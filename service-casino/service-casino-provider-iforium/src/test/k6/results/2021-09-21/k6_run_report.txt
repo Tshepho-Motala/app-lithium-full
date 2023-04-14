@@ -1,0 +1,164 @@
+tpi@tpi:~/Lithium/Source/app-lithium-full/service-casino/service-casino-provider-iforium/src/test/k6$ k6 run --env VUS=100 --env DURATION=10m main.js
+
+          /\      |‾‾| /‾‾/   /‾‾/   
+     /\  /  \     |  |/  /   /  /    
+    /  \/    \    |     (   /   ‾‾\  
+   /          \   |  |\  \ |  (‾)  | 
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: main.js
+     output: -
+
+  scenarios: (100.00%) 1 scenario, 100 max VUs, 10m30s max duration (incl. graceful stop):
+           * perf_test: 100 looping VUs for 10m0s (exec: perfTest, gracefulStop: 30s)
+
+
+running (10m01.6s), 000/100 VUs, 19000 complete and 0 interrupted iterations
+perf_test ✓ [======================================] 100 VUs  10m0s
+
+     █ balance
+
+       █ balance
+
+         ✓ is status 200
+         ✓ is body errorCode 0
+
+     █ redeemToken
+
+       █ redeemToken
+
+         ✓ is status 200
+         ✓ is body errorCode 0
+
+     █ createToken
+
+       █ createToken
+
+         ✓ is status 200
+         ✓ is body errorCode 0
+
+     █ balance->placeBet
+
+       █ balance
+
+         ✓ is status 200
+         ✓ is body errorCode 0
+
+       █ placeBet
+
+         ✓ is status 200
+         ✓ is body errorCode 0
+
+     █ placeBet->end
+
+       █ placeBet
+
+         ✓ is status 200
+         ✓ is body errorCode 0
+
+       █ end
+
+         ✓ is status 200
+         ✓ is body errorCode 0
+
+     █ balance->placeBet->end
+
+       █ balance
+
+         ✓ is status 200
+         ✓ is body errorCode 0
+
+       █ placeBet
+
+         ✓ is status 200
+         ✓ is body errorCode 0
+
+       █ end
+
+         ✓ is status 200
+         ✓ is body errorCode 0
+
+     █ placeBet->awardWinnings
+
+       █ placeBet
+
+         ✓ is status 200
+         ✓ is body errorCode 0
+
+       █ awardWinnings
+
+         ✓ is status 200
+         ✓ is body errorCode 0
+
+     █ balance->placeBet->awardWinnings->end
+
+       █ balance
+
+         ✓ is status 200
+         ✓ is body errorCode 0
+
+       █ placeBet
+
+         ✓ is status 200
+         ✓ is body errorCode 0
+
+       █ awardWinnings
+
+         ✓ is status 200
+         ✓ is body errorCode 0
+
+       █ end
+
+         ✓ is status 200
+         ✓ is body errorCode 0
+
+     █ startGame
+
+       █ startGame
+
+         ✓ is status 200
+         ✓ is body status 0
+
+     █ demoGame
+
+       █ demoGame
+
+         ✓ is status 200
+         ✓ is body status 0
+
+     checks............................: 100.00% ✓ 684000     ✗ 0     
+     data_received.....................: 189 MB  314 kB/s
+     data_sent.........................: 191 MB  318 kB/s
+     group_duration....................: avg=226.04ms min=4.11ms  med=179.91ms max=3.72s    p(90)=379.21ms p(95)=538.61ms
+     http_req_blocked..................: avg=10.27µs  min=1.5µs   med=3.9µs    max=20.72ms  p(90)=5.71µs   p(95)=6.52µs  
+     http_req_connecting...............: avg=3.38µs   min=0s      med=0s       max=20.04ms  p(90)=0s       p(95)=0s      
+     http_req_duration.................: avg=175.27ms min=3.86ms  med=174.63ms max=3.71s    p(90)=208.89ms p(95)=234.59ms
+       { expected_response:true }......: avg=175.27ms min=3.86ms  med=174.63ms max=3.71s    p(90)=208.89ms p(95)=234.59ms
+       { requestType:awardWinnings }...: avg=187.84ms min=35.58ms med=185.96ms max=443.16ms p(90)=208.13ms p(95)=217.15ms
+       { requestType:balance }.........: avg=156.98ms min=12.52ms med=150.97ms max=3.71s    p(90)=170.51ms p(95)=178.09ms
+       { requestType:createToken }.....: avg=119.05ms min=85.27ms med=116.5ms  max=349.08ms p(90)=134.42ms p(95)=142.48ms
+       { requestType:demoGame }........: avg=169.09ms min=3.86ms  med=168.23ms max=323.8ms  p(90)=191.3ms  p(95)=198.75ms
+       { requestType:end }.............: avg=185.92ms min=25.91ms med=183.69ms max=919.91ms p(90)=204.67ms p(95)=212.99ms
+       { requestType:placeBet }........: avg=186.45ms min=19.12ms med=183.7ms  max=1.07s    p(90)=205.12ms p(95)=213.65ms
+       { requestType:redeemToken }.....: avg=121.26ms min=53.53ms med=118.68ms max=361.92ms p(90)=138.34ms p(95)=146ms   
+       { requestType:startGame }.......: avg=251.93ms min=11.69ms med=248.17ms max=1.39s    p(90)=281ms    p(95)=293.83ms
+     http_req_failed...................: 0.00%   ✓ 0          ✗ 342000
+     http_req_receiving................: avg=105.8µs  min=21.09µs med=61.27µs  max=28.39ms  p(90)=106.76µs p(95)=217.3µs 
+     http_req_sending..................: avg=37.77µs  min=8.8µs   med=24.14µs  max=20.31ms  p(90)=35.46µs  p(95)=44.61µs 
+     http_req_tls_handshaking..........: avg=0s       min=0s      med=0s       max=0s       p(90)=0s       p(95)=0s      
+     http_req_waiting..................: avg=175.13ms min=3.77ms  med=174.49ms max=3.71s    p(90)=208.72ms p(95)=234.48ms
+     http_reqs.........................: 342000  568.480666/s
+       { requestType:awardWinnings }...: 38000   63.164518/s
+       { requestType:balance }.........: 76000   126.329037/s
+       { requestType:createToken }.....: 19000   31.582259/s
+       { requestType:demoGame }........: 19000   31.582259/s
+       { requestType:end }.............: 57000   94.746778/s
+       { requestType:placeBet }........: 95000   157.911296/s
+       { requestType:redeemToken }.....: 19000   31.582259/s
+       { requestType:startGame }.......: 19000   31.582259/s
+     iteration_duration................: avg=3.16s    min=2.2s    med=3.11s    max=10.26s   p(90)=3.29s    p(95)=3.33s   
+     iterations........................: 19000   31.582259/s
+     vus...............................: 100     min=100      max=100 
+     vus_max...........................: 100     min=100      max=100 
+

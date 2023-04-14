@@ -1,0 +1,16 @@
+<div class="row v-reset-row ">
+    <div class="col-xs-12">
+        <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs" lit-if-domains-permission="PLAYER_CASHIER_TRANSACTIONS_VIEW">
+                <li role="presentation" ng-class="{ active: controller.tab == tab }" ng-repeat="tab in controller.tabs"  class="{{tab.tclass}}">
+                    <a ng-click="controller.setTab(tab)">{{ tab.title | translate }}</a>
+                </li>
+            </ul>
+            <div class="tab-content" style="padding: 5px;">
+                <div class="well">
+                    <div ui-view></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

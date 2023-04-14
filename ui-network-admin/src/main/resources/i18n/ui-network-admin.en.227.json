@@ -1,0 +1,22 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "DIRECT_WITHDRAWAL": {
+      "RESPONSE": {
+        "ERRORS": {
+          "NEGATIVE_NON_ZERO_VALUE": "Adjustment amount can't have negative or zero value."
+        }
+      }
+    },
+    "PLAYER": {
+      "ACCOUNTING": {
+        "DIRECT_WITHDRAWAL": {
+          "FIELDS": {
+            "COMMENT": {
+              "LABEL": "Comment"
+            }
+          }
+        }
+      }
+    }
+  }
+}

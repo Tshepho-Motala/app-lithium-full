@@ -1,0 +1,9 @@
+Label,# Samples,Average,Min,Max,Std. Dev.,Error %,Throughput,KB/sec,Avg. Bytes
+Oauth2 Token Request,100,16,13,28,2.80,0.00%,14.2,16.43,1188.9
+Transaction Controller,20100,366,13,1125,40.75,0.00%,4.2,21.74,5335.5
+BeanShell Sampler,20000,0,0,53,0.65,0.00%,4.2,0.00,.0
+Accounting Internal - User,20000,4,2,264,2.53,0.00%,4.2,6.56,1596.9
+Accounting Internal - Get Balance,40000,6,4,238,2.87,0.00%,8.3,3.79,466.9
+Accounting Internal - Deposit,20000,39,30,609,9.44,0.00%,4.2,1.93,470.9
+Accounting Internal - Casino Bet,100000,62,48,396,10.86,0.00%,20.8,9.56,470.9
+TOTAL,220200,66,0,1125,99.62,0.00%,45.7,43.48,974.1

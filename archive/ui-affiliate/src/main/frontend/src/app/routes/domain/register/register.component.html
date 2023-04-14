@@ -1,0 +1,124 @@
+<div></div>
+<div class="register mat-elevation-z12">
+	<form novalidate (ngSubmit)="register()" #form="ngForm" style="position: relative">
+		<loading-overlay [isLoading]="isLoading"></loading-overlay>
+		<div class="register-content" fxLayout="column">
+			<h3 fxFlex>Login Details {{ domain }}</h3>
+			<p *ngIf="errorMessage">
+				<md-card class="error-card" fxLayout="row" fxLayoutAlign="start center">
+					<md-icon class="error-icon" color="warn">warning</md-icon>
+					<md-card-content class="error-message">{{ errorMessage }}</md-card-content>
+				</md-card>
+			</p>
+			<div fxLayout="column" fxLayout.gt-md="row">
+				<md-input-container fxFlex>
+					<input mdInput placeholder="Username" name="username" [(ngModel)]="model.username" #username="ngModel" required minlength="4" maxlength="24" uniqueUsername>
+					<md-formfield-errors [field]="username"></md-formfield-errors>
+				</md-input-container>
+			</div>
+			<div fxLayout="column" fxLayout.gt-md="row">
+				<md-input-container fxFlex>
+					<input mdInput placeholder="Password" type="password" name="password" [(ngModel)]="model.password" #password="ngModel" required pattern="^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,}$">
+					<md-formfield-errors [field]="password"></md-formfield-errors>
+				</md-input-container>
+				<md-input-container fxFlex>
+					<input mdInput placeholder="Password (Confirm)" type="password" name="password-confirm" [(ngModel)]="model.passwordConfirm" #passwordConfirm="ngModel" required [equalTo]="password">
+					<md-formfield-errors [field]="passwordConfirm"></md-formfield-errors>
+				</md-input-container>
+			</div>
+			<h3 fxFlex>Contact Information</h3>
+			<div fxLayout="column" fxLayout.gt-md="row">
+				<md-input-container fxFlex>
+					<input mdInput placeholder="Firstname" type="text" name="firstname" [(ngModel)]="model.firstName" #firstname="ngModel" required>
+					<md-formfield-errors [field]="firstname"></md-formfield-errors>
+				</md-input-container>
+				<md-input-container fxFlex>
+					<input mdInput placeholder="Lastname" type="text" name="lastname" [(ngModel)]="model.lastName" #lastname="ngModel" required>
+					<md-formfield-errors [field]="lastname"></md-formfield-errors>
+				</md-input-container>
+			</div>
+			<div fxLayout="column" fxLayout.gt-md="row">
+				<md-input-container fxFlex>
+					<input mdInput placeholder="E-Mail" type="text" name="email" [(ngModel)]="model.email" #email="ngModel" required email uniqueEmail>
+					<md-formfield-errors [field]="email"></md-formfield-errors>
+				</md-input-container>
+				<md-input-container fxFlex>
+					<input mdInput placeholder="Re-enter E-Mail" type="text" name="emailConfirm" [(ngModel)]="model.emailConfirm" #emailConfirm="ngModel" required email [equalTo]="email">
+					<md-formfield-errors [field]="emailConfirm"></md-formfield-errors>
+				</md-input-container>
+			</div>
+			<div fxLayout="column" fxLayout.gt-md="row">
+				<md-input-container fxFlex>
+					<input mdInput placeholder="Cellphone Number" type="text" name="cellNumber" [(ngModel)]="model.cellphoneNumber" #cellNumber="ngModel">
+					<md-formfield-errors [field]="cellNumber"></md-formfield-errors>
+				</md-input-container>
+			</div>
+			<div fxLayout="column" fxLayout.gt-md="row">
+				<md-input-container>
+					<input mdInput placeholder="Address Line 1" type="text" name="residentialAddressLine1" [(ngModel)]="model.residentialAddress.addressLine1" #residentialAddressLine1="ngModel">
+					<md-formfield-errors [field]="residentialAddressLine1"></md-formfield-errors>
+				</md-input-container>
+			</div>
+			<div fxLayout="column" fxLayout.gt-md="row">
+				<md-input-container>
+					<input mdInput placeholder="Address Line 2" type="text" name="residentialAddressLine2" [(ngModel)]="model.residentialAddress.addressLine2" #residentialAddressLine2="ngModel">
+					<md-formfield-errors [field]="residentialAddressLine2"></md-formfield-errors>
+				</md-input-container>
+				<md-input-container>
+					<input mdInput placeholder="Address Line 3" type="text" name="residentialAddressLine3" [(ngModel)]="model.residentialAddress.addressLine3" #residentialAddressLine3="ngModel">
+					<md-formfield-errors [field]="residentialAddressLine3"></md-formfield-errors>
+				</md-input-container>
+			</div>
+			<div fxLayout="column" fxLayout.gt-md="row">
+				<md-input-container>
+					<input mdInput placeholder="City" type="text" name="residentialAddressCity" [(ngModel)]="model.residentialAddress.cityObject" #residentialAddressCity="ngModel" (blur)="onRaCityBlur()" [mdAutocomplete]="cityAutocomplete">
+					<md-formfield-errors [field]="residentialAddressCity"></md-formfield-errors>
+				</md-input-container>
+				<md-autocomplete #cityAutocomplete [displayWith]="displayFn.bind(this)">
+					<md-option *ngFor="let city of filteredCities | async" [value]="city">{{ city.code + ' - ' + city.name }}</md-option>
+				</md-autocomplete>
+				<md-input-container>
+					<input mdInput placeholder="Country" type="text" name="residentialAddressCountry" [(ngModel)]="model.residentialAddress.country" #residentialAddressCountry="ngModel" disabled>
+					<md-formfield-errors [field]="residentialAddressCountry"></md-formfield-errors>
+				</md-input-container>
+				<md-input-container>
+					<input mdInput placeholder="Postal Code" type="text" name="residentialAddressPostalCode" [(ngModel)]="model.residentialAddress.postalCode" #residentialAddressPostalCode="ngModel">
+					<md-formfield-errors [field]="residentialAddressPostalCode"></md-formfield-errors>
+				</md-input-container>
+			</div>
+			<h3 fxFlex>Corporate Information</h3>
+			<div fxLayout="column" fxLayout.gt-md="row">
+				<md-input-container>
+					<input mdInput placeholder="Company Name" type="text" name="companyName" [(ngModel)]="model.companyName" #companyName="ngModel">
+					<md-formfield-errors [field]="companyName"></md-formfield-errors>
+				</md-input-container>
+			</div>
+			<div fxLayout="column" fxLayout.gt-md="row">
+				<md-input-container>
+					<input mdInput placeholder="Website URL" type="text" name="websiteURL" [(ngModel)]="model.websiteURL" #websiteURL="ngModel" url>
+					<md-formfield-errors [field]="websiteURL"></md-formfield-errors>
+				</md-input-container>
+			</div>
+			<div fxLayout="column" fxLayout.gt-md="row">
+				<md-input-container>
+					<textarea mdInput placeholder="Payment Details" name="paymentDetails" [(ngModel)]="model.paymentDetails" #paymentDetails="ngModel" rows="4"></textarea>
+					<md-formfield-errors [field]="paymentDetails"></md-formfield-errors>
+				</md-input-container>
+			</div>
+			<div fxLayout="column" fxLayout.gt-md="row">
+				<div class="extra-options" fxLayout="row" fxLayoutAlign="start start">
+					<md-checkbox name="acceptTerms" [(ngModel)]="model.acceptTerms">I accept the <a (click)="terms()">terms and conditions.</a></md-checkbox>
+				</div>
+			</div>
+			<div fxLayout="column" fxLayout.gt-md="row">
+				<div class="extra-options" fxLayout="row" fxLayoutAlign="start start">
+					<md-checkbox checked="true" name="optIn" [(ngModel)]="model.optIn"></md-checkbox>
+					<div>I wish to receive communications from our network of brands relating their products and special offers.</div>
+				</div>
+			</div>
+			<button color="primary" md-raised-button [disabled]="!form.valid || !model.acceptTerms">CREATE ACCOUNT</button>
+			<p class="note">Already have an account?<br/> <a [routerLink]="[ '..', 'login' ]">Sign in here</a></p>
+		</div>
+	</form>
+</div>
+<div></div>

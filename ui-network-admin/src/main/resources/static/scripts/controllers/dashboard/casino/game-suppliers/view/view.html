@@ -1,0 +1,31 @@
+<div class="container-fluid">
+    <div class="row v-reset-row  bottom-space-10">
+        <buttonbar>
+            <button-back ui-sref="^.list"></button-back>
+            <button-edit lit-if-permission="GAME_SUPPLIER_EDIT" lit-permission-domain="{{controller.gameSupplier.domain.name}}" ui-sref="dashboard.casino.game-suppliers.edit({domainName: controller.gameSupplier.domain.name, id: controller.gameSupplier.id})"></button-edit>
+        </buttonbar>
+    </div>
+    <div class="row v-reset-row ">
+        <div class="card card-block">
+            <div class="well-clear">
+                <div class="table-responsive">
+                    <table class="table table-hover nowrap" cellspacing="0" width="100%">
+                        <tbody>
+                        <tr>
+                            <th style="width: 25%;">{{'UI_NETWORK_ADMIN.GAME-SUPPLIERS.FIELDS.DOMAIN.LABEL'|translate}}</th>
+                            <td>{{controller.gameSupplier.domain.name}}</td>
+                        </tr><tr>
+                            <th>{{'UI_NETWORK_ADMIN.GAME-SUPPLIERS.FIELDS.NAME.LABEL'|translate}}</th>
+                            <td>{{controller.gameSupplier.name}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="row v-reset-row ">
+        <changelog options="controller.changelogs"></changelog>
+    </div>
+</div>

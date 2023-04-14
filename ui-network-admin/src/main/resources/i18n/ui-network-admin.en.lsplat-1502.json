@@ -1,0 +1,16 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "AUTOWITHDRAWALS": {
+      "RULESETS": {
+        "RULE": {
+          "ORIGINAL": {
+            "IN": "In"
+          },
+          "EXCHANGER": {
+            "IN": "Contains at least one of the following"
+          }
+        }
+      }
+    }
+  }
+}

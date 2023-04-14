@@ -1,0 +1,21 @@
+{
+  "SERVICE-LIMIT": {
+    "RESTRICTIONS": {
+      "RULESETS": {
+        "RULE": {
+          "FIELD": {
+            "DAYS_SINCE_RESTRICTION_ACTIVE": "Days Since Restriction Active",
+            "RESTRICTION_SUB_TYPE": "Restriction Subordinate Type"
+          }
+        }
+      },
+      "ERROR_MESSAGES": {
+        "PROMOTIONS": {
+          "ENABLE_CONFLICT": "Promotions OptOut already enabled",
+          "DISABLE_CONFLICT": "Promotions OptOut already disabled",
+          "BLOCKED": "Player has been restricted from changing their promotions OptOut flag"
+        }
+      }
+    }
+  }
+}

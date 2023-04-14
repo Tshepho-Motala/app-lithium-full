@@ -1,0 +1,170 @@
+{
+  "info": {
+    "_postman_id": "08357b46-c60c-4fd4-9f42-fc6592c323b7",
+    "name": "Paystack Withdraw",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Step 1. Paystak Create Transfer Recipient",
+      "protocolProfileBehavior": {
+        "disabledSystemHeaders": {
+          "content-type": true
+        }
+      },
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "authorization",
+            "type": "text",
+            "value": " Bearer sk_test_ef943ef71eca7136a785122931610ee31bec1d81"
+          },
+          {
+            "key": "content-type",
+            "type": "text",
+            "value": " application/json"
+          },
+          {
+            "key": "user-agent",
+            "type": "text",
+            "value": "Paystack-Developers-Hub",
+            "disabled": true
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"type\":\"nuban\",\"name\":\"dmsapiga\",\"account_number\":\"0000000000\",\"bank_code\":\"057\",\"currency\":\"NGN\"}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://api.paystack.co/transferrecipient",
+          "protocol": "https",
+          "host": [
+            "api",
+            "paystack",
+            "co"
+          ],
+          "path": [
+            "transferrecipient"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Lithium . Paystack Withdraw request",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "type": "text",
+            "value": "Bearer {{USERTOKEN}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"inputFieldGroups\": {\r\n     \"1\": { \"fields\": { \"amount\": { \"value\": \"100.00\" } } },\r\n    \"2\": { \"fields\": {\r\n      \"bank_code\": { \"value\": \"044\" },\r\n      \"account_number\": { \"value\": \"0000000000\" }\r\n    }}\r\n  },\r\n  \"state\": \"VALIDATEINPUT\",\r\n  \"stage\": \"1\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{gateway}}/service-cashier/frontend/withdraw/v2?methodCode=paystack",
+          "host": [
+            "{{gateway}}"
+          ],
+          "path": [
+            "service-cashier",
+            "frontend",
+            "withdraw",
+            "v2"
+          ],
+          "query": [
+            {
+              "key": "methodCode",
+              "value": "paystack"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Step 2. Create transfer",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "content-type",
+            "type": "text",
+            "value": "application/json"
+          },
+          {
+            "key": "authorization",
+            "type": "text",
+            "value": "Bearer sk_test_ef943ef71eca7136a785122931610ee31bec1d81"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{ \r\n    \"source\": \"balance\",\r\n    \"amount\":11100,\r\n    \"recipient\": \"RCP_iedc5jb58qazy96\",\r\n    \"reference\":\"206\"\r\n}"
+        },
+        "url": {
+          "raw": "https://api.paystack.co/transfer",
+          "protocol": "https",
+          "host": [
+            "api",
+            "paystack",
+            "co"
+          ],
+          "path": [
+            "transfer"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Step 3. Verify transfer",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "type": "text",
+            "value": "Bearer sk_test_ef943ef71eca7136a785122931610ee31bec1d81"
+          },
+          {
+            "key": "Content-Type",
+            "type": "text",
+            "value": "application/json"
+          }
+        ],
+        "url": {
+          "raw": "https://api.paystack.co/transfer/verify/206",
+          "protocol": "https",
+          "host": [
+            "api",
+            "paystack",
+            "co"
+          ],
+          "path": [
+            "transfer",
+            "verify",
+            "206"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "protocolProfileBehavior": {}
+}

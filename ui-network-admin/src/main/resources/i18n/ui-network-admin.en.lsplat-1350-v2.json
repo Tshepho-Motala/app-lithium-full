@@ -1,0 +1,16 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "PLAYER": {
+      "QUICK_ACTIONS" : {
+        "CHANGE": {
+            "NAME": "Change IBAN",
+            "PLACEHOLDER": "Change IBAN",
+            "DESCRIPTION": "Change Your International Bank Account Number (IBAN).",
+            "ERROR": "Not a valid IBAN",
+            "SHORT_ERROR": "IBAN number is too short",
+            "LONG_ERROR": "IBAN number is too long"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,204 @@
+{
+	"UI_NETWORK_ADMIN": {
+		"REPORTS": {
+			"PLAYERS": {
+				"GENERAL": {
+					"REPORTDETAILS": "Report Details",
+					"REPORTRUNAT": "The report will run @ {{prettyCron}}"
+				},
+				"FILTERS": {
+					"TITLE": "Report Filters",
+					"ADD": "Add Report Filter",
+					"TABLE": {
+						"FIELD": "Field",
+						"OPERATOR": "Operator",
+						"VALUE": "Value",
+						"NOFILTERSADDED": "No filters added yet."
+					}
+				},
+				"ACTIONS": {
+					"TITLE": "Report Actions",
+					"ADD": "Add Report Action",
+					"TABLE": {
+						"ACTIONTYPE": "Action Type",
+						"EMAILTEMPLATE": "Email Template",
+						"MODIFYRECIPIENTS": "Modify Recipients",
+						"MODIFYEMAILTEMPLATE": "Modify Email Template",
+						"NOACTIONSADDED": "No actions added yet."
+					}
+				},
+				"EMAILTEMPLATE": {
+					"PLACEHOLDER": {
+						"HEADER": {
+							"FIELD": "Field",
+							"PLACEHOLDER": "Placeholder"
+						},
+						"PLAYER": {
+							"TITLE": "Email Template Placeholders - (Send Email to Player)",
+							"USERNAME": "Username",
+							"EMAIL": "Email",
+							"FIRSTNAME": "First Name",
+							"LASTNAME": "Last Name",
+							"CREATEDDATE": "Created Date",
+							"DATEOFBIRTH": "Date of Birth",
+							"CURRENTBALANCE": "Current Balance",
+							"CURRENTBALANCECASINOBONUS": "Current Balance (Casino Bonus)",
+							"OPENINGBALANCE": "Opening Balance",
+							"CLOSINGBALANCE": "Closing Balance",
+							"OPENINGBALANCECASINOBONUS": "Opening Balance (Casino Bonus)",
+							"CLOSINGBALANCECASINOBONUS": "Closing Balance (Casino Bonus)",
+							"DEPOSITAMOUNT": "Deposit Amount",
+							"DEPOSITCOUNT": "Deposit Count",
+							"PAYOUTAMOUNT": "Payout Amount",
+							"PAYOUTCOUNT": "Payout Count",
+							"BALANCEADJUSTAMOUNT": "Balance Adjust Amount",
+							"BALANCEADJUSTCOUNT": "Balance Adjust Count",
+							"CASINOBETAMOUNT": "Casino Bet Amount",
+							"CASINOBETCOUNT": "Casino Bet Count",
+							"CASINOWINAMOUNT": "Casino Win Amount",
+							"CASINOWINCOUNT": "Casino Win Count",
+							"CASINONETAMOUNT": "Casino Net Amount",
+							"CASINOBONUSBETAMOUNT": "Casino Bonus Bet Amount",
+							"CASINOBONUSBETCOUNT": "Casino Bonus Bet Count",
+							"CASINOBONUSWINAMOUNT": "Casino Bonus Win Amount",
+							"CASINOBONUSWINCOUNT": "Casino Bonus Win Count",
+							"CASINOBONUSNETAMOUNT": "Casino Bonus Net Amount",
+							"CASINOBONUSACTIVATEAMOUNT": "Casino Bonus Activate Amount",
+							"CASINOBONUSTRANSFERTOBONUSAMOUNT": "Casino Bonus Transfer To Bonus Amount",
+							"CASINOBONUSTRANSFERFROMBONUSAMOUNT": "Casino Bonus Transfer From Bonus Amount",
+							"CASINOBONUSCANCELAMOUNT": "Casino Bonus Cancel Amount",
+							"CASINOBONUSEXPIREAMOUNT": "Casino Bonus Expire Amount",
+							"CASINOBONUSMAXPAYOUTEXCESSAMOUNT": "Casino Bonus Max Payout Excess Amount"
+						},
+						"REPORT": {
+							"TITLE": "Email Template Placeholders - (Send Full Report Via Email, Send Report Stats Via Email)",
+							"NAME": "Report Name",
+							"STARTEDON": "Started On",
+							"COMPLETEDON": "Completed On",
+							"STARTEDBY": "Started By",
+							"TOTALRECORDS": "Total Records",
+							"PROCESSEDRECORDS": "Processed Records"
+						}
+					}
+				},
+				"CREATE": {
+					"TITLE": "Player Report - Add",
+					"DESCRIPTION": "Use the form below to create a player report",
+					"FILTER": {
+						"TITLE": "Add a Report Filter"
+					},
+					"ACTION": {
+						"TITLE": "Add a Report Action"
+					}
+				},
+				"EDIT": {
+					"TITLE": "Player Report - Edit"
+				},
+				"FIELDS": {
+					"DOMAIN": {
+						"NAME": "Domain",
+						"DESCRIPTION": "The domain for this player report",
+						"PLACEHOLDER": "Select the domain for this player report"
+					},
+					"NAME": {
+						"NAME": "Name",
+						"DESCRIPTION": "The name of this player report",
+						"PLACEHOLDER": "Enter the name"
+					},
+					"DESCRIPTION": {
+						"NAME": "Description",
+						"DESCRIPTION": "A description of this player report",
+						"PLACEHOLDER": "Enter a description"
+					},
+					"ALLFILTERSAPPLICABLE": {
+						"NAME": "All Filters Applicable",
+						"DESCRIPTION": "If checked, all filters must apply, otherwise one or more"
+					},
+					"PLAYERDATAPERIOD": {
+						"NAME": "Player Data Period",
+						"DESCRIPTION": "The period of player data to accumulate for this report",
+						"PLACEHOLDER": "Select the Player Data Period"
+					},
+					"PLAYERDATAPERIODOFFSET": {
+						"NAME": "Player Data Period Offset",
+						"DESCRIPTION": "The Offset Based on the Player Data Period. For example, if Player Data Period is set to Day, set Player Data Period Offset to 1 for yesterday's data, 2 for data from two days ago, and so on. Similarly, if Player Data Period is set to Month, set Player Data Period Offset to 1 for last months data, 2 for data from two months ago, and so on.",
+						"PLACEHOLDER": "Enter the offset amount",
+						"PATTERN": "Only numbers allowed"
+					},
+					"ENABLED": {
+						"NAME": "Enabled",
+						"DESCRIPTION": "The status of the report, enabled or disabled"
+					},
+					"PERIOD": {
+						"NAME": "Period",
+						"DESCRIPTION": "The period for the schedule",
+						"PLACEHOLDER": "Select the Period"
+					},
+					"DAYOFWEEK": {
+						"NAME": "Day of Week",
+						"DESCRIPTION": "The day of week for the schedule",
+						"PLACEHOLDER": "Select the day of the week"
+					},
+					"DAYOFMONTH": {
+						"NAME": "Day of Month",
+						"DESCRIPTION": "The day of the month for the schedule",
+						"PLACEHOLDER": "Select the day of the month"
+					},
+					"HOUR": {
+						"NAME": "Hour",
+						"DESCRIPTION": "The hour of day for the schedule",
+						"PLACEHOLDER": "Select the hour"
+					},
+					"MINUTE": {
+						"NAME": "Minute",
+						"DESCRIPTION": "The minute of the hour for the schedule",
+						"PLACEHOLDER": "Select the minute"
+					},
+					"FILTER": {
+						"FIELD": {
+							"NAME": "Field",
+							"DESCRIPTION": "The field to filter by",
+							"PLACEHOLDER": "Select the filter field"
+						},
+						"OPERATOR": {
+							"NAME": "Operator",
+							"DESCRIPTION": "The operator to use for filtration",
+							"PLACEHOLDER": "Select the operator"
+						},
+						"VALUE": {
+							"NAME": "Value",
+							"DESCRIPTION": "The value to filter by",
+							"PLACEHOLDER": "Enter the value",
+							"PATTERN": {
+								"NUMBERS": "Only numbers allowed"
+							}
+						},
+						"XDAYSAGO": {
+							"NAME": "X Days Ago",
+							"DESCRIPTION": "The number of days ago. For example, 0 is today, 1 is yesterday, 2 is two days ago, and so on",
+							"PLACEHOLDER": "Enter the number of days ago"
+						}
+					},
+					"ACTION": {
+						"TYPE": {
+							"NAME": "Type",
+							"DESCRIPTION": "The type of action to perform",
+							"PLACEHOLDER": "Select the action"
+						},
+						"RECIPIENT": {
+							"NAME": "Recipient",
+							"DESCRIPTION": "The recipient to add",
+							"PLACEHOLDER": "Enter recipient e-mail address",
+							"PATTERN": "Valid email addresses only"
+						},
+						"EMAILTEMPLATE": {
+							"NAME": "Email Template Name",
+							"DESCRIPTION": "The email template to use for the action",
+							"PLACEHOLDER": "Enter the email template name"
+						}
+					}
+				}
+			}
+		}
+	}
+}

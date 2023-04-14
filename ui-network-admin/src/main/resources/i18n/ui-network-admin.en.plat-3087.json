@@ -1,0 +1,23 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "PLAYER": {
+      "QUICK_ACTIONS": {
+          "VERIFY_NIN_PHONE": "Verify by NIN Phone Number"
+      },
+      "NIN_BY_PHONE": {
+        "TITLE": "Verify by NIN Phone Number",
+        "NUMBER": "Phone Number",
+        "PLACEHOLDER": "Phone Number",
+        "DESCRIPTION": "Enter Phone Number",
+        "RESULT": "Result",
+        "RESPONSE": "Smile NIN response",
+        "ERROR": "Failed to verify by NIN Phone Number",
+        "SUCCESS": "NIN verification successful",
+        "LASTNAME": "Last Name",
+        "NIN": "NIN",
+        "MESSAGE": "Message",
+        "STATUS": "Status"
+      }
+    }
+  }
+}

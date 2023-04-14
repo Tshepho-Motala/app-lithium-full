@@ -1,0 +1,93 @@
+<form ng-submit="controller.registerPlayer()" bs-loading-overlay bs-loading-overlay-reference-id="{{controller.referenceId}}" autocomplete="off">
+	<div class="modal-header">
+		<div class="user-block" id="modal-title">
+			<div class="pull-right">
+				<span ng-if="controller.bonusRevision.bonusType == 0" style="line-height:inherit;" class="label label-warning">{{ 'GLOBAL.BONUS.TYPE.0' | translate | uppercase }}</span>
+				<span ng-if="controller.bonusRevision.bonusType == 1" style="line-height:inherit;" class="label label-success">{{ 'GLOBAL.BONUS.TYPE.1' | translate | uppercase }}</span>
+			</div>
+			<img class="img-circle img-bordered-sm" style="margin-right: 20px;" src="//:0" alt="">
+			<h4 style="font-weight: bold;">
+				<a ng-if="controller.bonusRevision.bonusCode" ui-sref="^">{{ controller.bonusRevision.bonusName }} ({{ controller.bonusRevision.bonusCode }})</a>
+				<a ng-if="!controller.bonusRevision.bonusCode" ui-sref="^">{{ controller.bonusRevision.bonusName }}</a>
+			</h4>
+		</div>
+	</div>
+	<div class="modal-body">
+		<div class="form-group" ng-if="controller.bonusRevision.bonusType == 1">
+			<label for="controller.depositAmount">{{ 'UI_NETWORK_ADMIN.BONUS.ACTIVATION.AMOUNT' | translate }}</label>
+			<input class="form-control"
+				type="text"
+				ng-model="controller.depositAmount"
+				ng-required="true"
+				ui-money-mask
+				currency-symbol="{{controller.domainInfo.currencySymbol}}" ui-negative-number="" ng-if="controller.domainInfo.currencySymbol"
+				min="0.01"
+				/>
+		</div>
+		<div class="form-group" ng-if="controller.bonusRevision.bonusType == 2 && controller.bonusRevision.bonusTriggerType == 0">
+			<label for="controller.customFreeMoneyAmount">{{ 'UI_NETWORK_ADMIN.BONUS.CUSTOM_FREE_MONEY.AMOUNT' | translate }}</label>
+			<input class="form-control"
+				   type="text"
+				   ng-model="controller.customFreeMoneyAmount"
+				   ng-required="false"
+				   ui-money-mask
+				   currency-symbol="{{controller.domainInfo.currencySymbol}}" ui-negative-number="" ng-if="controller.domainInfo.currencySymbol"
+			/>
+		</div>
+		<div class="form-group" ng-if="controller.bonusRevision.bonusType == 3">
+			<label for="controller.customBonusTokenAmount">{{ 'UI_NETWORK_ADMIN.BONUS.CUSTOM_BONUS_TOKEN.AMOUNT' | translate }}</label>
+			<input class="form-control"
+				   type="text"
+				   ng-model="controller.customBonusTokenAmount"
+				   ng-required="false"
+				   ui-money-mask
+				   currency-symbol="{{controller.domainInfo.currencySymbol}}" ui-negative-number="" ng-if="controller.domainInfo.currencySymbol"
+			/>
+		</div>
+		<div class="form-group">
+			<label for="playerName">{{ 'UI_NETWORK_ADMIN.BONUS.ACTIVATION.PLAYER.LABEL' | translate }}</label>
+			<input type="text"
+				id="playerName"
+				ng-model="controller.playerSearch"
+				ng-required="controller.csvfile == null"
+				placeholder="Enter player name to start search..."
+				uib-typeahead="user.username for user in controller.searchPlayer($viewValue)"
+				typeahead-loading="controller.loadingLocations"
+				typeahead-no-results="controller.noResults"
+				typeahead-min-length="2"
+				typeahead-show-hint="true"
+				typeahead-wait-ms="500"
+				typeahead-editable="false"
+			    typeahead-on-select="controller.selectedUser = $item;"
+				class="form-control"/>
+<!-- 						typeahead-on-select="controller.registerPlayer($item, $model, $label, $event)" -->
+			<i ng-show="controller.loadingLocations" class="glyphicon glyphicon-refresh"></i>
+			<div ng-show="controller.noResults">
+				<i class="glyphicon glyphicon-remove"></i> {{ 'GLOBAL.NORESULTS' | translate }}
+			</div>
+		</div>
+		<div class="form-group" ng-show="false">
+			<checkbox large class="input-control" ng-model="controller.bonusPrerequisites"></checkbox>&nbsp;
+			<label for="controller.bonusPrerequisites">{{ 'UI_NETWORK_ADMIN.BONUS.ACTIVATION.PREREQUISITES' | translate }}</label>
+		</div>
+		<div class="form-group" ng-if="(controller.bonusRevision.bonusType == 2 && controller.bonusRevision.bonusTriggerType == 0) || controller.bonusRevision.bonusType == 3">
+			<hr>
+			<label>OR</label>
+			<hr>
+			<label for="controller.csvfile">{{ 'UI_NETWORK_ADMIN.BONUS.CUSTOM_FREE_MONEY.FILE_UPLOAD' | translate }}</label>
+			<br>
+			<small>{{ 'UI_NETWORK_ADMIN.BONUS.CUSTOM_FREE_MONEY.FILE_UPLOAD_INFO' | translate }}</small>
+			<input class="form-control"
+				   type="file"
+				   ng-model="controller.csvfile"
+				   ng-required="false"
+				   accept="text/csv"
+				   file-model="controller.csvfile"
+			/>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-default" ng-click="controller.cancel()">{{ 'GLOBAL.ACTION.CANCEL' | translate | lowercase }}</button>
+		<button type="submit" class="btn btn-primary">{{ 'UI_NETWORK_ADMIN.BONUS.ACTIVATION.REGISTER_PLAYER' | translate | lowercase }}</button>
+	</div>
+</form>

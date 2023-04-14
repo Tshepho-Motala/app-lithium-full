@@ -1,0 +1,12 @@
+{
+  "SERVICE_KYC": {
+    "KYC_METHOD_NAMES": {
+      "METHOD_PASSPORT": "Passport Number",
+      "METHOD_NATIONAL_ID": "National ID",
+      "METHOD_DRIVERS_LICENSE": "Driver's licence",
+      "METHOD_BANK_ACCOUNT": "Bank Account",
+      "METHOD_BVN": "BVN",
+      "METHOD_VOTER_ID": "Voter ID"
+    }
+  }
+}

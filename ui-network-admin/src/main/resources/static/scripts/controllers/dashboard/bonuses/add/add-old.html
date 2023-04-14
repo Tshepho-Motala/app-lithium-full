@@ -1,0 +1,21 @@
+<div class="modal-header">
+	<h3 class="modal-title" id="modal-title">Add Bonus</h3>
+</div>
+
+<form ng-submit="vm.submit()" name="vm.form" novalidate>
+
+	<div class="modal-body" id="modal-body">
+		<div class="row v-reset-row ">
+			<div class="col-xs-12">
+				<formly-form model="vm.model" fields="vm.fields" form="vm.form" options="vm.options">
+				</formly-form>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal-footer">
+		<button-submit></button-submit>
+		<button-cancel ng-click="vm.cancel()"></button-cancel>
+	</div>
+
+</form>

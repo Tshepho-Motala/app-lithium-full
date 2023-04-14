@@ -1,0 +1,10 @@
+server:
+  port: 7073
+
+spring:
+  application:
+    name: service-games
+
+sidecar:
+  port: 8080
+  health-uri: http://localhost:8080/health

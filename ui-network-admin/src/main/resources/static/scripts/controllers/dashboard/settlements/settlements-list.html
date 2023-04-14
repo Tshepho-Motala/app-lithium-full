@@ -1,0 +1,28 @@
+<div class="container-fluid">
+    <lit-header
+            title="{{ 'UI_NETWORK_ADMIN.SERVICE_SETTLEMENT.SETTLEMENTS.LIST.TITLE' | translate: {batchId: controller.batchSettlement.id} }}"
+            description="{{ 'UI_NETWORK_ADMIN.SERVICE_SETTLEMENT.SETTLEMENTS.LIST.DESCRIPTION' | translate: {batchId: controller.batchSettlement.id, batchName: controller.batchSettlement.name} }}">
+    </lit-header>
+
+    <button-bar>
+        <button-back ui-sref="^.list"></button-back>
+        <button-refresh ng-click="controller.refresh()"></button-refresh>
+        <button-custom ng-disabled="controller.batchSettlement.open || controller.batchSettlement.rerunning" ng-click="controller.finalizeBatchSettlements()" bclass="default" icon="check-square" text="{{'UI_NETWORK_ADMIN.SERVICE_SETTLEMENT.SETTLEMENTS.LIST.ACTION.FINALIZEBATCH'|translate}}"></button-custom>
+        <button-custom ng-click="controller.exportToXls()" bclass="default" icon="file-excel-o" text="{{'UI_NETWORK_ADMIN.SERVICE_SETTLEMENT.SETTLEMENTS.LIST.ACTION.EXPORTTOXLS'|translate}}"></button-custom>
+        <button-custom ng-click="controller.exportToNets()" bclass="default" icon="file-o" text="{{'UI_NETWORK_ADMIN.SERVICE_SETTLEMENT.SETTLEMENTS.LIST.ACTION.EXPORTTONETS'|translate}}"></button-custom>
+        <br/>
+        <small><i>{{'UI_NETWORK_ADMIN.SERVICE_SETTLEMENT.SETTLEMENTS.LIST.HELP'|translate}}</i></small>-->
+    </button-bar>
+
+    <div class="row v-reset-row ">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-body no-padding table-responsive">
+                    <dt table="controller.table"/>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div ui-view></div>
+</div>

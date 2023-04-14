@@ -1,0 +1,4 @@
+ALTER TABLE `banner`
+    CHANGE COLUMN `date` `start_date` DATE NOT NULL,
+    ALGORITHM INPLACE,
+    LOCK NONE;

@@ -1,0 +1,9 @@
+{
+  "SERVICE_LIMIT": {
+    "DEPOSITLIMIT": {
+      "ERROR": {
+        "REACHED_BALANCE_LIMIT": "This amount will exceed your balance limit. Currently you can deposit up to {0} {1} or amend your limits"
+      }
+    }
+  }
+}

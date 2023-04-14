@@ -1,0 +1,22 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "DOMAIN": {
+      "FIELDS": {
+        "FAILED_LOGIN_IP": {
+          "LABEL": "Failed Login IP Block List",
+          "PLACEHOLDER": "Select IP List",
+          "DESC": "If an access control list has been selected, all new few time failed login ip's will be added to the list specified, to avoid attempt to brute force of accounts from these ip addresses for defined time period, please add this list to either the Pre or Post Login Access Rule selected below. Also, you should add following properties at Settings tab:  \n\t\"LOGIN_FAILURES_AMOUNT\" - amount of login failures needed to add ip to block list. \n\t\"CLEAN_LOGIN_FAILURES_EXPIRATION_TIME\" - time period from last fail login attempt in seconds, after which the amount of fail attempts will be reset"
+        }
+      }
+    },
+    "ACCESSCONTROL": {
+      "BASIC": {
+        "IP_RESET_TIME": {
+          "LABEL": "Reset time",
+          "PLACEHOLDER": "",
+          "DESCRIPTION": " The amount of time in seconds to pass before an IP is removed. Leave empty to avoid reset IPs"
+        }
+      }
+    }
+  }
+}

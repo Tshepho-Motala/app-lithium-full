@@ -1,0 +1,31 @@
+{
+  "name": "Bank",
+  "code": "bank",
+  "image": {
+    "filename": "/methods/bank.png",
+    "filetype": "image/png"
+  },
+  "withdrawalStages": [
+    {
+      "number": 1,
+      "title": "CASHIER-METHOD-BANK.WITHDRAWAL_AMOUNT_FIELD_TITLE",
+      "description": "CASHIER-METHOD-BANK.WITHDRAWAL_AMOUNT_FIELD_DESCRIPTION",
+      "inputFields": [
+        {
+          "code": "accountNumber",
+          "name": "CASHIER-METHOD-BANK.WITHDRAWAL_ACCOUNT_FIELD_TITLE",
+          "description": "CASHIER-METHOD-BANK.WITHDRAWAL_ACCOUNT_FIELD_DESCRIPTION",
+          "required": true
+        }
+      ]
+    }
+  ],
+  "properties": [
+    {
+      "name": "baseBatchFormat",
+      "defaultValue": "cashier-withdrawals-",
+      "type": "string",
+      "description": "The base format for the name of the batch settlements. The current date will be appended to the end."
+    }
+  ]
+}

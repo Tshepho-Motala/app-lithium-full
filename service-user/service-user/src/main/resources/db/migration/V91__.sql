@@ -1,0 +1,1 @@
+CREATE INDEX `idx_user_domain_id`  ON `lithium_user`.`user` (domain_id) COMMENT '' ALGORITHM INPLACE LOCK NONE;

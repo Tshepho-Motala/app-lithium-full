@@ -1,0 +1,18 @@
+{
+  "SERVICE-CASHIER": {
+    "AUTOWITHDRAWALS": {
+      "RULESETS": {
+        "RULE": {
+          "FIELD": {
+            "SETTINGS": {
+              "LIST_OF_ACCOUNT_CODES": {
+                "LABEL": "Account Codes",
+                "DESCRIPTION": "List of account codes."
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

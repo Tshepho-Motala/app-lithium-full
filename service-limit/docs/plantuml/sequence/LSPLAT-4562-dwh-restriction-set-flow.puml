@@ -1,0 +1,15 @@
+.DWH Restriction Set Flow
+[plantuml]
+----
+@startuml
+start
+
+if (Player and restriction \ntags match?) then (yes)
+  :Error Response;
+else (no)
+  :Success Response;
+endif
+
+stop
+@enduml
+----

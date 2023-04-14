@@ -1,0 +1,33 @@
+server:
+  port: 9920
+
+spring:
+  application:
+    name: service-csv-provider-threshold
+  cloud:
+    stream:
+      bindings:
+        service-csv-provider-threshold-input:
+          binder: rabbit
+          group: csv-threshold-group
+          destination: csv-threshold-queue
+          consumer:
+            concurrency: 2
+
+eureka:
+  instance:
+    appname: service-csv-provider-threshold
+
+
+lithium:
+  service-csv-generation-threshold:
+    processing-job-page-size: 500
+
+logging:
+  level:
+    lithium.service.csv.provider.threshold: INFO
+
+service:
+    document:
+      generation:
+        processing-job-page-size: 100

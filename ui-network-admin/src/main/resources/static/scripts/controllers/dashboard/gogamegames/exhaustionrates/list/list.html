@@ -1,0 +1,21 @@
+<div class="container-fluid">
+	<lit-header
+		title="GoGame Game Exhaustion Rate"
+		description="A searchable list of GoGame Exhaustion Rate Tests">
+	</lit-header>
+	
+	<button-bar>
+		<button-add lit-if-permission="GOGAMEGAMES_EXHAUSTIONRATES_EDIT" ng-click="controller.add()"></button-add>
+		<button-refresh ng-click="controller.refresh()"></button-refresh>
+	</button-bar>
+	
+	<div class="row v-reset-row ">
+		<div class="col-xs-12">
+			<div class="box">
+				<div class="box-body no-padding table-responsive">
+					<dt table="controller.gogameExhaustionRatesTable"/>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,52 @@
+{
+    "event": "transfer.success",
+    "data": {
+        "amount": 11100,
+        "currency": "NGN",
+        "domain": "test",
+        "failures": null,
+        "id": 26194952,
+        "integration": {
+            "id": 467501,
+            "is_live": false,
+            "business_name": "1988"
+        },
+        "reason": "Transfer from 1988",
+        "reference": "pvd3hz9sb7",
+        "source": "balance",
+        "source_details": null,
+        "status": "success",
+        "titan_code": null,
+        "transfer_code": "TRF_8j3sasddj1rwo2a",
+        "transferred_at": null,
+        "recipient": {
+            "active": true,
+            "currency": "NGN",
+            "description": null,
+            "domain": "test",
+            "email": null,
+            "id": 7416855,
+            "integration": 467501,
+            "metadata": null,
+            "name": "dmsapiga",
+            "recipient_code": "RCP_iedc5jb58qazy96",
+            "type": "nuban",
+            "is_deleted": false,
+            "details": {
+                "authorization_code": null,
+                "account_number": "0000000000",
+                "account_name": null,
+                "bank_code": "057",
+                "bank_name": "Zenith Bank"
+            },
+            "created_at": "2020-07-01T11:18:17.000Z",
+            "updated_at": "2020-07-01T11:18:17.000Z"
+        },
+        "session": {
+            "provider": null,
+            "id": null
+        },
+        "created_at": "2020-07-01T11:38:57.000Z",
+        "updated_at": "2020-07-01T11:38:57.000Z"
+    }
+}

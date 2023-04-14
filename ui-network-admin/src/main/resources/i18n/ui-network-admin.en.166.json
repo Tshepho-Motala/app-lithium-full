@@ -1,0 +1,63 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "LIST": {
+      "PLAYERS": {
+        "FIELDS": {
+          "FILTER": {
+            "BRAND": {
+              "LABEL": "Brand"
+            },
+            "DATEOFBIRTHSTARTDATE": {
+              "LABEL": "Date Of Birth: Start Date"
+            },
+            "DATEOFBIRTHENDDATE": {
+              "LABEL": "Date Of Birth: End Date"
+            },
+            "EMAIL": {
+              "LABEL": "Email"
+            },
+            "MOBILENUMBER": {
+              "LABEL": "Mobile Number"
+            },
+            "VERIFICATIONSTATUS": {
+              "LABEL": "Verification Status"
+            },
+            "INCLUDEEXCLUDETESTACCOUNT": {
+              "LABEL": "Include/Exclude Test Account"
+            },
+            "HASPENDINGWITHDRAWALS": {
+              "LABEL": "Has Pending Withdrawals"
+            },
+            "ACCOUNTMANAGEMENTSTATUS": {
+              "LABEL": "Account Management Status"
+            },
+            "LASTLOGINSTARTDATE": {
+              "LABEL": "Last Login: Start Date"
+            },
+            "LASTLOGINENDDATE": {
+              "LABEL": "Last Login: End Date"
+            },
+            "LASTLOGIN": {
+              "LABEL": "Last Login"
+            },
+            "CLIENTTYPE": {
+              "LABEL": "Client Type"
+            },
+            "ASSIGNEDACCOUNTMANAGER": {
+              "LABEL": "Assigned Account Manager"
+            },
+            "TAGS": {
+              "LABEL": "Tags"
+            },
+            "LASTDEPOSITSTARTDATE": {
+              "LABEL": "Last Deposit: Start Date"
+            },
+            "LASTDEPOSITENDDATE": {
+              "LABEL": "Last Deposit: End Date"
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,43 @@
+<div class="box box-default box-solid">
+    <div class="box-header with-border">
+        {{'UI_NETWORK_ADMIN.PLAYER.RESTRICTIONS.TITLE'|translate}}
+        <div class="box-tools pull-right">
+            <button lit-if-permission="USER_RESTRICTIONS_SET" lit-permission-domain="{{user.domain.name}}" type="button" class="btn btn-box-tool" ng-click="set()">
+                <span><i class="fa fa-plus"></i> {{'GLOBAL.ACTION.ADD'|translate}}</span>
+            </button>
+        </div>
+    </div>
+    <div class="box-body table-responsive">
+        <div ng-if="userRestrictions.length === 0" class="box box-danger">
+            <div class="box-body">
+                {{'UI_NETWORK_ADMIN.PLAYER.RESTRICTIONS.NONE'|translate}}
+            </div>
+        </div>
+        <table ng-if="userRestrictions.length > 0" class="table table-bordered">
+            <thead>
+            <tr>
+                <th>{{'UI_NETWORK_ADMIN.PLAYER.RESTRICTIONS.NAME'|translate}}</th>
+                <th>{{'UI_NETWORK_ADMIN.PLAYER.RESTRICTIONS.BLOCKS'|translate}}</th>
+                <th>{{'UI_NETWORK_ADMIN.PLAYER.RESTRICTIONS.ACTIVE_FROM'|translate}}</th>
+                <th>{{'UI_NETWORK_ADMIN.PLAYER.RESTRICTIONS.SUBORDINATE_TYPE'|translate}}</th>
+                <th>{{'UI_NETWORK_ADMIN.PLAYER.RESTRICTIONS.ACTIVE'|translate}}</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="userRestriction in userRestrictions track by $index">
+                <td style="width: 30%;">{{userRestriction.set.name}}</td>
+                <td style="width: 25%;">{{getBlockers(userRestriction.set)}}</td>
+                <td style="width: 25%;">{{getActiveFrom(userRestriction) | date:'yyyy-MM-dd HH:mm:ss':'UTC'}}</td>
+                <td>{{ getMessage(userRestriction) }}</td>
+                <td style="width: 10%;"><span class="label" ng-class="{'label-warning': userRestriction.active === false, 'label-danger': userRestriction.active === true }">{{(userRestriction.active) ? 'TRUE' : 'FALSE'}}</span></td>
+                <td>
+                    <button style="padding: 2px;" lit-if-permission="USER_RESTRICTIONS_LIFT" lit-permission-domain="{{user.domain.name}}" type="button" class="btn btn-box-tool" ng-click="lift($index)">
+                        <span class="pull-right badge bg-red"><i class="fa fa-times"></i></span>
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

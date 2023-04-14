@@ -1,0 +1,7 @@
+{
+  "ERROR_DICTIONARY": {
+    "LOGIN": {
+      "ACCOUNT_FROZEN_CRUKS_SELF_EXCLUSION": "Account is frozen. CRUKS self excluded."
+    }
+  }
+}

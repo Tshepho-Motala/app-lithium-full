@@ -1,0 +1,64 @@
+<div class="container-fluid">
+	<div class="box box-primary box-widget">
+		<div class="box-body box-profile">
+			<div class="user-block">
+				<div class="pull-right">
+					<span class="label">&nbsp;</span>
+					<br/>
+					<span style="line-height:inherit;" class="label label-primary">{{controller.model.domain.name|uppercase}}</span>
+				</div>
+				<h4 style="font-weight: bold;">
+					Tutorial<br/>
+					<small><span class="label label-success">Engine {{controller.model.engine.id}}</span></small>
+				</h4>
+			</div>
+		</div>
+	</div>
+	
+	<buttonbar>
+		<button-back ui-sref="dashboard.gogamegames.tutorials"></button-back>
+	</buttonbar>
+	
+	<br/><br/>
+	
+	<div class="row v-reset-row ">
+		<div class="col-xs-12">
+			<div class="box box-default">
+				<div class="box-header with-border">
+					<h3 class="box-title">General</h3>
+					<div class="box-tools pull-right">
+						<button lit-if-permission="GOGAMEGAMES_TUTORIALS_EDIT" type="button" class="btn btn-box-tool" ng-click="controller.edit()">
+							<span><i class="fa fa-gear"></i> {{"GLOBAL.ACTION.CHANGE"|translate}} </span>
+						</button>
+					</div>
+				</div>
+				<div class="box-body table-responsive">
+					<table class="table table-hover table-striped nowrap" cellspacing="0" width="100%">
+						<tbody>
+							<tr>
+								<th style="width: 20%;">Domain</th>
+								<td>{{controller.model.domain.name}}</td>
+							</tr><tr>
+								<th>Engine</th>
+								<td>{{controller.model.engine.id}}</td>
+							</tr><tr>
+								<th>Math Model (revision)</th>
+								<td>{{controller.model.mathModelRevision.name}} ({{controller.model.mathModelRevision.id}})</td>
+							</tr><tr>
+								<th>Player Balance Cents</th>
+								<td>{{controller.model.pbCents}}</td>
+							</tr><tr>
+								<th>Win Cents</th>
+								<td>{{controller.model.winCents}}</td>
+							</tr><tr>
+								<th>Result</th>
+								<td><pre>{{controller.model.result|json}}</pre></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+</div>

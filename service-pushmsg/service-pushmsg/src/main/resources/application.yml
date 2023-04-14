@@ -1,0 +1,41 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost/lithium_pushmsg
+    username: root
+    password: mysql
+  jpa:
+    hibernate:
+      ddl-auto: validate
+  cloud:
+    stream:
+      bindings:
+        pushmsgprovidersregisterinput:
+          group: pushmsgprovidersregistergroup
+          binder: rabbit
+          destination: pushmsgprovidersregisterqueue
+        pushmsginput:
+          binder: rabbit
+          destination: pushmsgoutput
+        defaultpushmsgtemplateinput:
+          binder: rabbit
+          destination: defaultpushmsgtemplateoutput
+  rabbitmq:
+    listener:
+      retry:
+        max-attempts: 20
+    
+logging:
+  level:
+    lithium.service.pushmsg: INFO
+    
+server:
+  port: 9892
+
+lithium:
+  services:
+    db:
+      load-test-data: false
+    pushmsg:
+      processing-job-cron: "*/1 * * * * *"
+      processing-job-page-size: 10
+      pushmsg-error-count-less-than: 1

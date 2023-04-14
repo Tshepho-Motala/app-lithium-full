@@ -1,0 +1,74 @@
+# Mounting in LBO
+
+(This only needs to be done once per plugin)
+- Navigate to an HTML page where you want to load the plugin
+- Create a new `div` where the plugin will be mounted, and set its ID to a `[unique-dom-id]`
+
+## Routing
+
+https://router.vuejs.org/[Vue Router Documentation] 
+
+The plugin SDK uses standard Vue Routing in order to load and mount components. The same routing mechanism is used to build and deploy standalone plugins.  
+
+
+The main routing file can be located in `/src/router/routes.ts`. This will house all the routing required for the SDK and to build plugins.  
+*NB: Please **do not** split this file out to sub route files as while it will work for the SDK, careful consideration needs to be made to cater for building plugins.*
+
+**Basic Route**
+```
+{
+  // Name (and key) of this plugin
+  name: 'plugin-name',
+  
+  // Relative path to load this plugin in the SDK
+  path: '/plugin-route-on-sdk', 
+
+  // Component (and entrypoint) of the plugin
+  component: () => import('@/plugin/plugin-entry-point/Plugin.vue'),
+  
+  // Meta field passes information from the SDK to LBO
+  // Any key/value pair can be added
+  meta: {                    
+    // Title of the plugin (Purely cosmetic for now)                                          
+    title: 'Plugin: Basic Plugin Example',
+
+    // Relative path to load this plugin in LBO
+    angularPath: '/login',
+
+    // DOM ID to mount this plugin on in LBO
+    mount: '#vueMountLogin',
+
+    // Optional: Reference key to use for this plugin if you don't want to use name
+    key: 'plugin-ClientAuth'
+  }
+}
+```
+
+The above example and comments are the minimum needed in order to load a plugin into the SDK, and have it build and mount correctly on LBO.
+
+---
+
+## Deprecated
+This section is only for reference to the original mounting and routing mechanism, and should no longer be used.  
+
+**[DEPRECATED - See [Routing](#routing)] Register a plugin to be deployed**
+- Open `/ci/deploy.js`
+- Look for a property under the following comment: `// PLUGIN REGISTRY`
+- Add a new line to the `plugins` array in the following way:  
+`newPlugin('[src/location]', 'plugin-[name]')`
+
+**[DEPRECATED - See [Routing](#routing)] Register a plugin for SDK access**
+- Open `/src/core/PluginRegistry.ts`
+- Import your plugin in the function named `registerMockPlugins()`
+
+**[DEPRECATED] Mount Plugin on LBO website** 
+- Navigate to the JS file that controls the HTML page  
+- In the controller function, add the following code  
+`window.VuePluginRegistry.loadByPage("[page-name]")`
+  - This will load any plugins that have a matching `[page-name]` in its descriptor
+- Navigate to `ui-network-admin/src/main/resources/static/scripts/vue-plugin-registry.js`
+- Add a new plugin descriptor to the `vuePlugins` array with the following format:  
+`new VuePlugin("plugin-[name]", "#[unique-dom-id]", "[page-name]")`
+  - `plugin-[name]` is the name of the plugin needing to be mounted
+  - `#[unique-dom-id]` is the selector for the DOM component to mount this plugin
+  - `[page-name]` the name of the page, when called, to load the plugin

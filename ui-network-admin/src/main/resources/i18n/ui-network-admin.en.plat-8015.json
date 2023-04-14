@@ -1,0 +1,24 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "USER": {
+      "FIELDS": {
+        "IS_AGE_VERIFIED": {
+          "STATUS": {
+            "NAME": "Is age verified?",
+            "PLACEHOLDER": "Please, set is age verified?"
+          }
+        },
+        "IS_ADDRESS_VERIFIED": {
+          "STATUS": {
+            "NAME": "Is address verified?",
+            "PLACEHOLDER": "Please, set is address verified?"
+          }
+        }
+      },
+      "ALERT" : {
+        "MANUALLY_VERIFIED" : "This status cannot be set directly, use age/address statuses instead.",
+        "EXTERNALLY_VERIFIED" : "Cannot set this status due to 'Externally verified' can be defined by kyc services only"
+      }
+    }
+  }
+}

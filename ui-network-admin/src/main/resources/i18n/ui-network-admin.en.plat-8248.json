@@ -1,0 +1,67 @@
+﻿{
+  "UI_NETWORK_ADMIN": {
+    "USER": {
+      "ACCOUNT_TYPE_CODE": {
+        "DESCRIPTION": {
+          "AFFILIATE_PAYMENT": "",
+          "MANUAL_BANK_TRANSFER": "",
+          "MANUAL_BONUS_CASINO": "",
+          "MANUAL_BONUS_FREE_FUNDS": "",
+          "MANUAL_BONUS_POKER": "",
+          "MANUAL_BONUS_VIRTUAL": "",
+          "MANUAL_WITHDRAWAL_FEE": "",
+          "GF_CHARGEBACK_RECOVERY": "To be used when Chargebacks occur from PSP - this does NOT include fraud closures.",
+          "DORMANT_ACCOUNT": "To be used when applying the final dormant account, to remove the remaining player balance.",
+          "DORMANT_ACCOUNT_FEE": "To be used when conducting the Dormant Account Policy task and will be the removal part of the player balance according to the policy for the particular brand.",
+          "GF_MANUAL_BANK_TRANSFER": "To be used when sending a withdrawal through the bank manually. If there is player contact, add ZenDesk ticket number in comment below.",
+          "GF_FRAUD_CB_ACCOUNT": "To be used when account is deemed fraudulent and the balance is reset to 0 - this does NOT include Chargeback cases.",
+          "GF_MANUAL_BALANCE_ADJUST": "To be used when adding any funds to a test account",
+          "GF_NEGATIVE_BALANCE_ADJUSTMENT": "To be used only for 'Negative Balance Report' task, see GF SOP for details.",
+          "GF_MANUAL_PSP_CORRECTION": "To be used when withdrawal has been declined by the PSP.",
+          "GF_MANUAL_BANK_TRANSFER_CORRECTION": "To be used when Manual Bank Transfer has been returned by the customers bank",
+          "CASINO_MANUAL_CASINO_WINNINGS_DEBIT": "To be used when a broken game round occurs. The appropriate game round ID must be added to the 'Text' field",
+          "GF_DEPOSIT_BONUS": "To be used for the accreditation of promotional bonus, as per GF SOP.",
+          "GF_DORMANT_ACCOUNT_CORRECTION": "To be used when GF_DORMANT_ACCOUNT has been debited incorrectly.",
+          "GF_MANUAL_BALANCE_ADJUST (WITHDRAWAL)": "To be used when removing any funds from a test account",
+          "GF_MANUAL_PSP": "To be used when manually returning funds through PSP back office",
+          "GF_NEGATIVE_BALANCE_ADJUSTMENT_MANUAL": "To be used only for 'Negative Balance Report' task, see GF SOP for details.",
+          "CASINO_MANUAL_CASINO_WINNINGS_CREDIT": "To be used when a broken game round occurs. The appropriate game round ID must be added to the 'Text' field",
+          "GF_DEPOSIT_BONUS_CANCELLATION": "To be used for the deduction of promotional bonus, as per GF SOP."
+        }
+      }
+    },
+    "CASHIER": {
+      "TRANSACTION": {
+        "MANUAL_ADJUSTMENT": {
+          "ACCOUNT_TYPE_CODE": {
+            "DESCRIPTION": {
+              "GF_MISSING_DEPOSIT": "To be used when deposit is successful in Lithium but declined/expired within PSP backoffice.",
+              "GF_MISSING_WITHDRAWAL": "To be used when withdrawal is successful in Lithium but declined/expired within a PSP backoffice.",
+              "GF_PAYMENT_ERROR": "To be used when individual deposit is successful in a payment backoffice but declined/expired on Lithium.",
+              "GF_WITHDRAWAL_ERROR": "To be used when individual withdrawal is successful in a PSP backoffice but declined/expired on Lithium."
+            }
+          },
+          "COMMENT": "Balance was adjusted manually for cashier transaction id#{0} on {1} {2} [{3}] [{4}]",
+          "GENERAL_ERROR": "Oops something went wrong. Reload the page and try again. If the error persists report it for investigation.", 
+          "NEGATIVE_BALANCE_ERROR": "Balance adjust will cause negative player balance, please top up the balance first with different transaction type and then retry cashier adjustment for the full amount.",
+          "SUCCESS": "The operation was successful",
+          "REQUIRED_FIELD": "This field is required",
+          "TRANSACTION_TYPE_DESCRIPTION_TITLE": "Transaction type description:",
+          "BUTTON_TITLE": "Adjustment",
+          "MODAL_TITLE": "Manual Cashier Adjustment",
+          "TABLE": {
+            "AMOUNT": "Amount:",
+            "OPERATION": "Operation:",
+            "DEBIT": "Debit",
+            "CREDIT": "Credit",
+            "LINKED": "Linked Cashier Txn:",
+            "ACCOUNT_CODE": "Account code:",
+            "COMMENT": "Comment"
+          },
+          "MESSAGE": "Are you sure you want to perform this action?",
+          "SUBMIT": "Submit"
+        }
+      }
+    }
+  }
+}

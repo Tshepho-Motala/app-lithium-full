@@ -1,0 +1,57 @@
+eureka:
+  client:
+    serviceUrl:
+      # This should be changed to point to the hostname of the server-eureka service, same port and url.
+      defaultZone: http://localhost:8761/eureka/
+  instance:
+    # This section should be removed entirely for non-developer cluster deployment.
+    hostname: localhost
+    ip-address: 127.0.0.1
+    prefer-ip-address: false
+lithium:
+  gateway-public-url: http://localhost:9000
+  system:
+    auth:
+      # This should be changed to point to the hostname of the server-oauth service, same port and url.
+      token-url: http://localhost:8901/oauth/token
+  service:
+    cashier:
+      restTemplateConnectTimeoutMs:30000
+      restTemplateReadTimeoutMs:30000
+    mail:
+      from: Lithium Development <noreply@playsafesa.com>
+    geo:
+      max-mind-update-enabled: false
+    accounting:
+      provider:
+        internal:
+          jobs:
+            summaries:
+              cron: 0 * * * * *
+
+spring:
+  rabbitmq:
+    # This should be changed to point to the hostname and port of the rabbitmq service
+    host: localhost
+    port: 5672
+
+#each spring application name can be allocated the ribbon timeouts as below. Using without app name, means global    
+#Gateway uses individual service's ribbon timeouts, thus gateway.ribbon.* does not serve any purpose
+#Always make sure hysterix timeout is > ribbon timeout * ribbon retries, otherwise hysterix will timeout while ribbon is still attempting comms
+ribbon:
+  ReadTimeout: 30000
+  ConnectTimeout: 5000
+
+service-cashier:
+  ribbon:
+    ReadTimeout: 30000
+    ConnectTimeout: 5000
+    
+  
+logging:
+  level:
+    ROOT: WARN
+    lithium.service.cashier: INFO
+    lithium.service.cashier.processor.http: DEBUG
+    lithium.service.user.services: DEBUG
+    lithium.service.user.controllers: DEBUG

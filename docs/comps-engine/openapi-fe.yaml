@@ -1,0 +1,1127 @@
+openapi: "3.0.2"
+info:
+  title: Comps Engine - FE Endpoints
+  version: "1.0.0"
+servers:
+  - url: 'http://localhost:9000'
+    description: Local Gateway.
+  - url: "https://gateway.lithium-develop.ls-g.net"
+    description: Livescore Lithium Develop
+  - url: "https://gateway.lithium-qa.ls-g.net"
+    description: Livescore Lithium QA
+  - url: "https://gateway.lithium-staging.ls-g.net/"
+    description: Livescore Lithium Staging
+  - url: "https://gateway.lithium-prod.ls-g.net"
+    description: Livescore Lithium Production
+tags:
+  - name: Promotions
+    description: These endpoints relate to promotions.
+  - name: Rewards
+    description: These endpoints relate to rewards.
+paths:
+  /service-promo/frontend/player/find/current/v1:
+    post:
+      tags:
+        - Promotions
+      summary: Current Player Promotions.
+      # These are user missions that has not been completed yet.
+      description: >-
+        These are promotions that the player is currently busy with.
+      security:
+        - httpBearer: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                pageSize:
+                  type: number
+                  default: 1000
+                page:
+                  type: number
+                  default: 0
+      responses:
+        '200':
+          description: >-
+            If call was successful, returns the player promotions that the player is currently busy completing.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Page'
+                properties:
+                  content:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/UserPromotionFE'
+        '500':
+          description: >-
+            Internal server error.
+  /service-promo/frontend/player/find/completed/v1:
+    post:
+      tags:
+        - Promotions
+      summary: Player Promotions already completed.
+      # These are user missions that has been completed.
+      description: >-
+        These are promotions that the player has already completed.
+      security:
+        - httpBearer: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                pageSize:
+                  type: number
+                  default: 1000
+                page:
+                  type: number
+                  default: 0
+      responses:
+        '200':
+          description: >-
+            If call was successful, returns the player promotions that the player has completed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Page'
+                properties:
+                  content:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/UserPromotionFE'
+        '500':
+          description: >-
+            Internal server error.
+  /service-reward/frontend/player/list/pending/v1:
+    post:
+      tags:
+        - Rewards
+      summary: List of pending rewards for a player. (limited to 1000)
+      description: >-
+        These are rewards that still needs acceptance from the player.
+      security:
+        - httpBearer: [ ]
+      parameters: []
+      responses:
+        '200':
+          description: >-
+            If call was successful, returns a list of pending rewards for the player.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PlayerRewardHistoryFE'
+              example:
+                - id: 10
+                  status: pending
+                  awardedDate: 2022-03-01T00:00:00
+                  redeemedDate: 2022-03-01T00:00:00
+                  expiryDate: 2022-03-01T00:00:00
+                  playerGuid: livescore_uk/rivalani2021
+                  rewardCode: WIN_BIG_ZAR_IN_2022
+                  rewardName: Relief Grant
+                  rewardComponents:
+                    id: 1
+                    status: pending_player_approval
+                    rewardComponentName: freespin
+                    playerRewardHistoryId: 4
+                    playerGuid: "livescore_sa/2200"
+                    awardedOn: 2022-09-03T22:00:00.000Z
+                    created: 2022-09-03T22:00:00.000Z
+                    updated: 2022-09-03T22:00:00.000Z
+                    amountGiven: 2
+                    amountUsed: 0
+                    amountInCents: 1
+                    description: string
+                    gameList:
+                      - name: Banghai
+                        guid: play-banghai
+
+  /service-reward/frontend/player/list/active/v1:
+    post:
+      tags:
+        - Rewards
+      summary: List of active rewards for a player. (limited to 1000)
+      description: >-
+        These are rewards that are active.
+      security:
+        - httpBearer: [ ]
+      responses:
+        '200':
+          description: >-
+            If call was successful, returns the player rewards that are active.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PlayerRewardHistoryFE'
+              example:
+                - id: 10
+                  status: awarded
+                  awardedDate: 2022-03-01T00:00:00
+                  redeemedDate: 2022-03-01T00:00:00
+                  expiryDate: 2022-03-01T00:00:00
+                  playerGuid: livescore_uk/20202
+                  rewardCode: WIN_BIG_ZAR_IN_2022
+                  rewardName: Relief Grant
+                  rewardComponents:
+                    - id: 1
+                      status: awarded
+                      rewardComponentName: freespin
+                      playerRewardHistoryId: 4
+                      playerGuid: "livescore_sa/2200"
+                      awardedOn: 2022-09-03T22:00:00.000Z
+                      created: 2022-09-03T22:00:00.000Z
+                      updated: 2022-09-03T22:00:00.000Z
+                      amountGiven: 2
+                      amountUsed: 0
+                      amountInCents: 1
+                      description: string
+                      gameList:
+                        - name: Banghai
+                          guid: play-banghai
+                    - id: 1
+                      status: redeemed
+                      rewardComponentName: unlock_games
+                      playerRewardHistoryId: 4
+                      playerGuid: "livescore_sa/2200"
+                      awardedOn: 2022-09-03T22:00:00.000Z
+                      created: 2022-09-03T22:00:00.000Z
+                      updated: 2022-09-03T22:00:00.000Z
+                      amountGiven: 0
+                      amountUsed: 0
+                      amountInCents: 0
+                      description: string
+                      gameList:
+                        - name: Banghai
+                          guid: play-banghai                             
+  /service-reward/frontend/player/list/completed/v1:
+    post:
+      tags:
+        - Rewards
+      summary: List of rewards a player has completed. (limited to 1000)
+      description: >-
+        These are rewards that has been completed.
+      security:
+        - httpBearer: [ ]
+      parameters: []
+      responses:
+        '200':
+          description: >-
+            If call was successful, returns the player rewards that the player has completed.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PlayerRewardHistoryFE'
+              example:
+                - id: 10
+                  status: completed
+                  awardedDate: 2022-03-01T00:00:00
+                  redeemedDate: 2022-03-01T00:00:00
+                  expiryDate: 2022-03-01T00:00:00
+                  playerGuid: livescore_uk/rivalani2021
+                  rewardCode: WIN_BIG_ZAR_IN_2022
+                  rewardName: Relief Grant
+                  rewardComponents:
+                  - id: 1
+                    status: redeemed
+                    rewardComponentName: freespin
+                    playerRewardHistoryId: 4
+                    playerGuid: "livescore_sa/2200"
+                    awardedOn: 2022-09-03T22:00:00.000Z
+                    created: 2022-09-03T22:00:00.000Z
+                    updated: 2022-09-03T22:00:00.000Z
+                    amountGiven: 2
+                    amountUsed: 2
+                    amountInCents: 1
+                    description: string
+                    gameList:
+                      - name: Banghai
+                        guid: play-banghai
+  /service-reward/frontend/player/find/pending/v1:
+    post:
+      tags:
+        - Rewards
+      summary: Pending Rewards for a player. (Paged)
+      description: >-
+        These are rewards that still needs acceptance from the player.
+      security:
+        - httpBearer: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                pageSize:
+                  type: number
+                  default: 1000
+                page:
+                  type: number
+                  default: 0
+      responses:
+        '200':
+          description: >-
+            If call was successful, returns the a list of pending player reward components.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Page'
+                properties:
+                  content:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PlayerRewardHistoryFE'
+              examples:
+                completed:
+                  value:
+                    content:
+                      - id: 10
+                        status: pending
+                        awardedDate: null
+                        redeemedDate: null
+                        expiryDate: 2022-03-01T00:00:00
+                        playerGuid: livescore_uk/rivalani2021
+                        rewardCode: WIN_BIG_ZAR_IN_2022
+                        rewardName: Relief Grant
+                        rewardComponents:
+                        - id: 1
+                          status: pending_player_approval
+                          rewardComponentName: freespin
+                          playerRewardHistoryId: 4
+                          playerGuid: "livescore_sa/2200"
+                          awardedOn: null
+                          created: null
+                          updated: null
+                          amountGiven: 2
+                          amountUsed: 0
+                          amountInCents: 1
+                          description: string
+                          gameList:
+                            - name: Banghai
+                              guid: play-banghai
+                    last: true
+                    totalElements: 1
+                    totalPages: 1
+                    numberOfElements: 1
+                    size: 0
+                    number: 0
+                    first: true
+                    sort:
+                      - direction: asc
+                        property: string
+                        ignoreCase: true
+                        ascending: true
+
+  /service-reward/frontend/player/find/active/v1:
+    post:
+      tags:
+        - Rewards
+      summary: Active Rewards for a player. (Paged)
+      description: >-
+        These are rewards that still needs acceptance from the player.
+      security:
+        - httpBearer: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                pageSize:
+                  type: number
+                  default: 1000
+                page:
+                  type: number
+                  default: 0
+      responses:
+        '200':
+          description: >-
+            If call was successful, returns the a list of active player reward components.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Page'
+                properties:
+                  content:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PlayerRewardHistoryFE'
+              examples:
+                completed:
+                  value:
+                    content:
+                      - id: 10
+                        status: awarded
+                        awardedDate: null
+                        redeemedDate: null
+                        expiryDate: 2022-03-01T00:00:00
+                        playerGuid: livescore_uk/rivalani2021
+                        rewardCode: WIN_BIG_ZAR_IN_2022
+                        rewardName: Relief Grant
+                        rewardComponents:
+                        - id: 1
+                          status: pending_player_approval
+                          rewardComponentName: freespin
+                          playerRewardHistoryId: 4
+                          playerGuid: "livescore_sa/2200"
+                          awardedOn: null
+                          created: null
+                          updated: null
+                          amountGiven: 2
+                          amountUsed: 0
+                          amountInCents: 1
+                          description: string
+                          gameList:
+                            - name: Banghai
+                              guid: play-banghai
+                        - id: 1
+                          status: redeemed
+                          rewardComponentName: unlock_games
+                          playerRewardHistoryId: 4
+                          playerGuid: "livescore_sa/2200"
+                          awardedOn: null
+                          created: null
+                          updated: null
+                          amountGiven: 0
+                          amountUsed: 0
+                          amountInCents: 0
+                          description: string
+                          gameList:
+                            - name: Banghai
+                              guid: play-banghai
+                    last: true
+                    totalElements: 1
+                    totalPages: 1
+                    numberOfElements: 1
+                    size: 0
+                    number: 0
+                    first: true
+                    sort:
+                      - direction: asc
+                        property: string
+                        ignoreCase: true
+                        ascending: true
+  /service-reward/frontend/player/find/completed/v1:
+    post:
+      tags:
+        - Rewards
+      summary: Rewards a player has completed. (Paged)
+      description: >-
+        These are rewards that has been completed.
+      security:
+        - httpBearer: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                pageSize:
+                  type: number
+                  default: 1000
+                page:
+                  type: number
+                  default: 0
+      responses:
+        '200':
+          description: >-
+            If call was successful, returns the player rewards that the player has completed.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Page'
+                properties:
+                  content:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PlayerRewardHistoryFE'
+              examples:
+                completed:
+                  value:
+                    content:
+                      - id: 10
+                        status: completed
+                        awardedDate: 2022-03-01T00:00:00
+                        redeemedDate: 2022-03-01T00:00:00
+                        expiryDate: 2022-03-01T00:00:00
+                        playerGuid: livescore_uk/rivalani2021
+                        rewardCode: WIN_BIG_ZAR_IN_2022
+                        rewardName: Relief Grant
+                        rewardComponents:
+                        - id: 1
+                          status: redeemed
+                          rewardComponentName: freespin
+                          playerRewardHistoryId: 4
+                          playerGuid: "livescore_sa/2200"
+                          awardedOn: 2022-09-03T22:00:00.000Z
+                          created: 2022-09-03T22:00:00.000Z
+                          updated: 2022-09-03T22:00:00.000Z
+                          amountGiven: 2
+                          amountUsed: 2
+                          amountInCents: 1
+                          description: string
+                          gameList:
+                            - name: Banghai
+                              guid: play-banghai
+                            
+                    last: true
+                    totalElements: 1
+                    totalPages: 1
+                    numberOfElements: 1
+                    size: 0
+                    number: 0
+                    first: true
+                    sort:
+                      - direction: asc
+                        property: string
+                        ignoreCase: true
+                        ascending: true
+  /service-reward/frontend/player/reward-components/v1:
+    post:
+      tags:
+        - Rewards
+      summary: Player Reward Components By Status. (Paged)
+      description: >-
+        Get a list of reward components for a player by status
+      security:
+        - httpBearer: []
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PlayerRewardComponentRequest'
+      responses:
+        '200':
+          description: >-
+            If call was successful, returns the player promotions that the player is currently busy completing.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Page'
+                properties:
+                  content:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PlayerRewardComponentHistoryFE'
+              examples:
+                freespins:
+                  value:
+                    content:
+                      - id: 1
+                        status: pending_player_approval
+                        rewardComponentName: freespin
+                        playerRewardHistoryId: 4
+                        playerGuid: "livescore_sa/2200"
+                        awardedOn: 2022-09-03T22:00:00.000Z
+                        created: 2022-09-03T22:00:00.000Z
+                        updated: 2022-09-03T22:00:00.000Z
+                        amountGiven: 2
+                        amountUsed: 0
+                        amountInCents: 1
+                        description: string
+                        gameList:
+                          - name: Banghai
+                            guid: play-banghai
+                          
+                    last: true
+                    totalElements: 1
+                    totalPages: 1
+                    numberOfElements: 1
+                    size: 0
+                    number: 0
+                    first: true
+                    sort:
+                      - direction: asc
+                        property: string
+                        ignoreCase: true
+                        ascending: true
+                unlock_games:
+                  value:
+                    content:
+                    - id: 1
+                      status: pending_player_approval
+                      rewardComponentName: unlock_games
+                      playerRewardHistoryId: 4
+                      playerGuid: "livescore_sa/2200"
+                      awardedOn: 2022-09-03T22:00:00.000Z
+                      created: 2022-09-03T22:00:00.000Z
+                      updated: 2022-09-03T22:00:00.000Z
+                      amountGiven: 0
+                      amountUsed: 0
+                      gameList:
+                        - play-10-roulette
+                        - play-banghai
+                    last: true
+                    totalElements: 1
+                    totalPages: 1
+                    numberOfElements: 1
+                    size: 0
+                    number: 0
+                    first: true
+                    sort:
+                      - direction: asc
+                        property: string
+                        ignoreCase: true
+                        ascending: true
+                cash:
+                  value:
+                    content:
+                    - id: 1
+                      status: pending_player_approval
+                      rewardComponentName: cash
+                      playerRewardHistoryId: 4
+                      playerGuid: "livescore_sa/2200"
+                      awardedOn: 2022-09-03T22:00:00.000Z
+                      created: 2022-09-03T22:00:00.000Z
+                      updated: 2022-09-03T22:00:00.000Z
+                      amountGiven: 200000
+                      amountUsed: 200000
+                      amountInCents: 200000
+                      description: string
+                      gameList: []
+                    last: true
+                    totalElements: 1
+                    totalPages: 1
+                    numberOfElements: 1
+                    size: 0
+                    number: 0
+                    first: true
+                    sort:
+                      - direction: asc
+                        property: string
+                        ignoreCase: true
+                        ascending: true
+  /service-reward/frontend/player/accept-pending-reward-component:
+    post:
+      tags:
+        - Rewards
+      summary: Accept a pending reward for a player.
+      description: >-
+        Accept one of the rewards identified from the list above.
+      security:
+        - httpBearer: []
+      requestBody:
+       content:
+         application/json:
+           schema:
+             $ref: '#/components/schemas/AcceptRewardRequest'
+      responses:
+        '200':
+          description: If successful, returns the player reward component
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PlayerRewardComponentHistoryFE'
+              examples:
+                accept:
+                  value:
+                    id: 1
+                    status: awarded
+                    rewardComponentName: freespin
+                    playerRewardHistoryId: 4
+                    playerGuid: "livescore_sa/2200"
+                    awardedOn: 2022-09-03T22:00:00.000Z
+                    created: 2022-09-03T22:00:00.000Z
+                    updated: 2022-09-03T22:00:00.000Z
+                    amountGiven: 2
+                    amountUsed: 0
+                    amountInCents: 1
+                    description: string
+                    gameList:
+                      - name: Banghai
+                        guid: play-banghai
+                decline:
+                  value:
+                    id: 1
+                    status: declined_by_player
+                    rewardComponentName: freespin
+                    playerRewardHistoryId: 4
+                    playerGuid: "livescore_sa/2200"
+                    awardedOn: 2022-09-03T22:00:00.000Z
+                    created: 2022-09-03T22:00:00.000Z
+                    updated: 2022-09-03T22:00:00.000Z
+                    amountGiven: 2
+                    amountUsed: 0
+                    amountInCents: 1
+                    description: string
+                    gameList:
+                      - name: Banghai
+                        guid: play-banghai
+        '466':
+          description: |
+            returns this error when trying to accept a reward component that is not 
+            in a pending status
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: The reward component is not in an acceptable state.
+                  status:
+                    type: number
+                    example: 466
+                  error:
+                    type: string
+                    example: errorcodeexception_466
+                  error_description:
+                    type: string
+                    example: The reward is not in an acceptable state.
+                  exception:
+                    type: string
+                    example: lithium.exceptions.Status466InvalidRewardStateException
+                  errorCode:
+                    type: string
+                    example: lithium.exceptions.Status466InvalidRewardStateException
+components:
+  schemas:
+    UserPromotionFE:
+      type: object
+      properties:
+        id:
+          type: number
+          format: int64
+          example: 1
+          description: This is the identifier for the user promotions record.
+        playerGuid:
+          type: string
+          example: livescore_uk/riaansuk1
+          description: Guid to identify the player.
+        promoEventStarted:
+          type: string
+          format: date-time
+          example: '2022-03-01T00:00:00'
+          description: When this instance of the event in was started by the player.
+        completed:
+          type: boolean
+          example: false
+          description: Has this event been completed?
+        promoEventCompleted:
+          type: string
+          format: date-time
+          example: 'null'
+          description: When completed, the date on which it was completed.
+        percentage:
+          type: number
+          format: float
+          example: 45
+          description: The percentage that has been completed.
+        promoEventStart:
+          type: string
+          format: date-time
+          example: '2022-03-01T00:00:00'
+          description: The start date for the total timespan of the event in this promo.
+        promoEventEnd:
+          type: string
+          format: date-time
+          example: '2022-03-03T23:59:59'
+          description: The end date for the total timespan of the event in this promo.
+        promotion:
+          $ref: '#/components/schemas/PromotionFE'
+          description: Details about the actual promotion.
+        userChallengeGroup:
+          type: array
+          description: >-
+            a Promotion can be made up of groups of challenges. The groups define different
+            paths that can be taken. "Group1's challenges" OR "Group2's challenges".
+            Each group will have different challenges and rules attached.
+          items:
+            $ref: '#/components/schemas/UserChallengeGroupFE'
+            description: Details about the challenges and rules that make up this promo.
+    UserChallengeGroupFE:
+      type: object
+      properties:
+        completed:
+          type: string
+          format: date-time
+          example: '2022-03-02T05:40:00'
+          description: The date on which these challenges were completed, null if not yet completed.
+        percentage:
+          type: number
+          format: float
+          example: 100
+          description: The percentage of challenges/rules that has been completed.
+        userChallenges:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserChallengeFE'
+            description: List of challenges that make up this item in the group.
+    UserChallengeFE:
+      type: object
+      properties:
+        started:
+          type: string
+          format: date-time
+          description: When this challenges was started.
+        complete:
+          type: boolean
+          description: Is this challenge complete yet?
+        completed:
+          type: string
+          format: date-time
+          description: If completed, when was it completed.
+        percentage:
+          type: number
+          format: float
+          description: The percentage that the challenge has been completed.
+        challenge:
+          $ref: '#/components/schemas/ChallengeFE'
+          description: More details about the specific challenge.
+        userRules:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserRuleFE'
+            description: The rules that make up this challenge.
+    UserRuleFE:
+      type: object
+      properties:
+        started:
+          type: string
+          format: date-time
+          description: Date that this rule was started.
+        complete:
+          type: boolean
+          description: Has this rule been completed?
+        completed:
+          type: string
+          format: date-time
+          description: If completed, when was it completed.
+        percentage:
+          type: number
+          format: float
+          description: The percentage that this was completed.
+        rule:
+          $ref: '#/components/schemas/RuleFE'
+          description: Details about the rule applicable.
+    RuleFE:
+      type: object
+      properties:
+        activity:
+          type: string
+          example: 'registration-success'
+          description: Depending on the provider, this can be wager/win/login-success/registration-success/etc.
+        operation:
+          type: string
+          example: LAST_VALUE
+          description: |- 
+            Only three operations defined
+            - Counter
+            - Accumulator
+            - Last Value
+        value:
+          type: number
+          format: int64
+          example: 1
+          description: The value required to complete this rule.
+    ChallengeFE:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Short description to describe this challenge.
+        rewardId:
+          type: number
+          format: int64
+          example: 1
+          description: The identifier for this associated reward.
+        rewardCode:
+          type: string
+          example: ''
+          description: The reward code of the reward to be awarded when the challenge was completed.
+        rules:
+          type: array
+          items:
+            $ref: '#/components/schemas/RuleFE'
+            description: Details about the rules applicable.
+    ChallengeGroupFE:
+      type: object
+      properties:
+        id:
+          type: number
+          format: int64
+          example: 1
+          description: Identifier for the challenge group.
+        challenges:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChallengeFE'
+            description: Details about the challenges applicable.
+    PromotionFE:
+      type: object
+      properties:
+        id:
+          type: number
+          format: int64
+          example: 1
+          description: Identifier for the promotion revision.
+        name:
+          type: string
+          example: Welcome Offer - June
+        description:
+          type: string
+          example: When signing up in June receive $$$
+        dateStart:
+          type: string
+          format: date-time
+          example: '2022-06-01T00:00:00'
+        dateEnd:
+          type: string
+          format: date-time
+          example: '2022-06-30T23:59:59'
+        rewardId:
+          type: number
+          format: int64
+          example: 1
+          description: The identifier for this associated reward.
+        rewardCode:
+          type: string
+          example: SUO-REWARD-1
+        exclusive:
+          type: boolean
+          example: false
+          description: |-
+            a Promotion can be restricted to a list of configured players, or tags. 
+            When marked as exclusive, only players uploaded to the list may participate 
+            in the promotion
+        dependsOnPromotion:
+          type: number
+          format: int64
+          example: 1
+          description: This is the identifier for the promotion that must be completed before this promotion may be entered into.
+        redeemableInTotal:
+          type: number
+          example: 3
+          description: |-
+            a Promotion can be run over a long period. Inside the period, a promotion can repeat
+            multiple times. Over the span of the whole promotion, how many times a player may enter 
+            the promotion.
+        redeemableInEvent:
+          type: number
+          example: 1
+          description: |-
+            For each of the events inside a promotion, how many times may a player take part per event.
+        eventDuration:
+          type: string
+          example: 2 days
+        challengeGroups:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChallengeGroupFE'
+            description: Details about the challenge groups applicable.
+
+    AcceptRewardRequest:
+     type: object
+     properties:
+       id:
+         type: integer
+         description: This is the id of the player reward component history.
+         example: 1
+       accept:
+         type: boolean
+         description: |
+           This indicates where a player accepts the reward or not
+           * If true, the player accepts the reward
+           * If false, the player declines the reward
+#          example: 2
+    PlayerRewardHistoryFE:
+      type: object
+      properties:
+        id:
+          type: number
+          format: int64
+          example: 2
+          description: Identifier for the player reward.
+        awardedDate:
+          type: string
+          format: date-time
+          example: '2022-03-01T00:00:00'
+          description: When this reward was awarded to the player.
+        redeemedDate:
+          type: string
+          format: date-time
+          example: '2022-03-01T00:00:00'
+          description: When this reward was redeemed by the player.
+        expiryDate:
+          type: string
+          format: date-time
+          example: '2022-03-01T00:00:00'
+          description: When this reward expires. After expiration, it will be cancelled.
+        playerGuid:
+          type: string
+          example: livescore_uk/rivalani2021
+        rewardCode:
+          type: string
+          example: WIN_BIG_ZAR_IN_2022
+        rewardName:
+          type: string
+          example: Relief Grant
+        status:
+          type: string
+          description: |-
+            Available values (might change in the future)
+            - awarded
+            - partially_awarded
+            - cancelled
+            - pending
+            - failed
+            - processing
+          example: awarded
+        rewardComponents:
+          type: array
+          items:
+            $ref: '#/components/schemas/PlayerRewardComponentHistoryFE'
+    PlayerRewardComponentHistoryFE:
+      type: object
+      properties:
+        id:
+          type: number
+          format: int64
+          example: 1
+          description: Identifier for the player reward component. To be used when acceptance is required.
+        status:
+          type: string
+          description: |-
+            Available values (might change in the future)
+            - awarded
+            - redeemed
+            - declined_by_player
+            - pending_player_approval
+            - processing
+            - processed_externally
+            - failed_externally
+            - failed_internally
+          example: awarded
+        rewardComponentName:
+          type: string
+          example: freespin
+          description: |- 
+            Available values (might change in the future)
+            - freespin
+            - cash
+            - unlock_games
+            - instant_reward
+            - casino_chip
+        playerRewardHistoryId:
+          type: number
+          format: int64
+          example: 2
+        playerGuid:
+          type: string
+          example: livescore_sa/2200
+        awardedOn:
+          type: string
+          example: 2022-09-03T22:00:00.000Z
+        created:
+          type: string
+          example: 2022-09-03T22:00:00.000Z
+        updated:
+          type: string
+          example: 2022-09-03T22:00:00.000Z
+        amountGiven:
+          type: number
+          example: 20
+        amountUsed:
+          type: number
+          example: 0
+        amountInCents:
+          type: number
+          example: 1
+        gameList:
+          type: array
+          items:
+            $ref: '#/components/schemas/Game'
+        description:
+          type: string
+    Game:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Banghai
+        guid:
+          type: string
+          example: play_banghai
+    PlayerRewardComponentRequest:
+      type: object
+      properties:
+        pageSize:
+          type: number
+          default: 1000
+        page:
+          type: number
+          default: 0
+        active:
+          type: boolean
+          default: true
+          description: >-
+            If true = Get all the player reward components that are active (currently in progress and not expired),
+            If false = Get all the player reward components based on status
+        status:
+          type: string
+          example: PENDING_PLAYER_APPROVAL
+          description: |
+            The status of the reward component, defaults to AWARDED (The reward component has not been redeemed fully, e.g used 5 out of 10 free spins),
+            available status [PENDING_PLAYER_APPROVAL, DECLINED_BY_PLAYER, PROCESSING, AWARDED, REDEEMED]
+    Page:
+      type: object
+      title: Page
+      properties:
+        content:
+          type: array
+          items:
+            type: object
+        last:
+          type: boolean
+        totalElements:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        numberOfElements:
+          type: integer
+          format: int32
+        size:
+          type: integer
+          format: int32
+        number:
+          type: integer
+          format: int32
+        first:
+          type: boolean
+        sort:
+          type: array
+          items:
+            $ref: '#/components/schemas/Sort'
+    Sort:
+      type: object
+      properties:
+        direction:
+          type: string
+        property:
+          type: string
+        ignoreCase:
+          type: boolean
+        nullHandling:
+          type: string
+        ascending:
+          type: boolean
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+    httpBearer:
+      type: http
+      scheme: bearer
+  security:
+    - basicAuth: [ ]
+    - httpBearer: [ ]

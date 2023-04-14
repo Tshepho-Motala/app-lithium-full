@@ -1,0 +1,2 @@
+INSERT INTO `status` (`deleted`, `description`, `name`, `user_enabled`, `version`) VALUES (0, 'Test account: active', 'Active Test Account', 1, 0);
+INSERT INTO `status` (`deleted`, `description`, `name`, `user_enabled`, `version`) VALUES (0, 'Test account: disabled', 'Disabled Test Account', 0, 0);

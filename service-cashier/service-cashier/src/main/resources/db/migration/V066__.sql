@@ -1,0 +1,1 @@
+ALTER TABLE `processor_account_data` ADD CONSTRAINT UNIQUE `idx_processor_account` (`processor_account_id`);

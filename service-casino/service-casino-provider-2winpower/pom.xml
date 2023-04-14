@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>service-casino-provider-2winpower</artifactId>
+	<packaging>jar</packaging>
+	<name>service-casino-provider-2winpower</name>
+	<description>Casino Provider - 2 Win Power</description>
+	<parent>
+		<groupId>lithium</groupId>
+		<artifactId>common-parent-service</artifactId>
+		<version>1.12-SNAPSHOT</version>
+		<relativePath>../../common-parent-service</relativePath>
+	</parent>
+	<dependencies>
+		<dependency>
+			<groupId>lithium</groupId>
+			<artifactId>library-casino-provider-2winpower</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>lithium</groupId>
+			<artifactId>library-games</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>lithium</groupId>
+			<artifactId>client-service-domain</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>lithium</groupId>
+			<artifactId>client-service-casino</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>lithium</groupId>
+			<artifactId>client-service-mail</artifactId>
+		</dependency>
+	</dependencies>
+</project>

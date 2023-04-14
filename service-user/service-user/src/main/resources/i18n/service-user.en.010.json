@@ -1,0 +1,6 @@
+{
+	"SERVICE_USER": {
+		"INVALID_USERNAME_MESSAGE": "The credentials entered are incorrect.",
+		"INVALID_PASSWORD_MESSAGE": "The credentials entered are incorrect."
+	}
+}

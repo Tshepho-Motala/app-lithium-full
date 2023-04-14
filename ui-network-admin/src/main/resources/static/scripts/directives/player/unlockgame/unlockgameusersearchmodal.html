@@ -1,0 +1,70 @@
+<form ng-submit="controller.registerPlayer()" bs-loading-overlay bs-loading-overlay-reference-id="{{controller.referenceId}}" autocomplete="off">
+	<div class="modal-header">
+		<div class="user-block" id="modal-title">
+			<div class="pull-right">
+				<span style="line-height:inherit;" class="label label-success">{{ controller.game.providerGuid | uppercase }}</span>
+			</div>
+			<h4 style="font-weight: bold;">
+				<a ui-sref="^">{{ controller.game.name }}</a>
+			</h4>
+		</div>
+	</div>
+	<div class="modal-body">
+		<div class="p-2 text-center">
+			<span class="description" ng-if="!controller.selectedDomain">{{ 'UI_NETWORK_ADMIN.GAME.UNLOCK.DOMAINSELECT' | translate }}</span>
+			<span class="description" ng-if="controller.selectedDomain">{{ 'UI_NETWORK_ADMIN.GAME.UNLOCK.DOMAINSELECTED' | translate }}</span>
+			<span class="title" ng-if="controller.selectedDomain">
+				{{controller.selectedDomain}}
+<!-- 				<a class="btn btn-xs btn-danger pull-right" ng-if="controller.selectedDomain" ng-click="controller.clearSelectedDomain()"> -->
+<!-- 					<span class="fa fa-exchange"></span> -->
+<!-- 				</a> -->
+			</span>
+		</div><div class="p-2 text-center" style="width: 30%;">
+			<ui-select
+				ng-if="!controller.selectedDomain"
+				theme="bootstrap"
+				ng-model="controller.selectedDomain"
+				search-enabled="true"
+				on-select="controller.domainSelect($item)"
+				style="min-width: 200px;">
+				<ui-select-match
+					placeholder=""
+					data-allow-clear="false">
+					{{controller.selectedDomain}}
+				</ui-select-match>
+				<ui-select-choices data-repeat="domain in controller.domains | filter: $select.search">
+					<div ng-bind-html="domain.name | highlight: $select.search"></div>
+				</ui-select-choices>
+			</ui-select>
+		</div>
+		<div class="form-group">
+			<label for="playerName">{{ 'UI_NETWORK_ADMIN.GAME.UNLOCK.SEARCH' | translate }}</label>
+			<input type="text"
+				id="playerName"
+				ng-model="controller.playerSearch"
+				ng-required="true"
+				placeholder="Enter player name to start search..."
+				uib-typeahead="user.username for user in controller.searchPlayer($viewValue)"
+				typeahead-loading="controller.loadingLocations"
+				typeahead-no-results="controller.noResults"
+				typeahead-min-length="2"
+				typeahead-show-hint="true"
+				typeahead-wait-ms="500"
+				typeahead-editable="false"
+				class="form-control"/>
+<!-- 						typeahead-on-select="controller.registerPlayer($item, $model, $label, $event)" -->
+			<i ng-show="controller.loadingLocations" class="glyphicon glyphicon-refresh"></i>
+			<div ng-show="controller.noResults">
+				<i class="glyphicon glyphicon-remove"></i> {{ 'GLOBAL.NORESULTS' | translate }}
+			</div>
+		</div>
+		<div class="form-group" ng-show="false">
+			<checkbox large class="input-control" ng-model="controller.bonusPrerequisites"></checkbox>&nbsp;
+			<label for="controller.bonusPrerequisites">{{ 'UI_NETWORK_ADMIN.BONUS.ACTIVATION.PREREQUISITES' | translate }}</label>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-default" ng-click="controller.cancel()">{{ 'GLOBAL.ACTION.CANCEL' | translate | lowercase }}</button>
+		<button type="submit" class="btn btn-primary">{{ 'UI_NETWORK_ADMIN.GAME.UNLOCK.BUTTON' | translate | lowercase }}</button>
+	</div>
+</form>

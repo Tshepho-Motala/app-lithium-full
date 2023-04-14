@@ -1,0 +1,84 @@
+{
+	"GLOBAL": {
+		"TRANTYPE": {
+			"CASINO_BET": {
+				"LABEL": "Casino bet"
+			},
+			"CASINO_WIN": {
+				"LABEL": "Casino win"
+			},
+			"CASINO_NEGATIVE_BET": {
+				"LABEL": "Casino negative bet"
+			},
+			"PLAYERBALANCE": {
+				"LABEL": "Player balance"
+			},
+			"CASINO_BET_ROLLBACK": {
+				"LABEL": "Casino bet rollback"
+			},
+			"CASINO_WIN_ROLLBACK": {
+				"LABEL": "Casino win rollback"
+			},
+			"CASINO_NEGATIVE_BET_ROLLBACK": {
+				"LABEL": "Casino negative bet rollback"
+			},
+			"PLAYER_BALANCE_CASINO_BONUS": {
+				"LABEL": "Player balance casino bonus"
+			},
+			"PLAYER_BALANCE_CASINO_BONUS_PENDING": {
+				"LABEL": "Player balance casino bonus pending"
+			},
+			"TRANSFER_TO_CASINO_BONUS": {
+				"LABEL": "Transfer to casino bonus"
+			},
+			"TRANSFER_FROM_CASINO_BONUS": {
+				"LABEL": "Transfer from casino bonus"
+			},
+			"TRANSFER_TO_CASINO_BONUS_PENDING": {
+				"LABEL": "Transfer to casino bonus pending"
+			},
+			"TRANSFER_FROM_CASINO_BONUS_PENDING": {
+				"LABEL": "Transfer from casino bonus pending"
+			},
+			"CASINO_BONUS_ACTIVATE": {
+				"LABEL": "Casino bonus activate"
+			},
+			"CASINO_BONUS_PENDING": {
+				"LABEL": "Casino bonus pending"
+			},
+			"CASINO_BONUS_CANCEL": {
+				"LABEL": "Casino bonus cancel"
+			},
+			"CASINO_BONUS_EXPIRED": {
+				"LABEL": "Casino bonus expired"
+			},
+			"CASINO_BONUS_MAXPAYOUT_EXCESS": {
+				"LABEL": "Casino bonus max payout excess"
+			},
+			"CASINO_BET_FREESPIN": {
+				"LABEL": "Casino bet freespin"
+			},
+			"CASINO_WIN_FREESPIN": {
+				"LABEL": "Casino win freespin"
+			},
+			"TRANSFER_TO_CASINO_ESCROW": {
+				"LABEL": "Transfer to casino escrow"
+			},
+			"TRANSFER_FROM_CASINO_ESCROW": {
+				"LABEL": "Transfer from casino escrow"
+			},
+			"PLAYER_BALANCE_CASINO_ESCROW": {
+				"LABEL": "Player balance casino escrow"
+			},
+			"CASINO_BONUS_PENDING_CANCEL": {
+				"LABEL": "Casino bonus pending cancel"
+			},
+			"CASINO_XP_GAIN": {
+				"LABEL": "Casino XP gain"
+			},
+			"BALANCE_ADJUST": {
+				"LABEL": "Balance adjust"
+			}
+		}
+	}
+}

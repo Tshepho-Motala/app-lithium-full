@@ -1,0 +1,7 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "VALIDATION": {
+      "EMAIL_PATTERN": "Please use the correct format for your e-mail address e.g. XXXX@XXXX.XXX"
+    }
+  }
+}

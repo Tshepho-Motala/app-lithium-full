@@ -1,0 +1,27 @@
+{
+	"GLOBAL": {
+		"TRANTYPE": {
+			"VIRTUAL_BET": {
+				"LABEL": "Virtual bet"
+			},
+			"VIRTUAL_WIN": {
+				"LABEL": "Virtual win"
+			},
+			"VIRTUAL_LOSS": {
+				"LABEL": "Virtual loss"
+			},
+			"VIRTUAL_FREE_BET": {
+				"LABEL": "Virtual free bet"
+			},
+			"VIRTUAL_FREE_WIN": {
+				"LABEL": "Virtual free win"
+			},
+			"VIRTUAL_FREE_LOSS": {
+				"LABEL": "Virtual free win"
+			},
+			"VIRTUAL_BET_REVERSAL": {
+				"LABEL": "Virtual bet reversal"
+			}
+		}
+	}
+}

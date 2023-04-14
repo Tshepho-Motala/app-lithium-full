@@ -1,0 +1,254 @@
+Test scenario:
+
+- VUs=100
+- Duration=10m
+
+## Load test statistics
+
+[Full report](k6_run_report.txt)
+
+```
+     █ balance
+
+       █ balance
+
+         ✓ is status 200
+         ✓ is body errorCode 0
+
+     █ redeemToken
+
+       █ redeemToken
+
+         ✓ is status 200
+         ✓ is body errorCode 0
+
+     █ createToken
+
+       █ createToken
+
+         ✓ is status 200
+         ✓ is body errorCode 0
+
+     █ balance->placeBet
+
+       █ balance
+
+         ✓ is status 200
+         ✓ is body errorCode 0
+
+       █ placeBet
+
+         ✓ is status 200
+         ✓ is body errorCode 0
+
+     █ placeBet->end
+
+       █ placeBet
+
+         ✓ is status 200
+         ✓ is body errorCode 0
+
+       █ end
+
+         ✓ is status 200
+         ✓ is body errorCode 0
+
+     █ balance->placeBet->end
+
+       █ balance
+
+         ✓ is status 200
+         ✓ is body errorCode 0
+
+       █ placeBet
+
+         ✓ is status 200
+         ✓ is body errorCode 0
+
+       █ end
+
+         ✓ is status 200
+         ✓ is body errorCode 0
+
+     █ placeBet->awardWinnings
+
+       █ placeBet
+
+         ✓ is status 200
+         ✓ is body errorCode 0
+
+       █ awardWinnings
+
+         ✓ is status 200
+         ✓ is body errorCode 0
+
+     █ balance->placeBet->awardWinnings->end
+
+       █ balance
+
+         ✓ is status 200
+         ✓ is body errorCode 0
+
+       █ placeBet
+
+         ✓ is status 200
+         ✓ is body errorCode 0
+
+       █ awardWinnings
+
+         ✓ is status 200
+         ✓ is body errorCode 0
+
+       █ end
+
+         ✓ is status 200
+         ✓ is body errorCode 0
+
+     █ startGame
+
+       █ startGame
+
+         ✓ is status 200
+         ✓ is body status 0
+
+     █ demoGame
+
+       █ demoGame
+
+         ✓ is status 200
+         ✓ is body status 0
+
+     █ placeBet->rollbackBet
+
+       █ placeBet
+
+         ✓ is status 200
+         ✓ is body errorCode 0
+
+       █ rollbackBet
+
+         ✓ is status 200
+         ✓ is body errorCode 0
+
+     █ balance->placeBet->rollbackBet
+
+       █ balance
+
+         ✓ is status 200
+         ✓ is body errorCode 0
+
+       █ placeBet
+
+         ✓ is status 200
+         ✓ is body errorCode 0
+
+       █ rollbackBet
+
+         ✓ is status 200
+         ✓ is body errorCode 0
+
+     █ balance->placeBet->rollbackBet->end
+
+       █ balance
+
+         ✓ is status 200
+         ✓ is body errorCode 0
+
+       █ placeBet
+
+         ✓ is status 200
+         ✓ is body errorCode 0
+
+       █ rollbackBet
+
+         ✓ is status 200
+         ✓ is body errorCode 0
+
+       █ end
+
+         ✓ is status 200
+         ✓ is body errorCode 0
+
+     █ balance->placeBet->end->rollbackBet
+
+       █ balance
+
+         ✓ is status 200
+         ✓ is body errorCode 0
+
+       █ placeBet
+
+         ✓ is status 200
+         ✓ is body errorCode 0
+
+       █ end
+
+         ✓ is status 200
+         ✓ is body errorCode 0
+
+       █ rollbackBet
+
+         ✓ is status 200
+         ✓ is body errorCode 0
+
+     █ voidBet
+
+       █ voidBet
+
+         ✓ is status 200
+         ✓ is body errorCode 0
+
+     checks............................: 100.00% ✓ 729600     ✗ 0
+     data_received.....................: 200 MB  332 kB/s
+     data_sent.........................: 198 MB  329 kB/s
+     group_duration....................: avg=224.75ms min=9.4ms    med=169.56ms max=1.37s    p(90)=464.48ms p(95)=637.58ms
+     http_req_blocked..................: avg=11.99µs  min=1.36µs   med=3.84µs   max=23.61ms  p(90)=5.63µs   p(95)=6.46µs
+     http_req_connecting...............: avg=4.68µs   min=0s       med=0s       max=9.2ms    p(90)=0s       p(95)=0s
+     http_req_duration.................: avg=164.48ms min=8.98ms   med=164.4ms  max=982.39ms p(90)=191.15ms p(95)=209.39ms
+       { expected_response:true }......: avg=164.48ms min=8.98ms   med=164.4ms  max=982.39ms p(90)=191.15ms p(95)=209.39ms
+       { requestType:awardWinnings }...: avg=174.42ms min=117.48ms med=172.06ms max=314.66ms p(90)=192.73ms p(95)=200.97ms
+       { requestType:balance }.........: avg=143.89ms min=55.92ms  med=140.87ms max=982.39ms p(90)=158.15ms p(95)=166.38ms
+       { requestType:createToken }.....: avg=112.16ms min=54.29ms  med=108.63ms max=408.57ms p(90)=122.95ms p(95)=129.8ms
+       { requestType:demoGame }........: avg=158.12ms min=74.04ms  med=158.2ms  max=304.23ms p(90)=178.47ms p(95)=186.2ms
+       { requestType:end }.............: avg=174.95ms min=20.76ms  med=171.43ms max=549.01ms p(90)=194.05ms p(95)=205.19ms
+       { requestType:placeBet }........: avg=173.62ms min=52.43ms  med=170.56ms max=574.02ms p(90)=191.04ms p(95)=201.01ms
+       { requestType:redeemToken }.....: avg=114.15ms min=34.87ms  med=109.63ms max=708.75ms p(90)=124.37ms p(95)=130.91ms
+       { requestType:startGame }.......: avg=239.62ms min=144.4ms  med=233.42ms max=712.54ms p(90)=272.41ms p(95)=288.83ms
+       { requestType:voidBet }.........: avg=169.07ms min=8.98ms   med=167.6ms  max=246.17ms p(90)=187.1ms  p(95)=195.25ms
+     http_req_failed...................: 0.00%   ✓ 0          ✗ 364800
+     http_req_receiving................: avg=109.27µs min=20.52µs  med=58.67µs  max=34.93ms  p(90)=107.5µs  p(95)=266.3µs
+     http_req_sending..................: avg=39.26µs  min=8.7µs    med=24.08µs  max=33.42ms  p(90)=35.42µs  p(95)=46.35µs
+     http_req_tls_handshaking..........: avg=0s       min=0s       med=0s       max=0s       p(90)=0s       p(95)=0s
+     http_req_waiting..................: avg=164.34ms min=8.88ms   med=164.26ms max=979.03ms p(90)=190.99ms p(95)=209.2ms
+     http_reqs.........................: 364800  605.540856/s
+       { requestType:awardWinnings }...: 22800   37.846304/s
+       { requestType:balance }.........: 79800   132.462062/s
+       { requestType:createToken }.....: 11400   18.923152/s
+       { requestType:demoGame }........: 11400   18.923152/s
+       { requestType:end }.............: 57000   94.615759/s
+       { requestType:placeBet }........: 102600  170.308366/s
+       { requestType:redeemToken }.....: 11400   18.923152/s
+       { requestType:startGame }.......: 11400   18.923152/s
+       { requestType:voidBet }.........: 11400   18.923152/s
+     iteration_duration................: avg=5.28s    min=4.36s    med=5.16s    max=9.67s    p(90)=5.52s    p(95)=5.61s
+     iterations........................: 11400   18.923152/s
+     vus...............................: 93      min=93       max=100
+     vus_max...........................: 100     min=100      max=100 
+```
+
+## Profiling statistics
+
+![Telemetry](jprofile/telemetry.png)
+
+Legend for this graph:
+1. Memory:
+- ![#04B404](https://placehold.it/15/04B404/000000?text=+) `Free size`
+- ![#2E2EFE](https://placehold.it/15/2E2EFE/000000?text=+) `Used size`
+2. Classes
+- ![#04B404](https://placehold.it/15/04B404/000000?text=+) `Non-CPU profiled classes`
+- ![#2E2EFE](https://placehold.it/15/2E2EFE/000000?text=+) `CPU profiled classes`
+3. Threads
+- ![#04B404](https://placehold.it/15/04B404/000000?text=+) `Runnable threads`
+- ![#DF0101](https://placehold.it/15/DF0101/000000?text=+) `Blocked threads`
+- ![#2EFEF7](https://placehold.it/15/2EFEF7/000000?text=+) `Threads in net I/O`
+- ![#FACC2E](https://placehold.it/15/FACC2E/000000?text=+) `Waiting threads`

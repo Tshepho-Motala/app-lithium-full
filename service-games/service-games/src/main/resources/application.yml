@@ -1,0 +1,115 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost/lithium_games
+    username: root
+    password: mysql
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+  cloud:
+    stream:
+      bindings:
+        casino-game-migration-input:
+          consumer:
+            concurrency: 20
+            max-attempts: 5
+            back-off-initial-interval: 5000
+            back-off-max-interval: 60000
+            back-off-multiplier: 2.5
+          group: casino-game-migration-group
+          binder: rabbit
+          destination: casino-game-migration-queue
+        gamesupdateinput:
+          group: gamesupdategroup
+          binder: rabbit
+          destination: gamesupdatequeue
+        gatewayexchange:
+          binder: rabbit
+          destination: gateway
+          producer:
+            should-declare: false
+        userattributestriggerinput :
+          group: user-attributes-trigger-group-games
+          binder : rabbit
+          destination : userattributestriggerqueue
+        suppliergamemetadatainput:
+          group: suppliergamemetadatagroup
+          binder: rabbit
+          destination: suppliergamemetadataqueue
+          content-type: application/json
+          producer:
+            should-declare: false
+        progressive-jackpot-registration-input:
+          group: progressivejackpotregistrationgroup
+          binder: rabbit
+          destination: progressive-jackpot-feed-registration-out
+        migration-exception-output:
+          binder: rabbit
+          destination: migration-exception-queue
+          producer:
+            required-groups: migration-exception-group
+
+      rabbit:
+        bindings:
+          casino-game-migration-input:
+            consumer:
+              autoBindDlq: true
+              requeueRejected: true
+              republishToDlq: true
+
+server:
+  port: 9783
+  
+          
+lithium:
+  queue:
+    free-game-metadata-enabled: true
+  services:
+    db:
+      load-test-data: false
+    games:
+      progressive-jackpot-feeds-scheduler-in-milliseconds: 30000
+      dlqRetries: 3
+      channel-migration-job:
+        # Migration Plan:
+        # Query to check for different os label values:
+        # SELECT *
+        # FROM label l
+        # INNER JOIN label_value lv ON l.id = lv.label_id
+        # WHERE l.name = 'os';
+        # 1. Do test Run (Set persistOsGameChannels: false && removeOsGameLabelValue: false && persistDefaultGameChannels: true) - Will not persist any changes and you will also be able to see if default channels was applied where os label did not exist on game
+        # 2. Validate Logs
+        # 3. If 2 passed: (Set persistOsGameChannels: true && removeOsGameLabelValue: false && persistDefaultGameChannels: true) run again - Now persisting new channel game label values
+        # 4. Validate Logs
+        # 5. If 4 passed and business agrees that os may be removed: (Set removeOsGameLabelValue: true and the persist values to false) - os label value will be removed from all games
+        # 6. Disable channel migration job: Set enabled: false
+        # 7. Log cleanup ticket to remove channel-migration-job from svc-games
+        enabled: false
+        # Needs a system token to run
+        # curl --location --request POST '{{gateway}}/service-games/system/run-channel-migration-job' \
+        #--header 'Authorization: Bearer {{systemAccessToken}}' \
+        #--header 'Content-Type: application/json' \
+        #--data-raw '{
+        #    "valueToChannelConfigurer": {
+        #          "des": "desktop_web",
+        #          "Desketo,Mobile": "desktop_web|mobile_web",
+        #          "desktop": "desktop_web",
+        #          "Desktop": "desktop_web",
+        #          "Desktop, Mobile": "desktop_web|mobile_web",
+        #          "Desktop,Mobile": "desktop_web|mobile_web",
+        #          "Desktop,Moblie": "desktop_web|mobile_web",
+        #          "mobile": "mobile_web",
+        #          "Mobile": "mobile_web"
+        #        },
+        #        "removeOsGameLabelValue": false,
+        #        "persistOsGameChannels": false,
+        #        "persistDefaultGameChannels": false,
+        #        "defaultGameChannels": "desktop_web|mobile_web"
+        #}'
+
+logging:
+  level:
+    lithium.service.games: INFO
+    lithium.service.games.services.ProgressiveJackpotFeedsBalanceSyncService: INFO
+

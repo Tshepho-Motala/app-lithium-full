@@ -1,0 +1,46 @@
+{
+	"name": "BLUEM iDEAL",
+	"code": "bluem-ideal",
+	"image": {
+		"filename": "/methods/ideal.png",
+		"filetype": "image/png"
+	},
+	"depositStages": [
+		{
+			"number": 1,
+			"title": "Enter Amount",
+			"description": null,
+			"inputFields": [
+				{
+					"code": "return_url",
+					"name": "Return URL",
+					"description": "Return URL once transaction is complete. Will be appended with a status",
+					"type": "return_url",
+					"required": true
+				},
+				{
+					"code": "processorAccountId",
+					"name": "Lithium processor account",
+					"description": "Lithium processor account contain details about Bluem payer account",
+					"type": "long",
+					"required": false
+				},
+				{
+					"code": "bank_code",
+					"name": "Bluem iDEAL BIC",
+					"description": "Bluem BIC (Business Identifier Codes)",
+					"type": "String",
+					"required": false
+				}
+			],
+			"outputFields": []
+		},
+		{
+			"number": 2,
+			"title": "Validate payment",
+			"description": null,
+			"inputFields": [],
+			"outputFields": []
+		}
+	]
+}

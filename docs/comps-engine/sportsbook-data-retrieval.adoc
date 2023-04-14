@@ -1,0 +1,84 @@
+= Sportsbook Data Retrieval
+Riaan Schoeman <riaan.schoeman@wonderlabz.com>
+1.0, Mar 3, 2022: Sportsbook Data Retrieval
+:sectnums:
+:toc: left
+:toclevels: 4
+:toc-title: Sportsbook Data Retrieval
+//:source-highlighter: pygments
+//:pygments-style: emacs
+:icons: font
+:url-quickref: https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/
+
+:lbo-sourcedir: ../../ui-network-admin/src/main/resources
+//ui-network-admin/src/main/resources/static/scripts/controllers/dashboard/bonuses/bonus/edit/addexternalbonusgame.js
+:promotions-sourcedir: ../../service-promotions/service-promotions/src/main/java
+:promotions-client-sourcedir: ../../service-promotions/client-service-promo/src/main/java
+:casino-sourcedir: ../../service-casino/service-casino/src/main/java
+:sb-sourcedir: ../../service-casino/service-casino-provider-sportsbook/src/main/java
+
+[sidebar]
+****
+link:squads.adoc[Squads TA] |
+link:readme.adoc[Comps Engine Readme]
+****
+
+== Description
+
+=== Business
+
+For the squads' promo we would like to know the scope of work required (t-shirt size) to retrieve and use sportsbook related data.
+
+=== Current T-Shirt size
+
+* 1 week development
+
+== Lithium / Architecture
+=== Explanation
+
+Referencing the diagram below (Figure 1.), wheneever a bet / settlement is made for sportsbook transactions, the normal flow of events would result in a `CompletedTransactionEvent` produced from `service-accounting-provider-internal`
+
+A new queue processor should be added to `scp-sportsbook`, filter for only sports bets/wins, for those trans, using the betId, we will make a request to SBT to retrieve more information about the bet. (This is currently being used within LBO to display the info on bets) This information will be stored inside the lithium_casino_sportsbook database to be retrieved again
+
+---
+=== svc-sportsbook
+include::../../service-casino/service-casino-provider-sportsbook/docs/plantuml/sportsbook-data-retrieval.puml[]
+
+include::../../service-casino/service-casino-provider-sportsbook/docs/plantuml/sportsbook-data-db.puml[]
+
+* Processor/consumer on scp-sportsbook, needs to have a domain setting to enable/disable.
+** Example ingress for completed transactions: `lithium.service.promotions.services.TransactionCompletedEventService.processCompletedTransaction`
++
+[source,java,linenums,indent=0]
+----
+include::{promotions-sourcedir}/lithium/service/promotions/services/TransactionCompletedEventService.java[lines=39..40]
+----
++
+* An example to retrieve details about sports transaction (#1 from figure 1 above):
++
+[source,java,linenumsscript,indent=0,highlight='4-5']
+----
+lithium.service.casino.provider.sportsbook.builders.BetHistorySearchBuilder.buildBetSearch
+include::{sb-sourcedir}/lithium/service/casino/provider/sportsbook/builders/BetHistorySearchBuilder.java[lines=77..94]
+----
++
+* once the data is retrieved and saved in the scp-sb database. Publish a new message to rabbit containing this information, which will be consumed by svc-promotion/svc-promo.
+* processing in svc-promotion/svc-promo to be completed as part of Squads TA:
+* create a processor/consumer on svc-promotion/svc-promo
+** as part of the stats that is being kept, add the following fields
+*** league
+*** sport
+*** event
+*** market
+
+---
+Removed from original Squads demo: Needs to be completed.
+
+---
+*** As part of the `MissionStatBasic` we need a new table structure that will hold more details about the stat that we are trying to track:
++
+include::plantuml/promo-stats-group-db.puml[]
++
+**** The label value structure should be implemented on `Rule`(s) as well, so that a rule can be linked to many identifiers. Currently, there is a field called `identifier` that is being used to identify if a specific game was configured on the Rule. (And checked when a transaction comes in, to check if it relates to the specific game.)
++
+We need to expand on this, so that we can select market+/league+/sport+/odds, which will be stored on the Rule, and checked on incoming transaction if it's set on the Rule.

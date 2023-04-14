@@ -1,0 +1,49 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "PLAYER": {
+      "CASINOHISTORY": {
+        "VIEWINGBETS": "Viewing bets",
+        "FILTER": {
+          "START": {
+            "LABEL": "Date Range Start"
+          },
+          "END": {
+            "LABEL": "Date Range End"
+          },
+          "STATUS": {
+            "LABEL": "Bet Status"
+          },
+          "GAME": {
+            "LABEL": "Game"
+          }
+        },
+        "TABLE": {
+          "BETID": {
+            "LABEL": "Bet Id"
+          },
+          "BETDATE": {
+            "LABEL": "Bet Date"
+          },
+          "GAME": {
+            "LABEL": "Game"
+          },
+          "BETSTATUS": {
+            "LABEL": "Bet Status"
+          },
+          "STAKE": {
+            "LABEL": "Stake"
+          },
+          "RETURN": {
+            "LABEL": "Return"
+          },
+          "ROUNDSTATUS": {
+            "LABEL": "Round Status"
+          },
+          "BETSETTLEDDATE": {
+            "LABEL": "Bet Settled Date"
+          }
+        }
+      }
+    }
+  }
+}

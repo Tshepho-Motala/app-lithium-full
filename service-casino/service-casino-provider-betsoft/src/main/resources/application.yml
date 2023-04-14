@@ -1,0 +1,9 @@
+server.port: 9771
+
+spring:
+  application:
+    name: service-casino-provider-betsoft
+    
+eureka:
+  instance:
+    appname: service-casino-provider-betsoft

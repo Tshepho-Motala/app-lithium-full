@@ -1,0 +1,59 @@
+{
+  "name": "BitCoin",
+  "code": "btc",
+  "image": {
+    "filename": "/methods/btc.png",
+    "filetype": "image/png"
+  },
+  "depositStages": [
+    {
+      "number": 1,
+      "title": "Enter Amount",
+      "description": "Specify an estimated amount that you wish to deposit.",
+      "outputFields": [
+        {
+          "code": "address",
+          "name": "Receiver Address",
+          "description": "The BitCoin address where funds needs to be transfered to."
+        },
+        {
+          "code": "bitcoins",
+          "name": "Amount",
+          "description": "Please transfer the above amount of bitcoins."
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "title": "Perform Deposit",
+      "description": "You now need to perform a BitCoin transfer to the address specified below. You may close your browser and return to this page at any time within the next 24 hours to continue this deposit. Once you have completed the transfer, it will take up to six confirmations before the deposit will be cleared. As soon as the deposit is cleared, we will notify you via email and the funds will be made available in your account. Please note that the exchange rate might vary by the time the deposit is received, and thus the amount deposited might be different."
+    }
+  ],
+  "withdrawalStages": [
+    {
+      "number": 1,
+      "title": "Perform Withdrawal",
+      "description": "Enter the amount that you wish to withdraw and an address where we should send the funds.",
+      "inputFields": [
+        {
+          "code": "address",
+          "name": "Receiver Address",
+          "description": "The BitCoin address where funds needs to be transfered to."
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "title": "Funds Sent",
+      "description": "We have submitted your withdrawal to the processor and it is currently pending."
+    }
+  ],
+  "properties": [
+    {
+      "name": "btcconfirmations",
+      "defaultValue": "6",
+      "type": "number",
+      "description": "Amount of confirmations required before approving the transaction. Default is 6."
+    }
+  ]
+}

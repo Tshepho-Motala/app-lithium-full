@@ -1,0 +1,70 @@
+.User Mass Validation Stage 1
+[plantuml]
+----
+@startuml
+'https://plantuml.com/sequence-diagram
+
+participant  "svc-user-mass-action" as usermassaction
+queue queue
+participant "svc-user" as user
+
+autonumber
+
+activate usermassaction
+usermassaction->usermassaction: trigger user verification processing (STAGE_1)
+usermassaction->usermassaction: retrieve fileUpload by id
+usermassaction->usermassaction: update fileUpload.uploadStatus = CHECKING
+usermassaction->usermassaction: retrieve uploaded CSV file from fileUpload.file
+usermassaction->usermassaction: extract fileDataList from CSV rows
+note right of usermassaction
+    * Each record is then extracted from the CSV file into a FileData object,
+    and after validation these records would be persisted into the file_upload_data table
+    * The number of records found in the file is stored against the fileUpload and will be used as indication to how
+      far the upload has processesed the user validations.
+end note
+loop through fileDataList
+    usermassaction-->queue: Add each fileData element from fileDataList onto user-validation-input-queue
+    note right of usermassaction
+        * Every record that was extracted from the CSV which was mapped to a FileData object now needs to be
+          send via a queue to a user validation queue listerner residing on service-user-mass-action
+        * At this stage the record has not yet been persisted to the DB and therefore when LBO queries the state for stage 1 via the in-progress backoffice API,
+          it would know how far down the line the user validation job has exected for. So if 10 records has been uploaded, and stage 1 we
+          only see two fileData records persisted in the DB, then the in-progress API would return 10% complete.
+    end note
+end
+    deactivate usermassaction
+
+== User Validation Queue Processor==
+
+usermassaction<-queue: listens to user-validation-output-queue
+activate usermassaction
+usermassaction->usermassaction: prepare user validation for fileData
+usermassaction->user: userApiInternalClientService.getUserById(fileData.getUploadedPlayerId());
+activate user
+user-->usermassaction: Response user
+deactivate user
+
+alt user found
+    usermassaction->usermassaction: set fileData UploadStatus.CHECKED, and create Player in local user table and set user status and status reason
+else user found but not on domain where CSV was uploaded from
+ usermassaction->usermassaction: mark fileData as UploadStatus.FAILED_STAGE_1 with DataError.USER_FOUND_ON_ANOTHER_DOMAIN
+else user not found
+    usermassaction->usermassaction: mark fileData as UploadStatus.FAILED_STAGE_1 with DataError.USER_NOT_FOUND
+end
+
+alt If UploadType.BONUS_*
+    usermassaction->usermassaction: handle bonus validations
+end
+
+usermassaction->usermassaction: insert fileData record into the DB
+
+usermassaction->usermassaction: postMassActionValidationChecks
+note right of usermassaction
+    * After each and every user validation that was done indivitually per player, we would need to do the summary API call to calculate whether all records on CSV has been validated or not.
+    * When all records has been processed, the UploadStatus needs to be updated to UploadStatus.CHECKED else if there are no valid players the upload will be marked as fileUpload.uploadStatus.FAILED_STAGE_1
+end note
+
+deactivate usermassaction
+
+@enduml
+----

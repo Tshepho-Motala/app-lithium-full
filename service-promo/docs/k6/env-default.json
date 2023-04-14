@@ -1,0 +1,23 @@
+{
+    "GATEWAY": "http://localhost:9000",
+    "PLAYER_DOMAIN": "livescore_uk",
+    "PLAYER_PREFIX": "jm__",
+    "PLAYER_PASSWORD": "Password12",
+    "OPTIONS": {
+        "thresholds": {
+            "http_req_failed": [
+                "rate<0.01"
+            ],
+            "http_req_duration": [
+                "p(95)<1000"
+            ]
+        },
+        "stages": [
+            {
+                "duration": "10s",
+                "target": 2
+            }
+        ],
+        "httpDebug": "full"
+    }
+}

@@ -1,0 +1,51 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "ECOSYSTEMS": {
+      "TITLE": {
+        "DESCRIPTION": "Please provide us with the basic information needed to create an ecosystem",
+        "TEXT": "Add Ecosystem"
+      },
+      "LIST_TITLE": "Ecosystem",
+      "LIST_DESC": "Below is a list of all your ecosystems",
+      "BUTTON": {
+        "ECOSYSTEM_BIN": "Delete"
+      },
+      "FIELDS": {
+          "ECOSYSTEM_NAME": "Name",
+          "ECOSYSTEM_DISPLAY_NAME": "Display Name",
+          "ECOSYSTEM_DESCRIPTION": "Description",
+          "ECOSYSTEM_STATUS": "Status",
+          "ECOSYSTEM_DELETED": "Deleted"
+        },
+      "BUTTONS": {
+        "STATUS_ENABLED": "Enabled",
+        "STATUS_DISABLED": "Disabled",
+        "LINK_OPEN": "Open"
+      },
+      "MESSAGES": {
+        "SUCCESS_MESSAGE": "SUCCESS",
+        "ADD_MESSAGE": "Please provide us with the basic information needed to create an ecosystem"
+      },
+      "LINK": {
+        "LIST_TITLE": "Domain Relationship List ",
+        "LIST_DESC": "Below is a list of all your Domain Relationships",
+        "SELECT_DOMAIN": "Selected domain:",
+        "SELECT_ECOSYSTEM": "Select an ecosystem to get started.",
+        "SELECT_REL_TYPE": "Selected relationship type",
+        "SELECT_A_DOMAIN": "Select a domain.",
+        "SELECT_A_REL_TYPE": "Select a relationship type.",
+        "ADD_TITLE": "Add domain relationship",
+        "ADD_DESC": "Create new domain relationship"
+      }
+    },
+    "RELATIONSHIP_TYPE": {
+      "TITLE": "Domain Relationship List ",
+      "LIST": "Below is a list of all your Domain Relationships",
+      "SELECT_DOMAIN": "Selected domain:",
+      "SELECT_ECOSYSTEM": "Select an ecosystem to get started.",
+      "SELECT_REL_TYPE": "Selected relationship type",
+      "ADD_TITLE": "Add domain relationship",
+      "ADD_DESC": "Create new domain relationship"
+    }
+  }
+}

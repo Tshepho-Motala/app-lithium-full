@@ -1,0 +1,14 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "CMS": {
+      "GLOBAL": {
+        "DIALOG":{
+          "CONFIRM_DELETE_WIDGET": {
+            "TITLE":"Confirm Delete",
+            "TEXT": "Are you sure you want to delete"
+          }
+        }
+      }
+    }
+  }
+}

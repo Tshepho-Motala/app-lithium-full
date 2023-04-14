@@ -1,0 +1,29 @@
+{
+  "SERVICE-LIMIT": {
+    "RESTRICTIONS": {
+      "RULESETS": {
+        "RULE": {
+          "FIELD": {
+            "DAYS_SINCE_REGISTRATION": "Days Since Registration",
+            "VERIFICATION_STATUS": "Verification Status",
+            "LT_DEPOSITS_IN_CENTS": "Lifetime Deposits (in cents)",
+            "LT_WITHDRAWALS_IN_CENTS": "Lifetime Withdrawals (in cents)"
+          },
+          "OPERATOR": {
+            "BETWEEN": "Between",
+            "EQUALS": "Equals",
+            "GREATER_THAN": "Greater than",
+            "GREATER_THAN_OR_EQUALS": "Greater than or equals",
+            "LESS_THAN": "Less than",
+            "LESS_THAN_OR_EQUALS": "Less than or equals",
+            "IN": "In"
+          }
+        },
+        "OUTCOME": {
+          "PLACE": "Place",
+          "LIFT": "Lift"
+        }
+      }
+    }
+  }
+}

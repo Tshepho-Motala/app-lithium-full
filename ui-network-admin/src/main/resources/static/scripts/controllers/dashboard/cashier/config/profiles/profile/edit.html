@@ -1,0 +1,13 @@
+<form ng-submit="controller.onSubmit()" name="controller.form" novalidate>
+<div class="row v-reset-row ">
+	<div class="col-xs-12">
+		<formly-form model="controller.model" fields="controller.fields" options="controller.options" form="controller.form">
+		</formly-form>
+		
+		<buttonbar>
+			<button-submit></button-submit>
+<!-- 			<button-cancel ui-sref="dashboard.cashier.profiles({domainName:$stateParams.domainName})"></button-cancel> -->
+		</buttonbar>
+	</div>
+</div>
+</form>

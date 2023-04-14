@@ -1,0 +1,1 @@
+ALTER TABLE `file_upload_data` ADD COLUMN `applied_default_amount` bit(1) DEFAULT NULL;

@@ -1,0 +1,50 @@
+{
+  "name": "Inpay Web",
+  "code": "inpay",
+  "image": {
+    "filename": "/methods/inpay.png",
+    "filetype": "image/png"
+  },
+  "depositStages": [
+    {
+      "number": 1,
+      "title": "Enter Amount",
+      "description": "Specify the amount you wish to deposit.",
+      "inputFields": [
+
+      ],
+      "outputFields": []
+    },
+    {
+      "number": 2,
+      "title": "Your transaction is awaiting approval.",
+      "description": "We have submitted your transaction and we are awaiting approval. Please check back later.",
+      "inputFields": [],
+      "outputFields": []
+    }
+  ],
+  "withdrawalStages": [
+    {
+      "number": 1,
+      "title": "Enter Amount",
+      "description": "Specify the amount and account number you wish to withdraw.",
+      "inputFields": [
+        {
+          "code": "processorAccountId",
+          "name": "Lithium processor account",
+          "description": "Lithium processor account contain details about Inpay payer account",
+          "type": "long",
+          "required": true
+        }
+      ],
+      "outputFields": []
+    },
+    {
+      "number": 2,
+      "title": "Your transaction is awaiting approval.",
+      "description": "We have submitted your transaction and we are awaiting approval. Please check back later.",
+      "inputFields": [],
+      "outputFields": []
+    }
+  ]
+}

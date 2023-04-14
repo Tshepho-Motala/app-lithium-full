@@ -1,0 +1,150 @@
+{
+	"GLOBAL": {
+		"ACTION": {
+			"EDIT": "Edit"
+		},
+		"CURRENCY": {
+			"NAME": "Currency",
+			"PLACEHOLDER": "E.g. ZAR",
+			"DESCRIPTION": "Start typing to search for the desired currency."
+		},
+		"BONUS": {
+			"TYPE": {
+				"TRIGGER": {
+					"7": "Product"
+				}
+			}
+		}
+	},
+	"UI_NETWORK_ADMIN": {
+		"CATALOG": {
+			"TRANSACTIONS": {
+				"CREATEDON": "Date",
+				"PRODUCTGUID": "Product Id",
+				"PRODUCTNAME": "Product Name",
+				"DOMAINNAME": "Domain",
+				"PLAYER": "Player",
+				"METHOD": "Deposit Method",
+				"CASHIER": "Cashier Transaction"
+			},
+			"ENABLED": {
+				"SUCCESS": "Successfully enabled/disabled this product.",
+				"ERROR": "Could not enable/disable this product, please try again later."
+			},
+			"LOCALCURRENCY": {
+				"TITLE": "Local Currency",
+				"COUNTRYCODE": "Country",
+				"CURRENCY": "Currency",
+				"AMOUNT": "Price",
+				"ADD": {
+					"SUCCESS": "Successfully added new local currency.",
+					"ERROR": "Could not add new local currency, please try again later."
+				},
+				"EDIT": {
+					"SUCCESS": "Successfully saved local currency details.",
+					"ERROR": "Could not save local currency details, please try again later."
+				}
+			},
+			"PAYOUT": {
+				"TITLE": "Product Payout",
+				"BONUS": "Bonus",
+				"CURRENCY": "Currency",
+				"ADD": {
+					"SUCCESS": "Successfully added new payout.",
+					"ERROR": "Could not add new payout, please try again later."
+				},
+				"EDIT": {
+					"SUCCESS": "Successfully saved payout details.",
+					"ERROR": "Could not save payout details, please try again later."
+				}
+			},
+			"EDIT": {
+				"SUCCESS": "Successfully saved product details.",
+				"ERROR": "Could not save product details, please try again later."
+			},
+			"VIEW": {
+				"DETAILS": "Product Details"
+			},
+			"ADD": {
+				"TITLE": "Add Product",
+				"DESCRIPTION": "Fill in the details about the product that you are trying to add.",
+				"DETAILS": "Product Details"
+			},
+			"LIST": {
+				"TITLE": "Products",
+				"DESCRIPTION": "a list of all products setup."
+			},
+			"FIELDS": {
+				"GUID": {
+					"TITLE": "Product Id",
+					"PLACE": "Product.A",
+					"DESC": "The id as it is configured on the apple/google side for in-app payments."
+				},
+				"NAME": {
+					"TITLE": "Name",
+					"PLACE": "Product A",
+					"DESC": "The name for this product."
+				},
+				"DESCRIPTION": {
+					"TITLE": "Description",
+					"PLACE": "My product description",
+					"DESC": "Short description about this product."
+				},
+				"DOMAINNAME": {
+					"TITLE": "Domain",
+					"PLACE": "Domain X",
+					"DESC": "The domain to which this product belongs."
+				},
+				"NOTIFICATION": {
+					"TITLE": "Notification",
+					"PLACE": "Notification X",
+					"DESC": "If you want a notification to be sent when this product is purchased, please select the notification here."
+				},
+				"CATALOG": {
+					"ADD": " ",
+					"TITLE": "Catalog",
+					"PLACE": "Catalog B",
+					"DESC": "The catalog/category that this product belongs to."
+				},
+				"ENABLED": {
+					"TITLE": "Enabled"
+				},
+				"BASECURRENCY": {
+					"TITLE": "Base Price",
+					"PLACE": "E.g. $5.00",
+					"DESC": "The base price in the currency chosen."
+				},
+				"LOCALCURRENCY": {
+					"TITLE": "Local Prices",
+					"PLACE": "E.g. $5.00",
+					"DESC": "The local price in the currency chosen."
+				},
+				"BONUS": {
+					"TITLE": "Bonus",
+					"PLACE": "E.g. BONUS1",
+					"DESC": "The bonus that should be rewarded when a player buys this product."
+				},
+				"PAYOUT": {
+					"TITLE": "Product Payout(s)",
+					"AMOUNT": {
+						"TITLE": "Amount",
+						"PLACE": "E.g. $100.00",
+						"DESC": "Enter the amount that will be awarded for the chosen currency."
+					}
+				},
+				"PRODUCTCOST": {
+					"AMOUNT": " ",
+					"TITLE": "Product Cost",
+					"PLACE": "",
+					"DESC": ""
+				},
+				"REALCOST": {
+					"AMOUNT": " ",
+					"TITLE": "Real Cost",
+					"PLACE": "",
+					"DESC": ""
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,64 @@
+{
+  "name": "UPayCard",
+  "code": "upay",
+  "image": {
+    "filename": "/methods/upay.png",
+    "filetype": "image/png"
+  },
+  "depositStages": [
+    {
+      "number": 1,
+      "title": "Enter Amount and UPayCard account information",
+      "description": "Specify the amount you wish to deposit and the account details of your UPayCard account.",
+      "inputFields": [
+        {
+          "code": "sender",
+          "name": "Username, account number or email address",
+          "description": "Enter either the username, the account number or the email address of your UPayCard account. Should you have more than one account with UPayCard under the same username or email, you will need to enter the account number as displayed on your account.",
+          "type": "string"
+        }
+      ],
+      "outputFields": [
+        {
+          "code": "token_number",
+          "name": "Token number",
+          "description": "The validation token number for this deposit.",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "title": "Validate account ownership.",
+      "description": "Please confirm your deposit by entering one of the keys from your keycode card that corresponds to the validation token number supplied above.",
+      "inputFields": [
+        {
+          "code": "token_code",
+          "name": "Token Key",
+          "description": "A token key from your keycard.",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "title": "Waiting for Confirmation",
+      "description": "Thank you. We have received all your information for this deposit and now we wait for the funds to arrive on our end. This can sometimes take up to \n48 hours but normally happens within 2 to 8 hours. As soon as we receive the funds, we will send you an email and the funds will be made available in your account."
+    }
+  ],
+  "withdrawalStages": [
+    {
+      "number": 1,
+      "title": "UPayCard Withdrawal",
+      "description": "Please specify an account below where you would like to receive your funds.",
+      "inputFields": [
+        {
+          "code": "receiver_account",
+          "name": "UPayCard account number",
+          "description": "Enter account number of one of your UPayCard accounts.",
+          "type": "string"
+        }
+      ]
+    }
+  ]
+}

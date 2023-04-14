@@ -1,0 +1,13 @@
+{
+  "SERVICE-LIMIT": {
+    "RESTRICTIONS": {
+      "ERROR_MESSAGES": {
+        "PLAYER_CASINO": {
+          "ENABLE_CONFLICT": "Player Casino Block already enabled",
+          "DISABLE_CONFLICT": "Player Casino Block already disabled",
+          "BLOCKED": "Player has been restricted from changing their Casino Block flag"
+        }
+      }
+    }
+  }
+}

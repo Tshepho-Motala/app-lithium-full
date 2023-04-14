@@ -1,0 +1,14 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "SERVICE_CASHIER": {
+      "TRANSACTION": {
+        "STATUS": {
+          "WITHDRAWAL": "WITHDRAWAL",
+          "DEPOSIT": "DEPOSIT",
+          "REVERSAL": "REVERSAL"
+        }
+      }
+    }
+  }
+}
+

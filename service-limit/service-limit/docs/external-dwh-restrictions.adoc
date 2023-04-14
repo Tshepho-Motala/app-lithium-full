@@ -1,0 +1,33 @@
+= External DWH Restrictions API
+:author: Irwin Herridge <irwin.herridge@wonderlabz.com>
+:version-label: 1.0, November 13, 2021: Service Access Documentation
+:sectnums:
+:toc: left
+:toclevels: 4
+:toc-title: External DWH Restrictions API
+:icons: font
+:url-quickref: https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/
+
+//:stylesheet: css/asciidoctor.css
+//:stylesheet: css/material-blue.css
+
+//This is done tto keep formatting aligned with gitlab
+****
+[verse,,]
+____
+link:readme.adoc[Back]
+____
+****
+
+The following API's were developed specifically for DWH for the following use cases:
+
+1.  Allow DWH to query for all DWH visible restrictions that may be loaded onto players per domain
+** link:DwhRestrictions.get.adoc[{gateway}/service-limit/external/restriction/v1/get]
+2.  Query all DWH visible restrictions that have been loaded onto a player.
+** link:DwhRestrictions.lookup.adoc[{gateway}/service-limit/external/restriction/v1/lookup]
+3.  Allow DWH to set any DWH restrictions onto players account.
+** link:DwhRestrictions.set.adoc[{gateway}/service-limit/external/restriction/v1/set]
+
+
+
+

@@ -1,0 +1,45 @@
+<div class="row v-reset-row ">
+    <div class="col-xs-12">
+        <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+                <li role="presentation" ng-class="{ active: controller.tab == tab }" ng-repeat="tab in controller.tabs" lit-if-domains-permission="{{tab.roles}}" class="{{tab.tclass}}">
+                    <a ng-click="controller.setTab(tab)">{{ tab.title | translate }}</a>
+                </li>
+            </ul>
+            <div class="tab-content" style="padding: 5px;">
+                <div class="well" ng-if="controller.showRegistration">
+                    <error-messages data="controller.data" sub-module="controller.subModule[0]" domain-specific="controller.domainSpecific"></error-messages>
+                </div>
+                <div class="well" ng-if="controller.showLogin">
+                    <error-messages data="controller.data" sub-module="controller.subModule[0]" domain-specific="controller.domainSpecific"></error-messages>
+                </div>
+                <div class="well" ng-if="controller.showPassword">
+                    <error-messages data="controller.data" sub-module="controller.subModule[0]" domain-specific="controller.domainSpecific"></error-messages>
+                </div>
+                <div class="well" ng-if="controller.showCashier">
+                    <error-messages data="controller.data" sub-module="controller.subModule[0]" domain-specific="controller.domainSpecific"></error-messages>
+                </div>
+                <div class="well" ng-if="controller.showMyAccount">
+                    <error-messages data="controller.data" sub-module="controller.subModule[0]" domain-specific="controller.domainSpecific"></error-messages>
+                </div>
+                <div class="well" ng-if="controller.limitSystemAccess">
+                    <error-messages data="controller.data" sub-module="controller.subModule[0]" domain-specific="controller.domainSpecific"></error-messages>
+                </div>
+                <div class="well" ng-if="controller.showRestrictions">
+                    <lit-header title="{{ 'Normal Restrictions' | translate }}"></lit-header>
+                    <error-messages data="controller.data" sub-module="controller.subModule[0]" domain-specific="controller.domainSpecific"></error-messages>
+                    <lit-header title="{{ 'System Restrictions' | translate }}"></lit-header>
+                    <error-messages data="controller.data" sub-module="controller.subModule[1]" domain-specific="controller.domainSpecific"></error-messages>
+                </div>
+                <div class="well" ng-if="controller.showGames">
+                    <error-messages data="controller.data" sub-module="controller.subModule[0]" domain-specific="controller.domainSpecific"></error-messages>
+                </div>
+            </div>
+            <div style="padding: 19px;" ng-if="controller.changelogs">
+                <div class="row v-reset-row  well">
+                    <changelog options="controller.changelogs" model=""></changelog>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

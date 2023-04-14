@@ -1,0 +1,13 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "BRANDCONFIG": {
+      "TAB": {
+        "ERROR_MESSAGES": {
+          "TABLE": {
+              "ERROR_CODE": "Error Code"
+          }
+        }
+      }
+    }
+  }
+}

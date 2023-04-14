@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>service-user-mass-action</artifactId>
+    <packaging>jar</packaging>
+    <name>service-user-mass-action</name>
+    <description>A microservice that is used to upload mass user lists with metadata that gets exected in jobs</description>
+
+    <parent>
+        <groupId>lithium</groupId>
+        <artifactId>common-parent-service</artifactId>
+        <version>1.12-SNAPSHOT</version>
+        <relativePath>../../common-parent-service</relativePath>
+    </parent>
+
+    <properties>
+        <commons-csv.version>1.8</commons-csv.version>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-csv</artifactId>
+            <version>${commons-csv.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>lithium</groupId>
+            <artifactId>client-service-domain</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>lithium</groupId>
+            <artifactId>client-service-casino</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>lithium</groupId>
+            <artifactId>client-service-user</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>lithium</groupId>
+            <artifactId>client-service-limit</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>lithium</groupId>
+            <artifactId>client-service-changelog</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>lithium</groupId>
+            <artifactId>client-service-access</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>lithium</groupId>
+            <artifactId>client-service-accounting</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>lithium</groupId>
+            <artifactId>library-common-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-jpamodelgen</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+</project>

@@ -1,0 +1,39 @@
+{
+	"code": "mvend",
+	"name": "Mvend",
+	"enabled": true,
+	"url": "service-sms-provider-mvend",
+	"properties": 
+	[
+		{
+			"name": "apiKey",
+			"defaultValue": "32s324jhhfewfwef",
+			"type": "string",
+			"description": "The API key provided by mvend"
+		},
+		{
+			"name": "username",
+			"defaultValue": "lssmsgw",
+			"type": "string",
+			"description": "The username provided by mvend"
+		},
+		{
+			"name": "password",
+			"defaultValue": "Ls#$%^&*sms",
+			"type": "string",
+			"description": "The password provided by mvend"
+		},
+		{
+			"name": "baseUrl",
+			"defaultValue": "https://platform.mvend.com",
+			"type": "string",
+			"description": "The base URL for all API calls"
+		},
+		{
+			"name": "senderid",
+			"defaultValue": "BetLion",
+			"type": "string",
+			"description": "SenderId that will appear on recipient’s phone."
+		}
+	]
+}

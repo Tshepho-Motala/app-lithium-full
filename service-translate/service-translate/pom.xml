@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>service-translate</artifactId>
+    <packaging>jar</packaging>
+    <name>service-translate</name>
+    <description>A microservice that stores translations based on a tree structure of translation keys. During startup, all other services that have translation keys in their classpath, will forward these to service-translate so that they will be persisted and may be translated via the backoffice.</description>
+
+    <parent>
+        <groupId>lithium</groupId>
+        <artifactId>common-parent-service</artifactId>
+        <version>1.12-SNAPSHOT</version>
+        <relativePath>../../common-parent-service</relativePath>
+    </parent>
+
+    <dependencies>
+        <dependency>
+            <groupId>lithium</groupId>
+            <artifactId>client-service-changelog</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>lithium</groupId>
+            <artifactId>client-service-domain</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>lithium</groupId>
+            <artifactId>library-common-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-jpamodelgen</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+        </dependency>
+    </dependencies>
+</project>

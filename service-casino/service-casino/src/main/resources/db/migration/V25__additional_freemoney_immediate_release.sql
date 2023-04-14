@@ -1,0 +1,1 @@
+ALTER TABLE `bonus_free_money` ADD COLUMN `immediate_release` BIT(1) DEFAULT NULL;

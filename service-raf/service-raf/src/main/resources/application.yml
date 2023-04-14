@@ -1,0 +1,45 @@
+server:
+  port: 9900
+  
+spring:
+  datasource:
+    url: jdbc:mysql://localhost/lithium_raf
+    username: root
+    password: mysql
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: validate
+  cloud:
+    stream:
+      bindings:
+        rafconversioninput:
+          group: rafconversiongroup
+          binder: rabbit
+          destination: rafconversionoutput
+        missionstatsoutput:
+          group: missionstatsgroup
+          binder: rabbit
+          destination: missionstatsqueue
+          producer:
+            required-groups: missionstatsgroup
+        triggerbonusoutput:
+          group: triggerbonusgroup
+          binder: rabbit
+          destination: triggerbonusqueue
+          producer:
+            required-groups: triggerbonusgroup
+        statsoutputv2:
+          group: statsgroupv2
+          binder: rabbit
+          destination: statsqueuev2
+          producer:
+            required-groups: statsgroupv2
+lithium:
+  services:
+    db:
+      load-test-data: false
+        
+logging:
+  level:
+    lithium.service.raf: INFO

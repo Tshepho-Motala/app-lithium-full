@@ -1,0 +1,14 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "PLAYER": {
+      "REALITYCHECK": {
+        "TITLE": "Reality Check",
+        "NOTSET": "Not currently set",
+        "FIELDS": {
+
+          "PERIODINMILLIS": "Period (in milliseconds)"
+        }
+      }
+    }
+  }
+}

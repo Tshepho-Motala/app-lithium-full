@@ -1,0 +1,8 @@
+{
+  "ERROR_DICTIONARY": {
+    "REGISTRATION": {
+      "INVALID_FIRST_NAME": "Invalid first name.",
+      "INVALID_LAST_NAME": "Invalid last name."
+    }
+  }
+}

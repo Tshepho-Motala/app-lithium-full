@@ -1,0 +1,12 @@
+{
+  "GLOBAL": {
+    "TRANTYPE": {
+        "TRANSFER_TO_PLAYER_BALANCE_PENDING_WITHDRAWAL": {
+          "LABEL": "Transfer to player balance pending withdrawal"
+        },
+        "TRANSFER_FROM_PLAYER_BALANCE_PENDING_WITHDRAWAL": {
+          "LABEL": "Transfer from player balance pending withdrawal"
+        }
+    }
+  }
+}

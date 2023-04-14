@@ -1,0 +1,40 @@
+<div class="container-fluid">
+	<div class="box box-primary box-widget">
+		<div class="box-body box-profile">
+			<div class="user-block">
+				<div class="pull-right">
+					<span class="label" 
+						 ng-class="{'label-success': controller.promotion.current.type === 1,
+									'label-primary': controller.promotion.current.type === 2}">
+							{{(controller.promotion.current.type === 1)?"SEQUENTIAL":"DATE DRIVEN"}}</span>
+					<br/><span style="line-height:inherit;" class="label label-primary">{{ controller.domainName | uppercase }}</span>
+				</div>
+				<h4 style="font-weight: bold;">
+					{{controller.promotion.current.name}}
+				</h4>
+			</div>
+		</div>
+	</div>
+	
+	<buttonbar>
+		<button-back ui-sref="dashboard.promotions"></button-back>
+		<button-edit lit-if-permission="MISSIONS_EDIT" ui-sref="dashboard.promotions.edit({id: controller.promotion.id, missionRevisionId: controller.promotion.current.id})"></button-edit>
+	</buttonbar>
+	
+	<br/><br/>
+	
+	<div class="row v-reset-row ">
+		<div class="col-xs-12">
+			<div class="nav-tabs-custom" style="margin-bottom: 5px;">
+				<ul class="nav nav-tabs">
+					<li role="presentation" ng-class="{ active: ($state.current.name.toLowerCase().indexOf(tab.name) === 0) }" ng-repeat="tab in controller.tabs" lit-if-permission="{{tab.roles}}" class="{{tab.tclass}}">
+						<a ng-click="controller.setTab(tab)">{{ tab.title | translate }}</a>
+					</li>
+				</ul>
+				<div class="tab-content" style="padding: 0px;padding-top: 1px;">
+					<div ui-view></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,17 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "SMS": {
+      "TEMPLATES": {
+        "TEST": {
+          "TITLE": "Test SMS Template",
+          "FIELDS": {
+            "RECIPIENTMOBILE": {
+              "NAME": "Test Mobile Number",
+              "DESCRIPTION": "Enter the number that you would like to send this template to."
+            }
+          }
+        }
+      }
+    }
+  }
+}

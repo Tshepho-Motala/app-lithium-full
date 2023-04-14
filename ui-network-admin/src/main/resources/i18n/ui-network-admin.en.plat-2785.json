@@ -1,0 +1,9 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "GROUP": {
+      "DELETE": {
+        "CONFIRM": "Are you sure you want to delete this group?"
+      }
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "SERVICE_CASHIER": {
+      "TRANSACTION": {
+        "STATUS": {
+          "APPROVED_DELAYED": "APPROVED DELAYED"
+        }
+      }
+    }
+  }
+}
+

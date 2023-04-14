@@ -1,0 +1,51 @@
+#spring.application.name=service-user-provider-vipps
+server:
+  port: 9707
+
+lithium:
+  vipps:
+    # this is just a sha256 of service-user-provider-vipps
+    api-token: E02EB2DF74B7A3051DCD63A8897AF97AB9DF4A8ADED2D6888A2489FB650EC898
+    allowed-i-ps:
+    - 127.0.0.1
+    - 10.0.14.66
+    - 192.168.20.90
+
+logging:
+  level:
+    lithium.rest: INFO
+    org.springframework.security: INFO
+    org.springframework.web.client: INFO
+
+#vipps:
+#  client:
+#    clientId: d25926b4-80ac-4255-aec8-1353892cad06
+#    clientSecret: TU5hdEpoZ3RodjU1VVQyU09Ua0s=
+#    accessTokenUri: https://apitest.vipps.no/accessToken/get
+#    userAuthorizationUri: https://apitest.vipps.no/signup/v1/loginRequests
+#    tokenName: oauth_token
+#    authenticationScheme: query
+#    clientAuthenticationScheme: form
+#  resource:
+#    userInfoUri: https://graph.facebook.com/me
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost/lithium_user_vipps
+    username: root
+    password: mysql
+  jpa:
+    properties:
+      jadira.usertype.autoRegisterUserTypes: true
+    show-sql: false
+    hibernate:
+      ddl-auto: validate
+  cloud:
+    stream:
+      bindings:
+        providersregisteroutput:
+          group: providersregistergroup
+          binder: rabbit
+          destination: providersregisterqueue
+          producer:
+            required-groups: providersregistergroup

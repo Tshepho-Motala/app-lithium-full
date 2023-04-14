@@ -1,0 +1,17 @@
+{
+	"SERVICE-CASHIER": {
+		"AMOUNT_FIELD_LABEL": "Beløp",
+		"DEPOSIT_AMOUNT_DESCRIPTION": "Angi beløpet du ønsker å sette inn.",
+		"WITHDRAWAL_AMOUNT_DESCRIPTION": "Angi beløpet du ønsker å ta ut.",
+		"DEPOSIT_BONUSCODE_LABEL": "Bonuskode",
+		"DEPOSIT_BONUSCODE_DESCRIPTION": "Angi bonuskoden du ønsker å benytte.",
+		"DEPOSIT_BONUSID_LABEL": "Bonus-Id",
+		"ERROR_REQUIRED_FIELD": "Dette er et obligatorisk felt",
+		"ERROR_FORM_VALIDATION": "Vennligst sjekk feilene i din informasjon og prøv å sende inn skjemaet på nytt.",
+		"ERROR_PAYMENT_METHOD_UNAVAILABLE": "Vi beklager, men denne betalingsmetoden ser ut til å være utilgjengelig for øyeblikket. Dette er et midlertidig problem, så du kan prøve igjen om noen minutter.",
+		"ERROR_INCORRECT_DEPOSIT_AMOUNT": "Vi beklager, men beløpet som er satt inn er feil. Ta kontakt med kundeservice.",
+		"ERROR_INCORRECT_DEPOSIT_AMOUNT_DETAIL": "Ugyldig beløp. Forventet {0} men mottok {1}",
+		"ERROR_INSUFFICIENT_FUNDS": "Spilleren har ikke tilstrekkelige beløp på konto.",
+		"ERROR_CUSTOMER_DETAIL_UPDATE": "Vi beklager, vi kunne ikke oppdatere brukerdetaljer, prøv igjen senere, eller kontakt kundestøtte"
+	}
+}

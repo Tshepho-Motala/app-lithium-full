@@ -1,0 +1,57 @@
+<div class="container-fluid">
+	<div class="box box-primary box-widget">
+		<div class="box-body box-profile">
+			<div class="user-block">
+				<h4 style="font-weight: bold;">
+					Debug Result<br/>
+					<small><span class="label label-success">ID {{controller.model.debugResultId.debugResultId}} Engine {{controller.model.debugResultId.engine.id}}</span></small>
+				</h4>
+			</div>
+		</div>
+	</div>
+	
+	<buttonbar>
+		<button-back ui-sref="dashboard.gogamegames.debugresults"></button-back>
+	</buttonbar>
+	
+	<br/><br/>
+	
+	<div class="row v-reset-row ">
+		<div class="col-xs-12">
+			<div class="box box-default">
+				<div class="box-header with-border">
+					<h3 class="box-title">General</h3>
+					<div class="box-tools pull-right">
+						<button lit-if-permission="GOGAMEGAMES_DEBUGRESULTS_EDIT" type="button" class="btn btn-box-tool" ng-click="controller.edit()">
+							<span><i class="fa fa-gear"></i> {{"GLOBAL.ACTION.CHANGE"|translate}} </span>
+						</button>
+						<button-custom icon="trash-o" text="{{'GLOBAL.ACTION.DELETE' | translate }}" ng-click="controller.doDelete()" class="pull-left btn btn-danger white-text card-danger-shadow" style="align-self: flex-end;"></button-custom>
+					</div>
+				</div>
+				<div class="box-body table-responsive">
+					<table class="table table-hover table-striped nowrap" cellspacing="0" width="100%">
+						<tbody>
+							<tr>
+								<th style="width: 20%;">Debug Result ID</th>
+								<td>{{controller.model.debugResultId.debugResultId}}</td>
+							</tr><tr>
+								<th>Engine</th>
+								<td>{{controller.model.debugResultId.engine.id}}</td>
+							</tr><tr>
+								<th>Math Model (revision)</th>
+								<td>{{controller.model.debugResultId.mathModelRevision.name}} ({{controller.model.debugResultId.mathModelRevision.id}})</td>
+							</tr><tr>
+								<th>Win Cents</th>
+								<td>{{controller.model.winCents}}</td>
+							</tr><tr>
+								<th>Result</th>
+								<td><pre>{{controller.model.result|json}}</pre></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+</div>

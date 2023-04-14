@@ -1,0 +1,7 @@
+{
+  "ERROR_DICTIONARY": {
+    "CASHIER": {
+      "REACHED_MAX_ACCOUNT_COUNT": "Transaction declined. You have reached the maximum number of active cards. Contact us for assistance or use another payment method."
+    }
+  }
+}

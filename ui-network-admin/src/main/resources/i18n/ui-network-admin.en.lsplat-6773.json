@@ -1,0 +1,51 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "GAME": {
+      "FIELDS": {
+        "GAME-STUDIO": {
+          "NAME": "Game Studio",
+          "DESCRIPTION": "The game studio which made the game"
+        },
+        "GAME-STUDIO-CURRENT": {
+          "NAME": "Game Studio (Current)",
+          "DELETED_WARN": "NB. This Game Studio has been Deleted!"
+        }
+      }
+    },
+    "GAME-STUDIO": {
+      "HEADER": {
+        "TITLE": "Game Studio",
+        "DESCRIPTION": "To manage game studios",
+        "SELECT_DOMAIN": "Select a domain to get started"
+      },
+      "ADD": {
+        "TITLE": "Add a Game Studio",
+        "SUCCESS": "Game studio added successfully",
+        "ERROR": "Game studio could not be added"
+      },
+      "EDIT": {
+        "DELETE": {
+          "CONFIRM": "Are you sure you want to delete this game studio?",
+          "SUCCESS": "Game studio deleted successfully",
+          "ERROR": "Game studio could not be deleted"
+        },
+        "SUCCESS": "Game studio edited successfully",
+        "ERROR": "Game studio could not be edited"
+      },
+      "FIELDS": {
+        "NAME": {
+          "LABEL": "Name",
+          "DESCRIPTION": "The name of the game studio"
+        },
+        "DOMAIN": {
+          "LABEL": "Domain"
+        }
+      }
+    },
+    "GAME_STUDIO": {
+      "HEADER": {
+        "TITLE": "Game Studios"
+      }
+    }
+  }
+}

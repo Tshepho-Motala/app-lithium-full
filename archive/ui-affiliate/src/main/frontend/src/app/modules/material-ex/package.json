@@ -1,0 +1,31 @@
+{
+  "name": "material-ex",
+  "version": "1.0.0",
+  "description": "Angular Material Extension Library",
+  "main": "index.ts",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc -w"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://git.playsafesa.com:3000/lithium/material-ex"
+  },
+  "author": "Playsafe",
+  "license": "MIT",
+  "dependencies": {
+    "@angular/common": "^2.4.10",
+    "@angular/core": "^2.4.10",
+    "@angular/flex-layout": "^2.0.0-rc.1",
+    "@angular/forms": "^2.4.10",
+    "@angular/http": "^2.4.10",
+    "@angular/material": "^2.0.0-beta.2",
+    "@angular/platform-browser": "^2.4.10",
+    "angular2-jwt": "^0.2.0",
+    "rxjs": "^5.2.0",
+    "zone.js": "^0.7.8"
+  },
+  "devDependencies": {
+    "typescript": "^2.2.2"
+  }
+}

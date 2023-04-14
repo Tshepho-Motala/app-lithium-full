@@ -1,0 +1,25 @@
+package lithium.service.accounting.domain.v2.storage.repositories;
+
+import lithium.service.accounting.domain.v2.storage.entities.Domain;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface DomainRepository extends JpaRepository<Domain, Long> {
+	@CacheEvict({
+		"lithium.service.accounting.domain.summary.v2.storage.entities.Domain.byId",
+		"lithium.service.accounting.domain.summary.v2.storage.entities.Domain.byCode",
+	})
+	@Override
+	<S extends Domain> S save(S entity);
+
+	@Cacheable(value = "lithium.service.accounting.domain.summary.v2.storage.entities.Domain.byId",
+			unless = "#result == null")
+	default Domain findOne(Long id) {
+		return findById(id).orElse(null);
+	}
+
+	@Cacheable(value = "lithium.service.accounting.domain.summary.v2.storage.entities.Domain.byCode",
+			unless = "#result == null")
+	Domain findByName(String name);
+}

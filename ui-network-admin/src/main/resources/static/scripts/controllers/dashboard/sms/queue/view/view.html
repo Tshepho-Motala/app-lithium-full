@@ -1,0 +1,18 @@
+<div class="container-fluid">
+	<lit-header
+		title="{{ 'UI_NETWORK_ADMIN.SMSQUEUE.LIST.TITLE' | translate }}"
+		description="{{ 'UI_NETWORK_ADMIN.SMSQUEUE.LIST.DESCRIPTION' | translate }}">
+	</lit-header>
+	
+	<button-bar>
+		<button-back ui-sref="dashboard.sms.queue"></button-back>
+	</button-bar>
+	
+	<div class="row v-reset-row ">
+		<div class="col-xs-12">
+			<div class="well" style="padding: 40px;">
+				<sms data="controller.sms" state="controller.state"></sms>
+			</div>
+		</div>
+	</div>
+</div>

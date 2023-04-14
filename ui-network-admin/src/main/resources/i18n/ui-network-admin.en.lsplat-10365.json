@@ -1,0 +1,20 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "RESTRICTIONS": {
+      "AUTO_RESTRICTIONS": {
+        "RULE_SETS": {
+          "FIELDS": {
+            "ROOT_ONLY": {
+              "NAME": "Apply on Root User Only",
+              "DESCRIPTION": "Should this ruleset only be applied to the linked root ecosystem user?"
+            },
+            "ALL_ECOSYSTEM": {
+              "NAME": "Apply on all Ecosystem Users",
+              "DESCRIPTION": "Should this ruleset be applied on all linked ecosystem users?"
+            }
+          }
+        }
+      }
+    }
+  }
+}

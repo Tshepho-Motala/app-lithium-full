@@ -1,0 +1,48 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "CMS": {
+      "JACKPOT_WIDGET_LAYOUT_CONFIG": {
+        "HEADER": {
+          "TITLE": "Jackpot Details"
+        },
+        "FIELDS": {
+          "JACKPOT_LOGO": {
+            "LABEL": "Jackpot Logo"
+          },
+          "DESCRIPTION": {
+            "LABEL": "Description"
+          },
+          "PROGRESSIVES": {
+            "LABEL": "Progressives",
+            "VALIDATION": {
+              "MIN_ERROR_MESSAGE": "You have to select at least one progressive item",
+              "MAX_ERROR_MESSAGE": "You have to select a minimum of 1 progressive item and a maximum of 3 progressive items"
+            }
+          },
+          "WIDGET_LINK": {
+            "LABEL": "Widget Link"
+          },
+          "WIDGET_LINK_TITLE": {
+            "LABEL": "Widget Link Title"
+          }
+        }
+      },
+      "PROGRESSIVE_ITEM_EDITOR": {
+        "HEADER": {
+          "TITLE": "Progressive Details Editor"
+        },
+        "FIELDS": {
+          "PROGRESSIVE_ID": {
+            "LABEL": "Progressive ID"
+          },
+          "TITLE": {
+            "LABEL": "Title"
+          },
+          "DESCRIPTION": {
+            "LABEL": "Description"
+          }
+        }
+      }
+    }
+  }
+}

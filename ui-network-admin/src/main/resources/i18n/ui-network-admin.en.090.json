@@ -1,0 +1,29 @@
+{
+	"UI_NETWORK_ADMIN": {
+		"MISSIONS": {
+			"FIELDS": {
+				"CHALLENGE": {
+					"CHALLENGERULES": {
+						"RULE": {
+							"EXPLAIN": {
+								"AVATAR": {
+									"UPDATE": "Update avatar at least {{val}} time(s)"
+								},
+								"CASINO": {
+									"SEEIT": {
+										"GAME": "\"See it\" {{val}} time(s) on {{gameName}}",
+										"ANY": "\"See it\" {{val}} time(s) on any slot"
+									},
+									"BET": {
+										"GAME": "Bet {{val}} cents on {{gameName}}",
+										"ANY": "Bet {{val}} cents on any slot"
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

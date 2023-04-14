@@ -1,0 +1,21 @@
+server.port: 9782
+
+spring:
+  application:
+    name: service-cashier-processor-wumg-paycr
+  cloud:
+    stream:
+      bindings:
+        processorsregisteroutput:
+          group: processorsregistergroup
+          binder: rabbit
+          destination: processorsregisterqueue
+          producer:
+            required-groups: processorsregistergroup
+  thymeleaf:
+    cache: false
+    
+logging:
+  level:
+    lithium.service.cashier: INFO
+    lithium.service.cashier.processor.http: INFO

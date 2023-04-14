@@ -1,0 +1,61 @@
+:host {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-height: calc(100vh - 2px);
+  max-height: calc(100vh - 2px);
+  min-width: calc(100vw - 2px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  overflow: scroll;
+}
+
+.register {
+
+  background: white;
+  margin: 20px;
+  max-width: 1020px;
+
+  .register-header {
+    // background: $background-color__sidenav-list;
+    padding: 24px;
+  }
+
+  .register-content {
+    padding: 24px 42px 42px;
+
+    h3 {
+      margin: 1em 0 1em 0;
+    }
+
+    md-input-container {
+      width: 100%;
+      margin: 6px 0;
+    }
+
+    .extra-options {
+      margin: 16px 0 32px;
+
+      .remember-me {
+        color: #777;
+      }
+    }
+
+    a {
+      text-decoration: none;
+      color: #2196F3;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    .note {
+      color: #777;
+      margin: 24px 0 0;
+      text-align: center;
+    }
+  }
+}

@@ -1,0 +1,19 @@
+<div class="modal-header">
+	<h3 class="modal-title" id="modal-title">Verification Status</h3>
+</div>
+<form ng-submit="vm.submit()" name="vm.form" autocomplete="off" novalidate>
+	<div class="modal-body" id="modal-body">
+		<div class="row v-reset-row ">
+			<div class="col-xs-12">
+				<formly-form model="vm.model" fields="vm.fields" form="vm.form" options="vm.options">
+				</formly-form>
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<p ng-if="vm.model.verificationStatus == 2" class="text-danger">This status cannot be set directly, use age/address statuses instead</p>
+		<p ng-if="vm.model.verificationStatus == 3" class="text-danger">Cannot set this status due to 'Externally verified' can be defined by kyc services only</p>
+		<button  class="btn btn-primary"  ng-submit="vm.submit()" ng-disabled="vm.submitCalled || vm.form.$invalid || vm.model.verificationStatus == 2 || vm.model.verificationStatus == 3"><i class="fab fa fa-floppy-o" aria-hidden="true"></i> Save</button>
+		<button-cancel ng-click="vm.cancel()"></button-cancel>
+	</div>
+</form>

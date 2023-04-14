@@ -1,0 +1,15 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "LIST": {
+      "PLAYERS": {
+        "FIELDS": {
+          "FILTER": {
+            "TRANSACTION_RUNTIME": {
+              "LABEL": "Transaction runtime (sec)"
+            }
+          }
+        }
+      }
+    }
+  }
+}

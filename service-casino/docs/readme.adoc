@@ -1,0 +1,53 @@
+= SERVICE CASINO
+Riaan Schoeman <riaan.schoeman@wonderlabz.com>
+1.0, December 1, 2021: Service Casino
+:sectnums:
+:toc: left
+:toclevels: 4
+:toc-title: Service Casino
+:icons: font
+:url-quickref: https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/
+
+//:stylesheet: css/asciidoctor.css
+//:stylesheet: css/material-blue.css
+
+//This is done tto keep formatting aligned with gitlab
+****
+[verse,,]
+____
+link:../../readme.adoc[Home]
+____
+****
+
+This document will describe the inner workings of service-casino and all the relevant providers that make up service-casino, and how it all fits together and communicates to other services within lithium.
+
+.Deprecated
+[NOTE]
+This service currently still contains bonus framework code, that will be removed in the future.
+
+== Casino
+
+== Providers (scp / service-casino-provider)
+
+=== scp-sportsbook
+
+* link:readme-scp-sportsbook.adoc[]
+
+=== scp-roxor
+
+* link:../service-casino-provider-roxor/docs/readme.adoc[]
+
+=== scp-iforium
+
+* link:../service-casino-provider-iforium/docs/../README.adoc[]
+
+=== scp-evolution (to-be)
+
+== Abbreviations
+
+|===
+|Abbreviation  |Meaning
+
+|scp-*
+|service-casino-provider-*
+|===

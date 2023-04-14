@@ -1,0 +1,61 @@
+= Wrapping the Session Token
+
+NOTE: Implemented in link:https://gitlab.com/playsafe/lithium/app-lithium-full/-/blob/develop/service-casino/service-casino-provider-iforium/src/main/java/lithium/service/casino/provider/iforium/controller/GameRoundController.java[lithium.service.casino.provider.iforium.controller.GameRoundController]
+
+This method is purely internal - i.e. not exposed to iForium. It will be used as part of the `/v1.0/session/createtoken` implementation, as well as directly servicing the wrapper.
+
+Its purpose is to take an existing `sessionKey` and deliver a corresponding, short-lived `sessionToken` that can be used to redeem the original `sessionKey`.
+
+[TIP]
+--
+To avoid any unnecessary mapping and storage, we will simply combine the `sessionKey` with a hexadecimal representation of the epoch time. This will give us *36* characters for the hexadecimal UUID and *11* characters for the hexadecimal timestamp plus *1* character for a hyphen separator, making a total of *48* characters (within the String[50] limit imposed by iForium).
+
+`sessionKey`-`timestamp` - e.g. `54ad78cb-1802-4fe7-9b4a-cc5eb2337da6-179b2ad1b0e`
+--
+
+.Example Algorithm
+[source,java]
+--
+class Scratch {
+    public static void main(String[] args) {
+        long TTL = 60000; // 60 seconds
+        String sessionKey = java.util.UUID.randomUUID().toString();
+        System.out.println("sessionKey:" + sessionKey + " [" + sessionKey.length() + " chars]");
+
+        long now = System.currentTimeMillis();
+        String hex = Long.toHexString(now);
+        System.out.println("Hex:" + hex + " [" + hex.length() + " chars]");
+
+        String tempToken = sessionKey.toString() + "-" + hex;
+        System.out.println("Token:" + tempToken + " [" + tempToken.length() + " chars]");
+
+        try {
+            java.lang.Thread.sleep(500);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        int idx = tempToken.lastIndexOf("-");
+        String wrappedSessionKey = tempToken.substring(0, idx);
+        String timestamp = tempToken.substring(idx+1,tempToken.length());
+
+        System.out.println("wrappedSessionKey:" + wrappedSessionKey);
+        long then = Long.parseLong(timestamp,16);
+        System.out.println("Now:" + now + ", Then:" + then);
+
+        long elapsed = System.currentTimeMillis() - then;
+        System.out.println("Elapsed:" + elapsed + ", Valid:" + (elapsed <= TTL));
+    }
+}
+--
+
+.Algorithm Output
+[source,bash]
+--
+sessionKey:902c36fa-3eea-4f87-b8ba-135f1a2442e5 [36 chars]
+Hex:179b2ce6708 [11 chars]
+Token:902c36fa-3eea-4f87-b8ba-135f1a2442e5-179b2ce6708 [48 chars]
+wrappedSessionKey:902c36fa-3eea-4f87-b8ba-135f1a2442e5
+Now:1622202541832, Then:1622202541832
+Elapsed:504, Valid:true
+--

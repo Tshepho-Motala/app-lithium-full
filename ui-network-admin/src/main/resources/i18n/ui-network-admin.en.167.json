@@ -1,0 +1,34 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "DOMAIN": {
+      "CLOSURE_REASONS": {
+        "TITLE": "Account's Closure Reasons",
+        "DELETE": {
+          "CONFIRM": "Are you sure you want to delete this closure reason ?",
+          "ERROR": "Could not delete closure reason, please try again.",
+          "SUCCESS": "Successfully deleted closure reason."
+        },
+        "FIELDS": {
+          "ID": {
+            "NAME": "Id",
+            "DESCRIPTION": "An internal autoincrement id."
+          },
+          "DESCRIPTION": {
+            "NAME": "Description",
+            "DESCRIPTION": "Short description."
+          },
+          "TEXT": {
+            "NAME": "Text",
+            "DESCRIPTION": "The default text that should be shown to user."
+          }
+        },
+        "ADD": {
+          "TITLE": "Add Closure Reason",
+          "SUCCESS": "Successfully added new closure reason.",
+          "ERROR": "Could not add new closure reason."
+        },
+        "MSG1": "Closure Reason created successfully."
+      }
+    }
+  }
+}

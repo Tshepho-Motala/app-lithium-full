@@ -1,0 +1,9 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "PLAYER": {
+      "RESTRICTIONS" : {
+        "BLOCKS": "Blocks"
+      }
+    }
+  }
+}

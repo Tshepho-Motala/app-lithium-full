@@ -1,0 +1,29 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "DIRECT_WITHDRAWAL": {
+      "FIELDS": {
+        "PLAYER_WALLET": {
+          "TITLE": "Player Wallet",
+          "PLAYER_BALANCE": "Player Balance",
+          "BALANCE_LIMIT_ESCROW": "Balance Limit Escrow",
+          "DESC": "Select the player wallet from which you wish to initiate the withdrawal."
+        },
+        "AMOUNT": {
+          "LABEL": "Amount",
+          "DESC": "Please fill in the amount, or use the buttons below to change the amount to be adjusted."
+        },
+        "CURRENT_BALANCE": {
+          "LABEL": "Current Balance",
+          "DESC": "This is the current player wallet's balance."
+        },
+        "NEW_BALANCE": {
+          "LABEL": "New Balance",
+          "DESC": "This is what the player wallet's balance will be after the direct withdrawal."
+        },
+        "COMMENT": {
+          "DESC": "Please specify a reason for this balance adjustment."
+        }
+      }
+    }
+  }
+}

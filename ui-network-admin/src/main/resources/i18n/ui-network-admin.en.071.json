@@ -1,0 +1,19 @@
+{
+	"GLOBAL": {
+		"FIELDS": {
+			"TIMEZONE": "Timezone" 
+		}
+	},
+	"UI_NETWORK_ADMIN": {
+		"USER": {
+			"FIELDS": {
+				"TIMEZONE": {
+					"NAME": "Timezone",
+					"DESCRIPTION": "Timezone",
+					"PLACEHOLDER": "Please select a timezone"
+				}
+			}
+		}
+	}
+	
+}

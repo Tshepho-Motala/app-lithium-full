@@ -1,0 +1,17 @@
+{
+	"SERVICE-CASHIER": {
+		"AMOUNT_FIELD_LABEL": "Amount",
+		"DEPOSIT_AMOUNT_DESCRIPTION": "Enter the amount that you wish to deposit.",
+		"WITHDRAWAL_AMOUNT_DESCRIPTION": "Enter the amount that you wish to withdraw.",
+		"DEPOSIT_BONUSCODE_LABEL": "BonusCode",
+		"DEPOSIT_BONUSCODE_DESCRIPTION": "Enter the bonus code that you wish to claim.",
+		"DEPOSIT_BONUSID_LABEL": "BonusId",
+		"ERROR_REQUIRED_FIELD": "This is a required field",
+		"ERROR_FORM_VALIDATION": "Please review the errors on your input and retry submitting the form.",
+		"ERROR_PAYMENT_METHOD_UNAVAILABLE": "We're really sorry, this payment method seems to be unavailable at the moment. This problem is temporary, please try again in a few minutes.",
+		"ERROR_INCORRECT_DEPOSIT_AMOUNT": "We're sorry but the amount deposited is incorrect. Please contact support.",
+		"ERROR_INCORRECT_DEPOSIT_AMOUNT_DETAIL": "Invalid amount. Expected  {0} but received {1}",
+		"ERROR_INSUFFICIENT_FUNDS": "Player does not have sufficient funds.",
+		"ERROR_CUSTOMER_DETAIL_UPDATE": "We're sorry, we could not update user details, please try again later, or contact customer support"
+	}
+}

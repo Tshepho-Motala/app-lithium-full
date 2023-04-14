@@ -1,0 +1,18 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "PLAYER": {
+      "QUICK_ACTIONS": {
+        "SET": {
+          "DAILY_DEPOSIT_LIMIT": "Set Daily Deposit Limit",
+          "WEEKLY_DEPOSIT_LIMIT" : "Set Weekly Deposit Limit",
+          "MONTHLY_DEPOSIT_LIMIT": "Set Monthly Deposit Limit"
+        },
+        "DELETE": {
+          "DAILY_DEPOSIT_LIMIT": "Delete Daily Deposit Limit",
+          "WEEKLY_DEPOSIT_LIMIT" : "Delete Weekly Deposit Limit",
+          "MONTHLY_DEPOSIT_LIMIT" : "Delete Monthly Limit"
+        }
+      }
+    }
+  }
+}

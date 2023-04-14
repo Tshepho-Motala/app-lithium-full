@@ -1,0 +1,29 @@
+#spring.application.name=service-cashier-mock-neteller
+server:
+  port: 9799
+ribbon:
+  ReadTimeout: 30000
+  ConnectTimeout: 30000
+security:
+  basic:
+    enabled: false
+spring:
+  datasource:
+    continue-on-error: true
+  autoconfigure:
+    exclude:
+    - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+    - org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
+  thymeleaf:
+    cache: false
+
+#lithium:
+#  service:
+#    cashier:
+
+lithium:
+  service:
+    cashier:
+      mock:
+        neteller:
+          access-token-client-secret: acmesecret

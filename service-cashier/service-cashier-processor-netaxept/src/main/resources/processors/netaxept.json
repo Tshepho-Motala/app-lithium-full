@@ -1,0 +1,55 @@
+{
+  "name": "Netaxept",
+  "code": "netaxept",
+  "url": "service-cashier-processor-netaxept",
+  "methodNames": ["netaxept"],
+  "deposit": true,
+  "withdraw": false,
+  "fees": {
+    "flat": 0,
+    "percentage": 0,
+    "minimum": 0
+  },
+  "limits": {
+    "minAmount": 5000,
+    "maxAmount": 0,
+    "maxAmountDay": 0,
+    "maxAmountWeek": 0,
+    "maxAmountMonth": 0,
+    "maxTransactionsDay": 0,
+    "maxTransactionsWeek": 0,
+    "maxTransactionsMonth": 0
+  },
+  "properties": [
+    { 
+      "name": "baseUrl",
+      "defaultValue": "https://test.epayment.nets.eu",
+      "type": "url",
+      "description": "The API base URL.."
+    },
+    { 
+      "name": "merchantId",
+      "defaultValue": "12002908",
+      "type": "string",
+      "description": "The processor should supply the API merchant id."
+    },
+    { 
+      "name": "token",
+      "defaultValue": "5r)F_Df",
+      "type": "string",
+      "description": "The processor should supply the API token."
+    },
+    {
+      "name": "callbackUrl",
+      "defaultValue": "/service-cashier/external/callback/do/netaxept/e38ed9abfc7b36feea1ec7fb68e7eaae218397d5/",
+      "type": "string",
+      "description": "This is the url that should be called from the processor side. The hash is the processor service name sha1."
+    },
+        {
+      "name": "websiteCallbackRedirect",
+      "defaultValue": "http://wp-luckybetz.com/callback",
+      "type": "string",
+      "description": "This is the url that should be redirected to from the lithium server when a callback is received from netaxept."
+    }
+  ]
+}

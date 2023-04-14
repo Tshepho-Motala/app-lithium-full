@@ -1,0 +1,7 @@
+{
+  "ERROR_DICTIONARY": {
+    "REGISTRATION": {
+      "INVALID_PARAMETER": "Invalid parameter provided: {0}"
+    }
+  }
+}

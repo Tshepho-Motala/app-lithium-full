@@ -1,0 +1,15 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "PASSWORDRESET": {
+      "PART1": {
+        "ERROR": "Could not update your password. Ensure that the domain and email you entered are correct",
+        "SUCCESS": "You have been sent an email to update your password",
+        "ERROR409": "Your password cannot be reset as you are not a back-office user"
+      },
+      "PART2": {
+        "ERROR": "Could not update your password, an unexpected error has occurred",
+        "SUCCESS": "Your password has been updated successfully"
+      }
+    }
+  }
+}

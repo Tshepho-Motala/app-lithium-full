@@ -1,0 +1,27 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "PLAYERS": {
+      "LINKS": {
+        "HEAD": {
+          "TITLE": "Player Links",
+          "DESCRIPTION": "List of all players that are linked"
+        },
+        "OPTIONS": {
+          "DOMAINS": "All Domains",
+          "NONE": "None",
+          "ECOSYSTEMS": "All Ecosystems",
+          "DOMAINS_SELECTED": "All Domains Selected",
+          "SELECTED": "Domains(s) Selected"
+        },
+        "LIST": {
+          "TITLE": {
+            "PRIMARY": "Primary player",
+            "SECONDARY": "Secondary player",
+            "TYPE": "Link type",
+            "COMMENT": "Link note"
+          }
+        }
+      }
+    }
+  }
+}

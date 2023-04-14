@@ -1,0 +1,1 @@
+ALTER TABLE lithium_cashier.method_stage_field ADD COLUMN `required` bit(1) DEFAULT true;

@@ -1,0 +1,37 @@
+{
+  "SERVICE_USER": {
+    "ACCOUNT_FROZEN": {
+      "MESSAGE": "Account is frozen.",
+      "COOLING_OFF": {
+        "MESSAGE": "Account is frozen. Cooling off."
+      },
+      "SELF_EXCLUDED": {
+        "MESSAGE": "Account is frozen. Self excluded."
+      },
+      "GAMSTOP_SELF_EXCLUSION": {
+        "MESSAGE": "Account is frozen. Gamstop self excluded."
+      }
+    },
+    "ACCOUNT_BLOCKED": {
+      "MESSAGE": "Account is blocked.",
+      "PLAYER_REQUEST": {
+        "MESSAGE": "Account is blocked. Player request."
+      },
+      "RESPONSIBLE_GAMING": {
+        "MESSAGE": "Account is blocked. Responsible gaming."
+      },
+      "AML": {
+        "MESSAGE": "Account is blocked. Anti money laundering."
+      },
+      "FRAUD": {
+        "MESSAGE": "Account is blocked. Fraud."
+      },
+      "DUPLICATED_ACCOUNT": {
+        "MESSAGE": "Account is blocked. Duplicated account."
+      },
+      "OTHER": {
+        "MESSAGE": "Account is blocked. Other"
+      }
+    }
+  }
+}

@@ -1,0 +1,59 @@
+<div class="tab-content" style="padding: 5px;">
+	<div class="well-clear" style="margin-bottom: 0px;">
+		<div class="row v-reset-row ">
+			<div class="col-xs-12 col-md-6 pull-left">
+				<button-back ui-sref="^.list"></button-back>
+				<button-edit lit-if-permission="TEMPLATES_EDIT" lit-permission-domain="{{controller.model.domain.name}}" ui-sref="dashboard.templates.domain.edit({ domainName: controller.model.domain.name, id: controller.model.id })"></button-edit>
+				<button-delete lit-if-permission="TEMPLATES_DELETE" lit-permission-domain="{{controller.model.domain.name}}" ng-click="controller.onDelete()" ng-if="!loading && showDeleteButton"></button-delete>
+				<button-custom btype="button" lit-if-permission="TEMPLATES_PUBLISH" lit-permission-domain="{{controller.model.domain.name}}" ng-if="!loading && cdnEnabled" ng-click="controller.onPublish()" bclass="default" icon="upload" text="Publish"></button-custom>
+				<button-custom btype="button" lit-if-permission="TEMPLATES_PUBLISH" lit-permission-domain="{{controller.model.domain.name}}" ng-if="!loading && showUnpublishButton" ng-click="controller.onUnpublish()" bclass="default" icon="remove" text="Unpublish"></button-custom>
+			</div>
+		</div>
+		<hr/>
+		<div class="callout callout-info" ng-if="controller.model.edit != null">
+			<span>Edit started on {{ controller.model.editStartedOn | datetimedefault }} by {{ controller.model.editBy.guid }}. Click modify to continue editing the template, commit all changes, or cancel the edit.</span>
+		</div>
+		<div class="row v-reset-row ">
+			<div class="col-xs-12">
+				<div class="box box-primary">
+					<div class="box-header with-border">
+						<h3 class="box-title">Template Details</h3>
+					</div>
+					<div class="box-body table-responsive">
+						<table class="table table-hover table-striped nowrap" cellspacing="0" width="100%">
+							<tr>
+								<th class="form-label">{{'UI_NETWORK_ADMIN.TEMPLATES.FIELDS.NAME.NAME'|translate}}</th>
+								<td>{{controller.model.name}}</td>
+							</tr>
+							<tr>
+								<th class="form-label">{{'UI_NETWORK_ADMIN.TEMPLATES.FIELDS.LANG.NAME'|translate}}</th>
+								<td>{{controller.model.lang}}</td>
+							</tr>
+							<tr>
+								<th class="form-label">{{'UI_NETWORK_ADMIN.TEMPLATES.FIELDS.DESCRIPTION.NAME'|translate}}</th>
+								<td>{{controller.model.current.description}}</td>
+							</tr>
+							<tr>
+								<th class="form-label">{{'UI_NETWORK_ADMIN.TEMPLATES.FIELDS.ENABLED.NAME'|translate}}</th>
+								<td>{{controller.model.enabled}}</td>
+							</tr>
+							<tr ng-if="cdnEnabled">
+								<th class="form-label">{{'UI_NETWORK_ADMIN.TEMPLATES.FIELDS.CDN.NAME'|translate}}</th>
+								<td><a href="{{cdnUrl}}" target="_blank">{{cdnUrl}} </a></td>
+							</tr>
+							<tr>
+								<th class="form-label">{{'UI_NETWORK_ADMIN.TEMPLATES.FIELDS.CONTENT.NAME'|translate}}</th>
+								<td><div ng-bind-html="controller.model.current.content"></div></td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div style="padding: 19px;">
+			<div class="row v-reset-row  well">
+				<cms-changelog options="controller.cmschangelogs" model="controller.model"></cms-changelog>
+			</div>
+		</div>
+	</div>
+</div>

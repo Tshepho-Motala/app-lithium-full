@@ -1,0 +1,109 @@
+<t class="modal-content">
+	<div class="modal-header primary-blue darken-4 white-text">
+		<h3 class="modal-title" id="modal-title">
+			CANCEL TRANSACTION
+			<div class="pull-right">
+				<button type="button" class="btn btn-default" ng-click="controller.cancel()">
+					<i class="fa fa-times" style="color: black"></i>
+				</button>
+			</div>
+		</h3>
+	</div>
+
+	<div class="box-body table-responsive">
+		<table class="table table-bordered">
+			<tr>
+				<th width="40%" style="font-size:16px;color:black">Reason for cancellation</th>
+			</tr>
+			<tr>
+				<td>
+					<select class="form-control" name="CancelReason" selected-index="1" id="cancelReason"
+					        style="appearance:auto" required>
+						<option value="1">
+							{{'UI_NETWORK_ADMIN.ACCOUNTING.TRANSACTIONS.FIELDS.CANCEL.REASON.CLOSED_LOOP' | translate}}
+						</option>
+						<option value="2">
+							{{'UI_NETWORK_ADMIN.ACCOUNTING.TRANSACTIONS.FIELDS.CANCEL.REASON.UNVERIFIED_ACCOUNT' | translate}}
+						</option>
+						<option value="3">
+							{{'UI_NETWORK_ADMIN.ACCOUNTING.TRANSACTIONS.FIELDS.CANCEL.REASON.PROMO_ABUSER' | translate}}
+						</option>
+						<option value="4">
+							{{'UI_NETWORK_ADMIN.ACCOUNTING.TRANSACTIONS.FIELDS.CANCEL.REASON.DUPLICATE_ACCOUNT' | translate}}
+						</option>
+						<option value="5">
+							{{'UI_NETWORK_ADMIN.ACCOUNTING.TRANSACTIONS.FIELDS.CANCEL.REASON.DEPOSIT_WAGERING' | translate}}
+						</option>
+						<option value="6">
+							{{'UI_NETWORK_ADMIN.ACCOUNTING.TRANSACTIONS.FIELDS.CANCEL.REASON.TECHNICAL_ERROR' | translate}}
+						</option>
+						<option value="7">
+							{{'UI_NETWORK_ADMIN.ACCOUNTING.TRANSACTIONS.FIELDS.CANCEL.REASON.NAME_MISMATCHED' | translate}}
+						</option>
+						<option value="8">
+							{{'UI_NETWORK_ADMIN.ACCOUNTING.TRANSACTIONS.FIELDS.CANCEL.REASON.CUSTOMER_REQUEST' | translate}}
+						</option>
+						<option value="9">
+							{{'UI_NETWORK_ADMIN.ACCOUNTING.TRANSACTIONS.FIELDS.CANCEL.REASON.WELCOME_BONUS' | translate}}
+						</option>
+						<option value="10">
+							{{'UI_NETWORK_ADMIN.ACCOUNTING.TRANSACTIONS.FIELDS.CANCEL.REASON.OTHERS' | translate}}
+						</option>
+					</select>
+
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<div ng-switch="controller.transaction.current.status.code">
+						<div ng-switch-when="APPROVED" style="align-items: center">
+							<div style="display: flex;">
+								<i class="fa fa-warning" style="font-size:36px;color:red"></i>
+								<H4 style="margin: 0 0 0 10px;">
+									{{'UI_NETWORK_ADMIN.CASHIER.TRANSACTION.CANCEL_AFTER_APPROVE.CONFIRM_MAIN' | translate}}</H4>
+							</div>
+							<br>
+							<H4 style="margin-left: 9%">
+								{{'UI_NETWORK_ADMIN.CASHIER.TRANSACTION.CANCEL_AFTER_APPROVE.CONFIRM_ADDITIONAL' | translate}}</H4>
+						</div>
+						<div ng-switch-when="AUTO_APPROVED" style="align-items: center">
+							<div style="display: flex;">
+								<i class="fa fa-warning" style="font-size:36px;color:red"></i>
+								<H4 style="margin: 0 0 0 10px;">
+									{{'UI_NETWORK_ADMIN.CASHIER.TRANSACTION.CANCEL_AFTER_APPROVE.CONFIRM_MAIN' | translate}}</H4>
+								<br>
+							</div>
+							<br>
+							<H4 style="margin-left: 9%">
+								{{'UI_NETWORK_ADMIN.CASHIER.TRANSACTION.CANCEL_AFTER_APPROVE.CONFIRM_ADDITIONAL' | translate}}</H4>
+						</div>
+						<div ng-switch-when="WAITFORPROCESSOR" style="align-items: center">
+							<div style="display: flex;">
+								<i class="fa fa-warning" style="font-size:36px;color:red"></i>
+								<H4 style="margin: 0 0 0 10px;">
+									{{'UI_NETWORK_ADMIN.CASHIER.TRANSACTION.CANCEL_AFTER_APPROVE.CONFIRM_MAIN' | translate}}</H4>
+								<br>
+							</div>
+							<br>
+							<H4 style="margin-left: 9%">
+								{{'UI_NETWORK_ADMIN.CASHIER.TRANSACTION.CANCEL_AFTER_APPROVE.CONFIRM_ADDITIONAL' | translate}}</H4>
+						</div>
+						<div ng-switch-default style="display: flex; align-items: center">
+							<H4 style="margin: 0 0 0 10px;">
+								{{'UI_NETWORK_ADMIN.CASHIER.TRANSACTION.CANCEL.CONFIRM' | translate}}</H4>
+						</div>
+					</div>
+				</td>
+			</tr>
+		</table>
+	</div>
+
+	<form name="controller.form" autocomplete="off" novalidate>
+		<div class="modal-body" id="modal-body" style="padding: 10px;">
+			<div class="modal-footer" style="padding: 10px; border-top: none;">
+				<button-submit ng-click="controller.submit()"></button-submit>
+				<button-cancel ng-click="controller.cancel()"></button-cancel>
+			</div>
+		</div>
+	</form>
+</t>

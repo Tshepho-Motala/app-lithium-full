@@ -1,0 +1,11 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "BONUS": {
+      "ADD": {
+        "EXISTING": {
+          "EXPLAIN": "An existing bonus for the specified code and domain and type already exists. You can choose to continue editing this existing bonus, or cancel and start over by adding a different bonus code."
+        }
+      }
+    }
+  }
+}

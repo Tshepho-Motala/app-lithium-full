@@ -1,0 +1,1 @@
+ALTER TABLE `incomplete_user` ADD COLUMN `domain_id`  bigint(20) , add key(domain_id);

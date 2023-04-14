@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"/>
+	<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+
+</head>
+<body>
+<form name="frm" th:action="${model.getMethodUrl()}" method="POST" id="threeD">
+	<input type="hidden" name="threeDSMethodData" th:value="${model.getThreeDSMethodData()}"></input>
+</form>
+<form id="payment-form" action="/service-cashier-frontend-nuvei-cc/fingerprint/do" method="POST">
+	<input type="hidden" name="transactionId" th:value="${model.getTransactionId()}"></input>
+	<input type="hidden" name="methodCompletionInd" value="N"></input>
+</form>
+<script th:inline="javascript">
+	//<![CDATA[
+	var $form = $('#threeD');
+	var $paymentform = $('#payment-form');
+	$(function() {
+		window.setTimeout(doDeposit, 10000);
+		$form.submit();
+	});
+
+	doDeposit = function() {
+		$paymentform.submit();
+	}
+	//]]>
+</script>
+</body>
+</html>

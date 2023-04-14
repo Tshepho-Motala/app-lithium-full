@@ -1,0 +1,2 @@
+ALTER TABLE `signup_event`
+ADD COLUMN `user_agent` varchar(1000) DEFAULT NULL, ALGORITHM INPLACE, LOCK NONE;

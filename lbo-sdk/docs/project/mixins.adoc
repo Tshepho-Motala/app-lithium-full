@@ -1,0 +1,7 @@
+# Mixins
+
+Mixins create a powerful way to introduce shared functionality between different Vue components. They're a bit like Class inheritance in TypeScript, except they're "mixed in" to the code instead of extending it.  
+
+Please be _cautious_ when creating any mixin, as they could override functionality without intending to. They also abstract the code away that is hard to debug and may lead to additional code complexity.  
+
+Rather write a Class and extend it, or simply use Vue's powerful child imports to create common functionality.

@@ -1,0 +1,14 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "CMS": {
+      "LOBBY": {
+        "ADD": {
+          "ERROR": {
+            "DUPLICATE_ENTRY": "A lobby with similar details already exists."
+          },
+          "SUCCESS" : "Lobby successfully created."
+        }
+      }
+    }
+  }
+}

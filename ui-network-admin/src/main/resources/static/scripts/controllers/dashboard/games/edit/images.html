@@ -1,0 +1,189 @@
+<div class="row v-reset-row ">
+	<div class="col-md-12">
+		<div class="nav-tabs-custom" style="margin-bottom: 0px;">
+			<div class="tab-content" style="padding: 5px;">
+				<div class="well" style="margin-bottom: 1px;">
+					<div class="row v-reset-row ">
+
+						<div class="col-md-8 col-md-offset-2">
+							<div class="box box-default" bs-loading-overlay bs-loading-overlay-reference-id="{{controller.referenceId}}_CDN_EXTERNAL">
+								<form ng-submit="controller.saveCdnExternalGameGraphic()" name="controller.formCDNExternalGraphic" novalidate>
+									<div class="box-header bold-text with-border">
+										{{ 'UI_NETWORK_ADMIN.GAME.IMAGES.CDN_EXTERNAL.CASINO.LABEL' | translate }}
+										<span ng-if="controller.cdnExternalGameGraphic !== undefined && controller.cdnExternalGameGraphic.id !== undefined" class="pull-right"><a ng-click="controller.removeCdnExternalGameGraphic()">{{'GLOBAL.ACTION.DELETE'|translate}}</a></span><br/>
+									</div>
+									<div class="box-body">
+										<span ng-if="controller.cdnExternalGameGraphic !== undefined && controller.cdnExternalGameGraphic.url !== undefined">
+											<img class="img-game-thumb img-bordered" src="//:0" ng-src="{{controller.cdnExternalGameGraphic.url}}">
+										</span>
+										<formly-form model="controller.cdnExternalGameGraphic" fields="controller.fieldsCDNExternalGraphic" options="controller.optionsCDNExternalGraphic" form="controller.formCDNExternalGraphic">
+										</formly-form>
+									</div>
+									<div class="box-footer">
+										<span class="pull-right"><button-save></button-save></span>
+									</div>
+								</form>
+							</div>
+						</div>
+
+						<div class="col-md-8 col-md-offset-2">
+							<div class="box box-default" bs-loading-overlay bs-loading-overlay-reference-id="{{controller.referenceId}}_LIVE_CASINO_LOBBY_IMAGE">
+								<form ng-submit="controller.saveLiveCasinoImage()" name="controller.formLiveCasinoImage" novalidate>
+									<div class="box-header bold-text with-border">
+										{{ 'UI_NETWORK_ADMIN.GAME.IMAGES.CDN_EXTERNAL.LIVE_CASINO.LABEL' | translate }}
+										<span ng-if="controller.liveCasinoImage !== undefined && controller.liveCasinoImage.id !== undefined" class="pull-right"><a ng-click="controller.removeLiveCasinoImage()">{{'GLOBAL.ACTION.DELETE'|translate}}</a></span><br/>
+									</div>
+									<div class="box-body">
+										<span ng-if="controller.liveCasinoImage !== undefined && controller.liveCasinoImage.url !== undefined">
+											<img class="img-game-thumb img-bordered" src="//:0" ng-src="{{controller.liveCasinoImage.url}}">
+										</span>
+										<formly-form model="controller.liveCasinoImage" fields="controller.fieldsLiveCasinoLobbyImage" options="controller.optionsLiveCasinoImage" form="controller.formLiveCasinoImage">
+										</formly-form>
+									</div>
+									<div class="box-footer">
+										<span class="pull-right"><button-save></button-save></span>
+									</div>
+								</form>
+							</div>
+						</div>
+
+						<div class="col-md-8 col-md-offset-2">
+						<div class="box box-default" bs-loading-overlay bs-loading-overlay-reference-id="{{controller.referenceId}}_Thumb">
+							<div class="box-header bold-text with-border">
+								{{ 'UI_NETWORK_ADMIN.GAME.IMAGES.THUMBNAIL' | translate }}
+								<span class="pull-right"><a ng-click="controller.removeFile('Thumb')">{{'UI_NETWORK_ADMIN.GAME.IMAGES.DOMAIN.REMOVE'|translate}}</a></span><br/>
+							</div>
+							<div class="box-body">
+								<div class="col-xs-6">
+									<span class="bold-text align-top">{{ 'UI_NETWORK_ADMIN.GAME.IMAGES.DOMAIN.LABEL' | translate }}:</span><br/>
+									<img class="img-game-thumb img-bordered" src="//:0" ng-src="{{controller.imageUrl}}gameguid={{controller.model.guid}}&function=thumb&origin=admin&nothig={{controller.model.forceImageReload}}">
+								</div><div class="col-xs-6" ng-if="controller.model.domainName!=='default'">
+									<span class="bold-text align-top">{{ 'UI_NETWORK_ADMIN.GAME.IMAGES.DEFAULT' | translate }}:</span>
+									<img class="img-game-thumb img-bordered" src="//:0" ng-src="{{controller.imageDefaultUrl}}gameguid={{controller.model.guid}}&function=thumb&origin=admin&nothig={{controller.model.forceImageReload}}">
+								</div>
+							</div>
+							<div class="box-footer">
+								<div class="input-group">
+									<div class="input-group-btn">
+										<div class="btn btn-default btn-file">
+											<i class="fa fa-paperclip"></i> {{ 'UI_NETWORK_ADMIN.GAME.IMAGES.CHOOSE' | translate }}
+											<input type="file" class="form-control" file-model="controller.myThumbFile"/>
+										</div>
+									</div>
+									<input type="text" class="form-control" placeholder="..." disabled="disabled" value="{{controller.myThumbFile.name}}">
+									<div class="input-group-btn">
+										<button-custom icon="upload" text="GLOBAL.ACTION.UPLOADFILE" bclass="primary pull-right" ng-click="controller.uploadFile('Thumb')"></button-custom>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>	
+					<div class="col-md-8 col-md-offset-2">
+						<div class="box box-default" bs-loading-overlay bs-loading-overlay-reference-id="{{controller.referenceId}}_Preview">
+							<div class="box-header bold-text with-border">
+								{{ 'UI_NETWORK_ADMIN.GAME.IMAGES.PREVIEW' | translate }}
+								<span class="pull-right"><a ng-click="controller.removeFile('Preview')">{{'UI_NETWORK_ADMIN.GAME.IMAGES.DOMAIN.REMOVE'|translate}}</a></span><br/>
+							</div>
+							<div class="box-body">
+								<div class="col-xs-6">
+									<span class="bold-text align-top">{{ 'UI_NETWORK_ADMIN.GAME.IMAGES.DOMAIN.LABEL' | translate }}:</span><br/>
+									<img class="img-game-thumb img-bordered" src="//:0" ng-src="{{controller.imageUrl}}gameguid={{controller.model.guid}}&function=preview&origin=admin&nothig={{controller.model.forceImageReload}}">
+								</div><div class="col-xs-6" ng-if="controller.model.domainName!=='default'">
+									<span class="bold-text align-top">{{ 'UI_NETWORK_ADMIN.GAME.IMAGES.DEFAULT' | translate }}:</span><br/>
+									<img class="img-game-thumb img-bordered" src="//:0" ng-src="{{controller.imageDefaultUrl}}gameguid={{controller.model.guid}}&function=preview&origin=admin&nothig={{controller.model.forceImageReload}}">
+								</div>
+							</div>
+							<div class="box-footer">
+								<div class="input-group">
+									<div class="input-group-btn">
+										<div class="btn btn-default btn-file">
+											<i class="fa fa-paperclip"></i> {{ 'UI_NETWORK_ADMIN.GAME.IMAGES.CHOOSE' | translate }}
+											<input type="file" class="form-control" id="myPreviewFile" file-model="controller.myPreviewFile"/>
+										</div>
+									</div>
+									<input type="text" class="form-control" placeholder="..." disabled="disabled" value="{{controller.myPreviewFile.name}}">
+									<div class="input-group-btn">
+										<button-custom icon="upload" text="GLOBAL.ACTION.UPLOADFILE" bclass="primary pull-right" ng-click="controller.uploadFile('Preview')"></button-custom>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>	
+					<div class="col-md-8 col-md-offset-2">
+						<div class="box box-default" bs-loading-overlay bs-loading-overlay-reference-id="{{controller.referenceId}}_Background">
+							<div class="box-header bold-text with-border">
+								{{ 'UI_NETWORK_ADMIN.GAME.IMAGES.BACKGROUND' | translate }}
+								<span class="pull-right"><a ng-click="controller.removeFile('Background')">{{'UI_NETWORK_ADMIN.GAME.IMAGES.DOMAIN.REMOVE'|translate}}</a></span><br/>
+							</div>
+							<div class="box-body">
+								<div class="col-xs-6">
+									<span class="bold-text align-top">{{ 'UI_NETWORK_ADMIN.GAME.IMAGES.DOMAIN.LABEL' | translate }}:</span><br/>
+									<img class="img-game-thumb img-bordered" src="//:0" ng-src="{{controller.imageUrl}}gameguid={{controller.model.guid}}&function=background&origin=admin&nothig={{controller.model.forceImageReload}}">
+								</div><div class="col-xs-6" ng-if="controller.model.domainName!=='default'">
+									<span class="bold-text align-top">{{ 'UI_NETWORK_ADMIN.GAME.IMAGES.DEFAULT' | translate }}:</span><br/>
+									<img class="img-game-thumb img-bordered" src="//:0" ng-src="{{controller.imageDefaultUrl}}gameguid={{controller.model.guid}}&function=background&origin=admin&nothig={{controller.model.forceImageReload}}">
+								</div>
+							</div>
+							<div class="box-footer">
+								<div class="input-group">
+									<div class="input-group-btn">
+										<div class="btn btn-default btn-file">
+											<i class="fa fa-paperclip"></i> {{ 'UI_NETWORK_ADMIN.GAME.IMAGES.CHOOSE' | translate }}
+											<input type="file" class="form-control" file-model="controller.myBackgroundFile"/>
+										</div>
+									</div>
+									<input type="text" class="form-control" placeholder="..." disabled="disabled" value="{{controller.myBackgroundFile.name}}">
+									<div class="input-group-btn">
+										<button-custom icon="upload" text="GLOBAL.ACTION.UPLOADFILE" bclass="primary pull-right" ng-click="controller.uploadFile('Background')"></button-custom>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-8 col-md-offset-2">
+						<div class="box box-default" bs-loading-overlay bs-loading-overlay-reference-id="{{controller.referenceId}}_Lock">
+							<div class="box-header bold-text with-border">
+								{{ 'UI_NETWORK_ADMIN.GAME.IMAGES.LOCK' | translate }}
+								<span class="pull-right"><a ng-click="controller.removeFile('Lock')">{{'UI_NETWORK_ADMIN.GAME.IMAGES.DOMAIN.REMOVE'|translate}}</a></span><br/>
+							</div>
+							<div class="box-body">
+								<div class="col-xs-6">
+									<span class="bold-text align-top">{{ 'UI_NETWORK_ADMIN.GAME.IMAGES.DOMAIN.LABEL' | translate }}:</span><br/>
+									<img class="img-game-thumb img-bordered" src="//:0" ng-src="{{controller.imageUrl}}gameguid={{controller.model.guid}}&function=lock&origin=admin&nothig={{controller.model.forceImageReload}}">
+								</div><div class="col-xs-6" ng-if="controller.model.domainName!=='default'">
+									<span class="bold-text align-top">{{ 'UI_NETWORK_ADMIN.GAME.IMAGES.DEFAULT' | translate }}:</span><br/>
+									<img class="img-game-thumb img-bordered" src="//:0" ng-src="{{controller.imageDefaultUrl}}gameguid={{controller.model.guid}}&function=lock&origin=admin&nothig={{controller.model.forceImageReload}}">
+								</div>
+							</div>
+							<div class="box-footer">
+								<div class="input-group">
+									<div class="input-group-btn">
+										<div class="btn btn-default btn-file">
+											<i class="fa fa-paperclip"></i> {{ 'UI_NETWORK_ADMIN.GAME.IMAGES.CHOOSE' | translate }}
+											<input type="file" class="form-control" file-model="controller.myLockFile"/>
+										</div>
+									</div>
+									<input type="text" class="form-control" placeholder="..." disabled="disabled" value="{{controller.myLockFile.name}}">
+									<div class="input-group-btn">
+										<button-custom icon="upload" text="GLOBAL.ACTION.UPLOADFILE" bclass="primary pull-right" ng-click="controller.uploadFile('Lock')"></button-custom>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-8 col-md-offset-2">
+						<div class="box box-default">
+							<div class="box-header bold-text with-border">
+								{{ 'UI_NETWORK_ADMIN.GAME.IMAGES.ORIGINAL' | translate }}
+							</div>
+							<div class="box-body">
+								<img class="img-game img-bordered" src="//:0" ng-src="{{controller.imageUrl}}gameguid={{controller.model.guid}}&function=original&origin=admin&nothig={{controller.model.forceImageReload}}">
+							</div>
+						</div>
+					</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

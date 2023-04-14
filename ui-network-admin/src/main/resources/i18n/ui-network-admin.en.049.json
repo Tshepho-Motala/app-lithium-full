@@ -1,0 +1,16 @@
+{
+	"UI_NETWORK_ADMIN": {
+		"BONUS": {
+			"LIST": {
+				"TITLE": {
+					"BONUSID": "Bonus ID"
+				}
+			}
+		}
+	},
+	"GLOBAL": {
+		"FIELDS": {
+			"BONUSID": "Bonus ID"
+		}
+	}
+}

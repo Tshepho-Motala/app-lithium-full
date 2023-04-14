@@ -1,0 +1,18 @@
+spring:
+  cloud:
+    bus:
+      enabled: true
+    config:
+      server:
+        git:
+          uri: ${GIT_URL:https://gitlab.com/playsafe/lithium/config.git}
+          username: ${GIT_USER:support}
+          password: ${GIT_PASSWORD:Q1kKrxzjLxD61Vy2zy5Y}
+  security:
+    user:
+      password: ${CONFIG_SERVICE_PASSWORD}
+server:
+  port: 8888
+logging:
+  level:
+    ROOT: WARN

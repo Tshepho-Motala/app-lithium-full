@@ -1,0 +1,9 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "ECOSYSTEMS": {
+      "LINK": {
+        "DISABLE_ROOT_MAIL": "Disable root welcome email"
+      }
+    }
+  }
+}

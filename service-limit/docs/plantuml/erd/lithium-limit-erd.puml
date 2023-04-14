@@ -1,0 +1,77 @@
+.lithium_limit ERD (!full schema)
+[plantuml]
+@startuml
+'https://plantuml.com/class-diagram
+
+skinparam linetype ortho
+!define T(name,desc) class name as "desc" << (T,#FFAAAA) >>
+
+!define pk(x) <b>x</b>
+!define fk(x) <color:purple><i>x</i></color>
+!define unique(x) <color:green>x</color>
+!define nn(x) <u>x</u>
+
+T(user, "user\n Contains some users") {
+  pk(id) bigint <<generated>>
+  ---
+  nn(unique(guid)): varchar(255)
+  test_account: bit
+}
+
+T(domain, "domain\n Domains registered in the system") {
+  pk(id) bigint <<generated>>
+  --
+  nn(unique(name)): varchar(255)
+  version: int
+}
+
+T(domain_restriction_set, "domain_restriction_set\n Contains restriction sets that may be loaded\n onto a player on a particular domain only") {
+  pk(id) bigint <<generated>>
+  --
+  fk(nn(domain_id)): bigint
+'  FK to lithium_user.user_category.id
+  fk(exclude_tag_id): bigint
+  --
+  name: varchar(255)
+  system_restriction: bit default 0
+  dwh_visible: bit default 0
+  error_message: varchar(255)
+  alt_message_count: int default 0
+  communicate_to_player: bit default 0
+  place_mail_template: varchar(255)
+  lift_mail_template: varchar(255)
+  deleted: bit default 0
+  enabled: bit default 1
+  version: int
+  --
+  constraint(unique(domain_id; name))
+}
+
+T(restriction, "restriction\n Contains restriction types used to\n restrict specific lithium components") {
+  pk(id) bigint <<generated>>
+  --
+  code: varchar(255)
+  name: varchar(255)
+  version: int
+  --
+  constraint(unique(code))
+  constraint(unique(name))
+}
+
+T(domain_restriction, "domain_restriction\n Groups restrictions that may be\n applied on a domain_restriction_set") {
+  pk(id) bigint <<generated>>
+  --
+  fk(nn(restriction_id)): bigint
+  fk(nn(set_id)): bigint
+  --
+  deleted: bit default 0
+  enabled: bit default 1
+  --
+  constraint(unique(restriction_id; set_id))
+}
+
+user }o--|| domain
+domain ||--o{ domain_restriction_set
+domain_restriction_set ||--o{ domain_restriction
+restriction ||--o{ domain_restriction
+@enduml

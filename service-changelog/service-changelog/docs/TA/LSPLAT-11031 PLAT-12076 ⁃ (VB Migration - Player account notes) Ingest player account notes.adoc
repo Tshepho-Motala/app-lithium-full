@@ -1,0 +1,903 @@
+= LSPLAT-11031 PLAT-12076 ⁃ VB Migration - Player account notes ingestion
+:sectnums:
+:toc: left
+:toclevels: 4
+:toc-title: LSPLAT-11031 PLAT-12076
+:icons: font
+:source-highlighter: coderay
+:url-quickref: https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/
+:table-caption!:
+
+WARNING: You might need to install graphviz to render the component models on IntelliJ on plantUML if not viewed on GitLab- see https://playsafe.atlassian.net/wiki/spaces/LITHIUM/pages/1674936347/How+To+Setup+Lithium+Local+Development#Noteworthy-Extensions.1[IntelliJ: PlantUML diagramming tool]
+
+== Description
+=== Jira
+* https://livescoregroup.atlassian.net/browse/PLAT-12076
+* https://playsafe.atlassian.net/browse/LSPLAT-11031
+
+=== Gitlab
+* Branch: origin/feature/LSPLAT-11031-PLAT-12076-account-notes
+* MR: https://gitlab.com/playsafe/lithium/app-lithium-full/-/merge_requests/XXXX
+
+=== Business
+Player account notes need to be ingested so that the backoffice users are able to view them.
+
+=== Approvals
+|===
+|Component |Reason |Comments
+
+|Li
+|
+|
+
+|DWH
+|
+|
+
+|===
+
+== Architecture
+=== Technical
+NOTE: This process can only begin once all players have been created in lithium, with respective lithium GUID's.
+
+IMPORTANT: The ingestion process should support resuming in case of failure of the process or interruptions on infrastructure. The data batches read from the source data should be tracked and the most recent incomplete batch should be the starting point when the ingestion is resumed. There should be care taken to avoid duplicate records being ingested during this process.
+
+IMPORTANT: Any provided sequences will stipulate a happy path process. All failure scenarios should be thought through, handled, retried where possible, or ultimately fail and rolled back and placed in a parking lot, as per details on previous technical specifications.
+
+TIP: Refer to https://gitlab.com/playsafe/lithium/app-lithium-full/-/blob/3887b3f2b0c8c2dca43259d0f3d008e2ce496e42/service-accounting/service-accounting-provider-internal/docs/TA/LSPLAT-9918-PLAT-11049-vb-migration-accounting-ingest-historic-transactions.adoc#user-content-prerequisites for a brief description of DLQ and PL used for handling failures. This link will become ineffective once the referenced branch above has been merged. After which, the document can be found in the develop branch in the same directory structure.
+
+In this specification, the requirement is to record the player notes to the changelog service in the Lithium platform with the correct taxonomy and original timestamps.
+
+==== Categorisation
+The player account notes need to be ingested with the relevant categorisation for the note. +
+There needs to be a mapping of the DK categories and Livescore categories to allow for the correct segmentations during the insertion of the account notes. +
+When production dry-run happens, there could potentially be additional categories and sub-categories, so this should be expected and changes to the mapping configuration will need to be made to accommodate this.
+[source,sql]
+----
+-- DK data
+SELECT CategoryName, SubCategoryName
+FROM `lithium-virginbet-sandbox.dk_files.CustomerNotes`
+GROUP BY CategoryName, SubCategoryName
+ORDER BY CategoryName asc, SubCategoryName asc
+LIMIT 1000
+----
+
+[source, sql]
+----
+SELECT c.name as category, sc.name as subcategory
+FROM lithium_changelog.sub_category sc
+JOIN lithium_changelog.category c
+ORDER BY c.name asc, sc.name asc
+----
+
+==== The dataset
+The data will need to be ingested with the relevant creation and modification date so that the note dates correlate to the original capture timestamp of the event. +
+There might not be relevant categories for some items from the DK data import and a decision would need to be made on the correct attribution of a category for those. +
+The 'isImportant' field in DK data will need to be mapped to the 'pinned' field in the lithium changelog table. +
+The 'isDeleted' and 'DeletedDate' in DK data will need to be mapped to 'deleted' field and 'change_date' field. +
+This will have the effect of the change date becoming the DeletedDate instead of the change date for the relevant changelog entry.
+[source,sql]
+----
+SELECT CustomerID, CategoryName,SubCategoryName, isImportant, CreationDate, isDeleted, DeleteDate, Note
+FROM `lithium-virginbet-sandbox.dk_files.CustomerNotes`
+ORDER BY CreationDate ASC
+LIMIT 1000
+----
+
+=== The process
+==== Convert DK note category and sub category to lithium changelog category and subcategory
+
+Given the existing Lithium categories and subcategories, the DK ones should be mapped to the equivalent ones in Lithium or new ones should be added in the unlikely event that there is no mapping that matches. +
+See the classes: +
+lithium.service.changelog.data.entities.Category +
+lithium.service.changelog.data.entities.SubCategory
+
+
+==== Ingest the player account notes
+Use the same ingestion auditing capture that would have been used for the user ingestion. There would have been a need to also capture the changelog entry for the original user registration activity. If this was not needed or completed, the need would be there to create a changelog entry registration endpoint that would need to capture the relevant account note and allow for the allocation of the creation date. +
+The main modification will be to expose the lithium.service.changelog.data.entities.ChangeLog.changeDate attribute in the ChangeLog entity. This adaptation will allow for the injection of the original date into the changelog entry. +
+
+IMPORTANT: The capturing endpoint should be a new endpoint and there should be no change to the existing changelog processes or the functionality. Running the risk of unexpected behaviour on the current changelog implementation workflows would be catastrophic.
+
+See the classes: +
+lithium.client.changelog.ChangeLogClient +
+lithium.client.changelog.ChangeLogService +
+lithium.service.changelog.data.entities.ChangeLog +
+
+==== Sequence
+
+include::../plantuml/sequence/player-account-note-ingestion-sequence.puml[]
+
+The process flow outlined below should serve as a guide for the expected workflow of a DK account note ingestion.
+
+== Data extracts
+=== Category extract DK
+[source, json]
+----
+[{
+  "CategoryName": "Accounts",
+  "SubCategoryName": "Closure"
+}, {
+  "CategoryName": "Accounts",
+  "SubCategoryName": "DepositFacility"
+}, {
+  "CategoryName": "Accounts",
+  "SubCategoryName": "Freezing"
+}, {
+  "CategoryName": "Accounts",
+  "SubCategoryName": "General"
+}, {
+  "CategoryName": "Accounts",
+  "SubCategoryName": "LegalTextRevision"
+}, {
+  "CategoryName": "Accounts",
+  "SubCategoryName": "Rejected bonuses"
+}, {
+  "CategoryName": "Accounts",
+  "SubCategoryName": "SelfExclude"
+}, {
+  "CategoryName": "Accounts",
+  "SubCategoryName": "WithdrawalFacility"
+}, {
+  "CategoryName": "Age Verification",
+  "SubCategoryName": "General"
+}, {
+  "CategoryName": "Betting",
+  "SubCategoryName": "General"
+}, {
+  "CategoryName": "Bonuses",
+  "SubCategoryName": "Auto Bonus Status"
+}, {
+  "CategoryName": "Bonuses",
+  "SubCategoryName": "Cancel Bonus"
+}, {
+  "CategoryName": "Bonuses",
+  "SubCategoryName": "General"
+}, {
+  "CategoryName": "Bonuses",
+  "SubCategoryName": "Rejected bonuses"
+}, {
+  "CategoryName": "Retention",
+  "SubCategoryName": "General"
+}, {
+  "CategoryName": "Risk",
+  "SubCategoryName": "DepositFacility"
+}, {
+  "CategoryName": "Risk",
+  "SubCategoryName": "General"
+}, {
+  "CategoryName": "Risk",
+  "SubCategoryName": "WithdrawalFacility"
+}, {
+  "CategoryName": "Risk",
+  "SubCategoryName": "Withdrawals Autoprocessing"
+}, {
+  "CategoryName": "Sales",
+  "SubCategoryName": "General"
+}, {
+  "CategoryName": "Support",
+  "SubCategoryName": "General"
+}]
+----
+
+=== Category extract Lithium
+[source, text]
+----
+category          |subcategory                    |
+------------------+-------------------------------+
+Access            |Access                         |
+Access            |Access rule                    |
+Access            |Account                        |
+Access            |Account Creation               |
+Access            |Affiliate                      |
+Access            |Auto Withdraw                  |
+Access            |Balance Limit                  |
+Access            |Bonus Create                   |
+Access            |Bonus Deleted                  |
+Access            |Bonus Grant                    |
+Access            |Bonus Revision                 |
+Access            |Bonuses                        |
+Access            |Cancelled Bonuses              |
+Access            |Closure                        |
+Access            |Communications                 |
+Access            |Create Domain                  |
+Access            |Create Promotion               |
+Access            |CRUKS                          |
+Access            |CRUKS Self-Exclusion           |
+Access            |Customer Funds                 |
+Access            |Date Of Birth Change           |
+Access            |Deposit Limits                 |
+Access            |Document Type                  |
+Access            |Document Upload                |
+Access            |Ecosystem                      |
+Access            |Ecosystem Synchronization      |
+Access            |Edit Details                   |
+Access            |Edit Domain                    |
+Access            |Edit Promotion                 |
+Access            |Entity                         |
+Access            |Excessive Failed Logins        |
+Access            |Finance                        |
+Access            |Gamstop                        |
+Access            |Gamstop Self-Exclusion         |
+Access            |IBAN Change                    |
+Access            |IBAN mismatch                  |
+Access            |iDin Verification              |
+Access            |KYC                            |
+Access            |Loss Limits                    |
+Access            |Password Reset                 |
+Access            |Place Of Birth Change          |
+Access            |Play Time Limit                |
+Access            |Promotion Participation        |
+Access            |Provider                       |
+Access            |Reality Check                  |
+Access            |Register Bonus                 |
+Access            |Responsible Gaming             |
+Access            |Restriction                    |
+Access            |Retention                      |
+Access            |Reward Cancelled               |
+Access            |Reward Created                 |
+Access            |Reward Declined                |
+Access            |Reward Deleted                 |
+Access            |Reward Grant                   |
+Access            |Rule set                       |
+Access            |Sales                          |
+Access            |Self-Exclusion                 |
+Access            |Status Change                  |
+Access            |Support                        |
+Access            |Templates                      |
+Access            |Terms and Conditions Acceptance|
+Access            |Time Frames Limit              |
+Access            |Translations                   |
+Access            |Update Password                |
+Access            |User Link                      |
+Account           |Access                         |
+Account           |Access rule                    |
+Account           |Account                        |
+Account           |Account Creation               |
+Account           |Affiliate                      |
+Account           |Auto Withdraw                  |
+Account           |Balance Limit                  |
+Account           |Bonus Create                   |
+Account           |Bonus Deleted                  |
+Account           |Bonus Grant                    |
+Account           |Bonus Revision                 |
+Account           |Bonuses                        |
+Account           |Cancelled Bonuses              |
+Account           |Closure                        |
+Account           |Communications                 |
+Account           |Create Domain                  |
+Account           |Create Promotion               |
+Account           |CRUKS                          |
+Account           |CRUKS Self-Exclusion           |
+Account           |Customer Funds                 |
+Account           |Date Of Birth Change           |
+Account           |Deposit Limits                 |
+Account           |Document Type                  |
+Account           |Document Upload                |
+Account           |Ecosystem                      |
+Account           |Ecosystem Synchronization      |
+Account           |Edit Details                   |
+Account           |Edit Domain                    |
+Account           |Edit Promotion                 |
+Account           |Entity                         |
+Account           |Excessive Failed Logins        |
+Account           |Finance                        |
+Account           |Gamstop                        |
+Account           |Gamstop Self-Exclusion         |
+Account           |IBAN Change                    |
+Account           |IBAN mismatch                  |
+Account           |iDin Verification              |
+Account           |KYC                            |
+Account           |Loss Limits                    |
+Account           |Password Reset                 |
+Account           |Place Of Birth Change          |
+Account           |Play Time Limit                |
+Account           |Promotion Participation        |
+Account           |Provider                       |
+Account           |Reality Check                  |
+Account           |Register Bonus                 |
+Account           |Responsible Gaming             |
+Account           |Restriction                    |
+Account           |Retention                      |
+Account           |Reward Cancelled               |
+Account           |Reward Created                 |
+Account           |Reward Declined                |
+Account           |Reward Deleted                 |
+Account           |Reward Grant                   |
+Account           |Rule set                       |
+Account           |Sales                          |
+Account           |Self-Exclusion                 |
+Account           |Status Change                  |
+Account           |Support                        |
+Account           |Templates                      |
+Account           |Terms and Conditions Acceptance|
+Account           |Time Frames Limit              |
+Account           |Translations                   |
+Account           |Update Password                |
+Account           |User Link                      |
+Bonuses           |Access                         |
+Bonuses           |Access rule                    |
+Bonuses           |Account                        |
+Bonuses           |Account Creation               |
+Bonuses           |Affiliate                      |
+Bonuses           |Auto Withdraw                  |
+Bonuses           |Balance Limit                  |
+Bonuses           |Bonus Create                   |
+Bonuses           |Bonus Deleted                  |
+Bonuses           |Bonus Grant                    |
+Bonuses           |Bonus Revision                 |
+Bonuses           |Bonuses                        |
+Bonuses           |Cancelled Bonuses              |
+Bonuses           |Closure                        |
+Bonuses           |Communications                 |
+Bonuses           |Create Domain                  |
+Bonuses           |Create Promotion               |
+Bonuses           |CRUKS                          |
+Bonuses           |CRUKS Self-Exclusion           |
+Bonuses           |Customer Funds                 |
+Bonuses           |Date Of Birth Change           |
+Bonuses           |Deposit Limits                 |
+Bonuses           |Document Type                  |
+Bonuses           |Document Upload                |
+Bonuses           |Ecosystem                      |
+Bonuses           |Ecosystem Synchronization      |
+Bonuses           |Edit Details                   |
+Bonuses           |Edit Domain                    |
+Bonuses           |Edit Promotion                 |
+Bonuses           |Entity                         |
+Bonuses           |Excessive Failed Logins        |
+Bonuses           |Finance                        |
+Bonuses           |Gamstop                        |
+Bonuses           |Gamstop Self-Exclusion         |
+Bonuses           |IBAN Change                    |
+Bonuses           |IBAN mismatch                  |
+Bonuses           |iDin Verification              |
+Bonuses           |KYC                            |
+Bonuses           |Loss Limits                    |
+Bonuses           |Password Reset                 |
+Bonuses           |Place Of Birth Change          |
+Bonuses           |Play Time Limit                |
+Bonuses           |Promotion Participation        |
+Bonuses           |Provider                       |
+Bonuses           |Reality Check                  |
+Bonuses           |Register Bonus                 |
+Bonuses           |Responsible Gaming             |
+Bonuses           |Restriction                    |
+Bonuses           |Retention                      |
+Bonuses           |Reward Cancelled               |
+Bonuses           |Reward Created                 |
+Bonuses           |Reward Declined                |
+Bonuses           |Reward Deleted                 |
+Bonuses           |Reward Grant                   |
+Bonuses           |Rule set                       |
+Bonuses           |Sales                          |
+Bonuses           |Self-Exclusion                 |
+Bonuses           |Status Change                  |
+Bonuses           |Support                        |
+Bonuses           |Templates                      |
+Bonuses           |Terms and Conditions Acceptance|
+Bonuses           |Time Frames Limit              |
+Bonuses           |Translations                   |
+Bonuses           |Update Password                |
+Bonuses           |User Link                      |
+Documents         |Access                         |
+Documents         |Access rule                    |
+Documents         |Account                        |
+Documents         |Account Creation               |
+Documents         |Affiliate                      |
+Documents         |Auto Withdraw                  |
+Documents         |Balance Limit                  |
+Documents         |Bonus Create                   |
+Documents         |Bonus Deleted                  |
+Documents         |Bonus Grant                    |
+Documents         |Bonus Revision                 |
+Documents         |Bonuses                        |
+Documents         |Cancelled Bonuses              |
+Documents         |Closure                        |
+Documents         |Communications                 |
+Documents         |Create Domain                  |
+Documents         |Create Promotion               |
+Documents         |CRUKS                          |
+Documents         |CRUKS Self-Exclusion           |
+Documents         |Customer Funds                 |
+Documents         |Date Of Birth Change           |
+Documents         |Deposit Limits                 |
+Documents         |Document Type                  |
+Documents         |Document Upload                |
+Documents         |Ecosystem                      |
+Documents         |Ecosystem Synchronization      |
+Documents         |Edit Details                   |
+Documents         |Edit Domain                    |
+Documents         |Edit Promotion                 |
+Documents         |Entity                         |
+Documents         |Excessive Failed Logins        |
+Documents         |Finance                        |
+Documents         |Gamstop                        |
+Documents         |Gamstop Self-Exclusion         |
+Documents         |IBAN Change                    |
+Documents         |IBAN mismatch                  |
+Documents         |iDin Verification              |
+Documents         |KYC                            |
+Documents         |Loss Limits                    |
+Documents         |Password Reset                 |
+Documents         |Place Of Birth Change          |
+Documents         |Play Time Limit                |
+Documents         |Promotion Participation        |
+Documents         |Provider                       |
+Documents         |Reality Check                  |
+Documents         |Register Bonus                 |
+Documents         |Responsible Gaming             |
+Documents         |Restriction                    |
+Documents         |Retention                      |
+Documents         |Reward Cancelled               |
+Documents         |Reward Created                 |
+Documents         |Reward Declined                |
+Documents         |Reward Deleted                 |
+Documents         |Reward Grant                   |
+Documents         |Rule set                       |
+Documents         |Sales                          |
+Documents         |Self-Exclusion                 |
+Documents         |Status Change                  |
+Documents         |Support                        |
+Documents         |Templates                      |
+Documents         |Terms and Conditions Acceptance|
+Documents         |Time Frames Limit              |
+Documents         |Translations                   |
+Documents         |Update Password                |
+Documents         |User Link                      |
+Finance           |Access                         |
+Finance           |Access rule                    |
+Finance           |Account                        |
+Finance           |Account Creation               |
+Finance           |Affiliate                      |
+Finance           |Auto Withdraw                  |
+Finance           |Balance Limit                  |
+Finance           |Bonus Create                   |
+Finance           |Bonus Deleted                  |
+Finance           |Bonus Grant                    |
+Finance           |Bonus Revision                 |
+Finance           |Bonuses                        |
+Finance           |Cancelled Bonuses              |
+Finance           |Closure                        |
+Finance           |Communications                 |
+Finance           |Create Domain                  |
+Finance           |Create Promotion               |
+Finance           |CRUKS                          |
+Finance           |CRUKS Self-Exclusion           |
+Finance           |Customer Funds                 |
+Finance           |Date Of Birth Change           |
+Finance           |Deposit Limits                 |
+Finance           |Document Type                  |
+Finance           |Document Upload                |
+Finance           |Ecosystem                      |
+Finance           |Ecosystem Synchronization      |
+Finance           |Edit Details                   |
+Finance           |Edit Domain                    |
+Finance           |Edit Promotion                 |
+Finance           |Entity                         |
+Finance           |Excessive Failed Logins        |
+Finance           |Finance                        |
+Finance           |Gamstop                        |
+Finance           |Gamstop Self-Exclusion         |
+Finance           |IBAN Change                    |
+Finance           |IBAN mismatch                  |
+Finance           |iDin Verification              |
+Finance           |KYC                            |
+Finance           |Loss Limits                    |
+Finance           |Password Reset                 |
+Finance           |Place Of Birth Change          |
+Finance           |Play Time Limit                |
+Finance           |Promotion Participation        |
+Finance           |Provider                       |
+Finance           |Reality Check                  |
+Finance           |Register Bonus                 |
+Finance           |Responsible Gaming             |
+Finance           |Restriction                    |
+Finance           |Retention                      |
+Finance           |Reward Cancelled               |
+Finance           |Reward Created                 |
+Finance           |Reward Declined                |
+Finance           |Reward Deleted                 |
+Finance           |Reward Grant                   |
+Finance           |Rule set                       |
+Finance           |Sales                          |
+Finance           |Self-Exclusion                 |
+Finance           |Status Change                  |
+Finance           |Support                        |
+Finance           |Templates                      |
+Finance           |Terms and Conditions Acceptance|
+Finance           |Time Frames Limit              |
+Finance           |Translations                   |
+Finance           |Update Password                |
+Finance           |User Link                      |
+Promotions        |Access                         |
+Promotions        |Access rule                    |
+Promotions        |Account                        |
+Promotions        |Account Creation               |
+Promotions        |Affiliate                      |
+Promotions        |Auto Withdraw                  |
+Promotions        |Balance Limit                  |
+Promotions        |Bonus Create                   |
+Promotions        |Bonus Deleted                  |
+Promotions        |Bonus Grant                    |
+Promotions        |Bonus Revision                 |
+Promotions        |Bonuses                        |
+Promotions        |Cancelled Bonuses              |
+Promotions        |Closure                        |
+Promotions        |Communications                 |
+Promotions        |Create Domain                  |
+Promotions        |Create Promotion               |
+Promotions        |CRUKS                          |
+Promotions        |CRUKS Self-Exclusion           |
+Promotions        |Customer Funds                 |
+Promotions        |Date Of Birth Change           |
+Promotions        |Deposit Limits                 |
+Promotions        |Document Type                  |
+Promotions        |Document Upload                |
+Promotions        |Ecosystem                      |
+Promotions        |Ecosystem Synchronization      |
+Promotions        |Edit Details                   |
+Promotions        |Edit Domain                    |
+Promotions        |Edit Promotion                 |
+Promotions        |Entity                         |
+Promotions        |Excessive Failed Logins        |
+Promotions        |Finance                        |
+Promotions        |Gamstop                        |
+Promotions        |Gamstop Self-Exclusion         |
+Promotions        |IBAN Change                    |
+Promotions        |IBAN mismatch                  |
+Promotions        |iDin Verification              |
+Promotions        |KYC                            |
+Promotions        |Loss Limits                    |
+Promotions        |Password Reset                 |
+Promotions        |Place Of Birth Change          |
+Promotions        |Play Time Limit                |
+Promotions        |Promotion Participation        |
+Promotions        |Provider                       |
+Promotions        |Reality Check                  |
+Promotions        |Register Bonus                 |
+Promotions        |Responsible Gaming             |
+Promotions        |Restriction                    |
+Promotions        |Retention                      |
+Promotions        |Reward Cancelled               |
+Promotions        |Reward Created                 |
+Promotions        |Reward Declined                |
+Promotions        |Reward Deleted                 |
+Promotions        |Reward Grant                   |
+Promotions        |Rule set                       |
+Promotions        |Sales                          |
+Promotions        |Self-Exclusion                 |
+Promotions        |Status Change                  |
+Promotions        |Support                        |
+Promotions        |Templates                      |
+Promotions        |Terms and Conditions Acceptance|
+Promotions        |Time Frames Limit              |
+Promotions        |Translations                   |
+Promotions        |Update Password                |
+Promotions        |User Link                      |
+Responsible Gaming|Access                         |
+Responsible Gaming|Access rule                    |
+Responsible Gaming|Account                        |
+Responsible Gaming|Account Creation               |
+Responsible Gaming|Affiliate                      |
+Responsible Gaming|Auto Withdraw                  |
+Responsible Gaming|Balance Limit                  |
+Responsible Gaming|Bonus Create                   |
+Responsible Gaming|Bonus Deleted                  |
+Responsible Gaming|Bonus Grant                    |
+Responsible Gaming|Bonus Revision                 |
+Responsible Gaming|Bonuses                        |
+Responsible Gaming|Cancelled Bonuses              |
+Responsible Gaming|Closure                        |
+Responsible Gaming|Communications                 |
+Responsible Gaming|Create Domain                  |
+Responsible Gaming|Create Promotion               |
+Responsible Gaming|CRUKS                          |
+Responsible Gaming|CRUKS Self-Exclusion           |
+Responsible Gaming|Customer Funds                 |
+Responsible Gaming|Date Of Birth Change           |
+Responsible Gaming|Deposit Limits                 |
+Responsible Gaming|Document Type                  |
+Responsible Gaming|Document Upload                |
+Responsible Gaming|Ecosystem                      |
+Responsible Gaming|Ecosystem Synchronization      |
+Responsible Gaming|Edit Details                   |
+Responsible Gaming|Edit Domain                    |
+Responsible Gaming|Edit Promotion                 |
+Responsible Gaming|Entity                         |
+Responsible Gaming|Excessive Failed Logins        |
+Responsible Gaming|Finance                        |
+Responsible Gaming|Gamstop                        |
+Responsible Gaming|Gamstop Self-Exclusion         |
+Responsible Gaming|IBAN Change                    |
+Responsible Gaming|IBAN mismatch                  |
+Responsible Gaming|iDin Verification              |
+Responsible Gaming|KYC                            |
+Responsible Gaming|Loss Limits                    |
+Responsible Gaming|Password Reset                 |
+Responsible Gaming|Place Of Birth Change          |
+Responsible Gaming|Play Time Limit                |
+Responsible Gaming|Promotion Participation        |
+Responsible Gaming|Provider                       |
+Responsible Gaming|Reality Check                  |
+Responsible Gaming|Register Bonus                 |
+Responsible Gaming|Responsible Gaming             |
+Responsible Gaming|Restriction                    |
+Responsible Gaming|Retention                      |
+Responsible Gaming|Reward Cancelled               |
+Responsible Gaming|Reward Created                 |
+Responsible Gaming|Reward Declined                |
+Responsible Gaming|Reward Deleted                 |
+Responsible Gaming|Reward Grant                   |
+Responsible Gaming|Rule set                       |
+Responsible Gaming|Sales                          |
+Responsible Gaming|Self-Exclusion                 |
+Responsible Gaming|Status Change                  |
+Responsible Gaming|Support                        |
+Responsible Gaming|Templates                      |
+Responsible Gaming|Terms and Conditions Acceptance|
+Responsible Gaming|Time Frames Limit              |
+Responsible Gaming|Translations                   |
+Responsible Gaming|Update Password                |
+Responsible Gaming|User Link                      |
+Retention         |Access                         |
+Retention         |Access rule                    |
+Retention         |Account                        |
+Retention         |Account Creation               |
+Retention         |Affiliate                      |
+Retention         |Auto Withdraw                  |
+Retention         |Balance Limit                  |
+Retention         |Bonus Create                   |
+Retention         |Bonus Deleted                  |
+Retention         |Bonus Grant                    |
+Retention         |Bonus Revision                 |
+Retention         |Bonuses                        |
+Retention         |Cancelled Bonuses              |
+Retention         |Closure                        |
+Retention         |Communications                 |
+Retention         |Create Domain                  |
+Retention         |Create Promotion               |
+Retention         |CRUKS                          |
+Retention         |CRUKS Self-Exclusion           |
+Retention         |Customer Funds                 |
+Retention         |Date Of Birth Change           |
+Retention         |Deposit Limits                 |
+Retention         |Document Type                  |
+Retention         |Document Upload                |
+Retention         |Ecosystem                      |
+Retention         |Ecosystem Synchronization      |
+Retention         |Edit Details                   |
+Retention         |Edit Domain                    |
+Retention         |Edit Promotion                 |
+Retention         |Entity                         |
+Retention         |Excessive Failed Logins        |
+Retention         |Finance                        |
+Retention         |Gamstop                        |
+Retention         |Gamstop Self-Exclusion         |
+Retention         |IBAN Change                    |
+Retention         |IBAN mismatch                  |
+Retention         |iDin Verification              |
+Retention         |KYC                            |
+Retention         |Loss Limits                    |
+Retention         |Password Reset                 |
+Retention         |Place Of Birth Change          |
+Retention         |Play Time Limit                |
+Retention         |Promotion Participation        |
+Retention         |Provider                       |
+Retention         |Reality Check                  |
+Retention         |Register Bonus                 |
+Retention         |Responsible Gaming             |
+Retention         |Restriction                    |
+Retention         |Retention                      |
+Retention         |Reward Cancelled               |
+Retention         |Reward Created                 |
+Retention         |Reward Declined                |
+Retention         |Reward Deleted                 |
+Retention         |Reward Grant                   |
+Retention         |Rule set                       |
+Retention         |Sales                          |
+Retention         |Self-Exclusion                 |
+Retention         |Status Change                  |
+Retention         |Support                        |
+Retention         |Templates                      |
+Retention         |Terms and Conditions Acceptance|
+Retention         |Time Frames Limit              |
+Retention         |Translations                   |
+Retention         |Update Password                |
+Retention         |User Link                      |
+Rewards           |Access                         |
+Rewards           |Access rule                    |
+Rewards           |Account                        |
+Rewards           |Account Creation               |
+Rewards           |Affiliate                      |
+Rewards           |Auto Withdraw                  |
+Rewards           |Balance Limit                  |
+Rewards           |Bonus Create                   |
+Rewards           |Bonus Deleted                  |
+Rewards           |Bonus Grant                    |
+Rewards           |Bonus Revision                 |
+Rewards           |Bonuses                        |
+Rewards           |Cancelled Bonuses              |
+Rewards           |Closure                        |
+Rewards           |Communications                 |
+Rewards           |Create Domain                  |
+Rewards           |Create Promotion               |
+Rewards           |CRUKS                          |
+Rewards           |CRUKS Self-Exclusion           |
+Rewards           |Customer Funds                 |
+Rewards           |Date Of Birth Change           |
+Rewards           |Deposit Limits                 |
+Rewards           |Document Type                  |
+Rewards           |Document Upload                |
+Rewards           |Ecosystem                      |
+Rewards           |Ecosystem Synchronization      |
+Rewards           |Edit Details                   |
+Rewards           |Edit Domain                    |
+Rewards           |Edit Promotion                 |
+Rewards           |Entity                         |
+Rewards           |Excessive Failed Logins        |
+Rewards           |Finance                        |
+Rewards           |Gamstop                        |
+Rewards           |Gamstop Self-Exclusion         |
+Rewards           |IBAN Change                    |
+Rewards           |IBAN mismatch                  |
+Rewards           |iDin Verification              |
+Rewards           |KYC                            |
+Rewards           |Loss Limits                    |
+Rewards           |Password Reset                 |
+Rewards           |Place Of Birth Change          |
+Rewards           |Play Time Limit                |
+Rewards           |Promotion Participation        |
+Rewards           |Provider                       |
+Rewards           |Reality Check                  |
+Rewards           |Register Bonus                 |
+Rewards           |Responsible Gaming             |
+Rewards           |Restriction                    |
+Rewards           |Retention                      |
+Rewards           |Reward Cancelled               |
+Rewards           |Reward Created                 |
+Rewards           |Reward Declined                |
+Rewards           |Reward Deleted                 |
+Rewards           |Reward Grant                   |
+Rewards           |Rule set                       |
+Rewards           |Sales                          |
+Rewards           |Self-Exclusion                 |
+Rewards           |Status Change                  |
+Rewards           |Support                        |
+Rewards           |Templates                      |
+Rewards           |Terms and Conditions Acceptance|
+Rewards           |Time Frames Limit              |
+Rewards           |Translations                   |
+Rewards           |Update Password                |
+Rewards           |User Link                      |
+Sales             |Access                         |
+Sales             |Access rule                    |
+Sales             |Account                        |
+Sales             |Account Creation               |
+Sales             |Affiliate                      |
+Sales             |Auto Withdraw                  |
+Sales             |Balance Limit                  |
+Sales             |Bonus Create                   |
+Sales             |Bonus Deleted                  |
+Sales             |Bonus Grant                    |
+Sales             |Bonus Revision                 |
+Sales             |Bonuses                        |
+Sales             |Cancelled Bonuses              |
+Sales             |Closure                        |
+Sales             |Communications                 |
+Sales             |Create Domain                  |
+Sales             |Create Promotion               |
+Sales             |CRUKS                          |
+Sales             |CRUKS Self-Exclusion           |
+Sales             |Customer Funds                 |
+Sales             |Date Of Birth Change           |
+Sales             |Deposit Limits                 |
+Sales             |Document Type                  |
+Sales             |Document Upload                |
+Sales             |Ecosystem                      |
+Sales             |Ecosystem Synchronization      |
+Sales             |Edit Details                   |
+Sales             |Edit Domain                    |
+Sales             |Edit Promotion                 |
+Sales             |Entity                         |
+Sales             |Excessive Failed Logins        |
+Sales             |Finance                        |
+Sales             |Gamstop                        |
+Sales             |Gamstop Self-Exclusion         |
+Sales             |IBAN Change                    |
+Sales             |IBAN mismatch                  |
+Sales             |iDin Verification              |
+Sales             |KYC                            |
+Sales             |Loss Limits                    |
+Sales             |Password Reset                 |
+Sales             |Place Of Birth Change          |
+Sales             |Play Time Limit                |
+Sales             |Promotion Participation        |
+Sales             |Provider                       |
+Sales             |Reality Check                  |
+Sales             |Register Bonus                 |
+Sales             |Responsible Gaming             |
+Sales             |Restriction                    |
+Sales             |Retention                      |
+Sales             |Reward Cancelled               |
+Sales             |Reward Created                 |
+Sales             |Reward Declined                |
+Sales             |Reward Deleted                 |
+Sales             |Reward Grant                   |
+Sales             |Rule set                       |
+Sales             |Sales                          |
+Sales             |Self-Exclusion                 |
+Sales             |Status Change                  |
+Sales             |Support                        |
+Sales             |Templates                      |
+Sales             |Terms and Conditions Acceptance|
+Sales             |Time Frames Limit              |
+Sales             |Translations                   |
+Sales             |Update Password                |
+Sales             |User Link                      |
+Support           |Access                         |
+Support           |Access rule                    |
+Support           |Account                        |
+Support           |Account Creation               |
+Support           |Affiliate                      |
+Support           |Auto Withdraw                  |
+Support           |Balance Limit                  |
+Support           |Bonus Create                   |
+Support           |Bonus Deleted                  |
+Support           |Bonus Grant                    |
+Support           |Bonus Revision                 |
+Support           |Bonuses                        |
+Support           |Cancelled Bonuses              |
+Support           |Closure                        |
+Support           |Communications                 |
+Support           |Create Domain                  |
+Support           |Create Promotion               |
+Support           |CRUKS                          |
+Support           |CRUKS Self-Exclusion           |
+Support           |Customer Funds                 |
+Support           |Date Of Birth Change           |
+Support           |Deposit Limits                 |
+Support           |Document Type                  |
+Support           |Document Upload                |
+Support           |Ecosystem                      |
+Support           |Ecosystem Synchronization      |
+Support           |Edit Details                   |
+Support           |Edit Domain                    |
+Support           |Edit Promotion                 |
+Support           |Entity                         |
+Support           |Excessive Failed Logins        |
+Support           |Finance                        |
+Support           |Gamstop                        |
+Support           |Gamstop Self-Exclusion         |
+Support           |IBAN Change                    |
+Support           |IBAN mismatch                  |
+Support           |iDin Verification              |
+Support           |KYC                            |
+Support           |Loss Limits                    |
+Support           |Password Reset                 |
+Support           |Place Of Birth Change          |
+Support           |Play Time Limit                |
+Support           |Promotion Participation        |
+Support           |Provider                       |
+Support           |Reality Check                  |
+Support           |Register Bonus                 |
+Support           |Responsible Gaming             |
+Support           |Restriction                    |
+Support           |Retention                      |
+Support           |Reward Cancelled               |
+Support           |Reward Created                 |
+Support           |Reward Declined                |
+Support           |Reward Deleted                 |
+Support           |Reward Grant                   |
+Support           |Rule set                       |
+Support           |Sales                          |
+Support           |Self-Exclusion                 |
+Support           |Status Change                  |
+Support           |Support                        |
+Support           |Templates                      |
+Support           |Terms and Conditions Acceptance|
+Support           |Time Frames Limit              |
+Support           |Translations                   |
+Support           |Update Password                |
+Support           |User Link                      |
+----

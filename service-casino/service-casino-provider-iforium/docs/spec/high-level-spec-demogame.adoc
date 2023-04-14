@@ -1,0 +1,5 @@
+.Demo Game
+[source,gherkin]
+----
+include::../../src/docs/gherkin/high-level-spec/demoGame.feature[]
+----

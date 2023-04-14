@@ -1,0 +1,502 @@
+= LSPLAT-6361 PLAT-7130 ⁃ Store full iDIN response in DB
+Irwin Herridge <irwin.herridge@wonderlabz.com>
+1.0, August 15, 2022: Store full iDIN response in DB
+:sectnums:
+:toc: left
+:toclevels: 4
+:toc-title: Table of Contents
+:icons: font
+:url-quickref: https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/
+:table-caption!:
+
+:svc-user-sourcedir: ../../../service-user/service-user/src/main/java
+
+//This is done to keep formatting aligned with gitlab
+****
+[verse,,]
+____
+link:../../readme.adoc[Home]
+____
+****
+
+== Description
+=== Jira
+* link:https://playsafe.atlassian.net/browse/LSPLAT-6361[LSPLAT-6361]
+* link:https://jira.livescore.com/browse/PLAT-7130[PLAT-7130]
+
+=== Gitlab
+* Branch: origin/feature/LSPLAT-6361_PLAT-7130_Store_full_iDIN_response_in_DB
+* MR: link:https://gitlab.com/playsafe/lithium/app-lithium-full/-/merge_requests/0000[]
+
+=== Business
+
+We want to store the full responses we get from iDIN, so we can improve our KYC/AML checks.
+
+We receive the initials from iDIN, but we cannot confidently use this in automatic processes. We want to manually check the first initial in the initials sent from iDIN to any documentation the user sends in to us as this initial should be close to 100% accurate against their legal name.
+
+On account creation, we want to store the full response as a changelog against the user.
+
+We want to also store any iDIN logs created on registration which do not go through registration to check if they try and register at a later date, verify if similar details are used to create an account etc.
+
+Technical
+
+Example response with some details redacted
+
+[source,json]
+----
+{
+    "SphonicResponse": {
+        "data": {
+            "traceData": {
+                "responseDateTime": "2022-06-23T12:07:42.614Z",
+                "livescoreRequestId": "None",
+                "livescoreApplicantId": "51",
+                "sphonicTransactionId": "cf7ee9fc-f6d6-4b0b-9735-c3afe21fff72",
+                "bluemTransactionId": "536fc3f2fc080664"
+            },
+            "outcome": {
+                "transactionResult": "None",
+                "reason": "Success",
+                "authenticationAuthorityId": "RABONL2U",
+                "authenticationAuthorityName": "Rabobank",
+                "idResponse": {
+                    "type": "BIN",
+                    "identifier": "NLRABOXXX"
+                }
+            },
+            "nameData": {
+                "initials": "LJM",
+                "legalLastName": "Roijakkers",
+                "preferredLastName": "Roijakkers"
+            },
+            "addressData": {
+                "houseNumber": "X1",
+                "street": "Street name",
+                "city": "EINDHOVEN",
+                "postalCode": "5642XX",
+                "countryCode": "NL"
+            },
+            "ageData": {
+                "dateOfBirth": "1990-07-12"
+            },
+            "genderData": {
+                "gender": "MALE"
+            },
+            "contactData": {
+                "phoneNumber": "+316xxx13xxx",
+                "email": "leonXX@hotmail.com"
+            }
+        }
+    }
+}
+----
+
+== Architecture
+
+=== iDin Account origination flow (Overview)
+
+.iDin Integration via Sphonic Overview
+[plantuml]
+----
+@startuml
+'https://plantuml.com/sequence-diagram
+
+actor player
+boundary "Livescore App / GW" as lsa
+participant "svc-user" as su
+participant "svc-user-pr-sphonic-idin" as supsi
+participant "svc-access" as sa
+participant "svc-domain" as svcdomain
+participant "svc-changelog" as svcchangelog
+boundary "iDin Screens" as idin
+participant Sphonic as sphonic
+
+autonumber
+
+== STEP#1: iDin START ==
+
+player-->lsa: Register using iDin
+activate lsa
+    alt Resume session
+        note right of lsa
+            * On LivescoreApp the applicantHash may be stored in session which may then be used to re-join at STEP#3 by using the returnUrl and applicantHash that was
+              generated on Lithium as part of the iDINStart Workflow
+        end note
+        lsa->lsa: retrieve applicantHash from session
+        alt applicantHash found in session
+            lsa->lsa: resume STEP#3
+        end
+    end
+    lsa->su: {{gateway}}/service-user/players/{domainName}/register/incomplete/v1?method=idin
+    note left of su
+        PlayerBasic request body {
+            "stage": "1",
+            "additionalData": {
+                "iDinReturnUrl": "http://returnURL"
+            }
+        }
+    end note
+    alt method=idin, stage=1
+        activate su
+            su->su: resolve idin registration provider (service-user-provider-sphonic-idin)
+            su->su: buildUserDetailsRequest
+            su->supsi: {{gateway}}/service-user-provider-sphonic-idin/system/external-register
+            note left of supsi
+                ExternalUserDetailsRequest {
+                    "stage": 1,
+                    "domainName": "livescore_nl",
+                    "playerBasic": {
+                        "additionalData": {
+                            "iDinReturnUrl": "http://returnURL",
+                            "playerIpAddress": "5.250.191.25"
+                        }
+                    }
+                }
+            end note
+            activate supsi
+                supsi->supsi: Generates unique applicantHash
+                supsi->supsi: Creates a new idin_request
+                note right of supsi
+                    * ** requestId **: to be generated by Lithium
+                        * requestId is used by Sphonic as a correlation id between multiple requests
+
+                    * ** applicantHash **: will be generated by the Lithium and needs to be unique
+                        * Each hash will be linked to an applicantId where the applicantId would simply be the id on idin_request table
+                        * The hash should be generated using the playerIpAddress and timestamp
+
+                    * ** returnUrl **:
+                        * Later in the flow as part of the iDin redirect back to returnUrl -> Livescore App would make use of the applicantHash
+                           to retrieve the applicant data and would populate the registration screens with the applicant data as needed.
+
+                    ** An incomplete user will be created and associated to the applicantHash and will also store the stage, createdDate and lastModifiedDate which may be used to see where players drops off in the process. **
+                end note
+                supsi -> sphonic: get access token
+                activate sphonic
+                    sphonic -->> supsi: accessToken
+                deactivate sphonic
+                supsi->sphonic: iDinStart Worflow request(requestId, applicationId, returnUrl)
+                note left of sphonic
+                    IDINStart Request: {
+                      "requestDetails": {
+                        "requestId": "{{lithiumRequestId}}",
+                        "requestDateTime": "2022-03-16T13:03:43"
+                      },
+                      "requestData": {
+                        "Applicant_Reference": "{{idinRequest.id}}",
+                        "Return_URL": "https://applicaton.livescore.net/holdingpage"
+                      }
+                    }
+                end note
+                activate sphonic
+                    note left of sphonic
+                        IDINStart Response: {
+                           "sphonicResponse": {
+                               "data": {
+                                   "responseDateTime": "2021-11-09T17:32:28Z",
+                                   "livescoreRequestId": "{{lithiumRequestId}}",
+                                   "livescoreAppliantId": "{{idinRequest.id}}",
+                                   "sphonicTransactionId": "56c14f84-bf73-4355-88ab-9d6985ebbd22",
+                                   "bluemTransactionId": "a117638133e7277",
+                                   "identURL": "https://test.vmb.fyi/s/BZYGCA"
+                               }
+                           }
+                       }
+                    end note
+                    sphonic-->supsi: iDinStart Worflow response(bluemTransactionId, verificationUrl=identURL)
+                deactivate sphonic
+                supsi->supsi: updates idin_request table with iDinStart response fields
+                supsi->supsi: store iDinStart Worflow response as json string on new table on idin_response
+                note right of supsi
+                    * Adds bluemTransactionId and verificationUrl to idin_request table for later retrieval via the applicantHash that was used to create the idin_request record
+                end note
+                supsi->supsi: buildExternalUserDetailsResponse
+                note left of supsi
+                    ExternalUserDetailsResponse {
+                        "stage": 1,
+                        "domainName": "livescore_nl",
+                        "outcome": "Success"
+                        "playerBasic": {
+                            "additionalData"": {
+                                "iDinApplicantHash": "averyuniquehash",
+                                "iDinVerificationUrl": "https://test.vmb.fyi/s/BZYGCA"
+                            }
+                        }
+                    }
+                end note
+                supsi-->su: Response ExternalUserDetailsResponse
+            deactivate supsi
+            su->su: map userDetailsResponse.playerBasic to Incomplete register playerBasic request body
+            su->su: creates new incomplete_user with iDinVerificationUrl and iDinApplicantHash stored as incomplete_user_label_value's
+        end
+        note left of su
+            * For method=idin, we will be removing the incomplete_user.id from the Incomplete User response since the applicantHash would need
+              to be used as a secure identifier when returning on stage 2 when continuing the iDin registration journey
+        end note
+        su-->lsa: Response Incomplete User
+    deactivate su
+    lsa->lsa: Adds applicantHash to session
+    note right of lsa
+        * iDin will be keeping state for up to 90 days after consent has been provided and therefore should the user have
+          completed the iDin external screen flows (STEP#2) but have not completed the registration flow (STEP#3), then the LivescoreApp may resume
+          at STEP#3 using the returnURL and applicantHash.
+        * Should the iDin outcome be Expired or Cancelled, then the applicantHash needs to be removed from the LivescoreApp session and have the process re-started from STEP#1
+
+        Outcomes from iDin:
+        * Expired
+          * Remove applicantHash from session on LivescoreApp and restart at STEP#1
+        * Cancelled
+          * Remove applicantHash from session on LivescoreApp and restart at STEP#1
+        * Success
+          * Need to re-join at STEP#3 by redirecting to returnURL using applicantHash that was stored in session
+        * Failure
+          * Remove applicantHash from session on LivescoreApp and restart at STEP#1
+    end note
+
+== STEP#2: Interacts with iDin / bank screens ==
+
+lsa->>idin: Sends player to verificationUrl
+activate idin
+    note right of idin
+        * Verification URL loads the iDin Screens for the user to interact with: the implementation of these screens are out of bounds to Lithium
+            * On completion of the iDin screens, Livescore App would redirect to the returnUrl which is based on the redirect URL on STEP#3 which includes a
+              uniquely identifier applicantHash to pull the players personal details into the registration screens
+    end note
+player-->idin: Interacts with iDin / bank screens
+idin->>lsa: on iDin screen flow end, redirects to returnUrl
+deactivate idin
+
+==STEP#3: Redirects back to returnURL ==
+lsa->lsa: Loads the returnURL
+note right of lsa
+    * The returnURL is essentially a magic link, since it may be used by the LivescoreApp to load the registration screen with some of the players personal details prefilled
+
+    Due to the nature of this API being open to the world and would essentially allow a hacker to resume with the players personal details prefilled, an SHA key needs to be calculated by the LivescoreApp
+    to secure the call to Lithium when retrieving sensitive information.
+    * To calculate the SHA, we will be using payload = apiAuthorizationId + "|" + iDinApplicantHash + "|" + sharedSecret, then MDA5'ed with a payload
+end note
+    lsa->su: {{gateway}}/service-user/players/livescore_uk/register/incomplete/v1?method=idin&sha=calculatedusingpayloadandsharedsecret&apiAuthorizationId=ls-gw
+    activate su
+        note left of su
+            Request body {
+                 "stage": "2",
+                 "additionalData": {
+                     "iDinApplicantHash": "averyuniquehash"
+                 }
+             }
+        end note
+        alt method=idin, stage=2
+            su->su: validate SHA calculated payload apiAuthorizationId|iDinApplicantHash|sharedSecret
+            su->su: find incomplete_user by iDinApplicantHash
+            su->supsi: {{gateway}}/service-user-provider-sphonic-idin/system/external-register
+            note left of supsi
+                ExternalUserDetailsRequest {
+                    "stage": 2,
+                    "domainName": "livescore_nl",
+                    "playerBasic": {
+                        "additionalData": {
+                            "iDinApplicantHash": "averyuniquehash"
+                        }
+                    }
+                }
+            end note
+            activate supsi
+                supsi->supsi: find idin_request for unique applicantHash
+                supsi -> sphonic: get access token
+                activate sphonic
+                    sphonic -->> supsi: accessToken
+                deactivate sphonic
+                supsi->sphonic: iDinRetrieve Worflow request(requestId, bluemTransactionId)
+                activate sphonic
+                    note left of sphonic
+                        IDINRetrieve Request: {
+                            "requestDetails": {
+                              "requestId": "{{idinRequest.lithiumRequestId}}",
+                              "requestDateTime": "2021-11-09T17:32:28Z"
+                            },
+                            "requestData": {
+                              "bluemTransactionId": "{{idinRequest.bluemTransactionId}}"
+
+                            }
+                        }
+                    end note
+                    note right of sphonic
+                        * If the check is successful the response will show that the outcome is “success” and will return the applicants name, address, dob, gender
+                          and contact details.
+                        * If the check is not successful it will return in the response an outcome "Failure"
+                    end note
+                    note left of sphonic
+                        IDINRetrieve Response: {
+                           "SphonicResponse": {
+                               "data": {
+                                   "traceData": {
+                                       "responseDateTime": "2021-11-10T14:09:27.882Z",
+                                       "livescoreRequestId": "{{idinRequest.lithiumRequestId}}",
+                                       "livescoreApplicantId": "{{idinRequest.id}}",
+                                       "sphonicTransactionId": "fce35022-3ce1-4208-a449-02b0e63f4593",
+                                       "bluemTransactionId": "f7e57b272bf3cebb"
+                                   },
+                                   "outcome": {
+                                       "transactionResult": "Success",
+                                       "reason": "Bank data received",
+                                       "authenticationAuthorityId": "RABONL2U",
+                                       "authenticationAuthorityName": "Rabobank iDIN issuer simulatie",
+                                       "idResponse": {
+                                           "type": "BIN",
+                                           "identifier": "FANTASYBANK1234567890"
+                                       }
+                                   },
+                                   "nameData": {
+                                       "initials": "VJ",
+                                       "legalLastName": "Vries",
+                                       "legalLastNamePrefix": "de",
+                                       "preferredLastName": "Vries-Jansen",
+                                       "legalFirstName": "",
+                                       "preferredFirstName": ""
+                                   },
+                                   "addressData": {
+                                       "houseNumber": "19",
+                                       "houseNumberSuffix": "",
+                                       "street": "Pascalstreet",
+                                       "addressExtra": "",
+                                       "city": "Aachen",
+                                       "postalCode": "0000AA",
+                                       "countryCode": "DE",
+                                       "internationalAddressLine1": "",
+                                       "internationalAddressLine2": "",
+                                       "internationalAddressLine3": ""
+                                   },
+                                   "ageData": {
+                                       "dateOfBirth": "1975-07-25"
+                                   },
+                                   "genderData": {
+                                       "gender": "MALE"
+                                   },
+                                   "contactData": {
+                                       "phoneNumber": "+31203051900",
+                                       "email": "info@equensworldline.nl"
+                                   }
+                               }
+                           }
+                       }
+                    end note
+                    sphonic-->supsi: iDinRetrieve Worflow response(outcome, personalData)
+                deactivate sphonic
+                supsi->supsi: store iDinRetrieve Worflow response as json string on new table on idin_response
+                note right of supsi
+                  * The following table needs to be updated on every response from iDin
+
+                  TABLE: idin_respone:
+                  - integer: id (pk)
+                  - idin_request_id (fk)
+                  - integer: stage
+                  - string: raw_json_response
+                end note
+                supsi->supsi: buildExternalUserDetailsResponse from iDinRetrieve response(outcome, applicantName, address, dob, gender, contactDetails)
+                note right of supsi
+                    * ExternalUserDetailsResponse.outcome = SphonicResponse.data.outcome.transactionResult
+                    * All personal details needs to be mapped to the PlayerBasic
+                end note
+                note left of supsi
+                    ExternalUserDetailsResponse {
+                        "stage": 2,
+                        "domainName": "livescore_nl",
+                        "outcome": "{{SphonicResponse.data.outcome.transactionResult}}"
+                        "playerBasic": {
+                            ...mapped personal information...
+                            "additionalData"": {
+                                "iDinApplicantHash": "averyuniquehash"
+                            }
+                        }
+                    }
+                end note
+                supsi-->su: Response ExternalUserDetailsResponse
+            deactivate supsi
+            su->su: update incomplete_user with personalData and store outcome as status=success with statusReason= on incomplete_user
+            alt "SphonicResponse" does not contain required "addressData"
+                su->su: update status to "SUCCESS"
+                su->su: no address is created and linked to incomplete_user
+            else
+                su->su: update status to "SUCCESS"
+                su->su: create address and link it to incomplete_user
+            end
+        end
+        note left of su
+            * For method=idin, we will be removing the incomplete_user.id from the Incomplete User response since the applicantHash would need
+              to be used as a secure identifier when finally registering the user on Lithium using the register/v4 endpoint
+        end note
+        su-->lsa: Response Incomplete User
+    deactivate su
+    lsa->lsa: LivescoreApp loads registration screen with players personal Data retrieve
+
+== STEP#4: continues with registration flow on Livescore App ==
+
+player->lsa: continues with registration flow
+
+lsa->sa: /service-access/external/authorization/livescore_nl/cruksAccessRule/check-authorization?locale=nl
+activate sa
+    sa-->lsa: Response ExternalValidationResponse
+deactivate sa
+note right of lsa: Should a valid CRUKS ID be returned on the ExternalValidationResponse, then the user would continue with the registration flow
+lsa->su: /service-user/frontend/livescore_nl/register/v4?locale=nl
+activate su
+    ... pre registration flow...
+    alt is incomplete user (playerBasic.additionalData.iDinApplicationHash)
+        alt incomplete user found
+            su->su: copy incomplete_user data to playerBasic
+            alt incomplete user does not have an address associated
+                su -> su: mark address_verified=false
+            else address associated on incomplete_user
+                su -> su: mark address_verified=true
+            end
+        else incomplete user not found
+            su->lsa: Status463IncompleteUserRegistrationException
+        else incomplete_user.status != "Success"
+            su->lsa: Status463IncompleteUserRegistrationException
+        end
+    end
+    ... post registration flow ...
+    alt registered from an incomplete_user
+        su -> svcdomain: check if register provider was configured for incomplete user flows
+        svcdomain -->> su: provider response
+        alt iDin Incomplete User Flow
+          su -> supsi++: /service-user-provider-sphonic-idin/system/do-post-registration-steps
+            supsi ->> svcchangelog: create new iDIN changelog from stage 2 idin_response.raw_response_data
+          supsi -->> su--: Response
+        end
+        su->su: remove incomplete_user after success user registration (cleanup)
+    end
+    su-->lsa: Response User
+deactivate su
+
+deactivate lsa
+
+@enduml
+----
+
+. As part of this archtitecture, we will need to persist the responses received from Sphonic on stage 1 and stage 2
+* Note that stage 2 is of most importance here, as we will later make use of this response to log it to a changelog note.
+
+include::../../service-user-provider-sphonic-idin/docs/plantuml/sphonic-idin-erd.puml[]
+
+[start=2]
+. Create a new system endpoint that will be called during the new `signupService#postRegistrationIncompleteUser` method inside `signupService#postRegisterPlayer`
+
+[source,java]
+----
+postRegistrationStepsIncompleteUser(pb , user);
+----
+
+* *POST* `/service-user-provider-sphonic-idin/system/do-post-registration-steps`
+
+* RequestBody
+[source,json]
+----
+{
+  "applicantHash": "**iDinApplicantHash**",
+  "userGuid": "domainName/id"
+}
+----
+
+** Find the idin_response.raw_response_data from the applicantHash on stage 2, and create a change note for the player with the json string as player note comment
+
+

@@ -1,0 +1,55 @@
+<div class="form-group" ng-class="{'has-error': showError}">
+	<div>
+		<label for="{{id}}" class="control-label" ng-if="to.label">
+			{{to.label}} {{to.required ? '*' : ''}}
+		</label>
+	</div>
+<!-- 	GLOBAL.GRANULARITY.YEAR -->
+	<div class="btn-group">
+		<label
+			ng-if="(to.include.indexOf(3) !== -1)"
+			class="btn btn-{{(to.btnclass)?to.btnclass:'default'}}"
+			ng-class="(model[options.key] === 3)?'active':''"
+			ng-model="model[options.key]" uib-btn-radio="3">
+			<i
+				ng-if="to.showicons === true"
+				ng-class="(model[options.key] === 3)?'fa fa-check-square-o':'fa fa-square-o'"></i>
+			<span>{{'GLOBAL.GRANULARITY.DAYS' | translate | lowercase }}</span></label>
+		<label
+			ng-if="(to.include.indexOf(4) !== -1)"
+			class="btn btn-{{(to.btnclass)?to.btnclass:'default'}}"
+			ng-class="(model[options.key] === 4)?'active':''"
+			ng-model="model[options.key]" uib-btn-radio="4" >
+			<i
+				ng-if="to.showicons === true"
+				ng-class="(model[options.key] === 4)?'fa fa-check-square-o':'fa fa-square-o'"></i>
+			<span>{{'GLOBAL.GRANULARITY.WEEKS' | translate | lowercase}}</span></label>
+		<label
+			ng-if="(to.include.indexOf(2) !== -1)"
+			class="btn btn-{{(to.btnclass)?to.btnclass:'default'}}"
+			ng-class="(model[options.key] === 2)?'active':''"
+			ng-model="model[options.key]" uib-btn-radio="2">
+			<i
+				ng-if="to.showicons === true"
+				ng-class="(model[options.key] === 2)?'fa fa-check-square-o':'fa fa-square-o'"></i>
+			<span>{{'GLOBAL.GRANULARITY.MONTHS' | translate | lowercase}}</span></label>
+		<label
+			ng-if="(to.include.indexOf(1) !== -1)"
+			class="btn btn-{{(to.btnclass)?to.btnclass:'default'}}"
+			ng-class="(model[options.key] === 1)?'active':''"
+			ng-model="model[options.key]" uib-btn-radio="1">
+			<i
+				ng-if="to.showicons === true"
+				ng-class="(model[options.key] === 1)?'fa fa-check-square-o':'fa fa-square-o'"></i>
+			<span>{{'GLOBAL.GRANULARITY.YEARS' | translate | lowercase}}</span></label>
+		<label
+			ng-if="(to.include.indexOf(5) !== -1)"
+			class="btn btn-{{(to.btnclass)?to.btnclass:'default'}}"
+			ng-class="(model[options.key] === 5)?'active':''"
+			ng-model="model[options.key]" uib-btn-radio="5">
+			<i
+				ng-if="to.showicons === true"
+				ng-class="(model[options.key] === 5)?'fa fa-check-square-o':'fa fa-square-o'"></i>
+			<span>{{'GLOBAL.GRANULARITY.ALL_TIME' | translate | lowercase}}</span></label>
+	</div>
+</div>

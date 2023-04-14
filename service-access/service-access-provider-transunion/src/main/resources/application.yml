@@ -1,0 +1,17 @@
+server:
+  port: 9598
+
+spring:
+ application:
+   name: service-access-provider-transunion
+   
+eureka:
+  instance:
+    appname: service-access-provider-transunion
+lithium:
+  service:
+    access:
+      gbg:
+        jobs:
+          password-update:
+           cron: 0 0 5 * * *

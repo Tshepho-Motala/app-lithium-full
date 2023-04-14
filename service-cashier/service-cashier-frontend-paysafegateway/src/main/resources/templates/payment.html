@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="utf-8"/>
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+        <title>Payment Details</title>
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+              integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+              integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+
+        <style>
+            body { margin-top:20px; }
+            .credit-card-box .panel-title {
+                display: inline;
+                font-weight: bold;
+            }
+            .credit-card-box .form-control.error {
+                border-color: red;
+                outline: 0;
+                box-shadow: inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(255,0,0,0.6);
+            }
+            .credit-card-box label.error {
+                font-weight: bold;
+                color: red;
+                padding: 2px 8px;
+                margin-top: 2px;
+            }
+            .credit-card-box .payment-errors {
+                font-weight: bold;
+                color: red;
+                padding: 2px 8px;
+                margin-top: 12px;
+            }
+            .credit-card-box label {
+                display: block;
+            }
+            .credit-card-box .display-tr {
+                display: table-row;
+            }
+            .credit-card-box .display-td {
+                display: table-cell;
+                vertical-align: middle;
+                width: 100%;
+            }
+            .credit-card-box .panel-heading img {
+                min-width: 180px;
+            }
+        </style>
+
+        <script src="https://hosted.paysafe.com/js/v1/latest/paysafe.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    </head>
+    <body>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-md-12">
+                <div class="panel panel-default credit-card-box">
+                    <div class="panel-heading display-table">
+                        <div class="row display-tr">
+                            <h3 class="panel-title display-td">Payment Details</h3>
+                            <div class="display-td">
+                                <img class="img-responsive pull-right" src="cards.png" th:src="@{cards.png}"></img>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <form role="form" id="payment-form" method="POST" action="payment/paymentpost" th:action="@{payment/paymentpost}" th:object="${payment}">
+                            <input id="tranid" name="tranid" type="hidden" th:value="${payment.transactionId}"/>
+                            <input id="token" name="token" type="hidden"/>
+                            <input id="code" name="code" type="hidden"/>
+                            <input id="correlationId" name="correlationId" type="hidden"/>
+                            <input id="detailedMessage" name="detailedMessage" type="hidden"/>
+                            <input id="displayMessage" name="displayMessage" type="hidden"/>
+                            <input id="message" name="message" type="hidden"/>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="form-group">
+                                        <label for="amount">AMOUNT</label>
+                                        <div class="input-group">
+                                            <input disabled="disabled" class="form-control" id="amount" th:value="${payment.amountFormatted}"> </input>
+                                            <span class="input-group-addon"><i class="fa fa-money"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="form-group">
+                                        <label for="cardholder-name">NAME ON CARD</label>
+                                        <div class="input-group">
+                                            <input class="form-control" id="cardholder-name" placeholder="Name on Card"> </input>
+                                            <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12">
+                                    <div class="form-group">
+                                        <label for="cardNumber">CARD NUMBER</label>
+                                        <div class="input-group">
+                                            <div class="form-control" id="cardNumber"> </div>
+                                            <span class="input-group-addon"><i id="cardNumberIcon" class="fa fa-credit-card"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-7 col-md-7">
+                                    <div class="form-group">
+                                        <label for="cardExpiry"><span class="hidden-xs">EXPIRATION</span><span class="visible-xs-inline">EXP</span> DATE</label>
+                                        <div class="form-control" id="cardExpiry"
+                                        ></div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-5 col-md-5 pull-right">
+                                    <div class="form-group">
+                                        <label for="cardCVC">CVV</label>
+                                        <div class="form-control" id="cardCVC"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <button class="pay btn btn-success btn-lg btn-block" type="button">Pay</button>
+                            </div>
+                        </div>
+                        <div class="row" style="display:none;">
+                            <div class="col-xs-12">
+                                <p id="payment-errors" class="payment-errors"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" th:inline="javascript">
+    /*<![CDATA[*/
+
+    var apiKey = [[${payment.apiKey}]];
+    var environment = [[${payment.environment}]];
+    var accountId = [[${payment.accountId}]];
+    var useThreeDSecure = [[${payment.useThreeDSecure}]];
+    var useThreeDSecureVersion2 = [[${payment.useThreeDSecureVersion2}]];
+    var amountCents = [[${payment.amountCents}]];
+    var currencyCode = [[${payment.currencyCode}]];;
+
+
+    var $form = $('#payment-form');
+    var $cardholderName = $("#cardholder-name");
+    $form.find('.pay').prop('disabled', true);
+
+    var options = {
+        environment: environment,
+        fields: {
+            cardNumber: {
+                selector: "#cardNumber",
+                placeholder: "Card Number"
+            },
+            expiryDate: {
+                selector: "#cardExpiry",
+                placeholder: "MM / YY"
+            },
+            cvv: {
+                selector: "#cardCVC",
+                placeholder: "CVV"
+            }
+        }
+    };
+
+    paysafe.fields.setup(apiKey, options, function(instance, error) {
+        if (error) {
+            console.log(error);
+        } else {
+            var payButton = $('.pay');
+
+            console.log(payButton);
+
+            instance.fields("cvv cardNumber expiryDate").valid(function (eventInstance, event) {
+                $(event.target.containerElement).closest('.form-control').removeClass('error').addClass('success');
+                if (paymentFormReady()) {
+                    $('.pay').prop('disabled', false);
+                }
+            });
+
+            instance.fields("cvv cardNumber expiryDate").invalid(function (eventInstance, event) {
+                $(event.target.containerElement).closest('.form-control').removeClass('success').addClass('error');
+                if (!paymentFormReady()) {
+                    $('.pay').prop('disabled', true);
+                }
+            });
+
+            instance.fields.cardNumber.on("FieldValueChange", function(instance, event) {
+                console.log(instance.fields.cardNumber);
+                if (!instance.fields.cardNumber.isEmpty()) {
+                    var cardBrand = instance.getCardBrand().replace(/\s+/g, '');
+                    if (cardBrand !== undefined && cardBrand !== null) {
+                        console.log(cardBrand);
+                        switch (cardBrand) {
+                            case "MasterCard":
+                                $form.find($("#cardNumberIcon")).removeClass('fa-credit-card').addClass('fa-cc-mastercard');
+                                break;
+                            case "Visa":
+                                $form.find($("#cardNumberIcon")).removeClass('fa-credit-card').addClass('fa-cc-visa');
+                                break;
+                        }
+                    } else {
+                        $form.find($("#cardNumberIcon")).removeClass().addClass('fa fa-credit-card');
+                    }
+                }
+                else {
+                    $form.find($("#cardNumberIcon")).removeClass().addClass('fa fa-credit-card');
+                }
+            });
+
+            payButton.bind("click", function (event) {
+                $('.pay').html('Processing <i class="fa fa-spinner fa-pulse"></i>');
+                $('.pay').prop('disabled', true);
+
+                var tokenizeObj = {};
+                if (useThreeDSecure) {
+                    tokenizeObj.threeDS = {
+                        useThreeDSecureVersion2: useThreeDSecureVersion2,
+                        accountId: accountId,
+                        amount: amountCents,
+                        currency: currencyCode
+                    };
+                    tokenizeObj.vault = {
+                        holderName: $cardholderName.val()
+                    };
+                }
+
+                instance.tokenize(tokenizeObj, function(instance, error, result) {
+                    if (error) {
+                        console.log(error);
+                        // $('.pay').html('Try again').prop('disabled', false);
+                        // $('#payment-errors').text("Something went wrong, please try again.");
+                        $('#payment-errors').closest('.row').show();
+                        $form.find('#code').val(error.code);
+                        $form.find('#correlationId').val(error.correlationId);
+                        $form.find('#detailedMessage').val(error.detailedMessage);
+                        $form.find('#displayMessage').val(error.displayMessage);
+                        $form.find('#message').val(error.message);
+                        $form.submit();
+                    } else {
+                        console.log(result);
+                        $('#payment-errors').closest('.row').hide();
+                        $('#payment-errors').text("");
+                        $form.find('#token').val(result.token);
+                        $form.submit();
+                    }
+                });
+            });
+        }
+    });
+
+    $cardholderName.change(function () {
+        if ($cardholderName.val().length > 0) {
+            $cardholderName.removeClass("error").addClass("success");
+        } else {
+            $cardholderName.removeClass("success").addClass("error");
+        }
+    });
+
+    paymentFormReady = function() {
+        if ($cardholderName.val().length > 0 &&
+            $form.find('#cardNumber').hasClass("success") &&
+            $form.find('#cardExpiry').hasClass("success") &&
+            $form.find('#cardCVC').hasClass("success")) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /*]]>*/
+    </script>
+    </body>
+</html>

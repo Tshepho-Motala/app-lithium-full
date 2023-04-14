@@ -1,0 +1,2 @@
+ALTER TABLE `player_transaction` ADD COLUMN `accounting_client_tran_id` VARCHAR(255) NULL DEFAULT NULL;
+ALTER TABLE `player_transaction` ADD COLUMN `accounting_client_external_id` VARCHAR(255) NULL DEFAULT NULL;

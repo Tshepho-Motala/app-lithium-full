@@ -1,0 +1,99 @@
+<div class="container-fluid">
+	<div class="box box-primary box-widget">
+		<div class="box-body box-profile">
+			<div class="user-block">
+				<h4 style="font-weight: bold;">
+					Engine ({{controller.model.id}})
+				</h4>
+			</div>
+		</div>
+	</div>
+	
+	<buttonbar>
+		<button-back ui-sref="dashboard.gogamegames.engines"></button-back>
+	</buttonbar>
+	
+	<br/><br/>
+	
+	<div class="row v-reset-row ">
+		<div class="col-xs-12">
+			<div class="row v-reset-row ">
+				<div class="col-xs-6">
+					<div class="box box-default">
+						<div class="box-header with-border">
+							<h3 class="box-title">Window</h3>
+						</div>
+						<div class="box-body">
+							<table class="table table-hover table-striped nowrap" cellspacing="0" width="100%">
+								<tr>
+									<th style="width: 30%;">Visible Reels</th>
+									<td>{{controller.model.visibleReels}}</td>
+								</tr><tr>
+									<th>Visible Rows</th>
+									<td>{{controller.model.visibleRows}}</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+					<div class="box box-default">
+						<div class="box-header with-border">
+							<h3 class="box-title">Symbols</h3>
+						</div>
+						<div class="box-body">
+							<table class="table table-hover table-striped nowrap" cellspacing="0" width="100%">
+								<thead>
+									<tr>
+										<th style="width: 30%;">Code</th>
+										<th>Name</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="symbol in controller.symbols">
+										<td>{{symbol.code}}</td>
+										<td>{{symbol.name}}</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div class="col-xs-6">
+					<div class="box box-default" ng-if="controller.model.payoutConfig !== null">
+						<div class="box-header with-border">
+							<h3 class="box-title">Payout Configuration</h3>
+						</div>
+						<div class="box-body">
+							<table class="table table-hover table-striped nowrap" cellspacing="0" width="100%">
+								<tr>
+									<th style="width: 30%;">Left to Right</th>
+									<td>{{controller.model.payoutConfig.leftToRight}}</td>
+								</tr><tr>
+									<th>Right to Left</th>
+									<td>{{controller.model.payoutConfig.rightToLeft}}</td>
+								</tr><tr>
+									<th>Higher Amount Only</th>
+									<td>{{(controller.model.payoutConfig.higherAmountOnly !== undefined && controller.model.payoutConfig.higherAmountOnly !== null)? controller.model.payoutConfig.higherAmountOnly: false}}</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+					<div class="box box-default" ng-if="controller.features.length > 0">
+						<div class="box-header with-border">
+							<h3 class="box-title">Features</h3>
+						</div>
+						<div class="box-body">
+							<table class="table table-hover table-striped nowrap" cellspacing="0" width="100%">
+								<tbody>
+									<tr ng-repeat="feature in controller.features">
+										<td>{{feature.feature.code}}</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<!-- 	<pre>{{controller.features|json}}</pre> -->
+</div>

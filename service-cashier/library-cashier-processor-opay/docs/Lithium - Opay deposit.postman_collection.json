@@ -1,0 +1,340 @@
+{
+	"info": {
+		"_postman_id": "36636204-9233-43e3-b90e-6a149bdc5c9b",
+		"name": "Lithium - Opay deposit",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Opay Deposit validate",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "85c39faf-cd73-4bde-b646-ed50e3876066",
+						"exec": [
+							"function doHttpSig() {",
+							"",
+							"    var navigator = {}; //fake a navigator object for the lib",
+							"    var window = {}; //fake a window object for the lib",
+							"    eval(postman.getGlobalVariable(\"jsrsasign-js\")); //import javascript jsrsasign",
+							"    ",
+							"    const moment = require('moment');",
+							"    var date = moment().format(\"YYYY-MM-DD hh:mm:ss\");",
+							"    var msisdn = \"0674309163\"",
+							"    var data2sign = date + msisdn;",
+							"    ",
+							"    const rsaPrivateKey = KEYUTIL.getKey(\"-----BEGIN PRIVATE KEY-----MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDaqBMGUyyPNwONU7+VAYg3mA5edWdAY2WEQsZkgQ23j7mE0nmq/bePdT049b7Fg3zMshkCXXft2+lUTNlS6smFeB0h8S1uVlOczTgbof/Jax+CkhH93yP9P+9YUIE8z31F9frlLsYcrr3TmiyF3ILREvuqTo8gsI1X61LObSpHKKspk8+5pF5IfvGluzwbnmlMpdbb27yaBP+oLSa9P5NNKVSRigkfUS9KjBdzJQMFVJfaigDylrTWBRoJsuv3AtURAJKMG5o7YDeTEyL9+wTEYs8v7r6piG74TlbKVYHdxliozAHgPHqK/SQKlmX5W016O0eNmaoFBKQiI+p0IsXFAgMBAAECggEAF1kXHvfGrEw9jtvAe1K8juMntaJnshJrBqJyuMynAFDSiIJJB58r+J+WN/zVsBWIP/tMfFoqsjVnRt8l3ZrAhgX7ZmJwbXW+W+H1+c1kmMddh/28+hTXrPUkw5NlGW82ez/22H4UHX/zOSMfWfPf7B9QzDCzS9ROY3L3Vp+Fgi99AF0BEYjHVu3fWKNPFS/bw34EE/AcDTxnhwu4Ti6/S0XmNEaB37BsZ353xxCF55MUCXWKfTcsRU/+ODoiPyAtV+SXVDU0Uf1oWEA2YshxffvQ15td4OToG/rTftpsgczZ9X6RcFLc7fBBv9cxtv2Bv48lNptowAgShHSXpXwpQQKBgQDtYAdEVO8irDeQ0nExaPIpBAMV5cqckPw+2Cbb61fjL5mkDS91jy5bEYjyqdWs0ghPkTdInXnBKI1C8zjN2Q4MbZc+l+8KvNNHA+tBOrFmU8rHbKCS7IGqBAUFxdR9pNQ4k9mHAptaC2dbDbu+pld5zBGEIBpdIwUKLo6+TNWjHQKBgQDr0A90i+3nHfQuUtzkRNHSj9UIcaI1kcK1IGLLhMB9xy80pPV1aZFgQtuD/VF/Ba5WBYQIyPGVpPiy3RqMZuKMfsJAGOH8wd8EZinoPO23FJREzXesbISAS1EqCHUv91dkjOqeBl7eLsTXQEbOUFYb7VgMPBbF18xwmDvV9rpEyQKBgHURE+RmQt2Fs42vy3VDvZHu0Zq+DlNyyYQw09FH2rtHYW1ft1Ux/Pmax0Bt89xcZQ7gnjQovcA+QJSRISWb82q7rYiII7LW9xeh3ib4TD8b+fiqIPL0wunXO6biLu6cGLGicPg9l+Irl5h3SG042hFOTCEuN/JQ8A5acbl2aTIdAoGAPS7ik66qr0iKTmqZfXCNsEA5WdOB7rw+9JfOileLShcgHFyggzI80ekG45waRQbIUPFlbJIWfGktTdsoRD19kk5hQBg0qkvy/UU0olkMpG/meGOHJWmSh2cDTBCdtzBJsIEPbqjgfG1ODTtUI7ucW+qc6a+9iN+Q37Xf8IfvlGECgYB294G7onl/3Z4L97vvn2q6xI2fGfXdJW/wx1zwLllKHDAm9Ef4Lt8epnV+22AuJm81c3YaAcxxzleQ6h5otyhwb6xbtrS1BGYPtEoFBG92KpdanyDtvg+V5sPNijUDK/q9E5YgCMwza2CAMi36jhyhabfkF6pLXDBucHweqGV/DQ==-----END PRIVATE KEY-----\");",
+							"    ",
+							"    var sig = new KJUR.crypto.Signature({\"alg\": \"SHA1withRSA\"});",
+							"    sig.init(rsaPrivateKey);",
+							"    sig.updateString(data2sign);",
+							"    const hash = sig.sign();",
+							"    const binSignature = CryptoJS.enc.Hex.parse(hash);",
+							"    ",
+							"    pm.variables.set(\"signature\", CryptoJS.enc.Base64.stringify(binSignature));",
+							"    pm.variables.set(\"date\", date);",
+							"    pm.variables.set(\"msisdn\", msisdn);",
+							"",
+							"}",
+							"",
+							"",
+							"if (globals['jsrsasign-js'] === undefined ) {",
+							"    console.log(\"jsrasign library not already downloaded. Downloading now. \")",
+							"    ",
+							"    pm.sendRequest({",
+							"        url: \"http://kjur.github.io/jsrsasign/jsrsasign-latest-all-min.js\",",
+							"        method: \"GET\",",
+							"        body: {}",
+							"    }, function (err, res) {",
+							"        postman.setGlobalVariable(\"jsrsasign-js\", res.text());",
+							"    doHttpSig();",
+							"    });",
+							"    ",
+							"} else {",
+							"    doHttpSig();",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "date_time",
+							"value": "{{date}}",
+							"type": "text"
+						},
+						{
+							"key": "amount",
+							"value": "2000",
+							"type": "text"
+						},
+						{
+							"key": "narrative",
+							"value": "Reason+entered+by+customer+if+any",
+							"type": "text"
+						},
+						{
+							"key": "network_ref",
+							"value": "24546468674",
+							"type": "text"
+						},
+						{
+							"key": "external_ref",
+							"value": "PGWUNIQI-0001",
+							"type": "text"
+						},
+						{
+							"key": "msisdn",
+							"value": "{{msisdn}}",
+							"type": "text"
+						},
+						{
+							"key": "signature",
+							"value": "{{signature}}",
+							"type": "text"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{gateway}}/service-cashier-processor-opay/public/deposit/validate",
+					"host": [
+						"{{gateway}}"
+					],
+					"path": [
+						"service-cashier-processor-opay",
+						"public",
+						"deposit",
+						"validate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Opay Deposit opayin",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "0187ddcc-15ef-4bfd-8273-70baa3997c75",
+						"exec": [
+							"function doHttpSig() {",
+							"",
+							"    var navigator = {}; //fake a navigator object for the lib",
+							"    var window = {}; //fake a window object for the lib",
+							"    eval(postman.getGlobalVariable(\"jsrsasign-js\")); //import javascript jsrsasign",
+							"    ",
+							"    const moment = require('moment');",
+							"    var date = moment().format(\"YYYY-MM-DD hh:mm:ss\");",
+							"    var msisdn = \"0674309163\"",
+							"    ",
+							"    var amount = \"2000\";",
+							"    var narrative = \"Reason+entered+by+customer+if+any\";",
+							"    var network_ref = \"24546468678\";",
+							"    var external_ref =\"PGWUNIQI-0001\";",
+							"    ",
+							"    var data2sign = date + amount + narrative + network_ref+external_ref+ msisdn;",
+							"    ",
+							"  ",
+							"    ",
+							"    const rsaPrivateKey = KEYUTIL.getKey(\"-----BEGIN PRIVATE KEY-----MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDaqBMGUyyPNwONU7+VAYg3mA5edWdAY2WEQsZkgQ23j7mE0nmq/bePdT049b7Fg3zMshkCXXft2+lUTNlS6smFeB0h8S1uVlOczTgbof/Jax+CkhH93yP9P+9YUIE8z31F9frlLsYcrr3TmiyF3ILREvuqTo8gsI1X61LObSpHKKspk8+5pF5IfvGluzwbnmlMpdbb27yaBP+oLSa9P5NNKVSRigkfUS9KjBdzJQMFVJfaigDylrTWBRoJsuv3AtURAJKMG5o7YDeTEyL9+wTEYs8v7r6piG74TlbKVYHdxliozAHgPHqK/SQKlmX5W016O0eNmaoFBKQiI+p0IsXFAgMBAAECggEAF1kXHvfGrEw9jtvAe1K8juMntaJnshJrBqJyuMynAFDSiIJJB58r+J+WN/zVsBWIP/tMfFoqsjVnRt8l3ZrAhgX7ZmJwbXW+W+H1+c1kmMddh/28+hTXrPUkw5NlGW82ez/22H4UHX/zOSMfWfPf7B9QzDCzS9ROY3L3Vp+Fgi99AF0BEYjHVu3fWKNPFS/bw34EE/AcDTxnhwu4Ti6/S0XmNEaB37BsZ353xxCF55MUCXWKfTcsRU/+ODoiPyAtV+SXVDU0Uf1oWEA2YshxffvQ15td4OToG/rTftpsgczZ9X6RcFLc7fBBv9cxtv2Bv48lNptowAgShHSXpXwpQQKBgQDtYAdEVO8irDeQ0nExaPIpBAMV5cqckPw+2Cbb61fjL5mkDS91jy5bEYjyqdWs0ghPkTdInXnBKI1C8zjN2Q4MbZc+l+8KvNNHA+tBOrFmU8rHbKCS7IGqBAUFxdR9pNQ4k9mHAptaC2dbDbu+pld5zBGEIBpdIwUKLo6+TNWjHQKBgQDr0A90i+3nHfQuUtzkRNHSj9UIcaI1kcK1IGLLhMB9xy80pPV1aZFgQtuD/VF/Ba5WBYQIyPGVpPiy3RqMZuKMfsJAGOH8wd8EZinoPO23FJREzXesbISAS1EqCHUv91dkjOqeBl7eLsTXQEbOUFYb7VgMPBbF18xwmDvV9rpEyQKBgHURE+RmQt2Fs42vy3VDvZHu0Zq+DlNyyYQw09FH2rtHYW1ft1Ux/Pmax0Bt89xcZQ7gnjQovcA+QJSRISWb82q7rYiII7LW9xeh3ib4TD8b+fiqIPL0wunXO6biLu6cGLGicPg9l+Irl5h3SG042hFOTCEuN/JQ8A5acbl2aTIdAoGAPS7ik66qr0iKTmqZfXCNsEA5WdOB7rw+9JfOileLShcgHFyggzI80ekG45waRQbIUPFlbJIWfGktTdsoRD19kk5hQBg0qkvy/UU0olkMpG/meGOHJWmSh2cDTBCdtzBJsIEPbqjgfG1ODTtUI7ucW+qc6a+9iN+Q37Xf8IfvlGECgYB294G7onl/3Z4L97vvn2q6xI2fGfXdJW/wx1zwLllKHDAm9Ef4Lt8epnV+22AuJm81c3YaAcxxzleQ6h5otyhwb6xbtrS1BGYPtEoFBG92KpdanyDtvg+V5sPNijUDK/q9E5YgCMwza2CAMi36jhyhabfkF6pLXDBucHweqGV/DQ==-----END PRIVATE KEY-----\");",
+							"    ",
+							"    var sig = new KJUR.crypto.Signature({\"alg\": \"SHA1withRSA\"});",
+							"    sig.init(rsaPrivateKey);",
+							"    sig.updateString(data2sign);",
+							"    const hash = sig.sign();",
+							"    const binSignature = CryptoJS.enc.Hex.parse(hash);",
+							"    ",
+							"    pm.variables.set(\"signature\", CryptoJS.enc.Base64.stringify(binSignature));",
+							"    pm.variables.set(\"date\", date);",
+							"    pm.variables.set(\"msisdn\", msisdn);",
+							"    ",
+							"    pm.variables.set(\"amount\",amount);",
+							"    pm.variables.set(\"narrative\", narrative);",
+							"    pm.variables.set(\"network_ref\", network_ref);",
+							"    pm.variables.set(\"external_ref\",external_ref);",
+							"",
+							"}",
+							"",
+							"",
+							"if (globals['jsrsasign-js'] === undefined ) {",
+							"    console.log(\"jsrasign library not already downloaded. Downloading now. \")",
+							"    ",
+							"    pm.sendRequest({",
+							"        url: \"http://kjur.github.io/jsrsasign/jsrsasign-latest-all-min.js\",",
+							"        method: \"GET\",",
+							"        body: {}",
+							"    }, function (err, res) {",
+							"        postman.setGlobalVariable(\"jsrsasign-js\", res.text());",
+							"    doHttpSig();",
+							"    });",
+							"    ",
+							"} else {",
+							"    doHttpSig();",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "date_time",
+							"value": "{{date}}",
+							"type": "text"
+						},
+						{
+							"key": "amount",
+							"value": "{{amount}}",
+							"type": "text"
+						},
+						{
+							"key": "narrative",
+							"value": "{{narrative}}",
+							"type": "text"
+						},
+						{
+							"key": "network_ref",
+							"value": "{{network_ref}}",
+							"type": "text"
+						},
+						{
+							"key": "external_ref",
+							"value": "{{external_ref}}",
+							"type": "text"
+						},
+						{
+							"key": "msisdn",
+							"value": "{{msisdn}}",
+							"type": "text"
+						},
+						{
+							"key": "signature",
+							"value": "{{signature}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{gateway}}/service-cashier-processor-opay/public/deposit/opayin",
+					"host": [
+						"{{gateway}}"
+					],
+					"path": [
+						"service-cashier-processor-opay",
+						"public",
+						"deposit",
+						"opayin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Opay Deposit status",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"id": "87276523-73fd-4c26-9a8b-2733aee45b90",
+						"exec": [
+							"function doHttpSig() {\r",
+							"\r",
+							"    var navigator = {}; //fake a navigator object for the lib\r",
+							"    var window = {}; //fake a window object for the lib\r",
+							"    eval(postman.getGlobalVariable(\"jsrsasign-js\")); //import javascript jsrsasign\r",
+							"    \r",
+							"    // const moment = require('moment');\r",
+							"    // var date = moment().format(\"YYYY-MM-DD hh:mm:ss\");\r",
+							"    var date = \"2020-07-06 07:53:38\";\r",
+							"    var network_ref = \"24546468676\";\r",
+							"    \r",
+							"    var data2sign = date + network_ref;\r",
+							"    \r",
+							"    const rsaPrivateKey = KEYUTIL.getKey(\"-----BEGIN PRIVATE KEY-----MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQDaqBMGUyyPNwONU7+VAYg3mA5edWdAY2WEQsZkgQ23j7mE0nmq/bePdT049b7Fg3zMshkCXXft2+lUTNlS6smFeB0h8S1uVlOczTgbof/Jax+CkhH93yP9P+9YUIE8z31F9frlLsYcrr3TmiyF3ILREvuqTo8gsI1X61LObSpHKKspk8+5pF5IfvGluzwbnmlMpdbb27yaBP+oLSa9P5NNKVSRigkfUS9KjBdzJQMFVJfaigDylrTWBRoJsuv3AtURAJKMG5o7YDeTEyL9+wTEYs8v7r6piG74TlbKVYHdxliozAHgPHqK/SQKlmX5W016O0eNmaoFBKQiI+p0IsXFAgMBAAECggEAF1kXHvfGrEw9jtvAe1K8juMntaJnshJrBqJyuMynAFDSiIJJB58r+J+WN/zVsBWIP/tMfFoqsjVnRt8l3ZrAhgX7ZmJwbXW+W+H1+c1kmMddh/28+hTXrPUkw5NlGW82ez/22H4UHX/zOSMfWfPf7B9QzDCzS9ROY3L3Vp+Fgi99AF0BEYjHVu3fWKNPFS/bw34EE/AcDTxnhwu4Ti6/S0XmNEaB37BsZ353xxCF55MUCXWKfTcsRU/+ODoiPyAtV+SXVDU0Uf1oWEA2YshxffvQ15td4OToG/rTftpsgczZ9X6RcFLc7fBBv9cxtv2Bv48lNptowAgShHSXpXwpQQKBgQDtYAdEVO8irDeQ0nExaPIpBAMV5cqckPw+2Cbb61fjL5mkDS91jy5bEYjyqdWs0ghPkTdInXnBKI1C8zjN2Q4MbZc+l+8KvNNHA+tBOrFmU8rHbKCS7IGqBAUFxdR9pNQ4k9mHAptaC2dbDbu+pld5zBGEIBpdIwUKLo6+TNWjHQKBgQDr0A90i+3nHfQuUtzkRNHSj9UIcaI1kcK1IGLLhMB9xy80pPV1aZFgQtuD/VF/Ba5WBYQIyPGVpPiy3RqMZuKMfsJAGOH8wd8EZinoPO23FJREzXesbISAS1EqCHUv91dkjOqeBl7eLsTXQEbOUFYb7VgMPBbF18xwmDvV9rpEyQKBgHURE+RmQt2Fs42vy3VDvZHu0Zq+DlNyyYQw09FH2rtHYW1ft1Ux/Pmax0Bt89xcZQ7gnjQovcA+QJSRISWb82q7rYiII7LW9xeh3ib4TD8b+fiqIPL0wunXO6biLu6cGLGicPg9l+Irl5h3SG042hFOTCEuN/JQ8A5acbl2aTIdAoGAPS7ik66qr0iKTmqZfXCNsEA5WdOB7rw+9JfOileLShcgHFyggzI80ekG45waRQbIUPFlbJIWfGktTdsoRD19kk5hQBg0qkvy/UU0olkMpG/meGOHJWmSh2cDTBCdtzBJsIEPbqjgfG1ODTtUI7ucW+qc6a+9iN+Q37Xf8IfvlGECgYB294G7onl/3Z4L97vvn2q6xI2fGfXdJW/wx1zwLllKHDAm9Ef4Lt8epnV+22AuJm81c3YaAcxxzleQ6h5otyhwb6xbtrS1BGYPtEoFBG92KpdanyDtvg+V5sPNijUDK/q9E5YgCMwza2CAMi36jhyhabfkF6pLXDBucHweqGV/DQ==-----END PRIVATE KEY-----\");\r",
+							"    \r",
+							"    var sig = new KJUR.crypto.Signature({\"alg\": \"SHA1withRSA\"});\r",
+							"    sig.init(rsaPrivateKey);\r",
+							"    sig.updateString(data2sign);\r",
+							"    const hash = sig.sign();\r",
+							"    const binSignature = CryptoJS.enc.Hex.parse(hash);\r",
+							"    \r",
+							"    pm.variables.set(\"signature\", CryptoJS.enc.Base64.stringify(binSignature));\r",
+							"    pm.variables.set(\"date\", date);    \r",
+							"    pm.variables.set(\"network_ref\", network_ref);\r",
+							"\r",
+							"\r",
+							"}\r",
+							"\r",
+							"\r",
+							"if (globals['jsrsasign-js'] === undefined ) {\r",
+							"    console.log(\"jsrasign library not already downloaded. Downloading now. \")\r",
+							"    \r",
+							"    pm.sendRequest({\r",
+							"        url: \"http://kjur.github.io/jsrsasign/jsrsasign-latest-all-min.js\",\r",
+							"        method: \"GET\",\r",
+							"        body: {}\r",
+							"    }, function (err, res) {\r",
+							"        postman.setGlobalVariable(\"jsrsasign-js\", res.text());\r",
+							"    doHttpSig();\r",
+							"    });\r",
+							"    \r",
+							"} else {\r",
+							"    doHttpSig();\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"network_ref\":\"{{network_ref}}\",\"date\":\"{{date}}\",\"signature\":\"{{signature}}\"}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{gateway}}//service-cashier-processor-opay/public/deposit/status",
+					"host": [
+						"{{gateway}}"
+					],
+					"path": [
+						"",
+						"service-cashier-processor-opay",
+						"public",
+						"deposit",
+						"status"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

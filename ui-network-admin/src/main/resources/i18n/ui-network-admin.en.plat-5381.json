@@ -1,0 +1,20 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "EMAILTEMPLATE": {
+      "FIELDS": {
+        "UPDATED_ON": {
+          "NAME": "Updated On"
+        }
+      }
+    },
+    "SMS": {
+      "TEMPLATES": {
+        "FIELDS": {
+          "UPDATED_ON": {
+            "NAME": "Updated On"
+          }
+        }
+      }
+    }
+  }
+}

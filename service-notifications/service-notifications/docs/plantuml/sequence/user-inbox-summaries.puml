@@ -1,0 +1,35 @@
+.read and unread user inbox counts
+
+@startuml
+'https://plantuml.com/sequence-diagram
+
+actor SYSTEM as system
+participant "SVC-NOTIFICATIONS" as svcnotifications
+database "INBOX_USER" as inbox_user
+
+autonumber
+
+system -> svcnotifications: GET /service-notifications/inbox/summary?userGuid?{domainName}/{userId}
+activate svcnotifications
+    inbox_user --> svcnotifications: findByUserAlwaysLock
+    svcnotifications -> svcnotifications: build inboxSummary object that contains read, unread and cta counts
+    svcnotifications --> system: return InboxStatus
+    note right of svcnotifications
+        inboxSummary: {
+            readCount: 0
+            unreadCount: 2,
+            ctaCount: 1
+        }
+
+        * From the response object above, you will notice that there are currently 2 unread Inbox items for this player,
+          where 1 of the unread messages has been flagged CTA (Call to Action)
+          * CTA is used to indicate that there has been an intervention message,
+            but future state might make use of the CTA flag to indicate high priority messages used as popups on the FE
+
+    end note
+deactivate svcnotifications
+
+
+
+
+@enduml

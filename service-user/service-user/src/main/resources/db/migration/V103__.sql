@@ -1,0 +1,1 @@
+ALTER TABLE `incomplete_user`ADD COLUMN `status` bigint (10) DEFAULT NULL, ALGORITHM INPLACE, LOCK NONE;

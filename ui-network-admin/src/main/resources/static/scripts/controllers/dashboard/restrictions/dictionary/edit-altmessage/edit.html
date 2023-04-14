@@ -1,0 +1,51 @@
+<div class="modal-content">
+	<div class="modal-header">
+		<h3 class="modal-title" id="modal-title">
+			<i class="fa fa-pencil"></i>
+			{{ 'UI_NETWORK_ADMIN.ERROR_DICTIONARY.RESTRICTION.ALT_MESSAGE.TITLE' | translate }}
+			<button-close-window ng-click="controller.cancel()"></button-close-window>
+		</h3>
+	</div>
+
+	<div class="moday-body" id="modal-body">
+
+		<div class="row v-reset-row ">
+			<div class="col-xs-12 col-md-6 pull-left">
+				<button-add lit-if-permission="ADMIN" ng-click="controller.increment()"></button-add>
+				<button-delete lit-if-permission="ADMIN" ng-click="controller.decrement()"></button-delete>
+			</div>
+		</div>
+		<hr/>
+		<div class="row v-reset-row">
+			<div class="col-xs-12">
+			<table class="table table-striped">
+				<tbody>
+					<tr>
+						<th>{{ 'UI_NETWORK_ADMIN.ERROR_DICTIONARY.RESTRICTION.ALT_MESSAGE.LABELS.ALT_MESSAGE_COUNT' | translate }}</th>
+						<td>{{ controller.currentIteration }}</td>
+					</tr>
+
+					<tr>
+						<th>{{ 'UI_NETWORK_ADMIN.ERROR_DICTIONARY.RESTRICTION.ALT_MESSAGE.LABELS.MESSAGE' | translate }}</th>
+						<td>{{ controller.translatedMessage }}</td>
+					</tr>
+				</tbody>
+			</table>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal-footer" id="modal-footer">
+		<buttonbar>
+			<button class="btn btn-default pull-left" ng-disabled="!controller.canNavigateBack()" ng-click="controller.prev()">
+				Prev
+			</button>
+
+			<button class="btn btn-default" ng-disabled="!controller.canNavigateForward()" ng-click="controller.next()">
+				Next
+			</button>
+		</buttonbar>
+	</div>
+	
+	
+</div>

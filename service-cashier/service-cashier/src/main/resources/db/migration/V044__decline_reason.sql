@@ -1,0 +1,1 @@
+ALTER TABLE `transaction` ADD COLUMN `decline_reason` varchar(512);

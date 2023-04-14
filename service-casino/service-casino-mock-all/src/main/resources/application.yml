@@ -1,0 +1,39 @@
+server.port: 9333
+
+security:
+  basic:
+    enabled: false
+spring:
+  thymeleaf:
+    cache: false
+  application:
+    name: service-casino-mock-all
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
+  datasource:
+    url: jdbc:mysql://localhost/lithium_game_mock
+    username: root
+    password: mysql
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: validate
+  cloud:
+    stream:
+      bindings:
+        transaction-label-accounting-output:
+          group: transaction-label-accounting-group
+          binder: rabbit
+          destination: transaction-label-accounting-queue
+          producer:
+            required-groups: transaction-label-accounting-group
+  flyway:
+    enabled: true
+eureka:
+  instance:
+    appname: service-casino-mock-all
+
+#logging:
+#  level:
+#    ROOT: INFO

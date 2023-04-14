@@ -1,0 +1,122 @@
+.Start / Demo Game Sequence
+[plantuml]
+----
+@startuml
+
+    box "LiveScore" #pink
+        participant "Player" as player
+        participant "Website" as website
+        participant "Wrapper" as wrapper
+    end box
+
+    box "Lithium" #LightBlue
+        participant "Games Service" as games
+        participant "LoginEventService" as login
+        participant "iForium Casino Provider" as provider
+        participant "Config Service" as config
+
+    end box
+
+    box "iForium" #LightGreen
+       participant "Gameflex Universal Launcher" as gul
+       participant "Generic Operator Wallet API" as ggo
+    end box
+
+    skinparam handwritten false
+    skinparam backgroundColor transparent
+    skinparam roundcorner 10
+    skinparam BoxPadding 20
+
+    skinparam sequence {
+
+        ArrowColor 3292b4
+        ArrowThickness 2
+
+        LifeLineBorderColor 3292b4
+        LifeLineBackgroundColor #3292b4
+
+        ParticipantBorderColor 3292b4
+        ParticipantBackgroundColor 3292b4
+        ParticipantFontName Arial
+        ParticipantFontSize 17
+        ParticipantFontColor white
+
+        ActorBorderColor 3292b4
+        ActorBackgroundColor aqua
+        ActorFontColor 3292b4
+        ActorFontSize 17
+        ActorFontName Arial
+    }
+
+    group Launch
+        player ->> website ++: selectGame (gameKey, token)
+
+            website ->> games ++ : /getGameUrl (domainName, gameguid, JWT)
+
+                games ->> provider ++ : /startGame (domainName, gameguid, JWT)
+
+                    provider ->> provider : createTempToken (JWT)
+                    note right of provider : TempToken has a 60s TTL
+                    note right of provider
+                        The JWT includes the **sessionKey**.
+                        The token expected by Iforium has a limit of 50 characters,
+                        48 of which are accounted for, so there is no room to include
+                        additional data, such as **Domain**
+                    end note
+                    provider -->> games -- : wrapperUrl [gameguid, temptoken]
+
+                games -->> website --: wrapperUrl [gameguid, temptoken]
+
+            website -// wrapper ++ : loadWrapperIframe ( wrapperUrl [gameguid, temptoken] )
+            wrapper ->> wrapper : construct gulUrl(gameguid, temptoken)
+            deactivate website
+
+                wrapper -// gul ++ : loadGameIframe ( gulUrl [gameguid, temptoken] )
+                    deactivate wrapper
+                    gul ->> ggo ++ : /v1.0/session/redeemtoken (temptoken)
+                        ggo ->> provider ++ : /v1.0/session/redeemtoken (temptoken)
+
+                            provider ->> provider : validateTempToken (temptoken)
+                            provider ->> provider : extractSessionKey(temptoken)
+
+                            provider ->> login ++ : loginEventForSessionKey(sessionKey)
+                            login -->> provider -- : LoginEvent
+
+                            alt Session Does Not Exist
+
+                                provider -->> ggo : "-3 Session Not Found"
+
+                            else Session Exists
+'                            group Access Control
+                                note right of provider: Domain extracted from LoginEvent
+                                provider ->> config ++: getConfig(Domain)
+                                config -->> provider --: IPWhitelist
+                                alt IP not found
+                                    provider -->> ggo : 403 Access Denied
+                                else
+                                    note right of provider
+                                        * **""OperatorAccountID""** = LoginEvent.User.**<color red>guid</color>**
+                                        ** **""OperatorUserName""** = LoginEvent.User.**<color red>username</color>**
+                                        ** **""OperatorDisplayName""** = LoginEvent.User.**<color red>externalUsername</color>**
+                                        * **""CurrencyCode""** = LoginEvent.Domain.**<color red>currency</color>**
+                                        * **""City""** = LoginEvent.**<color red>city</color>**
+                                        * **""CountryCode""** = LoginEvent.**<color red>countryCode</color>**
+                                        * **""DateOfBirth""** = User.**<color red>getDateOfBirth()</color>**
+                                        * **""Gender""** = User.**<color red>gender</color>**
+                                        * **""GatewaySessionToken""** = **<color purple>sessionKey</color>**
+                                    end note
+                                    provider -->> ggo -- : sessionKey + playerInfo
+                                end
+
+                            end
+
+
+                    ggo -->> gul -- : sessionKey + playerInfo
+                    gul ->> gul: JIT Player register
+                    gul ->> gul: loadGame (gameKey, sessionKey)
+                    gul -->> player --:
+
+    end group
+
+@enduml
+----

@@ -1,0 +1,28 @@
+server:
+  port: 9599
+
+spring:
+ application:
+   name: service-access-provider-gamstop
+ cloud:
+   stream:
+     bindings:
+       gamstopinput:
+         binder: rabbit
+         destination: gamstopoutput
+       gatewayexchange:
+         binder: rabbit
+         destination: gateway
+         producer:
+           should-declare: false
+   rabbitmq:
+     listener:
+       retry:
+         max-attempts: 20
+
+logging:
+  level:
+    lithium.service.access.provider.gamstop: INFO
+eureka:
+  instance:
+    appname: service-access-provider-gamstop

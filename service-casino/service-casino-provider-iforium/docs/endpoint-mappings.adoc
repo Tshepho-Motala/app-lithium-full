@@ -1,0 +1,12 @@
+= Endpoint Mappings
+:toc:
+
+== Basic Flow
+
+include::plantuml/basic-flow.puml[]
+
+include::endpoint-mappings-session.adoc[leveloffset=+1]
+
+include::endpoint-mappings-gameplay.adoc[leveloffset=+1]
+
+include::endpoint-mappings-alertwalletcallbacknotification.adoc[leveloffset=+1]

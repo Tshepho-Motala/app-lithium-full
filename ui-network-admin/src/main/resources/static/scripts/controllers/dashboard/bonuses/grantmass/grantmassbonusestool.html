@@ -1,0 +1,37 @@
+<div class="row v-reset-row ">
+    <div class="col-xs-12">
+        <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+                <li role="presentation" ng-class="{ active: controller.tab == tab }" ng-repeat="tab in controller.tabs"
+                    lit-if-permission="{{tab.roles}}" class="{{tab.tclass}}">
+                    <a ng-click="controller.setTab(tab)">{{ tab.title | translate }}</a>
+                </li>
+            </ul>
+            <div class="tab-content" style="padding: 5px;" ng-if="controller.tab.name === 'cashbonuses'">
+                <div class="well">
+                    <mass-cash-bonuses data="controller.data"></mass-cash-bonuses>
+                </div>
+            </div>
+            <div class="tab-content" style="padding: 5px;" ng-if="controller.tab.name === 'freespins'">
+                <div class="well">
+                    <mass-generic-bonuses data="controller.data"></mass-generic-bonuses>
+                </div>
+            </div>
+            <div class="tab-content" style="padding: 5px;" ng-if="controller.tab.name === 'freechips'">
+                <div class="well">
+                    <mass-generic-bonuses  data="controller.data"></mass-generic-bonuses>
+                </div>
+            </div>
+            <div class="tab-content" style="padding: 5px;" ng-if="controller.tab.name === 'instantrewards'">
+                <div class="well">
+                    <mass-generic-bonuses data="controller.data"></mass-generic-bonuses>
+                </div>
+            </div>
+            <div class="tab-content" style="padding: 5px;" ng-if="controller.tab.name === 'instantrewardfreespins'">
+                <div class="well">
+                    <mass-generic-bonuses data="controller.data"></mass-generic-bonuses>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

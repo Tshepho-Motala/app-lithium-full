@@ -1,0 +1,2 @@
+CREATE UNIQUE INDEX `idx_dal_domain_gran_type_age` ON `lithium_limit`.`domain_age_limit` (`domain_name` , `granularity`, `type`, `age_min`, `age_max`) ALGORITHM INPLACE LOCK NONE;
+CREATE INDEX `idx_dal_domain` ON `lithium_limit`.`domain_age_limit` (`domain_name`) ALGORITHM INPLACE LOCK NONE;

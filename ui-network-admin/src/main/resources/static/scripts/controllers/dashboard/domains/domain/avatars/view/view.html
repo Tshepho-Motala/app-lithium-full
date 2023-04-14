@@ -1,0 +1,73 @@
+<div class="container-fluid">
+	<button-bar>
+		<button-back ui-sref="^.list"></button-back>
+	</button-bar>
+		
+	<div class="row v-reset-row ">
+		<div class="col-xs-6">
+			<div class="box box-default box-solid">
+				<div class="box-header with-border">
+					{{"UI_NETWORK_ADMIN.DOMAIN.AVATARS.VIEW.BOXES.AVATAR"|translate}}
+					<div class="box-tools pull-right">
+						<button lit-if-permission="AVATARS_EDIT" type="button" class="btn btn-box-tool" ng-click="controller.toggleEnable()">
+							<span ng-if="controller.model.enabled"><i class="glyphicon glyphicon-exclamation-sign"></i> {{"GLOBAL.ACTION.DISABLE"|translate}} </span>
+							<span ng-if="!controller.model.enabled"><i class="glyphicon glyphicon-alert"></i> {{"GLOBAL.ACTION.ENABLE"|translate}} </span>
+						</button>
+						<button lit-if-permission="AVATARS_EDIT" type="button" ng-if="!controller.model.isDefault" class="btn btn-box-tool" ng-click="controller.setAsDefault()">
+							<span><i class="fa fa-user"></i> {{"UI_NETWORK_ADMIN.DOMAIN.AVATARS.VIEW.ACTIONS.SETASDEFAULT"|translate}}</span>
+						</button>
+						<button lit-if-permission="AVATARS_EDIT" type="button" class="btn btn-box-tool" ng-click="controller.deleteAvatar()">
+							<span><i class="fa fa-trash"></i> {{"GLOBAL.ACTION.DELETE"|translate}}</span>
+						</button>
+					</div>
+				</div>
+				<div class="box-body table-responsive">
+					<table class="table table-bordered">
+					<tr>
+						<th width="40%">{{"UI_NETWORK_ADMIN.DOMAIN.AVATARS.FIELDS.NAME.NAME"|translate}}</th>
+						<td>{{controller.model.name}}</td>
+					</tr><tr>
+						<th width="40%">{{"UI_NETWORK_ADMIN.DOMAIN.AVATARS.FIELDS.DESCRIPTION.NAME"|translate}}</th>
+						<td>{{controller.model.description}}</td>
+					</tr><tr>
+						<th width="40%">{{"UI_NETWORK_ADMIN.DOMAIN.AVATARS.FIELDS.ENABLED.NAME"|translate}}</th>
+						<td><label class="label" ng-class="{
+									'label-success': controller.model.enabled === true,
+									'label-danger': controller.model.enabled === false}">{{controller.model.enabled?'ENABLED':'DISABLED'}}</label></td>
+					</tr><tr>
+						<th width="40%">{{"UI_NETWORK_ADMIN.DOMAIN.AVATARS.FIELDS.DEFAULT.NAME"|translate}}</th>
+						<td><label class="label" ng-class="{
+									'label-primary': controller.model.isDefault === true,
+									'label-default': controller.model.isDefault === false}">{{controller.model.isDefault?'DEFAULT':'FALSE'}}</label></td>
+					</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+		
+		<div class="col-xs-6">
+			<div class="box box-default box-solid">
+				<div class="box-header with-border">
+					{{"UI_NETWORK_ADMIN.DOMAIN.AVATARS.VIEW.BOXES.FILE"|translate}}
+				</div>
+				<div class="box-body table-responsive">
+					<table class="table table-bordered">
+					<tr>
+						<th width="40%">{{"UI_NETWORK_ADMIN.DOMAIN.AVATARS.FIELDS.FILE.NAME.NAME"|translate}}</th>
+						<td>{{controller.model.graphic.name}}</td>
+					</tr><tr>
+						<th width="40%">{{"UI_NETWORK_ADMIN.DOMAIN.AVATARS.FIELDS.FILE.TYPE.NAME"|translate}}</th>
+						<td>{{controller.model.graphic.type}}</td>
+					</tr><tr>
+						<th width="40%">{{"UI_NETWORK_ADMIN.DOMAIN.AVATARS.FIELDS.FILE.SIZE.NAME"|translate}}</th>
+						<td>{{controller.model.graphic.size/1024|number:2}} KB</td>
+					</tr><tr>
+						<th width="40%">{{"UI_NETWORK_ADMIN.DOMAIN.AVATARS.FIELDS.FILE.IMAGE.NAME"|translate}}</th>
+						<td><a target="_blank" ng-href="{{controller.avatarImageUrl}}"><img style="max-width: 35%;max-height: 45%;" class="img-thumbnail img-responsive" src="//:0" ng-src="{{controller.avatarImageUrl}}" /></a></td>
+					</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

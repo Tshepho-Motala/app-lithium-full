@@ -1,0 +1,113 @@
+.Create Session Sequence
+[plantuml]
+----
+@startuml
+
+    box "LiveScore" #pink
+        participant "Player" as player
+        participant "Website" as website
+        participant "Wrapper" as wrapper
+    end box
+
+    box "Lithium" #LightBlue
+        participant "LoginEventService?" as login
+        participant "SignupService" as signup
+        participant "iForium Casino Provider" as provider
+    end box
+
+    box "iForium" #LightGreen
+       participant "Gameflex Universal Launcher" as gul
+       participant "Generic Operator Wallet API" as ggo
+       participant "Gameflex Test" as test
+    end box
+
+    skinparam handwritten false
+    skinparam backgroundColor transparent
+    skinparam roundcorner 10
+    skinparam BoxPadding 20
+
+    skinparam sequence {
+
+        ArrowColor 3292b4
+        ArrowThickness 2
+
+        LifeLineBorderColor 3292b4
+        LifeLineBackgroundColor #3292b4
+
+        ParticipantBorderColor 3292b4
+        ParticipantBackgroundColor 3292b4
+        ParticipantFontName Arial
+        ParticipantFontSize 17
+        ParticipantFontColor white
+
+        ActorBorderColor 3292b4
+        ActorBackgroundColor aqua
+        ActorFontColor 3292b4
+        ActorFontSize 17
+        ActorFontName Arial
+    }
+
+    group Login
+        player ->> website ++: login (usename/password)
+        website ->> login ++ : createSession()
+        login -->> website -- : sessionKey
+        website -->> player -- : sessionKey
+    end group
+
+    group Test Session Launch
+        test ->> provider ++ : /v1.0/session/createtoken (OperatorAccountID, GameID)
+            provider ->> signup ++ : register
+            signup -->> provider -- : guid
+            provider ->> login ++ : createSession(guid)
+            login -->> provider -- : sessionKey
+            provider ->> provider : createTempToken (sessionKey)
+            note right of provider : TempToken has a 60s TTL
+        provider -->> test -- : token
+        test ->> gul ++ : launch (gameKey, token)
+            gul ->> ggo ++ : /v1.0/session/redeemtoken (token)
+                ggo ->> provider ++ : /v1.0/session/redeemtoken (token)
+                note right of provider : See standard launch for detail
+                provider -->> ggo -- : sessionKey + playerInfo
+            ggo -->> gul -- : sessionKey + playerInfo
+            gul ->> gul: loadGame (gameKey, sessionKey)
+        gul -->> test -- :
+    end group
+
+    group Launch
+        player ->> website ++: selectGame (gameKey, sessionKey)
+            website ->> wrapper ++ : launch (gameKey, sessionKey)
+                wrapper ->> provider ++ : /v1.0/session/wraptoken (sessionKey)
+                    provider ->> provider : createTempToken (sessionKey)
+                    note right of provider : TempToken has a 60s TTL
+                provider -->> wrapper -- : token
+
+                wrapper ->> gul ++ : launch (gameKey, token)
+                    gul ->> ggo ++ : /v1.0/session/redeemtoken (token)
+                        ggo ->> provider ++ : /v1.0/session/redeemtoken (token)
+                            provider ->> provider : validateTempToken (token)
+                            provider ->> provider : extractSessionKey(token)
+                            provider ->> login ++ : loginEventForSessionKey(sessionKey)
+                            login -->> provider -- : LoginEvent
+                            note right of provider
+                                * **""OperatorAccountID""** = LoginEvent.User.**<color red>guid</color>**
+                                ** **""OperatorUserName""** = LoginEvent.User.**<color red>username</color>**
+                                ** **""OperatorDisplayName""** = LoginEvent.User.**<color red>externalUsername</color>**
+                                * **""CurrencyCode""** = LoginEvent.Domain.**<color red>currency</color>**
+                                * **""City""** = LoginEvent.**<color red>city</color>**
+                                * **""CountryCode""** = LoginEvent.**<color red>countryCode</color>**
+                                * **""DateOfBirth""** = User.**<color red>getDateOfBirth()</color>**
+                                * **""Gender""** = User.**<color red>gender</color>**
+                                * **""GatewaySessionToken""** = **<color purple>sessionKey</color>**
+                            end note
+                        provider -->> ggo -- : sessionKey + playerInfo
+                    ggo -->> gul -- : sessionKey + playerInfo
+                    gul ->> gul: JIT Player register
+                    gul ->> gul: loadGame (gameKey, sessionKey)
+                gul --> wrapper-- :
+            wrapper -->> website-- :
+        website -->> player -- :
+
+    end group
+
+@enduml
+----

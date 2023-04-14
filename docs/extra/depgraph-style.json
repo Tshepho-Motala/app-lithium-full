@@ -1,0 +1,44 @@
+{
+	"default-node": {
+		"type": "box",
+		"style": "rounded",
+		"default-font": {
+			"size": 10,
+			"name": "Helvetica"
+		},
+		"group-id-font": {
+			"size": 7
+		},
+		"artifact-id-font": {
+			
+		},
+		"version-font": {
+			"size": 7
+		},
+		"scope-font": {
+			"size": 7
+		}
+	},
+	"default-edge": {
+		"font": {
+			"size": 9,
+			"name": "Helvetica"
+		}
+	},
+	"edge-resolution-styles": {
+		"omitted-for-duplicate": {
+			"style": "dotted",
+			"color": "darkgrey",
+			"font": {
+				
+			}
+		},
+		"omitted-for-conflict": {
+			"style": "dashed",
+			"color": "red",
+			"font": {
+				"color": "red"
+			}
+		}
+	}
+}

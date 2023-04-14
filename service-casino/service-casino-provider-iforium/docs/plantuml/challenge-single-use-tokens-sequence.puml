@@ -1,0 +1,104 @@
+.Single-Use Token Sequence
+[plantuml]
+----
+@startuml
+
+    box "iForium" #LightGreen
+       participant "Generic Operator Wallet API" as ggo
+    end box
+
+    box "Lithium" #LightBlue
+        participant "iForium Casino Provider" as provider
+        database "Distributed Cache" as cache
+        participant "Config Service" as config
+        participant "LoginEventService" as login
+    end box
+
+    skinparam handwritten false
+    skinparam backgroundColor transparent
+    skinparam roundcorner 10
+    skinparam BoxPadding 20
+
+    skinparam  DatabaseBorderColor ffffff
+    skinparam  DatabaseBackgroundColor 3292b4
+    skinparam  DatabaseFontName Arial
+    skinparam  DatabaseFontSize 17
+    skinparam  DatabaseFontColor 3292b4
+
+    skinparam sequence {
+
+        ArrowColor 3292b4
+        ArrowThickness 2
+
+        LifeLineBorderColor 3292b4
+        LifeLineBackgroundColor #3292b4
+
+        ParticipantBorderColor 3292b4
+        ParticipantBackgroundColor 3292b4
+        ParticipantFontName Arial
+        ParticipantFontSize 17
+        ParticipantFontColor white
+
+        ActorBorderColor 3292b4
+        ActorBackgroundColor aqua
+        ActorFontColor 3292b4
+        ActorFontSize 17
+        ActorFontName Arial
+    }
+
+    ggo ->> provider ++ : /v1.0/session/redeemtoken (temptoken)
+    provider ->> provider : validateTempToken (temptoken)
+    group #pink Single-Use Verification
+        provider ->> cache ++: lookup (temptoken)
+        cache -->> provider --:
+
+        alt #pink Record Found
+            provider -->> ggo : "-3 Session Not Found"
+        else Record Not Found
+            note right of provider
+                A TTL of >60s will ensure the
+                token cannot be re-submitted
+                whilst still valid.
+            end note
+            provider ->> cache ++: store (temptoken, TTL)
+            cache -->> provider --:
+        end
+
+    end group
+
+
+    provider ->> provider : extractSessionKey(temptoken)
+
+    provider ->> login ++ : loginEventForSessionKey(sessionKey)
+    login -->> provider -- : LoginEvent
+
+    alt Session Does Not Exist
+
+        provider -->> ggo : "-3 Session Not Found"
+
+    else Session Exists
+
+        note right of provider: Domain extracted from LoginEvent
+        provider ->> config ++: getConfig(Domain)
+        config -->> provider --: IPWhitelist
+        alt IP not found
+            provider -->> ggo : 403 Access Denied
+        else
+            note right of provider
+                * **""OperatorAccountID""** = LoginEvent.User.**<color red>guid</color>**
+                * **""OperatorUserName""** = LoginEvent.User.**<color red>username</color>**
+                * **""OperatorDisplayName""** = LoginEvent.User.**<color red>externalUsername</color>**
+                * **""CurrencyCode""** = LoginEvent.Domain.**<color red>currency</color>**
+                * **""City""** = LoginEvent.**<color red>city</color>**
+                * **""CountryCode""** = LoginEvent.**<color red>countryCode</color>**
+                * **""DateOfBirth""** = User.**<color red>getDateOfBirth()</color>**
+                * **""Gender""** = User.**<color red>gender</color>**
+                * **""GatewaySessionToken""** = **<color purple>sessionKey</color>**
+            end note
+            provider -->> ggo -- : sessionKey + playerInfo
+        end
+
+    end
+
+@enduml
+----

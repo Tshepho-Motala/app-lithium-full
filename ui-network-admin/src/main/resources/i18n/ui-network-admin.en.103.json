@@ -1,0 +1,14 @@
+{
+	"UI_NETWORK_ADMIN": {
+		"SERVICE_CASHIER": {
+			"FEES": {
+				"CHARGE_OPTION_LABEL": "Fees Management Strategy",
+				"CHARGE_OPTION_1": "Net value communication",
+				"CHARGE_OPTION_2": "Gross value communication",
+				"CHARGE_OPTION_1_HELP_MESSAGE": "The net transaction amount (gross - fees) will be communicated to the processor upon transaction completion.",
+				"CHARGE_OPTION_2_HELP_MESSAGE": "The gross transaction amount will be communicated to the processor upon transaction completion.",
+				"PROCESSOR_COMM_STRAT": "Processor Fee Strategy"
+			}
+		}
+	}
+}

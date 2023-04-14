@@ -1,0 +1,884 @@
+openapi: 3.0.3
+info:
+  title: Lithium IncentiveGames API Documentation
+  version: 1.1.0
+  description: |
+    The following document describes the APIs that will allow Incentive Games to register transactions
+    within Lithium.
+    ---
+    Some requests require a sha256 checksum that accompanies the payload. To calculate the checksum, concatenate
+    the fields identified in the description of the respective sha256 field, using a colon as separator.
+    Thereafter pass it to your preferred hmac sha256 function together with the pre-shared key supplied by
+    Lithium.
+
+    See https://www.freeformatter.com/hmac-generator.html to test (ensure to select SHA256)
+
+        hmac_sha256("USERID:TRANSACTIONID:TRANSACTIONID:TRANSACTIONID", PRESHAREDKEY") = 54d7516fa4291efddbef355f9006583d67c76ebfce6bda9ae4532d1ca1cfa8c3
+        hmac_sha256("SETTLEMENTTRANSACTIONID19:BETTRANSACTIONID19", "PRESHAREDKEY") = d7c382a8c59766e602e261438de9deeaf7cad09894a8cbc05d851196bc1b9bfe
+servers:
+  - url: "https://gateway.lithium-develop.ls-g.net"
+    description: Livescore Lithium Develop
+  - url: "https://gateway.lithium-staging.ls-g.net"
+    description: Livescore Lithium Staging Gateway
+  - url: "https://gateway.lithium-live.ls-g.net"
+    description: Livescore Lithium Live
+  - url: "{GATEWAY_URL}"
+    description: Custom Lithium Gateway URL
+    variables:
+      GATEWAY_URL:
+        description: Gateway server URL
+        default: http://localhost:9000
+tags:
+  - name: Validate
+    description: Validate a session token and obtain customer details.
+paths:
+  /service-casino-provider-incentive/validatesession:
+    get:
+      tags:
+        - Validate
+      description: >-
+        This API will require a bearer token in the Authorisation header,
+        which will be used to retrieve the player details from the Lithium system.
+      security:
+        - BearerTokenAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ValidateSessionResponse"
+        "401":
+          $ref: "#/components/responses/401UnauthorizedError"
+        "404":
+          $ref: "#/components/responses/404NoSuchUserError"
+        "490":
+          $ref: "#/components/responses/490SoftSelfExclusion"
+        "491":
+          $ref: "#/components/responses/491PermanentSelfExclusion"
+        "500":
+          $ref: "#/components/responses/500InternalServerError"
+        "504":
+          $ref: "#/components/responses/504ServiceUnavailableError"
+
+  /service-casino-provider-incentive/placement:
+    post:
+      tags:
+        - Placement
+      description: |
+        This API will require a bearer token in the Authorisation header,
+        which will be used to identify the player that should have his/her wallet adjusted.
+
+        The placement request may contain more than one bet transaction. Each transaction will be handled separately.
+      security:
+        - BearerTokenAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PlacementRequest"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PlacementResponse"
+        "400":
+          $ref: "#/components/responses/400BadRequest"
+        "401":
+          $ref: "#/components/responses/401UnauthorizedError"
+        "405":
+          $ref: "#/components/responses/405UserDisabledError"
+        "409":
+          $ref: "#/components/responses/409DuplicateSubmission"
+        "422":
+          $ref: "#/components/responses/422DataValidationError"
+        "470":
+          $ref: "#/components/responses/470IncorrectHash"
+        "471":
+          $ref: "#/components/responses/471InsufficientFunds"
+        "473":
+          $ref: "#/components/responses/473DomainBettingDisabledError"
+        "474":
+          $ref: "#/components/responses/474DomainProviderDisabledError"
+        "490":
+          $ref: "#/components/responses/490SoftSelfExclusion"
+        "491":
+          $ref: "#/components/responses/491PermanentSelfExclusion"
+        "500":
+          $ref: "#/components/responses/500InternalServerError"
+        "504":
+          $ref: "#/components/responses/504ServiceUnavailableError"
+
+  /service-casino-provider-incentive/settlement:
+    post:
+      tags:
+        - Settlement
+      description: |
+        This API does not require a bearer token, as a settlement might happen while a player is logged out. To secure the endpoint,
+        the caller has to supply the unique reference to the bet, and generate a hash of the data utilising the pre-shared key
+        that is never transmitted.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SettlementRequest"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SettlementResponse"
+        "400":
+          $ref: "#/components/responses/400BadRequest"
+        "401":
+          $ref: "#/components/responses/401UnauthorizedError"
+        "404":
+          $ref: "#/components/responses/404OriginalTransactionNotFound"
+        "409":
+          $ref: "#/components/responses/409DuplicateSubmission"
+        "422":
+          $ref: "#/components/responses/422DataValidationError"
+        "470":
+          $ref: "#/components/responses/470IncorrectHash"
+        "471":
+          $ref: "#/components/responses/471InsufficientFunds"
+        "500":
+          $ref: "#/components/responses/500InternalServerError"
+        "504":
+          $ref: "#/components/responses/504ServiceUnavailableError"
+
+  /service-casino-provider-incentive/pickany/entry:
+    post:
+      tags:
+        - Pick5 / Pick6 / PickX Entry
+      description: |
+        Register a Pick game entry for a player.
+
+        A call to this API does not affect the player balance. It is a free entry.
+
+        The API is retryable. Sending the same data again, if a previous entry was received successfully, will result in an identical response to
+        the original successful request.
+
+        This API will require a bearer token in the Authorisation header,
+        which will be used to identify the player to whom this entry belongs to.
+        To secure the endpoint, the caller has to supply a hash of the data utilising the pre-shared key
+        that is never transmitted.
+      security:
+        - BearerTokenAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PickAnyEntryRequest"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PickAnyEntryResponse"
+        "400":
+          $ref: "#/components/responses/400BadRequest"
+        "401":
+          $ref: "#/components/responses/401UnauthorizedError"
+        "405":
+          $ref: "#/components/responses/405UserDisabledError"
+        "422":
+          $ref: "#/components/responses/422DataValidationError"
+        "470":
+          $ref: "#/components/responses/470IncorrectHash"
+        "490":
+          $ref: "#/components/responses/490SoftSelfExclusion"
+        "491":
+          $ref: "#/components/responses/491PermanentSelfExclusion"
+        "500":
+          $ref: "#/components/responses/500InternalServerError"
+        "504":
+          $ref: "#/components/responses/504ServiceUnavailableError"
+
+  /service-casino-provider-incentive/pickany/settlement:
+    post:
+      tags:
+        - Pick5 / Pick6 / PickX Settlement
+      description: |
+        Register a Pick5 or Pick6 game entry settlement result for a player.
+
+        A call to this API does not affect the player balance.
+
+        The API is retryable. Sending the same data again, if a previous entry was received successfully, will result in an identical response to
+        the original successful request.
+
+        This API does not require a bearer token, as a settlement might happen while a player is logged out. To secure the endpoint,
+        the caller has to supply the unique reference to the entry, and generate a hash of the data utilising the pre-shared key
+        that is never transmitted.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/PickAnySettlementRequest"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/PickAnySettlementResponse"
+        "400":
+          $ref: "#/components/responses/400BadRequest"
+        "422":
+          $ref: "#/components/responses/422DataValidationError"
+        "444":
+          $ref: "#/components/responses/444ReferencedEntityNotFound"
+        "470":
+          $ref: "#/components/responses/470IncorrectHash"
+        "500":
+          $ref: "#/components/responses/500InternalServerError"
+        "504":
+          $ref: "#/components/responses/504ServiceUnavailableError"
+
+  /service-casino-provider-incentive/frontend/bethistory:
+    post:
+      tags:
+        - Frontend Bet History
+      description: |
+        This API will require a bearer token in the Authorisation header,
+        which will be used to identify the player whose bet history is being queried.
+      security:
+        - BearerTokenAuth: []
+      parameters:
+        - in: query
+          name: isSettled
+          schema:
+            type: boolean
+          allowEmptyValue: true
+        - in: query
+          name: settlementResult
+          schema:
+            type: string
+          description: The result of the settlement. WIN/LOST/VOID.
+        - in: query
+          name: betTimestampRangeStart
+          schema:
+            type: string
+          description: Bet date range start in format yyyy-MM-dd
+        - in: query
+          name: betTimestampRangeEnd
+          schema:
+            type: string
+          description: Bet date range end in format yyyy-MM-dd
+        - in: query
+          name: settlementTimestampRangeStart
+          schema:
+            type: string
+          description: Settlement date range start in format yyyy-MM-dd
+        - in: query
+          name: settlementTimestampRangeEnd
+          schema:
+            type: string
+          description: Settlement date range end in format yyyy-MM-dd
+        - in: query
+          name: pageSize
+          schema:
+            type: integer
+            format: int32
+          required: true
+        - in: query
+          name: page
+          schema:
+            type: integer
+            format: int32
+          required: true
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Page'
+                properties:
+                  content:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Bet'
+
+components:
+  responses:
+
+    400BadRequest:
+      description: The request contained a document that could not be parsed due to a syntax error. Please do not resubmit before changing the content.
+
+    401UnauthorizedError:
+      description: Access token is missing or invalid. Please supply a new bearer token and resubmit the same request.
+
+    404NoSuchUserError:
+      description: The token belongs to a user that does not exist in this environment. Do not resubmit.
+
+    405UserDisabledError:
+      description: User account is disabled. Do not resubmit.
+
+    404OriginalTransactionNotFound:
+      description: The referenced transaction was not found. Do not resubmit.
+
+    409DuplicateSubmission:
+      description: This transaction was already submitted. Do not resubmit.
+
+    422DataValidationError:
+      description: The input data failed to validate. Please fix the request and submit a new one. The same transaction ID may be used.
+
+    444ReferencedEntityNotFound:
+      description: The referenced entity could not be found.
+
+    470IncorrectHash:
+      description: The supplied hash is incorrect. You may resubmit the same transaction with a new hash. The transaction will not be stored.
+
+    471InsufficientFunds:
+      description: Insufficient funds for this adjustment. Do not retry the same request again. The failure will be stored and future submissions with the same transaction ID will be rejected.
+
+    473DomainBettingDisabledError:
+      description: Betting on the domain has been disabled. Do not resubmit.
+
+    474DomainProviderDisabledError:
+      description: The domain provider has been disabled. Do not resubmit.
+
+    490SoftSelfExclusion:
+      description: Player account is flagged as self excluded with an expiry date.
+
+    491PermanentSelfExclusion:
+      description: Player account is flagged as self excluded without an expiry date.
+
+    500InternalServerError:
+      description: The server is experiencing technical problems and is unavailable. Please resubmit the same request later.
+
+    504ServiceUnavailableError:
+      description: The service is unavailabe (is it running?). Please resubmit the same request later.
+
+  schemas:
+
+    ValidateSessionResponse:
+      type: object
+      properties:
+        balance:
+          type: number
+          format: double
+        cellphoneNumber:
+          type: string
+        currencyCode:
+          type: string
+        guid:
+          type: string
+        username:
+          type: string
+
+    PlacementRequest:
+      type: object
+      properties:
+        userId:
+          type: string
+          description: A unique identifier for a player on the Incentive system. This differs from the user ID in Lithium
+        currencyCode:
+          type: string
+          description: A three letter ISO 4217 currency code
+          example: "USD"
+        bets:
+          type: array
+          description: An array of bets. May be 1 to many.
+          items:
+            $ref: "#/components/schemas/PlacementRequestBet"
+        extraData:
+          type: string
+          description: A base64 raw JSON object converted to string, representing the internal transaction within Incentive. Not to be trusted, the contents is volatile.
+        sha256:
+          type: string
+          description: |
+            To calculate the SHA256 here, use the following fields:
+            "USERID:TRANSACTIONID:TRANSACTIONID:TRANSACTIONID".
+            Repeat the TRANSACTIONID for each bet contained in the request.
+
+    PlacementRequestBet:
+      type: object
+      properties:
+        transactionTimestamp:
+          type: integer
+          format: int64
+          description: Milliseconds since Epoch for the bet placement
+        betTransactionId:
+          type: string
+          description: A unique hash for the bet. Will be used for dedupe checking.
+        totalOdds:
+          type: number
+          format: float
+          description: The total odds for this bet transaction.
+        totalStake:
+          type: number
+          format: float
+          description: The total amount to be deducted from the player balance.
+        maxPotentialWin:
+          type: number
+          format: float
+        events:
+          type: array
+          items:
+            $ref: "#/components/schemas/PlacementRequestEvent"
+
+    PlacementRequestEvent:
+      type: object
+      properties:
+        sportName:
+          type: string
+        sportCode:
+          type: string
+        competitionCode:
+          type: string
+        eventName:
+          type: string
+        eventStartTime:
+          type: integer
+          format: int64
+        marketCode:
+          type: string
+        marketName:
+          type: string
+        price:
+          type: number
+          format: float
+        selectionCode:
+          type: string
+        selectionId:
+          type: string
+        selectionName:
+          type: string
+
+    PlacementResponse:
+      type: object
+      properties:
+        playerBalance:
+          type: number
+          format: double
+        lithiumPlacementId:
+          type: integer
+          format: int64
+
+    SettlementRequest:
+      type: object
+      properties:
+        settlementTransactionId:
+          type: string
+          description: A unique hash for the transaction, different between bet placement and bet winnings. Will be used for dedupe.
+        betTransactionId:
+          type: string
+          description: The bet transaction ID for which this settlement is relevant.
+        result:
+          type: string
+          enum: [WIN, LOST, VOID]
+        returns:
+          type: number
+          format: float
+          description: |
+            The amount to return to player. This will be 0 if the result is "LOST", >0 if the result is "WIN" or "VOID".
+            For "VOID", the result amount should match the total stake of the original bet
+        currencyCode:
+          type: string
+          description: A three letter ISO 4217 currency code
+          example: "USD"
+        transactionTimestamp:
+          type: integer
+          format: int64
+          description: Milliseconds since Epoch for the bet placement
+        selections:
+          type: array
+          items:
+            $ref: "#/components/schemas/SettlementRequestSelection"
+        sha256:
+          type: string
+          description: |
+            To calculate the SHA256 here, use the following fields - "SETTLEMENTTRANSACTIONID:BETTRANSACTIONID".
+
+    SettlementRequestSelection:
+      type: object
+      properties:
+        selectionId:
+          type: string
+        result:
+          type: string
+          enum: [WIN, LOST]
+
+    SettlementResponse:
+      type: object
+      properties:
+        playerBalance:
+          type: number
+          format: double
+        lithiumSettlementId:
+          type: integer
+          format: int64
+
+    PickAnyEntryRequest:
+      type: object
+      properties:
+        gameCode:
+          type: string
+          description: A unique description for this game type (example PICK5 or PICK6)
+        predictorId:
+          type: integer
+          format: int64
+          description: The id for the instance of the game they are entering. Stored but not used, as we have no additional meta.
+        competitionCode:
+          type: string
+          description: The league code, same as the virtual bet competionCode.
+        entryTransactionId:
+          type: string
+          description: A unique receipt identifier for this individual entry.
+        picks:
+          type: array
+          items:
+            $ref: "#/components/schemas/PickAnyEntryPick"
+        entryTimestamp:
+          type: integer
+          format: int64
+          description: Milliseconds since Epoch
+        sha256:
+          type: string
+          description: |
+            To calculate the SHA256 here, use the following fields - "ENTRYTRANSACTIONID:PREDICTORID:ENTRYTIMESTAMP".
+        extraData:
+          type: string
+          description: A base64 raw JSON object converted to string, representing the internal transaction within Incentive. Not to be trusted, the contents is volatile.
+
+    PickAnyEntryPick:
+      type: object
+      properties:
+        eventId:
+          type: integer
+          format: int64
+        eventName:
+          type: string
+        eventStartTime:
+          type: integer
+          format: int64
+        homeScore:
+          type: integer
+          format: int64
+        awayScore:
+          type: integer
+          format: int64
+
+    PickAnyEntryResponse:
+      type: object
+      properties:
+        lithiumEntryId:
+          type: integer
+          format: int64
+
+    PickAnySettlementRequest:
+      type: object
+      properties:
+        entryTransactionId:
+          type: string
+          description: |
+            A unique receipt identifier for this individual entry. This needs to match the original entry request, and if not found,
+            will cause the settlement request to fail.
+        settlementTransactionId:
+          type: string
+          description: |
+            A unique receipt identifier for this settlement. Only one settlement per entry will be allowed. Resending the same value here will
+            cause the API to respond with the same response if a previous settlement resulted in a success.
+        settlementTimestamp:
+          type: integer
+          format: int64
+          description: Milliseconds since Epoch
+        picks:
+          type: array
+          items:
+            $ref: "#/components/schemas/PickAnySettlementPick"
+        totalPointsResult:
+          type: integer
+          format: int64
+        sha256:
+          type: string
+          description: |
+            To calculate the SHA256 here, use the following fields - "ENTRYTRANSACTIONID:SETTLEMENTTRANSACTIONID:SETTLEMENTTIMESTAMP".
+        extraData:
+          type: string
+          description: A base64 raw JSON object converted to string, representing the internal transaction within Incentive. Not to be trusted, the contents is volatile.
+
+    PickAnySettlementPick:
+      type: object
+      properties:
+        eventId:
+          type: integer
+          format: int64
+        homeScoreResult:
+          type: integer
+          format: int64
+        awayScoreResult:
+          type: integer
+          format: int64
+        pointsResult:
+          type: integer
+          format: int64
+
+    PickAnySettlementResponse:
+      type: object
+      properties:
+        lithiumEntryId:
+          type: integer
+          format: int64
+        lithiumSettlementId:
+          type: integer
+          format: int64
+
+    Bet:
+      type: object
+      properties:
+        transactionTimestamp:
+          type: integer
+          format: int64
+        betTransactionId:
+          type: string
+        totalOdds:
+          type: number
+          format: float
+        totalStake:
+          type: number
+          format: float
+        maxPotentialWin:
+          type: number
+          format: float
+        lithiumAccountingId:
+          type: number
+          format: int64
+        errorCode:
+          type: number
+          format: int32
+        errorMessage:
+          type: string
+        placement:
+          $ref: '#/components/schemas/Placement'
+        createdDate:
+          type: integer
+          format: int64
+        modifiedDate:
+          type: integer
+          format: int64
+        settlement:
+          $ref: '#/components/schemas/Settlement'
+        betSelections:
+          type: array
+          items:
+            $ref: "#/components/schemas/BetSelection"
+
+    Placement:
+      type: object
+      properties:
+        incentiveUser:
+          $ref: '#/components/schemas/IncentiveUser'
+        currency:
+          $ref: '#/components/schemas/Currency'
+        extraData:
+          type: string
+        user:
+          $ref: '#/components/schemas/User'
+        domain:
+          $ref: '#/components/schemas/Domain'
+
+    Settlement:
+      type: object
+      properties:
+        settlementTransactionId:
+          type: string
+        transactionTimestamp:
+          type: integer
+          format: int64
+        settlementResult:
+          $ref: '#/components/schemas/SettlementResult'
+        returns:
+          type: number
+          format: float
+        currency:
+          $ref: '#/components/schemas/Currency'
+        lithiumAccountingId:
+          type: integer
+          format: int64
+        errorCode:
+          type: integer
+          format: int32
+        errorMessage:
+          type: string
+
+    BetSelection:
+      type: object
+      properties:
+        price:
+          type: number
+          format: float
+        selection:
+          $ref: '#/components/schemas/Selection'
+        selectionType:
+          $ref: '#/components/schemas/SelectionType'
+        sport:
+          $ref: '#/components/schemas/Sport'
+        competition:
+          $ref: '#/components/schemas/Competition'
+        market:
+          $ref: '#/components/schemas/Market'
+        event:
+          $ref: '#/components/schemas/Event'
+        settlementSelection:
+          $ref: '#/components/schemas/SettlementSelection'
+
+    IncentiveUser:
+      type: object
+      properties:
+        guid:
+          type: string
+
+    Currency:
+      type: object
+      properties:
+        code:
+          type: string
+
+    User:
+      type: object
+      properties:
+        guid:
+          type: string
+
+    Domain:
+      type: object
+      properties:
+        name:
+          type: string
+
+    SettlementResult:
+      type: object
+      properties:
+        code:
+          type: string
+
+    Selection:
+      type: object
+      properties:
+        guid:
+          type: string
+
+    SelectionType:
+      type: object
+      properties:
+        name:
+          type: string
+        code:
+          type: string
+
+    Sport:
+      type: object
+      properties:
+        name:
+          type: string
+        code:
+          type: string
+
+    Competition:
+      type: object
+      properties:
+        name:
+          type: string
+        code:
+          type: string
+
+    Market:
+      type: object
+      properties:
+        name:
+          type: string
+        code:
+          type: string
+
+    Event:
+      type: object
+      properties:
+        startTimestamp:
+          type: integer
+          format: int64
+        eventName:
+          $ref: '#/components/schemas/EventName'
+
+    EventName:
+      type: object
+      properties:
+        name:
+          type: string
+
+    SettlementSelection:
+      type: object
+      properties:
+        selectionResult:
+          $ref: '#/components/schemas/SelectionResult'
+
+    SelectionResult:
+      type: object
+      properties:
+        code:
+          type: string
+
+    Page:
+      type: object
+      title: Page
+      properties:
+        content:
+          type: array
+          items:
+            type: object
+        last:
+          type: boolean
+        totalElements:
+          type: integer
+          format: int32
+        totalPages:
+          type: integer
+          format: int32
+        numberOfElements:
+          type: integer
+          format: int32
+        size:
+          type: integer
+          format: int32
+        number:
+          type: integer
+          format: int32
+        first:
+          type: boolean
+        sort:
+          type: array
+          items:
+            $ref: '#/components/schemas/Sort'
+
+    Sort:
+      type: object
+      properties:
+        direction:
+          type: string
+        property:
+          type: string
+        ignoreCase:
+          type: boolean
+        nullHandling:
+          type: string
+        ascending:
+          type: boolean
+
+  securitySchemes:
+    BearerTokenAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: >-
+        A token obtained via the Lithium login process, passed to Incentive via Cookie during Iframe open.
+        This will add a header to the request - "Authorization: Bearer TOKENVALUE"

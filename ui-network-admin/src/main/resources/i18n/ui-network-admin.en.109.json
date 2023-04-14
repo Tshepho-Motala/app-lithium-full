@@ -1,0 +1,15 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "RAF": {
+      "CONFIG": {
+        "FIELDS": {
+          "AUTO_CONVERT_PLAYER": {
+            "TITLE": "Auto Convert player",
+            "PLACE": "Select option...",
+            "DESC": "Auto convert player if they are past the convert criteria"
+          }
+        }
+      }
+    }
+  }
+}

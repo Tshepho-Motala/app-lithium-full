@@ -1,0 +1,33 @@
+{
+	"GLOBAL": {
+		"TRANTYPE": {
+			"CASHIER_DEPOSIT": {
+				"LABEL": "Cashier deposit"
+			},
+			"CASHIER_DEPOSIT_FEE": {
+				"LABEL": "Cashier deposit fee"
+			},
+			"CASHIER_PAYOUT": {
+				"LABEL": "Cashier payout"
+			},
+			"PLAYER_BALANCE": {
+				"LABEL": "Player balance"
+			},
+			"NEGATIVE_BALANCE_WRITEOFF": {
+				"LABEL": "Negative balance write-off"
+			},
+			"REVERSAL_FEE": {
+				"LABEL": "Reversal fee"
+			},
+			"CASHIER_PAYOUT_REVERSAL": {
+				"LABEL": "Cashier payout reversal"
+			},
+			"CASHIER_DEPOSIT_REVERSAL": {
+				"LABEL": "Cashier deposit reversal"
+			},
+			"PAYOUT_FEE": {
+				"LABEL": "Cashier payout fee"
+			}
+		}
+	}
+}

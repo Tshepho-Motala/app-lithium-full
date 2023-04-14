@@ -1,0 +1,16 @@
+server:
+  port: 8901
+
+#TODO pretty sure this isn't needed anywhere...
+security:
+  oauth2:
+    client:
+      clientId: acme
+      clientSecret: acmesecret
+      authorized-grant-types: refresh_token,password
+      scope: openid
+      auto-approve-scopes: .*
+      
+logging:
+  level:
+    lithium.server.oauth2: DEBUG

@@ -1,0 +1,8 @@
+{
+  "SERVICE_USER": {
+    "GLOBAL": {
+      "PLACE_OF_BIRTH_EDIT": "Place of birth was changed from ",
+      "PLACE_OF_BIRTH_ERROR": "Can't sent pub-sub message for placeOfBirth update."
+    }
+  }
+}

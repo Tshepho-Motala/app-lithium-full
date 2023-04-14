@@ -1,0 +1,1 @@
+ALTER TABLE `user_category` ADD COLUMN `dwh_visible` BIT(1) DEFAULT 0, ALGORITHM INPLACE, LOCK NONE;

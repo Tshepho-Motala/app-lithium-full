@@ -1,0 +1,16 @@
+# Quick Start
+
+## Start the SDK
+
+- Open the terminal and `cd` into `lbo-sdk`
+- Execute `npm i` in the terminal, this will install all packages and generate the initial plugins
+- Execute `npm run host` to start the development server for running the website on localhost
+
+## Deploying Plugins
+
+- Execute `npm run deploy` to build and deploy **all** plugins
+- Execute `npm run deploy [plugin-name]` to build and deploy a **single** plugin
+
+## Start the Development Server
+
+- Execute `npm start` in the terminal, this will start the localhost web service on <http://localhost:8080>

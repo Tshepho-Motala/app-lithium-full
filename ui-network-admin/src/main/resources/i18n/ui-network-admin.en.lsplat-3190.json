@@ -1,0 +1,19 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "CASHIER": {
+      "TRANS": {
+        "TABLE": {
+          "HEAD": {
+            "UPDATED": "Updated"
+          }
+        },
+        "FILTER": {
+          "CREATED_START": "Created Date: Start",
+          "CREATED_END": "Created Date: End",
+          "UPDATED_START": "Updated Date: Start",
+          "UPDATED_END": "Updated Date: End"
+        }
+      }
+    }
+  }
+}

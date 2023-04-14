@@ -1,0 +1,1 @@
+ALTER TABLE `lithium_user`.`user` ADD COLUMN `post_opt_out` BIT(1);

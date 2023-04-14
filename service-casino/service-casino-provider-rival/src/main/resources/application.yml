@@ -1,0 +1,9 @@
+server.port: 9781
+
+spring:
+  application:
+    name: service-casino-provider-rival
+    
+eureka:
+  instance:
+    appname: service-casino-provider-rival

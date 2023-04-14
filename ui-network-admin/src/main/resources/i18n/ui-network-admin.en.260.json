@@ -1,0 +1,25 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "PLAYER": {
+      "DOCUMENTS": {
+        "UPLOAD_SHORTCUTS": {
+          "NAME": "Upload Shortcuts",
+          "UPLOAD_PASSPORT": "Upload Passport",
+          "UPLOAD_DRIVERS_LICENSE": "Upload Driver's License",
+          "UPLOAD_BANK_STATEMENT": "Upload Bank Statement",
+          "UPLOAD_UTILITY_BILL": "Upload Utility Bill",
+          "UPLOAD_SELFIE_ID": "Upload Selfie ID",
+          "PASSPORT": "Passport",
+          "DRIVERS_LICENSE": "Driver's License",
+          "BANK_STATEMENT": "Bank Statement",
+          "UTILITY_BILL": "Utility Bill",
+          "SELFIE_ID": "Selfie ID",
+          "NEW_STATUS": "New",
+          "IDENTITY_VERIFICATION_FUNCTION": "Identity Verification",
+          "ADDRESS_VERIFICATION_FUNCTION": "Address Verification",
+          "ENHANCED_IDENTITY_VERIFICATION_FUNCTION": "Enhanced Identity Verification"
+        }
+      }
+    }
+  }
+}

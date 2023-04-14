@@ -1,0 +1,24 @@
+server.port: ${PORT:9107}
+
+spring:
+  application:
+    name: service-accounting-provider-readonly
+  datasource:
+    url: jdbc:mysql://localhost/lithium_accounting_internal
+    username: readonly
+    password: readonly
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: none
+  flyway:
+    enabled: false
+
+lithium:
+  is-read-only: true
+  is-summaries-only: false
+  can-be-leader-candidate: false
+
+logging:
+  level:
+    ROOT: WARN

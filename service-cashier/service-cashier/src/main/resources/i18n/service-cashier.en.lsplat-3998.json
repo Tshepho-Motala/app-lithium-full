@@ -1,0 +1,10 @@
+{
+  "ERROR_DICTIONARY": {
+    "CASHIER": {
+      "CANCEL_ADD_ACCOUNT": "Adding bank account is cancelled.",
+      "CANCEL_TRANSACTION": "Transaction canceled by player.",
+      "INVALID_PROCESSOR_ACCOUNT": "Invalid processor account.",
+      "EXPIRED_TRANSACTION": "Transaction was expired."
+    }
+  }
+}

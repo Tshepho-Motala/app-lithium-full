@@ -1,0 +1,109 @@
+<div class="box box-{{data.box}} box-solid" bs-loading-overlay bs-loading-overlay-reference-id="{{referenceId}}">
+	<div class="box-header with-border">
+		{{data.title | translate}}
+		<div class="box-tools pull-right">
+			<button type="button" class="btn btn-box-tool" ng-if="user.cellphoneValidated === true" ng-click="toggleMobileValidation()" lit-if-permission="PLAYER_VALIDATE_MOBILE" lit-permission-domain="{{user.domain.name}}">
+				<span><i class="glyphicon glyphicon-exclamation-sign"></i> {{ "GLOBAL.ACTION.INVALIDATE_MOBILE" | translate }} </span>
+			</button>
+			<button type="button" class="btn btn-box-tool" ng-if="user.cellphoneValidated === false" ng-click="toggleMobileValidation()" lit-if-permission="PLAYER_VALIDATE_MOBILE" lit-permission-domain="{{user.domain.name}}">
+				<span><i class="glyphicon glyphicon-alert"></i> {{ "GLOBAL.ACTION.VALIDATE_MOBILE" | translate }} </span>
+			</button>
+			<button type="button" class="btn btn-box-tool" ng-if="user.emailValidated === true" ng-click="toggleEmailValidation()" lit-if-permission="PLAYER_VALIDATE_EMAIL" lit-permission-domain="{{user.domain.name}}">
+				<span><i class="glyphicon glyphicon-exclamation-sign"></i> {{ "GLOBAL.ACTION.INVALIDATE_EMAIL" | translate }} </span>
+			</button>
+			<button type="button" class="btn btn-box-tool" ng-if="user.emailValidated === false" ng-click="toggleEmailValidation()" lit-if-permission="PLAYER_VALIDATE_EMAIL" lit-permission-domain="{{user.domain.name}}">
+				<span><i class="glyphicon glyphicon-alert"></i> {{ "GLOBAL.ACTION.VALIDATE_EMAIL" | translate }} </span>
+			</button>
+			<button type="button" ng-if="!data.profile" class="btn btn-box-tool" ng-click="changePersonalInfo()" lit-if-permission="PLAYER_INFO_EDIT" lit-permission-domain="{{user.domain.name}}">
+				<span><i class="fa fa-gear"></i> {{ "GLOBAL.ACTION.CHANGE" | translate }} </span>
+			</button>
+			<button type="button" ng-if="data.profile" class="btn btn-box-tool" ng-click="changePersonalInfo()">
+				<span><i class="fa fa-gear"></i> {{ "GLOBAL.ACTION.CHANGE" | translate }} </span>
+			</button>
+		</div>
+	</div>
+	<div class="box-body table-responsive">
+		<table class="table table-bordered">
+			<tr>
+				<th width="40%">{{ "GLOBAL.FIELDS.USERNAME" | translate }}</th>
+				<td colspan="2">{{ user.username }}</td>
+			</tr>
+			<tr>
+				<th>{{ "GLOBAL.FIELDS.FULLNAME" | translate }}</th>
+				<td colspan="2" ng-if="data.domainSettings['lastNamePrefix'] == 'show'  ? true : false">{{ user.firstName }} {{ (user.lastNamePrefix != '' && user.lastNamePrefix != undefined ? user.lastNamePrefix + ' ' : '')}}{{ user.lastName }}</td>
+				<td colspan="2" ng-if="data.domainSettings['lastNamePrefix'] == 'show'  ? false : true">{{ user.firstName }} {{ user.lastName }}</td>
+			</tr>
+			<tr>
+				<th width="40%">{{'GLOBAL.FIELDS.DATEOFBIRTH' | translate}}</th>
+				<td>{{ dateOfBirthFormatted() }} {{ ageInYears() }}</td>
+				<td lit-if-permission="PLAYER_DOB_EDIT" lit-permission-domain="{{user.domain.name}}">
+					<a style="cursor: pointer;" ng-click="changeDateOfBirth() ">
+						<span class="fa fa-pencil-square-o"> {{'UI_NETWORK_ADMIN.LIMITS.MODIFY' | translate}}</span>
+					</a>
+				</td>
+			</tr>
+			<tr>
+				<th>{{ "GLOBAL.FIELDS.GENDER" | translate }}</th>
+				<td colspan="2">{{ user.gender }}</td>
+			</tr>
+			<tr>
+				<th>{{ "GLOBAL.FIELDS.COUNTRY" | translate }}</th>
+				<td colspan="2">{{ user.countryCode }}</td>
+			</tr>
+			<tr ng-if="data.domainSettings['placeOfBirth'] == 'show'">
+				<th>{{ "GLOBAL.FIELDS.PLACE_OF_BIRTH" | translate }}</th>
+				<td colspan="2">{{ user.placeOfBirth }}</td>
+			</tr>
+			<tr ng-if="data.domainSettings['iban'] == 'show'" lit-if-permission="IBAN_VIEW" lit-permission-domain="{{user.domain.name}}">
+				<th>{{ "GLOBAL.FIELDS.IBAN" | translate }}</th>
+				<td colspan="2">{{ user.additionalData['iban'] }}</td>
+			</tr>
+			<tr>
+				<th>{{ "GLOBAL.FIELDS.EMAILADDRESS" | translate }}</th>
+				<td>{{ user.email }}</td>
+				<td>
+					<span ng-if="user.emailValidated === true" class="label label-lg label-info">{{ "UI_NETWORK_ADMIN.USER.EMAIL.VALIDATED" | translate
+						}}</span>
+					<span ng-if="user.emailValidated === false" class="label label-lg label-warning">{{ "UI_NETWORK_ADMIN.USER.EMAIL.NOT_VALIDATED" | translate
+						}}</span>
+          <div lit-if-permission="PLAYER_EDIT" lit-permission-domain="{{user.domain.name}}" ng-if="user.emailValidated == false">
+						<a style="cursor: pointer;" ng-click="redoValidation(user.email, user.id) ">
+							<span class="fa fa-paper-plane"> {{'UI_NETWORK_ADMIN.PERSONAL.REDO_EMAIL_VALIDATION' | translate}}</span>
+						</a>
+					</div>
+				</td>
+
+			<tr ng-if="data.domainSettings['pending_email_validation_activate'] && getPendingEmail(user).trim() !== ''">
+				<th>{{ "GLOBAL.FIELDS.PENDING_EMAIL_ADDRESS" | translate }}</th>
+				<td>{{ getPendingEmail(user) }}</td>
+      <td lit-if-permission="PLAYER_EDIT" lit-permission-domain="{{user.domain.name}}">
+				<a style="cursor: pointer;" ng-click="redoValidation(getPendingEmail(user), user.id) ">
+					<span class="fa fa-paper-plane"> {{'UI_NETWORK_ADMIN.PERSONAL.REDO_EMAIL_VALIDATION' | translate}}</span>
+				</a>
+			</td>
+			</tr>
+			<tr>
+				<th>{{ "GLOBAL.FIELDS.TIMEZONE" | translate }}</th>
+				<td colspan="2">{{ user.timezone }}</td>
+			</tr>
+			<tr>
+				<th>{{ "GLOBAL.FIELDS.TELEPHONENUMBER" | translate }}</th>
+				<td colspan="2">{{ user.telephoneNumber }}</td>
+			</tr>
+			<tr>
+				<th>{{ "GLOBAL.FIELDS.CELLPHONENUMBER" | translate }}</th>
+				<td colspan="2">{{ user.cellphoneNumber }}
+					<br/>
+					<span ng-if="user.cellphoneValidated === true" class="label label-lg label-info">{{ "UI_NETWORK_ADMIN.USER.MOBILE.VALIDATED" | translate
+						}}</span>
+					<span ng-if="user.cellphoneValidated === false" class="label label-lg label-warning">{{ "UI_NETWORK_ADMIN.USER.MOBILE.NOT_VALIDATED"
+					| translate }}</span>
+				</td>
+			</tr>
+			<tr ng-if="data.domainSettings['signup_bonus_code'] === 'show'">
+				<th>{{'UI_NETWORK_ADMIN.PLAYER.SUMMARY.SIGN_UP_BONUS_CODE' | translate}}</th>
+				<td>{{user.bonusCode}}</td>
+			</tr>
+		</table>
+	</div>
+</div>

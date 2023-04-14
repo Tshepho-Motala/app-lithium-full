@@ -1,0 +1,20 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "PLAYER": {
+      "RESTRICTIONS": {
+        "CASINO_BLOCK": {
+          "SUBORDINATE": {
+            "MESSAGE": {
+              "1": "1 - Restrict for 1 day",
+              "2": "2 - Restrict for 1 week",
+              "3": "3 - Restrict for 2 weeks",
+              "4": "4 - Restrict for 3 weeks",
+              "5": "5 - Restrict for 5 weeks",
+              "INDEFINITELY": "Restrict Indefinitely"
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,138 @@
+{
+  "name": "Credit Card",
+  "code": "cc",
+  "image": {
+    "filename": "/methods/cc.png",
+    "filetype": "image/png"
+  },
+  "properties": [
+    { 
+      "name": "cardType",
+      "type": "string",
+      "defaultValue": "ANY",
+      "description": "ANY or Specific comma separated shortcode(s) for card type(s). eg. VISA,MASTER,AMEX,DINERS,DISCOVER,JCB,CUNION"
+    }
+  ],
+  "depositStages": [
+    {
+      "number": 0,
+      "title": "Required Player Information",
+      "description": "Please fill in the missing details below before we proceed.",
+      "inputFields": [
+        {
+          "code": "firstName",
+          "name": "Firstname"
+        },
+        {
+          "code": "lastName",
+          "name": "Lastname"
+        },
+        {
+          "code": "residentialAddress.addressLine1",
+          "name": "Address Line 1",
+          "displayOrder": "5"
+        },
+        {
+          "code": "residentialAddress.addressLine2",
+          "name": "Address Line 2",
+          "displayOrder": "6",
+          "required": false
+        },
+        {
+          "code": "residentialAddress.city",
+          "name": "City",
+          "displayOrder": "4"
+        },
+        {
+          "code": "residentialAddress.adminLevel1",
+          "name": "Province/State",
+          "displayOrder": "2"
+        },
+        {
+          "code": "residentialAddress.country",
+          "name": "Country",
+          "displayOrder": "1"
+        },
+        {
+          "code": "residentialAddress.adminLevel1Code",
+          "name": "Province/State",
+          "type": "hidden"
+        },
+        {
+          "code": "residentialAddress.countryCode",
+          "name": "Country",
+          "type": "hidden"
+        },
+        {
+          "code": "residentialAddress.postalCode",
+          "name": "Postal Code",
+          "displayOrder": "3"
+        },
+        {
+          "code": "dobDay",
+          "name": "Birthday",
+          "type": "dob"
+        },
+        {
+          "code": "dobMonth",
+          "name": "Birthday",
+          "type": "dob"
+        },
+        {
+          "code": "dobYear",
+          "name": "Birthday",
+          "type": "dob"
+        }
+      ]
+    },
+    {
+      "number": 1,
+      "title": "Enter Amount and Sender",
+      "description": null,
+      "inputFields": [
+        {
+          "code": "nameoncard",
+          "name": "Name on Card",
+          "description": "Enter your full name as it appears on the front of your card",
+          "type": "string"
+        },
+        {
+          "code": "ccnumber",
+          "name": "Credit Card Number",
+          "description": "Enter your credit card number",
+          "type": "ccnumber"
+        },
+        {
+          "code": "expmonth",
+          "name": "Expiry Month",
+          "description": null,
+          "type": "month"
+        },
+        {
+          "code": "expyear",
+          "name": "Expiry Year",
+          "description": null,
+          "type": "year"
+        },
+        {
+          "code": "cvv",
+          "name": "CVV",
+          "description": "Enter the last three digits of the CVV code on the back of your card.",
+          "type": "cvv"
+        },
+	    {
+          "code": "csid",
+          "name": "",
+          "description": "",
+          "type": "csid"
+        }
+        
+      ]
+    },
+    {
+      "number": 2,
+      "title": "Waiting for Confirmation",
+      "description": "Hang on while we wait for the bank to confirm your deposit."
+    }
+  ]
+}

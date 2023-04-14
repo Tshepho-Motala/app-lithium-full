@@ -1,0 +1,12 @@
+<GAMESSUITES>
+<SUITES>
+<SUITE ID="Video Poker" NAME="Video Poker">
+<GAMES>
+<GAME NAME="Bonus Poker" ID="10137" IMAGEURL="" LANGUAGES="en">
+</GAME>
+<GAME NAME="Bonus Poker 2" ID="20232" IMAGEURL="" LANGUAGES="en">
+</GAME>
+</GAMES>
+</SUITE>
+</SUITES>
+</GAMESSUITES>

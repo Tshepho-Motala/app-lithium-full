@@ -1,0 +1,7 @@
+.User Authentication
+[source, gherkin]
+----
+include::../../src/gherkin/user-authentication.feature[]
+----
+
+include::../error-codes.adoc[]

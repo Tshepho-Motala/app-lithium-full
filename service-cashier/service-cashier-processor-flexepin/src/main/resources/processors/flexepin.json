@@ -1,0 +1,66 @@
+{
+	"name": "Flexepin",
+	"code": "flexepin",
+	"url": "service-cashier-processor-flexepin",
+	"methodNames": [
+		"flexepin"
+	],
+	"deposit": true,
+	"withdraw":false,
+	"fees": {
+		"flat": 0,
+		"percentage": 0,
+		"minimum": 0
+	},
+ 	"limits": {
+		"minAmount": 2500,
+		"maxAmount": 10000,
+		"maxAmountDay":20000,
+		"maxAmountWeek": 30000,
+		"maxAmountMonth": 1000,
+		"maxTransactionsDay":20,
+		"maxTransactionsWeek":30,
+		"maxTransactionsMonth":200
+	},
+	
+	"properties": [
+		{
+			"name": "APIKey",
+			"defaultValue": "GGCOM3TG8TK1MQRQ",
+			"type": "string",
+			"description": "Secret key provided by apiary"
+		},
+		{
+			"name": "APISecret",
+			"defaultValue": "ED4O0R2RPJ7SJSSL",
+			"type": "string",
+			"description": "Secret key provided by apiary"
+		},
+		 
+		{
+			"name": "subMerchantId",
+			"defaultValue": "app.megavegas.com",
+			"type": "string",
+			"description": "submechant ID"
+		},
+		 
+		{
+			"name": "baseUrl",
+			"defaultValue": "https://testrest.flexepin.com",
+			"type": "string",
+			"description": "Apiary base url"
+		},
+		{
+			"name": "scpMechantId",
+			"defaultValue": "SCPGGCOM6HS4",
+			"type": "string",
+			"description": "Apiary base mechantID"
+		},
+		{
+			"name": "amount",
+		    "defaultValue": false,		
+			"type":"boolean",
+			"description": "disable amount field validation"
+		}
+	]
+}

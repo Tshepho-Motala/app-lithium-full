@@ -1,0 +1,20 @@
+server:
+  port: 9921
+
+spring:
+  application:
+    name: service-promo-provider-casino-roxor
+
+test: win
+
+lithium:
+  services:
+    db:
+      load-test-data: true
+        
+logging:
+  level:
+    lithium.leader: WARN
+    org.springframework.cloud.netflix.feign.LithiumFeignClientFactoryBean: INFO
+    lithium.services.WebRequestInterceptorConfiguration: INFO
+

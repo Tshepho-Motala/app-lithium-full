@@ -1,0 +1,79 @@
+{
+  "GLOBAL" : {
+    "ACTION": {
+      "RESTORE": "Restore"
+    }
+  },
+  "UI_NETWORK_ADMIN": {
+    "PLAYER": {
+      "TAB": {
+        "NOTES": "Notes"
+      },
+      "NOTE": {
+        "ADD": {
+          "TITLE": "Add a note",
+          "SUCCESS": "User note was added successfully.",
+          "ERROR": "Failed to add user note."
+        },
+        "DELETE": {
+          "TITLE": "Are you sure you want to delete the note?"
+        },
+        "RESTORE": {
+          "TITLE": "Are you sure you want to restore the note?"
+        }
+      },
+      "QUICK_ACTIONS": {
+        "ADD": {
+          "NOTE": "Add A Note"
+        }
+      }
+    },
+    "CHANGELOGS" : {
+      "CREATE": "The {{ entity }} was created.",
+      "EDIT": "The {{ entity }} was edited.",
+      "ENABLE": "The {{ entity }} was enabled.",
+      "DISABLE": "The {{ entity }} was disabled.",
+      "DELETE": "The {{ entity }} was deleted.",
+      "SAVEFILE": "The {{ entity }} was saved.",
+      "MODIFY": "The {{ entity }} was modified.",
+      "CANCEL": "The {{ entity }} was canceled.",
+      "COMMENT": "The user.comment was added:",
+      "CANCELBONUS": "The {{ entity }} was canceled.",
+      "REGISTERDEPOSITBONUS": "The {{ entity }} deposit was registered.",
+      "CREATEDOCUMENT": "The {{ entity }} was created.",
+      "UPDATEDOCUMENT": "The {{ entity }} was updated.",
+      "EXCESSIVELOGINBLOCK": "The {{ entity}} was blocked for excessive login",
+      "GLOBAL": {
+        "TABLE": {
+          "LABEL": {
+            "PINNED": "Pinned Entities",
+            "HISTORY": "All Entities"
+          }
+        },
+        "FIELDS": {
+          "TEXT": "Text",
+          "DATE": "Date",
+          "CREATEDBY": "Created by",
+          "PRIORITY": {
+            "LOW": "Low",
+            "MEDIUM": "Medium",
+            "HIGH": "High"
+          },
+          "CHANGED": "The following fields were changed:",
+          "NOCHANGES": "No fields changes",
+          "FROM": "from",
+          "TO": "to"
+        }
+      },
+      "PLAYER": {
+        "TABLE": {
+          "LABEL": {
+            "PINNED" :"Pinned Notes",
+            "HISTORY" : "Notes History"
+          }
+        }
+      }
+    }
+  }
+}
+

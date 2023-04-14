@@ -1,0 +1,602 @@
+openapi: 3.0.3
+info:
+  title: Lithium Sportsbook API Documentation
+
+  version: 0.0.1
+  description: |
+    The following document describes the APIs that will allow a sportsbook provider to register transactions
+    within Lithium.
+    ---
+    Some requests require a sha256 checksum that accompanies the payload. To calculate the checksum, concatenate
+    the fields identified in the description of the respective sha256 field, using a colon as separator.
+    Thereafter pass it to your preferred hmac sha256 function together with the pre-shared key supplied by
+    Lithium.
+
+    See https://www.freeformatter.com/hmac-generator.html to test (ensure to select SHA256)
+
+        hmac_sha256("TESTDATA", PRESHAREDKEY") = cd322232cde0f9f6f8c3c0c7833ee8931af66677f1bf4c85691e0d777c9c567d
+
+servers:
+  - url: "https://gateway.lithium-develop.ls-g.net"
+    description: LS Lithium QA
+  - url: "https://gateway.lithium-staging.ls-g.net"
+    description: LS Lithium Staging
+  - url: "https://gateway.lithium-live.ls-g.net"
+    description: LS Lithium Production
+  - url: "https://gateway.dev.playsafesa.com"
+    description: PSSA Lithium Development
+  - url: "http://localhost:9000"
+    description: Local Lithium Gateway
+  - url: "{GATEWAY_URL}"
+    description: Custom Lithium Gateway URL
+    variables:
+      GATEWAY_URL:
+        description: Gateway server URL
+        default: http://localhost:9000
+
+paths:
+  /service-casino-provider-sportsbook/validatetoken:
+    post:
+      tags:
+        - Validate Token
+      security:
+        - BearerTokenAuth: []
+      description: Obtain customer info utilising JWT token authentication.
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CustomerInfoResponse"
+        "404":
+          $ref: "#/components/responses/404NoSuchUserError"
+        "470":
+          $ref: "#/components/responses/470IncorrectHash"
+        "490":
+          $ref: "#/components/responses/490SoftSelfExclusionException"
+        "491":
+          $ref: "#/components/responses/491PermanentSelfExclusionException"
+        "500":
+          $ref: "#/components/responses/500InternalServerError"
+        "504":
+          $ref: "#/components/responses/504ServiceUnavailableError"
+
+  /service-casino-provider-sportsbook/bet/reserve:
+    post:
+      tags:
+        - Bet Process
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BetReserveRequest"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BetReserveResponse"
+        "400":
+          $ref: "#/components/responses/400BadRequest"
+        "422":
+          $ref: "#/components/responses/422DataValidationError"
+        "470":
+          $ref: "#/components/responses/470IncorrectHash"
+        "471":
+          $ref: "#/components/responses/471InsufficientFunds"
+        "490":
+          $ref: "#/components/responses/490SoftSelfExclusionException"
+        "491":
+          $ref: "#/components/responses/491PermanentSelfExclusionException"
+        "492":
+          $ref: "#/components/responses/492DailyLossLimitReachedException"
+        "493":
+          $ref: "#/components/responses/493MonthlyLossLimitReachedException"
+        "494":
+          $ref: "#/components/responses/494DailyWinLimitReachedException"
+        "495":
+          $ref: "#/components/responses/495MonthlyWinLimitReachedException"
+        "500":
+          $ref: "#/components/responses/500InternalServerError"
+        "504":
+          $ref: "#/components/responses/504ServiceUnavailableError"
+
+  /service-casino-provider-sportsbook/bet/cancelreserve:
+    post:
+      tags:
+        - Bet Process
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BetCancelReserveRequest"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BetCancelReserveResponse"
+        "400":
+          $ref: "#/components/responses/400BadRequest"
+        "422":
+          $ref: "#/components/responses/422DataValidationError"
+        "470":
+          $ref: "#/components/responses/470IncorrectHash"
+        "500":
+          $ref: "#/components/responses/500InternalServerError"
+        "504":
+          $ref: "#/components/responses/504ServiceUnavailableError"
+
+  /service-casino-provider-sportsbook/bet/debitreserve:
+    post:
+      tags:
+        - Bet Process
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BetDebitReserveRequest"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BetDebitReserveResponse"
+        "400":
+          $ref: "#/components/responses/400BadRequest"
+        "422":
+          $ref: "#/components/responses/422DataValidationError"
+        "470":
+          $ref: "#/components/responses/470IncorrectHash"
+        "500":
+          $ref: "#/components/responses/500InternalServerError"
+        "504":
+          $ref: "#/components/responses/504ServiceUnavailableError"
+
+  /service-casino-provider-sportsbook/bet/commitreserve:
+    post:
+      tags:
+        - Bet Process
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BetCommitReserveRequest"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BetCommitReserveResponse"
+        "400":
+          $ref: "#/components/responses/400BadRequest"
+        "401":
+          $ref: "#/components/responses/401UnauthorizedError"
+        "422":
+          $ref: "#/components/responses/422DataValidationError"
+        "470":
+          $ref: "#/components/responses/470IncorrectHash"
+        "500":
+          $ref: "#/components/responses/500InternalServerError"
+        "504":
+          $ref: "#/components/responses/504ServiceUnavailableError"
+
+  /service-casino-provider-sportsbook/settle/debit:
+    description: |
+      The method instructs subtracts a certain amount from customer's account.
+      The command is used only for bet outcome correction (rare). This method will not be used for bet purchase!
+    post:
+      tags:
+        - Bet Settlement Process
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SettleDebitRequest"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SettleDebitResponse"
+        "400":
+          $ref: "#/components/responses/400BadRequest"
+        "422":
+          $ref: "#/components/responses/422DataValidationError"
+        "470":
+          $ref: "#/components/responses/470IncorrectHash"
+        "500":
+          $ref: "#/components/responses/500InternalServerError"
+        "504":
+          $ref: "#/components/responses/504ServiceUnavailableError"
+
+  /service-casino-provider-sportsbook/settle/credit:
+    description: |
+      The method adds a certain amount to customer's account.
+      The command is used only for bet outcome correction (rare). This method will not be used for bet purchase!
+    post:
+      tags:
+        - Bet Settlement Process
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SettleCreditRequest"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/SettleCreditResponse"
+        "400":
+          $ref: "#/components/responses/400BadRequest"
+        "422":
+          $ref: "#/components/responses/422DataValidationError"
+        "470":
+          $ref: "#/components/responses/470IncorrectHash"
+        "500":
+          $ref: "#/components/responses/500InternalServerError"
+        "504":
+          $ref: "#/components/responses/504ServiceUnavailableError"
+
+  /sportsbookprovidedurl/betinfo:
+    description: |
+      An API provided by the sportsbook that will return an iFrame URL that enables single signon to view the bet info
+      in the sportsbook backoffice. This is to be called from Lithium server to sportsbook.
+    post:
+      tags:
+        - Sportsbook Provided APIs
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BetInfoUrlRequest"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BetInfoUrlResponse"
+        "400":
+          $ref: "#/components/responses/400BadRequest"
+        "422":
+          $ref: "#/components/responses/422DataValidationError"
+        "470":
+          $ref: "#/components/responses/470IncorrectHash"
+        "500":
+          $ref: "#/components/responses/500InternalServerError"
+        "504":
+          $ref: "#/components/responses/504ServiceUnavailableError"
+
+components:
+  responses:
+
+    400BadRequest:
+      description: The request contained a document that could not be parsed due to a syntax error. Please do not resubmit before changing the content.
+
+    404NoSuchUserError:
+      description: The specified user does not exist.
+
+    404OriginalTransactionNotFound:
+      description: The referenced transaction was not found. Perhaps the original transaction was lost in transit. Resubmit the original transaction and then resubmit this transaction.
+
+    409DuplicateSubmission:
+      description: This transaction was already submitted. Do not resubmit.
+
+    422DataValidationError:
+      description: The input data failed to validate. Please fix the request and submit a new one. The same transaction ID may be used.
+
+    470IncorrectHash:
+      description: The supplied hash is incorrect. You may resubmit the same transaction with a new hash. The transaction will not be stored.
+
+    471InsufficientFunds:
+      description: Insufficient funds for this adjustment. Please resubmit the same request later. Repeatable.
+
+    490SoftSelfExclusionException:
+      description: The user has soft self-excluded. The request should not be repeated.
+
+    491PermanentSelfExclusionException:
+      description: The user has permanent self-excluded. The request should not be repeated.
+
+    492DailyLossLimitReachedException:
+      description: The user has exceeded their daily loss limit.
+
+    493MonthlyLossLimitReachedException:
+      description: The user has exceeded their monthly loss limit.
+
+    494DailyWinLimitReachedException:
+      description: The user has exceeded their daily win limit.
+
+    495MonthlyWinLimitReachedException:
+      description: The user has exceeded their monthly win limit.
+
+    500InternalServerError:
+      description: The server is experiencing technical problems and is unavailable. Please resubmit the same request later. Repeatable.
+
+    504ServiceUnavailableError:
+      description: The service is unavailabe (is it running?). Please resubmit the same request later. Repeatable.
+
+
+  schemas:
+
+    CustomerInfoResponse:
+      type: object
+      properties:
+        guid:
+          type: string
+        username:
+          type: string
+        #        apiToken:
+        #          type: string
+        city:
+          type: string
+        country:
+          type: string
+        currencyCode:
+          type: string
+        balance:
+          type: number
+          format: double
+
+    BetReserveRequest:
+      type: object
+      properties:
+        guid:
+          type: string
+        reserveId:
+          type: integer
+        amount:
+          type: number
+          format: double
+        timestamp:
+          type: integer
+          format: int64
+          description: Milliseconds since epoch
+        sha256:
+          type: string
+          description: |
+            To calculate the SHA256 here, use the following fields:
+            "guid:timestamp:reserveId".
+
+    BetReserveResponse:
+      type: object
+      properties:
+        balance:
+          type: number
+          format: double
+        balanceCurrencyCode:
+          type: string
+        bonusUsedAmount:
+          type: number
+          format: double
+        transactionId:
+          type: integer
+          format: int64
+
+    BetDebitReserveRequest:
+      type: object
+      properties:
+        guid:
+          type: string
+        betId:
+          type: string
+        purchaseId:
+          type: string
+        reserveId:
+          type: integer
+        requestId:
+          type: integer
+        amount:
+          type: number
+          format: double
+        timestamp:
+          type: integer
+          format: int64
+          description: Milliseconds since epoch
+        sha256:
+          type: string
+          description: |
+            To calculate the SHA256 here, use the following fields:
+            "guid:timestamp:reserveId:requestId".
+
+    BetDebitReserveResponse:
+      type: object
+      properties:
+        balance:
+          type: number
+          format: double
+        balanceCurrencyCode:
+          type: string
+        transactionId:
+          type: integer
+          format: int64
+
+    BetCancelReserveRequest:
+      type: object
+      properties:
+        guid:
+          type: string
+        reserveId:
+          type: integer
+        timestamp:
+          type: integer
+          format: int64
+          description: Milliseconds since epoch
+        sha256:
+          type: string
+          description: |
+            To calculate the SHA256 here, use the following fields:
+            "guid:timestamp:reserveId".
+
+    BetCancelReserveResponse:
+      type: object
+      properties:
+        balance:
+          type: number
+          format: double
+        balanceCurrencyCode:
+          type: string
+        transactionId:
+          type: integer
+          format: int64
+
+    BetCommitReserveRequest:
+      type: object
+      properties:
+        guid:
+          type: string
+        reserveId:
+          type: integer
+        timestamp:
+          type: integer
+          format: int64
+          description: Milliseconds since epoch
+        sha256:
+          type: string
+          description: |
+            To calculate the SHA256 here, use the following fields:
+            "guid:timestamp:reserveId".
+
+    BetCommitReserveResponse:
+      type: object
+      properties:
+        balance:
+          type: number
+          format: double
+        balanceCurrencyCode:
+          type: string
+        transactionId:
+          type: integer
+          format: int64
+
+    SettleDebitRequest:
+      type: object
+      properties:
+        guid:
+          type: string
+        requestId:
+          type: integer
+        amount:
+          type: number
+          format: double
+        timestamp:
+          type: integer
+          format: int64
+          description: Milliseconds since epoch
+        sha256:
+          type: string
+          description: |
+            To calculate the SHA256 here, use the following fields:
+            "guid:timestamp:requestId".
+
+    SettleDebitResponse:
+      type: object
+      properties:
+        balance:
+          type: number
+          format: double
+        balanceCurrencyCode:
+          type: string
+        transactionId:
+          type: integer
+          format: int64
+
+    SettleCreditRequest:
+      type: object
+      properties:
+        guid:
+          type: string
+        requestId:
+          type: integer
+        amount:
+          type: number
+          format: double
+        timestamp:
+          type: integer
+          format: int64
+          description: Milliseconds since epoch
+        sha256:
+          type: string
+          description: |
+            To calculate the SHA256 here, use the following fields:
+            "guid:timestamp:requestId".
+
+    SettleCreditResponse:
+      type: object
+      properties:
+        balance:
+          type: number
+          format: double
+        balanceCurrencyCode:
+          type: string
+        transactionId:
+          type: integer
+          format: int64
+
+    BetInfoUrlRequest:
+      type: object
+      properties:
+        bets:
+          type: array
+          description: An array of bet ids. May be 1 to many.
+          items:
+            $ref: "#/components/schemas/BetInfoUrlRequestBet"
+        timestamp:
+          type: integer
+          format: int64
+          description: Milliseconds since epoch
+        sha256:
+          type: string
+          description: |
+            To calculate the SHA256 here, add all the bet IDs in and then the timestamp:
+            "betid:betid:betid:...:timestamp".
+
+    BetInfoUrlRequestBet:
+      type: object
+      properties:
+        betId:
+          type: string
+
+    BetInfoUrlResponse:
+      type: object
+      properties:
+        urls:
+          type: array
+          description: An array of urls per bet id.
+          items:
+            $ref: "#/components/schemas/BetInfoUrlResponseBetUrl"
+
+    BetInfoUrlResponseBetUrl:
+      type: object
+      properties:
+        betId:
+          type: string
+        url:
+          type: string
+          description: |
+            The URL that should be provided to the browser in iFrame or popup so that it may show the operator a
+            detailed description of the bet.
+
+  securitySchemes:
+    BearerTokenAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: >-
+        A token obtained via the Lithium login process.
+        This will add a header to the request - "Authorization: Bearer TOKENVALUE"

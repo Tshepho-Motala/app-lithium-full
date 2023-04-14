@@ -1,0 +1,64 @@
+.Nuvei Withdraw Flow
+[plantuml]
+----
+
+@startuml
+
+actor Player
+participant Portal
+participant Lithium
+actor LBOOperator
+participant Nuvei
+participant Bank
+
+autonumber
+
+Player -> Portal  : Player press withdraw
+activate Portal
+Portal -> Lithium : getProcessorAccounts(userGuid)
+activate Lithium
+Lithium --> Portal : getProcessorAccounts(accounts_list)
+deactivate Lithium
+Portal--> Player: List of stored cards
+Player -> Portal : Player chooses card
+Portal -> Lithium : withdraw(processorAccountId)
+activate Lithium
+Lithium -> Lithium : Check account
+Lithium --> Portal : withdraw(status="WAITFORAPPROVAL")
+deactivate Lithium
+Portal --> Player : withdraw in progress
+deactivate Portal
+
+LBOOperator -> Lithium : Approve Withdraw
+activate Lithium
+Lithium -> Nuvei : payout(paymentOptionId)
+activate Nuvei
+Nuvei->Bank: payout
+activate Bank
+Bank --> Nuvei: initial result
+deactivate Bank
+Nuvei --> Lithium : payout(status="APPROVED,DECLINED,ERROR")
+deactivate Nuvei
+
+alt#Gold  #Pink status="ERROR,DECLINED"
+    Lithium --> LBOOperator: Deposit(status="DECLINED", error)
+else #LightGreen status="APPROVED"
+    Lithium --> LBOOperator: Deposit(status="WAITFORPROCESSOR")
+    ref over Lithium: Webhook
+    deactivate Lithium
+end
+
+ == Webhook==
+    Bank -> Nuvei: final notification
+    activate Nuvei
+    Nuvei -> Lithium : Notification(transactionId, type, status)
+    activate Lithium
+    Lithium -> Nuvei: GetTransactionStatus(transactionId)
+    activate Nuvei
+    Nuvei --> Lithium: GetTransactionStatus(status, error)
+    deactivate Nuvei
+    Lithium -> Lithium: Update transaction status and player balance
+    Lithium --> Nuvei: HTTP_OK
+    deactivate Lithium
+    deactivate Nuvei
+@enduml

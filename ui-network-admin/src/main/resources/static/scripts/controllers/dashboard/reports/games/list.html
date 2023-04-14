@@ -1,0 +1,25 @@
+<div class="container-fluid">
+	<lit-header
+		title="UI_NETWORK_ADMIN.REPORTS.GAMES.LIST.TITLE" 
+		description="UI_NETWORK_ADMIN.REPORTS.GAMES.LIST.DESCRIPTION">
+	</lit-header>
+	
+	<div class="row v-reset-row ">
+		<div class="col-lg-12">
+			<button-add ui-sref="dashboard.reports.games.create" lit-if-permission="REPORT_GAMES"></button-add>
+		</div>
+	</div>
+	
+	<br/>
+	
+	<div class="row v-reset-row ">
+		<div class="col-xs-12">
+			<div class="box">
+				<div class="box-body table-responsive no-padding">
+					<dt table="controller.table"/>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>

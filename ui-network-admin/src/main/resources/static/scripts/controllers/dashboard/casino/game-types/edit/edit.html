@@ -1,0 +1,18 @@
+<form ng-submit="controller.onSubmit()" name="controller.form" autocomplete="off" novalidate>
+    <buttonbar>
+        <button-back ui-sref="dashboard.casino.game-types.view({domainName: controller.model.domain.name, id: controller.model.id})"></button-back>
+        <button-submit></button-submit>
+        <button-delete click-confirm="{{'UI_NETWORK_ADMIN.GAME-TYPES.EDIT.DELETE.CONFIRM'|translate}}" click-confirmed="controller.delete()"></button-delete>
+    </buttonbar>
+    <br/><br/>
+    <div class="row v-reset-row ">
+        <div class="col-xs-12">
+            <div class="card card-block">
+                <div class="well-clear">
+                    <formly-form model="controller.model" fields="controller.fields" options="controller.options" form="controller.form">
+                    </formly-form>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

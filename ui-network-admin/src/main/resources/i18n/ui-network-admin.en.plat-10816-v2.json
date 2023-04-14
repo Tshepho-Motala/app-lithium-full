@@ -1,0 +1,71 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "RESTRICTIONS": {
+      "PLAYERS":{
+  "LOGIN.BLOCK.AFTER.SE": {
+    "NA": "Login Block After SE"
+  },
+  "INTERVENTION.COMPS.BLOCK": {
+    "1": {
+      "NAME": "Intervention Comps Block 30 Days"
+    },
+    "2": {
+      "NAME": "Intervention Comps Block 60 Days"
+    },
+    "3": {
+      "NAME": "Intervention Comps Block 90 Days"
+    },
+    "NA": "Intervention Comps Block"
+  },
+  "PLAYER.COMPS.OPT-OUT": {
+    "NA": "Player Comps Opt-Out"
+  },
+  "UNDERAGE.COMPS.BLOCK": {
+    "NA": "Underage Comps Block"
+  },
+  "INTERVENTION.CASINO.BLOCK": {
+    "1": {
+      "NAME": "Intervention Casino Block 1 Day"
+    },
+    "2": {
+      "NAME": "Intervention Casino Block 1 Week"
+    },
+    "3": {
+      "NAME": "Intervention Casino Block 2 Weeks"
+    },
+    "4": {
+      "NAME": "Intervention Casino Block 3 Weeks"
+    },
+    "5": {
+      "NAME": "Intervention Casino Block 5 Weeks"
+    },
+    "NA": "Intervention Casino Block"
+  },
+  "PLAYER.CASINO.BLOCK": {
+    "1": {
+      "NAME": "Player Casino Block 1 Day"
+    },
+    "2": {
+      "NAME": "Player Casino Block 1 Week"
+    },
+    "3": {
+      "NAME": "Player Casino Block 2 Weeks"
+    },
+    "4": {
+      "NAME": "Player Casino Block 3 Weeks"
+    },
+    "5": {
+      "NAME": "Player Casino Block 5 Weeks"
+    },
+    "NA": "Player Casino Block"
+  },
+  "F2P.BLOCK": {
+    "NA": "F2P Block"
+  },
+  "BET.PLACEMENT.BLOCK": {
+    "NA": "Bet Placement Block"
+  }
+}
+}
+  }
+}

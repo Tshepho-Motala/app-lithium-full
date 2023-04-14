@@ -1,0 +1,21 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "PLAYER": {
+      "LOGINEVENTS": {
+        "LOGIN_ID": "Login-ID"
+      }
+    },
+    "BONUSES": {
+      "GRANT_MASS": {
+        "CASH_BONUSES": {
+          "BUTTONS": {
+            "COMPLETE": "Complete"
+          },
+          "ERRORS": {
+            "NO_VALID_PLAYERS": "There are no valid players to process, please upload a new file with valid players"
+          }
+        }
+      }
+    }
+  }
+}

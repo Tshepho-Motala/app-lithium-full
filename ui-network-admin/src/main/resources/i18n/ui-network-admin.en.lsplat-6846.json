@@ -1,0 +1,13 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "CASINO": {
+      "IMAGES": {
+        "FORM": {
+          "INVALID": {
+            "ERROR_MESSAGE": "Failed to upload file, only images of type jpg, jpeg, png and svg are allowed."
+          }
+        }
+      }
+    }
+  }
+}

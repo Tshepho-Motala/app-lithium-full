@@ -1,0 +1,20 @@
+{
+  "SERVICE-CASHIER": {
+    "AUTOWITHDRAWALS": {
+      "RULESETS": {
+        "RULE": {
+          "FIELD": {
+            "AUTO_APPROVED_WDS_LIMITED": "Count of consecutive Auto Approved WDs limited",
+            "MANUALLY_APPROVED_WDS_LIMITED": "Count of consecutive Manual Approved WDs limited",
+            "SETTINGS": {
+              "NUMBER_OF_WITHDRAWAL": {
+                "LABEL": "Number of withdrawal",
+                "DESCRIPTION": "Number of withdrawal"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

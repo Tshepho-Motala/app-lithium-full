@@ -1,0 +1,14 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "USER": {
+      "ERRORS": {
+        "PERSONALSAVE": {
+          "DOB": "The selected date of birth makes player less than 18 years which is under age"
+        }
+      },
+      "DOB" : {
+        "TITLE" : "Please confirm this will make player underage?"
+      }
+    }
+  }
+}

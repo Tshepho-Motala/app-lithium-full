@@ -1,0 +1,138 @@
+= LSPLAT-4102 PLAT-5584 ⁃ [NL] - Performance improvements for Grant Mass Bonuses & Mass Player Update - Processing Mass Validation and Mass Actions via queues
+Senzo Mthembu <senzo.mthembu@wonderlabz.com>
+1.0, March 2, 2022:: TA - LSPLAT-4102 PLAT-4807 ⁃ [NL] - Allow customers to exclude from Casino
+:toc: left
+:toclevels: 4
+:toc-title: LSPLAT-4102 PLAT-4807
+:icons: font
+:url-quickref: https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/
+
+== Information
+=== Tickets
+* https://jira.livescore.com/browse/PLAT-4807
+* https://playsafe.atlassian.net/browse/LSPLAT-4102
+
+=== Dependencies
+* N/A
+
+=== MR
+* N/A
+
+== Description (From Ticket)
+=== Background
+From POC:
+
+Irwin Herridge played a bit with the Mass User Validation job on *service-user-mass-action*
+
+*Local environment setup:*
+using 2 instances of service-user-mass-action with 3 service-users
+
+*Test 1 (AS-IS):* - Used latest Grant Mass Bonus job that had the manual trigger implemented and uploaded 1240 records on CSV
+
+Processing 1240 users on User Validation job took 1 min 28 seconds
+Note: That only one pod would run the job and would validate users one by one
+
+Drawback of test 1: not scalable as the job would run sequentially taking one CSV record at a time, calling service-user to check user status and domain user belongs to
+
+*Test 2 (POC):*
+
+* Based on Grant Mass Bonus job with manual triggering of job, only difference is the user validation is done via a queue where the queue listener was implemented on service-user
+
+Processing 1240 users on User Validation job took 38 seconds
+
+Note: Each CSV record gets added to a queue on service-user, and each record validated is being acknowledged as user-validated by calling a system endpoint that is now exposed by service-user-mass-action
+
+*Benefits of test 2:*
+
+* Can add more pods to improve performance of user validation checks- When Test 2 completed, test one was only at 55.44%; so by adding the user validation to a stream/queue we are now able to get almost a double-up if not more in performance
+
+=== Requirements
+Need to do a TA for this with some modification on Test 2, where queue listener would now reside on service-user-mass-action
+
+Create two queues:
+
+. User validation queue (listener residing on service-user-mass-action (else service-user is tightly coupled to service-user-mass-action)
+
+. Actions queue (listener also residing on service-user-mass-action)
+
+== Architecture
+=== Overview
+=== Message Queueing System
+The use of Message Queues provides a way for parts of the application to push messages to a queue *asynchronously* and ensure they are delivered to the correct destination. To implement message queuing, a message broker like RabbitMQ is a good option. The message broker provides temporary message storage when the receiving service is busy or disconnected.
+
+*Asynchronous*
+Asynchronous - you have some central hub (or message queue) where you place all requests between the microservices and the corresponding service takes the request, process it and return the result to the caller. This is what RabbitMQ (or any other message queue - MSMQ and Apache Kafka are good alternatives) is used for. In this case all microservices know only about the existance of the hub.
+
+=== How RabbitMQ works?
+The messages are published to an exchange inside the RabbitMQ broker. The exchange then distributes copies of that message
+
+=== RabbitMQ as the broker in a Microservices Architecture
+RabbitMQ enables asynchronous processing, meaning that it allows you to put a message in a queue without processing it immediately. RabbitMQ is therefore ideal for long-running tasks or blocking tasks, allowing web servers to respond quickly to requests instead of being forced to perform computationally intensive tasks on the spot. RabbitMQ simply stores messages and passes them to consumers when ready.
+
+*Adding Library Dependency*
+[source, java]
+<dependencies>
+    <dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-amqp</artifactId>
+        <version>2.2.2.RELEASE</version>
+    </dependency>
+</dependencies>
+
+=== Technical
+
+The following sequence diagrams has been produced to show how the user validation and mass actions processing will now be performed as part of a queueing system
+
+Create a new Queue Processor on *service-user-mass-action* "UserMassActionQueueProcessor" processUserValidation on MassValidationService to validate the user/players replacing the *Cron Job* mechanism.
+
+Each pod/queue-processor would then do the calls to *service-user*.
+After each user validation or action performed the *fileUploadData* record would be inserted/updated.
+
+==== Stage 1
+
+On stage 1, all user validation per player will be placed into a queue, where multiple pods may then perform user validation concurrently.
+
+include::../plantuml/sequence/overview.trigger-user-validation-processing-stage-1.puml[]
+
+==== Stage 2
+
+On stage 2, all mass actions to be performed per player will be placed onto a queue, where multiple pods will then perform all actions sequencially.
+
+Please note that the actions has been split out from the diagram below into their own diagrams in the following section.
+
+include::../plantuml/sequence/overview.trigger-mass-actions-processing-stage-2.puml[]
+
+===== Mass Actions
+
+====== Grant Bonus
+include::../plantuml/sequence/stage-2.mass-action.grant-bonus.puml[]
+
+====== Change Status
+include::../plantuml/sequence/stage-2.mass-action.change-status.puml[]
+
+====== Change Verification Status
+include::../plantuml/sequence/stage-2.mass-action.change-verification-status.puml[]
+
+====== Mark as Test Player
+include::../plantuml/sequence/stage-2.mass-action.mark-as-test-player.puml[]
+
+====== Add Player Tags
+include::../plantuml/sequence/stage-2.mass-action.add-player-tags.puml[]
+
+====== Replace Player Tags
+include::../plantuml/sequence/stage-2.mass-action.replace-player-tags.puml[]
+
+====== Remove All Player Tags
+include::../plantuml/sequence/stage-2.mass-action.remove-all-player-tags.puml[]
+
+====== Remove Player Tags
+include::../plantuml/sequence/stage-2.mass-action.remove-player-tags.puml[]
+
+====== Add Note
+include::../plantuml/sequence/stage-2.mass-action.add-note.puml[]
+
+====== Lift Player Restrictions
+include::../plantuml/sequence/stage-2.mass-action.lift-restrictions.puml[]
+
+====== Place Player Restrictions
+include::../plantuml/sequence/stage-2.mass-action.place-restrictions.puml[]

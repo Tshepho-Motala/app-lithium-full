@@ -1,0 +1,15 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "CASHIER": {
+        "AUTOWITHDRAWALS" : {
+          "RULESET": {
+            "PROCESS": {
+              "CLONE": "CLONE",
+              "CLONE_TITLE": "Choose domain where you want to add cloned ruleset",
+              "CONFIRM": "Confirm"
+            }
+          }
+        }
+    }
+  }
+}

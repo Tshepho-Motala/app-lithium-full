@@ -1,0 +1,35 @@
+{
+  "name": "Custom",
+  "code": "none",
+  "image": {
+    "filename": "/methods/none.png",
+    "filetype": "image/png"
+  },
+  "depositStages": [
+    {
+      "number": 1,
+      "inputFields": [
+        {
+          "code": "noamount",
+          "name": "noamount",
+          "type": "noamount"
+        },
+        {
+          "code": "title",
+          "name": "Gift Cards",
+          "type": "custom"
+        },
+        {
+          "code": "message",
+          "name": "Contact our customer support for more information on our gift card offering.",
+          "type": "custom"
+        }
+      ]
+    }
+  ],
+  "withdrawalStages": [
+    {
+      "number": 1
+    }
+  ]
+}

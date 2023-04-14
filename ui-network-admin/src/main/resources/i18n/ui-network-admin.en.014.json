@@ -1,0 +1,52 @@
+{
+	"GLOBAL": {
+		"ACTION": {
+			"DOWNLOADEXCEL": "Download Excel",
+			"REFRESH": "Refresh"
+		},
+		"FIELDS": {
+			"STATUS": "Status"
+		}
+	},
+	
+	"UI_NETWORK_ADMIN": {
+		"REPORTS": {
+			"PLAYERS": {
+				"LIST": {
+					"TITLE": "Player Reports",
+					"DESCRIPTION": "Below is a list of all scheduled or ad-hoc reports on player activity."
+				},
+				"REPORT": {
+					"TITLE": "Player Report",
+					"DESCRIPTION": "A player report that contains the summary financial details for a player as per the configured parameters below.",
+					"FIELDS": {
+						"NAME": {
+							"NAME": "Report Name",
+							"DESCRIPTION": "The name of this report."
+						},
+						"DOMAIN": {
+							"NAME": "Domain Name",
+							"DESCRIPTION": "The domain to which this report applies."
+						},
+						"DESCRIPTION": {
+							"NAME": "Report Description",
+							"DESCRIPTION": "A descriptive note that describes this report."
+						},
+						"CREATEDON": {
+							"NAME": "Created On",
+							"DESCRIPTION": "The date and time that this report was created."
+						},
+						"CREATEDBY": {
+							"NAME": "Created By",
+							"DESCRIPTION": "The user that created this report."
+						}
+					}
+				},
+				"REPORTRUN": {
+					"TITLE": "Report Run",
+					"DESCRIPTION": "Below are the results of a single run of the report. Select 'Download Excel' to retrieve a copy of the report in Excel format."
+				}
+			}
+		}
+	}
+}

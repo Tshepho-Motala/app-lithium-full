@@ -1,0 +1,10 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "CHANGELOGS": {
+      "PLAYER": {
+        "IDIN_CELLPHONE_VALIDATED": "The player cellphone has been validated through iDin",
+        "IDIN_EMAIL_VALIDATED": "The player email has been validated through iDin"
+      }
+    }
+  }
+}

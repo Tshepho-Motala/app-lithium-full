@@ -1,0 +1,16 @@
+@import '~@angular/material/theming';
+@import '~@covalent/core/theming/all-theme';
+
+@include mat-core();
+
+$primary-palette: mat-palette($mat-blue-grey);
+$accent-palette: mat-palette($mat-orange, 800, A100, A400);
+$warn-palette: mat-palette($mat-red, 600);
+
+$theme: mat-light-theme($primary-palette, $accent-palette, $warn-palette);
+
+$primary-map: map-get($theme, primary);
+$accent-map: map-get($theme, accent);
+$warn-map: map-get($theme, warn);
+$background-map: map-get($theme, background);
+$foreground-map: map-get($theme, foreground);

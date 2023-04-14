@@ -1,0 +1,1 @@
+ALTER TABLE `inbox_message_placeholder_replacement` MODIFY `value` longtext DEFAULT NULL;

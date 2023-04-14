@@ -1,0 +1,149 @@
+= End Game Round
+
+include::plantuml/endpoint-mappings-endgameround-sequence.puml[]
+
+GGO: `/v1.0/gameround/end` +
+Lithium: `CasinoClientService.completeBetRound()`
+
+== Request
+
+[options="header", cols="^.<20m,.<30,.<10,.<20m,.<20e"]
+|===
+|GGO Parameter|Description|Type|Lithium Parameter|Comments
+
+| Authorization +
+_(header)_
+| Basic Auth.
+| String
+| N/A
+| Validate against config
+
+| PlatformKey
+| The platform key associated with the caller.
+| String(4)
+| N/A
+| Validate against config
+
+| GatewaySessionToken
+| The Player’s current Gateway Session Token as returned from the Redeem Session Token method. This should be validated as active on Place Bet only.
+| String(100)
+| sessionKey
+|
+
+| Timestamp
+| A UTC Timestamp for the request.
+| Date
+| BalanceAdjustmentRequest.ExternalTimestamp
+| Ignore - issues with unique index in Lithium
+
+| OperatorAccountID
+| Unique identifier for the Player in the Operator Platform.
+| String(50)
+| BalanceAdjustmentRequest.UserGuid
+|
+
+| GameRoundID
+| Unique Game Round ID within the Gameflex Platform.
+| String(50)
+| BalanceAdjustmentRequest.RoundId
+|
+
+| GameID
+| Unique identifier of the Game being played inside the Game Round.
+| String(50)
+| BalanceAdjustmentRequest.GameGuid
+| Will need to have looked up lithium.service.games.client.objects.Game from the value provided in the request
+
+| ContentGameProviderID
+| Content Game Provider ID.
+| String(50)
+| N/A
+| Ignore
+
+| CurrencyCode
+| Currency Code of the Transaction.
+| String(3)
+| N/A
+|
+
+| JackpotContribution
+| [red]#*_Optional._*# Jackpot Contribution which can be up to 10 decimal places.
+| Decimal
+| N/A
+| Ignore: not MVP
+
+| JackpotWinnings
+| [red]#*_Optional._*# Jackpot Winnings awarded for the Game Round. Note, this is for information only and is used to calculate revenue. The Jackpot Winnings amount can be the same as the total Game Round.
+| Money
+| N/A
+| Ignore: not MVP
+
+
+| FreeBetOfferCode
+| [red]#*_Optional._*# If the Game Round is for a Free Game, this is the promotional offer code associated with the Free Game.
+| String(100)
+| N/A
+| Ignore: not MVP
+
+|===
+
+.Example Request:
+[source,json]
+----
+ {
+    PlatformKey: "L100",
+    Sequence: "dec51196-3a6b-4795-8653-1a4c2a6be08e",
+    Timestamp: "2020-09-14T14:30:06.2794721Z",
+    GatewaySessionToken: "cc146974-b210-482e-820b-771b01d15227",
+    OperatorAccountID: "TestOperatorID",
+    GameRoundID: "13245Z",
+    GameID: "11588",
+    ContentGameProviderID: "12",
+    CurrencyCode: "EUR",
+    JackpotContribution: 0,
+    JackpotWinnings: 0,
+    FreeGameOfferCode: "OfferCode"
+}
+----
+
+== Response
+
+[options="header", cols="^.<20m,.<30,.<10,.<20m,.<20e"]
+|===
+|GGO Parameter|Description|Type|Lithium Parameter|Comments
+
+| ErrorCode
+| Error Code.
+| Integer
+|
+| [0, -1, -5, -6, -7, -14]
+
+| Balance
+| The Operator Wallet Balance as described in link:endpoint-mappings-gameplay-balance.adoc[Get Balance]. The Operator Waller Balance should always be returned unless a catastrophic error has occurred, and the balance cannot be retrieved.
+| Balance Object
+|
+|
+
+| Alerts
+| [red]#*_Optional._*#  List of Alerts to be displayed to the Player after Place Bet.
+| Alert[]
+|
+| Ignore - not MVP
+
+|===
+
+.Example Response:
+[source,json]
+----
+{
+    ErrorCode: 0,
+    Balance: {
+        CurrencyCode: "EUR",
+        CashFunds: 210.71,
+        BonusFunds: 0,
+        FundsPriority: "Unknown",
+        Version: 105657
+    },
+    Alerts: []
+}
+----

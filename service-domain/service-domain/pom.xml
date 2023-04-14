@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>service-domain</artifactId>
+    <packaging>jar</packaging>
+    <name>service-domain</name>
+    <description>A microservice that stores domains, a construct in Lithium that could either represent an administrative domain for a company account, or a set of brand domains, which the company owns and operates. A company could also be represented by multiple organisational units, each as separate domains within the service. The service is responsible for the details and settings for each domain, such as its external integrations, password policies, etc.</description>
+    
+    <parent>
+        <groupId>lithium</groupId>
+        <artifactId>common-parent-service</artifactId>
+        <version>1.12-SNAPSHOT</version>
+        <relativePath>../../common-parent-service</relativePath>
+    </parent>
+    
+    <dependencies>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>lithium</groupId>
+            <artifactId>client-service-accounting</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>lithium</groupId>
+            <artifactId>client-service-domain</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>lithium</groupId>
+            <artifactId>client-service-changelog</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>lithium</groupId>
+            <artifactId>library-common-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-jpamodelgen</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-rest</artifactId>
+        </dependency>
+      <dependency>
+        <groupId>lithium</groupId>
+        <artifactId>client-service-user</artifactId>
+      </dependency>
+    </dependencies>
+</project>

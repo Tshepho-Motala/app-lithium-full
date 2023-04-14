@@ -1,0 +1,41 @@
+= LSPLAT-4306 PLAT-4993 ⁃ [Promo][NL] - Trigger Transactional Email
+
+== Information
+=== Tickets
+* https://jira.livescore.com/browse/PLAT-4993
+* https://playsafe.atlassian.net/browse/LSPLAT-4306
+
+== Description (From Ticket)
+=== Background
+As per PLAT-4693 we will be restricting customers access to Promotions when DWH informs us that the customer has triggered an intervention.
+
+This story has been raised to ensure that when Lithium applies the auto blocking of Promotions to a customer. We also send that customer a Transactional Email, informing them why they have been blocked.
+
+These will be templated emails, the same as we use today for Reset Password for example.
+
+There will be 3/4 templates for the emails, one for each stage of Intervention the customer is entering.
+
+For example:
+
+ * Customer needs to be blocked from Promotions for 30 days, we need to email them Template 1
+ * Customer is blocked for 60 days, Template 2 email should be sent to customer etc
+
+=== Ticket Requirements
+
+Lithium to trigger sending of Transactional Email (defined and created by CRM) upon auto restricting customers from Promotions for intervention purposes only
+Email should not be triggered for reasons such as customer is under 24, or user opting out of promotions voluntarily
+The sending/triggering of these emails should take place each time the customer triggers Intervention (as determined by data received by DWH)
+
+== Email Templates
+The following templates are needed to be configured inorder to have your emails triggered for specific restriction set on user account by LBO/DWH
+
+ **** intervention.comps.block.1.place
+ **** intervention.comps.block.2.place
+ **** intervention.comps.block.3.place
+ **** intervention.comps.block.place (When there's no subtype specified)
+ **** player.comps.opt-out.place
+
+== Email Content Placeholders
+
+ **** %playerRestriction.subType%" (This is the subType value i.e. 30, 60, 90 days)
+ **** "%playerRestriction.activeFrom%" (Date when the restriction was activated)

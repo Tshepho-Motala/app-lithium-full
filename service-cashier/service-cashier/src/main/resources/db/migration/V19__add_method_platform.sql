@@ -1,0 +1,1 @@
+ALTER TABLE `method` ADD COLUMN `platform` varchar(10) DEFAULT NULL;

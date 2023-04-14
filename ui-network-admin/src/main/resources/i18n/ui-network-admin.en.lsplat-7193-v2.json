@@ -1,0 +1,13 @@
+{
+  "UI_NETWORK_ADMIN" : {
+    "CMS" : {
+      "LAYOUT_BUILDER_GRID" : {
+        "OUTPUT" : {
+          "AUTO_GENERATED_WIDGET" : {
+            "TITLE" : "Auto-Generated Widget"
+          }
+        }
+      }
+    }
+  }
+}

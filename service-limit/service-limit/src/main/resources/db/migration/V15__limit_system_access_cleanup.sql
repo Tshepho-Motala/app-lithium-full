@@ -1,0 +1,1 @@
+delete from limit_system_access where domain_name in ("default", "livescore");

@@ -1,0 +1,45 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "GAME": {
+      "FIELDS": {
+        "GAME-TYPE": {
+          "NAME": "Game Type",
+          "DESCRIPTION": "The type of game"
+        },
+        "GAME-TYPE-CURRENT": {
+          "NAME": "Game Type (Current)",
+          "DELETED_WARN": "NB. This Game Type has been Deleted!"
+        }
+      }
+    },
+    "GAME-TYPES": {
+      "HEADER": {
+        "TITLE": "Game Types",
+        "DESCRIPTION": "To manage game types"
+      },
+      "ADD": {
+        "TITLE": "Add a Game Type",
+        "SUCCESS": "Game type added successfully",
+        "ERROR": "Game type could not be added"
+      },
+      "EDIT": {
+        "DELETE": {
+          "CONFIRM": "Are you sure you want to delete this game type?",
+          "SUCCESS": "Game type deleted successfully",
+          "ERROR": "Game type could not be deleted"
+        },
+        "SUCCESS": "Game type edited successfully",
+        "ERROR": "Game type could not be edited"
+      },
+      "FIELDS": {
+        "NAME": {
+          "LABEL": "Name",
+          "DESCRIPTION": "The name of the game type"
+        },
+        "DOMAIN": {
+          "LABEL": "Domain"
+        }
+      }
+    }
+  }
+}

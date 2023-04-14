@@ -1,0 +1,55 @@
+<div class="col-md-12">
+	<div class="box box-default box-solid">
+		<div class="box-header with-border">
+			{{ 'UI_NETWORK_ADMIN.BONUS.EDIT.TABS.FREESPINS' | translate }}
+		</div>
+		<div class="box-body table-responsive">
+			<formly-form model="controller.model" fields="controller.bonusRulesFreespinsFields" options="controller.options" form="controller.form">
+			</formly-form>
+			
+			<ul class="todo-list ui-sortable">
+				<li ng-repeat="g in controller.model.freespinRules[0].bonusRulesFreespinGames">
+					<img width="40px" class="img-circle img-bordered-sm" src="//:0" ng-src="{{controller.imageUrl}}gameguid={{g.gameInfo.guid}}&function=thumb"alt="">
+					<div class="tools">
+						<i class="fa fa-trash-o" ng-click="controller.removeGame(g.gameId, $index)"></i>
+					</div>
+					<a ng-href="{{controller.demoUrl}}gameguid={{g.gameInfo.guid}}&lang=en" target="_blank">{{ g.gameInfo.name }}</a><br/>
+					<span class="description">
+						<b>Platform: </b>{{(g.gameInfo.labels.os.value || {})}}
+					</span><br/>
+					<span class="description">
+						<b>Provider: </b>{{g.gameInfo.providerGuid.replace("service-casino-provider-","")}}
+					</span><br/>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="col-md-12">
+	<div>
+		<form name="gameProviderForm">
+			<label for="repeatSelect">{{'UI_NETWORK_ADMIN.BONUS.EDIT.FREESPINS.SELECTPROVIDER' | translate}}</label> 
+			<select name="repeatSelect"
+				id="repeatSelect"
+				ng-model="controller.model.selectedfreespinprovider"
+				ng-change="controller.changeFreespinProvider()"
+				style="border-style: solid;">
+				<option value="">{{'UI_NETWORK_ADMIN.BONUS.EDIT.FREESPINS.SELECTPROVIDEROPTION' | translate}}</option>
+				<option ng-repeat="option in controller.providers"
+					value="{{option}}" ng-selected="{{controller.model.freespinRules[0].provider == 'service-casino-provider-'+option}}">{{option}}</option>
+			</select>
+		</form>
+	</div>
+	<div class="box box-default box-solid">
+		<div class="box-header with-border">Available Games</div>
+		<div class="box-body">
+			<p>Click on a game to add it.</p>
+			<dt ng-if="!controller.gamesLoading" table="controller.availableFreespinGamesTable"/>
+		</div>
+	</div>
+	<!--  div>
+	<pre>
+		{{controller.model | json}}
+	</pre>
+	</div-->
+</div>

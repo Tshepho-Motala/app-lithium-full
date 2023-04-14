@@ -1,0 +1,11 @@
+{
+  "SERVICE-LIMIT": {
+    "RESTRICTIONS": {
+      "ERROR_MESSAGES": {
+        "PLAYER_CASINO": {
+          "LIFT_BLOCKED": "Player is restricted from lifting their Casino Block restriction"
+        }
+      }
+    }
+  }
+}

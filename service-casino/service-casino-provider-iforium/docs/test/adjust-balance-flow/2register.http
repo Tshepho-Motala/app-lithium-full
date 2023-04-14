@@ -1,0 +1,30 @@
+POST http://localhost:9000/service-user/frontend/livescore_uk/register/v3
+Authorization: Basic acme acmesecret
+Content-Type: application/json
+
+{
+  "username": "volodtest1",
+  "password": "246810",
+  "email": "volodtest1@mailnator.com",
+  "firstName": "Volo",
+  "lastName": "Test",
+  "dobYear": "1972",
+  "dobMonth": "11",
+  "dobDay": "11"
+}
+
+###
+POST http://localhost:9000/service-user/frontend/livescore_ua/register/v3
+Authorization: Basic acme acmesecret
+Content-Type: application/json
+
+{
+  "username": "volodtest1",
+  "password": "246810",
+  "email": "volodtest1@mailnator.com",
+  "firstName": "Volo",
+  "lastName": "Test",
+  "dobYear": "1972",
+  "dobMonth": "11",
+  "dobDay": "11"
+}

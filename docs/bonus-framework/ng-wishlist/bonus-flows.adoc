@@ -1,0 +1,24 @@
+= Deposit Bonus Flows
+Riaan Schoeman <riaan.schoeman@wonderlabz.com>
+1.0, December 6, 2021: NG Wishlist
+:sectnums:
+:toc: left
+:toclevels: 4
+:toc-title: NG Wishlist
+:icons: font
+:url-quickref: https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/
+
+
+****
+[verse,,]
+____
+link:../readme.adoc[home] | link:readme.adoc[back]
+____
+****
+
+
+.Bonus Flows
+include::plantuml/bonus-flows.puml[Flow Diagram]
+
+include::plantuml/bonus-seq-flows.puml[Sequence Diagram]
+include::plantuml/bonus-seq-flows-proposed.puml[]

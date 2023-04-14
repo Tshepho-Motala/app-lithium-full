@@ -1,0 +1,52 @@
+{
+  "domain": {
+    "name": "livescore_uk",
+    "currency": "GBP"
+  },
+  "player": {
+    "id": 2022,
+    "guid": "livescore_uk/2121",
+    "originalId": 2121
+  },
+  "rewardRevisionTypeGames": [
+    {
+      "guid":"service-casino-provider-iforium-1000",
+      "gameId": "BP_Ted",
+      "gameName": "Ted"
+    }
+  ],
+  "processRewardTypeValues": [
+    {
+      "rewardRevisionTypeValueId": 1,
+      "rewardRevisionTypeValue": 10,
+      "rewardTypeFieldId": 1,
+      "rewardTypeFieldName": "numberOfRounds",
+      "rewardRevisionTypeId": 1
+    },
+    {
+      "rewardRevisionTypeValueId": 2,
+      "rewardRevisionTypeValue": 100,
+      "rewardTypeFieldId": 2,
+      "rewardTypeFieldName": "roundValueInCents",
+      "rewardRevisionTypeId": 1
+    }
+  ],
+
+  "rewardType": {
+    "id": 1,
+    "name": "free_money",
+    "url": "service-reward-provider-casino-blueprint",
+    "code": "BP"
+  },
+  "reward": {
+    "current": {
+      "id": 1,
+      "code": "FREE_SPIN_1",
+      "name": "Free Spin",
+      "description": "free spins for blueprint games",
+      "enabled": true,
+      "validFor": 2,
+      "validForGranularity": 3
+    }
+  }
+}

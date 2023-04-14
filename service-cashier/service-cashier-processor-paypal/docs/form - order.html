@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<!-- https://developer.paypal.com/demo/checkout/#/pattern/client -->
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1"> <!-- Ensures optimal rendering on mobile devices. -->
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" /> <!-- Optimal Internet Explorer compatibility -->
+</head>
+
+<body>
+  <script
+    src="https://www.paypal.com/sdk/js?client-id=AThyr2x4tRDp-b7wL3X875RTsVUdmB77ReSzVNvm3ZNAvYJ_nbws5O7a6s3-g4pWTqRGxSGVBu9vjDVo&currency=GBP"> // Required. Replace SB_CLIENT_ID with your sandbox client ID.
+  </script>
+
+  <script>
+  paypal.Buttons({
+    createOrder: function() {
+      return fetch('http://localhost:9000/service-cashier/frontend/deposit/v2?methodCode=paypal', {
+                    method: 'post',
+                    body: '{"inputFieldGroups":{"1":{"fields":{"amount":{"value":"500.00"}}}},"state":"VALIDATEINPUT","stage":"1"}',
+                    headers: {
+                       'Content-Type': 'application/json',
+                       'Authorization' : 'Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJsYXN0TmFtZSI6Iktvemhldm5pa292VHdvIiwibGFzdExvZ2luIjoxNjE1NDYzMzk0OTkzLCJqd3RVc2VyIjoiSDRzSUFBQUFBQUFBQUhXUXlRckNRQXhBZjBWeTdxaWREblk1ZWZCbXRhQ2lpSWpFZHF4RGw1SFdqbWp4MzAwUnhJT2VRdDdMUXRLQ2drQlkwRUFBUmh1VitUWUhDMDZVcm5XdWszdHhyMVkzVFNnbk5OV1BzelNseXJSNVEvblZOaTVRNWYxWUY4UVRtdXBRS01ubnlzZzYxcFU4bENxVmxjTE8xeERzV3Zpck94R1NXSGFpTi8rSVN3TEJ0V3JrYzI4QlVnMTNYSlNlSzVpTE9HUmlKRGc3K2o0eXllM1ljMUdnNXlYVVZxZmRQVkVZVGJhejdXSzFpWWlsdjNZUHZuNVFLMXJtREo4dkxHTTRKQ01CQUFBPSIsInNlc3Npb25LZXkiOiI2NzE3ZWJkMy1hMTEwLTQ1NDMtOTc0Zi0zYzEzMzhmNjQyNWMiLCJsYXN0SVAiOiI6OjEiLCJ1c2VyX25hbWUiOiJ2b3ZpazkxMiIsInNlc3Npb25JZCI6MzAsInVzZXJHdWlkIjoibGl2ZXNjb3JlX25pZ2VyaWEvdm92aWs5MTIiLCJ1c2VySWQiOjQsImF1dGhvcml0aWVzIjpbIlJPTEVfVVNFUiJdLCJjbGllbnRfaWQiOiJhY21lIiwiZmlyc3ROYW1lIjoiVm9sb2R5bXlyVHdvIiwiYXVkIjpbIm9hdXRoMi1yZXNvdXJjZSJdLCJzY29wZSI6WyJvcGVuaWQiXSwiZG9tYWluTmFtZSI6ImxpdmVzY29yZV9uaWdlcmlhIiwicmVnaXN0cmF0aW9uRGF0ZSI6MTYxNDc4MzA3MDAwMCwiZXhwIjoxNjE4MjExOTU2LCJzaG9ydEd1aWQiOiJWT0xPRFlNWVJUV08iLCJqdGkiOiJkMmMyZTAwYi1jNjE0LTQwNmItOGQ5Zi0xNGJiOTg0ZjRkMTEiLCJlbWFpbCI6InZvdmlrOTEyQG1haWwuY29tIiwidXNlcm5hbWUiOiJ2b3ZpazkxMiJ9.CQD_0sUQ4N-gRnrk0xIaR66MrgWKgY_eoP8uONpY0XJKeXVRF39jPiYrhvw3KlOFboyAHTYezmwzTou_yv06JjBY70xB6cQm9xgPVUznRa4n7VIPC7yVlpxxKYdCjRwMQWl5q_Ofr-WT7vQadirdJmbcubGZ-SO2w06q_sU7MmGFqu0v5r30OZh16r4RC0jmdREAtsV9pM4c3UTlGPgc4nQ1gVqdNIxFM1MjRF3OdmCWAjHP1KR_S5qAliwyTL5f55E79v1rknxMldM6ekT9KCB-OWZOQuAmIaA4dqxnntHU1GsosGfEnHfgpadX0lsSmKr2kgXBFYcWGbvQY1L2Mb_ijMFx1iBagcHIS9MTwCurcdK8MWOm38xMBLfHGynlASp21Glma0Nido4DhvCxbg09vx1r8lvBb7GSYLuIHyTytdpp39O0Sm8Cfukc-pfBPso9BhkqPVEG-mBXFZ3GejzmGysrQKX5aorrDSNKI8rCabL3c2UvVRFiRHteD7MWGfpWHww4vrrk6Bx1zMzvQbdHwTMHMiDSXs7tJaGZ1aNLvgOoEBZwOQOGv8v16k_qMUnQV2de_1FW9LCQcZZtACnK2YKv75-6ViZxXb2_YDEOArhSu7-y1UucxONtQSCr_CqjVYrTIqk_YhI4R7Ib18dzNIKikLYqNZtJSQb2ZpY'
+                    }
+                }).then(function(res) {
+                    return res.json();
+                }).then(function(orderData) {              
+                    return orderData.iframePostData.orderId;
+                });
+  },
+    onApprove: function(data, actions) {
+      // This function captures the funds from the transaction.
+      // return actions.order.capture().then(function(details) {r.    
+      return fetch('http://localhost:9000/service-cashier-processor-paypal/public/callback/order/'+data.orderID+'/return?&payerID='+data.payerID, {
+                    method: 'get',                                    
+                }).then(function(res) {                
+                    return res.json();
+                }).then(function(confirmData) {        
+                    console.log("data: "+ JSON.stringify(data)+", actions: " + JSON.stringify(actions)+", res="+ JSON.stringify(confirmData));
+                    return confirmData.status;
+                });
+    }
+  }).render('#paypal-button-container');
+  //This function displays Smart Payment Buttons on your web page.
+</script>
+
+  <div id="paypal-button-container"></div>
+
+
+</body>

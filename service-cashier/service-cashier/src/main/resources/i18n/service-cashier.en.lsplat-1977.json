@@ -1,0 +1,13 @@
+{
+  "SERVICE-CASHIER": {
+    "AUTOWITHDRAWALS": {
+      "RULESETS": {
+        "RULE": {
+          "FIELD": {
+            "WAIT_AUTO_APPROVAL_IN_MINUTES": "Number of minutes before executing the ruleset"
+          }
+        }
+      }
+    }
+  }
+}

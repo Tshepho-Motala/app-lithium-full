@@ -1,0 +1,37 @@
+{
+  "name": "Mvend Opay",
+  "code": "mvendopay",
+  "image": {
+    "filename": "/methods/mvend.png",
+    "filetype": "image/png"
+  },
+  "withdrawalStages": [
+    {
+      "number": 1,
+      "title": "CASHIER-METHOD-MVEND-OPAY.WITHDRAWAL_STAGE_1_TITLE",
+      "description": "CASHIER-METHOD-MVEND-OPAY.WITHDRAWAL_STAGE_1_DESCRIPTION",
+      "inputFields": [
+        {
+          "code": "mvend_reference",
+          "name": "CASHIER-METHOD-MVEND-OPAY.WITHDRAWAL_FIELD_MVEND_REFERENCE_TITLE",
+          "description": "CASHIER-METHOD-MVEND-OPAY.WITHDRAWAL_FIELD_MVEND_REFERENCE_DESCRIPTION",
+          "type": "hidden"
+        },
+        {
+          "code": "account_number",
+          "name": "CASHIER-METHOD-MVEND-OPAY.WITHDRAWAL_FIELD_ACCOUNT_NUMBER_TITLE",
+          "description": "CASHIER-METHOD-MVEND-OPAY.WITHDRAWAL_FIELD_ACCOUNT_NUMBER_DESCRIPTION",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "title": "CASHIER-METHOD-MVEND-OPAY.WITHDRAWAL_STAGE_2_TITLE",
+      "description": "CASHIER-METHOD-MVEND-OPAY.WITHDRAWAL_STAGE_2_DESCRIPTION",
+      "inputFields": []
+    }
+
+  ],
+  "properties": []
+}

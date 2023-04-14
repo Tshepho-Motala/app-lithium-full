@@ -1,0 +1,41 @@
+<div class="row v-reset-row ">
+	<div class="col-md-12">
+		<div ng-if="controller.bonus.current.id == controller.bonusRevision.id" class="panel box box-success">
+			<div class="box-header with-border">
+				<h4 class="box-title">{{ 'UI_NETWORK_ADMIN.BONUS.VIEW.VIEWCURRENT' | translate }}</h4>
+			</div>
+		</div>
+		<div ng-if="controller.bonus.current.id != controller.bonusRevision.id" class="panel box box-warning">
+			<div class="box-header with-border">
+				<h4 class="box-title">{{ 'UI_NETWORK_ADMIN.BONUS.VIEW.VIEWOLDREVISION' | translate: {bonusRevisionId: controller.bonusRevision.id} }}</h4>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-10">
+		<div class="box box-default box-solid">
+			<div class="box-header with-border">
+				{{ 'UI_NETWORK_ADMIN.BONUS.TAB.CURRENT.GAME_CAT_PERCENTAGES' | translate }}
+			</div>
+			<div class="box-body table-responsive">
+				<div class="well">
+					<span>{{ 'UI_NETWORK_ADMIN.BONUS.VIEW.GAME_CATEGORIES.EXPLAIN' | translate }}</span>
+				</div>
+				<ul class="todo-list ui-sortable">
+					<li ng-repeat="g in controller.gameCategories | orderBy: '-casinoCategory'">
+						<div class="row v-reset-row " style="margin-right: 0px;">
+							<div class="col-md-4">
+								<div class="user-block">
+									<h4 style="font-weight: bold;" class="text-light-blue">{{g.displayName}}</h4>
+								</div>
+							</div>
+							<div class="col-md-8">
+								<uib-progressbar class="progress-striped active" max="100" value="g.percentage" type="info"><i>{{g.percentage}}% / 100%</i></uib-progressbar>
+								<small ng-if="g.percentage > 0"><em>{{ 'UI_NETWORK_ADMIN.BONUS.VIEW.GAME_CATEGORIES.PROGRESSBAR' | translate:{percentage:g.percentage, category:g.displayName } | lowercase }}</em></small>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>

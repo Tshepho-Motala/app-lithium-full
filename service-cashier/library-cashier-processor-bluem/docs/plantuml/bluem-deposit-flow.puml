@@ -1,0 +1,114 @@
+.Bluem IDEAL Deposit Flow
+[plantuml]
+----
+
+@startuml
+header Bluem IDEAL Deposit Flow
+footer Page %page% of %lastpage%
+skinparam sequenceMessageAlign center
+actor Player
+box "Frontend" #LightBlue
+participant ExtraTab
+participant Portal
+end box
+participant Lithium
+participant Bluem
+participant Bank
+autonumber
+
+Player -> Portal  : Choose Bluem deposit
+activate Portal
+Portal -> Lithium : GetBanksList(authToken)
+activate Lithium
+    note right
+        Get list of supported banks
+        from configuration
+    end note
+Lithium --> Portal : GetBanksList(banks_list)
+deactivate Lithium
+Portal --> Player : Show payment page
+Player->Portal : Choose bank, enter ammount and press deposit
+
+
+Portal -> Lithium : Deposit(amount, bank_code, return_Url)
+activate Lithium
+    note right
+        {{trn_id}} placeholder
+        will be replaced with
+        corresponding transactionId
+        in the result_url
+    end note
+Lithium -> Bluem: CreateTransaction(amount, bank_code, return_Url)
+activate Bluem
+Bluem --> Lithium : CreateTransaction(error, bluem_redirect_url)
+deactivate Bluem
+alt#Gold  #Pink error!=null
+    Lithium --> Portal: Deposit(status="DECLINED", error)
+    Portal --> Player: Show error
+else #LightGreen error=null
+    Lithium --> Portal: Deposit(status="WAITFORPROCESSOR", bluem_redirect_url)
+    Portal -> ExtraTab : Open bluem_redirect_url in new tab
+    activate ExtraTab
+end
+ExtraTab -> Bluem : Open bluem_redirect_url
+activate Bluem
+Bluem -> ExtraTab : Open bank Page with bank native app QR code
+ExtraTab --> Player: Show open Bank App page
+Player -> Bank: Open bank App
+activate Bank
+Bank --> Player: Bank native App
+Player -> Bank: Player makes payment
+Bank -> Bluem: Payment Result
+deactivate Bank
+ExtraTab -> Bluem: Get status(Bluem page checks status on backend)
+Bluem -> ExtraTab: response(final status)
+deactivate Bluem
+ExtraTab -> ExtraTab: redirect to result_url
+    note left
+        result_url that was sent
+        in the initial deposit request
+    end note
+ExtraTab-> Portal: postmessage to reopen Deposit(authToken, transactionId)
+deactivate ExtraTab
+
+    ==Get Transaction status show result==
+    Portal -> Lithium: GetProviderProperties(client_processing_timeout)
+    activate Lithium
+    Lithium --> Portal: GetProviderProperties(retry list)
+    deactivate Lithium
+    loop while status="WAITFORPROCESSOR"
+               Portal -> Lithium: GetTransactionStatus(transactionId)
+               activate Lithium
+               Lithium -> Portal: GetTransactionStatus(status="WAITFORPROCESSOR")
+               deactivate Lithium
+               Portal --> Player: Pending Screen
+ == Webhook==
+    Bank -> Bluem: final notification
+    activate Bluem
+    Bluem -> Lithium : Notification(transactionId, status)
+    activate Lithium
+    Lithium -> Bluem: GetTransactionStatus(transactionId)
+    activate Bluem
+    Bluem --> Lithium: GetTransactionStatus(status, error)
+    deactivate Bluem
+    Lithium -> Lithium: Update transaction status
+    note left
+           IBAN verification is performed here,
+           in case it is failed new withdraw transaction
+           will be initiated using configured method.
+           Contra account is stored otherwise
+       end note
+    Lithium --> Bluem: HTTP_OK
+    deactivate Lithium
+    deactivate Bluem
+    Portal -> Lithium: GetTransactionStatus(transactionId)
+                   activate Lithium
+                   Lithium -> Portal: GetTransactionStatus(status="SUCCESS/DECLINED", error)
+                   deactivate Lithium
+
+    end
+    Portal --> Player: Show final result
+deactivate Portal
+deactivate Lithium
+
+@enduml

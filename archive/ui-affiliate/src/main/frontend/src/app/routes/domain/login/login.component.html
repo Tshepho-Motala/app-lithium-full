@@ -1,0 +1,29 @@
+<div></div>
+  <div class="login mat-elevation-z12 background-primary">
+    <div class="login-header mtex-bc-primary-800" fxLayout="column" fxLayoutAlign="center center">
+      <h1>{{ domainGuard.domain.displayName }}</h1>
+    </div>
+    <form #form="ngForm" (ngSubmit)="login()" style="position: relative">
+      <loading-overlay [isLoading]="isLoading"></loading-overlay>
+      <div class="login-content" fxLayout="column" fxLayoutAlign="start stretch">
+          <div class="error-container" *ngIf="errorMessage" fxLayout="row" fxLayoutAlign="start center">
+              <md-icon class="error-icon" color="warn">warning</md-icon>
+              <span class="error-message">{{ errorMessage }}</span>
+          </div>
+          <md-input-container>
+            <input mdInput placeholder="Username" type="text" name="email" required [(ngModel)]="username">
+          </md-input-container>
+          <md-input-container>
+            <input mdInput placeholder="Password" type="password" name="password" required [(ngModel)]="password">
+          </md-input-container>
+          <div class="extra-options" fxLayout="row" fxLayoutAlign="space-between center">
+            <md-checkbox class="remember-me">Remember Me</md-checkbox>
+            <div style="width: 20px;"></div>
+            <a class="forgot-password" [routerLink]="[ '..', 'forgot-password' ]">Forgot Password?</a>
+          </div>
+          <button color="primary" md-raised-button [disabled]="!form.valid">SIGN IN</button>
+        <p class="note">Don't have an account?<br/> <a [routerLink]="[ '..', 'register' ]">Click here to create one</a></p>
+      </div>
+    </form>
+  </div>
+<div></div>

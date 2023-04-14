@@ -1,0 +1,1 @@
+ALTER TABLE `label_value` ADD COLUMN `viewable` BIT(1) NULL DEFAULT 1;

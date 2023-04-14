@@ -1,0 +1,87 @@
+{
+  "GLOBAL": {
+    "STATE": {
+      "ENABLED": "Enabled",
+      "DISABLED": "Disabled"
+    }
+  },
+  "UI_NETWORK_ADMIN": {
+    "RESTRICTIONS": {
+      "CHANGENAME": {
+        "TITLE": "Restriction Set Change Name",
+        "SUCCESS": "Successfully changed restriction set name",
+        "ERROR": "Failed to change restriction set name"
+      },
+      "RESTRICTION": {
+        "TITLE": "RESTRICTION"
+      },
+      "NORESTRICTIONSSETUPYET": "No restrictions setup yet.",
+      "LIST": {
+        "TITLE": "Restrictions Dictionary",
+        "DESCRIPTION": "A searchable list of restrictions"
+      },
+      "VIEW": {
+        "TITLE": "Viewing Restrictions Set"
+      },
+      "EDIT": {
+        "TITLE": "Editing Restrictions Set",
+        "DISABLE": {
+          "CONFIRM": "Are you sure you want to disable this restrictions set?",
+          "SUCCESS": "Successfully disabled the restrictions set"
+        },
+        "ENABLE": {
+          "CONFIRM": "Are you sure you want to enable this restrictions set?",
+          "SUCCESS": "Successfully enabled the restrictions set"
+        },
+        "DELETE": {
+          "CONFIRM": "Are you sure you want to delete this restrictions set?",
+          "SUCCESS": "Successfully deleted the restrictions set"
+        },
+        "DELETERESTRICTION": {
+          "CONFIRM": "Are you sure you want to delete this restriction from the set?",
+          "SUCCESS": "Successfully deleted the restriction from the set"
+        },
+        "RESTRICTION": {
+          "ADD": {
+            "SUCCESS": "Successfully added the restriction to the set",
+            "ERROR": "Failed to add the restriction to the set"
+          },
+          "UPDATE": {
+            "SUCCESS": "Successfully updated restriction on set",
+            "ERROR": "Failed to update restriction on set"
+          }
+        }
+      },
+      "ADD": {
+        "TITLE": "Add a Restriction Set",
+        "DESCRIPTION": "Use the controls below to setup a restriction set",
+        "SUCCESS": "Successfully added the restriction set",
+        "ERROR": "Failed to add the restriction set"
+      },
+      "FIELDS": {
+        "DOMAIN": {
+          "NAME": "Domain",
+          "DESCRIPTION": "Choose the domain which you are creating the restriction for"
+        },
+        "NAME": {
+          "NAME": "Name",
+          "DESCRIPTION": "Add a unique name for the restriction"
+        },
+        "ENABLED": {
+          "NAME": "Enabled",
+          "DESCRIPTION": "Should the restriction be enabled?"
+        },
+        "RESTRICTION": {
+          "RESTRICTION": {
+            "NAME": "Restriction",
+            "DESCRIPTION": "Select the restriction to be applied"
+          },
+          "ENABLED": {
+            "NAME": "Enabled",
+            "DESCRIPTION": "Enable this restriction in the set?"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,19 @@
+.Access Control Rulesets (Basic Flow)
+[plantuml]
+----
+
+
+@startuml
+'https://plantuml.com/sequence-diagram
+
+actor internal
+participant  "svc-access" as sa
+database access_rule
+database access_rule_transaction
+database access_control_list
+database external_list
+
+autonumber
+
+@enduml
+----

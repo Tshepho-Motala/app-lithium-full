@@ -1,0 +1,13 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "ACCOUNTING": {
+      "TRANSACTIONS": {
+        "FIELDS": {
+          "ADDITIONALTRANID": {
+            "LABEL": "Additional Tran ID"
+          }
+        }
+      }
+    }
+  }
+}

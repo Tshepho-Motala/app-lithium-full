@@ -1,0 +1,158 @@
+{
+	"GLOBAL": {
+		"BONUS": {
+			"TYPE": {
+				"TRIGGER": {
+					"0": "Manual",
+					"6": "Consecutive"
+				}
+			}
+		},
+		"GRANULARITY": {
+			"CUSTOM": "Custom",
+			"HOURLY": "Hourly",
+			"0": "Custom Period",
+			"1": "Yearly",
+			"2": "Monthly",
+			"3": "Daily",
+			"4": "Weekly",
+			"5": "Total",
+			"6": "Hourly"
+		}
+	},
+	"UI_NETWORK_ADMIN": {
+		"BONUS": {
+			"CONSECUTIVEAMOUNT": {
+				"LABEL": "Amount of consecutive days",
+				"DESCRIPTION": "This is the number of consecutive login days required to qualify for this bonus. E.g. If '3' is specified, player will receive this bonus on the third consecutive day he/she logs in."
+			},
+			"TRIGGER": {
+				"TYPE": {
+					"6": "Consecutive"
+				},
+				"CONSECUTIVE": " consecutive login days."
+				
+			}
+		},
+		"USER": {
+			"PROMOOPTOUT": {
+				"LEADERBOARD": "Leaderboard Opt-Out"
+			}
+		},
+		"LEADERBOARD": {
+			"HISTORY": {
+				"PERIOD": "Period",
+				"ENTRIES": "Players",
+				"BETS": "Wagered",
+				"WINS": "Wins",
+				"HANDS": "Hands",
+				"RANK": "Rank"
+			},
+			"TYPE": {
+				"1": "Hands",
+				"2": "Wins",
+				"3": "Wagered"
+			},
+			"ORDERING": {
+				"1": "MORE_IS_BETTER",
+				"2": "LESS_IS_BETTER"
+			},
+			"VIEW": {
+				"TITLE": "Leaderboard"
+			},
+			"ADD": {
+				"TITLE": "Add Leaderboard",
+				"DESCRIPTION": "Use the form below to configure a new leaderboard for a domain.",
+				"SUCCESS": "Successfully added new leaderboard.",
+				"ERROR": "Something went wrong creating new leaderboard. Maybe it already exists ?"
+			},
+			"TOGGLE": {
+				"SUCCESS": "Successfully changed visibility for leaderboard.",
+				"ERROR": "Something went wrong changing visibility for leaderboard. Please try again later.",
+				"HIDE": "Hide",
+				"SHOW": "Show"
+			},
+			"ENABLED": {
+				"SUCCESS": "Successfully disabled/enabled leaderboard.",
+				"ERROR": "Something went wrong disabling/enabling leaderboard. Please try again later."
+			},
+			"LIST": {
+				"TITLE": "Leaderboards",
+				"DESCRIPTION": "View a list of all configured leaderboards."
+			},
+			"FIELDS": {
+				"PERIODTYPE": {
+					"LABEL": "Period Type",
+					"DESC": "Is this leaderboard recurring/renewing or is this leaderboard a once off to run between the chosen dates."
+				},
+				"CPSTARTDATE": {
+					"NAME": "Start Date",
+					"DESC": "The date on which this leaderboard should start."
+				},
+				"CPENDDATE": {
+					"NAME": "End Date",
+					"DESC": "The date on which this leaderboard should end."
+				},
+				"AMOUNT": {
+					"TITLE": "Amount",
+					"PLACE": "50",
+					"DESC": "The amount of places to store for this leaderboard, e.g. Top 50"
+				},
+				"VISIBLE": {
+					"TITLE": "Visible",
+					"DESC": "Is this leaderboard visible to players."
+				},
+				"ENABLED": {
+					"TITLE": "Enabled",
+					"DESC": "Is this leaderboard enabled."
+				},
+				"XPLEVEL": {
+					"TITLE": "XP Level",
+					"MIN": {
+						"TITLE": "Minimum",
+						"PLACE": "11",
+						"DESC": "The minimum level for XP that is required for a player to be on this leaderboard."
+					},
+					"MAX": {
+						"TITLE": "Maximum",
+						"PLACE": "20",
+						"DESC": "The maximum level for XP that is required for a player to be on this leaderboard."
+					}
+				},
+				"ORDERING": {
+					"TITLE": "Ordering",
+					"PLACE": "Select the ordering.",
+					"DESC": "Is a higher value better, or is a lower value better ?"
+				},
+				"TYPE": {
+					"TITLE": "Type",
+					"PLACE": "Select the type of leaderboard.",
+					"DESC": "The type of this leaderboard, is this for wins / hands / wagered."
+				},
+				"GRANULARITY": {
+					"TITLE": "Period",
+					"PLACE": "",
+					"DESC": "Is this leaderboard meant to be per day / week / month / year"
+				},
+				"DOMAINNAME": {
+					"TITLE": "Domain",
+					"PLACE": "",
+					"DESC": "The domain for which this leaderboard applies."
+				},
+				"DESCRIPTION": {
+					"TITLE": "Description",
+					"PLACE": "an awesome description.",
+					"DESC": "a Short description for this leaderboard."
+				},
+				"NAME": {
+					"TITLE": "Name",
+					"PLACE": "Leaderboard 1",
+					"DESC": "The name to identify this leaderboard."
+				},
+				"HISTORY": {
+					"CLOSED": "Closed"
+				}
+			}
+		}
+	}
+}

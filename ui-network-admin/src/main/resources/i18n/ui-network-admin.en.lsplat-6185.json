@@ -1,0 +1,25 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "GAME": {
+      "CHANNEL": {
+        "HEADER": "Channel"
+      },
+      "FIELDS": {
+        "CHANNEL_NAME": {
+          "DESKTOP_WEB": {
+            "LABEL": "Desktop Web"
+          },
+          "MOBILE_WEB": {
+            "LABEL": "Mobile Web"
+          },
+          "MOBILE_IOS": {
+            "LABEL": "Mobile iOS"
+          },
+          "ANDROID_NATIVE": {
+            "LABEL": "Android Native"
+          }
+        }
+      }
+    }
+  }
+}

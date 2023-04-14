@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>service-cashier-processor-cc-qwipi</artifactId>
+	<packaging>jar</packaging>
+	<name>service-cashier-processor-cc-qwipi</name>
+	<description>Cashier Processor - Credit Cards - QWIPI</description>
+	<parent>
+		<groupId>lithium</groupId>
+		<artifactId>common-parent-cashier</artifactId>
+		<version>1.12-SNAPSHOT</version>
+		<relativePath>../../common-parent-cashier</relativePath>
+	</parent>
+	<dependencies>
+		<dependency>
+			<groupId>lithium</groupId>
+			<artifactId>library-cashier</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>lithium</groupId>
+			<artifactId>library-cashier-method-cc</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>lithium</groupId>
+			<artifactId>library-cashier-processor-cc-qwipi</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>lithium</groupId>
+			<artifactId>client-service-cashier</artifactId>
+		</dependency>
+	</dependencies>
+</project>

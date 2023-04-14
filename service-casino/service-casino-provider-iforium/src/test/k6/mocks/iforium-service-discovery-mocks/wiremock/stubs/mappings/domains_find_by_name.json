@@ -1,0 +1,13 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "/domains/findByName?name=default"
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "domains_find_by_name.json",
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}

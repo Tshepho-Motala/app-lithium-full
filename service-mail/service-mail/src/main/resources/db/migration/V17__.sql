@@ -1,0 +1,7 @@
+ALTER TABLE `email`
+    ADD COLUMN `author_id` bigint(20) DEFAULT NULL,
+    ADD CONSTRAINT `FKybovikrthyprid20220708` FOREIGN KEY (`author_id`) REFERENCES `user`(id);
+
+ALTER TABLE `user` ADD COLUMN `last_name` VARCHAR(255) DEFAULT NULL;
+ALTER TABLE `user` ADD COLUMN `first_name` VARCHAR(255) DEFAULT NULL;
+

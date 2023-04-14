@@ -1,0 +1,44 @@
+<div class="tab-content" style="padding: 5px;">
+	<div class="well-clear" style="margin-bottom: 0px;">
+		<div class="row v-reset-row ">
+			<div class="col-xs-12 col-md-6 pull-left">
+				<button-back ui-sref="^.list"></button-back>
+			</div>
+		</div>
+		<br/>
+		<div class="row v-reset-row ">
+			<div class="col-xs-12">
+				<div class="box box-primary">
+					<div class="box-header with-border">
+						<h3 class="box-title"><i>{{controller.model.name}} - {{controller.model.subject}}</i></h3>
+					</div>
+					<div class="box-body">
+						<div class="col-xs-4">
+							<div class="well-clear">
+ 								<div ng-bind-html="controller.model.body"></div>
+							</div>
+						</div>
+						<div class="col-xs-8">
+							<div class="well-clear">
+								<table class="table table-hover table-striped nowrap" cellspacing="0" width="100%">
+									<thead>
+										<tr>
+											<td><label>{{'UI_NETWORK_ADMIN.MAIL.DEFAULTTEMPLATES.PLACEHOLDERS.NAME'|translate}}</label></td>
+											<td><label>{{'UI_NETWORK_ADMIN.MAIL.DEFAULTTEMPLATES.PLACEHOLDERS.DESCRIPTION'|translate}}</label></td>
+										</tr>
+									</thead>
+									<tbody>
+										<tr ng-repeat="placeholder in controller.model.placeholders">
+											<td>{{placeholder.name}}</td>
+											<td>{{placeholder.description}}</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

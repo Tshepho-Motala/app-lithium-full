@@ -1,0 +1,17 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "PLAYER": {
+      "LOGINEVENTS": {
+        "DATE": "Login Time",
+        "SUCCESSFUL" : "Login Status",
+        "COMMENT": "Fail Reason",
+        "AUTHCLIENT": "Client Type",
+        "LOGOUT": "Logout Time",
+        "DURATION": "Duration",
+        "USERAGENT": "User Agent",
+        "BROWSER": "Browser",
+        "OS": "OS"
+      }
+    }
+  }
+}

@@ -1,0 +1,10 @@
+server:
+  port: 8800
+turbine:
+  stream:
+    port: 8805
+#spring:
+#  sleuth:
+#    keys:
+#      hystrix:
+#        command-key: hystrix

@@ -1,0 +1,52 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "PLAYER": {
+      "KYC": {
+        "TAB": {
+          "TAB_TITLE": "KYC",
+          "FIELDS": {
+            "KYC_RECORD_ID": {
+              "LABEL": "Provider Tran Id"
+            },
+            "DATE": {
+              "LABEL": "Date"
+            },
+            "PROVIDER": {
+              "LABEL": "KYC Provider"
+            },
+            "METHOD": {
+              "LABEL": "Method"
+            },
+            "LEGAL_NAME": {
+              "LABEL": "Legal Name"
+            },
+            "DOB": {
+              "LABEL": "Date of Birth"
+            },
+            "ADDRESS": {
+              "LABEL": "Address"
+            },
+            "COUNTRY_OF_BIRTH": {
+              "LABEL": "Country of Birth"
+            },
+            "PHONE_NUMBER": {
+              "LABEL": "Phone Number"
+            },
+            "NATIONALITY": {
+              "LABEL": "Nationality"
+            },
+            "BVN": {
+              "LABEL": "BVN"
+            },
+            "SUCCESS": {
+              "LABEL": "Is attempt was success"
+            }
+          }
+        },
+        "KYC_RESULTS": {
+          "VIEWING_KYC_RESULTS": "Viewing KYC results"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,230 @@
+[plantuml]
+----
+@startuml
+
+!define p(name, alias) participant "name" as alias << (L,#AAFFCC) >>
+!define q(name, alias) queue "name" as alias << (L,#AAFFCC) >>
+!define pn(name, alias) participant "name" as alias << (L,#FFAAAA) >>
+
+skinparam BoxPadding 10
+autonumber
+
+database Hazelcast as hz
+p("Metrics", metrics)
+
+box "svc-games" #LightBlue
+pn("ProgressiveJackpotFeedsUpdateJob", jfuj)
+pn("ProgressiveJackpotFeedsService", jfs)
+pn("ProgressiveJackpotFeedsRepository", jfr)
+p("GameService", gs)
+end box
+
+box "client-service-casino" #LightSkyBlue
+pn("ProgressiveJackpotFeedsClientService", jfcs)
+pn("ProgressiveJackpotFeedClient", jfc)
+end box
+
+box "scp-roxor" #SkyBlue
+pn("ProgressiveJackpotFeedsController", scprjfc)
+pn("ProgressiveJackpotFeedRoxorTemplate", jfrt)
+end box
+
+participant "RoxorJackpotFeed" as extrjf
+
+box "scp-iforium" #SkyBlue
+pn("ProgressiveJackpotFeedsController", scpijfc)
+pn("ProgressiveJackpotFeedBlueprintTemplate", jfbt)
+end box
+
+participant "BlueprintJackpotFeed" as extbjf
+
+activate jfuj
+jfuj -> jfs: update
+note left
+Scheduler
+invoked
+end note
+activate jfs
+jfs -> jfr: findAll
+activate jfr
+jfr --> jfs
+deactivate jfr
+note right
+Registered __enabled__ progressive
+jackpot feeds returned
+end note
+note right of jfs
+Query all progressive feeds in
+parallel
+end note
+par
+jfs -> gs: findEnabledProgressiveJackpotGamesByGameSupplier
+note right
+We only really need gameGuid,
+name, supplier identifier to
+map games appropriately. Use a
+projection to select just
+required fields. Ensure that
+this is a performant query
+end note
+activate gs
+gs --> jfs: games
+note right
+The reason for this is
+to have a standard API
+response from progressive
+jackpot feeds that includes
+data per game, including
+the game name
+end note
+deactivate gs
+jfs -> jfcs: getProgressiveJackpotFeed(domainName, module, gameSupplier, games)
+note right
+livescore_uk,
+service-casino-provider-roxor,
+roxor
+end note
+activate jfcs
+jfcs -> jfcs: getProgressiveJackpotFeedClient(url)
+note right
+url = module, such that
+we can route to the
+appropriate casino provider,
+in this case,
+service-casino-provider-roxor
+end note
+jfcs -> jfc: getProgressiveJackpotFeed(domainName, gameSupplier, games)
+activate jfc
+jfc -> scprjfc: POST:/system/jackpot-feed/progressive/{domain-name}/{game-supplier}/get
+activate scprjfc
+scprjfc -> jfrt: getProgressiveJackpotFeed
+activate jfrt
+jfrt -> extrjf: HTTP request
+activate extrjf
+alt Timeout
+extrjf --> jfrt
+jfrt --> scprjfc: StatusXXXTimeoutException
+scprjfc --> jfc: StatusXXXTimeoutException
+jfc --> jfcs: StatusXXXTimeoutException
+jfcs --> jfs: StatusXXXTimeoutException
+jfs --> metrics: Add timeout metric
+activate metrics
+deactivate metrics
+note left
+The metric should contain
+enough info to identify the
+appropriate progressive jackpot
+feed. In this case, roxor.
+end note
+else
+extrjf --> jfrt
+deactivate extrjf
+jfrt -> jfrt: mapResponseData
+note right
+Mould response data to
+standard lithium API
+response
+end note
+jfrt --> scprjfc
+deactivate jfrt
+scprjfc --> jfc
+deactivate scprjfc
+jfc --> jfcs
+deactivate jfc
+deactivate jfcs
+jfcs --> jfs
+end
+else
+jfs -> gs: findEnabledProgressiveJackpotGamesByGameSupplier
+note right
+We only really need gameGuid,
+name, supplier identifier to
+map games appropriately. Use a
+projection to select just
+required fields. Ensure that
+this is a performant query
+end note
+activate gs
+gs --> jfs: games
+note right
+The reason for this is
+to have a standard API
+response from progressive
+jackpot feeds that includes
+data per game, including
+the game name
+end note
+deactivate gs
+jfs -> jfcs: getProgressiveJackpotFeed(domainName, module, gameSupplier, games)
+note right
+livescore_uk,
+service-casino-provider-iforium,
+blueprint
+end note
+activate jfcs
+jfcs -> jfcs: getProgressiveJackpotFeedClient(url)
+note right
+url = module, such that
+we can route to the
+appropriate casino provider,
+in this case,
+service-casino-provider-iforium
+end note
+jfcs -> jfc: getProgressiveJackpotFeed(domainName, gameSupplier, games)
+activate jfc
+jfc -> scpijfc: POST:/system/jackpot-feed/progressive/{domain-name}/{game-supplier}/get
+activate scpijfc
+scpijfc -> jfbt: getProgressiveJackpotFeed
+activate jfbt
+jfbt -> extbjf: HTTP request
+activate extbjf
+alt Timeout
+extbjf --> jfbt
+jfbt --> scpijfc: StatusXXXTimeoutException
+scpijfc --> jfc: StatusXXXTimeoutException
+jfc --> jfcs: StatusXXXTimeoutException
+jfcs --> jfs: StatusXXXTimeoutException
+jfs --> metrics: Add timeout metric
+activate metrics
+deactivate metrics
+note left
+The metric should contain
+enough info to identify the
+appropriate progressive jackpot
+feed. In this case, blueprint.
+end note
+else
+extbjf --> jfbt
+deactivate extbjf
+jfbt -> jfbt: mapResponseData
+note right
+Mould response data to
+standard lithium API
+response
+end note
+jfbt --> scpijfc
+deactivate jfbt
+scpijfc --> jfc
+deactivate scpijfc
+jfc --> jfcs
+deactivate jfc
+jfcs --> jfs
+deactivate jfcs
+end
+end
+jfs -> jfs: Amalgamation
+note right
+All requests completed
+or timed out. Now combine
+data from all lists
+end note
+jfs -> hz: Write to cache
+activate hz
+deactivate hz
+jfs --> jfuj
+deactivate jfs
+deactivate jfuj
+
+@enduml
+----
+[plantuml]

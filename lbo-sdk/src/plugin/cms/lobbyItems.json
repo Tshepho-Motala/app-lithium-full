@@ -1,0 +1,17 @@
+{
+    "items": [
+        {
+            "name": "New Item 0",
+            "state": "",
+            "maintenance": false,
+            "nav": [],
+            "badges": [],
+            "page": {
+                "channel": "",
+                "primary_nav_code": "",
+                "secondary_nav_code": ""
+            }
+        }
+    ]
+}
+

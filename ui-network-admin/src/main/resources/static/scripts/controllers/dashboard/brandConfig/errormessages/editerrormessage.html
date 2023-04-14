@@ -1,0 +1,74 @@
+<div class="modal-header" bs-loading-overlay bs-loading-overlay-reference-id="{{controller.referenceId}}">
+	<h3 ng-if="controller.auth.length == 0" class="modal-title" id="modal-view-title" style="position: absolute;">{{'UI_NETWORK_ADMIN.BRANDCONFIG.TAB.ERROR_MESSAGES.EDIT.VIEW_TITLE' | translate}}</h3>
+	<h3 ng-if="controller.auth.length > 0" class="modal-title" id="modal-edit-title" style="position: absolute;">{{'UI_NETWORK_ADMIN.BRANDCONFIG.TAB.ERROR_MESSAGES.EDIT.EDIT_TITLE' | translate}}</h3>
+	<button-close-window ng-click="controller.closeModal('close')"></button-close-window>
+</div>
+
+<form style="margin: 10px;" ng-submit="controller.submit()" name="controller.form" autocomplete="off" novalidate>
+
+	<div style="margin-left: 10px;" class="form-group">
+		<div class="form-group">
+			<div class="row v-reset-row " style="margin-bottom: 3px; margin-right: 3px;">
+				<div class="col-xs-2">
+					<label for="defaultValue" style="margin-left: 10px; margin-top: 6px;">{{'UI_NETWORK_ADMIN.BRANDCONFIG.TAB.ERROR_MESSAGES.EDIT.DEFAULT_LANGUAGE' | translate}}</label>
+				</div>
+				<div class="col-xs-10">
+					<input type="text" id="defaultValue" class="form-control" ng-model="controller.model.defaultValue" ng-disabled="true"/>
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="row v-reset-row " style="margin-bottom: 3px; margin-right: 3px;" ng-repeat="translation in controller.model.langValues">
+				<div class="col-xs-2">
+					<label for="langValue" style="margin-left: 10px; margin-top: 6px;">{{translation.language}}</label>
+				</div>
+				<div class="col-xs-8">
+					<input type="text" id="langValue" class="form-control" ng-model="translation.value" ng-disabled="controller.auth.length == 0"/>
+				</div>
+				<div class="col-xs-1" style="padding: 0px;">
+					<button class="btn btn-blue-grey" ng-click="controller.edit(translation)"><i class="fa fa-pencil-square-o"></i></button>
+				</div>
+				<div class="col-xs-1" style="padding: 0px; margin-left: -3px;">
+					<button class="btn btn-danger" ng-click="controller.delete(translation)" ng-if="translation.canDelete"><i class="fa fa-trash-o"></i></button>
+					<button class="btn btn-danger" ng-click="controller.delete(translation)" ng-if="!translation.canDelete" disabled><i class="fa fa-trash-o"></i></button>
+				</div>
+			</div>
+		</div>
+	</div>
+	</div>
+	<div class="model-content" style="margin: 10px;" ng-if="controller.auth.length > 0">
+		<div class="form-group">
+			<div class="row v-reset-row " >
+				<div class="col-xs-2">
+					<select class="form-control" ng-model="controller.model.newTranslation.locale2" selected-index="1">
+						<option>{{'UI_NETWORK_ADMIN.BRANDCONFIG.TAB.ERROR_MESSAGES.EDIT.SELECT_LANGUAGE' | translate}}</option>
+						<option ng-repeat="language in controller.model.languages" value="{{language.locale2}}">{{language.locale2}} ({{language.name}})</option>
+					</select>
+				</div>
+				<div class="col-xs-8">
+					<input type="text" class="form-control" ng-model="controller.model.newTranslation.value"/>
+				</div>
+				<div class="col-xs-1">
+					<button-add ng-click="controller.add()"></button-add>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<div class="form-group" ng-if="controller.model.toggleErrorMessage.enabled">
+			<form ng-submit="controller.closeModal('accept')" name="controller.form">
+				<div class="col-xs-12" style="text-align: left">
+					<formly-form model="controller.model" fields="controller.fields" form="controller.form" options="controller.options">
+					</formly-form>
+				</div>
+				<div class="row v-reset-row col-xs-12">
+					<div class="button-bar ">
+						<button-cancel class="pull-left" ng-click="controller.closeModal('cancel')"></button-cancel>
+						<button-enable class="pull-right" ng-click="controller.closeModal('accept')" ng-if="controller.model.toggleErrorMessage.buttonType === 'enable'"></button-enable>
+						<button-disable class="pull-right" ng-click="controller.closeModal('accept')" ng-if="controller.model.toggleErrorMessage.buttonType === 'disable'" ng-disabled="disableSubmitButton"></button-disable>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</form>

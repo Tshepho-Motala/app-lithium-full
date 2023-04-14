@@ -1,0 +1,9 @@
+{
+  "SERVICE_LIMIT": {
+    "TIME_FRAME_LIMIT" : {
+      "ERROR": {
+        "DISABLED_MESSAGE": "Time Frame limits disabled for current domain"
+      }
+    }
+  }
+}

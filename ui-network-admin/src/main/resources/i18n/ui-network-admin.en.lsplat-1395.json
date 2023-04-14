@@ -1,0 +1,11 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "DEPOSITLIMITS": {
+      "PENDING_TIME": {
+      "DAILY": "Daily deposit limit was increased on {{date}} to {{amount}}, this new limit will take effect after {{time}}hours from creation.",
+      "WEEKLY": "Weekly deposit limit was increased on {{date}} to {{amount}}, this new limit will take effect after {{time}}hours from creation.",
+      "MONTHLY": "Monthly deposit limit was increased on {{date}} to {{amount}}, this new limit will take effect after {{time}}hours from creation."
+      }
+    }
+  }
+}

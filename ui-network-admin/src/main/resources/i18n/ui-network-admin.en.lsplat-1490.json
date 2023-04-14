@@ -1,0 +1,62 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "CASHIER": {
+      "BANK_ACCOUNT_LOOKUP": {
+        "HEADER": {
+          "TITLE": "Bank Account Lookup",
+          "DESCRIPTION": "Cashier Bank Account related settings",
+          "SELECT_DOMAIN_DESC": "Select a domain to get started."
+        },
+        "INPUT_FIELDS": {
+          "PAYMENT_PROVIDER": "Payment Provider",
+          "BANK_ACCOUNT": {
+            "TITLE": "Bank Account",
+            "PLACEHOLDER": "10-digit NUBAN number",
+            "DESCRIPTION": "Set the 10-digit NUBAN bank account number that you wish to lookup"
+          },
+          "BANK_CODE": {
+            "TITLE": "Bank Code",
+            "PLACEHOLDER": "Input text",
+            "DESCRIPTION": "Enter the bank code or select a bank from the list below"
+          },
+          "BANK_NAME": {
+            "TITLE": "Bank Name",
+            "PLACEHOLDER": "A-Z list of banks",
+            "DESCRIPTION": "Select the name of the bank that the bank account belongs to"
+          },
+          "OPAY_MOBILE_NUMBER": {
+            "TITLE": "OPay Mobile Number",
+            "PLACEHOLDER": "234##########",
+            "DESCRIPTION": "Enter the mobile number associated with the OPay wallet"
+          },
+          "CLEAR_BUTTON": "Clear",
+          "LOOKUP_BUTTON": "Lookup"
+        },
+        "OUTPUT_FIELDS": {
+          "RESULTS": "Results",
+          "NO_DATA": "no data",
+          "PAYMENT_PROVIDER": "Payment Provider",
+          "STATUS": "Status",
+          "MESSAGE": "Message",
+          "FAILED_STATUS_REASON_MESSAGE": "Failed Status Reason Message",
+          "DATA_FROM_PROVIDER": "Data from Provider"
+        },
+        "RULES": {
+          "FIELD_REQUIRED": "Field is required",
+          "NAME_MUST_CONTAIN_ONLY_DIGITS": "Name must contain only digits",
+          "NAME_MUST_CONTAIN_10_DIGITS": "Name must contain 10 digits",
+          "NAME_MUST_CONTAIN_13_DIGITS": "Name must contain 13 digits"
+        }
+      },
+      "BANK_ACCOUNT_LOOKUP_TABLE": {
+        "BANK_ACCOUNT_LOOKUP": "Bank Account Lookup",
+        "STATUS": "Status",
+        "FAILED_STATUS_REASON": "Reason of Failed Status",
+        "ACCOUNT_NAME": "Account Name",
+        "ACCOUNT_NUMBER": "Account Number",
+        "BANK_CODE": "Bank Code",
+        "BANK_NAME": "Bank Name"
+      }
+    }
+  }
+}

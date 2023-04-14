@@ -1,0 +1,30 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "ACCESSCONTROL":{
+      "RULESETS": {
+        "SAVEMESSAGE": {
+          "MESSAGE": {
+            "PLACEHOLDER": "This is your custom {{messageType}} message that was configured on the access rules"
+          }
+        },
+        "VIEW": {
+          "ADD_RULE": {
+            "TITLE": "Add Rule",
+            "FINAL_OUTCOMES": "Final Outcome",
+            "SELECT_PROVIDER": "Select Provider",
+            "PROVIDER_OUTCOMES": "Provider Outcome",
+            "PROVIDER_DESCRIPTION": "Please select the provider which you want to call as part of this rule. This provider will be called and rules evaluated in the list provided below.",
+            "OUTCOMES_DESCRIPTION": "should return",
+            "SUCCESS": "The rule was successfully added.",
+            "OUTCOMES": "Outcomes"
+          },
+          "TABLE": {
+            "TIMEOUT_MSG": "Timeout Message",
+            "REVIEW_MSG": "Review Message"
+          }
+        }
+      }
+    }
+  }
+}
+

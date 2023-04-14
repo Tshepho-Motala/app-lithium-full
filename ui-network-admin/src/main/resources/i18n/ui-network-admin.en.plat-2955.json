@@ -1,0 +1,9 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "PROVIDER": {
+      "EDIT": {
+        "ERROR": "Please add betSearchBrand & submit again."
+      }
+    }
+  }
+}

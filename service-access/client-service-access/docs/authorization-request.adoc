@@ -1,0 +1,51 @@
+= AuthorizationRequest
+
+|====
+| Field | Type
+
+| ipAddress
+| String
+
+| country
+| String
+
+| claimedCountry
+| String
+
+| state
+| String
+
+| claimedState
+| String
+
+| city
+| String
+
+| claimedCity
+| String
+
+| browser
+| String
+
+| os
+| String
+
+| deviceId
+| String
+
+| userGuid
+| String
+
+| overrideValidateOnce
+| Boolean
+
+| postCode
+| String
+
+// TODO: Add PlayerBasic - Entropy...
+| playerBasic
+| PlayerBasic
+
+| additionalData
+| Map<String, String>
+|====

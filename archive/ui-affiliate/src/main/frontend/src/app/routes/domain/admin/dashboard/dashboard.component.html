@@ -1,0 +1,77 @@
+<mtex-layout-page>
+
+  <div *mtexLayoutToolbarSecondaryStart>
+    <h3>Dashboard</h3>
+  </div>
+
+      <md-card>
+        <md-card-title>Numbered Cards</md-card-title>
+        <md-divider></md-divider>
+        <div style="height: 300px; display: flex;" >
+            <ngx-charts-number-card [scheme]="blueScheme" [results]="single"></ngx-charts-number-card>
+        </div>
+      </md-card>
+
+      <md-card>
+        <md-card-title>Gauge</md-card-title>
+        <md-divider></md-divider>
+        <div style="height:400px; display: flex;">
+          <ngx-charts-gauge
+            [legend]="true"
+            [scheme]="orangeScheme"
+            [results]="single"
+            [angleSpan]="300"
+            [min]="0"
+            [max]="100"
+            [units]="'usage'"
+            [bigSegments]="10"
+            [smallSegments]="5"
+            [valueFormatting]="axisDigits">
+          </ngx-charts-gauge>
+        </div>
+      </md-card>
+
+      <md-card>
+        <md-card-title>Lines</md-card-title>
+        <md-divider></md-divider>
+        <div style="height:400px; display: flex;">
+          <ngx-charts-area-chart
+            [scheme]="blueScheme"
+            [results]="dataHits"
+            [roundDomains]="true"
+            [xAxis]="true"
+            [yAxis]="true"
+            [legend]="true"
+            [autoScale]="false"
+            [showXAxisLabel]="true"
+            [showYAxisLabel]="true"
+            [showGridLines]="false"
+            [timeline]="true"
+            [gradient]="gradient"
+            [curve]="curve"
+            [xAxisLabel]="'xAxisLabel'"
+            [yAxisLabel]="'yAxisLabel'">
+          </ngx-charts-area-chart>
+        </div>
+      </md-card>
+
+  <md-card>
+    <md-card-title>Hello</md-card-title>
+    <md-card-subtitle>Hello</md-card-subtitle>
+     <md-divider></md-divider>
+    <md-card-content>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras pulvinar venenatis blandit. Quisque ut tellus diam. Donec sed lacus ante. Sed eget cursus orci, non mollis odio. Nullam id mattis enim. Nulla nibh odio, elementum in pharetra vitae, semper sed odio. Fusce vel risus arcu. Ut vehicula sagittis ligula. Nulla a lorem placerat, malesuada elit luctus, sollicitudin neque. Duis id orci ante. Fusce efficitur ex commodo, tincidunt est ac, interdum sapien. Fusce finibus augue enim, non pharetra metus imperdiet in.</md-card-content>
+  </md-card>
+
+  <md-card>
+    <md-card-title>Hello</md-card-title>
+    <md-card-subtitle>Hello</md-card-subtitle>
+    <md-card-content>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras pulvinar venenatis blandit. Quisque ut tellus diam. Donec sed lacus ante. Sed eget cursus orci, non mollis odio. Nullam id mattis enim. Nulla nibh odio, elementum in pharetra vitae, semper sed odio. Fusce vel risus arcu. Ut vehicula sagittis ligula. Nulla a lorem placerat, malesuada elit luctus, sollicitudin neque. Duis id orci ante. Fusce efficitur ex commodo, tincidunt est ac, interdum sapien. Fusce finibus augue enim, non pharetra metus imperdiet in.</md-card-content>
+  </md-card>
+
+  <md-card>
+    <md-card-title>Hello</md-card-title>
+    <md-card-subtitle>Hello</md-card-subtitle>
+    <md-card-content>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras pulvinar venenatis blandit. Quisque ut tellus diam. Donec sed lacus ante. Sed eget cursus orci, non mollis odio. Nullam id mattis enim. Nulla nibh odio, elementum in pharetra vitae, semper sed odio. Fusce vel risus arcu. Ut vehicula sagittis ligula. Nulla a lorem placerat, malesuada elit luctus, sollicitudin neque. Duis id orci ante. Fusce efficitur ex commodo, tincidunt est ac, interdum sapien. Fusce finibus augue enim, non pharetra metus imperdiet in.</md-card-content>
+  </md-card>
+  
+</mtex-layout-page>

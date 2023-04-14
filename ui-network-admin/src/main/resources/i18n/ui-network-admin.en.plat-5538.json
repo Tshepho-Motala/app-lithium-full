@@ -1,0 +1,13 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "USER": {
+      "FIELDS": {
+        "SUB_ORDINATE": {
+          "LABEL": "Subordinate type",
+          "PLACEHOLDER": "Select subordinate type...",
+          "DESC": "A subordinate type provides additional control when used in combination with auto-restriction rules"
+        }
+      }
+    }
+  }
+}

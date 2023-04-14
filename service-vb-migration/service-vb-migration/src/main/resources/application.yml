@@ -1,0 +1,191 @@
+server:
+  port: 9999
+spring:
+  main:
+    allow-bean-definition-overriding: true
+    allow-circular-references: true
+  #rabbitmq:
+   # host: 127.0.0.1
+   # port: 15672
+   # username: guest
+   # password: guest
+  datasource:
+    #type: MYSQL
+    url: jdbc:mysql://localhost/lithium_vb_migration?useSSL=false
+    username: root
+    password: mysql
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate.jdbc.batch_size: 1000
+  cloud :
+    bootstrap:
+      enabled: true
+    gcp :
+      credentials :
+        location : file:${GOOGLE_FILE_PATH}
+      bigquery :
+
+        datasetName : lithium-virginbet-sandbox.dk_files
+    stream :
+      bindings :
+        vb-migration-output:
+          binder : rabbit
+          destination : vb-migration-users-queue
+          producer :
+            required-groups : vb-migration-users-group
+        player-limit-preferences-migration-output:
+          binder: rabbit
+          destination: player-limit-preferences-migration-queue
+          producer:
+            required-groups: player-limit-preferences-migration-group
+        casino-game-migration-output:
+          binder : rabbit
+          destination : casino-game-migration-queue
+          producer :
+            required-groups : casino-game-migration-group
+        casino-bets-migration-output:
+          binder : rabbit
+          destination : casino-bets-migration-queue
+          producer :
+            required-groups : casino-bets-migration-group
+        historic-migration-output:
+          binder : rabbit
+          destination : historic-migration-queue
+          producer :
+            required-groups: historic-migration-group
+        reality-check-migration-output:
+          binder : rabbit
+          destination : reality-check-migration-queue
+          producer :
+            required-groups : reality-check-migration-group
+
+
+        self-exclusion-cool-off-preference-output :
+          binder : rabbit
+          destination : self-exclusion-cool-off-preference-queue
+          producer :
+            required-groups : self-exclusion-cool-off-preference-group
+        opening-balance-migration-output :
+          binder : rabbit
+          destination : opening-balance-migration-queue
+          producer :
+            required-groups : opening-balance-migration-group
+        updating-balance-migration-output :
+          binder : rabbit
+          destination : updating-balance-migration-queue
+          producer :
+            required-groups : updating-balance-migration-group
+        cashier-payment-method-migration-output :
+          binder : rabbit
+          destination : cashier-payment-method-migration-queue
+          producer :
+            required-groups : cashier-payment-method-migration-group
+        cashier-historic-transaction-migration-output :
+          binder : rabbit
+          destination : cashier-historic-transaction-migration-queue
+          producer :
+            required-groups : cashier-historic-transaction-migration-group
+        account-notes-migration-output :
+          binder : rabbit
+          destination : account-notes-migration-queue
+          producer :
+            required-groups : account-notes-migration-group
+        account-notes-migration-prep-output :
+          binder : rabbit
+          destination : account-notes-migration-prep-queue
+          producer :
+            required-groups : account-notes-migration-prep-group
+        migration-exception-input:
+          consumer:
+            concurrency: 5
+            max-attempts: 5
+            back-off-initial-interval: 5000
+            back-off-max-interval: 60000
+            back-off-multiplier: 2.5
+          group: migration-exception-group
+          binder: rabbit
+          destination: migration-exception-queue
+        migration-credential-input:
+          consumer:
+            concurrency: 5
+            max-attempts: 5
+            back-off-initial-interval: 5000
+            back-off-max-interval: 60000
+            back-off-multiplier: 2.5
+          group: migration-credential-group
+          binder: rabbit
+          destination: migration-credential-queue
+        user-payment-options-migration-output :
+          binder : rabbit
+          destination : user-payment-options-migration-queue
+          producer :
+            required-groups : user-payment-options-migration-group
+
+      rabbit:
+        bindings:
+          migration-exception-input:
+            consumer:
+              auto-bind-dlq: true
+              requeue-rejected: true
+              republish-to-dlq: true
+          migration-credential-input:
+            consumer:
+              auto-bind-dlq: true
+              requeue-rejected: true
+              republish-to-dlq: true
+          user-payment-options-migration-output :
+            producer :
+              autoBindDlq : true
+
+
+
+
+lithium :
+  gateway-public-url : http://localhost:9001
+#  password :
+#    salt : testvalue
+
+# @Faiz I removed this because service-vb-migration should not override these properties. It is set as environment configuration on gitlab.
+#  system :
+#    auth :
+#      token-url : http://localhost:8901/oauth/token
+#      username : system
+#      password : VERYBLOODYgoodpasswordFORuseInSystemAUTHENTICATION99
+
+
+  service :
+    migration :
+      query :
+        data-set : dk_files
+        users : "SELECT * FROM `lithium-virginbet-sandbox.dk_files.historic_user_ingestions`"
+        batch-size : 30000
+        accounts: " SELECT * FROM `lithium-virginbet-sandbox.dk_files.AccountingLimits`"
+        transaction-types: " SELECT DISTINCT transactionTypeLithium FROM `lithium-virginbet-sandbox.dk_files.AccountingLimits`"
+        opening-balance-phase-1: " SELECT * FROM `lithium-virginbet-sandbox.dk_files.openingBalancesTest`"
+        opening-balance-phase-2: " SELECT * FROM `lithium-virginbet-sandbox.dk_files.openingBalancesTest` where newBalance is not null"
+        users-casino-migration: "SELECT DISTINCT(customerid) FROM `lithium-virginbet-sandbox.dk_files.casinoSnapshot`"
+        games-casino-migration: "SELECT DISTINCT(GameId), GameName, GameProviderName, rtp, SubProviderID, SubProviderName FROM `lithium-virginbet-sandbox.dk_files.casinoSnapshot`"
+        data-casino-migration: "SELECT * FROM `lithium-virginbet-sandbox.dk_files.casinoSnapshot`"
+        player-limit-preferences: "SELECT * FROM `lithium-virginbet-sandbox.dk_files.limits`"
+        cashier-payment-methods: "SELECT * FROM `lithium-virginbet-sandbox.dk_files.CashierPaymentMethods`"
+        cashier-transactions: "SELECT * FROM `lithium-virginbet-sandbox.dk_files.CashierTransactions`"
+        cashier-user-verify-transactions-exist: "SELECT * FROM `lithium-virginbet-sandbox.dk_files.CashierTransactions` WHERE customerId = #customerId LIMIT 1"
+        cashier-user-verify-transactions-exist-with-provider: "SELECT * FROM `lithium-virginbet-sandbox.dk_files.CashierTransactions` WHERE customerId = #customerId AND providerName = #providerName LIMIT 1"
+        cashier-users-for-upo-ingestion: "SELECT * FROM `lithium-virginbet-sandbox.dk_files.CashierUsersForUPOIngestion_table`"
+        accounts-batch-size : 30000
+      pending-self-exclusion-job :
+        cron : 0,5 * * * * *
+        page-size : 1000
+      historic-ingestion :
+        dlq-retries: 3
+        domain: virginbet_uk
+        domain-currency-code: GBP
+        legacy-guid: "legacy-"
+
+logging:
+    level:
+      lithium.service.migration: INFO
+#      lithium.service.migration.service.cashier.CashierUserVerificationService: TRACE

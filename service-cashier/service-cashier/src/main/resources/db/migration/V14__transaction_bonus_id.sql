@@ -1,0 +1,1 @@
+ALTER TABLE `transaction` ADD COLUMN `bonus_id` BIGINT(20) DEFAULT NULL;

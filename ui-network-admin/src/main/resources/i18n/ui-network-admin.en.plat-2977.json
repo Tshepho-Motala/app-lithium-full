@@ -1,0 +1,17 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "TEMPLATES": {
+      "ERRORS": {
+        "DELETE": "The template could not be deleted",
+        "PUBLISH_DELETE": "The template could not be deleted from the CDN"
+      },
+      "SUCCESS": {
+        "DELETE": "The template was deleted",
+        "PUBLISH_DELETE": "The template was deleted from the CDN"
+      },
+      "CONFIRM": {
+        "DELETE": "Are you sure you want to delete this template?"
+      }
+    }
+  }
+}

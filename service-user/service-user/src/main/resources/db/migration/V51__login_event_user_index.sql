@@ -1,0 +1,2 @@
+CREATE INDEX `idx_loginevent_user_id_successful_date` ON `login_event` (`user_id`, `successful`, `date`) ALGORITHM INPLACE LOCK NONE;
+ALTER TABLE `user` ADD COLUMN `excessive_failed_login_block` bit(1) DEFAULT NULL;

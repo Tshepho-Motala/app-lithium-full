@@ -1,0 +1,25 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "PLAYER": {
+      "QUICK_ACTIONS": {
+        "FREE_GAMES": {
+          "UNLOCK": "Unlock All Free Games",
+          "LOCK": "Lock All Free Games"
+        }
+      }
+    },
+    "USER": {
+      "FIELDS": {
+        "FREE_GAMES": "FREE GAMES"
+      }
+    },
+    "GAME": {
+      "FIELDS": {
+        "FREE_GAME": {
+          "NAME": "Free Game",
+          "DESCRIPTION": "The game does not use money to play"
+        }
+      }
+    }
+  }
+}

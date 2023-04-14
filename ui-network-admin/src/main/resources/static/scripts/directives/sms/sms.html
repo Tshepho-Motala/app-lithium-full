@@ -1,0 +1,124 @@
+<div class="row v-reset-row ">
+	<div class="user-block">
+		<img class="img-circle img-bordered-sm" src="//:0" alt="">
+		<span class="username">
+			<a>({{ sms.to }})</a>
+		</span>
+		<span class="description">
+			{{ "UI_NETWORK_ADMIN.SMSQUEUE.SMS.CREATEDDATE" | translate }} - {{ sms.createdDate | datetimedefault }}
+		</span>
+	</div>
+	<hr/>
+	<div class="row v-reset-row ">
+		<div class="col-md-7">
+			<div class="box box-info box-solid">
+				<div class="box-header with-border">
+					{{ "UI_NETWORK_ADMIN.SMSQUEUE.SMS.BASICINFORMATION" | translate }}
+				</div>
+				<div class="box-body table-responsive">
+					<table class="table table-bordered">
+						<tr>
+							<th>{{ "UI_NETWORK_ADMIN.SMSQUEUE.SMS.CREATEDDATE" | translate }}</th>
+							<td>{{ sms.createdDate | datetimedefault }}</td>
+						</tr>
+						<tr>
+							<th>{{ "UI_NETWORK_ADMIN.SMSQUEUE.SMS.FROM" | translate }}</th>
+							<td>{{ sms.from }}</td>
+						</tr>
+						<tr>
+							<th>{{ "UI_NETWORK_ADMIN.SMSQUEUE.SMS.TO" | translate }}</th>
+							<td>{{ sms.to }}</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-5">
+			<div class="box box-info box-solid">
+				<div class="box-header with-border">
+					{{ "UI_NETWORK_ADMIN.SMSQUEUE.SMS.PROCESSINGINFORMATION" | translate }}
+				</div>
+				<div class="box-body table-responsive">
+					<table class="table table-bordered">
+						<tr>
+							<th>{{ "UI_NETWORK_ADMIN.SMSQUEUE.SMS.CURRENTLYPROCESSING" | translate }}</th>
+							<td>{{ sms.processing }}</td>
+						</tr>
+						<tr>
+							<th>{{ "UI_NETWORK_ADMIN.SMSQUEUE.SMS.PRIORITY" | translate }}</th>
+							<td>{{ sms.priority === 1? "High":"Low" }}</td>
+						</tr>
+						<tr>
+							<th>{{ "UI_NETWORK_ADMIN.SMSQUEUE.SMS.SENT" | translate }}</th>
+							<td>{{ sms.sentDate != null? true:false }}</td>
+						</tr>
+						<tr>
+							<th>{{ "UI_NETWORK_ADMIN.SMSQUEUE.SMS.SENTDATE" | translate }}</th>
+							<td>{{ sms.sentDate | datetimedefault }}</td>
+						</tr>
+						<tr>
+							<th>{{ 'UI_NETWORK_ADMIN.SMSQUEUE.SMS.RECEIVEDDATE' | translate }}</th>
+							<td>{{ sms.receivedDate | datetimedefault }}</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div ng-if="currentState != 'dashboard.players.player.smshistory.view'" class="col-md-12">
+			<div class="box box-info box-solid">
+				<div class="box-header with-border">
+					{{ "UI_NETWORK_ADMIN.SMSQUEUE.SMS.USERINFO.TITLE" | translate }}
+				</div>
+				<div class="box-body table-responsive">
+					<div ng-if="sms.fullUser === null" class="box box-danger ng-scope">
+						<div class="box-body ng-binding">
+							No user found.
+						</div>
+					</div>
+					<table ng-if="sms.fullUser != null" class="table table-bordered">
+						<tr>
+							<th style="width: 15%;">{{ "UI_NETWORK_ADMIN.SMSQUEUE.SMS.USERINFO.NAME" | translate }}</th>
+							<td>{{ sms.fullUser.firstName + ' ' + sms.fullUser.lastName }}</td>
+						</tr>
+						<tr>
+							<th style="width: 15%;">{{ "UI_NETWORK_ADMIN.SMSQUEUE.SMS.USERINFO.USERNAME" | translate }}</th>
+							<td><a ng-href="{{ linkToProfile }}">{{ sms.fullUser.username }}</a></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-12">
+			<div class="box box-info box-solid">
+				<div class="box-header with-border">
+					{{ "UI_NETWORK_ADMIN.SMSQUEUE.SMS.ERRORINFORMATION" | translate }}
+				</div>
+				<div class="box-body table-responsive">
+					<div ng-if="sms.errorCount === 0" class="box box-danger ng-scope">
+						<div class="box-body ng-binding">
+							No errors found.
+						</div>
+					</div>
+					<table ng-if="sms.errorCount > 0" class="table table-bordered">
+						<tr>
+							<th style="width: 25%;">{{ "UI_NETWORK_ADMIN.SMSQUEUE.SMS.ERRORCOUNT" | translate }}</th>
+							<td>{{ sms.errorCount }}</td>
+						</tr>
+						<tr>
+							<th style="width: 25%;">{{ "UI_NETWORK_ADMIN.SMSQUEUE.SMS.LATESTERRORREASON" | translate }}</th>
+							<td>{{ sms.latestErrorReason }}</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-12">
+			<div class="box box-info box-solid">
+				<div class="box-header with-border">
+					{{ "UI_NETWORK_ADMIN.SMSQUEUE.SMS.TEXT" | translate }}
+				</div>
+				<div style="padding: 20px;">{{ sms.text }}</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,12 @@
+{
+  "UI_NETWORK_ADMIN" : {
+    "PLAYER" : {
+      "RESTRICTIONS" : {
+        "ADD" : {
+          "ERROR" : "Failed to add restriction",
+          "FAILURE" : "Please note this restriction has already been added!"
+        }
+      }
+    }
+  }
+}

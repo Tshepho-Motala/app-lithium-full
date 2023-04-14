@@ -1,0 +1,1 @@
+ALTER TABLE `report_run_results` ADD COLUMN `gamstop_status` varchar(255);

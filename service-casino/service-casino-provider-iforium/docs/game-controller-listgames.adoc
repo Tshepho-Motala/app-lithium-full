@@ -1,0 +1,142 @@
+= List Games
+
+include::plantuml/game-controller-listgames-sequence.puml[]
+
+GGO: N/A +
+Lithium: link:https://gitlab.com/playsafe/lithium/app-lithium-full/-/blob/develop/service-games/client-service-games/src/main/java/lithium/service/games/client/GamesClient.java#L30[`/games/{domainName}/listGames`]
+
+NOTE: Implemented in link:https://gitlab.com/playsafe/lithium/app-lithium-full/-/blob/develop/service-casino/service-casino-provider-iforium/src/main/java/lithium/service/casino/provider/iforium/controller/ServiceGameController.java[lithium.service.casino.provider.iforium.controller.ServiceGameController]
+
+The data returned by the `listGames` endpoint will be sourced from a CSV document, the location of which will be defined in the domain configuration. See  link:challenge-games-list.adoc[Games List] for more detail.
+
+[options="header", cols="<.<25m,.<10,.<25m,.<40e"]
+|===
+|Lithium Parameter|Type|CSV Column|Comments
+
+| id 
+| long 
+| N/A
+| IGNORE - internal to svc-games
+
+| name 
+| String 
+| Title
+| [red]#Required:# User-friendly display name for the game.
+
+| domain 
+| Domain 
+| N/A
+| IGNORE - internal to svc-games
+
+| providerGameId 
+| String 
+| Game ID
+| [red]#Required:# A unique identifier for the game on the Iforium side.
+
+| enabled 
+| boolean 
+| N/A
+| IGNORE - internal to svc-games
+
+| visible 
+| boolean 
+| N/A
+| IGNORE - internal to svc-games
+
+| locked 
+| boolean 
+| N/A
+| IGNORE - internal to svc-games
+
+| lockedMessage 
+| String 
+| N/A
+| IGNORE - internal to svc-games
+
+| hasLockImage 
+| boolean 
+| N/A
+| IGNORE - internal to svc-games
+
+| guid 
+| String 
+| N/A
+| Consists of providerServiceName and providerGameId 
+
+| description 
+| String 
+| N/A
+|
+
+| providerGuid 
+| String 
+| N/A
+| [red]#Required:# Essentially the eureka service name (`moduleInfo.getModuleName()`)
+
+| freeSpinEnabled 
+| Boolean 
+| N/A
+|
+
+| freeSpinValueRequired 
+| Boolean 
+| N/A
+|
+
+| freeSpinPlayThroughEnabled 
+| Boolean 
+| N/A
+|
+
+| casinoFreeBetEnabled 
+| Boolean 
+| N/A
+|
+
+| gameCurrency 
+| GameCurrency 
+| N/A
+| IGNORE - internal to svc-games
+
+| gameSupplier 
+| GameSupplier 
+| Integration Provider
+| IGNORE - internal to svc-games
+
+
+| labels 
+| HashMap <String, Label>
+a| * Content Provider
+* Channel
+* Game Type
+* Genre
+* Market
+* Branded
+* Volatility
+* RTP
+* Release Date
+| We'll pass the remaining data as labels.
+
+| progressiveJackpot 
+| Boolean 
+| Jackpot
+| Denotes that a game has a progressive jackpot
+
+| networkedJackpotPool 
+| Boolean
+| N/A
+| Denotes that a game is part of a networked jackpot pool
+
+| localJackpotPool 
+| Boolean 
+| N/A
+| Denotes that a game is part of a local jackpot pool
+
+|===
+
+== Comments
+
+[NOTE]
+--
+For `gameSupplier` we have also potential options of `Integration Provider` and `Content Provider`.
+--

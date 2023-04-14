@@ -1,0 +1,5 @@
+Credit
+[source,gherkin]
+----
+include::../../src/docs/gherkin/high-level-spec/credit.feature[]
+----

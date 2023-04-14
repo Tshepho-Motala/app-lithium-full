@@ -1,0 +1,16 @@
+server:
+  port: 9817
+  servlet:
+    context-path: /
+
+spring:
+  application:
+    name: service-casino-provider-evolution
+eureka:
+  instance:
+    appname: service-casino-provider-evolution
+
+logging:
+  level:
+    ROOT: WARN
+    lithium.service.casino.provider.evolution: INFO

@@ -1,0 +1,41 @@
+<div class="container-fluid">
+    <div class="row v-reset-row  bottom-space-10">
+        <buttonbar>
+            <button-back ui-sref="^.list"></button-back>
+            <button-edit lit-if-permission="GAME_TYPE_EDIT" lit-permission-domain="{{controller.gameType.domain.name}}" ui-sref="dashboard.casino.game-types.edit({domainName: controller.gameType.domain.name, id: controller.gameType.id})"></button-edit>
+            <button-custom ng-click="controller.viewGames()" bclass="" icon="eye" text="UI_NETWORK_ADMIN.GAME_TYPES.FIELDS.GAMES.VIEW_BUTTON"></button-custom>
+        </buttonbar>
+    </div>
+    <div class="row v-reset-row ">
+        <div class="card card-block">
+            <div class="well-clear">
+                <div class="table-responsive">
+                    <table class="table table-hover nowrap" cellspacing="0" width="100%">
+                        <tbody>
+                        <tr>
+                            <th style="width: 25%;">{{'UI_NETWORK_ADMIN.GAME-TYPES.FIELDS.DOMAIN.LABEL'|translate}}</th>
+                            <td>{{controller.gameType.domain.name}}</td>
+                        </tr>
+                        <tr>
+                            <th>{{'UI_NETWORK_ADMIN.GAME-TYPES.FIELDS.NAME.LABEL'|translate}}</th>
+                            <td>{{controller.gameType.name}}</td>
+                        </tr>
+                        <tr>
+                            <th>{{'UI_NETWORK_ADMIN.GAME-TYPES.FIELDS.TYPE.LABEL'|translate}}</th>
+                            <td>{{controller.gameType.type.value}}</td>
+                        </tr>
+                        <tr>
+                            <th>{{'UI_NETWORK_ADMIN.GAME_TYPES.FIELDS.GAMES.LABEL'|translate}}</th>
+                            <td>{{controller.games ? controller.games.length : 0}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="row v-reset-row ">
+        <changelog options="controller.changelogs"></changelog>
+    </div>
+</div>

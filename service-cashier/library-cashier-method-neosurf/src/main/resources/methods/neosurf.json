@@ -1,0 +1,20 @@
+{
+  "name": "Neosurf",
+  "code": "neosurf",
+  "image": {
+    "filename": "/methods/neosurflogo_150x40.png",
+    "filetype": "image/png"   
+  },
+  "depositStages": [
+    {
+      "number": 1,
+      "title": "CASHIER-METHOD-NEOSURF.DEPOSIT_AMOUNT_FIELD_TITLE",
+      "description": "CASHIER-METHOD-NEOSURF.DEPOSIT_AMOUNT_FIELD_DESCRIPTION."
+     },
+    {
+      "number": 2,
+      "title": "CASHIER-METHOD-NEOSURF.DEPOSIT_WAIT_FOR_PR_RESPONSE_TITLE",
+      "description": "CASHIER-METHOD-NEOSURF.DEPOSIT_WAIT_FOR_PR_RESPONSE_DESCRIPTION"
+    }
+  ]
+}

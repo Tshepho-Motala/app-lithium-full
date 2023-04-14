@@ -1,0 +1,31 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "PLAYER": {
+      "QUICK_ACTIONS": {
+        "ADD": {
+          "RESTRICTION": "Add a Restriction"
+        },
+        "DELETE": {
+          "RESTRICTION": "Lift Restriction [{{restriction}}]"
+        }
+      },
+      "RESTRICTIONS": {
+        "TITLE": "Restrictions",
+        "NONE": "No restrictions placed on user account.",
+        "ADD": {
+          "SUCCESS": "Successfully placed the restriction set on the user account."
+        },
+        "LIFT": {
+          "CONFIRM": "Are you sure you want to lift this restriction set from the user?",
+          "SUCCESS": "Successfully lifted the restriction set from the user."
+        },
+        "FIELDS": {
+          "RESTRICTIONSET": {
+            "NAME": "Restriction Set",
+            "DESCRIPTION": "Choose the restriction set that you want to place on the user"
+          }
+        }
+      }
+    }
+  }
+}

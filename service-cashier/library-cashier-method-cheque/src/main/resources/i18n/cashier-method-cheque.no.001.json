@@ -1,0 +1,8 @@
+{
+ "CASHIER-METHOD-FEDEX-CHEQUE": {
+		"WITHDRAWAL_AMOUNT_FIELD_TITLE": "Gjennomfør uttak",
+		"WITHDRAWAL_AMOUNT_FIELD_DESCRIPTION": "Angi beløpet du ønsker å overføre samt detaljene om bankkontoen vi skal overføre pengene til.",
+		"WITHDRAWAL_ACCOUNT_FIELD_TITLE": "Bankkontonummer",
+		"WITHDRAWAL_ACCOUNT_FIELD_DESCRIPTION": "Bankkontonummeret"
+	}
+}

@@ -1,0 +1,13 @@
+{
+  "SERVICE-LIMIT": {
+    "RESTRICTIONS": {
+      "RULESETS": {
+        "RULE": {
+          "FIELD": {
+            "PAYMENT_ACCOUNT_NAME": "Payment account name verified"
+          }
+        }
+      }
+    }
+  }
+}

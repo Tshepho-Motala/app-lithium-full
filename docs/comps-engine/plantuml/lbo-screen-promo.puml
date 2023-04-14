@@ -1,0 +1,71 @@
+.LBO Screens
+[plantuml]
+----
+
+@startuml
+(*) --> "
+__ LBO Menu __
+{{
+salt
+{
+{T
+ + Promotions
+ ++ <i>--Rewards--</i>
+ ++ Management
+ ++ Player History
+ ++ <i>--Leaderboards--</i>
+ ++ <i>--XP--</i>
+}
+}
+}}
+" as menu
+
+menu -right-> "
+__ Promotions Management __
+{{
+salt
+{#
+
+Name | Desc | Domain | Start Date | End Date | Sequence | XP Level | .
+Squads Signup | Bet at least £10 on Sports & Get A Bonus on Squads | livescore_uk | . | . | 1 | 0 | view
+Squads Decision Time | Wager at least £10 on Casino & Get Bonus on Squads | livescore_uk | . | . | 2 | 0 | view
+}
+}}
+" as m
+
+menu --> "
+__ Player History __
+{{
+salt
+{#
+
+Domain | User	| Name | . | Active | Expired | Started | Completed | Timezone | Percentage
+livescore_uk | livescore_uk/2 | Squads | Open | true | false | 2022-02-10 11:08:47 | . | Africa/Johannesburg | 90
+}
+}}
+" as ph
+
+menu -left-> "
+__ Rewards __
+{{
+salt
+{#
+Will be expanded on later.
+Current Bonus screens will be ported into this menu in a later task.
+}
+}}
+" as r
+
+'promo -down-> "
+'{{
+'salt
+'{+
+'<b>error
+'failed, sorry
+'[ok]
+'}
+'}}
+'"
+@enduml
+
+----

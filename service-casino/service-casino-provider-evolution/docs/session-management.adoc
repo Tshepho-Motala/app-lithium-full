@@ -1,0 +1,12 @@
+== Session Management
+
+`sid` is an attribute used in One Wallet API calls and represents player’s session ID.
+
+A players session ID in context of Evolution is linked to a successful login event that can be found on `lithium_user.login_event`.`session_key`.
+
+// To confirm
+A player's session ID is validated against the players login event. If the players session key matches a login event associated to the player's userGuid, then the session should validate to true.
+
+==== Create SID
+
+On `/startGame` the player's access token will be used to get the session key from it.

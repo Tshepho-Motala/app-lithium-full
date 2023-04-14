@@ -1,0 +1,9 @@
+{
+  "SERVICE_USER": {
+    "ACCOUNT_FROZEN": {
+      "CRUKS_SELF_EXCLUSION": {
+        "MESSAGE": "Account is frozen. CRUKS self excluded."
+      }
+    }
+  }
+}

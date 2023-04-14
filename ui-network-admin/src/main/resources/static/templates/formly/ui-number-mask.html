@@ -1,0 +1,7 @@
+<div class="form-group" ng-class="{'has-error': showError}" ng-attr-name="model[options.key]">
+	<input type="text" class="form-control" ng-if="((to.neg === false) && (to.hidesep === false))" ng-model="model[options.key]" ui-number-mask="{{to.decimals}}" min="{{to.min}}" max="{{to.max}}">
+	<input type="text" class="form-control" ng-if="((to.neg === false) && (to.hidesep === true))" ng-model="model[options.key]" ui-number-mask="{{to.decimals}}" min="{{to.min}}" max="{{to.max}}" ui-hide-group-sep>
+	<input type="text" class="form-control" ng-if="((to.neg === true) && (to.hidesep === false))" ng-model="model[options.key]" ui-number-mask="{{to.decimals}}" min="{{to.min}}" max="{{to.max}}" ui-negative-number>
+	<input type="text" class="form-control" ng-if="((to.neg === true) && (to.hidesep === true))" ng-model="model[options.key]" ui-number-mask="{{to.decimals}}" min="{{to.min}}" max="{{to.max}}" ui-negative-number ui-hide-group-sep>
+<!-- 	<p class="help-block" ng-if="to.description">{{to.description}}</p> -->
+</div>

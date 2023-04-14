@@ -1,0 +1,15 @@
+{
+	"UI_NETWORK_ADMIN": {
+		"ACCESSCONTROL": {
+			"RULES": {
+				"ADD": {
+					"BASIC": {
+						"NAME": {
+							"PATTERN": "Only letters, numbers, underscores, and dots allowed"
+						}
+					}
+				}
+			}
+		}
+	}
+}

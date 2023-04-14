@@ -1,0 +1,47 @@
+{
+	"info": {
+		"_postman_id": "4dbcfef2-1e5a-4b0f-88c3-83b721dba7e1",
+		"name": "Lithium Casino CMS",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "{{gateway}}/service-casino-cms/frontend/lobby/load",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{USERTOKEN}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"brand\": \"luckybetz\",\n    \"channel\": \"desktop_web\",\n    \"primary_nav_code\": \"casino\",\n    \"secondary_nav_code\": \"for_you\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{gateway}}/service-casino-cms/frontend/lobby/load",
+					"host": [
+						"{{gateway}}"
+					],
+					"path": [
+						"service-casino-cms",
+						"frontend",
+						"lobby",
+						"load"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

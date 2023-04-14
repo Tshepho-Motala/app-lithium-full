@@ -1,0 +1,62 @@
+.Deposit Bonus Flow (Current)
+[plantuml]
+----
+
+@startuml
+
+actor player as p
+
+participant "svc-promo" as pr
+participant "svc-campaign" as cam
+participant "svc-cashier" as ca
+participant "svc-casino" as sc
+participant "svc-accounting-pr-int" as sa
+participant "RabbitMQ" as k
+
+box "Rabbit" #lightgreen
+  participant k
+end box
+
+note over k
+  We currently use Rabbit for any messaging,
+  Kafka should be investigated for future use.
+end note
+
+group Bonus Activate [Deposit process initiates bonus activate]
+note over p
+  Deposit is made
+end note
+p->ca ++: player deposits money
+ca->sa ++: /balance/adjustMulti
+sa->k: CompletedTransaction (deposit) event sent
+sa->ca --: Response<AdjustmentTransaction>
+note over k
+  Cashier should be changed to make
+  use of CompletedTransaction,
+  this will be sent/distributed
+  from "svc-accounting-pr-int"
+end note
+ca->p --: deposit response
+k->pr: ICompletedTransactionProcessor
+end
+
+group Bonus Wagering [Casino bets processed to determine play through]
+p->sc ++: /casino/bet
+sc->sa ++: /balance/adjustMulti
+sa->sc --: Response<AdjustmentTransaction>
+sc->k: bet event registered
+note over k
+ fanout implementation similar
+ to CompletedTransaction impl.
+end note
+sc->p --: bet response
+k->cam: kafka streams bet event
+note over k
+ BetEvent:
+ userGuid,bet/win,roundId,gameGuid
+end note
+k->pr: ICompletedBetTransactionProcessor
+end
+
+@enduml
+----

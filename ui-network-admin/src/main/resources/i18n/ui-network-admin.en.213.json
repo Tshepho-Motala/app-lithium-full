@@ -1,0 +1,7 @@
+{
+  "UI_NETWORK_ADMIN": {
+      "NEGATIVE_BALANCE": {
+        "ERROR": "Balance can't be negative"
+    }
+  }
+}

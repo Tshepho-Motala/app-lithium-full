@@ -1,0 +1,55 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "ERROR_DICTIONARY": {
+      "RESTRICTION": {
+        "DEFAULT_ERROR_MESSAGE": "Your account is currently unable to perform this action. Please contact us for assistance."
+      }
+    }
+  },
+  "ERROR_DICTIONARY": {
+    "LIMIT_SYSTEM_ACCESS": {
+      "UNVERIFIED_LEVEL": {
+        "CASINO": "In order to play casino, please contact us to verify your account.",
+        "LOGIN": "In order to login, please contact us to verify your account.",
+        "DEPOSIT": "In order to deposit, please contact us to verify your account.",
+        "WITHDRAW": "In order to withdraw, please contact us to verify your account.",
+        "BET_PLACEMENT": "In order to place bets, please contact us to verify your account."
+      },
+      "MANUALLY_VERIFIED": {
+        "CASINO": "Casino gameplay is currently not allowed on your account. Please contact us for assistance.",
+        "LOGIN": "Login is currently not allowed on your account. Please contact us for assistance.",
+        "DEPOSIT": "Deposits are currently not allowed on your account. Please contact us for assistance.",
+        "WITHDRAW": "Withdrawals are currently not allowed on your account. Please contact us for assistance.",
+        "BET_PLACEMENT": "Bet placement is currently not allowed on your account. Please contact us for assistance."
+      },
+      "EXTERNALLY_VERIFIED": {
+        "CASINO": "Casino gameplay is currently not allowed on your account. Please contact us for assistance.",
+        "LOGIN": "Login is currently not allowed on your account. Please contact us for assistance.",
+        "DEPOSIT": "Deposits are currently not allowed on your account. Please contact us for assistance.",
+        "WITHDRAW": "Withdrawals are currently not allowed on your account. Please contact us for assistance.",
+        "BET_PLACEMENT": "Bet placement is currently not allowed on your account. Please contact us for assistance."
+      },
+      "SOF_VERIFIED": {
+        "CASINO": "Casino gameplay is currently not allowed on your account. Please contact us for assistance.",
+        "LOGIN": "Login is currently not allowed on your account. Please contact us for assistance.",
+        "DEPOSIT": "Deposits are currently not allowed on your account. Please contact us for assistance.",
+        "WITHDRAW": "Withdrawals are currently not allowed on your account. Please contact us for assistance.",
+        "BET_PLACEMENT": "Bet placement is currently not allowed on your account. Please contact us for assistance."
+      },
+      "UNDERAGED": {
+        "CASINO": "Casino gameplay is currently not allowed on your account. Please contact us for assistance.",
+        "LOGIN": "Login is currently not allowed on your account. Please contact us for assistance.",
+        "DEPOSIT": "Deposits are currently not allowed on your account. Please contact us for assistance.",
+        "WITHDRAW": "Withdrawals are currently not allowed on your account. Please contact us for assistance.",
+        "BET_PLACEMENT": "Bet placement is currently not allowed on your account. Please contact us for assistance."
+      },
+      "AGE_ONLY_VERIFIED": {
+        "CASINO": "Casino gameplay is currently not allowed on your account. Please contact us for assistance.",
+        "LOGIN": "Login is currently not allowed on your account. Please contact us for assistance.",
+        "DEPOSIT": "Deposits are currently not allowed on your account. Please contact us for assistance.",
+        "WITHDRAW": "Withdrawals are currently not allowed on your account. Please contact us for assistance.",
+        "BET_PLACEMENT": "Bet placement is currently not allowed on your account. Please contact us for assistance."
+      }
+    }
+  }
+}

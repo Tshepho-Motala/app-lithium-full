@@ -1,0 +1,34 @@
+<div class="container-fluid">
+	<div class="card card-block" style="margin-bottom: 10px;" ng-init="">
+		<div class="d-flex justify-content-start">
+			<div class="p-2 mr-auto" style="width: 50%;">
+				<span class="title">
+					{{ 'UI_NETWORK_ADMIN.USERMISSIONS.VIEW.TITLE' | translate }}
+				</span>
+				<span class="description">
+					{{ 'UI_NETWORK_ADMIN.USERMISSIONS.VIEW.DESCRIPTION' | translate }}
+				</span>
+			</div>
+			<div class="ml-auto p-2 text-right" style="width: 50%;">
+				<div style="margin-bottom:5px;">
+					<span style="padding:5px; margin-right: 2px;" class="label label-primary">&nbsp;{{ controller.model.promotionRevision.name }}&nbsp;</span>
+					<span style="padding:5px; margin-right: 2px;" class="label label-primary">&nbsp;{{ controller.model.user.guid | uppercase }}&nbsp;</span>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row v-reset-row ">
+		<div class="col-xs-12">
+			<button-bar>
+				<button-back ui-sref="^.list"></button-back>
+			</button-bar>
+		</div>
+	</div><br/>
+	
+	<div class="row v-reset-row ">
+		<div class="col-xs-12">
+			<usermission data="controller.model" games-list="controller.gamesList"></usermission>
+		</div>
+	</div>
+</div>

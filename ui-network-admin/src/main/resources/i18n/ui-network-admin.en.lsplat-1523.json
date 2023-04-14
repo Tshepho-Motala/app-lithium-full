@@ -1,0 +1,9 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "TAGS": {
+      "RESPONSE": {
+        "ERROR": "Please select a tag"
+      }
+    }
+  }
+}

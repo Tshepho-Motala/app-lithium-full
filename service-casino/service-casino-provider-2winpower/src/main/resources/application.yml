@@ -1,0 +1,27 @@
+server.port: 9778
+
+spring:
+  application:
+    name: service-casino-provider-2winpower
+  cloud:
+    stream:
+      bindings:
+        gamesupdateoutput:
+          group: gamesupdategroup
+          binder: rabbit
+          destination: gamesupdatequeue
+          producer:
+            required-groups: gamesupdategroup
+    
+eureka:
+  instance:
+    appname: service-casino-provider-2winpower
+lithium:
+  service:
+    casino:
+      provider:
+        twowinpower:
+          load-games-on-startup: false
+          download-images: false
+          image-download-path: /Users/riaans/game-assets-public/website/2winpower/
+#          game-pages-to-load: 5 #if property is missing, all pages will be loaded

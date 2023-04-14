@@ -1,0 +1,145 @@
+.Bonus Flows
+[plantuml]
+----
+
+@startuml
+
+start
+:Deposit;
+note right
+ 100% Deposit Bonus
+ <b>PB:</b> $50 (Player Main Balance)
+ <b>BB:</b> $50 (Player Bonus Balance)
+ <b>WR:</b> 4 x Wagering Requirement = $200
+end note
+:bet;
+
+fork
+  :Bet: $25;
+  :PB - $25
+  BB - $50;
+  :Win: $60;
+  :PB - $85
+  BB - $50;
+  fork again
+    :Bet: $50;
+    :PB - $0
+    BB - $50;
+    :Win: $60;
+    :PB - $60
+    BB - $50;
+  fork again
+    :Bet: $75;
+    :PB - $0
+    BB - $25;
+    :Win: $60;
+    :PB - $40
+    BB - $20;
+  fork again
+    :Bet: $100 (Max Bet);
+    :PB - $0
+    BB - $0;
+    :Win: $60;
+    :PB - $30
+    BB - $30;
+endfork
+:bet;
+fork
+  :Bet: $25;
+  :PB - $60
+  BB - $50
+  WR - $50;
+  :Win: $90;
+  :PB - $150
+  BB - $50;
+  fork again
+    :Bet: $50;
+    :PB - $10
+    BB - $50
+    WR - $100;
+    :Win: $90;
+    :PB - $100
+    BB - $50;
+  fork again
+    :Bet: $60 (Max Bet);
+    :PB - $0
+    BB - $0
+    WR - $135;
+    :Win: $90;
+    :PB - $60
+    BB - $30;
+  fork again
+    :Bet: $60 (Max Bet);
+    :PB - $0
+    BB - $0
+    WR - $160;
+    :Win: $90;
+    :PB - $45
+    BB - $45;
+endfork
+:bet;
+fork
+  :Bet: $25;
+  :PB - $125
+  BB - $50
+  WR - $75;
+  :<b>Loss</b>;
+  :PB - $125
+  BB - $50;
+  fork again
+    :Bet: $50;
+    :PB - $50
+    BB - $50
+    WR - $150;
+    :<b>Loss</b>;
+    :PB - $50
+    BB - $50;
+  fork again
+    :Bet: $60;
+    :PB - $0
+    BB - $30
+    WR - $195;
+    :<b>Loss</b>;
+    :PB - $0
+    BB - $30;
+  fork again
+    :Bet: $80;
+    :PB - $0
+    BB - $10
+    WR - $240;
+    :<b>Loss</b>;
+    #palegreen:PB - $10
+    BB - $0;
+    kill
+endfork
+:bet;
+fork
+  :Bet: $25;
+  :PB - $100
+  BB - $50
+  WR - $100;
+  :Win: $100;
+  :PB - $200
+  BB - $50;
+  fork again
+    :Bet: $50;
+    :PB - $0
+    BB - $50
+    WR - $200;
+    :Win: $100;
+    #palegreen:PB - $150
+    BB - $0;
+  fork again
+    :Bet: $30;
+    :PB - $0
+    BB - $0
+    WR - $225;
+    :Win: $100;
+    #palegreen:PB - $100
+    BB - $0;
+  fork again
+endfork
+stop
+
+@enduml
+----

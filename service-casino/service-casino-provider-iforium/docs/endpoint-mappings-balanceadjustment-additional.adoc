@@ -1,0 +1,72 @@
+= Additional Lithium parameters
+
+[WARNING]
+--
+* Locale for multiBetV1() has been hardcoded to en_GB
+--
+
+[options="header", cols="<.<20m,.<10,.<20m,.<20e"]
+|===
+|Lithium Parameter|Type|Value|Comments
+
+
+| BalanceAdjustmentRequest.BonusTran
+| boolean
+| false
+|
+
+| BalanceAdjustmentRequest.BonusId
+| integer
+| -1
+|
+
+| BalanceAdjustmentRequest.DomainName
+| String
+| Domain.Name
+|
+
+| BalanceAdjustmentRequest.ProviderGuid
+| Sting
+| Domain.Name + "/" + ModuleInfo.ModuleName
+|
+
+| BalanceAdjustmentRequest.TransactionTiebackId
+| String
+| null
+| Used to correlate distributed transactions - Ignore
+
+| BalanceAdjustmentRequest.RealMoneyOnly
+| boolean
+| true
+|
+| BalanceAdjustmentRequest.AllowNegativeBalanceAdjustment
+| boolean
+| false
+|
+
+| BalanceAdjustmentRequest.GameSessionId
+| String
+| SessionKey
+|
+
+| BalanceAdjustmentRequest.PerformAccessChecks
+| boolean
+| true
+|
+
+| BalanceAdjustmentRequest.PersistRound
+| boolean
+| true
+| Used for tracking in Casino Service - Set to true (as per Roxor Casino Provider).
+
+| BalanceAdjustmentRequest.SessionId
+| long
+| loginEvent.getId()
+|
+
+| BalanceAdjustmentComponent.InternalTransactionId
+| long
+| UUID.randomUUID().getMostSignificantBits() & Long.MAX_VALUE
+|
+
+|===

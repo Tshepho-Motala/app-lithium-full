@@ -1,0 +1,9 @@
+server.port: 9218
+
+spring:
+  application:
+    name: service-casino-provider-sgs
+    
+eureka:
+  instance:
+    appname: service-casino-provider-sgs

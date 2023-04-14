@@ -1,0 +1,19 @@
+server:
+  port: 9402
+
+spring:
+  application:
+    name: service-mail-provider-kickbox
+  cloud:
+    stream:
+      bindings:
+        mailprovidersregisteroutput:
+          group: mailprovidersregistergroup
+          binder: rabbit
+          destination: mailprovidersregisterqueue
+          producer:
+            required-groups: mailprovidersregistergroup
+eureka:
+  instance:
+    appname: service-mail-provider-kickbox
+

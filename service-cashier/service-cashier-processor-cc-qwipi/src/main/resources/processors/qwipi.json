@@ -1,0 +1,61 @@
+{
+  "name": "Qwipi",
+  "code": "qwipi",
+  "url": "service-cashier-processor-cc-qwipi",
+  "methodNames": ["cc"],
+  "fees": {
+    "flat": 0,
+    "percentage": 0,
+    "minimum": 0
+  },
+  "deposit": true,
+  "withdraw": false,
+  "limits": {
+    "minAmount": 2500,
+    "maxAmount": 0,
+    "maxAmountDay": 0,
+    "maxAmountWeek": 0,
+    "maxAmountMonth": 0,
+    "maxTransactionsDay": 0,
+    "maxTransactionsWeek": 0,
+    "maxTransactionsMonth": 0
+  },
+  "properties": [
+    { 
+      "name": "merno",
+      "defaultValue": "MERNO",
+      "type": "string",
+      "description": "Qwipi should supply the merchant number for API requests."
+    },
+    { 
+      "name": "md5Key",
+      "defaultValue": "A28AKL29172KJ",
+      "type": "key",
+      "description": "Qwipi should supply an MD5 key used to sign requests and validate responses."
+    },
+    { 
+      "name": "3dsecure",
+      "defaultValue": "yes",
+      "type": "yesno",
+      "description": "Process using 3D Secure?"
+    },
+    {
+      "name": "paymenturls2s",
+      "type": "url",
+      "description": "Direct payment (server to server) payment URL",
+      "defaultValue": "http://localhost:9000/service-cashier-mock-cc-qwipi/universalS2S/payment"
+    },
+    {
+      "name": "paymenturl3ds",
+      "type": "url",
+      "description": "3D Secure payment URL",
+      "defaultValue": "http://localhost:9000/service-cashier-mock-cc-qwipi/universal3DS/payments.jsp"
+    },
+    {
+      "name": "callback.url",
+      "defaultValue": "/service-cashier/external/callback/do/qwipi/f437d7e85de3c6b2f0ae6e9d3d9d7aa62d589cd1/",
+      "type": "string",
+      "description": "This is the url that should be called from the processor side. Called Shopper Result Url. /service-cashier/external/callback/do/qwipi/f437d7e85de3c6b2f0ae6e9d3d9d7aa62d589cd1/ or /service-cashier-processor-cc-qwipi/callback/c912c842-427g-4a34-bc5b-02202caef028/"
+    }
+  ]
+}

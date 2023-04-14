@@ -1,0 +1,13 @@
+<div class="row v-reset-row ">
+    <div class="col-xs-12">
+        <label for="{{id}}" class="control-label" ng-if="to.label">
+            {{to.label}} {{to.required ? '*' : ''}}
+        </label>
+        <div ng-readonly="{{(to.readOnly === undefined) ? false : to.readOnly}}"
+             ui-ace="to.aceOptions"
+             ng-model="model[options.key]"
+             style="width: inherit; height: {{to.height}};">
+        </div>
+        <span class="description">{{to.description}}</span>
+    </div>
+</div>

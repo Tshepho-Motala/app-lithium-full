@@ -1,0 +1,21 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "RESTRICTIONS": {
+      "CHANGE_ACTIONS": {
+        "TITLE": "Change Outcome Actions",
+        "SUCCESS": "Outcome actions successfully changed",
+        "ERROR": "Change outcome actions finished with errors"
+      },
+      "FIELDS": {
+        "LIFT_OUTCOME_ACTIONS": {
+          "NAME": "Lift outcome actions",
+          "DESCRIPTION": "Choose lift outcome action"
+        },
+        "PLACE_OUTCOME_ACTIONS": {
+          "NAME": "Place outcome actions",
+          "DESCRIPTION": "Choose place outcome action"
+        }
+      }
+    }
+  }
+}

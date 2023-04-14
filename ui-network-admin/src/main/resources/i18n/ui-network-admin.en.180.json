@@ -1,0 +1,15 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "PLAYER": {
+      "RESTRICTIONS": {
+        "ADD": {
+          "TITLE": "Add a Restriction"
+        },
+        "LIFT": {
+          "TITLE": "Lift Restrictions"
+        }
+      }
+    }
+  }
+}
+

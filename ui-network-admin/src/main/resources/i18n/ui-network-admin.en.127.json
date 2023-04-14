@@ -1,0 +1,74 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "ACCOUNTING": {
+      "TRANSACTIONS": {
+        "LIST": {
+          "TITLE": "Accounting Transactions",
+          "DESCRIPTION": "A searchable list of accounting transactions"
+        },
+        "FIELDS": {
+          "TRANID": {
+            "LABEL": "Tran ID"
+          },
+          "DATERANGESTART": {
+            "LABEL": "Date: Range Start"
+          },
+          "DATERANGEEND": {
+            "LABEL": "Date: Range End"
+          },
+          "PLAYER": {
+            "LABEL": "Player"
+          },
+          "DATE": {
+            "LABEL": "Date"
+          },
+          "TRANTYPE": {
+            "LABEL": "Transaction Type"
+          },
+          "TRANCURRENCY": {
+            "LABEL": "Transaction Currency"
+          },
+          "AMOUNTPOS": {
+            "LABEL": "Amount (+)"
+          },
+          "AMOUNTNEG": {
+            "LABEL": "Amount (-)"
+          },
+          "ACCOUNTCODE": {
+            "LABEL": "Account Code"
+          },
+          "ACCOUNTBALANCE": {
+            "LABEL": "Account Balance"
+          },
+          "PROVIDER": {
+            "LABEL": "Provider"
+          },
+          "PROVIDERTRANID": {
+            "LABEL": "Provider Tran Id"
+          },
+          "GAMENAME": {
+            "LABEL": "Game Name"
+          },
+          "BONUSREVISION": {
+            "LABEL": "Bonus Revision"
+          },
+          "BONUSNAME": {
+            "LABEL": "Bonus Name"
+          },
+          "BONUSCODE": {
+            "LABEL": "Bonus Code"
+          },
+          "PROCESSINGMETHOD": {
+            "LABEL": "Processing Method"
+          },
+          "ACC_CLIENT_TRANID": {
+            "LABEL": "Accounting Client Tran Id"
+          },
+          "ACC_CLIENT_EXTID": {
+            "LABEL": "Accounting Client External Id"
+          }
+        }
+      }
+    }
+  }
+}

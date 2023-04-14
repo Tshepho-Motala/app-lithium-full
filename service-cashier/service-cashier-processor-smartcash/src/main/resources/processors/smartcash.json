@@ -1,0 +1,81 @@
+{
+	"name": "smartcash",
+	"code": "smartcash",
+	"url": "service-cashier-processor-smartcash",
+	"methodNames": [
+		"smartcash"
+	],
+	"deposit": true,
+	"fees": {
+		"flat": 0,
+		"percentage": 0,
+		"minimum": 0
+	},
+	"withdraw": true,
+	"limits": {
+		"minAmount": 2500,
+		"maxAmount": 0,
+		"maxAmountDay": 0,
+		"maxAmountWeek": 0,
+		"maxAmountMonth": 0,
+		"maxTransactionsDay": 0,
+		"maxTransactionsWeek": 0,
+		"maxTransactionsMonth": 0
+	},
+	"properties": [
+		{
+			"name": "merchant_id",
+			"defaultValue": "",
+			"type": "string",
+			"description": "Smartcash merchant id"
+		},
+		{
+			"name": "api_url",
+			"defaultValue": "https://api.smartcash.com/payments",
+			"type": "url",
+			"description": "The base URL for Smartcash API"
+		},
+		{
+			"name": "client_id",
+			"defaultValue": "",
+			"type": "string",
+			"description": "Smartcash API client id. Please paste your client id here."
+		},
+		{
+			"name": "secret_key",
+			"defaultValue": "",
+			"type": "string",
+			"description": "Smartcash API secretKey. Please paste your secret key here."
+		},
+		{
+			"name": "reference",
+			"defaultValue": "",
+			"type": "string",
+			"description": "Smartcash payment reference."
+		},
+		{
+			"name": "pin",
+			"defaultValue": "",
+			"type": "string",
+			"description": "Smartcash disbursement API pin."
+		},
+		{
+			"name": "public_key",
+			"defaultValue": "",
+			"type": "string",
+			"description": "Smartcash pin encryption public key."
+		},
+		{
+			"name": "msisdn_length",
+			"defaultValue": "10",
+			"type": "int",
+			"description": "Length of (NDC — National Destination Code) plus (SN — subscriber number) for corresponding country. Default is 10 for Nigeria."
+		},
+		{
+			"name": "hash_key",
+			"defaultValue": "",
+			"type": "string",
+			"description": "Smartcash callback encryption key."
+		}
+	]
+}

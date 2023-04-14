@@ -1,0 +1,14 @@
+{
+	"GLOBAL": {
+		"TRANSACTIONS" : "Transaction(s)"
+	},
+	"UI_NETWORK_ADMIN": {
+		"DASHBOARD": {
+			"CASINOBETSBONUS_FREESPIN": "Casino Bets - Freespins",
+			"CASINOWINSBONUS_FREESPIN": "Casino Wins - Freespins",
+			"CASINONETBONUS_FREESPIN": "Casino Net - Freespins",
+			"MANUAL_BALANCE_ADJUST_CREDIT": "Manual Adjustments - Given To Player",
+			"MANUAL_BALANCE_ADJUST_DEBIT": "Manual Adjustments - Taken From Player"
+		}
+	}
+}

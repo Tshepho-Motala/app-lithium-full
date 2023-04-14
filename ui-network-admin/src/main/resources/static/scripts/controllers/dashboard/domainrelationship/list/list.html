@@ -1,0 +1,37 @@
+
+<!-- returning from addition page does not load the domain that was being worked on -->
+<div class="container-fluid">
+	<div class="row v-reset-row  d-flex flex-row justify-content-start align-items-start"  lit-if-permission="DOMAIN_ADD">
+		<button-bar>
+			<button-back ui-sref="dashboard.ecosystems.list"></button-back>
+			<button-relationship ng-show="controller.selectedEcosystem" ng-click="controller.addDomainRelationship(controller.ecosystemId)"></button-relationship>
+		</button-bar>
+	</div>
+	<div class="row v-reset-row " ng-repeat="domain in controller.domainRelationshipList | filter:filterValue ">
+		<div class="col-md-8 col-md-offset-2" bs-loading-overlay bs-loading-overlay-reference-id="{{referenceId}}">
+			<div class="box box-default">
+				<div class="box-header bg-gray-lighter">
+					<i class="fa fa-cloud" ng-if="((domain.id != 1) && (domain.enabled === true))"></i>
+					<i class="fa fa-ban" ng-if="((domain.id != 1) && (domain.enabled === false))" aria-hidden="true"></i>
+					<h3 class="box-title">{{domain.domain.displayName}}</h3>
+					<div class="box-tools pull-right" style="z-index: 90;">
+						<button type="button" class="btn btn-danger" ng-if="domain.id ">
+							<i class="fa fa-trash-o" ng-click="controller.remove(domain.id)"></i>
+						</button>
+					</div>
+				</div>
+				<div class="box-body">
+					<p class="text-muted">{{ domain.relationship.code }}</p> <!-- needs translation from code to a nice translated display -->
+				</div>
+				<div class="box-body" ng-if="((domain.id !== 1) && (domain.enabled === true) && (domain.relationship.code === 'ECOSYSTEM_MUTUALLY_EXCLUSIVE'))">
+					<label>
+						<checkbox class="btn" ng-model="domain.disableRootWelcomeEmail" ng-click="controller.updateDisableRootWelcomeEmail(domain)"></checkbox>
+						<small style="color:#999;font-size:80%;">{{'UI_NETWORK_ADMIN.ECOSYSTEMS.LINK.DISABLE_ROOT_MAIL' | translate}}</small>
+					</label>
+				</div>
+				<div class="overlay" ng-if="((domain.relationship.id != 1) && (domain.relationship.enabled === false))">
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

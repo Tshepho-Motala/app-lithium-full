@@ -1,0 +1,18 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "LIST": {
+      "PLAYERS":{
+        "FIELDS": {
+          "FILTER": {
+            "IS_ACTIVE_RESTRICTION": {
+              "LABEL": "Is active restriction"
+            },
+            "RESTRICTION_ACTIVE_FROM": {
+              "LABEL": "Restriction Active from Data"
+            }
+          }
+        }
+      }
+    }
+  }
+}

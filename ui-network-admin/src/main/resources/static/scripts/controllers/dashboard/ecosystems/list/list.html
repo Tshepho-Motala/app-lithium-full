@@ -1,0 +1,62 @@
+<div class="row v-reset-row " lit-if-permission="ECOSYSTEMS_EDIT">
+	<div class="col-xs-12 d-flex flex-row justify-content-start align-items-start" style="margin-bottom: 10px">
+		<div class="btn-group">
+			<button-add ui-sref="dashboard.ecosystems.add"></button-add>
+		</div>
+	</div>
+</div>
+
+<div class="row v-reset-row ">
+	<div class="col-xs-12">
+		<div class="box">
+			<div class="box-body no-padding table-responsive">
+				<table datatable="ng" class="table">
+					<thead>
+					<tr>
+						<th>{{'UI_NETWORK_ADMIN.ECOSYSTEMS.FIELDS.ECOSYSTEM_NAME' | translate}}</th>
+						<th>{{'UI_NETWORK_ADMIN.ECOSYSTEMS.FIELDS.ECOSYSTEM_DISPLAY_NAME' | translate}}</th>
+						<th>{{'UI_NETWORK_ADMIN.ECOSYSTEMS.FIELDS.ECOSYSTEM_DESCRIPTION' | translate}}</th>
+						<th></th>
+						<th>{{'UI_NETWORK_ADMIN.ECOSYSTEMS.FIELDS.ECOSYSTEM_STATUS' | translate}}</th>
+						<th></th>
+						<th>{{'UI_NETWORK_ADMIN.ECOSYSTEMS.BUTTON.ECOSYSTEM_BIN' | translate}}</th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr  ng-repeat="system in controller.ecosystemList">
+						<td>{{system.name}}</td>
+						<td>{{system.displayName}}</td>
+						<td>{{system.description}}</td>
+						<td ng-click="openEcosystem(system)">
+							<a>
+								{{'UI_NETWORK_ADMIN.ECOSYSTEMS.BUTTONS.LINK_OPEN' | translate}}
+							</a>
+						</td>
+						<td>
+							<span ng-show="system.enabled" class="label label-default">
+								{{'UI_NETWORK_ADMIN.ECOSYSTEMS.BUTTONS.STATUS_ENABLED' | translate}}
+							</span>
+							<span ng-show="!system.enabled" class="label label-danger">
+								{{'UI_NETWORK_ADMIN.ECOSYSTEMS.BUTTONS.STATUS_DISABLED' | translate}}
+							</span>
+						</td>
+						<td>
+							<div class="btn-group">
+								<button-manage ng-click="manageEcosystemRelationships(system)"></button-manage>
+							</div>
+						</td>
+						<td >
+							<button type="button" class="btn btn-danger" ng-click="deleteEcosystem(system, true)" text="GLOBAL.ACTION.DELETE">
+								<i class="fa fa-trash-o"></i>
+								<span>{{'GLOBAL.ACTION.DELETE' | translate}}</span>
+							</button>
+						</td>
+					</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+

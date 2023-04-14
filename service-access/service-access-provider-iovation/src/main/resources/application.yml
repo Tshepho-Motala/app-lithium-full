@@ -1,0 +1,24 @@
+spring:
+  servlet:
+    multipart:
+        maxFileSize: 20MB
+        maxRequestSize: 20MB
+        file-size-threshold: 1MB
+
+server:
+  port: 9596
+  
+          
+lithium:
+  services:
+    access:
+       iovation:
+        socket-timeout: 0
+        connection-request-timeout: 0
+        connect-timeout: 0
+    db:
+      load-test-data: false
+      
+logging:
+  level:
+    lithium.service.access.provider.iovation: INFO

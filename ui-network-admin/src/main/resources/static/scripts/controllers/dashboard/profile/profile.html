@@ -1,0 +1,25 @@
+<div class="container-fluid">
+	<lit-header
+		title="UI_NETWORK_ADMIN.PROFILE.TITLE" 
+		description="UI_NETWORK_ADMIN.PROFILE.DESCRIPTION">
+	</lit-header>
+	
+	<div class="row v-reset-row ">
+		<div class="col-xs-12">
+		<div class="box box-solid box-default">
+			<div class="box-body">
+				<div class="row v-reset-row ">
+					<div class="col-md-6">
+						<personal data="controller.personalinfo" ng-model="controller.user"></personal>
+						<address data="controller.residentialAddress" ng-model="controller.user"></address>
+						<address data="controller.postalAddress" ng-model="controller.user"></address>
+					</div>
+					<div class="col-md-6">
+						<password data="controller.password" ng-model="controller.user"></password>
+					</div>
+				</div>
+			</div>
+		</div>
+		</div>
+	</div>
+</div>

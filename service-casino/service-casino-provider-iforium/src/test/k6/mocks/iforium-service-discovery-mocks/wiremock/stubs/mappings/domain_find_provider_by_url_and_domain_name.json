@@ -1,0 +1,13 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "/domain/default/providers/findByUrlAndDomainName?url=service-casino-provider-iforium"
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "domain_find_provider_by_url_and_domain_name.json",
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}

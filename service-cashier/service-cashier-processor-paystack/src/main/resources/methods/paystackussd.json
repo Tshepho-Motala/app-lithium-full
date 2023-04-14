@@ -1,0 +1,37 @@
+{
+  "name": "Paystack Ussd",
+  "code": "paystackussd",
+  "image": {
+    "filename": "/methods/paystack.png",
+    "filetype": "image/png"
+  },
+  "depositStages": [
+    {
+      "number": 1,
+      "title": "Initiate ussd payment",
+      "description": "Specify needed data to initiate ussd payment",
+      "inputFields": [
+        {
+          "code": "bank_code",
+          "name": "Bank code",
+          "description": "The bank numeric code.",
+          "type": "string"
+        }
+      ],
+      "outputFields": [
+        {
+          "code": "ussd",
+          "name": "USSD Code",
+          "description": "Please now use this code on your phone to complete the deposit."
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "title": "Your transaction is awaiting approval.",
+      "description": "We have submitted your transaction and we are awaiting approval. Please check back later.",
+      "inputFields": [],
+      "outputFields": []
+    }
+  ]
+}

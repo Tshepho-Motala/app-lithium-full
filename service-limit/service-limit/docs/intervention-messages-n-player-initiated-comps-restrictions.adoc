@@ -1,0 +1,37 @@
+= Restrictions
+:author: Irwin Herridge <irwin.herridge@wonderlabz.com>
+:version-label: 1.0, December 16, 2021: Service Access Documentation
+:sectnums:
+:toc: left
+:toclevels: 4
+:toc-title: Comps Restrictions
+:icons: font
+:url-quickref: https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/
+
+//:stylesheet: css/asciidoctor.css
+//:stylesheet: css/material-blue.css
+
+//This is done tto keep formatting aligned with gitlab
+****
+[verse,,]
+____
+link:readme.adoc[Back]
+____
+****
+
+== Overview
+include::../../../docs/restrictions/plantuml/intervention-message-usecase.puml[]
+include::../../../docs/restrictions/plantuml/intervention-message-flow.puml[]
+
+== Force Promotion Blocks
+
+include::plantuml/sequence/overview.grant-promotions-flows.puml[]
+
+== Player Initiated Comps Restrictions
+include::plantuml/sequence/player-initiated.promotions-opt-out.puml[]
+include::plantuml/activity/player-initiated.frontend.promotions-opt-out.puml[]
+include::plantuml/activity/player-initiated.lithium.promotions-opt-out.puml[]
+
+== Intervention Message Comps Restrictions
+include::plantuml/sequence/lbo.lift-intervention.auto-restriction-configuration.puml[]
+include::plantuml/sequence/external/set-dwh-restrictions.puml[]

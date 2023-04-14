@@ -1,0 +1,10 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "PLAYERS": {
+      "LIST": {
+        "INCOMPLETE": "Abandoned Signups",
+        "NORMAL_LIST":" Complete Signups"
+      }
+    }
+  }
+}

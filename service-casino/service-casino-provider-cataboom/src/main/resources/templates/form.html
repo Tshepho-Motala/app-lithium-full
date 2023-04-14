@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+	<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	
+	</head>
+	
+	<body>
+		
+			<div></div>
+			<div>
+				<div>
+				<form action="#" th:action="@{/mock/FormUrlStep1}" th:object="${inputFields}" method="post">
+					<p>Campaignid: <input type="text" th:field="*{campaignid}"/></p>
+					<p>PlayerGuid: <input type="text" th:field="*{playerGuid}"/></p>
+					<p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>
+				</form>
+			</div>
+			
+		</div>
+	</body>
+</html>

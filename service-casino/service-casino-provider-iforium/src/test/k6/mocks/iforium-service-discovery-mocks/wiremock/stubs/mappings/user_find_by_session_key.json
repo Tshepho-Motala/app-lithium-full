@@ -1,0 +1,13 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "/system/loginevents/from-session-key?sessionKey=20fbd3b9-eef2-49cd-9976-50f0d34e7f7c"
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "user_find_by_session_key.json",
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}

@@ -1,0 +1,50 @@
+server:
+  port: 9705
+  max-http-header-size: 20000
+  
+spring:
+#  replaced the spring.datasource.initialization-mode starting Spring Boot 2.5
+  sql:
+    init:
+      mode: never # Prevent JPA from trying to Initialize
+  datasource:
+    url: jdbc:mysql://localhost/lithium_user_search?zeroDateTimeBehavior=convertToNull
+    username: root
+    password: mysql
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+#       format_sql: true
+        default_schema: lithium_user_search
+        physical_naming_strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+        implicit_naming_strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+        enable_lazy_load_no_trans: true
+  cloud:
+    stream:
+      bindings:
+        gatewayexchange:
+          binder: rabbit
+          destination: gateway
+          producer:
+            should-declare: false
+        userrestrictiontriggerinput :
+          group : userrestrictiontriggergroup
+          binder : rabbit
+          destination : userrestrictiontriggerqueue
+        userdocumenttriggerinput :
+          group : userdocumenttriggergroup
+          binder : rabbit
+          destination : userdocumenttriggerqueue
+  servlet:
+    multipart:
+        maxFileSize: 20MB
+        maxRequestSize: 20MB
+        file-size-threshold: 1MB
+  flyway :
+    enabled : true
+logging:
+  level:
+    lithium.service.user.search: INFO

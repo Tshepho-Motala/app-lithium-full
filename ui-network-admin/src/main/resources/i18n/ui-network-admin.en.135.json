@@ -1,0 +1,19 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "PLAYER": {
+      "COOLOFF": {
+        "TITLE": "Cool Off",
+        "NOTCOOLINGOFF": "Not currently cooling off.",
+        "FIELDS": {
+          "CREATEDDATE": "Created Date",
+          "EXPIRYDATE": "Expiry Date",
+          "PERIODINDAYS": "Period (in days)"
+        },
+        "CLEAR": {
+          "SUCCESS": "Successfully cleared player cool off",
+          "ERROR": "Failed to clear player cool off"
+        }
+      }
+    }
+  }
+}

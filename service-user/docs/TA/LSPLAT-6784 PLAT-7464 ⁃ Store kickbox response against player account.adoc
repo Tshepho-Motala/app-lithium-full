@@ -1,0 +1,511 @@
+= LSPLAT-6784 PLAT-7464 ⁃ Store kickbox response against player account
+Irwin Herridge <irwin.herridge@wonderlabz.com>
+1.0, August 20, 2022:: TA - LSPLAT-6784 PLAT-7464 ⁃ Store kickbox response against player account
+:sectnums:
+:toc: left
+:toclevels: 4
+:toc-title: LSPLAT-6784 PLAT-7464
+:icons: font
+:url-quickref: https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/
+
+== Information
+=== Tickets
+* https://jira.livescore.com/browse/PLAT-7464
+* https://playsafe.atlassian.net/browse/LSPLAT-6784
+
+=== Dependencies
+* N/A
+
+=== MR
+* https://gitlab.com/playsafe/lithium/app-lithium-full/-/merge_requests/5488
+* This MR contains the branch that should be used to complete this task!
+
+=== External Dependencies
+==== Swagger
+IMPORTANT: To be completed *before* development starts
+
+TIP: TL to facilitate timeline and communication to GW/FE for the changes.
+
+* Add a new CollectionData object on the PlayerBasic (note only showing collectionData property, the other playerBasic properties has been omitted)
+
+[source,json,linenum]
+----
+{
+  "collectionData": [
+    {
+      "collectionName": "kickbox",
+      "data": {
+        "result": "undeliverable",
+        "reason": "rejected_email",
+        "role": "false",
+        "free": "false",
+        "disposable": "false",
+        "accept_all": "false",
+        "did_you_mean": "bill.lumbergh@gmail.com",
+        "sendex": "0.23",
+        "email": "bill.lumbergh@gamil.com",
+        "user": "bill.lumbergh",
+        "domain": "gamil.com",
+        "success": "true",
+        "message": "could not be delivered"
+      }
+    }
+  ]
+}
+----
+
+==== DWH
+* As part of registration, FE will be passing in the kickbox email verification data to Lithium as part of account creation and may be used by insights team to build queries to check emails used with low deliverable status; therefore pointing out possible bonus abusers.
+** In order for Insights to know whether an email has been used for registration, they would need to compare the current `lithium_user.user.email` against `lithium_user.collection_data.dataValue` where `collection_name` = "kickbox" and `dataKey` = "email" for the latest `lithium_user.user.current_collection_data_rev_id`
+
+TIP: TL to facilitate communication to DWH for the changes.
+
+==== Other
+* Any other external providers that might need consideration. e.g. eXtremePush/Roxor
+
+== Description (From Ticket)
+
+We are seeing an increase in bonus abuse in some domains and want to get as much data from registration and KYC to better identify as early as possible if a player is a high risk of bonus abuse.
+
+On registration, we store 4 statuses for the emails: deliverable, risky, undeliverable and unknown.
+
+Any status not marked as deliverable should be investigated by our teams, but we are not storing this response against accounts.
+
+=== Acceptance criteria
+
+- Store the kickbox response score and status against the player's account and created a changelog in the notes.
+
+== Architecture
+
+=== Add new collection data to register endpoint
+
+. Add a new `CollectionData` object to the PlayerBasic, that may be used by FE to store groups of information against a player during registration to be used by DWH/Insights for special needs such as tracking the number of emails being used for registration with a low deliverable status. (_possible flagging on bonus abusers_)
+
+.PlayerBasic.collectionData
+[source,json,linenum]
+----
+{
+  "collectionData": [
+    {
+      "collectionName": "kickbox",
+      "data": {
+        "result": "undeliverable",
+        "reason": "rejected_email",
+        "role": "false",
+        "free": "false",
+        "disposable": "false",
+        "accept_all": "false",
+        "did_you_mean": "bill.lumbergh@gmail.com",
+        "sendex": "0.23",
+        "email": "bill.lumbergh@gamil.com",
+        "user": "bill.lumbergh",
+        "domain": "gamil.com",
+        "success": "true",
+        "message": "could not be delivered"
+      }
+    }
+  ]
+}
+----
+
+.lithium_user ERD (!full schema)
+[plantuml]
+----
+@startuml
+'https://plantuml.com/class-diagram
+
+skinparam linetype ortho
+!define T(name,desc) class name as "desc" << (T,#FFAAAA) >>
+
+!define pk(x) <b>x</b>
+!define fk(x) <color:purple><i>x</i></color>
+!define unique(x) <color:green>x</color>
+!define nn(x) <u>x</u>
+
+T(user, "user\n Contains some users") {
+  pk(id) bigint <<generated>>
+  --
+  fk(current_id): bigint
+  fk(current_collection_data_rev_id): bigint
+  fk(domain_id): bigint
+  fk(postal_address_id): bigint
+  fk(residential_address_id):  bigint
+  fk(status_id): bigint
+  fk(status_reason_id): bigint
+  fk(last_login_id): bigint
+  fk(user_api_token_id): bigint
+  fk(verification_status): bigint
+  --
+  nn(unique(guid)): varchar(100)
+  nn(created_date): datetime
+  nn(updated_date): datetime
+  nn(username): varchar(35)
+  nn(test_account): bit default b'0'
+  nn(deleted): bit
+  external_username: varchar(35)
+  email: varchar(255)
+  deleted_email: varchar(255)
+  cellphone_number: varchar(255)
+  deleted_cellphone_number: varchar(255)
+  telephone_number: varchar(255)
+  deleted_telephone_number: varchar(255)
+  first_name: varchar(35)
+  last_name_prefix: varchar(255)
+  last_name: varchar(35)
+  gender: varchar(10)
+  dob_year: int
+  dob_month: int
+  dob_day: int
+  country_code: varchar(255)
+  place_of_birth: varchar(255)
+  social_security_number: varchar(15)
+  timezone: varchar(255)
+  comments: longtext
+  password_plaintext: varchar(255)
+  password_hash: varchar(255)
+  password_updated: datetime
+  password_updated_by: varchar(255)
+  referrer_guid: varchar(255)
+  age_verified: bit default b'0'
+  address_verified: bit default b'0'
+  email_validated: bit default b'0'
+  cellphone_validated: bit default b'0'
+  email_opt_out: bit default b'0'
+  sms_opt_out: bit default b'0'
+  call_opt_out: bit default b'0'
+  post_opt_out: bit default b'0'
+  promotions_opt_out: bit default b'0'
+  push_opt_out: bit default b'0'
+  leaderboard_opt_out: bit default b'0'
+  comms_opt_in_complete: bit default b'0'
+  excessive_failed_login_block: bit
+  auto_withdrawal_allowed: bit
+  failed_reset_count: int
+  welcome_email_sent: bit default b'0'
+  welcome_sms_sent: bit default b'0'
+  has_self_excluded: bit
+  bonus_code: varchar(20)
+  protection_of_customer_funds_version: varchar(35)
+  terms_and_conditions_version: varchar(35)
+  version: int
+}
+
+T(domain, "domain\n Domains registered in the system") {
+  pk(id) bigint <<generated>>
+  --
+  nn(unique(name)): varchar(255)
+  version: int
+}
+
+T(address , "address\n Used to store both postal and addresses for a user") {
+  pk(id) bigint <<generated>>
+  --
+  fk(user_id): bigint
+  --
+  nn(address_line1): varchar(255)
+  address_line2: varchar(255)
+  address_line3: varchar(255)
+  admin_level1: varchar(255)
+  admin_level1code: varchar(10)
+  nn(city): varchar(255)
+  city_code: varchar(10)
+  nn(country): varchar(255)
+  country_code: varchar(10)
+  postal_code: varchar(255)
+  manual_address: bit
+  version: int
+}
+
+T(collection_data_revision, "collection_data_revision\n Used for collection revision history") #yellow {
+  pk(id): bigint
+  --
+  fk(user_id): bigint
+  --
+  creation_date: datetime
+  version: int
+}
+
+T(collection_data_revision_entry, "collection_data_revision_entry\n Contains collection data revision history") #yellow {
+  pk(id): bigint
+  --
+  fk(collection_revision_id): bigint
+  fk(collection_data_id): bigint
+  fk(last_updated_revision_id): bigint
+  --
+  version: int
+  --
+  constraint(collection_revision_id, collection_data_id)
+}
+
+T(collection_data, "collection_data/") #yellow {
+  pk(id): bigint
+  --
+  nn(collection_name): varchar(255)
+  nn(data_key): varchar(255)
+  nn(data_value): varchar(512)
+  version: int
+  --
+  constraint(collection_name, data_key, data_value)
+}
+
+user }o--|| domain
+user ||--o| address
+user ||--o{ collection_data_revision
+user ||--o| collection_data_revision
+collection_data_revision ||--o{ collection_data_revision_entry
+collection_data_revision_entry }|--|| collection_data
+
+@enduml
+----
+
+[start=2]
+. Store each property directly under each object node (also called a collection) e.g. playerBasic.collectionData.kickbox.deliverable to a collection_name. (See table illustration for a better explenation)
+
+.PlayerBasic extract
+[source,json,linenum]
+----
+{
+  "collectionData": [
+    {
+      "collectionName": "collection_name1",
+      "data": {
+        "data_key1": "dataValue1",
+        "data_key2": "dataValue2"
+      }
+    },
+    {
+      "collectionName": "collection_name2",
+      "data": {
+        "data_key1": "dataValue1",
+        "data_key2": "dataValue2"
+      }
+    }
+  ]
+}
+----
+
+IMPORTANT: Ensure that only snake case is allowed for all collection_names and dataKey's. (i.e. lower_case_with_underscores_same_as_db_column_names_used_on_lithium_today)
+
+[source,java,linenum]
+----
+package lithium.service.user.client.objects;
+
+import java.util.Map;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class CollectionData {
+    private String collectionName;
+    private Map<String, String> data;
+}
+----
+
+.Registering a player with collection data attached
+[plantuml]
+----
+@startuml
+gw -> lithium++: register a new player using the register/v4 API
+
+  group pre-registration-steps
+      lithium -> lithium: validate
+      group#yellow collectionData pre-condition validate
+      lithium -> lithium: validate collectionData pre-conditions (collection name & dataKey must be snake_case)
+      end
+      lithium -> lithium: execute pre-signup access rules
+      lithium -> lithium: creates new user
+      lithium -> lithium: stores playerBasic.additionalData as user revision label values
+      group#yellow playerBasic.collectionData provided
+        lithium -> lithium: stores playerBasic.collectionData against user_collection_data
+        lithium -> lithium: creates a changelog per collectionData.collection_name
+        note right
+          entity: user.collectiondata
+          entity_record_id: userId
+          comment: {collection_name} has been added to the players account
+          field changes: name: data key; from: empty : to: value
+        end note
+      end group
+  end group
+
+  group post-registration-steps
+    lithium -> lithium: execute post-signup access rules
+      group auto-restriction rules
+        lithium -> lithium: trigger auto-restriction rules
+      end group
+        lithium -> lithium: updates user statuses, limits
+      alt ecosystem
+        lithium -> lithium: media account creation
+      end
+  end group
+  group implicit login after successful registeration
+    lithium -> lithium: validation
+    group execute post-login access rules
+      lithium -> lithium: execute post-login access rules
+    end group
+    lithium --> gw--: response AccessTokenResponse
+  end group
+@enduml
+----
+
+.lithium_user.user (only showing relevant columns)
+
+|===
+|id |guid |current_collection_data_rev_id
+
+|1234 |"livescore_nl/1234" |2
+|===
+
+* Reading from the above table, you can see that there is currently 2 revisions on `lithium_user.collection_data_revision` for playerId = 1234, with the current revision set to `lithium_user.collection_data_revision.id`=2
+
+.lithium_user.collection_data_revision
+|===
+|id |user_id | creation_date
+
+|1
+|1234
+|2022-08-23 11:22:11
+
+|2
+|1234
+|2022-09-01 12:22:23
+|===
+
+.lithium_user.collection_data
+|===
+|id |collection_name |data_key |data_value |version
+
+|1
+|"kickbox"
+|"result"
+|"deliverable"
+|0
+
+|2
+|"kickbox"
+|"reason"
+|"accepted_email"
+|0
+
+|3
+|"kickbox"
+|"role"
+|"true"
+|0
+
+|4
+|"kickbox"
+|"free"
+|"true"
+|0
+
+|5
+|"kickbox"
+|"disposable"
+|"false"
+|0
+
+|6
+|"kickbox"
+|"accept_all"
+|"false"
+|0
+
+|7
+|"kickbox"
+|"did_you_mean"
+|null
+|0
+
+|8
+|"kickbox"
+|"sendex"
+|"1"
+|0
+
+|9
+|"kickbox"
+|"email"
+|"bill.lumbergh@gamil.com"
+|0
+
+|10
+|"kickbox"
+|"user"
+|"bill.lumbergh"
+|0
+
+|11
+|"kickbox"
+|"domain"
+|"gamil.com"
+|0
+
+|12
+|"kickbox"
+|"success"
+|"true"
+|0
+
+|13
+|"kickbox"
+|"message"
+|"You are using Kickbox's sandbox API, which is used to test your integration against mock results."
+|0
+
+|14
+|"kickbox"
+|"email"
+|"bill.lumbergh2@gamil.com"
+|0
+
+|===
+
+* Showing the `lithium_user.collection_data` above, you can see from table below on `lithium_user.collection_data_revision_entry` that the email was updated on the second revision, as only one additional row was added on `lithium_user.collection_data` id=14
+
+.lithium_user.collection_data_revision_entry
+|===
+|id |collection_revision_id |collection_data_id |last_updated_revision_id |version
+
+|1 |1 |1 |1 |0
+|2 |1 |2 |1 |0
+|3 |1 |3 |1 |0
+|4 |1 |4 |1 |0
+|5 |1 |5 |1 |0
+|6 |1 |6 |1 |0
+|7 |1 |7 |1 |0
+|8 |1 |8 |1 |0
+|9 |1 |9 |1 |0
+|10 |1 |10 |1 |0
+|11 |1 |11 |1 |0
+|12 |1 |12 |1 |0
+|13 |1 |13 |1 |0
+
+|14 |2 |1 |1 |0
+|15 |2 |2 |1 |0
+|16 |2 |3 |1 |0
+|17 |2 |4 |1 |0
+|18 |2 |5 |1 |0
+|19 |2 |6 |1 |0
+|20 |2 |7 |1 |0
+|21 |2 |8 |1 |0
+|22 |2 |*14* |2 |0
+|23 |2 |10 |1 |0
+|24 |2 |11 |1 |0
+|25 |2 |12 |1 |0
+|26 |2 |13 |1 |0
+|===
+
+* Looking back on the tables above, we are able to see that there are two revisions on the user collection_data; and we are able to see on which date a revision was modified by looking at `lithium_user.collection_data_revision.creation_date`.
+* Important to also notice is that we are able to see exactly in which revision a particular field was added or modified by looking at the last_updated_revision_id as a back reference to the actual revision where a collection data entry was added to a revision. This will also provide you with the date the field was added/modified.
+** Therefore, whenever a revision is updated, we should check whether the collection_name/dataKey/dataValue is the same as previous revision, and only update the last_updated_revision_id with the new revision id if there was an addition or update made.
+*** The service method that will be called from within the registration process should take care of creating a new revision if no revision exist on the user, and should also cater for updating to new revisions should you call the method with a user that already have a revision active on their account.
+**** Create a new service called CollectionDataService#createOrUpdateCollectionData(PlayerBasic playerBasic) with TDD tests that both tests for create and update to ensure that in future when we start calling this method on update, that it is working as expected.
+**** Create a new system endpoint that can be used to add new collection data as a system endpoint POST `/system/user/collection-data`
+***** If a revision already exist, and the playerBasic.collectionData.collection_name.dataKey does not exist, add it to a new revision with all existing keys also copied to new revision.
+***** If a revision does not exist, create it and add the collection data to it
+***** Removing keys from the store is not supported (out-of-scope)

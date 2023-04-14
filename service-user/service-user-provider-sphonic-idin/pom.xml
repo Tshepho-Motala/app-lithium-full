@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>service-user-provider-sphonic-idin</artifactId>
+    <version>1.12-SNAPSHOT</version>
+    <name>service-user-provider-sphonic-idin</name>
+    <description>Service for IDIN integration</description>
+
+    <parent>
+        <artifactId>common-parent-service</artifactId>
+        <groupId>lithium</groupId>
+        <version>1.12-SNAPSHOT</version>
+        <relativePath>../../common-parent-service</relativePath>
+    </parent>
+
+    <dependencies>
+        <dependency>
+            <groupId>lithium</groupId>
+            <artifactId>library-access-provider-sphonic</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>lithium</groupId>
+            <artifactId>client-service-access</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.flywaydb</groupId>
+            <artifactId>flyway-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.json</groupId>
+            <artifactId>json</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>lithium</groupId>
+            <artifactId>library-common-jpa</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>lithium</groupId>
+            <artifactId>client-service-changelog</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>lithium</groupId>
+            <artifactId>client-service-kyc</artifactId>
+        </dependency>
+    </dependencies>
+</project>

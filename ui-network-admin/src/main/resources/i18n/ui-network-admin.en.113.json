@@ -1,0 +1,19 @@
+{
+  "GLOBAL": {
+    "FIELDS": {
+      "EXCESSIVE_FAILED_LOGIN_BLOCK": "Excessive failed login block"
+    }
+  },
+  "UI_NETWORK_ADMIN": {
+    "USER": {
+      "FIELDS": {
+        "CHANGEPASSWORD": {
+          "NEW": {
+            "NAME": "New Password",
+            "DESCRIPTION": "Passwords should contain only alphanumeric characters, and has to be 6 characters in length up to a maximum of 35 characters."
+          }
+        }
+      }
+    }
+  }
+}

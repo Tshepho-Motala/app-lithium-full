@@ -1,0 +1,9 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "PLAYER_LINKING": {
+      "ADD": {
+          "LABEL": "Add player link"
+        }
+      }
+    }
+  }

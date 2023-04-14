@@ -1,0 +1,72 @@
+<div class="container-fluid">
+	<div class="box box-primary box-widget">
+		<div class="box-body box-profile">
+			<div class="user-block">
+				<div class="pull-right">
+					<span ng-if="controller.bonus.current.bonusType == 0" style="line-height:inherit;" class="label label-warning">{{ 'GLOBAL.BONUS.TYPE.0' | translate | uppercase }}</span>
+					<span ng-if="controller.bonus.current.bonusType == 1" style="line-height:inherit;" class="label label-success">{{ 'GLOBAL.BONUS.TYPE.1' | translate | uppercase }}</span>
+					<span ng-if="controller.bonus.current.bonusType == 2" style="line-height:inherit;" class="label label-primary">{{ 'GLOBAL.BONUS.TYPE.2' | translate | uppercase }}</span>
+					<span ng-if="controller.bonus.current.bonusType == 3" style="line-height:inherit;" class="label label-primary">{{ 'GLOBAL.BONUS.TYPE.3' | translate | uppercase }}</span>
+<!-- 					<span ng-if="controller.bonus.current.bonusType == 2" style="line-height:inherit;" class="label label-default">{{ 'GLOBAL.BONUS.TYPE.TRIGGER.'+controller.bonus.current.bonusTriggerType | translate | uppercase }}</span> -->
+					<span ng-if="!controller.bonus.current && controller.bonus.edit.bonusType == 0" style="line-height:inherit;" class="label label-warning">{{ 'GLOBAL.BONUS.TYPE.0' | translate | uppercase }}</span>
+					<span ng-if="!controller.bonus.current && controller.bonus.edit.bonusType == 1" style="line-height:inherit;" class="label label-success">{{ 'GLOBAL.BONUS.TYPE.1' | translate | uppercase }}</span>
+					<span ng-if="!controller.bonus.current && controller.bonus.edit.bonusType == 2" style="line-height:inherit;" class="label label-primary">{{ 'GLOBAL.BONUS.TYPE.2' | translate | uppercase }}</span>
+					<span ng-if="!controller.bonus.current && controller.bonus.edit.bonusType == 3" style="line-height:inherit;" class="label label-primary">{{ 'GLOBAL.BONUS.TYPE.3' | translate | uppercase }}</span>
+<!-- 					<span ng-if="!controller.bonus.current && controller.bonus.edit.bonusType == 2" style="line-height:inherit;" class="label label-default">{{ 'GLOBAL.BONUS.TYPE.TRIGGER.'+controller.bonus.edit.bonusTriggerType | translate | uppercase }}</span> -->
+					<br/><span style="line-height:inherit;" class="label label-primary">{{ controller.model.domain.name | uppercase }}</span>
+				</div>
+				<img class="img-circle img-bordered-sm" style="margin-right: 20px;" src="//:0" alt="">
+				<h4 style="font-weight: bold;">
+					<a ng-if="controller.bonus.current.bonusCode" ui-sref="^">{{ controller.bonus.current.bonusName }} ({{ controller.bonus.current.bonusCode }})</a>
+					<a ng-if="!controller.bonus.current.bonusCode" ui-sref="^">{{ controller.bonus.current.bonusName }}</a>
+					<a ng-if="!controller.bonus.current.bonusCode && controller.bonus.edit.bonusCode" ui-sref="^">{{ controller.bonus.edit.bonusName }} ({{ controller.bonus.edit.bonusCode }})</a>
+					<a ng-if="!controller.bonus.current.bonusCode && !controller.bonus.edit.bonusCode" ui-sref="^">{{ controller.bonus.edit.bonusName }}</a>
+				</h4>
+			</div>
+		</div>
+	</div>
+	<form ng-submit="controller.save()" name="controller.form" autocomplete="off" novalidate>
+	<div class="row v-reset-row ">
+		<div class="col-md-12">
+			<div class="box box-default">
+				<div class="box-body table-responsive">
+				<button-bar style="padding-bottom: 10px">
+					<button-back ui-sref="dashboard.bonuses.bonus.revisions({bonusId:controller.bonus.id})"></button-back>
+					<button-save></button-save>
+					<button-custom ng-click="controller.saveAndExit()" icon="floppy-o" bclass="primary submit-button" text="{{ 'GLOBAL.ACTION.SAVEEXIT' | translate }}"></button-custom>
+					<button-custom ng-click="controller.markCurrent(controller.bonus.edit.id)" icon="check-square-o" bclass="success submit-button" text="{{ 'UI_NETWORK_ADMIN.BONUS.EDIT.BUTTON.MARKCURRENT' | translate }}"></button-custom>
+				</button-bar>
+				<button-bar>
+					<button-custom ui-sref-active="active" ui-sref=".summary" icon="gamepad" bclass="default" text="{{ 'UI_NETWORK_ADMIN.BONUS.EDIT.BUTTON.SUMMARY' | translate }}"></button-custom>
+					<button-custom ng-if="!(controller.bonus.current.bonusType === 3 || controller.bonus.edit.bonusType === 3)" ui-sref-active="active" ui-sref=".freespins" icon="gamepad" bclass="default" text="{{ 'UI_NETWORK_ADMIN.BONUS.EDIT.BUTTON.FREESPINS' | translate }}"></button-custom>
+					<button-custom ng-if="!(controller.bonus.current.bonusType === 3 || controller.bonus.edit.bonusType === 3)" ui-sref-active="active" ui-sref=".casinoChip" icon="gamepad" bclass="default" text="{{ 'UI_NETWORK_ADMIN.BONUS.EDIT.BUTTON.CASINO_CHIP' | translate }}"></button-custom>
+					<button-custom ng-if="!(controller.bonus.current.bonusType === 3 || controller.bonus.edit.bonusType === 3)" ui-sref-active="active" ui-sref=".instantReward" icon="gamepad" bclass="default" text="{{ 'UI_NETWORK_ADMIN.BONUS.EDIT.BUTTON.INSTANT_REWARDS' | translate }}"></button-custom>
+					<button-custom ng-if="!(controller.bonus.current.bonusType === 3 || controller.bonus.edit.bonusType === 3)" ui-sref-active="active" ui-sref=".instantRewardFreespin" icon="gamepad" bclass="default" text="{{ 'UI_NETWORK_ADMIN.BONUS.EDIT.BUTTON.INSTANT_REWARD_FREESPINS' | translate }}"></button-custom>
+					<button-custom ng-if="!(controller.bonus.current.bonusType === 3 || controller.bonus.edit.bonusType === 3)" ui-sref-active="active" ui-sref=".unlockgame" icon="gamepad" bclass="default" text="{{ 'UI_NETWORK_ADMIN.BONUS.EDIT.BUTTON.UNLOCKGAME' | translate }}"></button-custom>
+					<button-custom ng-if="!(controller.bonus.current.bonusType === 3 || controller.bonus.edit.bonusType === 3)" ui-sref-active="active" ui-sref=".percentages" icon="gamepad" bclass="default" text="{{ 'UI_NETWORK_ADMIN.BONUS.EDIT.BUTTON.GAME_PERCENTAGES' | translate }}"></button-custom>
+					<button-custom ng-if="!(controller.bonus.current.bonusType === 3 || controller.bonus.edit.bonusType === 3)" ui-sref-active="active" ui-sref=".categories" icon="gamepad" bclass="default" text="{{ 'UI_NETWORK_ADMIN.BONUS.EDIT.BUTTON.GAME_CATEGORIES' | translate }}"></button-custom>
+				</button-bar>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row v-reset-row ">
+		<div class="col-md-12">
+			<div class="well">
+				<div class="row v-reset-row ">
+					<div ui-view></div>
+				</div>
+			</div>
+<!-- 			<div class="well">
+				<div class="row v-reset-row ">
+					<pre>{{controller.model | json}}</pre>
+				</div>
+				<div class="row v-reset-row ">
+					<pre>{{controller.form | json}}</pre>
+				</div>
+			</div> -->
+		</div>
+	</div>
+	
+	</form>
+</div>

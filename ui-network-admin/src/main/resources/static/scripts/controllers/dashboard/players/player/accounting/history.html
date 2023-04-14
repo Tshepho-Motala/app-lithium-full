@@ -1,0 +1,49 @@
+<div class="card card-block bg-yellow" style="text-align: center">
+<lit-header
+		title="Deprecation warning"
+		description="Please note this screen is DEPRECATED and will be replaced with the Accounting History Tab in future">
+	</lit-header>
+</div>
+
+<br/>
+
+
+<div class="container-fluid">
+<!-- 	<lit-header
+		title="UI_NETWORK_ADMIN.REPORTS.PLAYERS.LIST.TITLE" 
+		description="UI_NETWORK_ADMIN.REPORTS.PLAYERS.LIST.DESCRIPTION">
+	</lit-header> -->
+
+	<form ng-submit="controller.submit()" name="controller.form" autocomplete="off" novalidate>
+		<div class="row v-reset-row " id="modal-body">
+			<div class="row v-reset-row ">
+				<div class="col-lg-12">
+					<formly-form model="controller.model" fields="controller.fields" form="controller.form" options="controller.options">
+					</formly-form>
+					<button-submit class=" pull-right" style="margin-top: 25px; margin-right: 15px; margin-bottom: 10px"></button-submit>
+				</div>
+
+			</div>
+		</div>
+	</form>
+	<div class="callout callout-danger overlay" ng-show="controller.dateError">
+		<i class="fa fa-exclamation-triangle"></i> 
+		The date range you have supplied is invalid. Please make sure the start date is further in the past than the end date.
+	</div>
+	<div class="callout callout-info overlay" ng-show="controller.loading">
+		<i class="fa fa-refresh fa-spin"></i> 
+		The data you have requested is being retrieved. Depending on the number of records in your search, this might take a while.
+	</div>
+	<div class="row v-reset-row " ng-show="!controller.loading && controller.table">
+		<div class="col-lg-12">
+			<div class="box">
+				<div class="box-body table-responsive no-padding" ng-if="controller.table">
+					<dt table="controller.table"/>
+				</div>
+			</div>
+			<div class="row v-reset-row  pull-right" style="margin-right: 0px">
+				<button-download-excel ng-click="controller.downloadxls()"></button-download-excel>
+			</div>
+		</div>
+	</div>
+</div>

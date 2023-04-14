@@ -1,0 +1,34 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "CMS": {
+      "LAYOUT_BUILDER_BANNER": {
+        "OUTPUT": {
+          "CREATE_LOBBY_DIALOG": {
+            "TITLE": "Create Lobby"
+          },
+          "BANNER_ENTRY": {
+            "TITLE": "Banners"
+          }
+        }
+      },
+      "BANNER_ENTRY_LAYOUT_SELECTOR": {
+        "OUTPUT": {
+          "HEADER": {
+            "TITLE": "Create Banner"
+          }
+        },
+        "FIELDS": {
+          "SELECT_LAYOUT": {
+            "LABEL": "Select a Layout"
+          },
+          "TITLE": {
+            "LABEL": "Title"
+          },
+          "SELECT_TILE_SIZE": {
+            "LABEL": "Select Tile Size"
+          }
+        }
+      }
+    }
+  }
+}

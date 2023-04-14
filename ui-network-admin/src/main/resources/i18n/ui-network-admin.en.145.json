@@ -1,0 +1,42 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "PLAYER": {
+      "QUICK_ACTIONS": {
+        "SEND_NOTIFICATION": "Send Notification",
+        "SEND_SMS": "Send SMS",
+        "CHANGE": {
+          "STATUS": "Change Status",
+          "CATEGORY": "Change Category",
+          "PASSWORD": "Change Password",
+          "PROMOTIONAL_OPTOUT": "Edit Promotional Opt-Out",
+          "RESIDENTIAL_ADDRESS": "Change Residential Address",
+          "POSTAL_ADDRESS": "Change Postal Address",
+          "PERSONAL_INFO": "Change Personal Info",
+          "ADJUST_BALANCE": "Adjust Balance",
+          "WRITE_OFF_BALANCE": "Write Off Balance",
+          "DAILY_LOSS_LIMIT": "Modify Daily Loss Limit",
+          "MONTHLY_LOSS_LIMIT": "Modify Monthly Loss Limit",
+          "SELF_EXCLUSION": "Change Self Exclusion",
+          "VERIFICATION_STATUS": "Change Verification Status"
+        },
+        "ADD": {
+          "COMMENT": "Add Comment",
+          "SELF_EXCLUSION": "Add Self Exclusion",
+          "COOL_OFF": "Add Cool Off",
+          "BONUS": "Register Bonus",
+          "DOCUMENT" : "Add Document"
+        },
+        "SET": {
+          "DAILY_LOSS_LIMIT": "Set Daily Loss Limit",
+          "MONTHLY_LOSS_LIMIT": "Set Monthly Loss Limit"
+        },
+        "DELETE": {
+          "DAILY_LOSS_LIMIT": "Delete Daily Loss Limit",
+          "MONTHLY_LOSS_LIMIT" : "Delete Monthly Loss Limit",
+          "SELF_EXCLUSION": "Delete Self Exclusion",
+          "COOL_OFF": "Delete Cool Off"
+        }
+      }
+    }
+  }
+}

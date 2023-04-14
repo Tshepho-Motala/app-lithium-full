@@ -1,0 +1,115 @@
+<div ng-init="controller.reload()">
+	<div class="row v-reset-row ">
+		<div class="col-xs-12">
+			<div class="nav-tabs-custom" style="margin-bottom: 0px;">
+				<ul class="nav nav-tabs">
+					<li role="presentation" ng-class="{ active: controller.tab == tab }" ng-repeat="tab in controller.tabs" lit-if-permission="{{tab.roles}}" lit-permission-domain="{{domain.name}}">
+						<a ng-click="controller.setTab(tab)">{{ tab.title | translate }}</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row v-reset-row " lit-if-permission="PROVIDER_ADD,PROVIDER_ADD_LINK">
+		<div class="col-xs-12" style="margin: 10px">
+			<button-add ng-click="controller.providerAddModal()"></button-add>
+			<button-refresh ng-click="controller.reload()"></button-refresh>
+			<button-custom lit-if-permission="DOMAIN_EDIT" ng-if="controller.tab.name === 'dashboard.provider.casino' && controller.domain.bettingEnabled" icon="exclamation-triangle" bclass="danger submit-button" text="UI_NETWORK_ADMIN.PROVIDERS.CASINO.BETTING.DISABLE.LABEL" click-confirm="{{'UI_NETWORK_ADMIN.PROVIDERS.CASINO.BETTING.DISABLE.CONFIRM'|translate}}"  click-confirmed="controller.toggleBettingEnabled()"></button-custom>
+			<button-custom lit-if-permission="DOMAIN_EDIT" ng-if="controller.tab.name === 'dashboard.provider.casino' && !controller.domain.bettingEnabled" icon="exclamation-triangle" bclass="success submit-button" text="UI_NETWORK_ADMIN.PROVIDERS.CASINO.BETTING.ENABLE.LABEL" click-confirm="{{'UI_NETWORK_ADMIN.PROVIDERS.CASINO.BETTING.ENABLE.CONFIRM'|translate}}" click-confirmed="controller.toggleBettingEnabled()"></button-custom>
+		</div>
+	</div>
+	
+	<div class="row v-reset-row ">
+	<div class="col-md-8 col-md-offset-2" ng-show="controller.providers.length > 4 || controller.providerLinks.length > 4">
+		<div class="box box-default">
+			<div class="box-body">
+				<div class="input-group">
+					<input type="text" ng-model="filterValue" class="form-control" placeholder="{{ 'GLOBAL.INPUT.SEARCHDYNAMIC' | translate }}">
+					<span class="input-"src/main/resources/static/scripts/controllers/dashboard/providers/list/list.html"group-addon"><i class="fa fa-search"></i></span>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row v-reset-row " ng-repeat="provider in controller.providers | filter:filterValue ">
+		<div class="col-md-8 col-md-offset-2">
+			<!--  a ng-click="providerViewModal (provider.id)"-->
+			<div class="box box-default" style=":hover { background-color: #aaaaaa }">
+				<div class="box-header bg-gray-lighter">
+					<i ng-if="provider.providerType.name == 'USER'" class="fa fa-fw fa-user"></i>
+					<i ng-if="provider.providerType.name == 'AUTH'" class="fa fa-fw fa-unlock-alt"></i>
+					<i ng-if="provider.providerType.name == 'CASINO'" class="fa fa-fw fa-diamond"></i> 
+					<i ng-if="provider.providerType.name == 'GAMES'" class="fa fa-fw fa-diamond"></i>
+					<i ng-if="provider.providerType.name == 'CASHIER'" class="fa fa-fw fa-money"></i>
+					<i ng-if="provider.providerType.name == 'ACCOUNTING'" class="fa fa-fw fa-money"></i>
+					<i ng-if="provider.providerType.name === 'ACCESS'" class="fa fa-fw fa-lock"></i>
+					<i ng-if="provider.providerType.name === 'KYC'" class="fa fa-fw fa-users"></i>
+					<i ng-if="provider.providerType.name === 'CDN'" class="fa fa-fw fa-archive"></i>
+					<i ng-if="provider.providerType.name === 'DOCUMENT'" class="fa fa-fw fa-lock"></i>
+					<i ng-if="provider.providerType.name === 'PUB-SUB'" class="fa fa-fw fa-lock"></i>
+					<i ng-if="provider.providerType.name === 'REGISTER'" class="fa fa-fw fa-lock"></i>
+					<h3 class="box-title">{{provider.name}}</h3>
+					<button-view class="pull-right" lit-permission-domain="{{domainName}}" ng-click="controller.providerViewModal(provider)"></button-view>
+				</div>
+				<div class="box-body">
+					<label>Status:</label><span> {{provider.enabled==1?"Enabled":"Disabled"}}</span><br>
+					<label>URL:</label><span> {{provider.url}}</span>
+					<button-edit class="pull-right" lit-permission-domain="{{domainName}}" ng-click="controller.providerEditModal(provider)"></button-edit>
+				</div>
+			</div>
+			<!--  /a-->
+		</div>
+	</div>
+	<div class="row v-reset-row " ng-repeat="link in controller.providerLinks | filter:filterValue ">
+		<div class="col-md-8 col-md-offset-2">
+			<!-- a ng-click="providerViewModal (link) " -->
+			<div class="box box-default" style=":hover { background-color: #aaaaaa }">
+				<div class="box-header bg-gray-lighter">
+					<i ng-if="link.provider.providerType.name == 'USER'" class="fa fa-fw fa-user"></i>
+					<i ng-if="link.provider.providerType.name == 'AUTH'" class="fa fa-fw fa-unlock-alt"></i>
+					<i ng-if="link.provider.providerType.name == 'CASINO'" class="fa fa-fw fa-diamond"></i>
+					<i ng-if="link.provider.providerType.name == 'CASHIER'" class="fa fa-fw fa-money"></i>
+					<i ng-if="link.provider.providerType.name == 'ACCOUNTING'" class="fa fa-fw fa-money"></i>
+					<i ng-if="link.provider.providerType.name === 'ACCESS'" class="fa fa-fw fa-lock"></i>
+					<i ng-if="link.provider.providerType.name === 'KYC'" class="fa fa-fw fa-users"></i>
+					<i ng-if="link.provider.providerType.name === 'CDN'" class="fa fa-fw fa-archive"></i>
+					<i ng-if="link.provider.providerType.name === 'PUB-SUB'" class="fa fa-fw fa-lock"></i>
+					<h3 class="box-title">{{link.provider.name}}</h3>
+				<h3 class="box-title"><i class="fa fa-fw fa-link"></i>{{link.domain.displayName}}</h3>
+				<button-view class="pull-right" lit-permission-domain="{{domainName}}" ng-click="controller.providerViewModal(link)"></button-view>
+				</div>
+				<div class="box-body">
+					<label>Status:</label><span> {{link.enabled==1?"Enabled":"Disabled"}}</span><br>
+					<label>URL:</label><span> {{link.provider.url}}</span><br>
+					<label>Owner domain:</label><span> {{link.domain.displayName}}</span>
+					<button-edit class="pull-right" lit-permission-domain="{{domainName}}" ng-click="controller.providerEditModal(link)"></button-edit>
+				</div>
+			</div>
+			<!--  /a-->
+		</div>
+	</div>
+	<div class="row v-reset-row  col-md-8 col-md-offset-2" ng-show="!controller.tab">
+		<div class=" callout callout-warning">
+			<h5>Select a provider tab above to view configured providers.</h5>
+		</div>
+	</div>
+	<div class="row v-reset-row  col-md-8 col-md-offset-2" ng-show="controller.tab && !controller.providerLinks.length && !controller.providers.length">
+		<div class="callout callout-info">
+			<h5 ng-if="controller.tab.providerType === 'ACCOUNTING'">
+				No provider configured, so will use internal accounting. This is the default behaviour.
+			</h5>
+			<h5 ng-if="controller.tab.providerType !== 'ACCOUNTING'">
+				No provider(s) configured for the currently selected provider type.
+			</h5>
+		</div>
+	</div>
+	</div>
+
+	<div style="padding: 19px;">
+		<div class="row v-reset-row  well">
+			<changelog options="controller.changelogs"></changelog>
+		</div>
+	</div>
+
+</div>

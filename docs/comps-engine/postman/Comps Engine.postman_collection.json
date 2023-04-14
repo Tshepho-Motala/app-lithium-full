@@ -1,0 +1,2095 @@
+{
+	"info": {
+		"_postman_id": "1753d533-e2b1-4bdc-b289-aeebf287b338",
+		"name": "Comps Engine",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15727883"
+	},
+	"item": [
+		{
+			"name": "service-casino",
+			"item": [
+				{
+					"name": "bonus",
+					"item": [
+						{
+							"name": "Manual Bonus Trigger",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{USERTOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"playerGuid\": \"livescore_sa/rivalani47\",\n    \"bonusCode\": \"MANUALBONUS\",\n    \"customAmountDecimal\": \"5000\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{gateway}}/service-casino/casino/bonus/manual/register/trigger",
+									"host": [
+										"{{gateway}}"
+									],
+									"path": [
+										"service-casino",
+										"casino",
+										"bonus",
+										"manual",
+										"register",
+										"trigger"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Manual Bonus Trigger V2",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{USERTOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"playerGuid\": \"livescore_sa/rivalani47\",\n    \"bonusCode\": \"MANUAL_BONUSCODE\",\n    \"customAmountDecimal\": \"5000\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{gateway}}/service-casino/casino/bonus/manual/register/trigger/v2",
+									"host": [
+										"{{gateway}}"
+									],
+									"path": [
+										"service-casino",
+										"casino",
+										"bonus",
+										"manual",
+										"register",
+										"trigger",
+										"v2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Mass Action Trigger",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{USERTOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"playerGuid\": \"livescore_sa/rivalani47\",\n    \"bonusCode\": \"MANUAL_BONUSCODE\",\n    \"customAmountDecimal\": \"5000\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{gateway}}/casino/bonus/mass-action-trigger",
+									"host": [
+										"{{gateway}}"
+									],
+									"path": [
+										"casino",
+										"bonus",
+										"mass-action-trigger"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Manual Bonus Trigger v2 csv",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{USERTOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "bonusCode",
+											"value": "MANUAL_BONUSCODE",
+											"type": "text"
+										},
+										{
+											"key": "revisionId",
+											"value": "2",
+											"type": "text"
+										},
+										{
+											"key": "image",
+											"type": "file",
+											"src": "/Users/rivalani/Desktop/players2.csv"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{gateway}}/service-casino/casino/bonus/manual/register/trigger/v2/csv",
+									"host": [
+										"{{gateway}}"
+									],
+									"path": [
+										"service-casino",
+										"casino",
+										"bonus",
+										"manual",
+										"register",
+										"trigger",
+										"v2",
+										"csv"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Manual Bonus Token csv",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{USERTOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "bonusCode",
+											"value": "MANUAL_BONUSCODE",
+											"type": "text"
+										},
+										{
+											"key": "revisionId",
+											"value": "2",
+											"type": "text"
+										},
+										{
+											"key": "image",
+											"type": "file",
+											"src": "/Users/rivalani/Desktop/players2.csv"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{gateway}}/service-casino/casino/bonus/manual/register/bonus-token/v2/csv",
+									"host": [
+										"{{gateway}}"
+									],
+									"path": [
+										"service-casino",
+										"casino",
+										"bonus",
+										"manual",
+										"register",
+										"bonus-token",
+										"v2",
+										"csv"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "LBO Trigger Bonus v3",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{USERTOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"playerGuid\": \"livescore_sa/rivalani47\",\n    \"bonusCode\": \"MANUAL_BONUSCODE\",\n\t\"customAmountDecimal\": \"200\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{gateway}}/service-casino/backoffice/livescore_sa/bonus/signup/manual/register/trigger/v3",
+									"host": [
+										"{{gateway}}"
+									],
+									"path": [
+										"service-casino",
+										"backoffice",
+										"livescore_sa",
+										"bonus",
+										"signup",
+										"manual",
+										"register",
+										"trigger",
+										"v3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Register Frontend Bonus",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{player-access-token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{gateway}}/service-casino/casino/bonus/register/frontend?bonusCode=SIGN2021_BON_STAR",
+									"host": [
+										"{{gateway}}"
+									],
+									"path": [
+										"service-casino",
+										"casino",
+										"bonus",
+										"register",
+										"frontend"
+									],
+									"query": [
+										{
+											"key": "bonusCode",
+											"value": "SIGN2021_BON_STAR"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Register Hourly Bonus",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{player-access-token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{gateway}}/service-casino/casino/bonus/register/hourly?bonusCode=MANUAL_BONUSCODE",
+									"host": [
+										"{{gateway}}"
+									],
+									"path": [
+										"service-casino",
+										"casino",
+										"bonus",
+										"register",
+										"hourly"
+									],
+									"query": [
+										{
+											"key": "bonusCode",
+											"value": "MANUAL_BONUSCODE"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Register Signup Bonus Auto",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{USERTOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"playerGuid\": \"livescore_sa/rivalani47\",\n    \"bonusCode\": \"SIGN2021_BON_STAR\",\n\t\"customAmountDecimal\": \"200\",\n    \"bonusId\": 2,\n    \"token\": \"\",\n\t\"amountCents\": 300\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{gateway}}/service-casino/casino/bonus/manual/register/signup",
+									"host": [
+										"{{gateway}}"
+									],
+									"path": [
+										"service-casino",
+										"casino",
+										"bonus",
+										"manual",
+										"register",
+										"signup"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Register Signup Bonus",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{USERTOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"playerGuid\": \"livescore_sa/rivalani47\",\n    \"bonusCode\": \"SIGN2021_BON_STAR\",\n\t\"customAmountDecimal\": \"200\",\n    \"bonusId\": 2,\n    \"token\": \"\",\n\t\"amountCents\": 300\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{gateway}}/service-casino/casino/bonus/auto/register/signup",
+									"host": [
+										"{{gateway}}"
+									],
+									"path": [
+										"service-casino",
+										"casino",
+										"bonus",
+										"auto",
+										"register",
+										"signup"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Register Signup Bonus By Id",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{USERTOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"playerGuid\": \"livescore_sa/rivalani47\",\n    \"bonusCode\": \"MANUAL_BONUSCODE\",\n\t\"customAmountDecimal\": \"200\",\n    \"bonusId\": 2,\n    \"token\": \"\",\n\t\"amountCents\": 300\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{gateway}}/service-casino/casino/bonus/register/signupbyid",
+									"host": [
+										"{{gateway}}"
+									],
+									"path": [
+										"service-casino",
+										"casino",
+										"bonus",
+										"register",
+										"signupbyid"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Register Signup Bonus v2",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{USERTOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"playerGuid\": \"livescore_sa/rivalani47\",\n    \"bonusCode\": \"SIGN2021_BON_STAR\",\n\t\"customAmountDecimal\": \"200\",\n    \"bonusId\": 2,\n    \"token\": \"\",\n\t\"amountCents\": 300\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{gateway}}/service-casino/casino/bonus/manual/register/signup/v2",
+									"host": [
+										"{{gateway}}"
+									],
+									"path": [
+										"service-casino",
+										"casino",
+										"bonus",
+										"manual",
+										"register",
+										"signup",
+										"v2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Register Token Bonus v2",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{USERTOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"playerGuid\": \"livescore_sa/rivalani47\",\n    \"bonusCode\": \"MANUAL_BONUSCODE\",\n\t\"customAmountDecimal\": \"200\",\n    \"bonusId\": 2,\n    \"token\": \"\",\n\t\"amountCents\": 300\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{gateway}}/service-casino/casino/bonus/manual/register/bonus-token/v2",
+									"host": [
+										"{{gateway}}"
+									],
+									"path": [
+										"service-casino",
+										"casino",
+										"bonus",
+										"manual",
+										"register",
+										"bonus-token",
+										"v2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "AutoRegister Deposit Bonus",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{USERTOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"playerGuid\": \"livescore_sa/rivalani47\",\n    \"bonusCode\": \"DEPO_BONUS\",\n\t\"customAmountDecimal\": \"200\",\n    \"bonusId\": 2,\n    \"token\": \"\",\n\t\"amountCents\": 300,\n    \"userEventId\": 0\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{gateway}}/service-casino/casino/bonus/auto/register/deposit",
+									"host": [
+										"{{gateway}}"
+									],
+									"path": [
+										"service-casino",
+										"casino",
+										"bonus",
+										"auto",
+										"register",
+										"deposit"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Register Deposit Bonus",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{USERTOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"playerGuid\": \"livescore_sa/rivalani47\",\n    \"bonusCode\": \"DEPO_BONUS\",\n\t\"customAmountDecimal\": \"200\",\n    \"bonusId\": 2,\n    \"token\": \"\",\n    \"userEventId\": 0,\n\t\"amountCents\": 300\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{gateway}}/service-casino/casino/bonus/register/deposit",
+									"host": [
+										"{{gateway}}"
+									],
+									"path": [
+										"service-casino",
+										"casino",
+										"bonus",
+										"register",
+										"deposit"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Register Deposit Bonus ById",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{USERTOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"playerGuid\": \"livescore_sa/rivalani47\",\n    \"bonusCode\": \"DEPO_BONUS\",\n\t\"customAmountDecimal\": \"200\",\n    \"bonusId\": 2,\n    \"token\": \"\",\n    \"userEventId\": 0,\n\t\"amountCents\": 300\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{gateway}}/service-casino/casino/bonus/register/depositbyid",
+									"host": [
+										"{{gateway}}"
+									],
+									"path": [
+										"service-casino",
+										"casino",
+										"bonus",
+										"register",
+										"depositbyid"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Register Manual Deposit Bonus",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{USERTOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"playerGuid\": \"livescore_sa/rivalani47\",\n    \"bonusCode\": \"DEPO_BONUS\",\n\t\"customAmountDecimal\": \"200\",\n    \"bonusId\": 2,\n    \"token\": \"\",\n    \"userEventId\": 0,\n\t\"amountCents\": 300\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{gateway}}/service-casino/casino/bonus/manual/register/deposit",
+									"host": [
+										"{{gateway}}"
+									],
+									"path": [
+										"service-casino",
+										"casino",
+										"bonus",
+										"manual",
+										"register",
+										"deposit"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Register Manual Deposit Bonus v2",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{USERTOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"playerGuid\": \"livescore_sa/rivalani47\",\n    \"bonusCode\": \"DEPO_BONUS\",\n\t\"customAmountDecimal\": \"200\",\n    \"bonusId\": 2,\n    \"token\": \"\",\n    \"userEventId\": 0,\n\t\"amountCents\": 300\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{gateway}}/service-casino/casino/bonus/manual/register/deposit/v2",
+									"host": [
+										"{{gateway}}"
+									],
+									"path": [
+										"service-casino",
+										"casino",
+										"bonus",
+										"manual",
+										"register",
+										"deposit",
+										"v2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Find Active Bonuses",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{player-access-token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"playerGuid\": \"livescore_sa/rivalani47\",\n    \"bonusCode\": \"MANUAL_BONUSCODE\",\n\t\"customAmountDecimal\": \"200\",\n    \"bonusId\": 2,\n    \"token\": \"\",\n\t\"amountCents\": 300\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{gateway}}/service-casino/casino/bonus/find/active",
+									"host": [
+										"{{gateway}}"
+									],
+									"path": [
+										"service-casino",
+										"casino",
+										"bonus",
+										"find",
+										"active"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Find Bonus Codes For Domain",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{player-access-token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"playerGuid\": \"livescore_sa/rivalani47\",\n    \"bonusCode\": \"MANUAL_BONUSCODE\",\n\t\"customAmountDecimal\": \"200\",\n    \"bonusId\": 2,\n    \"token\": \"\",\n\t\"amountCents\": 300\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{gateway}}/service-casino/casino/bonus/find/bonus-token/codes?domains=livescore_sa",
+									"host": [
+										"{{gateway}}"
+									],
+									"path": [
+										"service-casino",
+										"casino",
+										"bonus",
+										"find",
+										"bonus-token",
+										"codes"
+									],
+									"query": [
+										{
+											"key": "domains",
+											"value": "livescore_sa"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Register Bonus Slot Api",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"const requestId = new Date().getTime()",
+											"const amount = '100.0'",
+											"const hash = CryptoJS.HmacSHA256(`${requestId}:${amount}`, 'asdASD123').toString(CryptoJS.digest)",
+											"",
+											"const body = JSON.stringify({",
+											"    requestId: requestId,",
+											"    customAmountDecimal: amount,",
+											"    sha256: hash,",
+											"    description: \"Hello World\",",
+											"    playerGuid: \"livescore_sa/rivalani11\",",
+											"    bonusCode: \"MANUALBONUS\"",
+											"})",
+											"",
+											"console.log(body)",
+											"",
+											"pm.variables.set('restriction_body', body)"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "acmesecret",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "acme",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{{restriction_body}}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{gateway}}/service-casino-provider-slotapi/bonus/trigger",
+									"host": [
+										"{{gateway}}"
+									],
+									"path": [
+										"service-casino-provider-slotapi",
+										"bonus",
+										"trigger"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Free Round Bonus",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{USERTOKEN}}",
+											"type": "string"
+										},
+										{
+											"key": "password",
+											"value": "{{token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{gateway}}/service-casino/casino/frb/awardbonus",
+									"host": [
+										"{{gateway}}"
+									],
+									"path": [
+										"service-casino",
+										"casino",
+										"frb",
+										"awardbonus"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "external player bonuses",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"const playerId = 1000000000 + 126208",
+											"const timestamp = new Date().getTime()",
+											"const hash = CryptoJS.HmacSHA256(`${playerId}:${timestamp}`, '6bf902494d3a04d83b2ff7c2c7f29f2b').toString()",
+											"",
+											"",
+											"pm.variables.set('restriction_body', `playerId=${playerId}&timestamp=${timestamp}&sha=${hash}`)"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://dev-platform-internal-gw.lsb-uk.ls-g.net/api/v1/lithium/playerBonuses?{{restriction_body}}",
+									"protocol": "https",
+									"host": [
+										"dev-platform-internal-gw",
+										"lsb-uk",
+										"ls-g",
+										"net"
+									],
+									"path": [
+										"api",
+										"v1",
+										"lithium",
+										"playerBonuses"
+									],
+									"query": [
+										{
+											"key": "{{restriction_body}}",
+											"value": ""
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "sportsbook",
+					"item": [
+						{
+							"name": "toggle_player_bonus",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"const playerId = 334818",
+											"const restrict = true",
+											"const hash = CryptoJS.HmacSHA256(`${playerId}:${restrict}`, '6bf902494d3a04d83b2ff7c2c7f29f2b').toString()",
+											"//dev-platform-internal-gw.lsb-uk.ls-g.net/",
+											"//dev-platform-internal.gw.lsb-uk.ls-g.net",
+											"const body = {",
+											"    playerId: playerId,",
+											"    restrict: restrict,",
+											"    sha: hash",
+											"}",
+											"",
+											"pm.variables.set('restriction_body', JSON.stringify(body))"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{{restriction_body}}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://test-platform-internal-gw.lsb-uk.ls-g.net/api/v1/lithium/restrictbonus",
+									"protocol": "https",
+									"host": [
+										"test-platform-internal-gw",
+										"lsb-uk",
+										"ls-g",
+										"net"
+									],
+									"path": [
+										"api",
+										"v1",
+										"lithium",
+										"restrictbonus"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get_player_bonuses",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"const playerId = 1000000000 + 136692",
+											"const restrict = true",
+											"const timestamp= new Date().getTime()",
+											"",
+											"const hash = CryptoJS.HmacSHA256(`${playerId}:${timestamp}`, '6bf902494d3a04d83b2ff7c2c7f29f2b').toString()",
+											"",
+											"pm.variables.set('playerId', playerId)",
+											"pm.variables.set('timestamp', timestamp)",
+											"pm.variables.set('sha', hash)"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://dev-platform-internal-gw.lsb-uk.ls-g.net/api/v1/lithium/playerBonuses?playerId={{playerId}}&sha={{sha}}&timestamp={{timestamp}}",
+									"protocol": "https",
+									"host": [
+										"dev-platform-internal-gw",
+										"lsb-uk",
+										"ls-g",
+										"net"
+									],
+									"path": [
+										"api",
+										"v1",
+										"lithium",
+										"playerBonuses"
+									],
+									"query": [
+										{
+											"key": "playerId",
+											"value": "{{playerId}}"
+										},
+										{
+											"key": "sha",
+											"value": "{{sha}}"
+										},
+										{
+											"key": "timestamp",
+											"value": "{{timestamp}}"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Sports Frree Bets",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{USERTOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{gateway}}/service-casino-provider-sportsbook/backoffice/bet/livescore_sa/freebets/history?draw=1&playerId=1100&dateRangeFrom=2022-01-01&dateRangeTo=2022-12-12&start=1&length=10",
+									"host": [
+										"{{gateway}}"
+									],
+									"path": [
+										"service-casino-provider-sportsbook",
+										"backoffice",
+										"bet",
+										"livescore_sa",
+										"freebets",
+										"history"
+									],
+									"query": [
+										{
+											"key": "draw",
+											"value": "1"
+										},
+										{
+											"key": "playerId",
+											"value": "1100"
+										},
+										{
+											"key": "dateRangeFrom",
+											"value": "2022-01-01"
+										},
+										{
+											"key": "dateRangeTo",
+											"value": "2022-12-12"
+										},
+										{
+											"key": "start",
+											"value": "1"
+										},
+										{
+											"key": "length",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "FE",
+					"item": [
+						{
+							"name": "Active Bonuses",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{player-access-token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{gateway}}/service-casino/frontend/bonus/find/active",
+									"host": [
+										"{{gateway}}"
+									],
+									"path": [
+										"service-casino",
+										"frontend",
+										"bonus",
+										"find",
+										"active"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Complete Bonus",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{player-access-token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{gateway}}/service-casino/frontend/bonus/complete?playerBonusHistoryId=3372",
+									"host": [
+										"{{gateway}}"
+									],
+									"path": [
+										"service-casino",
+										"frontend",
+										"bonus",
+										"complete"
+									],
+									"query": [
+										{
+											"key": "playerBonusHistoryId",
+											"value": "3372"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Accept Bonus",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{player-access-token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{gateway}}/service-casino/frontend/bonus/player/accept?playerBonusHistoryId=3460&playerBonusPendingId=69&accept=true",
+									"host": [
+										"{{gateway}}"
+									],
+									"path": [
+										"service-casino",
+										"frontend",
+										"bonus",
+										"player",
+										"accept"
+									],
+									"query": [
+										{
+											"key": "playerBonusHistoryId",
+											"value": "3460"
+										},
+										{
+											"key": "playerBonusPendingId",
+											"value": "69"
+										},
+										{
+											"key": "accept",
+											"value": "true"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "service-notification",
+			"item": [
+				{
+					"name": "frontend",
+					"item": [
+						{
+							"name": "InboxRead",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{player-access-token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{gateway}}/service-notifications/frontend/inbox/read?channels=pull&locale=en&type=reward",
+									"host": [
+										"{{gateway}}"
+									],
+									"path": [
+										"service-notifications",
+										"frontend",
+										"inbox",
+										"read"
+									],
+									"query": [
+										{
+											"key": "channels",
+											"value": "pull"
+										},
+										{
+											"key": "locale",
+											"value": "en"
+										},
+										{
+											"key": "cta",
+											"value": "false",
+											"disabled": true
+										},
+										{
+											"key": "type",
+											"value": "reward"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "markAsRead",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{player-access-token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"replyMessage\": \"Thank you government but I will have to pass on this one\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{gateway}}/service-notifications/frontend/inbox/22/markAsRead?locale=nl",
+									"host": [
+										"{{gateway}}"
+									],
+									"path": [
+										"service-notifications",
+										"frontend",
+										"inbox",
+										"22",
+										"markAsRead"
+									],
+									"query": [
+										{
+											"key": "locale",
+											"value": "nl"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "InboxUnread",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{player-access-token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{gateway}}/service-notifications/frontend/inbox/unread?channels=sms,email,pull&locale=af&cta=true",
+									"host": [
+										"{{gateway}}"
+									],
+									"path": [
+										"service-notifications",
+										"frontend",
+										"inbox",
+										"unread"
+									],
+									"query": [
+										{
+											"key": "channels",
+											"value": "sms,email,pull"
+										},
+										{
+											"key": "locale",
+											"value": "af"
+										},
+										{
+											"key": "type",
+											"value": "mkoveni",
+											"disabled": true
+										},
+										{
+											"key": "cta",
+											"value": "true"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "system",
+					"item": [
+						{
+							"name": "inbox_summary",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{player-access-token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{gateway}}/service-notifications/system/inbox/summary?userGuid=livescore_sa/rivalani22",
+									"host": [
+										"{{gateway}}"
+									],
+									"path": [
+										"service-notifications",
+										"system",
+										"inbox",
+										"summary"
+									],
+									"query": [
+										{
+											"key": "userGuid",
+											"value": "livescore_sa/rivalani22"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "promo",
+			"item": [
+				{
+					"name": "service-promo",
+					"item": [
+						{
+							"name": "Create Promo",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{USERTOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"current\": {\n        \"domain\": {\n            \"name\": \"livescore_sa\"\n        },\n        \"name\": \"Exclusive Casino Promotion\",\n        \"description\": \"This is a promotion for comps engine\",\n        \"xpLevel\": 0,\n        \"startDate\": \"2022-06-01\",\n        \"endDate\": \"2022-08-30\",\n        \"recurrencePattern\": \"FREQ=WEEKLY;INTERVAL=1;BYDAY=MO,WED,FR;UNTIL=20220930T000000Z\",\n        \"redeemableInTotal\": 10,\n        \"redeemableInEvent\": 2,\n        \"eventDuration\": 1,\n        \"eventDurationGranularity\": 3,\n        \"exclusive\": true,\n        \"challengeGroups\": [\n            {\n                \"challenges\": [\n                    {\n                        \"description\": \"The Grand Father Challenge\",\n                        \"rules\": [\n                            {\n                                \"promoProvider\": {\n                                    \"category\": \"user\",\n                                    \"url\": \"service-promo-provider-user\"\n                                },\n                                \"activity\": {\n                                    \"name\": \"login-success\"\n                                },\n                                \"operation\": \"last_value\",\n                                \"value\": 5,\n                                \"promoProviderExtraFieldRuleValues\": [\n                                    {\n                                        \"value\": [\"1\",\"3\",\"5\"],\n                                        \"promoProviderExtraField\": {\n                                            \"name\": \"daysOfWeek\"\n                                        }\n                                    }\n                                ]\n                            }\n                        ]\n                    }\n                ]\n            }\n        ],\n\n        \"reward\": {\n            \"code\": \"SA_RELIEF_GRANT_10\"\n        },\n\n        \"exclusivePlayers\": [\n            {\"guid\": \"livescore_sa\"}\n        ]\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{gateway}}/service-promo/backoffice/promotions/create",
+									"host": [
+										"{{gateway}}"
+									],
+									"path": [
+										"service-promo",
+										"backoffice",
+										"promotions",
+										"create"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Promos",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{USERTOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"current\": {\n        \"domain\": {\n            \"name\": \"livescore_sa\"\n        },\n        \"name\": \"Casino Promotion\",\n        \"sequenceNumber\": 1,\n        \"description\": \"This is a promotion for comps engine\",\n        \"xpLevel\": 0,\n        \"startDate\": \"2022-06-01\",\n        \"endDate\": \"2022-08-30\",\n        \"challenges\": [\n            {\n                \"description\": \"Spin 10 times on games\",\n                \"rules\": [{\n                    \"promoProvider\": {\n                        \"id\": 1,\n                        \"category\": \"casino\",\n                        \"url\": \"service-promo-provider-casino-roxor\"\n                    },\n                    \"activity\": {\n                        \"name\": \"wager\"\n                    },\n                    \"operation\": \"accumulator\",\n                    \"value\": 2000\n                }]\n            }\n        ]\n    } \n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{gateway}}/service-promo/backoffice/promotions/table?domains=livescore_sa&draw=1&start=1&length=10",
+									"host": [
+										"{{gateway}}"
+									],
+									"path": [
+										"service-promo",
+										"backoffice",
+										"promotions",
+										"table"
+									],
+									"query": [
+										{
+											"key": "domains",
+											"value": "livescore_sa"
+										},
+										{
+											"key": "draw",
+											"value": "1"
+										},
+										{
+											"key": "start",
+											"value": "1"
+										},
+										{
+											"key": "length",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "User Promotions",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{USERTOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"current\": {\n        \"domain\": {\n            \"name\": \"livescore_sa\"\n        },\n        \"name\": \"Casino Promotion\",\n        \"sequenceNumber\": 1,\n        \"description\": \"This is a promotion for comps engine\",\n        \"xpLevel\": 0,\n        \"startDate\": \"2022-06-01\",\n        \"endDate\": \"2022-08-30\",\n        \"challenges\": [\n            {\n                \"description\": \"Spin 10 times on games\",\n                \"rules\": [{\n                    \"promoProvider\": {\n                        \"id\": 1,\n                        \"category\": \"casino\",\n                        \"url\": \"service-promo-provider-casino-roxor\"\n                    },\n                    \"activity\": {\n                        \"name\": \"wager\"\n                    },\n                    \"operation\": \"accumulator\",\n                    \"value\": 2000\n                }]\n            }\n        ]\n    } \n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{gateway}}/service-promo/backoffice/user-promotions/table?domains=livescore_sa&draw=1&start=1&length=10",
+									"host": [
+										"{{gateway}}"
+									],
+									"path": [
+										"service-promo",
+										"backoffice",
+										"user-promotions",
+										"table"
+									],
+									"query": [
+										{
+											"key": "domains",
+											"value": "livescore_sa"
+										},
+										{
+											"key": "draw",
+											"value": "1"
+										},
+										{
+											"key": "start",
+											"value": "1"
+										},
+										{
+											"key": "length",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Provider Field Values",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{USERTOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{gateway}}/service-promo/backoffice/livescore_sa/provider/service-promo-provider-casino-roxor/game",
+									"host": [
+										"{{gateway}}"
+									],
+									"path": [
+										"service-promo",
+										"backoffice",
+										"livescore_sa",
+										"provider",
+										"service-promo-provider-casino-roxor",
+										"game"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Provider Categories",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{USERTOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"current\": {\n        \"domain\": {\n            \"name\": \"livescore_sa\"\n        },\n        \"name\": \"Casino Promotion\",\n        \"sequenceNumber\": 1,\n        \"description\": \"This is a promotion for comps engine\",\n        \"xpLevel\": 0,\n        \"startDate\": \"2022-06-01\",\n        \"endDate\": \"2022-08-30\",\n        \"challenges\": [\n            {\n                \"description\": \"Spin 10 times on games\",\n                \"rules\": [{\n                    \"promoProvider\": {\n                        \"id\": 1,\n                        \"category\": \"casino\",\n                        \"url\": \"service-promo-provider-casino-roxor\"\n                    },\n                    \"activity\": {\n                        \"name\": \"wager\"\n                    },\n                    \"operation\": \"accumulator\",\n                    \"value\": 2000\n                }]\n            }\n        ]\n    } \n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{gateway}}/service-promo/backoffice/promotions/table?domains=livescore_sa&draw=1&start=1&length=10",
+									"host": [
+										"{{gateway}}"
+									],
+									"path": [
+										"service-promo",
+										"backoffice",
+										"promotions",
+										"table"
+									],
+									"query": [
+										{
+											"key": "domains",
+											"value": "livescore_sa"
+										},
+										{
+											"key": "draw",
+											"value": "1"
+										},
+										{
+											"key": "start",
+											"value": "1"
+										},
+										{
+											"key": "length",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Providers In Category",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{USERTOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"current\": {\n        \"domain\": {\n            \"name\": \"livescore_sa\"\n        },\n        \"name\": \"Casino Promotion\",\n        \"sequenceNumber\": 1,\n        \"description\": \"This is a promotion for comps engine\",\n        \"xpLevel\": 0,\n        \"startDate\": \"2022-06-01\",\n        \"endDate\": \"2022-08-30\",\n        \"challenges\": [\n            {\n                \"description\": \"Spin 10 times on games\",\n                \"rules\": [{\n                    \"promoProvider\": {\n                        \"id\": 1,\n                        \"category\": \"casino\",\n                        \"url\": \"service-promo-provider-casino-roxor\"\n                    },\n                    \"activity\": {\n                        \"name\": \"wager\"\n                    },\n                    \"operation\": \"accumulator\",\n                    \"value\": 2000\n                }]\n            }\n        ]\n    } \n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{gateway}}/service-promo/backoffice/promotions/table?domains=livescore_sa&draw=1&start=1&length=10",
+									"host": [
+										"{{gateway}}"
+									],
+									"path": [
+										"service-promo",
+										"backoffice",
+										"promotions",
+										"table"
+									],
+									"query": [
+										{
+											"key": "domains",
+											"value": "livescore_sa"
+										},
+										{
+											"key": "draw",
+											"value": "1"
+										},
+										{
+											"key": "start",
+											"value": "1"
+										},
+										{
+											"key": "length",
+											"value": "10"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Operations",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{USERTOKEN}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{gateway}}/service-promo/backoffice/promotions/rule/operations",
+									"host": [
+										"{{gateway}}"
+									],
+									"path": [
+										"service-promo",
+										"backoffice",
+										"promotions",
+										"rule",
+										"operations"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "service-promo-provider-casino-roxor",
+					"item": []
+				}
+			]
+		},
+		{
+			"name": "rewards",
+			"item": [
+				{
+					"name": "service-reward",
+					"item": [
+						{
+							"name": "backoffice",
+							"item": [
+								{
+									"name": "Create Reward",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"Relief Grant\",\n    \"code\": \"SA_RELIEF_GRANT\",\n    \"description\": \"The the covid 19 scam grant\",\n    \"domainName\": \"livescore_sa\",\n    \"validFor\": 3,\n    \"validForGranularity\": 3,\n    \"rewardTypeValues\": [\n        {\n            \"url\": \"service-reward\",\n            \"instant\": true,\n            \"rewardTypeName\": \"cash\",\n            \"rewardTypeFieldName\": \"valueInCents\",\n            \"value\": \"5000\"\n        },\n        {\n            \"url\": \"service-reward\",\n            \"instant\": true,\n            \"rewardTypeName\": \"cash\",\n            \"rewardTypeFieldName\": \"currentCode\",\n            \"value\": \"ZAR\"\n        }\n    ],\n    \"rewardTypeGames\": [\n          {\n            \"url\": \"service-reward\",\n            \"rewardTypeName\": \"unlock_games\",\n            \"guid\": \"service-casino-provider-roxor_play-banghai\"\n        }\n    ]\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{gateway}}/service-reward/backoffice/livescore_sa/rewards",
+											"host": [
+												"{{gateway}}"
+											],
+											"path": [
+												"service-reward",
+												"backoffice",
+												"livescore_sa",
+												"rewards"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Provider Games",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{gateway}}/service-reward/backoffice/livescore_sa/games/service-reward-provider-casino-blueprint",
+											"host": [
+												"{{gateway}}"
+											],
+											"path": [
+												"service-reward",
+												"backoffice",
+												"livescore_sa",
+												"games",
+												"service-reward-provider-casino-blueprint"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "RewardTypes For Providers",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "[\n    \"service-reward\",\n    \"service-reward-provider-casino-roxor\"\n]",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{gateway}}/service-reward//backoffice/reward-types/providers",
+											"host": [
+												"{{gateway}}"
+											],
+											"path": [
+												"service-reward",
+												"",
+												"backoffice",
+												"reward-types",
+												"providers"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Reward Providers",
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{gateway}}/service-reward/backoffice/livescore_sa/games/service-reward-provider-casino-blueprint",
+											"host": [
+												"{{gateway}}"
+											],
+											"path": [
+												"service-reward",
+												"backoffice",
+												"livescore_sa",
+												"games",
+												"service-reward-provider-casino-blueprint"
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"auth": {
+								"type": "bearer",
+								"bearer": [
+									{
+										"key": "token",
+										"value": "{{USERTOKEN}}",
+										"type": "string"
+									}
+								]
+							},
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	]
+}

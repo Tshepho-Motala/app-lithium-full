@@ -1,0 +1,109 @@
+{
+  "name": "PayPal Web",
+  "code": "paypal",
+  "url": "service-cashier-processor-paypal",
+  "methodNames": ["paypal"],
+  "deposit": true,
+  "withdraw": true,
+  "fees": {
+    "flat": 0,
+    "percentage": 0,
+    "minimum": 0
+  },
+  "limits": {
+    "minAmount": 2500,
+    "maxAmount": 100000000,
+    "maxAmountDay": 1000000000,
+    "maxAmountWeek": 1000000000,
+    "maxAmountMonth": 1000000000,
+    "maxTransactionsDay": 1000000000,
+    "maxTransactionsWeek": 1000000000,
+    "maxTransactionsMonth": 1000000000
+  },
+  "properties": [
+    {
+      "name": "username",
+      "defaultValue": "AThyr2x4tRDp-b7wL3X875RTsVUdmB77ReSzVNvm3ZNAvYJ_nbws5O7a6s3-g4pWTqRGxSGVBu9vjDVo",
+      "type": "string",
+      "description": "PayPal Client ID for one-off purchases and withdrawals"
+    },
+    {
+      "name": "password",
+      "defaultValue": "EOVKlLoBOSfn_ffIjtJi6LOQYkzotpS0jCqF6oDKRzcZOOt1rLJt73YXFGVmpuwMkNKZ4OcXtEykfnJd",
+      "type": "string",
+      "description": "PayPal Secret for one-off purchases and withdrawals"
+    },
+    {
+      "name": "username_ba",
+      "defaultValue": "AThyr2x4tRDp-b7wL3X875RTsVUdmB77ReSzVNvm3ZNAvYJ_nbws5O7a6s3-g4pWTqRGxSGVBu9vjDVo",
+      "type": "string",
+      "description": "PayPal Client ID for purchases with billing agreements"
+    },
+    {
+      "name": "password_ba",
+      "defaultValue": "EOVKlLoBOSfn_ffIjtJi6LOQYkzotpS0jCqF6oDKRzcZOOt1rLJt73YXFGVmpuwMkNKZ4OcXtEykfnJd",
+      "type": "string",
+      "description": "PayPal Secret for purchases with billing agreements"
+    },
+    {
+      "name": "email_subject",
+      "defaultValue": "You have a payout!",
+      "type": "string",
+      "description": "The subject of the successful payment email"
+    },
+    {
+      "name": "email_message",
+      "defaultValue": "You have received a payout! Thanks for using our service!",
+      "type": "string",
+      "description": "The message of the successful payment email"
+    },
+    {
+      "name": "api_url",
+      "defaultValue": "https://api-m.sandbox.paypal.com",
+      "type": "url",
+      "description": "PayPal API url"
+    },
+    {
+      "name": "currency_code",
+      "defaultValue": "GBP",
+      "type": "string",
+      "description": "The three-character ISO-4217 currency code that identifies the currency."
+    },
+    {
+      "name": "purchase_description",
+      "defaultValue": "Credit LSB UK account",
+      "type": "string",
+      "description": "Purchase description"
+    },
+    {
+      "name": "brand_name",
+      "defaultValue": "LSBet UK",
+      "type": "string",
+      "description": "The label that overrides the business name in the PayPal account on the PayPal site."
+    },
+    {
+      "name": "billing_agreement_description",
+      "defaultValue": "Information from LSB regarding billing agreement",
+      "type": "string",
+      "description": "Billing Agreement description"
+    },
+    {
+      "name": "webhook_id",
+      "defaultValue": "",
+      "type": "string",
+      "description": "The ID of the webhook as configured in PayPal Developer Portal account."
+    },
+    {
+      "name": "webhook_ba_id",
+      "defaultValue": "",
+      "type": "string",
+      "description": "The ID of the webhook as configured in PayPal Developer Portal BA account."
+    },
+    {
+      "name": "enable_webhook_verification",
+      "defaultValue": "false",
+      "type": "boolean",
+      "description": "Enables PayPal webhook signature verification."
+    }
+  ]
+}

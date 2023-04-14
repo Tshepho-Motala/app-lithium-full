@@ -1,0 +1,159 @@
+{
+	"info": {
+		"_postman_id": "0051f6da-9bb1-484b-a2c5-b0172c194657",
+		"name": "Roxor",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "rgp/authenticatePlayer",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "bca7fe59-5788-47b2-a408-48a9aa1f68d7",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"",
+							"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "SessionKey",
+						"value": "123123123",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"playerId\": \"livescore_nigeria/25\",\n    \"website\": \"livescore_nigeria\"\n}"
+				},
+				"url": {
+					"raw": "{{gateway}}/service-casino-provider-roxor/rgp/authenticatePlayer",
+					"host": [
+						"{{gateway}}"
+					],
+					"path": [
+						"service-casino-provider-roxor",
+						"rgp",
+						"authenticatePlayer"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "rgp/game-play",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "532b4ce3-f80c-4a83-a807-f0e442e208ef",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"",
+							"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "SessionKey",
+						"type": "text",
+						"value": "123123123"
+					},
+					{
+						"key": "GameplayId",
+						"value": "game-play-01",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"playerId\" : \"livescore_nigeria/25\",\n  \"website\" : \"livescore_nigeria\",\n  \"platform\" : \"desktop\",\n  \"gameKey\" : \"game-key-999\",\n  \"gamePlayId\" : \"game-play-01\",\n  \"operations\" : [{\n    \"operationType\" : \"START_GAME_PLAY\"\n  },{\n    \"operationType\" : \"TRANSFER\",\n    \"amount\" : {\n        \"currency\" : \"GBP\",\n        \"amount\" : 10\n    },\n    \"transferId\" : \"b781ff4e-eec7-499c-9b75-63b78019f543\",\n    \"type\" : \"DEBIT\"\n  },{\n    \"operationType\" : \"TRANSFER\",\n    \"amount\" : {\n        \"currency\" : \"GBP\",\n        \"amount\" : 100\n    },\n    \"transferId\" : \"b781ff4e-eec7-499c-9b75-1123123dasff\",\n    \"type\" : \"CREDIT\"\n  },{\n    \"operationType\" : \"FINISH_GAME_PLAY\"\n  }]\n}"
+				},
+				"url": {
+					"raw": "{{gateway}}/service-casino-provider-roxor/rgp/game-play",
+					"host": [
+						"{{gateway}}"
+					],
+					"path": [
+						"service-casino-provider-roxor",
+						"rgp",
+						"game-play"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "rgp/balance",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "300b7b63-19c1-4c4a-8cd5-635acef7e149",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"",
+							"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "SessionKey",
+						"type": "text",
+						"value": "123123123"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"playerId\": \"livescore_nigeria/25\",\n    \"website\": \"livescore_nigeria\",\n    \"gameKey\": \"somegameforsomereason\"\n}"
+				},
+				"url": {
+					"raw": "{{gateway}}/service-casino-provider-roxor/rgp/balance",
+					"host": [
+						"{{gateway}}"
+					],
+					"path": [
+						"service-casino-provider-roxor",
+						"rgp",
+						"balance"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

@@ -1,0 +1,16 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "CASHIER": {
+      "PAYMENT_METHOD": {
+        "EDIT": {
+          "STATUS": {
+            "DESCRIPTION": "Please specify the status for this payment method."
+          },
+          "COMMENT": {
+            "DESCRIPTION": "Please specify a reason for this action."
+          }
+        }
+      }
+    }
+  }
+}

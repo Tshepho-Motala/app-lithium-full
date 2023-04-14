@@ -1,0 +1,4 @@
+server:
+  port: 9106
+lithium:
+  enable-read-only: false

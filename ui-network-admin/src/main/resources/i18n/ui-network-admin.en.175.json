@@ -1,0 +1,14 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "GAME": {
+      "FIELDS": {
+        "NAME": {
+          "PATTERN": "Only numbers, letters, and special characters allowed."
+        },
+        "PROVIDER_GAME_ID": {
+          "PATTERN": "Only numbers, lowercase letters, hyphens, periods, and underscores allowed."
+        }
+      }
+    }
+  }
+}

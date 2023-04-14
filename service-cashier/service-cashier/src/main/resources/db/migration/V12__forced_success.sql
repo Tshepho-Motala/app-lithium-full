@@ -1,0 +1,1 @@
+ALTER TABLE `transaction` ADD COLUMN `forced_success` BIT(1) NOT NULL DEFAULT 0; 

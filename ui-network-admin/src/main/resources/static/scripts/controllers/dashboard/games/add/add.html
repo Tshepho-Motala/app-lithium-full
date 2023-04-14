@@ -1,0 +1,24 @@
+<div class="container-fluid">
+	<lit-header
+		title="UI_NETWORK_ADMIN.GAME.ADD.TITLE" 
+		description="UI_NETWORK_ADMIN.GAME.ADD.DESCRIPTION">
+	</lit-header>
+	<form ng-submit="controller.onSubmit()" name="controller.form" novalidate>
+		<div class="row v-reset-row ">
+			<div class="col-md-8 col-md-offset-2">
+				<div class="box box-default">
+					<div class="box-body">
+						<formly-form model="controller.model" fields="controller.fields" options="controller.options" form="controller.form"></formly-form>
+					</div>
+					<div class="box-footer">
+						<button type="submit" class="btn btn-primary submit-button">{{ "GLOBAL.ACTION.SUBMIT" | translate }}</button>
+						&nbsp;
+						<button type="button" class="btn btn-default" ng-click="controller.resetModel()">{{ "GLOBAL.ACTION.RESET" | translate }}</button>
+						&nbsp;
+						<button type="button" class="btn btn-default pull-right" ui-sref="dashboard.games">{{ "GLOBAL.ACTION.CANCEL" | translate }}</button>
+					</div>
+				</div>
+			</div>	
+		</div>
+	</form>
+</div>

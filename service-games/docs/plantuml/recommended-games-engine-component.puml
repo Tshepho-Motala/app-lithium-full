@@ -1,0 +1,25 @@
+'Recommended Games Engine
+[plantuml]
+----
+@startuml
+'https://plantuml.com/component-diagram
+
+package "Recommended Games Engine" {
+    [frontend]
+    package "Lithium" {
+        [svc-casino-cms] -(0- [svc-user]
+        [svc-games] -(0- [svc-domain]
+        [svc-games-provider-google-rge]
+    }
+    package "LiveScore" {
+      [vertex-api-rge: games predict API]
+    }
+}
+
+[frontend] -(0- [svc-casino-cms]
+[svc-casino-cms] -(0- [svc-games]
+[svc-games] -(0- [svc-games-provider-google-rge]
+[svc-games-provider-google-rge] -(0- [vertex-api-rge: games predict API]
+
+@enduml
+----

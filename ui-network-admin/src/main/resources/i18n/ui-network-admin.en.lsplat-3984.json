@@ -1,0 +1,45 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "ERROR_DICTIONARY": {
+      "RESTRICTION": {
+        "ALT_MESSAGE": {
+          "TITLE": "Update Alternative Message Count",
+          "LABELS": {
+            "ALT_MESSAGE_COUNT": "Alternative Message Count",
+            "MESSAGE": "Message"
+          },
+          "BUTTONS": {
+            "INCREMENT": "Add",
+            "DECREMENT": "Remove"
+          }
+        },
+        "INCREMENT": {
+          "SUCCESS": "Alternative message count increment was successful",
+          "ERROR": "Failed to increment alternative message count"
+        },
+        "DECREMENT": {
+          "SUCCESS": "Alternative message count decrement was successful",
+          "ERROR": "Failed to decrement alternative message count"
+        }
+      }
+    },
+    "PLAYER": {
+      "RESTRICTIONS": {
+        "FIELDS": {
+          "RESTRICTION_SUBORDINATE": {
+            "NAME": "Subordinate type",
+            "DESCRIPTION": "A subordinate type provides additional control when used in combination with auto-restriction rules"
+          }
+        },
+        "SUBORDINATE": {
+          "MESSAGE": {
+            "1": "1 - Restrict for 30 days",
+            "2": "2 - Restrict for 60 days",
+            "3": "3 - Restrict for 90 days"
+          }
+        }
+
+      }
+    }
+  }
+}

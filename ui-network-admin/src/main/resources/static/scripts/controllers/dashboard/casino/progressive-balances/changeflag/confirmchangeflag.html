@@ -1,0 +1,17 @@
+<div class="modal-body" bs-loading-overlay bs-loading-overlay-reference-id="{{controller.referenceId}}">
+	<h3 class="text-center">{{'UI_NETWORK_ADMIN.CASINO.REGISTERED_PROGRESSIVE_FEEDS.EDIT.FLAG.CONFIRM.TITLE' | translate}}</h3>
+	<h4 class="text-center">{{'UI_NETWORK_ADMIN.CASINO.REGISTERED_PROGRESSIVE_FEEDS.EDIT.FLAG.CHANGE_FIELD' | translate}}<span></span>
+		{{controller.flagType}}<span></span>{{'UI_NETWORK_ADMIN.CASINO.REGISTERED_PROGRESSIVE_FEEDS.EDIT.FLAG.FROM' | translate}}
+		<span></span><strong>{{controller.flagValue}}</strong><span></span>{{'UI_NETWORK_ADMIN.CASINO.REGISTERED_PROGRESSIVE_FEEDS.EDIT.FLAG.TO_VALUE' | translate}}
+	    <span></span><strong>{{controller.changeFlagValueTo}}</strong></h4>
+</div>
+<div class="modal-footer">
+	<div class="row v-reset-row ">
+		<div class="col-xs-6 text-center">
+			<button-custom icon="edit" text="GLOBAL.ACTION.SUBMIT" bclass="primary" ng-click="controller.submit()"></button-custom>
+		</div>
+		<div class="col-xs-6 text-center">
+			<button-custom icon="ban" text="GLOBAL.ACTION.CANCEL" bclass="default" ng-click="controller.cancel()"></button-custom>
+		</div>
+	</div>
+</div>

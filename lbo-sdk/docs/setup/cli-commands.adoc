@@ -1,0 +1,22 @@
+npm run deploy -- --cpu {number}
+npm run deploy -- --only plugin-1 [plugin-2 plugin-3]
+
+Options:
+  --help     Show help                                                 [boolean]
+  --version  Show version number                                       [boolean]
+  --cpu      Set max number of CPU cores to use for building Vue plugins[number]
+  --only     Only deploy these plugins                                   [array]
+
+Examples:
+  npm run deploy                            This is the same as "npm run deploy
+                                            -- --cpu 1"
+  npm run deploy -- --cpu 1                 This will force all plugin builds to
+                                            run on a single thread
+  npm run deploy -- --cpu 3                 This will distribute plugin builds
+                                            to run between 3 threads
+  npm run deploy -- --only plugin-Auth      This will only build and deploy a
+                                            plugin with a key of "plugin-Auth"
+  npm run deploy -- --only plugin-Auth      This will only build and deploy a
+  plugin-User                               plugin with a key of "plugin-Auth"
+                                            and a plugin with a key of
+                                            "plugin-User"

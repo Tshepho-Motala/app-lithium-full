@@ -1,0 +1,12 @@
+{
+	"SERVICE_USER": {
+		"CHANGEPASSWORD": {
+			"ERRORS": {
+				"NOTFOUND": "Could not find player data.",
+				"PASSWDMISMATCH": "New passwords do not match.",
+				"INVALIDPASSWD": "Password entered incorrectly.",
+				"CURRENTMATCHNEW": "New password cannot be the same as current password."
+			}
+		}
+    }
+}

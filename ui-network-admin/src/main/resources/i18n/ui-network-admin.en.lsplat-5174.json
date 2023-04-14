@@ -1,0 +1,23 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "CMS": {
+      "OUTPUT": {
+        "DOMAIN_SELECTOR": {
+          "TITLE": "Casino CMS",
+          "DESCRIPTION": "To manage games and promotional content within the Casino Lobby pages"
+        }
+      },
+      "DOMAIN_SELECTOR": {
+        "OUTPUT": {
+          "SELECT_DOMAIN": "Select a domain"
+        }
+      },
+      "CHANNEL_SELECTOR": {
+        "OUTPUT": {
+          "TITLE": "Channel",
+          "SELECT_CHANNEL": "Select a channel to configure"
+        }
+      }
+    }
+  }
+}

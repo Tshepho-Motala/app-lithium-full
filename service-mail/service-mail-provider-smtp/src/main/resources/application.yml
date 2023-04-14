@@ -1,0 +1,29 @@
+server.port: 9401
+
+spring:
+  application:
+    name: service-mail-provider-smtp
+  cloud:
+    stream:
+      bindings:
+        mailprovidersregisteroutput:
+          group: mailprovidersregistergroup
+          binder: rabbit
+          destination: mailprovidersregisterqueue
+          producer:
+            required-groups: mailprovidersregistergroup
+  mail:
+    host: mail.playsafesa.com
+    port: 587
+    username: lithium@playsafesa.com
+    password: Password123
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+    
+logging:
+  level:
+    lithium.service.mail: INFO

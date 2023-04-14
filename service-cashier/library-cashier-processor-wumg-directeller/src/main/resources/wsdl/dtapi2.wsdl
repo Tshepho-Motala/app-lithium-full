@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://directteller.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" targetNamespace="http://directteller.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://directteller.com/">
+      <s:element name="init_deposit">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PaymentMethod" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TransferType" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="CustomerID" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="SenderFirstName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SenderLastName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SenderPhone" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SenderCity" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SenderState" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SenderCountry" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TransactionAmount" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TransactionCurrency" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Comments" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="UserCreditCard" type="s:boolean" />
+            <s:element minOccurs="0" maxOccurs="1" name="ExternalTraceID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="init_depositResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="init_depositResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="confirm_deposit">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TransactionID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="MerchantCustomerPin" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SenderFirstName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SenderLastName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SenderPhone" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SenderCity" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SenderState" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SenderCountry" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TransactionAmount" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ControlNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Comments" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TransferCharge" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ExternalTraceID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="confirm_depositResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="confirm_depositResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="get_status">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TransactionID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="get_statusResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="get_statusResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="get_status2">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ExternalTraceID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="get_status2Response">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="get_status2Result" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="init_payout">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="PaymentMethod" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TransferType" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="CustomerID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ReceiverFirstName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ReceiverLastName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ReceiverPhoneNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ReceiverCity" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ReceiverState" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ReceiverCountry" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TransactionAmount" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TransactionCurrency" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Comments" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ExternalTraceID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="init_payoutResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="init_payoutResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="update_transaction">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="Username" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="AgencyID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TransactionID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="AgencyTraceID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TransactionStatus" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Comments" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TransactionAmount" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TransactionCurrency" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="TransferCharge" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="ControlNumber" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="SenderName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="update_transactionResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="update_transactionResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="init_depositSoapIn">
+    <wsdl:part name="parameters" element="tns:init_deposit" />
+  </wsdl:message>
+  <wsdl:message name="init_depositSoapOut">
+    <wsdl:part name="parameters" element="tns:init_depositResponse" />
+  </wsdl:message>
+  <wsdl:message name="confirm_depositSoapIn">
+    <wsdl:part name="parameters" element="tns:confirm_deposit" />
+  </wsdl:message>
+  <wsdl:message name="confirm_depositSoapOut">
+    <wsdl:part name="parameters" element="tns:confirm_depositResponse" />
+  </wsdl:message>
+  <wsdl:message name="get_statusSoapIn">
+    <wsdl:part name="parameters" element="tns:get_status" />
+  </wsdl:message>
+  <wsdl:message name="get_statusSoapOut">
+    <wsdl:part name="parameters" element="tns:get_statusResponse" />
+  </wsdl:message>
+  <wsdl:message name="get_status2SoapIn">
+    <wsdl:part name="parameters" element="tns:get_status2" />
+  </wsdl:message>
+  <wsdl:message name="get_status2SoapOut">
+    <wsdl:part name="parameters" element="tns:get_status2Response" />
+  </wsdl:message>
+  <wsdl:message name="init_payoutSoapIn">
+    <wsdl:part name="parameters" element="tns:init_payout" />
+  </wsdl:message>
+  <wsdl:message name="init_payoutSoapOut">
+    <wsdl:part name="parameters" element="tns:init_payoutResponse" />
+  </wsdl:message>
+  <wsdl:message name="update_transactionSoapIn">
+    <wsdl:part name="parameters" element="tns:update_transaction" />
+  </wsdl:message>
+  <wsdl:message name="update_transactionSoapOut">
+    <wsdl:part name="parameters" element="tns:update_transactionResponse" />
+  </wsdl:message>
+  <wsdl:portType name="dtapi2Soap">
+    <wsdl:operation name="init_deposit">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Generates the deposit and returns the Receiver Information</wsdl:documentation>
+      <wsdl:input message="tns:init_depositSoapIn" />
+      <wsdl:output message="tns:init_depositSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="confirm_deposit">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Confirms the Deposit and set the status to Pending</wsdl:documentation>
+      <wsdl:input message="tns:confirm_depositSoapIn" />
+      <wsdl:output message="tns:confirm_depositSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="get_status">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Retrieves information about a Transaction</wsdl:documentation>
+      <wsdl:input message="tns:get_statusSoapIn" />
+      <wsdl:output message="tns:get_statusSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="get_status2">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Retrieves information about a Transaction</wsdl:documentation>
+      <wsdl:input message="tns:get_status2SoapIn" />
+      <wsdl:output message="tns:get_status2SoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="init_payout">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">Retrieves information about a Transaction</wsdl:documentation>
+      <wsdl:input message="tns:init_payoutSoapIn" />
+      <wsdl:output message="tns:init_payoutSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="update_transaction">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">updates a transaction</wsdl:documentation>
+      <wsdl:input message="tns:update_transactionSoapIn" />
+      <wsdl:output message="tns:update_transactionSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="dtapi2Soap" type="tns:dtapi2Soap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="init_deposit">
+      <soap:operation soapAction="http://directteller.com/init_deposit" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="confirm_deposit">
+      <soap:operation soapAction="http://directteller.com/confirm_deposit" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_status">
+      <soap:operation soapAction="http://directteller.com/get_status" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_status2">
+      <soap:operation soapAction="http://directteller.com/get_status2" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="init_payout">
+      <soap:operation soapAction="http://directteller.com/init_payout" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="update_transaction">
+      <soap:operation soapAction="http://directteller.com/update_transaction" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="dtapi2Soap12" type="tns:dtapi2Soap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="init_deposit">
+      <soap12:operation soapAction="http://directteller.com/init_deposit" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="confirm_deposit">
+      <soap12:operation soapAction="http://directteller.com/confirm_deposit" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_status">
+      <soap12:operation soapAction="http://directteller.com/get_status" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="get_status2">
+      <soap12:operation soapAction="http://directteller.com/get_status2" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="init_payout">
+      <soap12:operation soapAction="http://directteller.com/init_payout" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="update_transaction">
+      <soap12:operation soapAction="http://directteller.com/update_transaction" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="dtapi2">
+    <wsdl:port name="dtapi2Soap" binding="tns:dtapi2Soap">
+      <soap:address location="https://www.transact.ag/application/services/dtapi2.asmx" />
+    </wsdl:port>
+    <wsdl:port name="dtapi2Soap12" binding="tns:dtapi2Soap12">
+      <soap12:address location="https://www.transact.ag/application/services/dtapi2.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,33 @@
+# DOM Test ID Reference
+
+All HTML object that have testable functionality need to contain a `data-test-id=""` custom attribute on their HTML element. More information for custom data attributes can be found here: https://www.w3schools.com/tags/att_data-.asp  
+
+"*Testable functionality*" refers to any controls that offer a functional input, or required output. When in doubt, add a `data-test-id` to as much as you can.
+
+We will be using data attributes instead of class names and DOM ID's to ensure these attributes can last even when their component changes.  
+
+**DO NOT REMOVE EXISTING ATTRIBUTES** as this will break automated testcases and you will be the one to put them back in, or assist in helping to update all of the relevant test scripts.  
+
+**All keys** need to follow `kebab-case` formatting. Try not to use generic names; rather have a longer key than a compact one.  
+
+### Test ID Reference Sheet
+
+|===
+| Type | Key | Example
+
+| Containers | `cnt-X` | `data-test-id="cnt-authentication"`
+| Forms | `frm-X` | `data-test-id="frm-login"`
+| Lables | `lbl-X` | `data-test-id="lbl-username"`
+| Text Fields | `txt-X` | `data-test-id="txt-username"`
+| Buttons | `btn-X` | `data-test-id="btn-submit-login"`
+| Tables | `tbl-X` | `data-test-id="tbl-user-list"`
+| Table Items | `tbi-X-Y` | `data-test-id="tbi-user-1"`
+| Lists | `lst-X` | `data-test-id="lst-domain"`
+| List Items | `lsi-X-Y` | `data-test-id="lsi-domain-1"`
+| Selects [Dropdown, Combo Box, Autocomplete] | `slt-X` | `data-test-id="slt-status"`
+| Select Items | `slt-X-Y` | `data-test-id="slt-status-1"`
+| Checbox Groups | `chk-X` | `data-test-id="chk-like"`
+| Checkbox Items | `chi-X-Y` | `data-test-id="chk-like-1"`
+| Radio Groups | `rdo-X` | `data-test-id="rdo-toc"`
+| Radio Items | `rdi-X-Y` | `data-test-id="rdi-toc-1"`
+|===

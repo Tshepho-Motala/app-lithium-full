@@ -1,0 +1,25 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "RESTRICTIONS": {
+      "TITLES": {
+        "RESTRICTION_TAG": "Add/Edit Restriction Tag"
+      },
+      "FIELDS": {
+        "TAG": {
+          "NAME": "Exclusion Tag",
+          "DESCRIPTION": "This tag will be used to exclude players from having a restriction applied to their profile",
+          "PLACEHOLDER": "Select a restriction tag"
+        }
+      },
+      "LABELS": {
+        "PLAYER_EXCLUDE": "Exclude Players with Tag"
+      },
+      "MESSAGES": {
+        "ADD_TAG": {
+          "SUCCESS": "Restriction tag was updated successfully",
+          "ERROR": "Failed while updating restriction tag"
+        }
+      }
+    }
+  }
+}

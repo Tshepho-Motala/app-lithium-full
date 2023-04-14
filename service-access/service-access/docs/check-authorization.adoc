@@ -1,0 +1,49 @@
+:toc:
+:icons: font
+:url-quickref: https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/
+== Check Authorization
+
+....
+POST /service-access/authorization/{domainName}/{accessRuleName}/checkAuthorization
+....
+
+=== Parameters
+
+[cols="2,2,2,4a"]
+|====
+| Field | Object Type | Request Type |Description
+
+| domainName
+| String
+| Path
+| The name for the domain on which the ACR has been configured on LBO: _Administration -> Access Control Rulesets_
+
+| accessRuleName
+| String
+| Path
+| The name for the ACR that has been configured on LBO: _Administration -> Access Control Rulesets_
+
+| authorizationRequest
+| link:../../client-service-access/docs/authorization-request.adoc[AuthorizationRequest]
+| Request body
+|
+
+|====
+
+//==== curl example
+//
+//....
+//
+//....
+
+=== Access Control Rulesets (Flow)
+
+include::plantuml/svc-access.authorization-service.puml[]
+
+=== Do external authorization (Flow)
+
+include::plantuml/svc-access.do-external-authorization.puml[]
+
+=== References
+
+* link:../../service-access-provider-sphonic-cruks/docs/readme.adoc[Do External Access Provider: Service Access Provider Sphonic CRUKS Flow]

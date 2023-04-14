@@ -1,0 +1,1 @@
+ALTER TABLE `domain_method` ADD COLUMN `description` varchar(255) DEFAULT NULL;

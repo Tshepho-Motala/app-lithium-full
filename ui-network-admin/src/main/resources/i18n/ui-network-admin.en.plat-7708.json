@@ -1,0 +1,60 @@
+{
+  "ERROR_DICTIONARY": {
+    "MY_ACCOUNT": {
+      "LIMIT_TYPE_WIN": "win",
+      "LIMIT_TYPE_LOSS": "loss",
+      "GRANULARITY_YEAR": "year",
+      "GRANULARITY_MONTH": "month",
+      "GRANULARITY_DAY": "day",
+      "GRANULARITY_WEEK": "week",
+      "GRANULARITY_TOTAL": "total"
+    }
+  },
+  "GLOBAL": {
+    "FIELDS": {
+      "ALLOWED": "YES",
+      "NOT_ALLOWED": "NO"
+    },
+    "PLAYER_NOTIFICATION": {
+      "SUCCESS": "Successfully activated player to receive threshold notifications",
+      "FAILED": "Failed to activate player to receive threshold notifications",
+      "PLAYER_THRESHOLD_ENABLE_TITLE": "Enable Player to receive notifications",
+      "PLAYER_REGISTERED_FOR_NOTIFICATIONS": "User Registered For Notifications"
+    }
+  },
+  "UI_NETWORK_ADMIN": {
+    "PLAYER": {
+      "PLAYER_LABELS": {
+        "THRESHOLD_LABEL": "Threshold Warnings",
+        "THRESHOLD_ENABLED_LABEL": "Enable Threshold Warnings",
+        "DESCRIPTION": "Enable player to receive notifications",
+        "PLACEHOLDERS": {
+          "PLACEHOLDER": "Enable Threshold Warnings"
+        },
+        "PLAYER_PROTECTION": {
+          "EVENT": "Event",
+          "AMOUNT": "Amount",
+          "GRANULARITY": "Granurality",
+          "DATE": "Date",
+          "GRANULARITY_MONTH": "Month",
+          "GRANULARITY_DAY": "Day",
+          "GRANULARITY_WEEK": "Week"
+        }
+      },
+      "ERROR": "Something went wrong",
+      "LOSS_LIMITS": {
+        "TYPE": "Type",
+        "LIMIT": "Limit",
+        "WARNING": "Early Warning Percentage",
+        "LABELS": {
+          "THRESHOLD_TITTLE": "Warning Threshold",
+          "THRESHOLD_DESCRIPTION": "Warning Threshold",
+          "THRESHOLD_LABEL": "Warning Threshold",
+          "DAILY_THRESHOLD": "Daily Warning Threshold",
+          "WEEKLY_THRESHOLD": "Weekly Warning Threshold",
+          "MONTHLY_THRESHOLD": "Monthly Warning Threshold"
+        }
+      }
+    }
+  }
+}

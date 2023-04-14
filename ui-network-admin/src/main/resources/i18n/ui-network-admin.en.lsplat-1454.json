@@ -1,0 +1,21 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "PLAYER": {
+      "KYC": {
+        "TAB": {
+          "FIELDS": {
+            "REASON": {
+              "LABEL": "Reason"
+            },
+            "PROVIDER_MSG": {
+              "LABEL": "Provider Message"
+            },
+            "FULL_NAME": {
+              "LABEL": "Full Name"
+            }
+          }
+        }
+      }
+    }
+  }
+}

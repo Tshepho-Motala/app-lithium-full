@@ -1,0 +1,50 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "BRAND_CONFIG": {
+      "ERROR_MESSAGES": {
+        "FIELDS": {
+          "MESSAGE_TYPE": {
+            "TITLE": "Message Type",
+            "PLACEHOLDER": "Login",
+            "DESCRIPTION": "Specifies the type of error being created."
+          },
+          "MESSAGE_KEY": {
+            "TITLE": "Message Key",
+            "PLACEHOLDER": "Invalidated client auth",
+            "DESCRIPTION": "Unique identifier of a message code"
+          },
+          "MESSAGE_DEFAULT_TRANSLATION": {
+            "TITLE": "Default Translation",
+            "PLACEHOLDER": "Invalidated client auth.",
+            "DESCRIPTION": "Default message translation."
+          },
+          "MESSAGE_LANGUAGE": {
+            "TITLE": "Language",
+            "PLACEHOLDER": "English",
+            "DESCRIPTION": "Specifies language."
+          },
+          "MESSAGE_DOMAIN": {
+            "TITLE": "Domain",
+            "PLACEHOLDER": "livescore_uk",
+            "DESCRIPTION": "Specifies the domain name."
+          }
+        },
+        "ADD": {
+          "TITLE" : "Add Error Message",
+          "SUCCESS": "Error message successfully added.",
+          "ERROR": {
+            "BAD_REQUEST": "Could not add error message, please check the page for any possible missing fields/errors.",
+            "CONFLICT": "A similar error message already exists.",
+            "DOMAIN": "Selected domain not found."
+              }
+
+          },
+        "DELETE" : {
+          "SUCCESS" : "Error message successfully deleted.",
+          "ERROR": "Failed to delete error message.",
+          "CONFIRM": "Are you sure you want to delete the selected error message?"
+        }
+        }
+    }
+  }
+}

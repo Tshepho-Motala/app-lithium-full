@@ -1,0 +1,44 @@
+.promo-engine
+[plantuml]
+----
+
+@startuml
+
+cloud "Comps Engine" {
+  skinparam node {
+    backgroundColor<<svc-promo>> Pink
+  }
+  node " " <<svc-promo>> as sp
+  note as sp_note
+    * This is currently know as service-missions
+    * Will form the base of the promo-engine
+    * Will tell svc-reward to award rewards (bonuses)
+  end note
+  sp .. sp_note
+
+  node "svc-reward" as sr
+  note as sr_note
+    * This is currently split between svc-casino / svc-bonus
+    * Receives instructions from svc-promo
+      to give players rewards.
+  end note
+  sr .. sr_note
+
+  node "svc-leaderboard" as sl
+  note as sl_note
+    * Managing of leaderboard data
+  end note
+  sl .. sl_note
+
+  node "svc-xp" as sx
+  note as sx_note
+    * Managing of XP (Experience Points) data
+  end note
+  sx .. sx_note
+
+  sp -> sr
+}
+
+@enduml
+
+----

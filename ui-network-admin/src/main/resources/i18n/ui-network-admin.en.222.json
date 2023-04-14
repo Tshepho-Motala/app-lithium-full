@@ -1,0 +1,14 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "USER": {
+      "PROMOOPTOUT": {
+        "EMAIL": "Email",
+        "POST": "Post",
+        "SMS": "SMS",
+        "CALL": "Phone",
+        "PUSH": "PUSH",
+        "LEADERBOARD": "Leaderboard"
+      }
+    }
+  }
+}

@@ -1,0 +1,72 @@
+.RGE Google Cloud Authentication Sequence Diagram
+[plantuml]
+----
+@startuml
+'https://plantuml.com/sequence-diagram
+
+box "svc-games-provider-google-rge" #transparent
+    control "GoogleAuthenticationJob" as job
+    participant GoogleAuthenticationService as authservice
+    entity AuthenticationRepository as repository
+    participant "RecommendedGamesService" as rgservice
+    participant "client-svc-domain" as domain
+end box
+
+autonumber
+
+== USE CASE 1 - GoogleAuthenticationJob ==
+
+job --> job++: start (runs every minute)
+job --> job: checks leadership cadence (stops job execution if not a leader)
+
+group evict expired tokens
+
+    job --> authservice++: evict expired tokens
+    authservice <--> repository: find all access tokens (one per domain)
+    loop#yellow for each access token found per domain
+        alt expiration date is before execution date-time
+            authservice --> repository--: delete by domain name (also removing from cache)
+        end
+    end
+end group
+
+group authenticate all domains with configured provider setting for RGE games
+
+   job --> authservice++: authenticate all domains
+
+   authservice <--> domain: get all player domains (from cachingDomainClientService)
+   loop#yellow for each player domain
+        authservice <--> domain: find provider by url and domain name if exist
+        alt provider exist and is enabled
+            authservice <--> repository: find by domain name (gets from db if not cached already)
+            alt authentication object not found (meaning it was evicted from cache and removed from db on evict expired tokens method)
+                authservice --> authservice: get provider settings
+                authservice --> authservice: do google authentication with GoogleCredentials built from provider settings (See code snippet on TA LSPLAT-320)
+                authservice --> authservice: build authentication object with expiration date minus two minutes (will expire token ahead of actual expiration date)
+                note right authservice: Shave off 2 minutes from token expiration, so that we can preemptively request a new token prior to expiration.
+                authservice --> repository--: find or create by domain name
+            end
+        end
+   end
+
+end group
+
+job --> job--: stops
+
+
+== USE CASE 2 - getAccessToken ==
+
+rgservice --> authservice: get access token
+authservice <--> repository: find by domain name (gets from db if not cached already)
+alt authentication object not found (meaning it was evicted from cache and removed from db on evict expired tokens method or the job has not run yet to find and create authentication object)
+    authservice --> authservice: get provider settings
+    authservice --> authservice: do google authentication with GoogleCredentials built from provider settings (See code snippet on TA LSPLAT-320)
+    authservice --> authservice: build authentication object with expiration date minus two minutes (will expire token ahead of actual expiration date)
+    note right authservice: Shave off 2 minutes from token expiration, so that we can preemptively request a new token prior to expiration.
+    authservice --> repository--: find or create by domain name
+end
+authservice -->>rgservice: return access token
+
+
+@enduml
+----

@@ -1,0 +1,40 @@
+server:
+  port: 9708
+  max-http-header-size: 20000
+  
+spring:
+  #  replaced the spring.datasource.initialization-mode starting Spring Boot 2.5
+  sql :
+    init :
+      mode : never # Prevent JPA from trying to Initialize
+  datasource:
+    url: jdbc:mysql://localhost/lithium_casino?zeroDateTimeBehavior=convertToNull
+    username: root
+    password: mysql
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+#        format_sql: true
+        default_schema: lithium_casino
+        physical_naming_strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+        implicit_naming_strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+        enable_lazy_load_no_trans: true
+  cloud:
+    stream:
+      bindings:
+        gatewayexchange:
+          binder: rabbit
+          destination: gateway
+          producer:
+            should-declare: false
+  servlet:
+    multipart:
+        maxFileSize: 20MB
+        maxRequestSize: 20MB
+        file-size-threshold: 1MB
+logging:
+  level:
+    lithium.service.casino.search: INFO

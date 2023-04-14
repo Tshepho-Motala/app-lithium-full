@@ -1,0 +1,1 @@
+ALTER TABLE login_event ADD COLUMN `provider_auth_client` VARCHAR(255) NULL DEFAULT NULL;

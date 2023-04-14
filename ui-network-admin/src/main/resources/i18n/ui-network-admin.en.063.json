@@ -1,0 +1,15 @@
+{
+	"UI_NETWORK_ADMIN": {
+		"BONUS": {
+			"FREEMONEY": {
+				"ADDITIONAL": {
+					"CURRENCY": "Currency",
+					"AMOUNT": "Amount",
+					"WAGER": "Wager Requirement",
+					"EXAMPLE": "Example",
+					"EXPLAIN": "Player will be awarded {{(amount / 100)}} {{currency}}, and an amount of {{(wager / 100) | currency}} will be added to the playthrough requirement."
+				}
+			}
+		}
+	}
+}

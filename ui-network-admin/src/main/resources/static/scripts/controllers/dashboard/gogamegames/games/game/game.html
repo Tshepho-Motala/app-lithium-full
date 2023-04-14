@@ -1,0 +1,115 @@
+<div class="container-fluid">
+	<div class="box box-primary box-widget">
+		<div class="box-body box-profile">
+			<div class="user-block">
+				<h4 style="font-weight: bold;">
+					{{controller.model.name}}
+				</h4>
+			</div>
+		</div>
+	</div>
+	
+	<buttonbar>
+		<button-back ui-sref="dashboard.gogamegames.games"></button-back>
+	</buttonbar>
+	
+	<br/><br/>
+	
+	<div class="row v-reset-row ">
+		<div class="col-xs-12">
+			<div class="box box-default">
+				<div class="box-header with-border">
+					<h3 class="box-title">Information</h3>
+					<div class="box-tools pull-right">
+						<button lit-if-permission="GOGAMEGAMES_GAMES_EDIT" type="button" class="btn btn-box-tool" ng-click="controller.changeInfo()">
+							<span><i class="fa fa-gear"></i> {{"GLOBAL.ACTION.CHANGE"|translate}} </span>
+						</button>
+					</div>
+				</div>
+				<div class="box-body">
+					<table class="table table-hover table-striped nowrap" cellspacing="0" width="100%">
+						<tbody>
+							<tr>
+								<th style="width: 20%;">Game ID</th>
+								<td>{{controller.model.id}}</td>
+							</tr><tr>
+								<th>Name</th>
+								<td>{{controller.model.name}}</td>
+							</tr><tr>
+								<th>URL</th>
+								<td>{{controller.model.url}}</td>
+							</tr><tr>
+								<th>Description</th>
+								<td>{{controller.model.descriptionEng}}</td>
+							</tr><tr>
+								<th>Currency</th>
+								<td>{{controller.model.currencyCode}}</td>
+							</tr><tr>
+								<th>Currency Divisor</th>
+								<td>{{controller.model.currencyDivisor}}</td>
+							</tr><tr>
+								<th>Payout Currency</th>
+								<td>{{controller.model.payoutCurrencyCode}}</td>
+							</tr><tr>
+								<th>Payout Currency Divisor</th>
+								<td>{{controller.model.payoutCurrencyDivisor}}</td>
+							</tr><tr>
+								<th>Real</th>
+								<td>{{controller.model.real}}</td>
+							</tr><tr>
+								<th>Engine</th>
+								<td>{{controller.model.engineId}}</td>
+							</tr><tr>
+								<th>Math Model Revision</th>
+								<td>{{controller.game.mathModelRevision.id}} - {{controller.game.mathModelRevision.name}}</td>
+							</tr><tr>
+								<th>Default Stake Cents</th>
+								<td>{{controller.model.defaultStakeCents}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<div class="box box-default">
+				<div class="box-header with-border">
+					<h3 class="box-title">Game Ledgers</h3>
+					<div class="box-tools pull-right">
+						<button lit-if-permission="GOGAMEGAMES_GAMES_EDIT" type="button" class="btn btn-box-tool" ng-click="controller.addGameLedger()">
+							<span><i class="fa fa-plus"></i> {{"GLOBAL.ACTION.ADD"|translate}} </span>
+						</button>
+					</div>
+				</div>
+				<div class="box-body">
+					<table class="table table-hover table-striped nowrap" cellspacing="0" width="100%">
+						<thead ng-if="controller.gameLedgers !== undefined && controller.gameLedgers !== null && controller.gameLedgers.length > 0">
+							<tr>
+								<th style="width: 20%;">Ledger name</th>
+								<th style="width: 20%;">Currency</th>
+								<th style="width: 20%;">Total play</th>
+								<th ng-if="controller.model.engineId === 5" style="width: 20%">Deposit Amount Cents (>=)</th>
+								<th ng-if="controller.model.engineId === 5" style="width: 20%">Deposited Days Ago</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="gameLedger in controller.gameLedgers track by $index">
+								<td>{{gameLedger.ledger.name}}</td>
+								<td>{{gameLedger.ledger.currencyCode}}</td>
+								<td>{{gameLedger.ledger.totalPlay|currency}}</td>
+								<td ng-if="controller.model.engineId === 5">{{gameLedger.depositAmountCents}}</td>
+								<td ng-if="controller.model.engineId === 5">{{gameLedger.depositedDaysAgo}}</td>
+								<td>
+									<a class="pull-right" lit-if-permission="GOGAMEGAMES_GAMES_EDIT" ng-click="controller.removeGameLedger(gameLedger, $index)">
+										<span class="badge bg-red"><i class="fa fa-times"></i></span>
+									</a>
+								</td>
+							</tr>
+							<tr ng-if="controller.gameLedgers === undefined || controller.gameLedgers === null || controller.gameLedgers.length === 0">
+								<td>No game ledgers configured yet.</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

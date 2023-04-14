@@ -1,0 +1,20 @@
+<div class="container-fluid">
+	<lit-header
+		title="GoGame Reel Configurations"
+		description="A searchable list of reel configurations">
+	</lit-header>
+	
+	<button-bar>
+		<button-add lit-if-permission="GOGAMEGAMES_REELS_EDIT" ui-sref="^.add"></button-add>
+	</button-bar>
+	
+	<div class="row v-reset-row ">
+		<div class="col-xs-12">
+			<div class="box">
+				<div class="box-body no-padding table-responsive">
+					<dt table="controller.reelConfigsTable"/>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

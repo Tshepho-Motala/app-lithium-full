@@ -1,0 +1,12 @@
+{
+  "UI_NETWORK_ADMIN" : {
+    "CASINO" : {
+      "LOBBY" : {
+        "DIALOG" : {
+          "CREATE" : "Create Lobby",
+          "MODIFY" : "Modify Lobby"
+        }
+      }
+    }
+  }
+}

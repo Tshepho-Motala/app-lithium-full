@@ -1,0 +1,1 @@
+CREATE INDEX `account_idx_account_id_currency_id` ON `account` (`id` ASC,`account_code_id` ASC,`currency_id` ASC) ALGORITHM INPLACE LOCK NONE;

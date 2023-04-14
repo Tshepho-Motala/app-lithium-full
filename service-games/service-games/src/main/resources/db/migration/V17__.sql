@@ -1,0 +1,1 @@
+ALTER TABLE `lithium_games`.`game` ADD COLUMN `free_game` BIT(1) NOT NULL DEFAULT false;

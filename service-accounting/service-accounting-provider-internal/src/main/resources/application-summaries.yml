@@ -1,0 +1,24 @@
+server.port: ${PORT:9110}
+
+spring:
+  application:
+    name: service-accounting-provider-summaries
+  datasource:
+    url: jdbc:mysql://localhost/lithium_accounting_internal
+    username: root
+    password: mysql
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: none
+  flyway:
+    enabled: false
+
+lithium:
+  is-read-only: false
+  is-summaries-only: true
+  can-be-leader-candidate: true
+
+logging:
+  level:
+    ROOT: WARN

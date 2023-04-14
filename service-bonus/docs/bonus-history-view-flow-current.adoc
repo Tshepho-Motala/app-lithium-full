@@ -1,0 +1,38 @@
+= Bonus History View Flow
+
+[sidebar]
+****
+link:readme.adoc[Home]
+****
+
+include::plantuml/bonus-history-view-flow-current.puml[]
+
+|===
+|Step | Description
+
+|LBO → service-accounting-history (Existing)
+|Initiates the request
+
+|service-accounting-history → service-accounting-internal (Existing)
+|Requests the accounting data based on request filters
+
+|service-accounting-history → service-casino (Existing)
+|Enriches the accounting data with additional data from service-casino
+
+|service-accounting-history → service-games (Existing)
+|Enriches the accounting data with additional game related data from service-games
+
+|service-accounting-history → service-casino (NEW)
+|Enriches the accounting data based on value stored in player_bonus_history_id to query the bonus details from service-casino.
+
+Please note this value will only be populated in the event that the bonus originated from service-casino (v1)
+
+Service casino uses this value to retrieve the corresponding player_bonus_history records associated bonus_revision to extract the relevant additional metadata
+
+|service-accounting-history-> service-bonus (NEW)
+|Enriches the accounting data based on value stored in player_bonus_reward_id to query the bonus details from service-bonus.
+
+Please note this value will only be populated in the event that the bonus originated from service-bonus (v2)
+
+Service bonus uses this value to retrieve the corresponding player_bonus_reward associated player_bonus associated bonus_revision to extract the relevant additional metadata
+|===

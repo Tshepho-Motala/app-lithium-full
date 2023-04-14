@@ -1,0 +1,98 @@
+{
+	"GLOBAL": {
+		"ACTION": {
+			"DISPLAY": "Display"
+		}
+	},
+	"UI_NETWORK_ADMIN": {
+		"BONUS": {
+			"TAB": {
+				"CURRENT": {
+					"UNLOCKGAMES": "Unlock Games"
+				}
+			},
+			"EDIT": {
+				"TABS": {
+					"UNLOCKGAME": "Unlock Games"
+				},
+				"BUTTON": {
+					"UNLOCKGAME": "Unlock Games"
+				},
+				"UNLOCKGAME": {
+					"SELECTPROVIDER": "Select game provider: ",
+					"AVAILABLE": "Available Games",
+					"INSTRUCTIONS1": "Click on a game to add it.",
+					"EXISTS": "Game already added to unlock list."
+				}
+			}
+		},
+		"GAMES": {
+			"LIST": {
+				"NODOMAIN": "Please select the domain(s) to get started!",
+				"DOMAIN": "Select domain(s)",
+				"DESCRIPTION": "Start by selecting the domain(s) you would like to see then clicking the display button."
+			}
+		},
+		"GAME": {
+			"FIELDS": {
+				"ENABLED": {
+					"NAME": "Enabled"
+				},
+				"VISIBLE": {
+					"NAME": "Visible"
+				},
+				"LOCKED": {
+					"NAME": "Locked",
+					"DESCRIPTION": "Locked games will only be available under certain conditions. E.g. As prize for a bonus."
+				},
+				"LOCKMSG": {
+					"NAME": "Lock Message",
+					"DESCRIPTION": "This is the message that would be displayed to a player for which the game is locked.",
+					"PLACEHOLDER": "E.g. : This game is locked, to unlock deposit $100 with bonus code x"
+				}
+			},
+			"TABS": {
+				"SUMMARY": "Summary",
+				"IMAGES": "Images",
+				"PLAYERS": "Players (Unlocked)"
+			},
+			"DOMAINSELECTED": "The information displayed below is for the chosen domain. Please remember to save the information if you've made any changes.'",
+			"UNSAVED": "Changes made to game information, please remember to click the save button, to save your changes.",
+			"SUMMARY": "Information",
+			"LABELS": "Labels",
+			"PLAYERS": "Players Who Have Unlocked this Game",
+			"PLAYERSDT": {
+				"ID": "Id",
+				"GUID": "Player",
+				"LOCKED": "Unlocked"
+			},
+			"EDIT": {
+				"DESCRIPTION": "The information displayed is configurable per domain, please make sure you choose the correct domain before editing."
+			},
+			"UNLOCK": {
+				"LOCK": "lock",
+				"UNLOCK": "unlock",
+				"REMOVE": "remove",
+				"BUTTON": "Unlock Player",
+				"SEARCH": "Search for the player that you would like to unlock for this game.",
+				"DOMAINSELECT": "Select the domain for the player, then search below for the player name",
+				"DOMAINSELECTED": "Chosen domain for the player search: ",
+				"USERREGERROR": "Could not unlock game for selected player, please try again later.",
+				"USERREGSUCCESS": "Player status successfully changed."
+			},
+			"LOCK": {
+				"TITLE": "Locked Message"
+			},
+			"IMAGES": {
+				"CHOOSE": "Choose Image",
+				"THUMBNAIL": "Thumbnail Graphic",
+				"PREVIEW": "Preview Graphic",
+				"BACKGROUND": "Background Graphic",
+				"ORIGINAL": "Original Graphic",
+				"LOCK": "Lock Image",
+				"DOMAIN": "Domain",
+				"DEFAULT": "Default"
+			}
+		}
+	}
+}

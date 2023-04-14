@@ -1,0 +1,25 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "NOTIFICATIONS": {
+      "CHANNEL": {
+        "DELETE_CONFIRMATION": {
+          "TITLE": "Confirm Channel Deletion",
+          "MESSAGE": "Are you sure about deleting this channel from the notification? This cannot be undone.",
+          "CONFIRM_BUTTON": "Delete",
+          "CANCEL_BUTTON": "Cancel"
+        }
+      }
+
+    },
+    "DIALOGS": {
+      "CONFIRM": {
+        "ERRORS": {
+          "INVALID_CONFIRM_OBJECT": "Invalid argument passed to confirmDialog, an object is required",
+          "MISSING_CONFIRM_FUNCTION": "The object being passed to confirmDialog needs to have a onConfirm property, which is also a function",
+          "MISSING_TITLE": "The object being passed to confirmDialog needs to have a title property, which is also a string",
+          "MISSING_MESSAGE": "The object being passed to confirmDialog needs to have a message property, which is also a string"
+        }
+      }
+    }
+  }
+}

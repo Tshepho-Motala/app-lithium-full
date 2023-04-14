@@ -1,0 +1,27 @@
+= Building and Deploying
+
+== Building locally
+
+TIP: Instructions for setting up your IDE for local Lithium Development can be found on the https://playsafe.atlassian.net/wiki/spaces/LITHIUM/pages/1674936347/How+To+Setup+Lithium+Local+Development[Wonderlabz Confluence]
+
+To build `service-casino-provider-iforium` simply run:
+
+```
+mvn -Psonarqube sonar:sonar -Dsonar.projectKey=service-casino-provider-iforium clean install
+```
+
+== Pipelines & deploying
+
+Development occurs on feature branches (`feature/LSPLAT-261-XXX`). Once an MR has been approved by an architect, it will be merged to the `develop` branch.
+
+Subsequent deployment to other environments occurs according to the following schedule:
+
+* Once a day, the `develop` branch is merged automatically to `environment/livescore-develop` which deploys it to the development kubernetes cluster.
+* Once a week, on a Friday morning, `environment/livescore-develop` is merged to `environment/livescore-qa`.
+* Once a week, on a Tuesday morning, `environment/livescore-qa` is merged to `environment/livescore-staging`.
+* Once a week, on a Wednesday morning, `environment/livescore-staging` is merged to `environment/livescore-production` after approval has been received from LiveScore.
+
+:leveloffset: +1
+include::development-e2e-tests.adoc[]
+
+:leveloffset: -1

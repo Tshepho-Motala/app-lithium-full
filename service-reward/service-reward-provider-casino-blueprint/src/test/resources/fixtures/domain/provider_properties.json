@@ -1,0 +1,12 @@
+{
+  "data": [
+    { "id": 1,  "name": "rewardsBaseUrl", "value": "https://www.google.com" },
+    { "id": 2, "name": "rewardsApiToken", "value": "devtoken" },
+    { "id": 3,  "name": "brandId", "value": "LVS-P009-142" },
+    { "id": 4,  "name": "countryCode", "value": "UK" },
+    { "id": 5,  "name": "jurisdiction", "value": "UK" },
+    { "id": 6,  "name": "iforiumPlatformKey", "value": "P009" },
+    { "id": 7,  "name": "playerOffset", "value": "1000" },
+    { "id": 8,  "name": "playerGuidPrefix", "value": "LVS" }
+  ]
+}

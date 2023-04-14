@@ -1,0 +1,11 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "PLAYER": {
+      "QUICK_ACTIONS": {
+        "REALITY_CHECK_UPDATE":{
+          "TITLE":"Update Reality Check"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,46 @@
+<div class="container-fluid">
+	<div>
+		<div>
+			<div class="row v-reset-row ">
+				<div class="col-xs-12" style="margin-bottom: 10px">
+					<button-add lit-if-permission="PLAYER_DOC_ADD" lit-permission-domain="{{controller.user.domain.name}}" ng-click="controller.documentAddModal()"></button-add>
+					<upload-shortcuts lit-if-permission="PLAYER_DOC_UPLOAD_SHORTCUTS" ng-model="controller.user" data="controller.userData"></upload-shortcuts>
+				</div>
+				<div class="col-lg-12" *hasPermission="['PLAYER_DOCUMENT_EXTERNAL_LIST','PLAYER_DOCUMENT_INTERNAL_LIST']" operation="'OR'">
+					<button lit-if-permission="PLAYER_DOCUMENT_EXTERNAL_LIST" lit-permission-domain="{{controller.user.domain.name}}" ng-click="controller.reload(1)" type="button" ng-class="{'active': controller.external == 1}" class="btn btn-default">{{ "UI_NETWORK_ADMIN.DOCUMENT.EXTERNAL.NAME" | translate }}</button>
+					<button lit-if-permission="PLAYER_DOCUMENT_INTERNAL_LIST" lit-permission-domain="{{controller.user.domain.name}}" ng-click="controller.reload(0)" type="button" ng-class="{'active': controller.external == 0}" class="btn btn-default">{{ "UI_NETWORK_ADMIN.DOCUMENT.INTERNAL.NAME" | translate }}</button>
+				</div>
+			</div>
+			<div ng-if=controller.external style="margin-top: 10px"  lit-if-permission="PLAYER_DOCUMENT_EXTERNAL_LIST" lit-permission-domain="{{controller.user.domain.name}}">
+				{{ "UI_NETWORK_ADMIN.DOCUMENT.EXTERNAL.DESCRIPTION" | translate }}
+			</div>
+			<div ng-if=!controller.external style="margin-top: 10px" lit-if-permission="PLAYER_DOCUMENT_INTERNAL_LIST" lit-permission-domain="{{controller.user.domain.name}}">
+				{{ "UI_NETWORK_ADMIN.DOCUMENT.INTERNAL.DESCRIPTION" | translate }}
+			</div>
+		</div>
+		<table lit-if-permission="PLAYER_DOCUMENT_EXTERNAL_LIST,PLAYER_DOCUMENT_INTERNAL_LIST" lit-permission-domain="{{controller.user.domain.name}}"
+					 class="table table-hover table-border table-striped vertical-align-middle">
+			<thead>
+			<tr>
+				<th>{{ "UI_NETWORK_ADMIN.DOCUMENT.FIELDS.NAME.NAME" | translate }}</th>
+				<th>{{ "UI_NETWORK_ADMIN.DOCUMENT.FIELDS.STATUS.NAME" | translate }}</th>
+				<th>{{ "UI_NETWORK_ADMIN.DOCUMENT.FIELDS.FUNCTION.NAME" | translate }}</th>
+				<th></th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr ng-repeat="document in controller.documents">
+				<td><span>{{ document.name }}</span></td>
+				<td><span>{{ document.statusName }}</span></td>
+				<td><span>{{ document.functionName }}</span></td>
+				<td>
+					<button-edit  lit-if-permission="PLAYER_DOC_EDIT" lit-permission-domain="{{controller.user.domain.name}}" ng-click=controller.documentEditModal(document)></button-edit>
+					<button-download ng-repeat="page in document.pages" ng-if="document.lastFileUploadDate" lit-if-permission="PLAYER_DOCUMENT_EXTERNAL_CONTENT,PLAYER_DOCUMENT_INTERNAL_CONTENT" lit-permission-domain="{{controller.user.domain.name}}" ng-click="controller.download( document.uuid, page )"></button-download>
+					<div ng-if="document.lastFileUploadDate"><span class="fa fa-check-square-o"></span> File Uploaded: {{ document.lastFileUploadDate | date:'yyyy-MM-dd HH:mm:ss':'GMT' }}</div>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+
+</div>

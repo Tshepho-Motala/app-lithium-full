@@ -1,0 +1,1 @@
+ALTER TABLE `login_event` MODIFY COLUMN `date` DATETIME(3) DEFAULT NOW(3);

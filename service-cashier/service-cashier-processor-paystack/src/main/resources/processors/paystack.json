@@ -1,0 +1,139 @@
+{
+  "name": "Paystack Web and USSD",
+  "code": "paystack",
+  "url": "service-cashier-processor-paystack",
+  "methodNames": ["paystack","paystackussd"],
+  "deposit": true,
+  "withdraw": true,
+  "fees": {
+    "flat": 0,
+    "percentage": 0,
+    "minimum": 0
+  },
+  "limits": {
+    "minAmount": 2500,
+    "maxAmount": 100000000,
+    "maxAmountDay": 100000000,
+    "maxAmountWeek": 100000000,
+    "maxAmountMonth": 100000000,
+    "maxTransactionsDay": 100000000,
+    "maxTransactionsWeek": 100000000,
+    "maxTransactionsMonth": 100000000
+  },
+  "properties": [
+    {
+      "name": "withdraw_banks_url",
+      "defaultValue": "https://api.paystack.co/bank",
+      "type": "string",
+      "description": "The Paystack Withdraw Banks list available API URL  "
+    },
+    {
+      "name": "ussd_banks_list",
+      "defaultValue": "",
+      "type": "string",
+      "description": "The list of banks available for USSD payments"
+    },
+    {
+      "name": "ussd_charges_api_url",
+      "defaultValue": "https://api.paystack.co/charge",
+      "type": "string",
+      "description": "The USSD charge API URL"
+    },
+    {
+      "name": "authorization_url",
+      "defaultValue": "https://api.paystack.co/transaction/charge_authorization",
+      "type": "string",
+      "description": "The charge authorization url"
+    },
+    {
+      "name": "paystack_recipient_type",
+      "defaultValue": "nuban",
+      "type": "string",
+      "description": "Recipient Type (Only nuban at this time)"
+    },
+    {
+      "name": "paystack_transfer_source",
+      "defaultValue": "balance",
+      "type": "string",
+      "description": "Where should we transfer from? Only balance for now"
+    },
+    {
+      "name": "paystack_transfer_recipient_api_url",
+      "defaultValue": "https://api.paystack.co/transferrecipient",
+      "type": "url",
+      "description": "The transfer recipient API URL."
+    },
+    {
+      "name": "paystack_transfer_api_url",
+      "defaultValue": "https://api.paystack.co/transfer",
+      "type": "url",
+      "description": "The transfer recipient API URL."
+    },
+    {
+      "name": "paystack_verify_api_url",
+      "defaultValue": "https://api.paystack.co/transfer/verify/",
+      "type": "url",
+      "description": "The transfer recipient API URL."
+    },
+    {
+      "name": "secret_key",
+      "defaultValue": "",
+      "type": "string",
+      "description": "Paystack API requires a secret key to sign requests. Please paste your secret key here."
+    },
+    {
+      "name": "init_deposit_url",
+      "defaultValue": "https://api.paystack.co/transaction/initialize",
+      "type": "url",
+      "description": "Initialize transaction API URL"
+    },
+    {
+      "name": "verify_deposit_url",
+      "defaultValue": "https://api.paystack.co/transaction/verify/{id}",
+      "type": "url",
+      "description": "Confirm the status of a transaction API URL"
+    },
+    {
+      "name": "dummy_email",
+      "defaultValue": "",
+      "type": "string",
+      "description": "Dummy email for NG players"
+    },
+    {
+      "name": "ussd_expired_after_minutes",
+      "defaultValue": "0",
+      "type": "string",
+      "description": "Time in minutes that the transaction will be active. 0 Never Expired. Default 0"
+    },
+    {
+      "name": "disable_account_for_bins",
+      "defaultValue": "",
+      "type": "string",
+      "description": "Comma separated list of card bins. New accounts will be created with status DISABLED for the cards with bins the list."
+    },
+    {
+      "name": "account_verification_url",
+      "defaultValue": "https://api.paystack.co/bank/resolve",
+      "type": "string",
+      "description": "Account Verification URL"
+    },
+    {
+      "name": "bank_account_lookup_bank_account_flag",
+      "defaultValue": "true",
+      "type": "boolean",
+      "description": "Bank Account Lookup. Set true to append Bank Account field to Bank Account Lookup"
+    },
+    {
+      "name": "bank_account_lookup_bank_code_flag",
+      "defaultValue": "true",
+      "type": "boolean",
+      "description": "Bank Account Lookup. Set true to append Bank Code field to Bank Account Lookup"
+    },
+    {
+      "name": "bank_account_lookup_bank_name_flag",
+      "defaultValue": "true",
+      "type": "boolean",
+      "description": "Bank Account Lookup. Set true to append Bank Name field to Bank Account Lookup"
+    }
+  ]
+}

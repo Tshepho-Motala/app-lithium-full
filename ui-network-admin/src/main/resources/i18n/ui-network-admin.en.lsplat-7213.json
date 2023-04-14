@@ -1,0 +1,13 @@
+{
+  "UI_NETWORK_ADMIN" : {
+    "CMS" : {
+      "BANNER_ITEM_EDITOR" : {
+        "OUTPUT" : {
+          "HEADER" : {
+            "TITLE" : "Edit Banner"
+          }
+        }
+      }
+    }
+  }
+}

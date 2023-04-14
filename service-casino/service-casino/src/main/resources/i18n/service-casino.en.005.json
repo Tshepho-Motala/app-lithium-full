@@ -1,0 +1,12 @@
+{
+  "SERVICE_CASINO": {
+    "BETHISTORY": {
+      "TRAN_TYPE": {
+        "WIN": "Casino win",
+        "LOSS": "Casino loss",
+        "VOID": "Casino void",
+        "OPEN": "Open"
+      }
+    }
+  }
+}

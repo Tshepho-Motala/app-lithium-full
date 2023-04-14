@@ -1,0 +1,2 @@
+ALTER TABLE `transaction_data` 
+CHANGE COLUMN `value` `value` VARCHAR(5000) NULL DEFAULT NULL ;

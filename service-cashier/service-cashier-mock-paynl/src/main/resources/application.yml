@@ -1,0 +1,29 @@
+server:
+  port: 9631
+spring:
+  datasource:
+    url: jdbc:mysql://localhost/lithium_cashier_mock_paynl
+    username: root
+    password: mysql
+  jpa:
+    hibernate:
+      ddl-auto: validate
+      naming:
+        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+        implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+    show-sql: false
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+
+logging:
+  level:
+    lithium.service.cashier.mock.paynl: INFO
+    
+lithium:
+  service:
+    cashier:
+      mock:
+        paynl:
+          Authorization: "Basic QVQtMDA3Mi00NjM1OjQ2Y2U1OTg1M2YwZTVmMWNjNGZlYTVhN2ZiODVmYjllMDhmZTM2NmY="
+          delayBetweenTransactionSteps: "5000"

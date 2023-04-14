@@ -1,0 +1,1 @@
+drop view if exists bet_round_with_game;

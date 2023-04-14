@@ -1,0 +1,39 @@
+{
+	"name": "sms.failed.login.block",
+	"description": "%domain.name% account blocked due to excessive failed login attempts.",
+	"text": "Account blocked on %domain.name% due to excessive failed logins. Please change your password to unlock your account.",
+	"placeholders": [
+		{
+			"name": "%domain.name%",
+			"description": "The domain's display name"
+		},
+		{
+			"name": "%domain.url%",
+			"description": "The domain's URL"
+		},
+		{
+			"name": "%domain.supportEmail%",
+			"description": "The domain's support email address"
+		},
+		{
+			"name": "%user.firstName%",
+			"description": "The player's first name"
+		},
+		{
+			"name": "%user.lastName%",
+			"description": "The player's last name"
+		},
+		{
+			"name": "%user.userName%",
+			"description": "The player's username"
+		},
+		{
+			"name": "%user.emailAddress%",
+			"description": "The player's email address"
+		},
+		{
+			"name": "%user.cellphoneNumber%",
+			"description": "The player's mobile phone number"
+		}
+	]
+}

@@ -1,0 +1,259 @@
+server:
+  port: ${PORT:9102}
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost/lithium_accounting_internal
+    username: root
+    password: mysql
+  jpa:
+    show-sql: false
+#    properties:
+#      hibernate:
+#        generate_statistics: true
+    hibernate:
+      ddl-auto: validate
+  cloud:
+    stream:
+      bindings:
+        aux-label-accounting-input:
+          consumer:
+            concurrency: 20
+            maxAttempts: 5
+            # Initial backoff interval at retry, unit milliseconds, default 1000
+            backOffInitialInterval: 5000
+            # Maximum backoff interval, unit milliseconds, default 10000
+            backOffMaxInterval: 60000
+            # Backoff multiplier, default 2.0
+            backOffMultiplier: 2.5
+          group: aux-label-accounting-group
+          binder: rabbit
+          destination: aux-label-accounting-queue
+        transaction-label-accounting-input:
+          consumer:
+            concurrency: 20
+            maxAttempts: 5
+            # Initial backoff interval at retry, unit milliseconds, default 1000
+            backOffInitialInterval: 5000
+            # Maximum backoff interval, unit milliseconds, default 10000
+            backOffMaxInterval: 60000
+            # Backoff multiplier, default 2.0
+            backOffMultiplier: 2.5
+          group: transaction-label-accounting-group
+          binder: rabbit
+          destination: transaction-label-accounting-queue
+        historic-migration-input:
+          consumer:
+            concurrency: 20
+            maxAttempts: 5
+            # Initial backoff interval at retry, unit milliseconds, default 1000
+            backOffInitialInterval: 5000
+            # Maximum backoff interval, unit milliseconds, default 10000
+            backOffMaxInterval: 60000
+            # Backoff multiplier, default 2.0
+            backOffMultiplier: 2.5
+          group: historic-migration-group
+          binder: rabbit
+          destination: historic-migration-queue
+        transactiontyperegisterinput:
+          group: transactiontyperegistergroup
+          binder: rabbit
+          destination: transactiontyperegisterqueue
+        affiliatetransactionoutput:
+          group: affiliatetransactiongroup
+          binder: rabbit
+          destination: affiliatetransactionqueue
+          producer:
+            required-groups: affiliatetransactiongroup
+        aux-label-accounting-output:
+          group: aux-label-accounting-group
+          binder: rabbit
+          destination: aux-label-accounting-queue
+          producer:
+            required-groups: aux-label-accounting-group
+        transaction-label-accounting-output:
+          group: transaction-label-accounting-group
+          binder: rabbit
+          destination: transaction-label-accounting-queue
+          producer:
+            required-groups: transaction-label-accounting-group
+        leaderboardoutput:
+          group: leaderboardgroup
+          binder: rabbit
+          destination: leaderboardqueue
+          producer:
+            required-groups: leaderboardgroup
+        adjustmentoutput:
+          group: adjustmentgroup
+          binder: rabbit
+          destination: adjustmentqueue
+          producer:
+            required-groups: adjustmentgroup
+        asynclabelvalueoutput:
+          group: asynclabelvaluegroup
+          binder: rabbit
+          destination: asynclabelvaluequeue
+          producer:
+            required-groups: asynclabelvaluegroup
+        adjustmentoutputv2:
+          group: adjustmentgroupv2
+          binder: rabbit
+          destination: adjustmentqueuev2
+          producer:
+            required-groups: adjustmentgroupv2
+        asynclabelvalueoutputv2:
+          group: asynclabelvaluegroupv2
+          binder: rabbit
+          destination: asynclabelvaluequeuev2
+          producer:
+            required-groups: asynclabelvaluegroupv2
+        userattributestriggerinput :
+          group : user-attributes-trigger-group-accounting-internal
+          binder : rabbit
+          destination : userattributestriggerqueue
+        opening-balance-migration-input:
+          consumer:
+            concurrency: 20
+            max-attempts: 5
+            back-off-initial-interval: 5000
+            back-off-max-interval: 60000
+            back-off-multiplier: 2.5
+          group: opening-balance-migration-group
+          binder: rabbit
+          destination: opening-balance-migration-queue
+        updating-balance-migration-input:
+          consumer:
+            concurrency: 20
+            max-attempts: 5
+            back-off-initial-interval: 5000
+            back-off-max-interval: 60000
+            back-off-multiplier: 2.5
+          group: updating-balance-migration-group
+          binder: rabbit
+          destination: updating-balance-migration-queue
+        migration-exception-output :
+          binder: rabbit
+          destination: migration-exception-queue
+          producer:
+            required-groups: migration-exception-group
+
+      rabbit:
+        bindings:
+          aux-label-accounting-input:
+            consumer:
+              # Whether to automatically declare the DLQ and bind it to the binder DLX.
+              autoBindDlq: true
+              # Whether delivery failures should be re-queued when retry is disabled or republishToDlq is false.
+              requeueRejected: true
+              # By default, messages that fail after retries are exhausted are rejected. If a dead-letter queue (DLQ) is configured, RabbitMQ routes
+              # the failed message (unchanged) to the DLQ. If set to true, the binder republishs failed messages to the DLQ with additional headers,
+              # including the exception message and stack trace from the cause of the final failure.
+              republishToDlq: true
+          transaction-label-accounting-input:
+            consumer:
+              # Whether to automatically declare the DLQ and bind it to the binder DLX.
+              autoBindDlq: true
+              # Whether delivery failures should be re-queued when retry is disabled or republishToDlq is false.
+              requeueRejected: true
+              # By default, messages that fail after retries are exhausted are rejected. If a dead-letter queue (DLQ) is configured, RabbitMQ routes
+              # the failed message (unchanged) to the DLQ. If set to true, the binder republishs failed messages to the DLQ with additional headers,
+              # including the exception message and stack trace from the cause of the final failure.
+              republishToDlq: true
+          historic-migration-input:
+            consumer:
+              # Whether to automatically declare the DLQ and bind it to the binder DLX.
+              autoBindDlq: true
+              # Whether delivery failures should be re-queued when retry is disabled or republishToDlq is false.
+              requeueRejected: true
+              # By default, messages that fail after retries are exhausted are rejected. If a dead-letter queue (DLQ) is configured, RabbitMQ routes
+              # the failed message (unchanged) to the DLQ. If set to true, the binder republishs failed messages to the DLQ with additional headers,
+              # including the exception message and stack trace from the cause of the final failure.
+              republishToDlq: true
+          opening-balance-migration-input:
+            consumer:
+              autoBindDlq: true
+              requeueRejected: true
+              republishToDlq: true
+          updating-balance-migration-input:
+            consumer:
+              autoBindDlq: true
+              requeueRejected: true
+              republishToDlq: true
+          adjustmentoutput:
+            producer:
+              autoBindDlq: true
+          asynclabelvalueoutput:
+            producer:
+              autoBindDlq: true
+          adjustmentoutputv2:
+            producer:
+              autoBindDlq: true
+          asynclabelvalueoutputv2:
+            producer:
+              autoBindDlq: true
+
+  flyway:
+    enabled: true
+lithium:
+  is-read-only: false
+  is-summaries-only: false
+  service:
+    accounting:
+      queue-rate-limiter:
+        aux-label:
+          enabled: false
+          minDelayMs: 50
+          maxDelayMs: 100
+        transaction-label:
+          enabled: false
+          minDelayMs: 50
+          maxDelayMs: 100
+      balance-adjustments:
+        dispatchUserBalanceEventEnabled: true
+        summarizeEnabled: true
+        bypassSessionIdRequirement: false
+        send-completed-summary-account-transaction-type-event: false
+        summarizeDomainEnabled: true
+#      summary:
+#        account:
+#          label-value:
+#            replay:
+#              enabled: false
+#              data-fetch-size: 1000
+#              delay-ms: 5000
+#              bound:
+#                lower: 34835552
+#                upper: 38208394
+      provider:
+        internal:
+          # This is the amount of times that it will be republished to the original queue, before it is retired to the parkingLot.
+          # ie. Lets assume Msg A will always fail. And maxAttempts is 2 and dlqRetries is 1. Msg A will enter the queue, be retried 2 times, then
+          # enters DLQ for the first time. DLQ republishes it back to original queue. It is retried 2 times. Enters DLQ again, but is then sent to
+          # the parking lot, to be handled with manual intervention.
+          dlqRetries: 1
+    rabbit:
+      exchange:
+        fanout-exchange-list:
+          - service.accounting.completed.transactions
+        delayed-exchange-list:
+          - service.accounting.player.reached.balance.limit
+  services:
+    accounting:
+      domain:
+        summary:
+          v2:
+            data-migration:
+              inclusive-upper-bound-tran-id: 0
+              data-enqueue-size: 0
+              enabled: false
+logging:
+  level:
+    ROOT: WARN
+    lithium.service.accounting.provider.internal: INFO
+#    lithium.service.accounting.provider.internal.services.QueueRateLimiter: TRACE
+#    lithium.service.accounting.provider.internal.services.SummaryReconciliationService: INFO
+#    org.hibernate: INFO
+#    org.hibernate.SQL: debug
+#    org.hibernate.stat: INFO
+#    org.hibernate.type: TRACE
+#    org.hibernate.type.descriptor.sql: INFO

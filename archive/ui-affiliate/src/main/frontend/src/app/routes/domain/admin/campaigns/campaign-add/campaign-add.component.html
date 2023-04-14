@@ -1,0 +1,33 @@
+<form novalidate (ngSubmit)="ok()" #form="ngForm" style="position: relative">
+
+<h2>Create a Campaign</h2>
+<div md-dialog-content>
+
+  <div fxLayout="column" fxLayoutAlign="start stretch">
+    <div fxLayout="row" fxLayoutWrap="wrap" fxLayoutAlign="space-between">
+
+      <select-brand fxFlex="100%" [(brand)]="brand"></select-brand>
+
+      <md-input-container fxFlex="100%">
+        <input mdInput placeholder="Campaign Name" type="text" name="name" [(ngModel)]="model.name" #name="ngModel" required minlength="4" maxlength="24">
+        <md-formfield-errors [field]="name"></md-formfield-errors>
+      </md-input-container>
+
+      <md-input-container fxFlex="100%">
+        <input mdInput placeholder="Description" type="text" name="name" [(ngModel)]="model.name" #name="ngModel" required minlength="4" maxlength="24">
+        <md-formfield-errors [field]="name"></md-formfield-errors>
+      </md-input-container>
+
+    </div>
+  </div>
+
+</div>
+
+<md-dialog-actions align="end">
+  <button md-raised-button color="primary" type="submit">Ok</button>
+  <button md-button (click)="dialogRef.close(null)" type="button">Cancel</button>
+</md-dialog-actions>
+
+</form>
+
+<br/>

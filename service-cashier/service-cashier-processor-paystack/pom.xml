@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>service-cashier-processor-paystack</artifactId>
+    <packaging>jar</packaging>
+    <parent>
+        <groupId>lithium</groupId>
+        <artifactId>common-parent-cashier</artifactId>
+        <version>1.12-SNAPSHOT</version>
+        <relativePath>../../common-parent-cashier</relativePath>
+    </parent>
+    <dependencies>
+        <dependency>
+            <groupId>lithium</groupId>
+            <artifactId>library-cashier</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>lithium</groupId>
+            <artifactId>library-cashier-processor-paystack</artifactId>
+        </dependency>
+    </dependencies>
+</project>

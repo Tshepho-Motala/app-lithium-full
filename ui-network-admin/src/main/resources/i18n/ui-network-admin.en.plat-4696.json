@@ -1,0 +1,44 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "PLAYERS": {
+      "MASS_UPDATE": {
+        "ACTIONS": {
+          "PLAYER_RESTRICTIONS": {
+            "LABEL": "Update Player Restrictions"
+          }
+        }
+      }
+    },
+    "USER": {
+      "FIELDS": {
+        "PLAYER_RESTRICTIONS": {
+          "RADIO": {
+            "LIFT": {
+              "NAME": "Lift"
+            },
+            "PLACE": {
+              "NAME": "Place"
+            }
+          },
+          "COMMENT": {
+            "NAME": "Text",
+            "PLACEHOLDER": "Fill in a reason",
+            "DESCRIPTION": "Specify a reason for this change/update."
+          },
+          "OPTIONS": {
+            "LIFT": {
+              "NAME": "Restrictions",
+              "PLACEHOLDER": "Select reasons to lift",
+              "DESCRIPTION": "A list of restrictions that must be lifted"
+            },
+            "PLACE": {
+              "NAME": "Restrictions",
+              "PLACEHOLDER": "Select reasons to place",
+              "DESCRIPTION": "A list of restrictions that must be placed"
+            }
+          }
+        }
+      }
+    }
+  }
+}

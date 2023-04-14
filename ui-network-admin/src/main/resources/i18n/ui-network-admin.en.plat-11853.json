@@ -1,0 +1,9 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "CASHIER": {
+      "PAYMENT_METHOD": {
+        "EXPIRY_DATE": "Expiry Date"
+      }
+    }
+  }
+}

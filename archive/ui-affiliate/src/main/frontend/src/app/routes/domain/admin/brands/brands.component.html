@@ -1,0 +1,29 @@
+<loading-overlay [isLoading]="isLoading"></loading-overlay>
+
+<md-card color="primary" class="mat-elevation-z12">
+  <md-toolbar color="primary">Brands will go here</md-toolbar>
+  <md-card-content>
+  </md-card-content>
+</md-card>
+
+<md-card *ngFor="let brand of brands | async">
+  <md-card-content>{{ brand.displayName }}</md-card-content>
+  <md-card-actions>
+    <button md-raised-button color="primary">Use</button>
+    <button md-raised-button color="accent">Preview</button>
+  </md-card-actions>
+</md-card>
+
+<md-card fxFlex="80%">
+  <md-card-title>Standard Card with Actions</md-card-title>
+  <md-card-subtitle>Subtitle</md-card-subtitle>
+  <md-card-content>
+    <p>Old there any widow law rooms. Agreed but expect repair she nay sir silent person. Direction
+      can dependent one bed situation attempted. His she are man their spite avoid. Her pretended
+      fulfilled extremely education yet. Satisfied did one admitting incommode tolerably how are. </p>
+  </md-card-content>
+  <md-card-actions align="end">
+    <button md-button>Cancel</button>
+    <button color="primary" md-raised-button>Action</button>
+  </md-card-actions>
+</md-card>

@@ -1,0 +1,50 @@
+<div class="modal-content">
+	<div class="modal-header primary-blue darken-4 white-text">
+		<h3 class="modal-title" id="modal-title">
+			<i class="fa fa-pencil"></i>
+			{{ 'UI_NETWORK_ADMIN.ACCESSCONTROL.LIST.ADD_VALUE.TITLE' | translate }}
+			<button-close-window ng-click="controller.cancel()"></button-close-window>
+		</h3>
+	</div>
+
+	<form ng-submit="controller.save()" name="controller.form" novalidate>
+		<div class="modal-body" id="modal-body">
+			<div class="row v-reset-row ">
+				<div class="col-xs-12">
+					<formly-form model="controller.model" fields="controller.fields" options="controller.options" form="controller.form">
+					</formly-form>
+					<div ng-if="controller.list.listType.name === 'Player_List'">
+						<label>User</label>
+						<div class="input-group">
+							<input type="text"
+								   ng-model="controller.model.selectedUser"
+								   placeholder="search player"
+								   uib-typeahead="user.username for user in controller.searchUsers($viewValue)"
+								   typeahead-loading="loadingLocations"
+								   typeahead-no-results="noResults"
+								   typeahead-min-length="2"
+								   typeahead-show-hint="true"
+								   typeahead-wait-ms="500"
+								   typeahead-editable="false"
+								   typeahead-on-select="controller.model.selectedUser = $item;"
+								   class="form-control"/>
+							<div class="input-group-btn">
+								<button type="button" class="btn btn-default" ng-click="controller.resetUserSearch()"><i class="fa fa-remove"></i></button>
+							</div>
+						</div>
+						<div ng-show="loadingLocations" class="overlay">
+							<i class="fa fa-refresh fa-spin"></i>
+						</div>
+						<div ng-show="noResults" class="form-group has-error">
+							<span class="help-block"><i class="fa fa-remove"></i>&nbsp;No Results Found</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<button-save class="pull-left"></button-save>
+			<button-cancel ng-click="controller.cancel()"></button-cancel>
+		</div>
+	</form>
+</div>

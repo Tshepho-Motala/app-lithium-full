@@ -1,0 +1,16 @@
+{
+  "SERVICE-CASHIER": {
+    "AUTOWITHDRAWALS": {
+      "RULESETS": {
+        "RULE": {
+          "FIELD": {
+            "LAST_DEPOSIT_PAYMENT_METHOD": "Last Deposit Payment Method"
+          },
+          "OPERATOR": {
+            "IN": "Contains at least one of the following"
+          }
+        }
+      }
+    }
+  }
+}

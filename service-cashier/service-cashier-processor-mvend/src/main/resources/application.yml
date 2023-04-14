@@ -1,0 +1,23 @@
+server.port: 9793
+
+ribbon:
+  ReadTimeout: 30000
+  ConnectTimeout: 30000
+  
+spring:
+  application:
+    name: service-cashier-processor-mvend
+  cloud:
+    stream:
+      bindings:
+        processorsregisteroutput:
+          group: processorsregistergroup
+          binder: rabbit
+          destination: processorsregisterqueue
+          producer:
+            required-groups: processorsregistergroup
+
+#logging:
+#  level:
+#    lithium.service.cashier: INFO
+#    lithium.service.cashier.processor.http: INFO

@@ -1,0 +1,55 @@
+{
+  "name": "UPayWise",
+  "code": "upaywise",
+  "url": "service-cashier-processor-cc-upaywise",
+  "methodNames": ["cc"],
+  "deposit": true,
+  "withdraw": false,
+  "fees": {
+    "flat": 0,
+    "percentage": 0,
+    "minimum": 0
+  },
+  "limits": {
+    "minAmount": 2500,
+    "maxAmount": 0,
+    "maxAmountDay": 0,
+    "maxAmountWeek": 0,
+    "maxAmountMonth": 0,
+    "maxTransactionsDay": 0,
+    "maxTransactionsWeek": 0,
+    "maxTransactionsMonth": 0
+  },
+  "properties": [
+    { 
+      "name": "terminalId",
+      "defaultValue": "",
+      "type": "string",
+      "description": "Unique terminal id provided by the Gateway administrator"
+    },
+    { 
+      "name": "password",
+      "defaultValue": "",
+      "type": "string",
+      "description": "Password associated with the terminal id provided to the merchant."
+    },
+    {
+      "name": "url",
+      "defaultValue": "http://localhost:9000/service-cashier-mock-cc-upaywise/paymentgateway/payments/performXmlTransaction",
+      "type": "url",
+      "description": "Payment url"
+    },
+    {
+    	"name": "currencyCode",
+    	"defaultValue": "ZAR",
+    	"type": "string",
+    	"description": "The currency that the payment processor uses"
+    },
+    {
+    	"name": "deductPercentage",
+    	"defaultValue": "2",
+    	"type": "int",
+    	"description": "The percentage to deduct after currency conversion"
+    }
+  ]
+}

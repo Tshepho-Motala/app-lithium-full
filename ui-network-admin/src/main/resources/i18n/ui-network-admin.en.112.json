@@ -1,0 +1,33 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "PLAYER": {
+      "SELFEXCLUSION": {
+        "TITLE": "Self Exclusion",
+        "NOTSET": "No self exclusion set.",
+        "REMOVE": {
+          "SUCCESS": "Player exclusion removed",
+          "ERROR": "Could not remove the player exclusion"
+        },
+        "FIELDS": {
+          "CREATEDDATE": {
+            "NAME": "Created Date"
+          },
+          "EXPIRYDATE": {
+            "NAME": "Expiry Date",
+            "DESCRIPTION": "Exclude player from transacting until a specified date"
+          },
+          "PERMANENT": {
+            "NAME": "Permanent",
+            "DESCRIPTION": "Exclude player from transacting permanently"
+          }
+        },
+        "CHANGE": {
+          "TITLE": "Change Self Exclusion",
+          "SUCCESS": "Successfully set player exclusion",
+          "ERROR": "Could not set the player exclusion",
+          "PERMOREXPDATE": "Either check the permanent box, or set an expiration date."
+        }
+      }
+    }
+  }
+}

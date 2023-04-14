@@ -1,0 +1,39 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "CASHIER": {
+      "TRANS": {
+        "VIEW": {
+          "INFO": {
+            "AUTO_APPROVED": "Auto Approved"
+          }
+        },
+        "LIST": {
+          "FILTER": {
+            "AUTO_APPROVED_ONLY": {
+              "LABEL": "Show only auto-approved transactions?"
+            }
+          }
+        }
+      },
+      "AUTOWITHDRAWALS": {
+        "RULESETS": {
+          "CHANGENAME": {
+            "TITLE": "Auto Withdrawals Rulesets Change Name",
+            "SUCCESS": "Successfully changed the auto-withdrawal ruleset name",
+            "ERROR": "Failed to change the auto-withdrawal ruleset name"
+          },
+          "EDIT": {
+            "DELETE": {
+              "CONFIRM": "Are you sure you want to delete this auto-withdrawal ruleset?",
+              "SUCCESS": "Successfully deleted the auto-withdrawal ruleset"
+            },
+            "DELETERULE": {
+              "CONFIRM": "Are you sure you want to delete this auto-withdrawal ruleset rule?",
+              "SUCCESS": "Successfully deleted the auto-withdrawal ruleset rule"
+            }
+          }
+        }
+      }
+    }
+  }
+}

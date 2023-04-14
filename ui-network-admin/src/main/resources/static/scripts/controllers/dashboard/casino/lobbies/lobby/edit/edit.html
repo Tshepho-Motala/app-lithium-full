@@ -1,0 +1,18 @@
+<form ng-submit="controller.onSubmit()" name="controller.form" autocomplete="off" novalidate>
+	<buttonbar>
+		<button-back ui-sref="dashboard.casino.lobbies.lobby.view({domainName: controller.lobby.domain.name, lobbyId: controller.lobby.id, lobbyRevisionId: controller.lobby.current.id})"></button-back>
+		<button-custom btype="submit" bclass="primary submit-button" icon="floppy-o" text="Commit all changes"></button-custom>
+		<button-custom btype="button" ng-click="controller.onContinue()" bclass="default" icon="clock-o" text="Continue later with this edit"></button-custom>
+	</buttonbar>
+	<br/><br/>
+	<div class="row v-reset-row ">
+		<div class="col-xs-12">
+			<div class="card card-block">
+				<div class="well-clear">
+					<formly-form model="controller.model" fields="controller.fields" options="controller.options" form="controller.form">
+					</formly-form>
+				</div>
+			</div>
+		</div>
+	</div>
+</form>

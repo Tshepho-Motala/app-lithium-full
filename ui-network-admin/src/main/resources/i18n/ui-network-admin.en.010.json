@@ -1,0 +1,10 @@
+{
+	"UI_NETWORK_ADMIN": {
+		"LOGINEVENTS": {
+			"LIST": {
+				"TITLE": "Login Events",
+				"DESCRIPTION": "A list of login events for the network or domain"
+			}
+		}
+	}
+}

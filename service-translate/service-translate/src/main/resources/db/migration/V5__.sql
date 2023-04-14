@@ -1,0 +1,1 @@
+ALTER TABLE `translation_key_v2` ADD COLUMN `user_defined` bit(1) DEFAULT NULL;

@@ -1,0 +1,3 @@
+= External DWH Restrictions Controller - /get
+
+include::plantuml/sequence/external/get-dwh-restrictions.puml[]

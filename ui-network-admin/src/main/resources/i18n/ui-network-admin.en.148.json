@@ -1,0 +1,74 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "DOMAIN": {
+      "FIELDS": {
+        "DEPOSITLIMITS": {
+          "NAME": "Player Deposit Limits",
+          "DESCRIPTION": "Allow player deposit limits to be specified."
+        }
+      }
+    },
+    "DEPOSITLIMITS": {
+      "ERRORS": {
+        "GETLIMITS": "Could not retrieve deposit limit information, please try again."
+      },
+      "TITLE": "Deposit Limits",
+      "NOTSET": "Not Set",
+      "SET": "set",
+      "MODIFY": "change",
+      "EXPLANATION": "Explanation",
+      "SAVE": {
+        "SUCCESS": "Deposit limit saved successfully.",
+        "ERROR": "Deposit limit could not be saved, please try again."
+      },
+      "PENDING": {
+        "DAILY": "Daily deposit limit was increased on {{date}} to {{amount}}, this new limit will take effect after 24hours from creation.",
+        "WEEKLY": "Weekly deposit limit was increased on {{date}} to {{amount}}, this new limit will take effect after 24hours from creation.",
+        "MONTHLY": "Monthly deposit limit was increased on {{date}} to {{amount}}, this new limit will take effect after 24hours from creation."
+      },
+      "CHANGE": {
+        "EXPLAIN": {
+          "SMALLER": "This limit change is smaller (or equal) than the current limit, and will take effect immediately.",
+          "LARGER": "This is an increase to this deposit limit, and will only take effect within 24 hours."
+        },
+        "LIMIT": {
+          "3": {
+            "LABEL": "Daily Deposit Limit",
+            "DESCRIPTION": "Set the daily deposit amount for this player"
+          },
+          "4": {
+            "LABEL": "Weekly Deposit Limit",
+            "DESCRIPTION": "Set the weekly deposit amount for this player"
+          },
+          "2": {
+            "LABEL": "Monthly Deposit Limit",
+            "DESCRIPTION": "Set the monthly deposit amount for this player"
+          }
+        },
+        "USED": {
+          "3": {
+            "LABEL": "Current Day Deposits",
+            "DESCRIPTION": "The current deposit amount for this player for the day."
+          },
+          "4": {
+            "LABEL": "Current Week Deposits",
+            "DESCRIPTION": "The current deposit amount for this player for the week."
+          },
+          "2": {
+            "LABEL": "Current Month Deposits",
+            "DESCRIPTION": "The current deposit amount for this player for the month."
+          }
+        }
+      },
+      "DAILY": {
+        "LABEL": "Daily"
+      },
+      "WEEKLY": {
+        "LABEL": "Weekly"
+      },
+      "MONTHLY": {
+        "LABEL": "Monthly"
+      }
+    }
+  }
+}

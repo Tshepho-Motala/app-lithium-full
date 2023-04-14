@@ -1,0 +1,54 @@
+<div class="container-fluid">
+    <div class="card card-block" style="margin-bottom: 10px;" ng-init="">
+        <div class="d-flex justify-content-start">
+            <div class="p-2 mr-auto" style="width: 50%;">
+                <span class="title">{{'UI_NETWORK_ADMIN.RESTRICTIONS.AUTORESTRICTIONS.RULESETS.LIST.TITLE'|translate}}</span>
+                <span class="description">{{'UI_NETWORK_ADMIN.RESTRICTIONS.AUTORESTRICTIONS.RULESETS.LIST.DESCRIPTION'|translate}}</span>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="row v-reset-row ">
+        <div class="col-xs-12">
+            <button-add lit-if-permission="AUTORESTRICTION_RULESETS_ADD" ui-sref="^.add"></button-add>
+
+            <div class="pull-right">
+                <div  id="vueMountDomainSelect"></div>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="row v-reset-row ">
+        <div class="col-xs-12">
+            <div class="card card-block">
+                <div class="" style="margin-bottom: 10px;">
+                    <div uib-collapse="controller.legendCollapsed">
+                        <div class="row v-reset-row ">
+                            <formly-form model="controller.model" fields="controller.fields" form="controller.form" options="controller.options">
+                            </formly-form>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="flex-row pull-right">
+                                <button-clear ng-click="controller.resetFilter(true)"></button-clear>
+                                <button-filter ng-click="controller.applyFilter(true)"></button-filter>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="collapse" uib-collapse="!controller.legendCollapsed">
+                        <div align="center">
+                            <button-filter class="pull-left" ng-click="controller.toggleLegendCollapse()"></button-filter>
+                            <button-refresh class="pull-right" ng-click="controller.applyFilter(false)"></button-refresh>
+                            <button-clear class="pull-right" ng-click="controller.resetFilter(false)"></button-clear>
+                        </div>
+                        <div class="text-center col-xs-12" style="padding-top: 10px;">
+                            <span class="description"> <label>Viewing auto-restriction rulesets</label><br/></span>
+                            <span ng-if="controller.model.name" class="description"> <label>with name starting with <i>{{controller.model.name}}</i></label><br/></span>
+                            <span ng-if="controller.model.lastUpdatedStart || controller.model.lastUpdatedEnd" class="description"> <label>last updated </label> <label ng-if="controller.model.lastUpdatedStart"> from {{controller.model.lastUpdatedStart|date}}</label> <label ng-if="controller.model.lastUpdatedEnd"> up to {{controller.model.lastUpdatedEnd|date}}</label><br/></span>
+                       </div>
+                    </div>
+                    <dt class="table table-sm table-responsive" table="controller.autoRestrictionRulesetsTable"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

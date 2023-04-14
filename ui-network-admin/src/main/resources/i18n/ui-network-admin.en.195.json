@@ -1,0 +1,22 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "PLAYER": {
+      "TAB": {
+        "SPORTSBOOK": "Sportsbook"
+      }
+    },
+    "SPORTSBOOK": {
+      "BETS": {
+        "FILTER": {
+          "STATUS": "Status",
+          "BET_TYPE": "Bet Type",
+          "MATCH_TYPE": "Match Type",
+          "BETTIMERANGESTART": "Bet Time: Range Start",
+          "BETTIMERANGEEND": "Bet Time: Range End",
+          "SETTLEMENTTIMERANGESTART": "Settlement Time: Range Start",
+          "SETTLEMENTTIMERANGEEND": "Settlement Time: Range End"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "UI_NETWORK_ADMIN": {
+      "DOMAIN": {
+        "FIELDS": {
+          "PLAYTIME_LIMITS": {
+            "NAME": "Play Time Limit",
+            "DESCRIPTION": "Allow play time limit to be specified."
+          }
+        }
+      }
+  }
+}

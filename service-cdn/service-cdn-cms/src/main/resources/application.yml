@@ -1,0 +1,23 @@
+server.port: 9920
+
+spring:
+  application:
+    name: service-cdn-cms
+  datasource:
+    url: jdbc:mysql://localhost/lithium_cdn_cms
+    username: root
+    password: mysql
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: validate
+  flyway:
+    enabled: true
+
+eureka:
+  instance:
+    appname: service-cdn-cms
+
+logging:
+  level:
+    lithium.service.cdn.cms: INFO

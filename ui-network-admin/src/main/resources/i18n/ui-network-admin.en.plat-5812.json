@@ -1,0 +1,11 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "ACCESSCONTROL": {
+      "LIST": {
+        "TYPES": {
+          "DUPLICATE_CHECK": "Duplicate check"
+        }
+      }
+    }
+  }
+}

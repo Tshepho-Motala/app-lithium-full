@@ -1,0 +1,17 @@
+.Get Document Status
+[plantuml]
+----
+@startuml
+participant LBOUSER as lbo
+actor       Actor       as Foo1
+collections    ServiceDocumentGeneration  as Foo2
+control     Control     as Foo3
+entity      Entity      as Foo4
+collections status as Foo6
+lbo -> Foo1 : To LBO
+lbo -> Foo2 : GET: /document/{reference}/status
+lbo -> Foo3 : To control
+lbo -> Foo4 : To entity
+lbo -> Foo6 : To document generation status
+@enduml
+----

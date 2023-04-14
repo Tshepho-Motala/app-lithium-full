@@ -1,0 +1,10 @@
+{
+	"GLOBAL": {
+		"BONUS": {
+			"TYPE": {
+				"0": "Signup",
+				"1": "Deposit"
+			}
+		}
+	}
+}

@@ -1,0 +1,5 @@
+.Alert Wallet Callback Notification
+[source,gherkin]
+----
+include::../../src/docs/gherkin/high-level-spec/alertWalletCallBackNotification.feature[]
+----

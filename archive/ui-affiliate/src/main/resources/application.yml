@@ -1,0 +1,30 @@
+server:
+  port: 9801
+
+zuul:
+  sensitive-headers:
+  ignoredServices: '*'
+  routes:
+    
+    server-oauth2: /api/oauth2/**
+    service-affiliate: /api/affiliate/**
+    service-user: /api/user/**
+    service-domain: /api/domain/**
+    service-translate: /api/translate/**
+    service-accounting-provider-internal: /api/accounting/**
+    service-geo: /api/geo/**
+
+server-oauth2:
+  ribbon:
+    ConnectTimeout: 10000
+    ReadTimeout: 60000
+    
+ribbon:
+  ReadTimeout: 60000
+    
+#TODO is this needed?
+spring:
+  aop:
+    proxy-target-class: true
+
+    

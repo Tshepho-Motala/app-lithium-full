@@ -1,0 +1,11 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "CASINO": {
+      "MODIFY_LOBBY": {
+        "SELECTOR": {
+          "TITLE": "Modify Lobby"
+        }
+      }
+    }
+  }
+}

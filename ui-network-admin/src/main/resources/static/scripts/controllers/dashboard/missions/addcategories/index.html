@@ -1,0 +1,19 @@
+<div class="modal-header">
+	<h3 class="modal-title" id="modal-title">{{'UI_NETWORK_ADMIN.MISSIONS.ADD_CATEGORY.TITLE'|translate}}</h3>
+	<span class="description">{{'UI_NETWORK_ADMIN.MISSIONS.ADD_CATEGORY.DESCRIPTION'|translate}}</span>
+</div>
+
+<form ng-submit="controller.submit()" name="controller.form" novalidate>
+	<div class="modal-body" id="modal-body">
+		<div class="row v-reset-row ">
+			<div class="col-xs-12">
+				<formly-form model="controller.model" fields="controller.fields" options="controller.options" form="controller.form">
+				</formly-form>
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<button-submit></button-submit>
+		<button-cancel ng-click="controller.cancel()"></button-cancel>
+	</div>
+</form>

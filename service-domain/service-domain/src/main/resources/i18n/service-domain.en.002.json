@@ -1,0 +1,7 @@
+{
+  "SERVICE_DOMAIN": {
+    "DOMAIN": {
+      "PROVIDER_DISABLED": "Provider {1} for domain {0} has been disabled."
+    }
+  }
+}

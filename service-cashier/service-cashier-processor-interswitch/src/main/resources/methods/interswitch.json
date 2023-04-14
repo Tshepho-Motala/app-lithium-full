@@ -1,0 +1,133 @@
+{
+  "name": "Interswitch",
+  "code": "interswitch",
+  "image": {
+    "filename": "/methods/interswitch.png",
+    "filetype": "image/png"
+  },
+  "depositStages": [
+    {
+      "number": 1,
+      "title": "Enter Amount",
+      "description": "Specify the amount you wish to deposit.",
+      "inputFields": [
+        {
+          "code": "return_url",
+          "name": "Return URL",
+          "description": "Return URL once transaction is complete. Will be appended with a status and reference number",
+          "type": "return_url",
+          "required": true
+        },
+        {
+          "code": "handle_redirect",
+          "name": "Handle redirect",
+          "description": "Interswitch redirect will be handled on Lithium side, if set to true.",
+          "type": "boolean",
+          "required": false
+        }
+      ],
+      "outputFields": [
+        {
+          "code": "site_redirect_url",
+          "name": "Site redirect Url",
+          "description": "Merchant's website redirect url",
+          "type": "string",
+          "required": true
+        },
+        {
+          "code": "pay_item_id",
+          "name": "Pay item id",
+          "description": "Pay item ID from Interswitch developer tools page",
+          "type": "string",
+          "required": true
+        },
+        {
+          "code": "txn_ref",
+          "name": "Transaction reference",
+          "description": "Transaction reference min (length: 6..50)",
+          "type": "string",
+          "required": true
+        },
+        {
+          "code": "amount",
+          "name": "Amount",
+          "description": "The expected value you want to be paid in a lower denomination e.g N10 = 1000",
+          "type": "string",
+          "required": true
+        },{
+          "code": "currency",
+          "name": "Currency",
+          "description": "ISO currency code",
+          "type": "string",
+          "required": true
+        },
+        {
+          "code": "cust_email",
+          "name": "Email Address",
+          "description": "An email address for the paying customer.",
+          "type": "string",
+          "required": false
+        },
+        {
+          "code": "cust_id",
+          "name": "Customer Id",
+          "description": "This is a unique reference for this payment or customer.",
+          "type": "string",
+          "required": false
+        },
+        {
+          "code": "pay_item_name",
+          "name": "pay_item_name",
+          "description": "Name of the item being paid for",
+          "type": "string",
+          "required": true
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "title": "Your transaction is awaiting approval.",
+      "description": "We have submitted your transaction and we are awaiting approval. Please check back later.",
+      "inputFields": [],
+      "outputFields": []
+    }
+  ],
+  "withdrawalStages": [
+    {
+      "number": 1,
+      "title": "Enter Amount",
+      "description": "Specify the amount you wish to withdraw.",
+      "inputFields": [
+        {
+          "code": "account_number",
+          "name": "Account number",
+          "description": "The account number",
+          "type": "string",
+          "required": false
+        },
+        {
+          "code": "bank_code",
+          "name": "Bank code",
+          "description": "Supported bank code",
+          "type": "string",
+          "required": false
+        },
+        {
+          "code": "processorAccountId",
+          "name": "Lithium processor account",
+          "description": "Lithium processor account contain details about PayPal payer account",
+          "type": "long",
+          "required": false
+        }
+      ],
+      "outputFields": []
+    },
+    {
+      "number": 2,
+      "title": "Your transaction is awaiting approval.",
+      "description": "We have submitted your transaction and we are awaiting approval. Please check back later.",
+      "inputFields": [],
+      "outputFields": []
+    }
+  ]
+}

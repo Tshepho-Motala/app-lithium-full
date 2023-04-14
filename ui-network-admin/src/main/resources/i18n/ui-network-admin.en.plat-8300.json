@@ -1,0 +1,11 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "PLAYERS": {
+      "MASS_UPDATE": {
+        "TOOLTIP": {
+            "LABEL": "CSV format: two column, first containing user IDs, second containing adjustment amounts - First row is a header."
+        }
+      }
+    }
+  }
+}

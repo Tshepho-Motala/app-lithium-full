@@ -1,0 +1,20 @@
+{
+	"UI_NETWORK_ADMIN": {
+		"RAF": {
+			"CONFIG": {
+				"FIELDS": {
+					"CONVERSIONTYPE": {
+						"TITLE": "Conversion Type",
+						"PLACE": "Select the conversion type...",
+						"DESC": "On a deposit, or when a certain XP level is reached"
+					},
+					"CONVERSIONXPLEVEL": {
+						"TITLE": "Conversion XP Level",
+						"PLACE": "E.g. 5",
+						"DESC": "The XP level in which the player conversion should take place"
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,1 @@
+ALTER TABLE `transaction` MODIFY `processor_reference` VARCHAR(255);

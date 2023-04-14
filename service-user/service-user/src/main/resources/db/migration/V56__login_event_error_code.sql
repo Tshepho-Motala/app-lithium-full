@@ -1,0 +1,1 @@
+ALTER TABLE login_event ADD COLUMN `error_code` INT NULL DEFAULT NULL;

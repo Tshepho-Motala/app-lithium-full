@@ -1,0 +1,55 @@
+{
+  "name": "Quickbit",
+  "code": "quickbit",
+  "url": "service-cashier-processor-quickbit",
+  "methodNames": ["quickbit"],
+  "deposit": true,
+  "withdraw": true,
+  "fees": {
+    "flat": 0,
+    "percentage": 0,
+    "minimum": 0
+  },
+  "limits": {
+    "minAmount": 2500,
+    "maxAmount": 0,
+    "maxAmountDay": 0,
+    "maxAmountWeek": 0,
+    "maxAmountMonth": 0,
+    "maxTransactionsDay": 0,
+    "maxTransactionsWeek": 0,
+    "maxTransactionsMonth": 0
+  },
+  "properties": [
+    { 
+      "name": "referralcode",
+      "defaultValue": "1503f9c08ebcfb27636eaf50b405a301",
+      "type": "string",
+      "description": "Referral code provided by quickbit"
+    },
+    {
+      "name": "secretkey",
+      "defaultValue": "f09dfece239c4a1b6978c16c7b16a00b",
+      "type": "string",
+      "description": "Secret key provided by quickbit"
+    },
+    {
+      "name": "baseUrl",
+      "defaultValue": "https://gateway.lithium-ci-develop.cloud.playsafesa.com/service-cashier-mock-quickbit",
+      "type": "string",
+      "description": "Quickbit base url"
+    },
+    {
+      "name": "callbackurl",
+      "defaultValue": "https://gateway.lithium-ci-develop.cloud.playsafesa.com/service-cashier-processor-quickbit/030791F2FA35B94AA3954288DEDEE7C2/",
+      "type": "string",
+      "description": "Internal callback URL that is provided to Quickbit"
+    },
+    {
+      "name": "redirecturl",
+      "defaultValue": "",
+      "type": "string",
+      "description": "The URL for quickbit to redirect to once payment has been completed on their system"
+    }
+  ]
+}

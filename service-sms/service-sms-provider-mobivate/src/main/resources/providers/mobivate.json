@@ -1,0 +1,39 @@
+{
+  "code": "mobivate",
+  "name": "mobivate",
+  "enabled": true,
+  "url": "service-sms-provider-mobivate",
+  "properties":
+  [
+    {
+      "name": "ROUTE",
+      "defaultValue": "mglobal",
+      "type": "string",
+      "description": "The API key provided by mobivate"
+    },
+    {
+      "name": "baseUrl",
+      "defaultValue": "https://app.mobivatebulksms.com/gateway/api/simple/MT",
+      "type": "string",
+      "description": "The base URL for all API calls"
+    },
+    {
+      "name": "ORIGINATOR",
+      "defaultValue": "LvScrBet",
+      "type": "string",
+      "description": "The API key provided by mobivate"
+    },
+    {
+      "name": "USER_NAME",
+      "defaultValue": "sviatoslav.sviripa@onseo.biz",
+      "type": "string",
+      "description": "The API key provided by mobivate"
+    },
+    {
+      "name": "PASSWORD",
+      "defaultValue": "19981216",
+      "type": "string",
+      "description": "The API key provided by mobivate"
+    }
+  ]
+}

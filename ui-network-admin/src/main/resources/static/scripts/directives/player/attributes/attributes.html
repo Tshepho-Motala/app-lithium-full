@@ -1,0 +1,113 @@
+<div class="box box-{{data.box}} box-solid" bs-loading-overlay bs-loading-overlay-reference-id="{{referenceId}}">
+	<div class="box-header with-border">
+		{{data.title | translate }}
+		<div class="box-tools pull-right">
+			<button type="button" class="btn btn-box-tool" ng-click="toggleAutoWithdrawalAllowed()" lit-if-permission="PLAYER_AUTO_WITHDRAWAL_EDIT" lit-permission-domain="{{user.domain.name}}"
+					ng-if="user.autoWithdrawalAllowed !== undefined && user.autoWithdrawalAllowed !== null && user.autoWithdrawalAllowed === false">
+				<span><i class="glyphicon glyphicon-ok"></i> {{'UI_NETWORK_ADMIN.PLAYER.ALLOW_AUTO_WITHDRAWALS'|translate}} </span>
+			</button>
+			<button type="button" class="btn btn-box-tool" ng-click="toggleAutoWithdrawalAllowed()" lit-if-permission="PLAYER_AUTO_WITHDRAWAL_EDIT" lit-permission-domain="{{user.domain.name}}"
+					ng-if="((user.autoWithdrawalAllowed === undefined || user.autoWithdrawalAllowed === null) ||
+							(user.autoWithdrawalAllowed !== undefined && user.autoWithdrawalAllowed !== null && user.autoWithdrawalAllowed === true))">
+				<span><i class="glyphicon glyphicon-remove"></i> {{'UI_NETWORK_ADMIN.PLAYER.DISALLOW_AUTO_WITHDRAWALS'|translate}} </span>
+			</button>
+		</div>
+	</div>
+	<div class="box-body table-responsive">
+		<table class="table table-bordered">
+
+			<tr>
+				<th>{{ "GLOBAL.FIELDS.EXCESSIVE_FAILED_LOGIN_BLOCK" | translate }}</th>
+				<td colspan="0">
+					<span ng-if="!user.excessiveFailedLoginBlock" class="label label-success" style="text-transform:uppercase;">
+					{{'GLOBAL.ACTION.OPEN' | translate}}
+				</span>
+					<span ng-if="user.excessiveFailedLoginBlock" class="label label-danger" style="text-transform:uppercase;">
+					{{'UI_NETWORK_ADMIN.PLAYER.BLOCKED' | translate}}
+				</span>
+				</td>
+				<td ng-if="user.excessiveFailedLoginBlock" lit-if-permission="USER_EDIT, PLAYER_EDIT, PLAYER_INFO_EDIT" lit-permission-domain="{{user.domain.name}}">
+					<a style="cursor: pointer;" ng-click="updateFailedLoginBlock() ">
+						<span class="fa fa-pencil-square-o"> {{'GLOBAL.ACTION.CHANGE' | translate}}</span>
+					</a>
+				</td>
+			</tr>
+			<tr>
+				<th>{{'UI_NETWORK_ADMIN.PLAYER.HASSELFEXCLUDED' | translate}}</th>
+				<td colspan="2">
+					<span ng-if="user.hasSelfExcluded === undefined || user.hasSelfExcluded === null || user.hasSelfExcluded === false"
+						  class="label label-success" style="text-transform:uppercase;">
+						{{'UI_NETWORK_ADMIN.PLAYER.HAS_NEVER_SELFEXCLUDED' | translate}}
+					</span>
+					<span ng-if="user.hasSelfExcluded !== undefined && user.hasSelfExcluded !== null && user.hasSelfExcluded === true"
+						  class="label label-danger" style="text-transform:uppercase;">
+						{{'UI_NETWORK_ADMIN.PLAYER.HAS_EVER_SELFEXCLUDED' | translate}}
+					</span>
+				</td>
+			</tr>
+		
+			<tr>
+				<th>{{'UI_NETWORK_ADMIN.PLAYER.AUTO_WITHDRAWAL_ALLOWED' | translate}}</th>
+				<td colspan="2">
+				<span ng-if="((user.autoWithdrawalAllowed === undefined || user.autoWithdrawalAllowed === null) ||
+							  (user.autoWithdrawalAllowed !== undefined && user.autoWithdrawalAllowed !== null && user.autoWithdrawalAllowed === true))"
+							class="label label-success" style="text-transform:uppercase;">
+					{{'GLOBAL.FIELDS.ALLOWED' | translate}}
+				</span>
+					<span ng-if="user.autoWithdrawalAllowed !== undefined && user.autoWithdrawalAllowed !== null && user.autoWithdrawalAllowed === false"
+								class="label label-danger" style="text-transform:uppercase;">
+					{{'GLOBAL.FIELDS.NOT_ALLOWED' | translate}}
+				</span>
+				</td>
+			</tr>
+			<tr>
+				<th>{{'UI_NETWORK_ADMIN.PLAYER.SUMMARY.ALLOW_PROMOTIONAL_CONTENT' | translate}}</th>
+				<td colspan="2">
+				<span ng-if="((user.promotionsOptOut === undefined || user.promotionsOptOut === null) ||
+							  (user.promotionsOptOut !== undefined && user.promotionsOptOut !== null && user.promotionsOptOut === false))"
+							class="label label-success" style="text-transform:uppercase;">
+					{{'GLOBAL.FIELDS.ALLOWED' | translate}}
+				</span>
+					<span ng-if="user.promotionsOptOut !== undefined && user.promotionsOptOut !== null && user.promotionsOptOut === true"
+								class="label label-danger" style="text-transform:uppercase;">
+					{{'GLOBAL.FIELDS.NOT_ALLOWED' | translate}}
+				</span>
+				</td>
+			</tr>
+
+			<tr>
+				<th>{{'UI_NETWORK_ADMIN.PLAYER.SOW' | translate}}</th>
+				<td>
+					<span ng-if="user.requireSowDocument === true" class="label label-success">{{'UI_NETWORK_ADMIN.PLAYER.FIELDS.ALLOWED' | translate}}</span>
+					<span ng-if="user.requireSowDocument === false" class="label label-warning">{{'UI_NETWORK_ADMIN.PLAYER.FIELDS.NOT_ALLOWED' | translate}}</span>
+				</td>
+				<td>
+
+					<a style="cursor: pointer;" ng-if="user.requireSowDocument === true" ng-click="toggleSowValidation()" lit-if-domains-permission="PLAYER_ALLOW_SOW_DOCUMENT">
+						<span class="fa fa-pencil-square-o"> {{"UI_NETWORK_ADMIN.PLAYER.SOW_LABELS.INVALIDATE_CHANGE" | translate}}</span>
+					</a>
+
+					<a style="cursor: pointer;" ng-if="user.requireSowDocument === false" ng-click="toggleSowValidation()" lit-if-domains-permission="PLAYER_ALLOW_SOW_DOCUMENT">
+						<span class="fa fa-pencil-square-o"> {{"UI_NETWORK_ADMIN.PLAYER.SOW_LABELS.VALIDATE_CHANGE" | translate}}</span>
+					</a>
+				</td>
+			</tr>
+
+
+			<tr>
+				<th>{{'UI_NETWORK_ADMIN.PLAYER.ATTRIBUTE.LOSS_LIMITS_VISIBLE' | translate}}</th>
+				<td>
+					<span ng-if="lossLimitVisibility === 'ENABLED'" class="label label-lg label-success">{{ lossLimitVisibility | uppercase }}</span>
+					<span ng-if="lossLimitVisibility === 'DISABLED'" class="label label-lg label-warning">{{ lossLimitVisibility | uppercase }}</span>
+					<span ng-if="lossLimitVisibility === 'OFF'" class="label label-lg label-danger">{{ lossLimitVisibility | uppercase }}</span>
+					<span ng-if="!lossLimitVisibility" class="label label-lg label-danger">{{ 'N/A' | uppercase }}</span>
+				</td>
+				<td lit-if-permission="PLAYER_LIMIT_EDIT" lit-permission-domain="{{user.domain.name}}">
+					<a style="cursor: pointer;" ng-click="changeLossLimitVisibility()">
+						<span class="fa fa-pencil-square-o"> {{'UI_NETWORK_ADMIN.LIMITS.MODIFY' | translate}}</span>
+					</a>
+				</td>
+			</tr>
+		</table>
+	</div>
+</div>

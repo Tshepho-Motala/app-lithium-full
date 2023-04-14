@@ -1,0 +1,65 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "CASINO": {
+      "IMAGES": {
+        "TITLE": "CMS Images",
+        "DESCRIPTION": "Manage cms images for casino",
+
+        "BANNER": {
+          "TITLE": "Add Banner Image"
+        },
+
+        "TILE": {
+          "TITLE": "Add Tile Image"
+        },
+
+        "FORM": {
+          "BANNER": {
+            "NAME": "Banner Name",
+            "SUCCESS_MESSAGE": "Banner image was uploaded successfully",
+            "ERROR_MESSAGE": "Failed to upload banner image"
+          },
+          "TILE": {
+            "NAME": "Game Key",
+            "SUCCESS_MESSAGE": "Tile image was uploaded successfully",
+            "ERROR_MESSAGE": "Failed to upload tile image"
+          },
+
+          "BUTTON": "Upload"
+        },
+
+        "FIELDS": {
+          "NAME": {
+            "NAME": "Image"
+          },
+          "URL": {
+            "NAME": "Image Url"
+          },
+          "SIZE": {
+            "NAME": "Image Size"
+          },
+          "UPLOADED_DATE": {
+            "NAME": "Date Uploaded"
+          }
+        },
+
+        "TABS": {
+            "BANNER": "Banners",
+            "TILE": "Tiles"
+        },
+        "BUTTON": {
+          "ADD": "Add Image",
+          "DELETE": "Delete"
+        },
+        "DELETE": {
+          "TITLE": "Please confirm deletion",
+          "PROMPT": "Click cancel to go back, or click confirm to permanently delete this item",
+          "CONFIRM": "Confirm",
+          "CANCEL": "Cancel",
+          "ERROR_MESSAGE": "Failed to remove image",
+          "SUCCESS_MESSAGE": "Image was removed successfully"
+        }
+      }
+    }
+  }
+}

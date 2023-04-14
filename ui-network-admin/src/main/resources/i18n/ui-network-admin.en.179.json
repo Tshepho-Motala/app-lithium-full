@@ -1,0 +1,22 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "LIMITS": {
+      "PLAYER": {
+        "WEEKLYLOSSLIMIT": {
+          "LABEL": "Weekly Loss Limit",
+          "DESCRIPTION": "Set the weekly loss amount for the player"
+        }
+      }
+    },
+    "PLAYER": {
+      "QUICK_ACTIONS": {
+        "CHANGE": {
+          "WEEKLY_LOSS_LIMIT": "Modify Weekly Loss Limit"
+        },
+        "SET": {
+          "WEEKLY_LOSS_LIMIT": "Set Weekly Loss Limit"
+        }
+      }
+    }
+  }
+}

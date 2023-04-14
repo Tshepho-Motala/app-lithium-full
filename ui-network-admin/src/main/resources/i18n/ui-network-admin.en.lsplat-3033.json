@@ -1,0 +1,18 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "PLAYER": {
+      "KYC": {
+        "TAB": {
+          "FIELDS": {
+            "DOCUMENT_DECISION": {
+              "LABEL": "Document Decision"
+            },
+            "ADDRESS_DECISION": {
+              "LABEL": "Address Decision"
+            }
+          }
+        }
+      }
+    }
+  }
+}

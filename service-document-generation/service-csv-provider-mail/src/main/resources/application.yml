@@ -1,0 +1,28 @@
+server:
+  port: 9930
+
+spring:
+  application:
+    name: service-csv-provider-mail
+  cloud:
+    stream:
+      bindings:
+        service-csv-provider-mail-input:
+          binder: rabbit
+          group: csv-mail-group
+          destination: csv-mail-queue
+          consumer:
+            concurrency: 2
+
+eureka:
+  instance:
+    appname: service-csv-provider-mail
+
+lithium:
+  service-csv-generation-mail:
+    processing-job-page-size: 500
+
+logging:
+  level:
+    lithium.service.csv.provider.mail: INFO
+

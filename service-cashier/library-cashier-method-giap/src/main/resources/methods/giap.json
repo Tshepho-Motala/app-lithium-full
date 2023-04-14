@@ -1,0 +1,41 @@
+{
+  "name": "Google In App Purchase",
+  "code": "giap",
+  "image": {
+    "filename": "/methods/giap.png",
+    "filetype": "image/png"
+  },
+  "inApp": "true",
+  "platform": "google",
+  "depositStages": [
+    {
+      "number": 1,
+      "title": "Start Google In App Purchase",
+      "description": null,
+      "inputFields": [
+        {
+          "code": "noamount",
+          "name": "noamount",
+          "type": "noamount"
+        },
+        {
+          "code": "productGuid",
+          "name": "Product Guid",
+          "description": "Enter the Product Guid Number.",
+          "type": "String"
+        },
+        {
+          "code": "purchaseToken",
+          "name": "Purchase Token",
+          "description": "Enter the Token Number.",
+          "type": "String"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "title": "Verifying Google In App Purchase",
+      "description": null
+    }
+  ]
+}

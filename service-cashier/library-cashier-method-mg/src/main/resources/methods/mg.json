@@ -1,0 +1,161 @@
+{
+  "name": "MoneyGram",
+  "code": "mg",
+  "image": {
+    "filename": "/methods/mg.png",
+    "filetype": "image/png"
+  },
+  "depositStages": [
+    {
+      "number": 0,
+      "title": "Required Player Information",
+      "description": "Please fill in the missing details below before we proceed.",
+      "inputFields": [
+        {
+          "code": "firstName",
+          "name": "Firstname",
+          "description": "Your given firstname(s)."
+        },
+        {
+          "code": "lastName",
+          "name": "Lastname",
+          "description": "Your given lastname(s)."
+        },
+        {
+          "code": "residentialAddress.addressLine1",
+          "name": "Address Line 1",
+          "displayOrder": "5"
+        },
+        {
+          "code": "residentialAddress.addressLine2",
+          "name": "Address Line 2",
+          "displayOrder": "6",
+          "required": false
+        },
+        {
+          "code": "residentialAddress.city",
+          "name": "City",
+          "displayOrder": "4"
+        },
+        {
+          "code": "residentialAddress.adminLevel1",
+          "name": "Province/State",
+          "displayOrder": "2"
+        },
+        {
+          "code": "residentialAddress.country",
+          "name": "Country",
+          "displayOrder": "1"
+        },
+        {
+          "code": "residentialAddress.adminLevel1Code",
+          "name": "Province/State",
+          "type": "hidden"
+        },
+        {
+          "code": "residentialAddress.countryCode",
+          "name": "Country",
+          "type": "hidden"
+        },
+        {
+          "code": "residentialAddress.postalCode",
+          "name": "Postal Code",
+          "displayOrder": "3"
+        }
+      ]
+    },{
+      "number": 1,
+      "title": "Enter Amount",
+      "description": "Specify an amount that you wish to deposit.",
+      "outputFields": [
+        {
+          "code": "receiver_name",
+          "name": "Receiver Name",
+          "description": "The name of the person you need to send the funds to."
+        },
+        {
+          "code": "receiver_country",
+          "name": "Receiver Country",
+          "description": "The country of the person you need to send the funds to."
+        },
+        {
+          "code": "receiver_city",
+          "name": "Receiver City",
+          "description": "The city of the person you need to send the funds to."
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "title": "Perform Deposit",
+      "description": "You now need to perform a MoneyGram transfer to the person who's details are supplied below. You may close your browser and return to this page at any time in the next 24 hours to continue this deposit. Once you have completed the transfer, you will receive an authorization number from MoneyGram that you will need to provide here for the deposit to continue.",
+      "inputFields": [
+        {
+          "code": "control_number",
+          "name": "Authorization Number",
+          "description": "The Authorization number is a unique number assigned to a transaction for tracking purposes. You can find this number in the confirmation email you received when you submitted the transaction.",
+          "type": "string"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "title": "Waiting for Confirmation",
+      "description": "Thank you. We have received all your information for this deposit and now we wait for the funds to arrive on our end. This can sometimes take up to 48 hours but normally happens within 2 to 8 hours. As soon as we receive the funds, we will send you an email and the funds will be made available in your account."
+    }
+  ],
+  "withdrawalStages": [
+    {
+      "number": 0,
+      "title": "Required Player Information",
+      "description": "Please fill in the missing details below before we proceed.",
+      "inputFields": [
+        {
+          "code": "firstName",
+          "name": "Firstname",
+          "description": "Your given firstname(s)."
+        },
+        {
+          "code": "lastName",
+          "name": "Lastname",
+          "description": "Your given lastname(s)."
+        },
+        {
+          "code": "residentialAddress.addressLine1",
+          "name": "Address Line 1"
+        },
+        {
+          "code": "residentialAddress.addressLine2",
+          "name": "Address Line 2"
+        },
+        {
+          "code": "residentialAddress.city",
+          "name": "City"
+        },
+        {
+          "code": "residentialAddress.adminLevel1",
+          "name": "Province/State"
+        },
+        {
+          "code": "residentialAddress.country",
+          "name": "Country"
+        },
+        {
+          "code": "residentialAddress.postalCode",
+          "name": "Postal Code"
+        }
+      ]
+    },
+    {
+      "number": 1,
+      "title": "Perform Withdrawal",
+      "description": "Enter the amount that you wish to withdraw. "
+    },
+	{
+      "number": 2,
+      "title": "Waiting for Confirmation",
+      "description": "Your withdrawal request was submitted to MoneyGram and we are awaiting confirmation."
+    }
+    
+  ]
+}

@@ -1,0 +1,22 @@
+{
+	"UI_NETWORK_ADMIN": {
+		"USER": {
+			"FIELDS": {
+				"REFERRALCODE": "Referral Code",
+				"GENDER": {
+					"NAME": "Gender",
+					"DESCRIPTION": "Player's gender",
+					"GENDERS": {
+						"MALE": "Male",
+						"FEMALE": "Female"
+					}
+				}
+			}
+		}
+	},
+	"GLOBAL": {
+		"FIELDS": {
+			"GENDER": "Gender"
+		}
+	}
+}

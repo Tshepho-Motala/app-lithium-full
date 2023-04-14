@@ -1,0 +1,30 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "CMS": {
+      "GAME_ENTRY_LAYOUT_SELECTOR_FIELD": {
+        "DFG_WIDGET": {
+          "DESCRIPTION": {
+            "MESSAGE": "Description",
+            "MAIN_WIDGET_TEXT" : "Main widget text",
+            "WIDGET_SUB_TEXT" : "Widget sub text",
+            "MONTHLY_FREE_GAME_TEXT" : "Monthly Free game text"
+          }
+        }
+      },
+      "GAME_ITEM_EDITOR": {
+        "FIELDS": {
+          "PROMO": {
+            "ID": "Promo ID"
+          }
+        }
+      },
+      "DFG_WIDGET_LAYOUT_CONFIG": {
+        "DESCRIPTION": {
+          "DETAILS": {
+            "TITLE": "Dfg Description Details"
+          }
+        }
+      }
+    }
+  }
+}

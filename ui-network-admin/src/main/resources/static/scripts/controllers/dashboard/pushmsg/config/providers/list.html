@@ -1,0 +1,67 @@
+<div class="tab-content" style="padding: 5px;">
+	<div class="well-clear" style="margin-bottom: 0px;">
+		<div class="row v-reset-row ">
+			<div class="col-xs-12 col-md-6 pull-left">
+				<button-add ng-click="controller.addDomainProvider()"></button-add>
+				<button-save-order ng-if="controller.domainProviderOrderChanged" ng-click="controller.saveDomainProviderOrder()"></button-save-order>
+			</div>
+		</div>
+		
+		<div ng-if="controller.domainProviders.length === 0">
+			<br/>
+			<div class="card-danger-shadow">
+				<div class="card card-block">
+					<span class="description" align="center">
+						{{'UI_NETWORK_ADMIN.PUSHMSG.PROVIDERS.EMPTY'|translate}}
+					</span>
+				</div>
+			</div>
+		</div>
+		
+		<br/>
+		
+		<div ui-tree="controller.treeOptions" ng-if="controller.domainProviders.length > 0" data-max-depth="1">
+			<ol ui-tree-nodes ng-model="controller.domainProviders" class="">
+				<li ui-tree-node ng-repeat="domainProvider in controller.domainProviders" style="padding-bottom: 4px;">
+					<div class="row v-reset-row " ng-class="{ 'card-danger-shadow': domainProvider.enabled === false}" style="margin-bottom: 5px;">
+						<div class="card card-block">
+							<div class="d-flex justify-content-start">
+								<div ui-tree-handle class="p-2" ng-show="controller.domainProviders.length > 1">
+									<i class="fa fa-arrows-v"></i>
+								</div>
+								<div class="divider" ng-show="controller.domainProviders.length > 1"></div>
+								<div class="p-2">
+									<span class="title">
+										{{domainProvider.provider.name}} - {{domainProvider.provider.code}}
+									</span>
+									<span class="description">
+										{{domainProvider.description}}
+									</span>
+								</div>
+								<div class="p-2" style="clear:left;">
+									<div class="badge-wrap access-rule" ng-if="domainProvider.accessRule">{{domainProvider.accessRule}}</div>
+									<div class="badge-wrap card-danger" ng-if="!domainProvider.enabled">{{'GLOBAL.FIELDS.DISABLED'|translate}}</div>
+								</div>
+								<div class="ml-auto p-2">
+									<span uib-dropdown keyboard-nav>
+										<div id="menu-dropdown" uib-dropdown-toggle ng-click="$event.stopPropagation();" class="dropdown-ellipsis-center">
+											<i class="fa fa-ellipsis-v menu-blue-grey"></i>
+										</div>
+										<ul class="dropdown-menu dropdown-menu-right" uib-dropdown-menu dropdown-menu-right aria-labelledby="menu-dropdown">
+											<li class="dropdown-item"><a href ng-click="controller.editDomainProvider(domainProvider); $event.stopPropagation();">Edit Provider</a></li>
+											<li class="dropdown-item" ng-if="domainProvider.enabled === false"><a href ng-click="controller.toggleDomainProvider(domainProvider); $event.stopPropagation();">Enable Provider</a></li>
+											<li class="dropdown-item" ng-if="domainProvider.enabled === true"><a class="warning" href ng-click="controller.toggleDomainProvider(domainProvider); $event.stopPropagation();">Disable Provider</a></li>
+											<li class="dropdown-item"><a href ng-click="controller.editProperties(domainProvider); $event.stopPropagation();">Properties</a></li>
+											<li class="dropdown-divider">&nbsp;</li>
+											<li class="dropdown-item"><a class="danger" href ng-click="controller.deleteDomainProvider(domainProvider); $event.stopPropagation();">Delete</a></li>
+										</ul>
+									</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</li>
+			</ol>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,188 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Include Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous" />
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row"><strong>Mock session Info: </strong></div>
+    <div class="row" th:object="${@mockController.test(mockSessionId)}">
+        <div th:text="*{ gameStartUrl }"></div>
+    </div>
+
+
+    <div th:fragment="activity (obj)">
+        <div class="row" th:if="${obj}" th:object="${ obj }">
+            <div th:text="| Activity id: *{ id } "></div>
+            <div th:text="| Request: *{ request } |"></div>
+            <div th:text="| Round Id: *{ roundId } |"></div>
+            <div th:text="| User Guid: *{ mockSession.userGuid } |"></div>
+            <div th:each="activityExecution : *{ mockActivityExecutionList }">
+                <div th:text="| Id: ${ activityExecution.id } |"></div>
+                <div th:if="${ activityExecution.response }" th:text="| Response: ${ activityExecution.response } |"></div>
+                <div th:text="| Execution ms: ${ activityExecution.executionDurationMs } |"></div>
+                <div th:text="| Transaction Id: ${ activityExecution.transactionId } |"></div>
+                <div th:text="| Lithium Transaction Id: ${ activityExecution.lithiumTransactionId } |"></div>
+                <pre><div class="small" th:text="| Request to lithium: ${ activityExecution.emulatedProviderRequest } |"></div></pre>
+                <pre><div class="small" th:text="| Response from lithium: ${ activityExecution.emulatedLithiumResponse } |"></div></pre>
+
+            </div>
+        </div>
+    </div>
+
+    <br/>
+    <div th:replace="this::activity(${@mockController.balance(mockPayload)})"></div>
+    <br/>
+    <div th:replace="this::activity(${@mockController.validateUser(mockPayload)})"></div>
+    <br/>
+    <div th:replace="this::activity(${@mockController.bet(mockPayload)})"></div>
+    <br/>
+    <div th:replace="this::activity(${@mockController.win(mockPayload)})"></div>
+    <br/>
+    <div th:replace="this::activity(${@mockController.negativeBet(mockPayload)})"></div>
+    <br/>
+    <div th:replace="this::activity(${@mockController.refund(mockPayload)})"></div>
+    <br/>
+    <div th:replace="this::activity(${@mockController.freespin(mockPayload)})"></div>
+    <br/>
+    <div th:replace="this::activity(${@mockController.freespinFeature(mockPayload)})"></div>
+    <br/>
+    <div th:replace="this::activity(${@mockController.betAndWin(mockPayload)})"></div>
+    <br/>
+    <div th:replace="this::activity(${@mockController.winAndNegativeBet(mockPayload)})"></div>
+    <br/>
+    <div th:replace="this::activity(${@mockController.betAndWinAndRefund(mockPayload)})"></div>
+    <br/>
+    <div th:replace="this::activity(${@mockController.winAndRefund(mockPayload)})"></div>
+    <br/>
+    <div th:replace="this::activity(${@mockController.freespinFeatureAndRefund(mockPayload)})"></div>
+    <br/>
+    <div th:replace="this::activity(${@mockController.freespinAndRefund(mockPayload)})"></div>
+    <br/>
+    <div th:replace="this::activity(${@mockController.negativeBetAndRefund(mockPayload)})"></div>
+    <br/>
+    <div th:replace="this::activity(${@mockController.winAndNegativeBetAndRefund(mockPayload)})"></div>
+    <br/>
+    <!--<div>-->
+        <!--<strong>Validate user response: </strong>-->
+        <!--<br/>-->
+
+        <!--<span th:text="${@mockController.validateUser(mockPayload)}"></span>-->
+    <!--</div>-->
+
+    <!--<div>-->
+        <!--<strong>Balance response: </strong>-->
+        <!--<br/>-->
+
+        <!--<span th:text="${@mockController.balance(mockPayload)}"></span>-->
+    <!--</div>-->
+
+    <!--<div>-->
+        <!--<strong>Bet response: </strong>-->
+        <!--<br/>-->
+
+        <!--<span th:text="${@mockController.bet(mockPayload)}"></span>-->
+    <!--</div>-->
+
+    <!--<div>-->
+        <!--<strong>Win response: </strong>-->
+        <!--<br/>-->
+
+        <!--<span th:text="${@mockController.win(mockPayload)}"></span>-->
+    <!--</div>-->
+
+    <!--<div>-->
+        <!--<strong>Bet and Win response: </strong>-->
+        <!--<br/>-->
+
+        <!--<span th:text="${@mockController.betAndWin(mockPayload)}"></span>-->
+    <!--</div>-->
+
+    <!--<div>-->
+        <!--<strong>Negative Bet response: </strong>-->
+        <!--<br/>-->
+
+        <!--<span th:text="${@mockController.negativeBet(mockPayload)}"></span>-->
+    <!--</div>-->
+
+    <!--<div>-->
+        <!--<strong>Refund response: </strong>-->
+        <!--<br/>-->
+
+        <!--<span th:text="${@mockController.refund(mockPayload)}"></span>-->
+    <!--</div>-->
+
+    <!--<div>-->
+        <!--<strong>Freespin response: </strong>-->
+        <!--<br/>-->
+
+        <!--<span th:text="${@mockController.freespin(mockPayload)}"></span>-->
+    <!--</div>-->
+
+    <!--<div>-->
+        <!--<strong>Freespin feature: </strong>-->
+        <!--<br/>-->
+
+        <!--<span th:text="${@mockController.freespinFeature(mockPayload)}"></span>-->
+    <!--</div>-->
+
+    <!--<div>-->
+        <!--<strong>Bet and Refund response: </strong>-->
+        <!--<br/>-->
+
+        <!--<span th:text="${@mockController.betAndRefund(mockPayload)}"></span>-->
+    <!--</div>-->
+
+    <!--<div>-->
+        <!--<strong>Bet and Win and Refund response: </strong>-->
+        <!--<br/>-->
+
+        <!--<span th:text="${@mockController.betAndWinAndRefund(mockPayload)}"></span>-->
+    <!--</div>-->
+
+    <!--<div>-->
+        <!--<strong>Freespin and Refund response: </strong>-->
+        <!--<br/>-->
+
+        <!--<span th:text="${@mockController.freespinAndRefund(mockPayload)}"></span>-->
+    <!--</div>-->
+
+    <!--<div>-->
+        <!--<strong>Freespin feature and Refund response: </strong>-->
+        <!--<br/>-->
+
+        <!--<span th:text="${@mockController.freespinFeatureAndRefund(mockPayload)}"></span>-->
+    <!--</div>-->
+
+    <!--<div>-->
+        <!--<strong>Win and Negative bet response: </strong>-->
+        <!--<br/>-->
+
+        <!--<span th:text="${@mockController.winAndNegativeBet(mockPayload)}"></span>-->
+    <!--</div>-->
+
+    <!--<div>-->
+        <!--<strong>Win and Negative Bet And Refund response: </strong>-->
+        <!--<br/>-->
+
+        <!--<span th:text="${@mockController.winAndNegativeBetAndRefund(mockPayload)}"></span>-->
+    <!--</div>-->
+
+    <!--<div>-->
+        <!--<strong>Win and Refund response: </strong>-->
+        <!--<br/>-->
+
+        <!--<span th:text="${@mockController.winAndRefund(mockPayload)}"></span>-->
+    <!--</div>-->
+</div>
+</body>
+</html>

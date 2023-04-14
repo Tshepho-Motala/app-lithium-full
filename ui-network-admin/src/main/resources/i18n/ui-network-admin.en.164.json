@@ -1,0 +1,9 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "TEMPLATES": {
+      "ENABLED": {
+        "PUBLISH": "You can only publish templates that have been enabled"
+      }
+    }
+  }
+}

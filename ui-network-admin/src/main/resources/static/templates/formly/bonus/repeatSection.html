@@ -1,0 +1,11 @@
+<div class="{{hideRepeat}}">
+	<button-add bclass="default btn-xs" ng-click="addNew()" ng-show="model[options.key].length === 0"></button-add>
+	<div class="repeatsection" ng-repeat="element in model[options.key]" ng-init="fields = copyFields(to.fields)">
+		<formly-form fields="fields" model="element" form="form"></formly-form>
+		<button-bar ng-show="to.hidebuttons !== true">
+			<button-delete bclass="danger btn-xs" ng-click="remove(element)"></button-delete>
+			<button-add bclass="default btn-xs" ng-click="addNew()"></button-add>
+		</button-bar>
+		<hr/>
+	</div>
+</div>

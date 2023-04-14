@@ -1,0 +1,65 @@
+<div class="tab-content" style="padding: 5px;">
+<div class="well-clear" style="margin-bottom: 0px;">
+	<div class="row v-reset-row ">
+		<div class="col-xs-12 col-md-6 pull-left">
+			<button-add lit-if-permission="CASHIER_CONFIG_ADD" ng-click="controller.addProfile()"></button-add>
+		</div>
+		<div class="col-xs-12 col-md-6 pull-right" style="padding-top:3px;" ng-if="controller.profiles.length > 0">
+			<div class="form-group has-feedback clearfix">
+				<label for="search" class="sr-only">{{ 'GLOBAL.INPUT.SEARCHDYNAMIC' | translate }}</label>
+				<input ng-model="controller.filterValue" type="text" class="form-control" placeholder="{{ 'GLOBAL.INPUT.SEARCHDYNAMIC' | translate }}">
+				<span class="glyphicon glyphicon-search form-control-feedback"></span>
+			</div>
+		</div>
+	</div>
+	
+	<div ng-if="controller.profiles.length === 0">
+		<br/>
+		<div class="card-danger-shadow">
+			<div class="card card-block">
+				<span class="description" align="center">
+					{{'UI_NETWORK_ADMIN.CASHIER.PROFILES.EMPTY'|translate}}
+				</span>
+			</div>
+		</div>
+	</div>
+	
+	<div ng-if="filteredProfiles.length === 0 && controller.profiles.length > 0">
+		<br/>
+		<div class="card-danger-shadow">
+			<div class="card card-block">
+				<span class="description" align="center">
+					{{'UI_NETWORK_ADMIN.CASHIER.PROFILES.SEARCHEMPTY'|translate}}
+				</span>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row v-reset-row " ng-repeat="p in filteredProfiles = (controller.profiles | filter:controller.filterValue)">
+		<div class="col-md-8 col-md-offset-2">
+			<div class="card card-block" style="margin-bottom: 5px;">
+				<div class="d-flex justify-content-start">
+					<div class="p-2">
+						<span class="title">{{p.name}} ({{p.code}})</span>
+						<span class="description">{{p.description}}</span>
+					</div>
+					<div class="ml-auto p-2">
+						<button lit-if-permission="CASHIER_CONFIG_EDIT" type="button" class="btn btn-box-tool" ui-sref="dashboard.cashier.config.profile({domainName:$stateParams.domainName, profileId:p.id})">
+							<i class="fa fa-edit"></i>
+						</button>
+						<button lit-if-permission="CASHIER_CONFIG_VIEW,CASHIER_CONFIG_ADD,CASHIER_CONFIG_EDIT,CASHIER_CONFIG_DELETE" type="button" class="btn btn-box-tool" ui-sref="dashboard.cashier.config.profile.users({domainName:$stateParams.domainName, profileId:p.id})">
+							<i class="fa fa-users"></i>
+						</button>
+						<button lit-if-permission="CASHIER_CONFIG_DELETE" type="button" class="btn btn-box-tool" ng-click="controller.deleteById(p.id)">
+							<i class="fa fa-trash"></i>
+						</button>
+<!-- 						<button type="button" class="btn btn-box-tool" ui-sref="dashboard.cashier.config.profile.processors({domainName:$stateParams.domainName, profileId:p.id})"> -->
+<!-- 							<i class="fa fa-credit-card"></i> -->
+<!-- 						</button> -->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>

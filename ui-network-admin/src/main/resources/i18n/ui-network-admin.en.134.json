@@ -1,0 +1,19 @@
+{
+  "GLOBAL": {
+    "ACTION": {
+      "DISMISS": "Dismiss",
+      "EXTEND_SESSION": "Extend Session"
+    }
+  },
+  "UI_NETWORK_ADMIN": {
+    "EXTEND_SESSION": {
+      "TITLE": "Session Expiring",
+      "EXPLAIN1": "Your session has expired and you will be logged out automatically after :",
+      "TIME_UNIT": "second(s)",
+      "EXPLAIN2": "You may choose to extend this session if you want to continue, or you can dismiss this dialog to finish what you were busy with, but you will still be logged out automatically after the time indicated above if you don't extend your session. You may also logout manually using the button below."
+    },
+    "EXPIRE_SESSION": {
+      "EXPLAIN2": "This session cannot be extended, you have to login again. You can dismiss this dialog to finish what you were busy with, but you will still be logged out automatically after the time indicated above. You may also logout manually using the button below."
+    }
+  }
+}

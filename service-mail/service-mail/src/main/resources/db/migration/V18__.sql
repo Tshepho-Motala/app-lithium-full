@@ -1,0 +1,2 @@
+CREATE UNIQUE INDEX `idx_name` ON `default_email_template`(`name`) ALGORITHM INPLACE LOCK NONE;
+CREATE UNIQUE INDEX `idx_default_template_and_name` ON `default_email_template_placeholder`(`default_email_template_id`,`name`) ALGORITHM INPLACE LOCK NONE;

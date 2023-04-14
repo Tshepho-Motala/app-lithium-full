@@ -1,0 +1,37 @@
+.Create Banner
+[plantuml]
+----
+@startuml
+'https://plantuml.com/sequence-diagram
+autonumber
+actor LBO as lbo
+participant "service-casino-cms" as svc_cms
+participant "service-cdn-cms" as svc_cdn
+database "lithium_cms" as cms_db
+
+lbo -> svc_cdn: GET /service-cdn-cms/backoffice/{domainName}/cms-assets/find-by-name-and-domain-and-type
+activate svc_cdn
+    svc_cdn -> cms_db: findByNameAndDomainIdAndType
+    activate cms_db
+        cms_db -> svc_cdn: bannerAsset
+    deactivate cms_db
+    svc_cdn --> svc_cms: Status 200 OK (bannerAsset)
+deactivate svc_cdn
+alt bannerAsset exist
+lbo -> lbo: Show banner create component \n with autofilled image url
+lbo -> lbo: Add banner input
+lbo -> svc_cms: POST /service-casino-cms/backoffice/{domain-name}/banners/save
+activate svc_cms
+    svc_cms -> svc_cms: validate bannerObject
+    alt bannerObject valid
+        svc_cms -> cms_db: Save banner
+        cms_db --> svc_cms: saved bannerObject
+    end
+deactivate svc_cms
+svc_cms --> lbo: 200 OK (saved bannerObject)
+
+end
+
+
+@enduml
+----

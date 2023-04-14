@@ -1,0 +1,20 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "TEMPLATES": {
+      "ERRORS": {
+        "PUBLISH": "Could not publish the template to the CDN"
+      },
+      "SUCCESS": {
+        "PUBLISH": "The template was published to the CDN"
+      },
+      "INVALID": {
+        "PUBLISH": "The template cannot be empty"
+      },
+      "FIELDS": {
+        "CDN": {
+          "NAME": "CDN URL"
+        }
+      }
+    }
+  }
+}

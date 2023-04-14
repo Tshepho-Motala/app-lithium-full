@@ -1,0 +1,11 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "CASHIER": {
+      "TRANSACTION": {
+        "FAILED": {
+          "EXPLANATION": "Insufficient player balance to process payout"
+        }
+      }
+    }
+  }
+}

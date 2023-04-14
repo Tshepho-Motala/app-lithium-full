@@ -1,0 +1,127 @@
+= LSPLAT-9919 PLAT-11050 ⁃ (VB Migration - Accounting) Ingest initial balances
+Reza Khan <reza.khan@wonderlabz.com>
+1.0, Jan 23, 2022:: TA - LSPLAT-9919 PLAT-11050 ⁃ (VB Migration - Accounting) Ingest initial balances
+:sectnums:
+:toc: left
+:toclevels: 4
+:toc-title: LSPLAT-9918 PLAT-11049
+:icons: font
+:source-highlighter: coderay
+:url-quickref: https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/
+:table-caption!:
+
+WARNING: You might need to install graphviz to render the component models on IntelliJ on plantUML if not viewed on GitLab- see https://playsafe.atlassian.net/wiki/spaces/LITHIUM/pages/1674936347/How+To+Setup+Lithium+Local+Development#Noteworthy-Extensions.1[IntelliJ: PlantUML diagramming tool]
+
+== Description
+=== Jira
+* https://livescoregroup.atlassian.net/browse/PLAT-11050
+* https://playsafe.atlassian.net/browse/LSPLAT-9919
+
+=== Gitlab
+* Branch: origin/feature/LSPLAT-9919-vb-ingest-initial-balances
+* MR: https://gitlab.com/playsafe/lithium/app-lithium-full/-/merge_requests/6246
+
+=== Business
+Any money in player wallet's from the previous operator need to be transferred to the lithium wallet.
+
+=== Approvals
+|===
+|Component |Reason |Comments
+
+|Li
+|
+|
+
+|DWH
+|
+|
+
+|===
+
+== Architecture
+=== Technical
+NOTE: This process can only begin once all players have been created in lithium, with respective lithium GUID's.
+
+The business requirement will be fulfilled via a player balance migration process, which will be split into two phases.
+
+_Phase 1_: An initial dataset will be provided. At this point, the old operator is still active and accepting debits and credits to player balances. The dataset will be ingested into lithium, having the related lithium player balance updated appropriately.
+
+_Phase 2_: Theoretically, a high percentage of player balances ingested in Phase 1 will remain unchanged. A second dataset will be provided for those players where the balance had movement after Phase 1. During phase 2, the old operator will not be active any longer. Thus, the two phased approach to minimise any downtime necessary while updating player balances.
+
+IMPORTANT: Any provided sequences will stipulate a happy path process. All failure scenarios should be thought through, handled, retried where possible, or ultimately fail and rolled back and placed in a parking lot, as per details on previous technical specifications.
+
+TIP: Refer to https://gitlab.com/playsafe/lithium/app-lithium-full/-/blob/3887b3f2b0c8c2dca43259d0f3d008e2ce496e42/service-accounting/service-accounting-provider-internal/docs/TA/LSPLAT-9918-PLAT-11049-vb-migration-accounting-ingest-historic-transactions.adoc#user-content-prerequisites for a brief description of DLQ and PL used for handling failures. This link will become ineffective once the referenced branch above has been merged. After which, the document can be found in the develop branch in the same directory structure.
+
+==== Phase 1
+===== The dataset (from sandbox)
+[source,sql]
+----
+SELECT * FROM `lithium-virginbet-sandbox.dk_files.FactGranularBalancesTransactions_vw`
+----
+
+===== OPERATOR_MIGRATION_CREDIT transaction type
+To be able to easily identify the source of funds, a new transaction type needs to be created. OPERATOR_MIGRATION_CREDIT will be the transaction type used for the player balance adjustment.
+
+===== Full transaction details
+|===
+|Description |Account code |Account type code |Contra account code |Contra account type code |Transaction type code |Transaction Type Label(s)
+
+|Phase 1 balance migration
+|PLAYER_BALANCE
+|PLAYER_BALANCE
+|OPERATOR_MIGRATION_OPENING_CREDIT
+|OPERATOR_MIGRATION
+|OPERATOR_MIGRATION_CREDIT
+|transaction_id (unique)
+|===
+
+===== Transaction Type Labels
+The *transaction_id* label used for these transactions should be the DK customer ID concatenated with _-credit_ then _-1_, which stands for Phase 1, as well as the number of credit adjustments made during this phase. Ideally, for a single player, this should only be 1. *For example, it should look like: 12345-credit-1-1.* This will prevent duplicate transactions from being processed on the lithium player wallet during the Phase 1 balance updates.
+
+===== Sequence
+The implementation and reporting of the crediting of the player balance will be very similar to a cashier deposit. Except, of course, the transaction type will not be CASHIER_DEPOSIT, but OPERATOR_MIGRATION_CREDIT.
+
+include::../plantuml/sequence/ingest-initial-balances-phase-1-sequence.puml[]
+
+==== Phase 2
+===== The dataset
+TBA. DWH to provide. Format of data should be identical to the dataset from Phase 1.
+
+===== OPERATOR_MIGRATION_DEBIT transaction type
+
+IMPORTANT: DWH to confirm below
+
+Presumably, the data provided for Phase 2 will contain the player's final balance, as opposed to the difference between the balance we had ingested from Phase 1 and now. With that being said, as part of the Phase 2 process, for any player being processed, first, the player's balance needs to be adjusted to 0 (via a debit of the amount that was credited in Phase 1, causing a zero net effect) then adjusted to the final balance.
+
+IMPORTANT: It is of utmost importance that these two steps either pass in full, or fail and rollback
+
+===== Full transaction details
+|===
+|Description |Account code |Account type code |Contra account code |Contra account type code |Transaction type code |Transaction Type Label(s)
+
+|Phase 2 balance migration, step 1
+|PLAYER_BALANCE
+|PLAYER_BALANCE
+|OPERATOR_MIGRATION_OPENING_DEBIT
+|OPERATOR_MIGRATION
+|OPERATOR_MIGRATION_DEBIT
+|transaction_id (unique)
+
+|Phase 2 balance migration, step 2
+|PLAYER_BALANCE
+|PLAYER_BALANCE
+|OPERATOR_MIGRATION_OPENING_CREDIT
+|OPERATOR_MIGRATION
+|OPERATOR_MIGRATION_CREDIT
+|transaction_id (unique)
+|===
+
+===== Transaction Type Labels
+====== Step 1:
+The *transaction_id* label used for these transactions should be the DK customer ID concatenated with _-debit_ then _-2_, which stands for Phase 2, as well as the number of debit adjustments made during this phase. Ideally, for a single player, this should only be 1. *For example, it should look like: 12345-debit-2-1.* This will prevent duplicate transactions from being processed on the lithium player wallet during the Phase 2, step 1, balance updates.
+
+====== Step 2:
+The *transaction_id* label used for these transactions should be the DK customer ID concatenated with _-credit_ then _-2_, which stands for Phase 2, as well as the number of credit adjustments made during this phase. Ideally, for a single player, this should only be 1. *For example, it should look like: 12345-credit-2-1.* This will prevent duplicate transactions from being processed on the lithium player wallet during the Phase 2, step 2, balance updates.
+
+===== Sequence
+include::../plantuml/sequence/ingest-initial-balances-phase-2-sequence.puml[]

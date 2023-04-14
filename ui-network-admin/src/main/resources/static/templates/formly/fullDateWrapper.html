@@ -1,0 +1,9 @@
+<div>
+	<label for="{{id}}" class="formly-field-label" style="margin-bottom: 15px;">
+		{{options.templateOptions.label}} {{options.templateOptions.required ? '*' : ''}}
+		<checkbox ng-model="dateEnabled" ng-change="enable(dateEnabled)"></checkbox>
+	</label>
+	<br/><small class="helpblock">{{to.description}}</small><br/><br/>
+	<formly-transclude></formly-transclude>
+	<hr/>
+</div>

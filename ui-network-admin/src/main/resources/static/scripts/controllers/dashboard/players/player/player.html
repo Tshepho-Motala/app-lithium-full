@@ -1,0 +1,136 @@
+<div class="container-fluid">
+    <div class="card card-block">
+        <div class="row v-reset-row ">
+            <div class="col-xs-12 col-md-6 col-lg-3 top-space-5">
+                <span ng-if="controller.user.firstName && controller.user.lastName" style="color: #3c8dbc; font-size: 16px; font-weight: 600;">{{controller.user.firstName + " " + (controller.domainSettings['lastNamePrefix'] == 'show' ? controller.user.lastNamePrefix != null ? controller.user.lastNamePrefix + " " : "": "") +  controller.user.lastName + " (" + controller.user.username + ")"}}<br/></span>
+                <span ng-if="!controller.user.firstName && !controller.user.lastName" style="color: #3c8dbc; font-size: 16px; font-weight: 600;">{{"(" + controller.user.username + ")"}}<br/></span>
+                <div style="color: #AAA; font-size: 12px;">
+                    <span>{{'UI_NETWORK_ADMIN.PLAYER.INFO-HEADER.REGISTERED'|translate}} - {{controller.user.createdDate|datetimedefault}}<br/></span>
+                    <span>{{'UI_NETWORK_ADMIN.PLAYER.INFO-HEADER.LAST-UPDATED'|translate}} - {{controller.user.updatedDate|datetimedefault}}<br/></span>
+                    <span>{{'UI_NETWORK_ADMIN.PLAYER.INFO-HEADER.LAST-LOGIN'|translate}} - {{controller.user.lastLoggedInDate|datetimedefault}}<br/></span>
+
+                    <span>{{'UI_NETWORK_ADMIN.PLAYER.INFO-HEADER.SESSION-LOGOUT'|translate}} - {{controller.user.loggedOutDate|datetimedefault}}<br/></span>
+                    <span>{{'UI_NETWORK_ADMIN.PLAYER.INFO-HEADER.SESSION-DURATION'|translate}} - {{controller.sessionDuration}}<br/></span>
+                    <span>{{'UI_NETWORK_ADMIN.PLAYER.INFO-HEADER.APITOKEN'|translate}} - {{controller.user.userApiToken.token}}<br/></span>
+
+                    <span style="font-weight: bold;" class="danger-text bold-text" ng-if="controller.failedResetWarn">{{'UI_NETWORK_ADMIN.PLAYER.INFO-HEADER.FAILED-PASSWORD-RESET-ATTEMPTS'|translate}} - {{controller.user.failedResetCount + " / " + controller.domainFailedResetCountSetting }}</span>
+                    <span style="font-weight: bold;" ng-if="controller.failedResetInfo">{{'UI_NETWORK_ADMIN.PLAYER.INFO-HEADER.FAILED-PASSWORD-RESET-ATTEMPTS'|translate}} - {{controller.user.failedResetCount + " / " + controller.domainFailedResetCountSetting}}</span>
+                    <span ng-if="controller.failedResetZero">{{'UI_NETWORK_ADMIN.PLAYER.INFO-HEADER.FAILED-PASSWORD-RESET-ATTEMPTS'|translate}} - {{controller.user.failedResetCount + " / " + controller.domainFailedResetCountSetting}}</span>
+                    <span ng-if="controller.failedResetInfo || controller.failedResetWarn" lit-if-permission="PLAYER_CLEAR_FAILED_RESET" lit-permission-domain="{{controller.user.domain.name}}">
+                        &nbsp;<a ng-click="controller.clearFailedResetCount()"><i class="fa fa-refresh"></i> clear</a>
+                    </span>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-md-6 col-lg-3 top-space-5 player-info-header-bottom-space">
+                <span style="line-height:inherit; margin-right: 5px;" class="label" ng-class="{'label-success': controller.user.status.userEnabled === true, 'label-danger': controller.user.status.userEnabled === false }">{{controller.user.status.name}}</span>
+                <span ng-if="controller.user.statusReason" class="label label-default">
+                    {{controller.user.statusReason.description|uppercase}}
+                    <br/>
+                </span>
+                <span ng-if="controller.user.statusReason && controller.user.statusReason.name === 'GAMSTOP_SELF_EXCLUSION' || controller.user.statusReason.name === 'SELF_EXCLUSION' || controller.user.statusReason.name === 'COOLING_OFF'" class="label label-info">
+                    Rt.&nbsp;
+                    <span ng-if="controller.user.statusReason.name === 'GAMSTOP_SELF_EXCLUSION' || controller.user.statusReason.name === 'SELF_EXCLUSION'">
+                        <span ng-if="controller.userData.selfExclusion && controller.userData.selfExclusion.expiryDate">{{controller.futureDateToTimeRemaining(controller.userData.selfExclusion.expiryDate)}}</span>
+                        <span ng-if="!controller.userData.selfExclusion">N/A</span>
+                    </span>
+                    <span ng-if="controller.user.statusReason.name === 'COOLING_OFF'">
+                        <span ng-if="controller.userData.coolOff && controller.userData.coolOff.expiryDate">{{controller.futureDateToTimeRemaining(controller.userData.coolOff.expiryDate)}}</span>
+                        <span ng-if="!controller.userData.coolOff">N/A</span>
+                    </span>
+                    <br/>
+                </span>
+                <!--
+                     Copied from static/scripts/directives/player/ver ificationstatus/verificationstatus.html
+                        ...It would have been nice to have the code/translation as well (i.e. UNVERIFIED, MANUALLY_VERIFIED, etc)
+                     then we could (possibly) have reduced the duplication here.
+                -->
+                <span ng-if="controller.user.verificationStatus === 1 && !controller.user.emailValidated && controller.domainSettings['validate_email_on_registration'] === 'true'" class="label label-warning">{{"UI_NETWORK_ADMIN.USER.FIELDS.VERIFICATIONSTATUS.CODES.TEMPORARY_ID"|translate|uppercase}}</span>
+                <span ng-if="controller.user.verificationStatus === 1 && controller.user.emailValidated && controller.domainSettings['validate_email_on_registration'] === 'true'" class="label label-warning">{{"UI_NETWORK_ADMIN.USER.FIELDS.VERIFICATIONSTATUS.CODES.UNVERIFIED"|translate|uppercase}}</span>
+                <span ng-if="controller.user.verificationStatus === 1 && controller.domainSettings['validate_email_on_registration'] !== 'true'" class="label label-warning">{{"UI_NETWORK_ADMIN.USER.FIELDS.VERIFICATIONSTATUS.CODES.UNVERIFIED"|translate|uppercase}}</span>
+                <span ng-if="controller.user.verificationStatus === 2" class="label label-info">{{"UI_NETWORK_ADMIN.USER.FIELDS.VERIFICATIONSTATUS.CODES.MANUALLY_VERIFIED"|translate|uppercase}}</span>
+                <span ng-if="controller.user.verificationStatus === 3" class="label label-info">{{"UI_NETWORK_ADMIN.USER.FIELDS.VERIFICATIONSTATUS.CODES.EXTERNALLY_VERIFIED"|translate|uppercase}}</span>
+                <span ng-if="controller.user.verificationStatus === 4" class="label label-info">{{"UI_NETWORK_ADMIN.USER.FIELDS.VERIFICATIONSTATUS.CODES.SOF_VERIFIED"|translate|uppercase}}</span>
+                <span ng-if="controller.user.verificationStatus === 5" class="label label-info">{{"UI_NETWORK_ADMIN.USER.FIELDS.VERIFICATIONSTATUS.CODES.UNDERAGED"|translate|uppercase}}</span>
+                <span ng-if="controller.user.verificationStatus === 6" class="label label-info">{{"UI_NETWORK_ADMIN.USER.FIELDS.VERIFICATIONSTATUS.CODES.AGE_ONLY_VERIFIED"|translate|uppercase}}</span>
+                <span ng-if="controller.user.testAccount === true" class="label label-danger">TEST</span>
+                <span ng-if="!controller.userData.freeGamesLocked" class="label label-warning">{{"UI_NETWORK_ADMIN.USER.FIELDS.FREE_GAMES"|translate|uppercase}}</span>
+
+                <div class="top-space-5" style="overflow-x: auto; white-space: nowrap" ng-if="controller.user.userCategories.length > 0">
+                    <span ng-repeat="uc in controller.user.userCategories">
+                        <span style="line-height:inherit; margin-right: 5px; display: inline-block; float: none;" class="label label-primary">{{uc.name}}</span>
+                        <span ng-if="$last"><br/></span>
+                    </span>
+                </div>
+
+                <div class="top-space-5" style="overflow-x: auto; white-space: nowrap" ng-if="controller.userData.userRestrictions.length > 0">
+                    <span ng-repeat="userRestriction in controller.userData.userRestrictions">
+                        <span style="line-height:1; padding: .2em .6em .3em; margin-right: 5px; float: none;" class="label" ng-class="{'label-danger': userRestriction.active === true, 'label-warning': userRestriction.active === false }">{{userRestriction.set.systemRestriction===true?(userRestriction.displayName |translate | uppercase) : (userRestriction.displayName)}}</span>
+                        <span ng-if="$last"><br/></span>
+                    </span>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-md-6 col-lg-3 top-space-5">
+                <div class="table-responsive">
+                    <table class="table table-condensed table-hover nowrap" cellspacing="0" width="100%" style="font-size: 12px;">
+                        <tbody>
+                        <tr>
+                            <td style="width: 50%;">{{'UI_NETWORK_ADMIN.PLAYER.INFO-HEADER.LT-DEPOSITS'|translate}}</td>
+                            <td><span style="color: green;">{{controller.ltDeposits|cents:controller.userData.domain.currencySymbol}}</span></td>
+                        </tr><tr>
+                            <td>{{'UI_NETWORK_ADMIN.PLAYER.INFO-HEADER.LT-WITHDRAWALS'|translate}}</td>
+                            <td><span style="color: red;">{{controller.ltWithdrawals|cents:controller.userData.domain.currencySymbol}}</span></td>
+                        </tr><tr>
+                            <td>{{'UI_NETWORK_ADMIN.PLAYER.INFO-HEADER.PENDING-WITHDRAWALS'|translate}}</td>
+                            <td><span style="color: red;">{{controller.pendingWithdrawals|cents:controller.userData.domain.currencySymbol}}</span></td>
+                        </tr>
+                        <tr>
+                            <td>{{'UI_NETWORK_ADMIN.PLAYER.INFO-HEADER.ESCROW_BALANCE'|translate}}</td>
+                            <td><span style="color: red;">{{controller.escrowBalance|cents:controller.userData.domain.currencySymbol}}</span></td>
+                        </tr>
+                        <tr>
+                            <td>{{'UI_NETWORK_ADMIN.PLAYER.INFO-HEADER.LT_DEPOSIT_ATTEMPTS'|translate}}</td>
+                            <td><span style="color: red;">{{controller.ltDepositsAttempts}}</span></td>
+                        </tr>
+                        <tr>
+                            <td>{{'UI_NETWORK_ADMIN.PLAYER.INFO-HEADER.LT_DEPOSIT_SUCCESS'|translate}}</td>
+                            <td><span style="color: red;">{{controller.ltDepositsSuccess}}</span></td>
+                        </tr>
+                        <tr>
+                            <td>{{'UI_NETWORK_ADMIN.PLAYER.INFO-HEADER.LT_PLACED_TO'|translate}}</td>
+                            <td><span style="color: red;">{{controller.ltPlacedTo|cents:controller.userData.domain.currencySymbol}}</span></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-md-6 col-lg-3 top-space-5">
+                <span style="line-height:inherit; margin-right: 3px;" class="label label-primary">{{controller.user.guid|uppercase}}</span><br/><br/>
+                <span style="line-height:inherit; margin-right: 3px; font-size: 14pt; font-weight: bolder;">{{controller.userData.defaultBalance.balance|cents:controller.userData.domain.currencySymbol}}</span><br/><br/>
+                <quick-actions ng-model="controller.user" data="controller.userData"></quick-actions>
+            </div>
+        </div>
+    </div>
+
+    <div class="top-space-15"></div>
+
+    <div class="row v-reset-row ">
+        <div class="col-xs-12">
+            <div class="nav-tabs-custom">
+                <ul class="nav nav-tabs">
+                    <li role="presentation" ng-class="{ active: controller.tab == tab }"
+                        ng-repeat="tab in controller.tabs" lit-if-permission="{{tab.roles}}" lit-permission-domain="{{controller.user.domain.name}}" class="{{tab.tclass}}">
+                        <a ng-click="controller.setTab(tab)">{{ tab.title | translate }}</a>
+                    </li>
+                </ul>
+                <div class="tab-content" style="padding: 5px;">
+                    <div class="well">
+                        <div ui-view></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

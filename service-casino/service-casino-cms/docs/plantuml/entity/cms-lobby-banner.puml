@@ -1,0 +1,83 @@
+[plantuml]
+----
+@startuml
+
+entity Lobby {
+    *id : number <<PK>><<generated>>
+    --
+    **
+    **
+}
+
+entity Domain {
+    *id: number <<PK>><<generated>>
+    --
+    **
+    **
+}
+
+entity PageBanner {
+    *id : number <<PK>><<generated>>
+    --
+    lobby_id: number
+    primary_nav_code : text
+    secondary_nav_code: text
+    channel_name: text
+    version: number
+    banner_id: number <<FK>>
+}
+
+entity Banner {
+    *id: number <<PK>><<generated>>
+    --
+    version: number
+    name: text
+    position: number
+    start_date: date
+    time_from: time
+    time_to : time
+    link : text
+    image_url: text
+    recurrence_pattern: text
+    logged_in: boolean
+    domain_id: number <<FK>>
+}
+
+entity BannerSchedule {
+    *id: number <<PK>><<generated>>
+    --
+    version: number
+    start_date: date
+    end_date: date
+    version: number
+    closed: boolean
+    banner_id: number <<FK>>
+}
+
+entity Tags {
+    *id: number <<PK>><<generated>>
+    --
+    name: text
+    version: number
+    domain_id: number
+}
+
+entity BannerTags {
+    *id: number <<PK>><<generated>>
+    --
+    banner_id: number <<FK>>
+    tag_id: number <<FK>>
+}
+
+Lobby ||..o{ PageBanner
+Banner |o..o{ PageBanner
+Banner |o..o{ BannerTags
+Banner ||..|{ BannerSchedule
+Tags |o..o{ BannerTags
+Domain ||..|| Lobby
+Domain ||..o{ Banner
+Domain ||..o{ Tags
+
+
+@enduml
+----

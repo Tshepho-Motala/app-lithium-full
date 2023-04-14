@@ -1,0 +1,78 @@
+.Game Controller
+[plantuml]
+----
+@startuml
+
+    box "Lithium" #LightBlue
+        participant "Games Service" as games
+        participant "iForium Casino Provider" as provider
+    end box
+
+    skinparam handwritten false
+    skinparam backgroundColor transparent
+    skinparam roundcorner 10
+    skinparam BoxPadding 20
+
+    skinparam sequence {
+
+        ArrowColor 3292b4
+        ArrowThickness 2
+
+        LifeLineBorderColor 3292b4
+        LifeLineBackgroundColor #3292b4
+
+        ParticipantBorderColor 3292b4
+        ParticipantBackgroundColor 3292b4
+        ParticipantFontName Arial
+        ParticipantFontSize 17
+        ParticipantFontColor white
+
+        ActorBorderColor 3292b4
+        ActorBackgroundColor aqua
+        ActorFontColor 3292b4
+        ActorFontSize 17
+        ActorFontName Arial
+    }
+
+
+group Implemented Endpoints
+    games ->> provider : /games/{domainName}/startGame
+    provider -->> games :
+    games ->> provider : /games/{domainName}/demoGame
+    provider -->> games :
+    games ->> provider : /games/{domainName}/listGames
+    provider -->> games :
+end
+
+group Endpoints with Empty Responses
+    games ->> provider : /games/{domainName}/listDomainGamesDT
+    provider -->> games :
+    games ->> provider : /games/{domainName}/listDomainGamesReport
+    provider -->> games :
+end
+
+group Unimplemented Endpoints
+    games ->> provider : /games/{gameId}/unlock/toggle
+    provider -->> games : 501 - Not Implemented
+    games ->> provider : /games/{domainName}/listFrbGames
+    provider -->> games : 501 - Not Implemented
+    games ->> provider : /games/add
+    provider -->> games : 501 - Not Implemented
+    games ->> provider : /games/{gameId}/findById
+    provider -->> games : 501 - Not Implemented
+    games ->> provider : /games/{gameId}/editGraphic/{graphicFunction}
+    provider -->> games : 501 - Not Implemented
+    games ->> provider : /games/edit
+    provider -->> games : 501 - Not Implemented
+    games ->> provider : /games/{domainName}/listDomainGames
+    provider -->> games : 501 - Not Implemented
+    games ->> provider : /games/{domainName}/find/guid/{gameGuid}
+    provider -->> games : 501 - Not Implemented
+    games ->> provider : /games/{domainName}/find/guid/{gameGuid}/no-labels
+    provider -->> games : 501 - Not Implemented
+    games ->> provider : /games/{domainName}/isGameLockedForPlayer
+    provider -->> games : 501 - Not Implemented
+end
+
+@enduml
+----

@@ -1,0 +1,72 @@
+{
+	"info": {
+		"_postman_id": "e5d4c80b-946f-4aa4-b4e7-b186b6207b45",
+		"name": "Lithium Access API Documentation",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "External",
+			"item": [
+				{
+					"name": "externalValidations (iban, cruks)",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"firstName\": \"Jeremy\",\n  \"lastNamePrefix\": \"poweeeer\",\n  \"countryCodeOfBirth\": \"UK\",\n  \"dobDay\": 10,\n  \"dobMonth\": 3,\n  \"dobYear\": 1990,\n  \"email\": \"thisisthefastestcar@intheworld.com\",\n  \"additionalData\": {\n    \"bsn\": \"123456782ohwegohwefpkwdg\"\n  },\n  \"sha256\": \"e39c60975f3c3841ff3a966b46448712b6b43f900b15c555c3f6a7ad1c4ab27f\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{gateway}}/service-access/external/authorization/:domainName/:accessRuleName/check-authorization?locale=nl",
+							"host": [
+								"{{gateway}}"
+							],
+							"path": [
+								"service-access",
+								"external",
+								"authorization",
+								":domainName",
+								":accessRuleName",
+								"check-authorization"
+							],
+							"query": [
+								{
+									"key": "locale",
+									"value": "nl"
+								}
+							],
+							"variable": [
+								{
+									"key": "domainName",
+									"value": "livescore_nl"
+								},
+								{
+									"key": "accessRuleName",
+									"value": "cruksAccessRule"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

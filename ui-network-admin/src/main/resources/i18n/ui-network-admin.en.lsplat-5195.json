@@ -1,0 +1,20 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "BONUS": {
+      "EDIT": {
+        "REQUIRES_ACCEPTANCE": {
+          "NAME": "Requires Player Acceptance",
+          "DESCRIPTION": "The player must accept the bonus before it can be granted/activated"
+        }
+      }
+    },
+    "NOTIFICATIONS": {
+      "FIELDS": {
+        "NOTIFICATION_TYPE": {
+          "NAME": "Notification Type",
+          "DESCRIPTION": "Choose a notification type"
+        }
+      }
+    }
+  }
+}

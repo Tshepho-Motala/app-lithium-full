@@ -1,0 +1,1 @@
+ALTER TABLE `domain_currency` ADD COLUMN `is_default` bit(1);

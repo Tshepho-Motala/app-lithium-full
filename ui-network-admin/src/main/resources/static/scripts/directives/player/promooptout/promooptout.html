@@ -1,0 +1,163 @@
+<div class="box box-{{data.box}} box-solid" bs-loading-overlay bs-loading-overlay-reference-id="{{referenceId}}">
+    <div class="box-header with-border">
+        {{data.title | translate}}
+    </div>
+    <div class="box-body table-responsive">
+        <table class="table table-bordered">
+            <tr ng-if="data.isRootAccountLinked" >
+                <th  style="text-align: center; text-transform: capitalize;" class="align-middle" colspan="3">{{user.primaryBrandName}}</th>
+            </tr>
+            <tr ng-if="data.isRootAccountLinked">
+                <th width="40%">{{ 'UI_NETWORK_ADMIN.USER.PROMOOPTOUT.EMAIL' | translate }}</th>
+                <td ng-if="user.emailOptOut === null || !user.emailOptOut"><span class="label label-lg label-success">{{ 'UI_NETWORK_ADMIN.USER.PROMOOPTOUT.OPTIN_MESSAGE' | translate }}</span></td>
+                <td ng-if="user.emailOptOut"><span class="label label-lg label-warning">{{ 'UI_NETWORK_ADMIN.USER.PROMOOPTOUT.OPTOUT_MESSAGE' | translate }}</span></td>
+                <td ng-if="user.emailOptOut === null || !user.emailOptOut">
+                    <a lit-if-permission="USER_OPT,PLAYER_OPT"
+                       ng-click="opt('email', true)">{{ 'UI_NETWORK_ADMIN.USER.PROMOOPTOUT.OPTOUT' | translate }}</a>
+                </td>
+                <td ng-if="user.emailOptOut">
+                    <a lit-if-permission="USER_OPT,PLAYER_OPT"
+                       ng-click="opt('email', false)">{{ 'UI_NETWORK_ADMIN.USER.PROMOOPTOUT.OPTIN' | translate }}</a>
+                </td>
+            </tr>
+            <tr ng-if="user.ecosystemRootBrand" >
+                <th ng-if="data.isRootAccountLinked" style="text-align: center; text-transform: capitalize;" class="align-middle" colspan="3">{{user.brandName}}</th>
+                <th ng-if="!data.isRootAccountLinked" style="text-align: center; text-transform: capitalize;" class="align-middle" colspan="3">{{user.primaryBrandName}}</th>
+            </tr>
+
+            <tr ng-if="!data.isRootAccountLinked" >
+                <th width="40%">{{ 'UI_NETWORK_ADMIN.USER.PROMOOPTOUT.EMAIL' | translate }}</th>
+                <td ng-if="user.emailOptOut === null || !user.emailOptOut"><span class="label label-lg label-success">{{ 'UI_NETWORK_ADMIN.USER.PROMOOPTOUT.OPTIN_MESSAGE' | translate }}</span></td>
+                <td ng-if="user.emailOptOut"><span class="label label-lg label-warning">{{ 'UI_NETWORK_ADMIN.USER.PROMOOPTOUT.OPTOUT_MESSAGE' | translate }}</span></td>
+                <td ng-if="user.emailOptOut === null || !user.emailOptOut">
+                    <a lit-if-permission="USER_OPT,PLAYER_OPT"
+                       ng-click="opt('email', true)">{{ 'UI_NETWORK_ADMIN.USER.PROMOOPTOUT.OPTOUT' | translate }}</a>
+                </td>
+                <td ng-if="user.emailOptOut">
+                    <a lit-if-permission="USER_OPT,PLAYER_OPT"
+                       ng-click="opt('email', false)">{{ 'UI_NETWORK_ADMIN.USER.PROMOOPTOUT.OPTIN' | translate }}</a>
+                </td>
+            </tr>
+            <tr ng-if="!data.isRootAccountLinked" >
+                <th width="40%">{{ 'UI_NETWORK_ADMIN.USER.PROMOOPTOUT.POST' | translate }}</th>
+                <td ng-if="user.postOptOut === null || !user.postOptOut"><span class="label label-lg label-success">{{ 'UI_NETWORK_ADMIN.USER.PROMOOPTOUT.OPTIN_MESSAGE' | translate }}</span></td>
+                <td ng-if="user.postOptOut"><span class="label label-lg label-warning">{{ 'UI_NETWORK_ADMIN.USER.PROMOOPTOUT.OPTOUT_MESSAGE' | translate }}</span></td>
+                <td ng-if="user.postOptOut === null || !user.postOptOut">
+                    <a lit-if-permission="USER_OPT,PLAYER_OPT"
+                       ng-click="opt('post', true)">{{ 'UI_NETWORK_ADMIN.USER.PROMOOPTOUT.OPTOUT' | translate }}</a>
+                </td>
+                <td ng-if="user.postOptOut">
+                    <a lit-if-permission="USER_OPT,PLAYER_OPT"
+                       ng-click="opt('post', false)">{{ 'UI_NETWORK_ADMIN.USER.PROMOOPTOUT.OPTIN' | translate }}</a>
+                </td>
+            </tr>
+            <tr ng-if="!data.isRootAccountLinked">
+                <th>{{ 'UI_NETWORK_ADMIN.USER.PROMOOPTOUT.SMS' | translate }}</th>
+                <td ng-if="user.smsOptOut === null || !user.smsOptOut"><span class="label label-lg label-success">{{ 'UI_NETWORK_ADMIN.USER.PROMOOPTOUT.OPTIN_MESSAGE' | translate }}</span></td>
+                <td ng-if="user.smsOptOut"><span class="label label-lg label-warning">{{ 'UI_NETWORK_ADMIN.USER.PROMOOPTOUT.OPTOUT_MESSAGE' | translate }}</span></td>
+                <td ng-if="user.smsOptOut === null || !user.smsOptOut">
+                    <a lit-if-permission="USER_OPT,PLAYER_OPT"
+                       ng-click="opt('sms', true)">{{ 'UI_NETWORK_ADMIN.USER.PROMOOPTOUT.OPTOUT' | translate }}</a>
+                </td>
+                <td ng-if="user.smsOptOut">
+                    <a lit-if-permission="USER_OPT,PLAYER_OPT"
+                       ng-click="opt('sms', false)">{{ 'UI_NETWORK_ADMIN.USER.PROMOOPTOUT.OPTIN' | translate }}</a>
+                </td>
+            </tr>
+            <tr ng-if="!data.isRootAccountLinked" >
+                <th>{{ 'UI_NETWORK_ADMIN.USER.PROMOOPTOUT.CALL' | translate }}</th>
+                <td ng-if="user.callOptOut === null || !user.callOptOut"><span class="label label-lg label-success">{{ 'UI_NETWORK_ADMIN.USER.PROMOOPTOUT.OPTIN_MESSAGE' | translate }}</span></td>
+                <td ng-if="user.callOptOut"><span class="label label-lg label-warning">{{ 'UI_NETWORK_ADMIN.USER.PROMOOPTOUT.OPTOUT_MESSAGE' | translate }}</span></td>
+                <td ng-if="user.callOptOut === null || !user.callOptOut">
+                    <a lit-if-permission="USER_OPT,PLAYER_OPT"
+                       ng-click="opt('call', true)">{{ 'UI_NETWORK_ADMIN.USER.PROMOOPTOUT.OPTOUT' | translate }}</a>
+                </td>
+                <td ng-if="user.callOptOut">
+                    <a lit-if-permission="USER_OPT,PLAYER_OPT"
+                       ng-click="opt('call', false)">{{ 'UI_NETWORK_ADMIN.USER.PROMOOPTOUT.OPTIN' | translate }}</a>
+                </td>
+            </tr>
+            <tr ng-if="crossDomainOptOutDisplayEnabled">
+                <th>{{ 'UI_NETWORK_ADMIN.USER.PROMOOPTOUT.PUSH' | translate }}</th>
+                <td ng-if="user.pushOptOut === null || !user.pushOptOut"><span class="label label-lg label-success">{{ 'UI_NETWORK_ADMIN.USER.PROMOOPTOUT.OPTIN_MESSAGE' | translate }}</span></td>
+                <td ng-if="user.pushOptOut"><span class="label label-lg label-warning">{{ 'UI_NETWORK_ADMIN.USER.PROMOOPTOUT.OPTOUT_MESSAGE' | translate }}</span></td>
+                <td ng-if="user.pushOptOut === null || !user.pushOptOut">
+                    <a lit-if-permission="USER_OPT,PLAYER_OPT"
+                       ng-click="opt('push', true)">{{ 'UI_NETWORK_ADMIN.USER.PROMOOPTOUT.OPTOUT' | translate }}</a>
+                </td>
+                <td ng-if="user.pushOptOut">
+                    <a lit-if-permission="USER_OPT,PLAYER_OPT"
+                       ng-click="opt('push', false)">{{ 'UI_NETWORK_ADMIN.USER.PROMOOPTOUT.OPTIN' | translate }}</a>
+                </td>
+            </tr>
+            <tr ng-if="crossDomainOptOutDisplayEnabled">
+                <th>{{ 'UI_NETWORK_ADMIN.USER.PROMOOPTOUT.LEADERBOARD' | translate }}</th>
+                <td ng-if="user.leaderboardOptOut === null || !user.leaderboardOptOut"><span class="label label-lg label-success">{{ 'UI_NETWORK_ADMIN.USER.PROMOOPTOUT.OPTIN_MESSAGE' | translate }}</span></td>
+                <td ng-if="user.leaderboardOptOut"><span class="label label-lg label-warning">{{ 'UI_NETWORK_ADMIN.USER.PROMOOPTOUT.OPTOUT_MESSAGE' | translate }}</span></td>
+                <td ng-if="user.leaderboardOptOut === null || !user.leaderboardOptOut">
+                    <a lit-if-permission="USER_OPT,PLAYER_OPT"
+                       ng-click="opt('leaderboard', true)">{{ 'UI_NETWORK_ADMIN.USER.PROMOOPTOUT.OPTOUT' | translate}}</a>
+                </td>
+                <td ng-if="user.leaderboardOptOut">
+                    <a lit-if-permission="USER_OPT,PLAYER_OPT"
+                       ng-click="opt('leaderboard', false)">{{ 'UI_NETWORK_ADMIN.USER.PROMOOPTOUT.OPTIN' | translate}}</a>
+                </td>
+            </tr>
+            <tr ng-if="!data.isRootAccountLinked" >
+                <th style="text-align: center; text-transform: capitalize;" class="align-middle" colspan="3">{{user.brandName}}</th>
+            </tr>
+            <tr ng-if="user.ecosystemRootBrand">
+                <th>{{ 'UI_NETWORK_ADMIN.USER.PROMOOPTOUT.EMAIL' | translate }}</th>
+                <td ng-if="user.ecosystemRootEmailOptOut === null || !user.ecosystemRootEmailOptOut"><span class="label label-lg label-success">{{ 'UI_NETWORK_ADMIN.USER.PROMOOPTOUT.OPTIN_MESSAGE' | translate }}</span></td>
+                <td ng-if="user.ecosystemRootEmailOptOut"><span class="label label-lg label-warning">{{ 'UI_NETWORK_ADMIN.USER.PROMOOPTOUT.OPTOUT_MESSAGE' | translate }}</span></td>
+                <td ng-if="user.ecosystemRootEmailOptOut === null || !user.ecosystemRootEmailOptOut">
+                    <a lit-if-permission="USER_OPT,PLAYER_OPT"
+                       ng-click="optEcosystemRoot('email', true)">{{ 'UI_NETWORK_ADMIN.USER.PROMOOPTOUT.OPTOUT' | translate}}</a>
+                </td>
+                <td ng-if="user.ecosystemRootEmailOptOut">
+                    <a lit-if-permission="USER_OPT,PLAYER_OPT"
+                       ng-click="optEcosystemRoot('email', false)">{{ 'UI_NETWORK_ADMIN.USER.PROMOOPTOUT.OPTIN' | translate}}</a>
+                </td>
+            </tr>
+            <tr ng-if="data.isRootAccountLinked" >
+                <th width="40%">{{ 'UI_NETWORK_ADMIN.USER.PROMOOPTOUT.POST' | translate }}</th>
+                <td ng-if="user.ecosystemRootPostOptOut === null || !user.ecosystemRootPostOptOut"><span class="label label-lg label-success">{{ 'UI_NETWORK_ADMIN.USER.PROMOOPTOUT.OPTIN_MESSAGE' | translate }}</span></td>
+                <td ng-if="user.ecosystemRootPostOptOut"><span class="label label-lg label-warning">{{ 'UI_NETWORK_ADMIN.USER.PROMOOPTOUT.OPTOUT_MESSAGE' | translate }}</span></td>
+                <td ng-if="user.ecosystemRootPostOptOut === null || !user.ecosystemRootPostOptOut">
+                    <a lit-if-permission="USER_OPT,PLAYER_OPT"
+                       ng-click="optEcosystemRoot('post', true)">{{ 'UI_NETWORK_ADMIN.USER.PROMOOPTOUT.OPTOUT' | translate }}</a>
+                </td>
+                <td ng-if="user.ecosystemRootPostOptOut">
+                    <a lit-if-permission="USER_OPT,PLAYER_OPT"
+                       ng-click="optEcosystemRoot('post', false)">{{ 'UI_NETWORK_ADMIN.USER.PROMOOPTOUT.OPTIN' | translate }}</a>
+                </td>
+            </tr>
+            <tr ng-if="data.isRootAccountLinked" >
+                <th>{{ 'UI_NETWORK_ADMIN.USER.PROMOOPTOUT.SMS' | translate }}</th>
+                <td ng-if="user.ecosystemRootSmsOptOut === null || !user.ecosystemRootSmsOptOut"><span class="label label-lg label-success">{{ 'UI_NETWORK_ADMIN.USER.PROMOOPTOUT.OPTIN_MESSAGE' | translate }}</span></td>
+                <td ng-if="user.ecosystemRootSmsOptOut"><span class="label label-lg label-warning">{{ 'UI_NETWORK_ADMIN.USER.PROMOOPTOUT.OPTOUT_MESSAGE' | translate }}</span></td>
+                <td ng-if="user.ecosystemRootSmsOptOut === null || !user.ecosystemRootSmsOptOut">
+                    <a lit-if-permission="USER_OPT,PLAYER_OPT"
+                       ng-click="optEcosystemRoot('sms', true)">{{ 'UI_NETWORK_ADMIN.USER.PROMOOPTOUT.OPTOUT' | translate }}</a>
+                </td>
+                <td ng-if="user.ecosystemRootSmsOptOut">
+                    <a lit-if-permission="USER_OPT,PLAYER_OPT"
+                       ng-click="optEcosystemRoot('sms', false)">{{ 'UI_NETWORK_ADMIN.USER.PROMOOPTOUT.OPTIN' | translate }}</a>
+                </td>
+            </tr>
+            <tr ng-if="data.isRootAccountLinked" >
+                <th>{{ 'UI_NETWORK_ADMIN.USER.PROMOOPTOUT.CALL' | translate }}</th>
+                <td ng-if="user.ecosystemRootCallOptOut === null || !user.ecosystemRootCallOptOut"><span class="label label-lg label-success">{{ 'UI_NETWORK_ADMIN.USER.PROMOOPTOUT.OPTIN_MESSAGE' | translate }}</span></td>
+                <td ng-if="user.ecosystemRootCallOptOut"><span class="label label-lg label-warning">{{ 'UI_NETWORK_ADMIN.USER.PROMOOPTOUT.OPTOUT_MESSAGE' | translate }}</span></td>
+                <td ng-if="user.ecosystemRootCallOptOut === null || !user.ecosystemRootCallOptOut">
+                    <a lit-if-permission="USER_OPT,PLAYER_OPT"
+                       ng-click="optEcosystemRoot('call', true)">{{ 'UI_NETWORK_ADMIN.USER.PROMOOPTOUT.OPTOUT' | translate }}</a>
+                </td>
+                <td ng-if="user.ecosystemRootCallOptOut">
+                    <a lit-if-permission="USER_OPT,PLAYER_OPT"
+                       ng-click="optEcosystemRoot('call', false)">{{ 'UI_NETWORK_ADMIN.USER.PROMOOPTOUT.OPTIN' | translate }}</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

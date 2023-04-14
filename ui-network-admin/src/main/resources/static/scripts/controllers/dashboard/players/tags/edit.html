@@ -1,0 +1,42 @@
+<div class="modal-content">
+	<div class="modal-header primary-blue darken-4 white-text">
+		<h3 class="modal-title" id="modal-title">
+			<i class="fa fa-pencil"></i>
+			{{ 'UI_NETWORK_ADMIN.PLAYERS.TAGS.EDIT.TITLE' | translate }}
+			<button-close-window ng-click="controller.cancel()"></button-close-window>
+		</h3>
+	</div>
+
+	<form ng-submit="controller.onSubmit()" name="controller.form" novalidate>
+		<div class="modal-body" id="modal-body">
+			<div class="row v-reset-row ">
+				<div class="col-xs-12">
+					<formly-form model="controller.model" fields="controller.fields"
+											 options="controller.options" form="controller.form">
+					</formly-form>
+					<div>
+						<label class="control-label ">
+							{{'UI_NETWORK_ADMIN.PLAYERS.TAGS.FIELDS.USERS.TITLE' | translate}}
+						</label>
+						<br>
+						<p>{{controller.players}} Players with current tag</p>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal-footer" id="modal-footer">
+			<buttonbar>
+				<div class="pull-left">
+					<button-save ></button-save>
+					<button-custom bclass="danger" text="GLOBAL.ACTION.DELETE" icon="trash-o"
+												 disabled="{{controller.players > 0}}"
+												 ng-click="controller.deleteTag()"></button-custom>
+				</div>
+				<button-custom ng-click="controller.edit()" bclass="" icon="eye"
+											 text="UI_NETWORK_ADMIN.PLAYERS.TAGS.VIEWBUTTON"></button-custom>
+				<button-cancel ng-click="controller.cancel()"></button-cancel>
+			</buttonbar>
+		</div>
+	</form>
+</div>

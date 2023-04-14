@@ -1,0 +1,37 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "TEMPLATES": {
+      "FIELDS": {
+        "NAME": {
+          "UNIQUE": "Template already exists."
+        }
+      }
+    },
+    "CMS": {
+      "PAGE": {
+        "TITLE": {
+          "IMAGES": "Images"
+        }
+      },
+      "IMAGES": {
+        "ERRORS": {
+          "DELETE": "Failed to delete image."
+        },
+        "FIELDS": {
+          "NAME": {
+            "UNIQUE": "The image already exists.",
+            "NAME": "Image Name",
+            "DESCRIPTION": "A descriptive name for this image that should be unique per language, per domain, and will be used when referring to the image."
+          },
+          "LANG": {
+            "DESCRIPTION": "The language of this image. You may create many versions of this image, one for each language."
+          },
+          "DESCRIPTION": {
+            "NAME": "Image Description",
+            "DESCRIPTION": "Provide a short description for this image."
+          }
+        }
+      }
+    }
+  }
+}

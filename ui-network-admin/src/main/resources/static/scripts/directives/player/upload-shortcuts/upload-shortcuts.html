@@ -1,0 +1,47 @@
+<div class="btn-group pull-right" uib-dropdown>
+  <button id="dropdown-domain" type="button" class="btn btn-default" uib-dropdown-toggle>
+    {{"UI_NETWORK_ADMIN.PLAYER.DOCUMENTS.UPLOAD_SHORTCUTS.NAME" | translate}} <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu dropdown-menu-right" uib-dropdown-menu role="menu">
+    <li role="menuitem">
+      <a ng-click="controller.createAndEditDocument(
+            'UI_NETWORK_ADMIN.PLAYER.DOCUMENTS.UPLOAD_SHORTCUTS.PASSPORT' | translate,
+            'UI_NETWORK_ADMIN.PLAYER.DOCUMENTS.UPLOAD_SHORTCUTS.IDENTITY_VERIFICATION_FUNCTION' | translate,
+            'UI_NETWORK_ADMIN.PLAYER.DOCUMENTS.UPLOAD_SHORTCUTS.NEW_STATUS' | translate, false)">
+        {{"UI_NETWORK_ADMIN.PLAYER.DOCUMENTS.UPLOAD_SHORTCUTS.UPLOAD_PASSPORT" | translate}}
+      </a>
+    </li>
+    <li role="menuitem">
+      <a ng-click="controller.createAndEditDocument(
+            'UI_NETWORK_ADMIN.PLAYER.DOCUMENTS.UPLOAD_SHORTCUTS.DRIVERS_LICENSE' | translate,
+            'UI_NETWORK_ADMIN.PLAYER.DOCUMENTS.UPLOAD_SHORTCUTS.IDENTITY_VERIFICATION_FUNCTION' | translate,
+            'UI_NETWORK_ADMIN.PLAYER.DOCUMENTS.UPLOAD_SHORTCUTS.NEW_STATUS' | translate, false)">
+        {{"UI_NETWORK_ADMIN.PLAYER.DOCUMENTS.UPLOAD_SHORTCUTS.UPLOAD_DRIVERS_LICENSE" | translate}}
+      </a>
+    </li>
+    <li role="menuitem">
+      <a ng-click="controller.createAndEditDocument(
+            'UI_NETWORK_ADMIN.PLAYER.DOCUMENTS.UPLOAD_SHORTCUTS.BANK_STATEMENT' | translate,
+            'UI_NETWORK_ADMIN.PLAYER.DOCUMENTS.UPLOAD_SHORTCUTS.ADDRESS_VERIFICATION_FUNCTION' | translate,
+            'UI_NETWORK_ADMIN.PLAYER.DOCUMENTS.UPLOAD_SHORTCUTS.NEW_STATUS' | translate, false)">
+        {{"UI_NETWORK_ADMIN.PLAYER.DOCUMENTS.UPLOAD_SHORTCUTS.UPLOAD_BANK_STATEMENT" | translate}}
+      </a>
+    </li>
+    <li role="menuitem">
+      <a ng-click="controller.createAndEditDocument(
+            'UI_NETWORK_ADMIN.PLAYER.DOCUMENTS.UPLOAD_SHORTCUTS.UTILITY_BILL' | translate,
+            'UI_NETWORK_ADMIN.PLAYER.DOCUMENTS.UPLOAD_SHORTCUTS.ADDRESS_VERIFICATION_FUNCTION' | translate,
+            'UI_NETWORK_ADMIN.PLAYER.DOCUMENTS.UPLOAD_SHORTCUTS.NEW_STATUS' | translate, false)">
+        {{"UI_NETWORK_ADMIN.PLAYER.DOCUMENTS.UPLOAD_SHORTCUTS.UPLOAD_UTILITY_BILL" | translate}}
+      </a>
+    </li>
+    <li role="menuitem">
+      <a ng-click="controller.createAndEditDocument(
+            'UI_NETWORK_ADMIN.PLAYER.DOCUMENTS.UPLOAD_SHORTCUTS.SELFIE_ID' | translate,
+            'UI_NETWORK_ADMIN.PLAYER.DOCUMENTS.UPLOAD_SHORTCUTS.ENHANCED_IDENTITY_VERIFICATION_FUNCTION' | translate,
+            'UI_NETWORK_ADMIN.PLAYER.DOCUMENTS.UPLOAD_SHORTCUTS.NEW_STATUS' | translate, false)">
+        {{"UI_NETWORK_ADMIN.PLAYER.DOCUMENTS.UPLOAD_SHORTCUTS.UPLOAD_SELFIE_ID" | translate}}
+      </a>
+    </li>
+  </ul>
+</div>

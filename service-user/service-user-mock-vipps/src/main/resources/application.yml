@@ -1,0 +1,26 @@
+#spring.application.name=service-user-mock-vipps
+server:
+  port: 9706
+security:
+  basic:
+    enabled: false
+spring:
+  datasource:
+    continue-on-error: true
+  autoconfigure:
+    exclude:
+    - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
+    - org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfiguration
+  thymeleaf:
+    cache: false
+logging:
+  level:
+    lithium.service.user.mock.vipps: INFO
+    org.springframework.web.client: INFO
+lithium:
+  vipps:
+    mock:
+      access-token-client-id: d25926b4-80ac-4255-aec8-1353892cad06
+      access-token-client-secret: TU5hdEpoZ3RodjU1VVQyU09Ua0s=
+      ocp-apim-subscription-key: 1b0c52f6880e4dd8b7557411c9894744
+      url: http://vipps-mock.lithium-ci-develop.cloud.playsafesa.com

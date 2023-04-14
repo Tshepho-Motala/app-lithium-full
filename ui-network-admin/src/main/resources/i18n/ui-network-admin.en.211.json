@@ -1,0 +1,29 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "PLAYER": {
+      "TAB": {
+        "FINANCIAL_TRANSACTIONS": "Financial Transactions"
+      }
+    },
+    "CASHIER": {
+      "PAYMENT_METHOD": {
+        "TITLE_MANY": "Payment methods",
+        "EDIT": {
+          "TITLE": "Payment Method Edit",
+          "COMMENT": {
+            "NAME": "Comment",
+            "PLACEHOLDER": "",
+            "DESCRIPTION": "Please specify the status for this payment method"
+          }
+        },
+        "GRAND_TOTAL": "Grand Total",
+        "METHOD": "Method",
+        "DEPOSIT": "Deposit",
+        "WITHDRAWAL": "Withdrawal",
+        "NET_DEPOSIT": "Net Deposit",
+        "STATUS": "Status",
+        "ACTION": "Action"
+      }
+    }
+  }
+}

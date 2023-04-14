@@ -1,0 +1,139 @@
+{
+  "name": "Nuvei Credit Card",
+  "code": "nuvei-cc",
+  "url": "service-cashier-processor-nuvei-cc",
+  "methodNames": ["nuvei-cc"],
+  "deposit": true,
+  "withdraw": true,
+  "fees": {
+    "flat": 0,
+    "percentage": 0,
+    "minimum": 0
+  },
+  "limits": {
+    "minAmount": 2500,
+    "maxAmount": 100000000,
+    "maxAmountDay": 1000000000,
+    "maxAmountWeek": 1000000000,
+    "maxAmountMonth": 1000000000,
+    "maxTransactionsDay": 1000000000,
+    "maxTransactionsWeek": 1000000000,
+    "maxTransactionsMonth": 1000000000
+  },
+  "properties": [
+    {
+      "name": "allow_multi_transactions",
+      "defaultValue": "true",
+      "type": "string",
+      "description": "Allow user to create new transaction while previous one is pending."
+    },
+    {
+      "name": "merchant_id",
+      "defaultValue": "",
+      "type": "string",
+      "description": "Nuvei merchant id"
+    },
+    {
+      "name": "merchant_site_id",
+      "defaultValue": "",
+      "type": "string",
+      "description": "Nuvei merchant site id"
+    },
+    {
+      "name": "merchant_key",
+      "defaultValue": "",
+      "type": "string",
+      "description": "Nuvei merchant key"
+    },
+    {
+      "name": "test",
+      "defaultValue": "true",
+      "type": "boolean",
+      "description": "Use Nuvei test environment"
+    },
+    {
+      "name": "use_3DSecure",
+      "defaultValue": "true",
+      "type": "string",
+      "description": "Choose whether to use 3DS"
+    },
+    {
+      "name": "product_id",
+      "defaultValue": "Livescore",
+      "type": "string",
+      "description": "The product id that will be sent to Nuvei."
+    },
+    {
+      "name": "check_card_owner",
+      "defaultValue": "false",
+      "type": "boolean",
+      "description": "Enable user card owner check."
+    },
+    {
+      "name": "merchant_site_name",
+      "defaultValue": null,
+      "type": "string",
+      "description": "The merchant’s site name. That will be sent to Nuvei."
+    },
+    {
+      "name": "challenge_preference",
+      "defaultValue": "02",
+      "type": "string",
+      "description": "Determines the challenge preference. 01 – Challenge requested, 02 – Exemption requested, 03 – No preference"
+    },
+    {
+      "name": "merchant_name",
+      "defaultValue": null,
+      "type": "string",
+      "description": "The merchant name, as is displayed for the transaction on the consumer’s card statement.(String, 25)"
+    },
+    {
+      "name": "merchant_phone",
+      "defaultValue": null,
+      "type": "string",
+      "description": "The merchant contact information, as is displayed for the transaction on the consumer’s card statement. It can also be an email address.(String, 13)"
+    },
+    {
+      "name": "product_id",
+      "defaultValue": null,
+      "type": "string",
+      "description": "A free text field used to identify the product/service sold..(String, 50)"
+    },
+    {
+      "name": "fingerprint_enabled",
+      "defaultValue": false,
+      "type": "boolean",
+      "description": "Enables 3DS fingerprint flow"
+    },
+    {
+      "name": "allow_card_types",
+      "defaultValue": "debit",
+      "type": "frontend",
+      "description": "Allowed card types (debit, credit)."
+    },
+    {
+      "name": "upos_mid",
+      "defaultValue": "",
+      "type": "string",
+      "description": "The merchant ID to use for retrieving user payment options"
+    },
+    {
+      "name": "upos_sid",
+      "defaultValue": "",
+      "type": "string",
+      "description": "The merchant site ID to use for retrieving user payment options"
+    },
+    {
+      "name": "upos_mkey",
+      "defaultValue": "",
+      "type": "string",
+      "description": "The merchant secret key to use for retrieving user payment options"
+    },
+    {
+      "name": "upos_hash_algorithm",
+      "defaultValue": "MD5",
+      "type": "string",
+      "description": "The merchant hash algorithm to use for checksum calculation"
+    }
+  ]
+}

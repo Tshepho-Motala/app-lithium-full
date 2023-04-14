@@ -1,0 +1,23 @@
+{
+  "SERVICE-CASHIER": {
+    "AUTOWITHDRAWALS": {
+      "RULESETS": {
+        "RULE": {
+          "FIELD": {
+            "WITHDRAW_AMOUNT_CENTS": "Withdraw Amount (in cents)",
+            "DAYS_SINCE_REGISTRATION": "Days Since Registration",
+            "NO_OF_MANUALLY_CONFIRMED_WITHDRAWALS": "No. of Manually Confirmed Withdrawals"
+          },
+          "OPERATOR": {
+            "BETWEEN": "Between",
+            "EQUALS": "Equals",
+            "GREATER_THAN": "Greater than",
+            "GREATER_THAN_OR_EQUALS": "Greater than or equals",
+            "LESS_THAN": "Less than",
+            "LESS_THAN_OR_EQUALS": "Less than or equals"
+          }
+        }
+      }
+    }
+  }
+}

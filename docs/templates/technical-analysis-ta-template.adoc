@@ -1,0 +1,112 @@
+= My Beautiful TA
+Riaan Schoeman <riaan.schoeman@wonderlabz.com>
+1.0, July 20, 2022: TA1
+:sectnums:
+:toc: left
+:toclevels: 4
+:toc-title: Table of Contents
+:icons: font
+:source-highlighter: coderay
+:url-quickref: https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/
+:table-caption!:
+
+:erd-include: ../includes/erd.puml
+:seq-include: ../includes/sequence.puml
+
+:svc-user-sourcedir: ../../service-user/service-user/src/main/java
+
+//This is done to keep formatting aligned with gitlab
+****
+[verse,,]
+____
+link:../../readme.adoc[Home]
+____
+****
+
+WARNING: You might need to install graphviz to render the component models on IntelliJ on plantUML if not viewed on GitLab - see https://playsafe.atlassian.net/wiki/spaces/LITHIUM/pages/1674936347/How+To+Setup+Lithium+Local+Development#Noteworthy-Extensions.1[IntelliJ: PlantUML diagramming tool] +
+The download can be made from: https://graphviz.gitlab.io/download/
+
+== Description
+=== Jira
+* link:https://playsafe.atlassian.net/browse/LSPLAT-0000[LSPLAT-0000]
+* link:https://jira.livescore.com/browse/PLAT-0000[PLAT-0000]
+
+=== Gitlab
+* Branch: origin/feature/LSPLAT-0000_PLAT-0000-awesome_new_feauture
+* MR: link:https://gitlab.com/playsafe/lithium/app-lithium-full/-/merge_requests/0000[]
+
+=== External Dependencies
+==== Swagger (To be completed *before* development starts)
+* Short description of swagger changes that will be required.
+* TL to facilitate timeline and communication to GW/FE for the changes.
+
+==== DWH
+* Short description of any changes that would need to be communicated/discussed with DWH.
+* TL to facilitate.
+
+==== Other
+* Any other external providers that might need consideration. e.g. eXtremePush/Roxor
+
+=== Business
+
+Description from the ticket being worked on.
+
+== Architecture
+
+=== Sample Source
+// Side effect from using this approach is that a few commits into the future above the line numbers speficied in [lines=39..66], will result in your code block not being relevant anymore when you look at it again. It is rather preferred to copy your source examples into the TA to have it comitted as part of the same file.
+[source,java,linenums,indent=0,highlight=21]
+----
+include::{svc-user-sourcedir}/lithium/service/user/ServiceUserApplication.java[lines=39..66]
+----
+
+=== Sample Sequence
+// Note that any plantuml references to files in a TA will eventially no longer be in line with what was spec'ed at the time of writing the TA. It is rather recommended to apply the changes to the .puml file, and then copy the plantuml code from the .puml file into the TA (in-line source), and then have it commited as part of the TA. This way the sequence diagram is saved within context of the TA at the time of its writing.
+.Sample sequence diagram.
+["plantuml"]
+----
+
+include::../includes/sequence.puml[]
+
+pn("service-user-threshold", sut)
+p("service-user", su)
+q("rabbit", r)
+
+su -> sut++: request
+sut --> r: post message to rabbit
+su <- sut--: response
+
+----
+
+=== Sample ERD
+.Sample ER diagram.
+["plantuml"]
+----
+
+include::../includes/erd.puml[]
+
+T(u, "user\n Contains some users") {
+  pk(id) bigint(20) <<generated>>
+  --
+  version: int(11)
+  nn(unique(guid)): varchar(255)
+  test_account: bit(1)
+  dobYear: int(11)
+  dobMonth: int(11)
+  dobDay: int(11)
+  notifications: bit(1)
+  fk(domain_id): bigint(20)
+}
+note right of u
+  Sample Note
+end note
+
+T(d, "domain\n Contains some domain names") {
+  pk(id) bigint(20) <<generated>>
+  --
+  version: int(11)
+  nn(unique(name)): varchar(255)
+}
+
+u -- d
+----

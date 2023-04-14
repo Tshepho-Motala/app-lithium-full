@@ -1,0 +1,31 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost/lithium_document
+    username: root
+    password: mysql
+  jpa:
+    hibernate:
+      ddl-auto: validate
+  cloud:
+    stream:
+      bindings:
+        userdocumenttriggeroutput:
+          group: userdocumenttriggergroup
+          binder: rabbit
+          destination: userdocumenttriggerqueue
+          producer:
+            required-groups: userdocumenttriggergroup
+#File properties should be in MB only, business logic is assuming properties are in MB
+  servlet:
+    multipart:
+      max-file-size: 20MB
+      max-request-size: 20MB
+      file-size-threshold: 1MB
+
+server:
+  port: 9494
+
+lithium:
+  services:
+    db:
+      load-test-data: false

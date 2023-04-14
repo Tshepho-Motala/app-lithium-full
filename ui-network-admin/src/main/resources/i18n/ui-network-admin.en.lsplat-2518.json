@@ -1,0 +1,50 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "BRANDCONFIG": {
+      "TAB": {
+        "ERROR_MESSAGES": {
+          "TAB": {
+            "LIMIT_SYSTEM_ACCESS": {
+              "TITLE": "Limit System Access"
+            },
+            "RESTRICTIONS": {
+              "TITLE": "Restrictions"
+            }
+          }
+        }
+      }
+    },
+    "DOMAIN": {
+      "LIMIT_SYSTEM_ACCESS": {
+        "VIEW": {
+          "HEADER": {
+            "SYSTEM_ACCESS_LIMITS": {
+              "LABEL": "System Access Limits"
+            },
+            "LOGIN": {
+              "LABEL": "login"
+            },
+            "DEPOSIT": {
+              "LABEL": "deposit"
+            },
+            "WITHDRAW": {
+              "LABEL": "withdraw"
+            },
+            "BET_PLACEMENT": {
+              "LABEL": "betPlacement"
+            },
+            "CASINO": {
+              "LABEL": "casino"
+            }
+          },
+          "TOGGLE_ERROR_MESSAGE": {
+            "REASON": {
+              "LABEL": "Reason for enabling/disabling System Limit Access restriction rule?",
+              "PLACEHOLDER": "Please provide a reason for change..."
+            }
+          }
+        }
+      }
+    }
+  }
+}

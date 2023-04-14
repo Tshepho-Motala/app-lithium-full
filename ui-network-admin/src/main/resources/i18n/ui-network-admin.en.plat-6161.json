@@ -1,0 +1,8 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "CHANGELOGS": {
+      "PLACE": "The transaction status was edited. ",
+      "LIFT": "The transaction status was edited. "
+    }
+  }
+}

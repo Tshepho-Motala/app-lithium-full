@@ -1,0 +1,1 @@
+UPDATE status set name = upper(name)

@@ -1,0 +1,53 @@
+<div class="container-fluid" bs-loading-overlay bs-loading-overlay-reference-id="{{controller.referenceId}}">
+	<div class="card card-block" style="margin-bottom: 10px;" ng-init="">
+		<div class="d-flex justify-content-start">
+			<div class="p-2 mr-auto" style="width: 50%;">
+				<span class="title">{{ 'UI_NETWORK_ADMIN.PLAYERS.LIST.TITLE' | translate }}</span>
+				<span class="description">{{ 'UI_NETWORK_ADMIN.PLAYERS.LIST.DESCRIPTION' | translate }}</span>
+			</div>
+			<div class="ml-auto p-2 text-right d-flex flex-wrap" style="width: 50%;">
+				<span ng-repeat="domain in controller.selectedDomains"><span style="padding:5px; margin-right: 3px;" class="label label-primary mb-2 d-flex">&nbsp;{{ domain.name | uppercase }}&nbsp;</span></span>
+				<div class="col-xs-12 bottom-space-10 text-right"></div>
+				<span ng-repeat="type in controller.selectedTypes"><span style="padding:5px; margin-right: 3px;" class="label label-default">&nbsp;{{ type.name | uppercase }}&nbsp;</span></span>
+				<div class="col-xs-12 bottom-space-10 text-right"></div>
+				<span ng-repeat="restriction in controller.selectedRestrictions"><span style="padding:5px; margin-right: 3px;" class="label label-default">&nbsp;{{ restriction.name | uppercase }}&nbsp;</span></span>
+				<div class="col-xs-12 bottom-space-10 text-right"></div>
+				<span ng-repeat="affiliate in controller.selectedAffiliate"><span style="padding:5px; margin-right: 3px;" class="label label-warning">&nbsp;{{ affiliate.value | uppercase }}&nbsp;</span></span>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row v-reset-row ">
+		<div class="col-xs-12 bottom-space-10 top-space-25 text-right">
+			<div  id="vueMountPlayerSearchTopBar"></div>
+		</div>
+	</div>
+	<div class="row v-reset-row ">
+		<div class="col-xs-12">
+			<div class="card card-block">
+				<div class="" style="margin-bottom: 10px;">
+					<div uib-collapse="controller.legendCollapsed">
+						<div class="row v-reset-row ">
+							<formly-form model="controller.model" fields="controller.filterFields" form="controller.form" options="controller.options" class="d-flex flex-wrap">
+							</formly-form>
+						</div>
+						<div class="col-xs-12">
+							<div class="flex-row pull-right">
+								<button-clear ng-click="controller.resetFilter(true)"></button-clear>
+								<button-refresh ng-click="controller.tableLoad()"></button-refresh>
+								<button-filter ng-click="controller.applyFilter(true)"></button-filter>
+							</div>
+						</div>
+					</div>
+					<div class="collapse" uib-collapse="!controller.legendCollapsed">
+						<div align="pull-left">
+							<button-filter ng-click="controller.toggleLegendCollapse()"></button-filter>
+							<button-refresh ng-click="controller.tableLoad()"></button-refresh>
+						</div>
+					</div>
+					<dt class="table table-sm table-responsive" table="controller.playerSearchTable"/>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

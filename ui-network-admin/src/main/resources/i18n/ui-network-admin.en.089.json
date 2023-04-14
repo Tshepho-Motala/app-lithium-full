@@ -1,0 +1,11 @@
+{
+	"GLOBAL": {
+		"BONUS": {
+			"TYPE": {
+				"TRIGGER": {
+					"10" : "Frontend/User"
+				}
+			}
+		}
+	}
+}

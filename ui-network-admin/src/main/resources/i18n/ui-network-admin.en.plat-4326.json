@@ -1,0 +1,37 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "CASHIER": {
+      "BANK_ACCOUNT_LOOKUP": {
+        "INPUT_FIELDS": {
+          "CREATE_MANUAL_WITHDRAWAL": "Create manual withdrawal"
+        },
+        "OUTPUT_FIELDS": {
+          "ACCOUNT_NAME": "Account Name",
+          "ACCOUNT_NUMBER": "Account Number",
+          "BANK_NAME": "Bank Name",
+          "BANK_CODE": "Bank Code",
+          "BANK_ID": "Bank Id"
+        },
+        "MANUAL_WITHDRAWAL": {
+          "TITLE": "Manual Withdrawal",
+          "PAYMENT_METHOD": "Please specify the payment method the withdrawal should be made to.",
+          "WARNING": "Warning",
+          "RESTRICTION": "No restrictions will be applied for this transaction. All policies, account and player limitations are circumvented. Double-check player' restrictions If you are not confident with the transaction.",
+          "SUBMIT": "Submit",
+          "CANCEL": "Cancel",
+          "START_TYPING": "Start typing to search",
+          "AMOUNT_LABEL": "Amount *",
+          "FILL_AMOUNT": "Please fill in the amount, or use the buttons below to change the amount to be adjusted.",
+          "CURRENT_BALANCE": "Current Balance",
+          "CURRENT_BALANCE_HINT": "This is the current player wallet's balance.",
+          "NEW_BALANCE": "New Balance",
+          "NEW_BALANCE_HINT": "This is what the player wallet's balance will be after the direct withdrawal.",
+          "COMMENT": "Comment *",
+          "COMMENT_HINT": "Please specify a reason for this balance adjustment.",
+          "REDIRECT": "Redirect to Transaction Page after Submit",
+          "MORE_THAN_BALANCE": "Cannot increase amount because you don't have enough funds on your balance for this operation"
+        }
+      }
+    }
+  }
+}

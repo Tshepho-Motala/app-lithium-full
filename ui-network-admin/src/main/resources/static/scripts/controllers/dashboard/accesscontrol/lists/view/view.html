@@ -1,0 +1,108 @@
+<div class="container-fluid">
+	<div class="card card-block" style="margin-bottom: 10px;">
+		<div class="p-2 text-center">
+			<span class="title">{{ 'UI_NETWORK_ADMIN.ACCESSCONTROL.VIEW.TITLE' | translate }}</span>
+			<span class="description">{{ 'UI_NETWORK_ADMIN.ACCESSCONTROL.VIEW.DESCRIPTION' | translate }}</span>
+		</div>
+	</div>
+
+	<button-bar>
+		<button-back ui-sref="dashboard.accesscontrol.lists.list"></button-back>
+	</button-bar>
+	
+	<div class="row v-reset-row ">
+		<div class="col-xs-12">
+			<div class="well" style="padding: 40px;">
+				<div class="row v-reset-row ">
+					<div class="user-block">
+						<img class="img-circle img-bordered-sm" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==
+" alt="">
+						<span class="username">
+							<a>{{ controller.list.name }}</a> <b style="color: red;" ng-if="controller.list.enabled === false">(disabled)</b>
+						</span>
+						<span class="description">
+							{{ controller.list.description }}
+						</span>
+					</div>
+					<hr/>
+					<div class="row v-reset-row ">
+						<div class="col-md-12">
+							<div class="col-md-7">
+								<div class="box box-default box-solid">
+									<div class="box-header with-border">
+										{{ 'UI_NETWORK_ADMIN.ACCESSCONTROL.VIEW.BASICINFORMATION' | translate }}
+										<div lit-if-permission="ACCESSCONTROL_ADD,ACCESSCONTROL_EDIT" lit-permission-domain="{{controller.list.domain.name}}" class="box-tools pull-right">
+											<button ng-if="controller.list.enabled === true" type="button" class="btn btn-box-tool" ng-click="controller.toggleEnable()">
+												<span><i class="fa fa-ban"></i> {{ "GLOBAL.ACTION.DISABLE" | translate }} </span>
+											</button>
+											<button ng-if="controller.list.enabled === false" type="button" class="btn btn-box-tool" ng-click="controller.toggleEnable()">
+												<span><i class="fa fa-check"></i> {{ "GLOBAL.ACTION.ENABLE" | translate }} </span>
+											</button>
+										</div>
+									</div>
+									<div class="box-body table-responsive">
+										<table class="table table-bordered">
+											<tr>
+												<th>{{ 'UI_NETWORK_ADMIN.ACCESSCONTROL.BASIC.NAME.LABEL' | translate }}</th>
+												<td>{{ controller.list.name }}</td>
+											</tr>
+											<tr>
+												<th>{{ 'UI_NETWORK_ADMIN.ACCESSCONTROL.BASIC.DESCRIPTION.LABEL' | translate }}</th>
+												<td>{{ controller.list.description }}</td>
+											</tr>
+											<tr>
+												<th>{{ 'UI_NETWORK_ADMIN.ACCESSCONTROL.BASIC.DOMAIN.LABEL' | translate }}</th>
+												<td>{{ controller.list.domain.name }}</td>
+											</tr>
+											<tr>
+												<th>{{ 'UI_NETWORK_ADMIN.ACCESSCONTROL.BASIC.ENABLED.LABEL' | translate }}</th>
+												<td>{{ controller.list.enabled }}</td>
+											</tr>
+										</table>
+									</div>
+								</div>
+								<div class="box box-success box-solid">
+									<div class="box-header with-border">
+										{{ 'UI_NETWORK_ADMIN.ACCESSCONTROL.VIEW.LISTVALUES' | translate }}
+										<div lit-if-permission="ACCESSCONTROL_ADD,ACCESSCONTROL_EDIT" lit-permission-domain="{{controller.list.domain.name}}" class="box-tools pull-right">
+											<button type="button" class="btn btn-box-tool" ng-click="controller.addModal()">
+												<span><i class="fa fa-plus"></i> {{ "GLOBAL.ACTION.ADD" | translate }} </span>
+											</button>
+										</div>
+									</div>
+									<div class="box-body table-responsive">
+										<div class="box-body no-padding table-responsive">
+											<dt table="controller.accessControlListTable"/>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-5">
+								<div class="box box-info box-solid">
+									<div class="box-header with-border">
+										{{ 'UI_NETWORK_ADMIN.ACCESSCONTROL.VIEW.TYPEINFORMATION' | translate }}
+									</div>
+									<div class="box-body table-responsive">
+										<table class="table table-bordered">
+											<tr>
+												<th>{{ 'UI_NETWORK_ADMIN.ACCESSCONTROL.BASIC.NAME.LABEL' | translate }}</th>
+												<td>{{ controller.list.listType.name }}</td>
+											</tr>
+											<tr>
+												<th>{{ 'UI_NETWORK_ADMIN.ACCESSCONTROL.BASIC.DESCRIPTION.LABEL' | translate }}</th>
+												<td>{{ controller.list.listType.description }}</td>
+											</tr>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row v-reset-row ">
+					<changelog options="controller.changelogs" model="controller.list"></changelog>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

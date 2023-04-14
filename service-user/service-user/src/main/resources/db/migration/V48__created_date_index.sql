@@ -1,0 +1,1 @@
+CREATE INDEX `idx_u_created_date` ON `user` (`created_date`) ALGORITHM INPLACE LOCK NONE;

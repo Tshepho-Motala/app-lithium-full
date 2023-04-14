@@ -1,0 +1,1 @@
+ALTER TABLE `bonus_revision` ADD COLUMN `activation_notification_name` VARCHAR(255);

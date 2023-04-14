@@ -1,0 +1,89 @@
+.iDin Integration via Sphonic Overview
+[plantuml]
+----
+@startuml
+'https://plantuml.com/sequence-diagram
+
+actor player
+boundary "Livescore App / GW" as lsa
+participant "svc-user" as su
+participant "svc-user-pr-sphonic-idin" as supsi
+participant "svc-access" as sa
+participant "svc-domain" as svcdomain
+participant "svc-changelog" as svcchangelog
+participant "svc-kyc" as svckyc
+boundary "iDin Screens" as idin
+participant Sphonic as sphonic
+
+autonumber
+
+
+== STEP#4: continues with registration flow on Livescore App ==
+
+player->lsa: continues with registration flow
+
+lsa->sa: /service-access/external/authorization/livescore_nl/cruksAccessRule/check-authorization?locale=nl
+activate sa
+    sa-->lsa: Response ExternalValidationResponse
+deactivate sa
+note right of lsa: Should a valid CRUKS ID be returned on the ExternalValidationResponse, then the user would continue with the registration flow
+lsa->su: /service-user/frontend/livescore_nl/register/v4?locale=nl
+activate su
+    ... pre registration flow...
+    su -> su: check if incomplete user flow (contains valid applicantHash)
+    alt incomplete user found
+        group validate pre-registration steps compelete for configured provider
+          su -> svcdomain++: check if register provider was configured for incomplete user flows
+          svcdomain -->> su--: provider response
+          su -> supsi++: POST /system/validate-pre-registration
+          supsi --> supsi: validate if pre-registration conditions met
+          supsi --> su--: Response
+          alt conditions not met
+            su->lsa: Status463IncompleteUserRegistrationException
+          end
+        end
+        su->su: copy incomplete_user data to playerBasic
+    else incomplete user not found
+        su->lsa: Status463IncompleteUserRegistrationException
+    else incomplete_user.status != "Success"
+        su->lsa: Status463IncompleteUserRegistrationException
+    end
+    ... post registration flow ...
+    alt registered from an incomplete_user
+        su -> su: check if incomplete user flow (contains valid applicationHash)
+        su -> svcdomain++: check if register provider was configured for incomplete user flows
+        svcdomain -->> su--: provider response
+        alt iDin Incomplete User Flow
+          su -> supsi++: POST /{external-register-module-name}/system/do-post-registration-steps
+            supsi --> supsi: validate if pre-registration conditions met
+            alt pre-registration conditions met
+              alt user.address_verified = true
+                supsi -> su++: POST /service-user/system/user/set-address-verified where address_verified_type=IDIN
+                note left of supsi
+                  {
+                    "userGuid": "domainName/id",
+                    "addressVerifiedType": "IDIN",
+                    "category": "ACCOUNT",
+                    "subCategory": "IDIN_VERIFICATION"
+                  }
+                end note
+                su -> su: update lithium_user.user.address_verified = true
+                su -> su: Update changelogs with provided Category and SubCategory
+                su --> pubsub: Send ACCOUNT_UPDATE event to notify DWH that the address has been verified by iDin
+                su -->> supsi: Response 200
+              end
+              supsi ->> svckyc: POST /service-kyc/system/result/save
+              supsi ->> svcchangelog: create new iDIN changelog from stage 2 idin_response.raw_response_data
+            end
+          supsi -->> su--: Response
+        end
+        su->su: remove incomplete_user after success user registration (cleanup)
+        su->su: refresh user (addressVerified might have been updated)
+    end
+    su-->lsa: Response User
+deactivate su
+
+deactivate lsa
+
+@enduml
+----

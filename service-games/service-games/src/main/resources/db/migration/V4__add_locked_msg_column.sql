@@ -1,0 +1,1 @@
+ALTER TABLE `game` ADD COLUMN `locked_message` longtext DEFAULT NULL;

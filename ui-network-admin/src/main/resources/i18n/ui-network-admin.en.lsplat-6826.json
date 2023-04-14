@@ -1,0 +1,22 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "PLAYER": {
+      "SOW": "SOW Document Required",
+      "MESSAGE": {
+        "SUCCESS_ENABLE": "SOW Document enabled successfully",
+        "SUCCESS_DISABLE": "SOW Document disabled successfully",
+        "ERROR": "Something went wrong"
+      },
+      "FIELDS": {
+        "ALLOWED": "YES",
+        "NOT_ALLOWED": "NO"
+      },
+      "SOW_LABELS": {
+        "INVALIDATE_SOW": "Mark SOW document Required NO",
+        "VALIDATE_SOW": "Mark SOW document Required YES",
+        "INVALIDATE_CHANGE": "Change",
+        "VALIDATE_CHANGE": "Change"
+      }
+    }
+  }
+}

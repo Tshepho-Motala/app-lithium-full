@@ -1,0 +1,15 @@
+server:
+  port: 9703
+
+spring:
+  oauth2:
+    client:
+      clientId: 927748213306-s5oafujlddsc0p8jut811s8ns0g3h4qn.apps.googleusercontent.com
+      clientSecret: a-knTWsDZsSIkuzhNU-FrX2d
+      accessTokenUri: https://www.googleapis.com/oauth2/v3/token
+      userAuthorizationUri: https://accounts.google.com/o/oauth2/auth
+      clientAuthenticationScheme: query
+      scope: profile email
+    resource:
+      userInfoUri: https://www.googleapis.com/plus/v1/people/me
+      preferTokenInfo: true

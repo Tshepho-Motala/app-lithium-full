@@ -1,0 +1,13 @@
+{
+  "SERVICE-LIMIT": {
+    "RESTRICTIONS": {
+      "RULESETS": {
+        "RULE": {
+          "FIELD": {
+            "USER_STATUS_IS_USER_ENABLED": "User status is user enabled"
+          }
+        }
+      }
+    }
+  }
+}

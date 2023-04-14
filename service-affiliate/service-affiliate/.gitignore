@@ -1,0 +1,14 @@
+/bin
+/target
+/.settings
+/.classpath
+/.project
+/.springBeans
+.DS_Store
+*.class
+/.apt_generated/
+/.factorypath
+/data
+/.mvn
+*.log
+*.log.json

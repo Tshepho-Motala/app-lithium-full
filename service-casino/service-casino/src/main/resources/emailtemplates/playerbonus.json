@@ -1,0 +1,63 @@
+{
+	"name": "player.[bonusType].bonus.[bonusCode].[state]",
+	"subject": "Player bonus state change email template",
+	"body": "<html><body><p>Bonus type is either 'signup' or 'deposit'.</p><br/><p>Bonus code should be replaced with the bonus code for which the email template is being created. For a bonus with an empty bonus code, enter 'nobonuscode'.</p><br/><p>State is one of: 'activate', 'pending', 'cancel', 'cancel_pending'</p></body></html>",
+	"placeholders": [
+		{
+			"name": "%user.userName%",
+			"description": "The player's username"
+		},
+		{
+			"name": "%user.firstName%",
+			"description": "The player's first name"
+		},
+		{
+			"name": "%user.lastName%",
+			"description": "The player's last name"
+		},
+		{
+			"name": "%user.emailAddress%",
+			"description": "The player's email address"
+		},
+		{
+			"name": "%casino.playThroughCents%",
+			"description": "The play through cents"
+		},
+		{
+			"name": "%casino.playThroughRequiredCents%",
+			"description": "The play through cents required"
+		},
+		{
+			"name": "%casino.triggerAmount%",
+			"description": "The trigger amount"
+		},
+		{
+			"name": "%casino.bonusAmount%",
+			"description": "The bonus amount"
+		},
+		{
+			"name": "%casino.bonusPercentage%",
+			"description": "The bonus percentage"
+		},
+		{
+			"name": "%casino.bonusCode%",
+			"description": "The bonus code"
+		},
+		{
+			"name": "%casino.bonusName%",
+			"description": "The bonus name"
+		},
+		{
+			"name": "%domain.name%",
+			"description": "The domain's display name"
+		},
+		{
+			"name": "%domain.url%",
+			"description": "The domain's URL"
+		},
+		{
+			"name": "%domain.supportEmail%",
+			"description": "The domain's support email address"
+		}
+	]
+}

@@ -1,0 +1,13 @@
+{
+  "SERVICE-CASHIER": {
+    "AUTOWITHDRAWALS": {
+      "RULESETS": {
+        "RULE": {
+          "FIELD": {
+            "NET_DEPOSIT_AMOUNT_IN_CENTS_PM": "Lifetime PM Net Deposit amount (in cents)"
+          }
+        }
+      }
+    }
+  }
+}

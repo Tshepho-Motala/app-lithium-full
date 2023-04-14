@@ -1,0 +1,22 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "LIMITS": {
+      "DOMAIN": {
+        "WEEKLYLOSSLIMIT": {
+          "LABEL": "Weekly Loss Limit",
+          "DESCRIPTION": "Set the weekly loss amount"
+        },
+        "WEEKLYWINLIMIT": {
+          "LABEL": "Weekly Win Limits",
+          "DESCRIPTION": "Set the weekly win amount"
+        },
+        "CHANGE": {
+          "LIMIT": {
+            "WEEKLYLOSS": "Change Global Player Weekly Loss Limit",
+            "WEEKLYWIN": "Change Global Player Weekly Win Limit"
+          }
+        }
+      }
+    }
+  }
+}

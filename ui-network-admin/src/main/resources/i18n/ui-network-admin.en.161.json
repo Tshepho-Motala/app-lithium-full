@@ -1,0 +1,11 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "PLAYER": {
+      "RESPONSIBLE_GAMBLING": {
+        "TITLE": "Responsible Gambling",
+        "ACTION": "Player Action",
+        "DATE": "Date"
+      }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+= High Level Specifications
+
+TIP: The following are _high-level_ specs, expressed in https://cucumber.io/docs/gherkin/reference/[Gherkin], that outline the functional behaviour of the iForium Casino Provider.
+
+== Wallet Enquiry
+* link:https://gitlab.com/playsafe/lithium/app-lithium-full/-/blob/develop/service-casino/service-casino-provider-iforium/docs/spec/high-level-spec-balance.adoc[Balance]
+
+== Session Management
+* link:https://gitlab.com/playsafe/lithium/app-lithium-full/-/blob/develop/service-casino/service-casino-provider-iforium/docs/spec/high-level-spec-createtoken.adoc[Create Token]
+* link:https://gitlab.com/playsafe/lithium/app-lithium-full/-/blob/develop/service-casino/service-casino-provider-iforium/docs/spec/high-level-spec-redeemtoken.adoc[Redeem Token]
+
+== Gameplay
+* link:https://gitlab.com/playsafe/lithium/app-lithium-full/-/blob/develop/service-casino/service-casino-provider-iforium/docs/spec/high-level-spec-placebet.adoc[Place Bet]
+* link:https://gitlab.com/playsafe/lithium/app-lithium-full/-/blob/develop/service-casino/service-casino-provider-iforium/docs/spec/high-level-spec-rollback.adoc[Rollback Bet]
+* link:https://gitlab.com/playsafe/lithium/app-lithium-full/-/blob/develop/service-casino/service-casino-provider-iforium/docs/spec/high-level-spec-awardwinnings.adoc[Award Winnings]
+* link:https://gitlab.com/playsafe/lithium/app-lithium-full/-/blob/develop/service-casino/service-casino-provider-iforium/docs/spec/high-level-spec-end.adoc[End Game Round]
+* link:https://gitlab.com/playsafe/lithium/app-lithium-full/-/blob/develop/service-casino/service-casino-provider-iforium/docs/spec/high-level-spec-voidbet.adoc[Void Bet]
+* link:https://gitlab.com/playsafe/lithium/app-lithium-full/-/blob/develop/service-casino/service-casino-provider-iforium/docs/spec/high-level-spec-credit.adoc[Credit]
+* link:https://gitlab.com/playsafe/lithium/app-lithium-full/-/blob/develop/service-casino/service-casino-provider-iforium/docs/spec/high-level-spec-alertWalletCallBackNotification.adoc[Alert Wallet Callback Notification]
+
+== Lithium Services
+
+* link:https://gitlab.com/playsafe/lithium/app-lithium-full/-/blob/develop/service-casino/service-casino-provider-iforium/docs/spec/high-level-spec-startgame.adoc[Start Game]
+* link:https://gitlab.com/playsafe/lithium/app-lithium-full/-/blob/develop/service-casino/service-casino-provider-iforium/docs/spec/high-level-spec-listgames.adoc[List Games]
+* link:https://gitlab.com/playsafe/lithium/app-lithium-full/-/blob/develop/service-casino/service-casino-provider-iforium/docs/spec/high-level-spec-demogame.adoc[Demo Game]

@@ -1,0 +1,11 @@
+= Pay.nl Withdraw Flow
+1.0, May 11, 2022: LSB-NL
+:sectnums:
+:toc: left
+:toclevels: 2
+:toc-title: LSBet - NL
+:icons: font
+:url-quickref: https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/
+
+.Pay.nl Withdraw Flow
+include::plantuml/paynl-withdraw-flow.puml[Flow Diagram]

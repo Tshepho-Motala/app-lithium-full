@@ -1,0 +1,11 @@
+spring:
+  application:
+    name: service-kyc-provider-smileidentity
+  servlet:
+    multipart:
+        maxFileSize: 20MB
+        maxRequestSize: 20MB
+        file-size-threshold: 1MB
+
+server:
+  port: 8598

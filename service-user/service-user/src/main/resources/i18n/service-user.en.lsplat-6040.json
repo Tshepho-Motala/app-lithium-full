@@ -1,0 +1,7 @@
+{
+  "ERROR_DICTIONARY": {
+    "REGISTRATION": {
+      "IDIN_TIMEOUT": "Request timed out"
+    }
+  }
+}

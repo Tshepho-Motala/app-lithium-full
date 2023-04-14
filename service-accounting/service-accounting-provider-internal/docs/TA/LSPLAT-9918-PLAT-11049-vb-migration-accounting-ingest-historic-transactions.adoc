@@ -1,0 +1,80 @@
+= LSPLAT-9918 PLAT-11049 ⁃ (VB Migration - Accounting) Ingest historic transactions
+Reza Khan <reza.khan@wonderlabz.com>
+1.0, Oct 26, 2022:: TA - LSPLAT-9918 PLAT-11049 ⁃ (VB Migration - Accounting) Ingest historic transactions
+:sectnums:
+:toc: left
+:toclevels: 4
+:toc-title: LSPLAT-9918 PLAT-11049
+:icons: font
+:url-quickref: https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/
+:table-caption!:
+
+WARNING: You might need to install graphviz to render the component models on IntelliJ on plantUML if not viewed on GitLab- see https://playsafe.atlassian.net/wiki/spaces/LITHIUM/pages/1674936347/How+To+Setup+Lithium+Local+Development#Noteworthy-Extensions.1[IntelliJ: PlantUML diagramming tool]
+
+== Description
+=== Jira
+* https://livescoregroup.atlassian.net/browse/PLAT-11049
+* https://playsafe.atlassian.net/browse/LSPLAT-9918
+
+=== Gitlab
+* Branch: origin/feature/LSPLAT-9918-vb-migration-accounting-ingest-historic-transactions
+* MR: https://gitlab.com/playsafe/lithium/app-lithium-full/-/merge_requests/TBA
+
+=== Business
+As part of the VB Migration initiative, historical balance movement/accounting transactions need to be imported from the provided dataset into lithium.
+
+=== Approvals
+|===
+|Component |Reason |Comments
+
+|Li
+|
+|
+
+|DWH
+|
+|
+
+|===
+
+== Architecture
+=== Technical
+As this is historic data, player balances should not be affected. Player financial summarization, as well as domain/brand financial summarization should also be skipped (where possible; see note below) in an attempt to accelerate the completion of the data ingestion, as well as to avert as much system impact as possible caused by the data migration.
+
+IMPORTANT: Player financial summarization cannot be skipped for the month in which the data migration takes place. This is to ensure that certain features, like loss limits, or deposit limits, continue to function normally (as per lithium's feature implementation of such features) for the month in which players are migrated over to lithium, where there might have been transactions made on the previous operator.
+
+NOTE: Since the aforementioned features require summarized data up to the monthly granularity, they should continue to function so long as player financial transactions are summarized the moment transactions received indicate that it took place in the current month. To cater for this, a configuration property specifying a date has to be coded. The process for ingesting historic transactions has to compare the transaction date against this, on every transaction, and if the transaction date is greater than the configured value, summarization has to be done.
+
+In order to import historic transactions without adjusting player balances, performing player based financial summarization (up to the configured date), or domain/brand financial summarization, a few essential changes will need to be made to the accounting sub-system in lithium.
+
+This specification attempts to describe those changes and provide guidance in order to satisfy the requirements set out above.
+
+==== Prerequisites
+IMPORTANT: The following steps are not included in this specification, but have a strong dependency to.
+
+* Extraction of data from the provided dataset
+** DWH to pre-process the data received from DK and create a subset of the data containing only the required data for ingestion, i.e. only 3 months, 1 year, etc., whichever date range is deemed necessary for regulatory purposes
+*** Extraction of the data should be a simple query, tracking by ID
+*** It is important to confirm these steps with DWH
+* Transformation of extracted data to the required formats
+* Creation of queue defined here as, "historic-transaction-ingestion-queue"
+* Enqueuing of transactions to queue specified above
+** There is little room for failure in processing a transaction once it is on the queue above, and thus failure scenarios need to be handled
+*** As there is always possibility of failure, dead letter queue (DLQ) and parking lot (PL) needs to be implemented. The DLQ handles retries up to a configured maximum number of retries. Once DLQ exhausts the configured maximum retries, to prevent an infinite loop of retries or loss of the transaction (in the case of a catastrophic and unrecoverable error), the transaction is moved onto the PL. Entries in the PL require manual intervention to move them back to the original queue, once the error that caused it to be placed here is resolved.
+*** DLQ and PL is not explained in detail in this TA. There are many resources online, and it has been utilised extensively in lithium. Take inspiration from existing implementations
+* Creation of the DLQ and parking lot PL
+
+NOTE: This TA describes the steps for de-queuing and processing messages off of the queue specified above
+
+==== Historic transaction ingestion
+===== Workflow
+
+NOTE: This is a happy path process
+
+include::../plantuml/sequence/historic-transaction-ingestion-sequence.puml[]
+
+===== endHistoricTransaction
+
+IMPORTANT: Study lithium.service.accounting.provider.internal.services.TransactionService.endTransaction closely. The following activity diagram is not explained in detail as it is merely a clone of an existing method with very minor alterations to cater for the excluding of wallet balance updates and player financial transaction summarization.
+
+include::../plantuml/activity/end-historic-transaction.puml[]

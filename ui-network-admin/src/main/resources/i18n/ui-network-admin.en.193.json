@@ -1,0 +1,11 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "CASHIER": {
+      "FIELDS": {
+        "PAYMENT_TYPE": "Payment Type",
+        "PLACEHOLDER": "Select a payment type to use",
+        "DESCRIPTION": "Please specify which payment type you want to setup"
+      }
+    }
+  }
+}

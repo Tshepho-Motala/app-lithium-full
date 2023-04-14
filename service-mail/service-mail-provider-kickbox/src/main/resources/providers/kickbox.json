@@ -1,0 +1,25 @@
+{
+	"code": "kickbox",
+	"name": "kickbox",
+	"enabled": true,
+	"url": "service-mail-provider-kickbox",
+	"properties": 
+	[
+		{
+			"name": "api_key",
+			"defaultValue": "test_c41f7fffc6018df0d6d57417b8d1bf91b0f4fc575bc10c8fef0059aa5c391be7",
+			"type": "string",
+			"description": "Kickbox API key"
+		},
+		{
+			"name": "kickbox_url",
+			"defaultValue": "https://api.kickbox.com/v2/verify",
+			"type": "string",
+			"description": "Kickbox verification url"
+		}
+
+	],
+	"providerType": {
+		"name": "verification"
+	}
+}

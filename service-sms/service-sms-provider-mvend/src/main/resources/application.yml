@@ -1,0 +1,14 @@
+server.port: 9896
+
+spring:
+  application:
+    name: service-sms-provider-mvend
+  cloud:
+    stream:
+      bindings:
+        smsprovidersregisteroutput:
+          group: smsprovidersregistergroup
+          binder: rabbit
+          destination: smsprovidersregisterqueue
+          producer:
+            required-groups: smsprovidersregistergroup

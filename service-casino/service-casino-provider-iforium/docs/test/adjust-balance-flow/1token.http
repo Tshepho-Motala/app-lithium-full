@@ -1,0 +1,10 @@
+POST http://localhost:9000/server-oauth2/oauth/token
+Authorization: Basic system VERYBLOODYgoodpasswordFORuseInSystemAUTHENTICATION99
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=client_credentials&username=admin&password=Gauteng
+
+> {%
+    client.global.set("USERTOKEN_UK", response.body.access_token);
+    client.global.set("USERTOKEN_UA", response.body.access_token);
+%}

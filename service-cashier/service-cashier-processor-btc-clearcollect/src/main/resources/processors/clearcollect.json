@@ -1,0 +1,43 @@
+{
+  "name": "ClearCollect",
+  "code": "clearcollect",
+  "url": "service-cashier-processor-btc-clearcollect",
+  "methodNames": ["btc"],
+  "deposit": true,
+  "withdraw": true,
+  "fees": {
+    "flat": 0,
+    "percentage": 0,
+    "minimum": 0
+  },
+  "limits": {
+    "minAmount": 2500,
+    "maxAmount": 0,
+    "maxAmountDay": 0,
+    "maxAmountWeek": 0,
+    "maxAmountMonth": 0,
+    "maxTransactionsDay": 0,
+    "maxTransactionsWeek": 0,
+    "maxTransactionsMonth": 0
+  },
+  "properties": [
+    { 
+      "name": "apiurl",
+      "defaultValue": "http://localhost:9000/service-cashier-mock-btc-clearcollect/crypto/v2",
+      "type": "url",
+      "description": "The API URL. We will add /deposit/new/json to the end to start a new deposit."
+    },
+    { 
+      "name": "apikey",
+      "defaultValue": "ASDASD",
+      "type": "string",
+      "description": "ClearCollect should supply the API key."
+    },
+    { 
+      "name": "apisecret",
+      "defaultValue": "10293019283",
+      "type": "string",
+      "description": "ClearCollect should supply the API secret."
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+= Sphonic IBAN Flow
+1.0, July 8, 2022: VB-UK
+:sectnums:
+:toc: left
+:toclevels: 2
+:toc-title: VB-UK
+:icons: font
+:url-quickref: https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/
+
+.Nuvei Deposit Flow
+include::plantuml/sphonic-iban-flow.puml[Flow Diagram]

@@ -1,0 +1,10 @@
+{
+	"SERVICE_CASINO_PROVIDER_INCENTIVE": {
+		"BET_TYPE": {
+			"SINGLE": "Single",
+			"DOUBLE": "Double",
+			"TRIPLE": "Triple",
+			"FOLD": "{0}fold"
+		}
+	}
+}

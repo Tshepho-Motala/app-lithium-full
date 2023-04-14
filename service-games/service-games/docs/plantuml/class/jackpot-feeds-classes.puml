@@ -1,0 +1,42 @@
+[plantuml]
+----
+@startuml
+class ProgressiveJackpotFeedRequest {
+    data: ArrayList<ProgressiveJackpotGame>
+}
+
+class ProgressiveJackpotGame {
+    gameGuid: String
+    gameName: String
+    supplierId: String
+}
+
+class ProgressiveJackpotFeedResponse {
+    data: ArrayList<ProgressiveJackpotGameBalance>
+}
+
+class ProgressiveJackpotGameBalance {
+    gameGuid: String
+    gameName: String
+    progressiveId: String
+    currencyCode: String
+    amount: BigDecimal
+    wonByAmount: BigDecimal
+}
+
+class ProgressiveJackpotBalanceFE {
+    progressiveId: String
+    currencyCode: String
+    amount: BigDecimal
+    wonByAmount: BigDecimal
+}
+
+class ProgressiveJackpotBalanceFERequest {
+    progressiveIds: ArrayList<String>
+}
+
+class ProgressiveJackpotBalanceFEResponse {
+    progressiveJackpotBalances: ArrayList<ProgressiveJackpotBalanceFE>
+}
+@enduml
+----

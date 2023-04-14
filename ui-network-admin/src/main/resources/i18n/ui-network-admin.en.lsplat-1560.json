@@ -1,0 +1,45 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "TIME_SLOT": {
+      "TITLE": "Time Frame Limits",
+      "SUBTITLE": "Can't Play/Deposit:",
+      "LABEL": "Time Frame",
+      "MENU_ITEM_LABEL": "Update Time Frame Limits",
+      "FROM": "From:",
+      "TO": "To:",
+      "NOT_SET": "Not Set",
+      "CURRENT_FROM": "Current From",
+      "CURRENT_TO": "Current To:",
+      "DELETE": {
+        "ERROR": "Unable to delete this time frame limit, please try again.",
+        "SUCCESS": "Successfully deleted the time frame limit."
+      },
+      "SELECT_DELETE": {
+        "LABEL": "Delete This Limit",
+        "DESC": "(The player will no longer have a limit)"
+      },
+      "EXAMPLE_FST": {
+        "SMALL_TEXT": "Set the daily time frame limits for this player."
+      },
+      "EXAMPLE_SCD": {
+        "SMALL_TEXT": "The current daily time frame limits for this player."
+      },
+      "DISABLE": {
+        "MESSAGE": "Time Frame Limit is disabled for this domain."
+      },
+      "SAVE": {
+        "ERROR": "Unable to save this time frame limit, please try again.",
+        "SUCCESS": "Successfully saved the time frame limit."
+      },
+      "FORM_ERROR": {
+        "MESSAGE": "FROM time must be before TO time.",
+        "EMPTY_INPUT": "FROM time and TO time need to have values."
+      },
+      "VIEW": {
+        "LABEL": "Player Time Frame Limits",
+        "PLACEHOLDER": "Player Time Frame Limits",
+        "DESC": "Allow player time frame limit to be specified."
+      }
+    }
+  }
+}

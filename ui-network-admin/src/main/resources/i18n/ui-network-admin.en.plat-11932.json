@@ -1,0 +1,12 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "CASHIER": {
+      "TRANSACTION": {
+        "RFI": {
+          "ENABLE": "Set RFI",
+          "DISABLE": "Remove RFI"
+        }
+      }
+    }
+  }
+}

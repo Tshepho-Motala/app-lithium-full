@@ -1,0 +1,79 @@
+=== External Error Dictionary
+:toc:
+:icons: font
+:url-quickref: https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/
+
+....
+GET {gateway}/service-translate/external/translations/error-dictionary
+....
+
+==== Parameters
+
+Note that whenever the ecosystem or domain is not provided, we would return error dictionary translations for all domains, including the default domain. Also whenever the locale is not provided, we would return for all enabled languages only.
+
+[cols="2,2,2,2,8a"]
+|====
+| Field | Object Type | Request Type | Required | Description
+
+| ecosystemName
+| String
+| Request Parameter
+| False
+| Returns all error dictionary translations found for all domains within the provided ecosystem
+
+| domainName
+| String
+| Request Parameter
+| False
+| Returns all error dictionary translations found for the domain provided only
+
+| locale
+| String
+| Request Parameter
+| False
+| Returns all error dictionary translations found for the provided locale only
+
+| lastUpdatedSince
+| Date String - pattern: yyyy-MM-dd HH:mm:ss
+| Request Parameter
+| False - default 2000-01-01 00:00:00
+| Returns all error dictionary translations found for the domain provided only
+
+| hash
+| String
+| Request Parameter
+| True
+| The hash needs to be calculated using the lastUpdatedSince date along with a shared secret with MD5 encryption.
+
+Hash is calculated as follows:
+
+If lastUpdatedSince = "2000-01-01 00:00:00" and preshared secret = "PRESHAREDSECRETHERE"
+
+Then payload = "2000-01-01 00:00:00" + “\|” + “ls-dev” + “\|” + “PRESHAREDSECRETHERE"
+
+hash = MD5encrypt(payload) = "590cd1aaab6d3d799e136a2ca301c8fb"
+
+Note that whenever lastUpdatedSince is not provided, a default of "2000-01-01 00:00:00" will be used.
+
+| apiAuthorizationId
+| String
+| Request Parameter
+| False - default ls-gw
+| This is the API Authorization Identity
+
+
+|====
+
+==== curl example
+
+....
+curl --location --request GET 'localhost:9000/service-translate/external/translations/error-dictionary?lastUpdatedSince=2021-11-01 18:40:34&locale=en&ecosystemName=livescore_ecosystem&hash=d8a7550891ae0d7a2ce832fe1b60a0cbe1e930cd&apiAuthorizationId=ls-dev' \
+--header 'Cookie: JSESSIONID=D47749B607D41B6C8B0DF1D1A4523793'
+....
+
+==== Sequence diagram
+
+include::plantuml/get.external.translations.error-dictionary.puml[]
+
+
+

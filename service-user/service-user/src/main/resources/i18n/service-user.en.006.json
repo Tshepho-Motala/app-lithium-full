@@ -1,0 +1,7 @@
+{
+	"SERVICE_USER": {
+		"PASSWORDRESET": {
+			"USER_DISABLED": "Your account is disabled."
+		}
+    }
+}

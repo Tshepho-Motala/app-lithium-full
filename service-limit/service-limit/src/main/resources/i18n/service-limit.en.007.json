@@ -1,0 +1,11 @@
+{
+  "SERVICE_LIMIT": {
+    "DEPOSITLIMIT": {
+      "ERROR": {
+        "REACHED_LIMIT_DAILY": "Daily deposit limit will be reached with the amount entered. You can deposit up to {0} today.",
+        "REACHED_LIMIT_WEEKLY": "Weekly deposit limit will be reached with the amount entered. You can deposit up to {0} this week.",
+        "REACHED_LIMIT_MONTHLY": "Monthly deposit limit will be reached with the amount entered. You can deposit up to {0} this month."
+      }
+    }
+  }
+}

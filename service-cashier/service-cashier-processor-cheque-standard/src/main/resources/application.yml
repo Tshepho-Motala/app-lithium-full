@@ -1,0 +1,24 @@
+server.port: 9847
+
+ribbon:
+  ReadTimeout: 30000
+  ConnectTimeout: 30000
+  
+spring:
+  application:
+    name: service-cashier-processor-cheque-standard
+  cloud:
+    stream:
+      bindings:
+        processorsregisteroutput:
+          group: processorsregistergroup
+          binder: rabbit
+          destination: processorsregisterqueue
+          producer:
+            required-groups: processorsregistergroup
+  thymeleaf:
+    cache: false
+
+logging:
+  level:
+    lithium.service.cashier: INFO

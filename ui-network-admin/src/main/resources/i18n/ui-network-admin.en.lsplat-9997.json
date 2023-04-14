@@ -1,0 +1,13 @@
+{
+  "UI_NETWORK_ADMIN" : {
+    "CMS" : {
+      "BANNER_EDITOR" : {
+        "TIME_PICKER" : {
+          "UTC_TIME_SPECIFICATION" : {
+            "LABEL" : "All times are saved in UTC"
+          }
+        }
+      }
+    }
+  }
+}

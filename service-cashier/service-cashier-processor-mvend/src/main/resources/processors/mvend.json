@@ -1,0 +1,67 @@
+{
+  "name": "Mvend",
+  "code": "mvend",
+  "url": "service-cashier-processor-mvend",
+  "methodNames": ["mvend", "mvendopay", "mvendpaystack"],
+  "deposit": true,
+  "withdraw": true,
+  "fees": {
+    "flat": 0,
+    "percentage": 0,
+    "minimum": 0
+  },
+  "limits": {
+    "minAmount": 0,
+    "maxAmount": 100000000,
+    "maxAmountDay": 1000000000,
+    "maxAmountWeek": 1000000000,
+    "maxAmountMonth": 1000000000,
+    "maxTransactionsDay": 1000000000,
+    "maxTransactionsWeek": 1000000000,
+    "maxTransactionsMonth": 1000000000
+  },
+  "properties": [
+    { 
+      "name": "mvend_url",
+      "defaultValue": "http://localhost:9000/service-cashier-processor-mvend/mock",
+      "type": "url",
+      "description": "The API URL. We will add /paymentserver/async to the requests"
+    },
+    { 
+      "name": "username",
+      "defaultValue": "someusername",
+      "type": "string",
+      "description": "A username provided to Mvend for API calls"
+    },
+    {
+      "name": "password",
+      "defaultValue": "somepassword",
+      "type": "string",
+      "description": "A password provided to Mvend for API calls"
+    },
+    {
+      "name": "secret_key",
+      "defaultValue": "AE19FF83B22128FA",
+      "type": "string",
+      "description": "A pre-shared key, not transmitted via API calls, provided to Mvend"
+    },
+    {
+      "name": "mvend_appid",
+      "defaultValue": "1",
+      "type": "string",
+      "description": "An app id provided by Mvend"
+    },
+    {
+      "name": "mvend_apikey",
+      "defaultValue": "AE19FF83B22128FA",
+      "type": "string",
+      "description": "A pre-shared key, not transmitted via API calls, provided by Mvend"
+    },
+    {
+      "name": "mvend_rsa_pub",
+      "defaultValue": "",
+      "type": "string",
+      "description": "A public key to verify Opay Deposit status request"
+    }
+  ]
+}

@@ -1,0 +1,3 @@
+#spring.application.name=service-access-provider-google-recaptcha
+server:
+  port: 9724

@@ -1,0 +1,18 @@
+{
+  "PlatformKey": "L100",
+  "Sequence": "f82f441f-a20f-4244-b760-35d2d05705d7",
+  "Timestamp": "2020-09-14T13:21:49.9546136Z",
+  "GatewaySessionToken": "72542ee1-eca8-4df9-93cb-76a5555e3da2",
+  "OperatorAccountID": "domain/accountId",
+  "GameRoundID": "13245Z",
+  "GameRoundTransactionID": "123456Y",
+  "GameID": "gameId",
+  "CurrencyCode": "GBP",
+  "Amount": 10.00,
+  "StartRound": true,
+  "EndRound": false,
+  "ContentGameProviderID": "12",
+  "JackpotContribution": 0,
+  "FreeBetCost": 0,
+  "FreeGameOfferCode": "OfferCode"
+}

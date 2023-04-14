@@ -1,0 +1,21 @@
+CREATE TABLE `email` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `bcc` varchar(255) DEFAULT NULL,
+  `body` longtext NOT NULL,
+  `created_date` datetime NOT NULL,
+  `error_count` int(11) NOT NULL,
+  `from` varchar(255) NOT NULL,
+  `latest_error_reason` longtext,
+  `priority` int(11) NOT NULL,
+  `processing` bit(1) NOT NULL,
+  `sent_date` datetime DEFAULT NULL,
+  `subject` varchar(255) NOT NULL,
+  `to` varchar(255) NOT NULL,
+  `version` int(11) NOT NULL,
+  `user_id` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `idx_email_created_date_priority` (`created_date`,`priority`),
+  KEY `idx_email_sent_date_priority` (`sent_date`,`priority`),
+  KEY `FK4qxwfk0jqc0au545318wfiqxx` (`user_id`),
+  CONSTRAINT `FK4qxwfk0jqc0au545318wfiqxx` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

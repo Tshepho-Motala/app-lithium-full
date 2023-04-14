@@ -1,0 +1,11 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "GAME": {
+      "FIELDS": {
+        "NOT_RECENTLY_PLAYED": {
+          "NAME": "Do not show in recently played"
+        }
+      }
+    }
+  }
+}

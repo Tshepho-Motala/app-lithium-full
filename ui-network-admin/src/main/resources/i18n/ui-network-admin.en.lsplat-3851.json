@@ -1,0 +1,50 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "CMS": {
+      "GLOBAL": {
+        "OUTPUT": {
+          "SELECT_LOBBY_MESSAGE": " Please select a lobby first!"
+        }
+      },
+      "BADGE_MANAGEMENT": {
+        "FIELDS": {
+          "BADGE_CODE": {
+            "PLACEHOLDER": "Badge Code"
+          },
+          "BADGE_IMAGE": {
+            "PLACEHOLDER": "Badge Image Url"
+          }
+        },
+        "BUTTON": {
+          "ADD": "Add"
+        },
+        "OUTPUT": {
+          "BADGE_LIST": "Badges"
+        }
+      },
+      "NAVIGATION_MANAGEMENT": {
+        "FIELDS": {
+          "NAV_CODE": {
+            "PLACEHOLDER": "Nav Code"
+          },
+          "NAV_TITLE": {
+            "PLACEHOLDER": "Nav Title"
+          },
+          "PRIMARY_NAV_CODE": {
+            "PLACEHOLDER": "Primary Nav Code"
+          }
+        }
+      },
+      "ADD_SUB_NAVIGATION": {
+        "FIELDS": {
+          "CODE": {
+            "PLACEHOLDER": "Sub Navigation Code"
+          },
+          "TITLE": {
+            "PLACEHOLDER": "Sub Navigation Title"
+          }
+        }
+      }
+    }
+  }
+}

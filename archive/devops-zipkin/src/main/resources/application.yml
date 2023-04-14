@@ -1,0 +1,18 @@
+server:
+  port: 9411
+spring:
+  sleuth:
+    stream:
+      enabled: false
+  zipkin:
+    enabled: false
+    store:
+      type: mem
+    hystrix:
+      strategy:
+        enabled: false
+    web:
+      port: 9412
+      rootUrl: /
+      query:
+        dest: localhost:9411

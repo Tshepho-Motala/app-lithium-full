@@ -1,0 +1,9 @@
+{
+  "ERROR_DICTIONARY": {
+    "MY_ACCOUNT": {
+      "SOFT_SELF_EXCLUSION": "Soft self exclusion.",
+      "PERMANENT_SELF_EXCLUSION": "Permanent self exclusion.",
+      "FLAGGED_AS_COOLING_OFF_EXPIRES_ON": "Player account is flagged as cooling off. Expires on {0}."
+    }
+  }
+}

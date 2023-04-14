@@ -1,0 +1,36 @@
+{
+	"UI_NETWORK_ADMIN": {
+		"USERMISSIONS": {
+			"LIST": {
+				"TITLE": "User Missions",
+				"DESCRIPTION": "A searchable list of active user missions"
+			},
+			"VIEW": {
+				"TITLE": "View User Mission",
+				"DESCRIPTION": "Viewing user mission"
+			},
+			"FIELDS": {
+				"USER": {
+					"NAME": "User"
+				},
+				"MISSION": {
+					"NAME": "Mission"
+				},
+				"STARTED": {
+					"NAME": "Started"
+				},
+				"TIMEZONE": {
+					"NAME": "Timezone"
+				},
+				"PERCENTAGE": {
+					"NAME": "Percentage"
+				}
+			},
+			"BOXES": {
+				"USER": "User",
+				"MISSION": "Mission",
+				"CHALLENGES": "Challenges"
+			}
+		}
+	}
+}

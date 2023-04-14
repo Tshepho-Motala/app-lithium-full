@@ -1,0 +1,13 @@
+{
+  "UI_NETWORK_ADMIN":{
+    "GAME": {
+      "FIELDS": {
+        "SUPPLIER_GAME_GUID": {
+          "NAME": "Supplier Game Guid",
+          "PLACEHOLDER": "E.g CrazyTime0000001",
+          "DESCRIPTION": "The supplier game guid"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,89 @@
+{
+  "name": "Cheque",
+  "code": "cheque",
+  "image": {
+    "filename": "/methods/cheque.png",
+    "filetype": "image/png"
+  },
+  "withdrawalStages": [
+    {
+      "number": 0,
+      "title": "Required Player Information",
+      "description": "Please fill in the missing details below before we proceed.",
+      "inputFields": [
+        {
+          "code": "firstName",
+          "name": "Firstname"
+        },
+        {
+          "code": "lastName",
+          "name": "Lastname"
+        },
+        {
+          "code": "email",
+          "name": "Email"
+        },
+        {
+          "code": "cellphoneNumber",
+          "name": "Cellphone Number"
+        },
+        {
+          "code": "residentialAddress.addressLine1",
+          "name": "Address Line 1",
+          "displayOrder": "5"
+        },
+        {
+          "code": "residentialAddress.city",
+          "name": "City",
+          "displayOrder": "4"
+        },
+        {
+          "code": "residentialAddress.adminLevel1",
+          "name": "Province/State",
+          "displayOrder": "2"
+        },
+        {
+          "code": "residentialAddress.country",
+          "name": "Country",
+          "displayOrder": "1"
+        },
+        {
+          "code": "residentialAddress.adminLevel1Code",
+          "name": "Province/State",
+          "type": "hidden"
+        },
+        {
+          "code": "residentialAddress.countryCode",
+          "name": "Country",
+          "type": "hidden"
+        },
+        {
+          "code": "residentialAddress.postalCode",
+          "name": "Postal Code",
+          "displayOrder": "3"
+        }
+      ]
+    },
+    {
+      "number": 1,
+      "title": "CASHIER-METHOD-CHEQUE.WITHDRAWAL_AMOUNT_FIELD_TITLE",
+      "description": "CASHIER-METHOD-CHEQUE.WITHDRAWAL_AMOUNT_FIELD_DESCRIPTION",
+      "inputFields": [
+        {
+          "code": "accountNumber",
+          "name": "CASHIER-METHOD-CHEQUE.WITHDRAWAL_ACCOUNT_FIELD_TITLE",
+          "description": "CASHIER-METHOD-CHEQUE.WITHDRAWAL_ACCOUNT_FIELD_DESCRIPTION",
+          "required": true
+        }
+      ]
+    }
+  ],
+  "properties": [
+    {
+      "name": "baseBatchFormat",
+      "defaultValue": "cashier-withdrawals-",
+      "type": "string",
+      "description": "The base format for the name of the batch settlements. The current date will be appended to the end."
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: service-kyc
+  datasource:
+    url: jdbc:mysql://localhost/lithium_kyc
+    username: root
+    password: mysql
+  jpa:
+      show-sql: false
+      hibernate:
+        ddl-auto: validate
+  servlet:
+    multipart:
+        maxFileSize: 20MB
+        maxRequestSize: 20MB
+        file-size-threshold: 1MB
+  cloud:
+    stream:
+      bindings:
+        statsoutputv2:
+          group: statsgroupv2
+          binder: rabbit
+          destination: statsqueuev2
+          producer:
+            required-groups: statsgroupv2
+        userattributestriggerinput :
+          group : user-attributes-trigger-group-kyc
+          binder : rabbit
+          destination : userattributestriggerqueue
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+
+server:
+  port: 8590

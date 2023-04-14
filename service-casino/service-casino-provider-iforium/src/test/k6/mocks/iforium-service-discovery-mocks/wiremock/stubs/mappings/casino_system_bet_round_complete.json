@@ -1,0 +1,13 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "/system/bet/round/complete?domainName=default&providerGuid=default%2Fservice-casino-provider-iforium&roundId=13245Z"
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "casino_system_bet_round_complete.json",
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}

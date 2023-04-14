@@ -1,0 +1,2 @@
+ALTER TABLE `user_event` 
+CHANGE COLUMN `data` `data` LONGTEXT NOT NULL ;

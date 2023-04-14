@@ -1,0 +1,18 @@
+CREATE TABLE `type` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `modify_type` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO `type` (`id`, `name`)
+VALUES (1, 'TYPE_WIN_LIMIT'), (2, 'TYPE_LOSS_LIMIT'), (3, 'TYPE_DEPOSIT_LIMIT'), (4,'TYPE_DEPOSIT_LIMIT_PENDING')
+, (5, 'TYPE_DEPOSIT_LIMIT_SUPPOSED'), (6, 'TYPE_BALANCE_LIMIT'), (7, 'TYPE_BALANCE_LIMIT_PENDING');
+
+INSERT INTO `modify_type` (`id`, `name`)
+VALUES (0, 'CREATED'), (1, 'UPDATED'), (2, 'REMOVED');

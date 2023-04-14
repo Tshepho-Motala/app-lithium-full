@@ -1,0 +1,16 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "DOMAIN": {
+      "CLOSURE_REASONS": {
+        "DELETE": {
+          "REASON" : "Please enter reason for deleting entry"
+        },
+        "FIELDS": {
+          "TEXT": {
+            "INPUT_DESCRIPTION": "Please type reason for deletion"
+          }
+        }
+      }
+    }
+  }
+}

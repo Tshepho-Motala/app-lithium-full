@@ -1,0 +1,8 @@
+{
+	"SERVICE_USER": {
+		"PASSWORDRESET": {
+			"ERROR_100": "You have entered your details incorrectly.",
+			"INVALIDDOB": "You have entered your details incorrectly."
+		}
+    }
+}

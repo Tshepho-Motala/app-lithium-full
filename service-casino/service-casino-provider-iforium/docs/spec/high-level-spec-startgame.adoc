@@ -1,0 +1,5 @@
+.Start Game
+[source,gherkin]
+----
+include::../../src/docs/gherkin/high-level-spec/startGame.feature[]
+----

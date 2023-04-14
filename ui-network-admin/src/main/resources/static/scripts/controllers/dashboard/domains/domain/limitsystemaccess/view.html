@@ -1,0 +1,71 @@
+<div class="tab-content" style="padding: 5px;">
+    <table datatable="ng" class="row v-reset-row -border hover">
+        <thead>
+        <tr>
+            <th>{{'UI_NETWORK_ADMIN.DOMAIN.LIMIT_SYSTEM_ACCESS.VIEW.HEADER.SYSTEM_ACCESS_LIMITS.LABEL' | translate}}</th>
+            <th>{{'UI_NETWORK_ADMIN.DOMAIN.LIMIT_SYSTEM_ACCESS.VIEW.HEADER.LOGIN.LABEL' | translate}}</th>
+            <th>{{'UI_NETWORK_ADMIN.DOMAIN.LIMIT_SYSTEM_ACCESS.VIEW.HEADER.DEPOSIT.LABEL' | translate}}</th>
+            <th>{{'UI_NETWORK_ADMIN.DOMAIN.LIMIT_SYSTEM_ACCESS.VIEW.HEADER.WITHDRAW.LABEL' | translate}}</th>
+            <th>{{'UI_NETWORK_ADMIN.DOMAIN.LIMIT_SYSTEM_ACCESS.VIEW.HEADER.BET_PLACEMENT.LABEL' | translate}}</th>
+            <th>{{'UI_NETWORK_ADMIN.DOMAIN.LIMIT_SYSTEM_ACCESS.VIEW.HEADER.CASINO.LABEL' | translate}}</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="limit in controller.llsa">
+            <td>
+                {{ limit.verificationStatus.code }}
+            </td>
+            <td valign="middle">
+                <input lit-if-permission="SYSTEMACCESS_EDIT" type="checkbox"
+                ng-model="limit.login"
+                ng-change="controller.toggleLimit(limit, 'login', limit.login, controller.getErrorMessageKey(limit.verificationStatus.code, 'LOGIN'))"
+                >
+                <button type="button" ng-click="controller.editTranslation(controller.getErrorMessageKey(limit.verificationStatus.code, 'LOGIN'))">
+                    <span><i class="fa fa-pencil"></i></span>
+                </button>
+            </td>
+            <td valign="middle">
+                <input lit-if-permission="SYSTEMACCESS_EDIT" type="checkbox"
+                ng-model="limit.deposit"
+                ng-change="controller.toggleLimit(limit, 'deposit', limit.deposit, controller.getErrorMessageKey(limit.verificationStatus.code, 'DEPOSIT'))"
+                >
+                <button type="button" ng-click="controller.editTranslation(controller.getErrorMessageKey(limit.verificationStatus.code, 'DEPOSIT'))">
+                    <span><i class="fa fa-pencil"></i></span>
+                </button>
+            </td>
+            <td valign="middle">
+                <input lit-if-permission="SYSTEMACCESS_EDIT" type="checkbox"
+                ng-model="limit.withdraw"
+                ng-change="controller.toggleLimit(limit, 'withdraw', limit.withdraw, controller.getErrorMessageKey(limit.verificationStatus.code, 'WITHDRAW'))"
+                >
+                <button type="button" ng-click="controller.editTranslation(controller.getErrorMessageKey(limit.verificationStatus.code, 'WITHDRAW'))">
+                    <span><i class="fa fa-pencil"></i></span>
+                </button>
+            </td>
+            <td valign="middle">
+                <input lit-if-permission="SYSTEMACCESS_EDIT" type="checkbox"
+                    ng-model="limit.betPlacement"
+                    ng-change="controller.toggleLimit(limit, 'betPlacement', limit.betPlacement, controller.getErrorMessageKey(limit.verificationStatus.code, 'BET_PLACEMENT'))"
+                >
+                <button type="button" ng-click="controller.editTranslation(controller.getErrorMessageKey(limit.verificationStatus.code, 'BET_PLACEMENT'))">
+                    <span><i class="fa fa-pencil"></i></span>
+                </button>
+            </td>
+            <td valign="middle">
+                <input lit-if-permission="SYSTEMACCESS_EDIT" type="checkbox"
+                    ng-model="limit.casino"
+                    ng-change="controller.toggleLimit(limit, 'casino', limit.casino, controller.getErrorMessageKey(limit.verificationStatus.code, 'CASINO'))"
+                >
+                <button type="button" ng-click="controller.editTranslation(controller.getErrorMessageKey(limit.verificationStatus.code, 'CASINO'))">
+                    <span><i class="fa fa-pencil"></i></span>
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div style="padding: 19px;">
+        <div class="row v-reset-row  well">
+            <changelog options="controller.changelogs" model=""></changelog>
+        </div>
+    </div>
+</div>

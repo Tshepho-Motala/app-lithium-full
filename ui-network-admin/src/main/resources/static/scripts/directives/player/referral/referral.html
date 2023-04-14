@@ -1,0 +1,19 @@
+<div class="box box-{{data.box}} box-solid" bs-loading-overlay bs-loading-overlay-reference-id="{{referenceId}}">
+	<div class="box-header with-border">
+		{{data.title|translate}}
+	</div>
+	<div class="box-body table-responsive">
+		<table class="table table-bordered">
+		<tr>
+			<th width="40%">Referral Code for {{user.username}}</th>
+			<td>{{user.userApiToken.shortGuid}}</td>
+		</tr><tr>
+			<th width="40%">{{'UI_NETWORK_ADMIN.USER.REFERRAL.REFERRER'|translate}}</th>
+			<td><a ng-href="/#/dashboard/players/{{referral.fullReferrer.domain.name}}/{{referral.fullReferrer.id}}/summary">{{referral.fullReferrer.username}}</a></td>
+		</tr><tr>
+			<th width="40%">{{'UI_NETWORK_ADMIN.USER.REFERRAL.CONVERTED'|translate}}</th>
+			<td>{{referral.converted}}</td>
+		</tr>
+		</table>
+	</div>
+</div>

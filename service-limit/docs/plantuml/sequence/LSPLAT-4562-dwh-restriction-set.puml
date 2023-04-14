@@ -1,0 +1,28 @@
+.DWH Restriction Set
+[plantuml]
+----
+@startuml
+'https://plantuml.com/sequence-diagram
+
+entity  "DWH" as user
+participant "svc-limit" as svclimit
+
+entity "DWH" as dwh
+participant "svc-limit" as svclimit
+
+alt Perform Set action
+    dwh->svclimit++:Set restriction {{gateway}}/service-limit/external/restriction/v1/set
+    alt success
+        dwh<--svclimit--: Successful Response
+    else exception
+        note right of dwh
+            * ERROR INTERVENTION_EXCLUSION
+                show an appropriate message that indicates
+                that we cannot set an intervention restriction because
+                the player is excluded from intervention blocks
+        end note
+    end
+end
+
+@enduml
+----

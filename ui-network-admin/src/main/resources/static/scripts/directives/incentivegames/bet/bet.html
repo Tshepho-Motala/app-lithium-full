@@ -1,0 +1,89 @@
+<div class="row v-reset-row ">
+   <div class="well-clear">
+       <div class="row v-reset-row ">
+           <div class="col-xs-12 col-md-6 col-lg-6">
+               <div class="incentive-bet-header">
+                   <div class="incentive-bet-header-name">
+                       {{bet.transactionTimestamp|datetimegmt}} - {{bet.betTransactionId.substr(0, 8)}}
+                   </div>
+                   <div class="incentive-bet-header-status-container">
+                       <div class="incentive-bet-status"
+                            ng-class="{
+                            'incentive-bet-status-lost': bet.settlement.settlementResult.code === 'LOST',
+                            'incentive-bet-status-won': bet.settlement.settlementResult.code === 'WIN',
+                            'incentive-bet-status-void': bet.settlement.settlementResult.code === 'VOID',
+                            'incentive-bet-status-open': bet.settlement === undefined || bet.settlement === null
+                        }">
+                           <span ng-if="bet.settlement !== undefined && bet.settlement !== null">{{bet.settlement.settlementResult.code}}</span>
+                           <span ng-if="bet.settlement === undefined || bet.settlement === null">OPEN</span>
+                       </div>
+                   </div>
+               </div>
+               <div class="incentive-bet-selection" ng-repeat="betSelection in bet.betSelections">
+                   <div class="incentive-bet-selection-event">
+                       <div class="incentive-bet-selection-event-pick">
+                           {{betSelection.selectionType.code}}
+                       </div>
+                       <div class="incentive-bet-selection-event-type">
+                           {{betSelection.market.code}}
+                       </div>
+                       <div class="incentive-bet-selection-event-name">
+                           {{betSelection.event.eventName.name}}
+                       </div>
+                   </div>
+                   <div class="incentive-bet-selection-prediction incentive-bet-status">
+                       <div class="incentive-bet-status"
+                            ng-class="{
+                            'incentive-bet-status-lost': betSelection.settlementSelection.selectionResult.code === 'LOST',
+                            'incentive-bet-status-won': betSelection.settlementSelection.selectionResult.code === 'WIN',
+                            'incentive-bet-status-void': betSelection.settlementSelection.selectionResult.code === 'VOID',
+                            'incentive-bet-status-open': betSelection.settlementSelection === undefined || betSelection.settlementSelection === null
+                        }">
+                           <span ng-if="betSelection.settlementSelection !== undefined && betSelection.settlementSelection !== null">{{betSelection.settlementSelection.selectionResult.code}}</span>
+                           <span ng-if="betSelection.settlementSelection === undefined || betSelection.settlementSelection === null">OPEN</span>
+                       </div>
+                   </div>
+                   <div class="incentive-bet-selection-odds">
+                       {{betSelection.price}}
+                   </div>
+               </div>
+               <div class="incentive-bet-summary">
+                   <div class="incentive-bet-summary-stake">
+                       Stake:<b>{{bet.totalStake|currency:bet.placement.currency.code}}</b>
+                   </div>
+                   <div class="incentive-bet-summary-odds">
+                       Odds:<b>{{bet.totalOdds}}</b>
+                   </div>
+                   <div class="incentive-bet-summary-win">
+                       <span ng-if="bet.settlement !== undefined && bet.settlement !== null">Win:<b>{{bet.settlement.returns|currency:bet.placement.currency.code}}</b></span>
+                       <span ng-if="bet.settlement === undefined || bet.settlement === null">Win:<b>{{0|currency:bet.placement.currency.code}}</b></span>
+                   </div>
+               </div>
+           </div>
+           <div class="col-xs-12 col-md-6 col-lg-6">
+               <div class="well-clear">
+                   <div class="well incentive-bet-system-details">
+                       <div>
+                           <b>Player:</b> <a target="_blank" ui-sref="dashboard.players.guidredirect({domainName:bet.placement.user.guid.split('/')[0], usernameOrId:bet.placement.user.guid.split('/')[1]})">{{bet.placement.user.guid}} {{(bet.placement.user.username !== undefined && bet.placement.user.username !== null) ? "(" + bet.placement.user.username + ")" : ""}}</a><br/>
+                           <b>Balance:</b> {{bet.postEntryAccountBalance |currency:bet.placement.currency.code}}
+                       </div>
+                   </div>
+                    <div class="well incentive-bet-system-details">
+                        <div>
+                            <b>Incentive Bet ID:</b> {{bet.betTransactionId}}<br/>
+                            <b>Bet Accounting Tran ID:</b> {{bet.lithiumAccountingId}}<br/>
+                            <b>Max Potential Win:</b> {{bet.maxPotentialWin}}
+                        </div>
+                    </div>
+                    <div ng-if="bet.settlement !== undefined && bet.settlement !== null" class="well incentive-bet-system-details">
+                        <div>
+                            <b>Settlement Time:</b> {{bet.settlement.transactionTimestamp|datetimegmt}}<br/>
+                            <b>Incentive Settlement ID:</b> {{bet.settlement.settlementTransactionId}}<br/>
+                            <b>Settlement Accounting Tran ID:</b> {{bet.settlement.lithiumAccountingId}}
+                        </div>
+                    </div>
+               </div>
+           </div>
+       </div>
+   </div>
+</div>

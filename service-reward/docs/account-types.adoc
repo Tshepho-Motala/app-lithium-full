@@ -1,0 +1,112 @@
+= Account and Transaction Types
+:icons: font
+
+[sidebar]
+****
+link:readme.adoc[Home]
+****
+
+[%autowidth]
+[cols="2h,~,1,1,1"]
+|===
+|Event |Description   |Transaction Type |Account icon:plus[role="Lime"] |Account icon:minus[role="Maroon"]
+
+|DFG Game Bet
+|This is when pr-roxor receives a TRANSFER_DEBIT event from a DFG / MFG GameKey (This is usually a 0 amount)
+|CASINO_BET_FREEGAME
+|CASINO_BALANCE_BONUS_FREEGAME
+|PLAYER_BALANCE_ CASINO_BONUS_FREEGAME
+
+|DFG Game Cash Win
+|This is when pr-roxor receives a TRANSFER_CREDIT event from a DFG / MFG GameKey (Wins cash instead of free_spins from a DFG Game)
+|CASINO_WIN_FREEGAME
+|PLAYER_BALANCE
+|CASINO_WIN_FREEGAME
+
+|DFG Game Reward Win Activate
+|This is not applicable as currently Roxor does not sent Lithium DFG Initiated Reward activations
+|N/A
+|N/A
+|N/A
+
+|DFG Granted Reward FreeRound Redemption (Bet)
+|This is when pr-roxor receives a FREE_PLAY event that has a source of type DFG indicating this redemption is due to a DFG Granting a reward to the player.
+|CASINO_BET_FREEROUND_FREEGAME
+|CASINO_BALANCE_BONUS_FREEROUND_FREEGAME
+|PLAYER_BALANCE_CASINO_BONUS_FREEROUND_FREEGAME
+
+|DFG Granted Reward FreeRound Win
+|This is when pr-roxor receives a TRANSFER_CREDIT event that was caused by a FREE_PLAY wager that has a source of type DFG and not a TRANSFER_DEBIT wager.
+|CASINO_WIN_FREEROUND_FREEGAME
+|PLAYER_BALANCE
+|CASINO_WIN_FREEROUND_FREEGAME
+
+|LBO Granted Free Spin Reward (Activate)
+|This is when service-bonus activates bonus that contains a free spin reward.
+|CASINO_BONUS_ACTIVATE_FREESPIN_V2
+|PLAYER_BALANCE_CASINO_BONUS_FREESPIN
+|CASINO_BALANCE_BONUS_FREESPIN
+
+|LBO Granted Free Spin Redemption (Bet)
+|This is when pr-roxor receives a FREE_PLAY event and the source → sourceId value resolved on the RewardBonusMap and the RewardType within the record indicates free_spin
+|CASINO_BET_FREESPIN_V2
+|CASINO_BALANCE_BONUS_FREESPIN
+|PLAYER_BALANCE_CASINO_BONUS_FREESPIN
+
+|LBO Granted Free Spin Win
+|This is when pr-roxor receives a TRANSFER_CREDIT event that was caused by a FREE_PLAY wager and not a TRANSFER_DEBIT wager.
+
+The FreePlay event source->sourceId resolved on the RewardBonusMap  and the rewardType within the record indicates free_spin
+
+|CASINO_WIN_FREESPIN_V2
+|PLAYER_BALANCE
+|CASINO_WIN_FREESPIN
+
+|LBO Granted Casino Free Bet Reward Activate (FreeChips)
+|This is when service-bonus activates bonus that contains a casino free bet reward.
+|CASINO_BONUS_ACTIVATE_CASINOFREEBET
+|PLAYER_BALANCE_CASINO_BONUS_CASINOFREEBET
+|CASINO_BALANCE_BONUS_CASINOFREEBET
+
+|LBO Granted Casino Free Bet Redemption (Bet)
+|This is when pr-roxor receives a FREE_PLAY event and the source → sourceId value resolved on the RewardBonusMap and the RewardType within the record indicates bonus_cash
+|CASINO_BET_CASINOFREEBET
+|CASINO_BALANCE_BONUS_CASINOFREEBET
+|PLAYER_BALANCE_CASINO_BONUS_CASINOFREEBET
+
+|LBO Granted Casino Free Bet Win
+|This is when pr-roxor receives a TRANSFER_CREDIT event that was caused by a FREE_PLAY wager and not a TRANSFER_DEBIT wager.
+
+The FreePlay event source->sourceId resolved on the RewardBonusMap  and the rewardType within the record indicates bonus_cash
+
+|CASINO_WIN_CASINOFREEBET
+|PLAYER_BALANCE
+|CASINO_WIN_CASINOFREEBET
+
+|LBO Granted Instant Reward Activate
+|This is when service-bonus activates bonus that contains an instant reward reward.
+|CASINO_BONUS_ACTIVATE_INSTANTREWARD
+|PLAYER_BALANCE_CASINO_BONUS_INSTANTREWARD
+|CASINO_BALANCE_BONUS_INSTANTREWARD
+
+|LBO Granted Instant Reward Redemption (Bet)
+|This is when pr-roxor receives a FREE_PLAY event and the source → sourceId value resolved on the RewardBonusMap and the RewardType within the record indicates instant_reward
+|CASINO_BET_INSTANTREWARD
+|CASINO_BALANCE_BONUS_INSTANTREWARD
+|PLAYER_BALANCE_CASINO_BONUS_INSTANTREWARD
+
+|LBO Granted Instant Reward Win
+|This is when pr-roxor receives a TRANSFER_CREDIT event that was caused by a FREE_PLAY wager and not a TRANSFER_DEBIT wager.
+
+The FreePlay event source->sourceId resolved on the RewardBonusMap  and the rewardType within the record indicates instant_reward
+|CASINO_WIN_INSTANTREWARD
+|PLAYER_BALANCE
+|CASINO_WIN_INSTANTREWARD
+
+|LBO Granted Free Money Activate
+|This is when service-bonus activates bonus that contains a free money reward.
+|CASINO_BONUS_ACTIVATE_FREEMONEY_V2
+|PLAYER_BALANCE
+|CASINO_BALANCE_BONUS_FREEMONEY
+
+|===

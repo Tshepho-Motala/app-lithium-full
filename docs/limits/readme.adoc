@@ -1,0 +1,27 @@
+= Limits
+Riaan Schoeman <riaan.schoeman@wonderlabz.com>
+1.0, October 10, 2022: Limits
+:sectnums:
+:toc: left
+:toclevels: 4
+:toc-title: Limits
+:icons: font
+:url-quickref: https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/
+:table-caption!:
+
+:erd-include: ../includes/erd.puml
+:seq-include: ../includes/sequence.puml
+
+:svc-user-sourcedir: ../../service-user/service-user/src/main/java
+
+//This is done to keep formatting aligned with gitlab
+****
+[verse,,]
+____
+link:../../readme.adoc[Home]
+____
+****
+
+== Description
+
+* This document will describe all the information around limits, and systems affected by anything to do with limits.

@@ -1,0 +1,131 @@
+<div class="container-fluid" bs-loading-overlay bs-loading-overlay-reference-id="loading">
+    <div class="card card-block" style="margin-bottom: 10px;" ng-init="">
+        <div class="d-flex justify-content-start">
+            <div class="p-2 mr-auto">
+                <span class="title">{{'UI_NETWORK_ADMIN.RESTRICTIONS.EDIT.TITLE'|translate}}</span>
+                <span class="description">({{controller.set.id}} - {{controller.set.name}})</span> <br/>
+                <span class="label" ng-class="{'label-success': controller.set.enabled === true, 'label-danger': controller.set.enabled === false }">{{(controller.set.enabled) ? 'ENABLED' : 'DISABLED'}}</span>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <form ng-submit="controller.onSubmit()" name="controller.form" autocomplete="off" novalidate>
+        <buttonbar>
+            <button-back ui-sref="dashboard.restrictions.dictionary.view({id: controller.set.id})"></button-back>
+            <button-disable lit-if-permission="RESTRICTIONS_EDIT" lit-permission-domain="{{controller.set.domain.name}}" ng-if="controller.set.enabled" click-confirm="{{'UI_NETWORK_ADMIN.RESTRICTIONS.EDIT.DISABLE.CONFIRM'|translate}}"  click-confirmed="controller.toggleEnabled()"></button-disable>
+            <button-enable lit-if-permission="RESTRICTIONS_EDIT" lit-permission-domain="{{controller.set.domain.name}}" ng-if="!controller.set.enabled" click-confirm="{{'UI_NETWORK_ADMIN.RESTRICTIONS.EDIT.ENABLE.CONFIRM'|translate}}"  click-confirmed="controller.toggleEnabled()"></button-enable>
+            <button-delete lit-if-permission="RESTRICTIONS_EDIT" lit-permission-domain="{{controller.set.domain.name}}" click-confirm="{{'UI_NETWORK_ADMIN.RESTRICTIONS.EDIT.DELETE.CONFIRM'|translate}}" click-confirmed="controller.delete()"></button-delete>
+        </buttonbar>
+        <br/><br/>
+        <div class="row v-reset-row ">
+            <div class="col-xs-12">
+                <div class="card card-block">
+                    <div class="well-clear">
+                        <div class="col-xs-12 table-responsive">
+                            <table class="table table-hover nowrap" cellspacing="0" width="100%">
+                                <tbody>
+                                <tr>
+                                    <th style="width: 25%;">{{'UI_NETWORK_ADMIN.RESTRICTIONS.FIELDS.NAME.NAME'|translate}}</th>
+                                    <td>{{controller.set.name}} <a ng-click="controller.editName()">{{'GLOBAL.ACTION.CHANGE'|translate}}</a></td>
+                                </tr><tr>
+                                    <th>{{'UI_NETWORK_ADMIN.RESTRICTIONS.FIELDS.DOMAIN.NAME'|translate}}</th>
+                                    <td>{{controller.set.domain.name}}</td>
+                                </tr><tr>
+                                    <th>{{'UI_NETWORK_ADMIN.RESTRICTIONS.FIELDS.ENABLED.NAME'|translate}}</th>
+                                    <td>{{controller.set.enabled}}</td>
+                                </tr><tr>
+                                    <th>{{'Error Message'|translate}}&nbsp;
+                                        <button type="button" ng-click="controller.editTranslation()">
+                                            <span><i class="fa fa-pencil-square-o"></i></span>
+                                        </button>
+                                    </th>
+                                    <td>{{controller.set.errorMessage ? controller.set.errorMessage : 'UI_NETWORK_ADMIN.ERROR_DICTIONARY.RESTRICTION.DEFAULT_ERROR_MESSAGE' | translate}}</td>
+                                </tr><tr>
+	                                <th>{{'UI_NETWORK_ADMIN.RESTRICTIONS.FIELDS.DWH_VISIBLE.NAME'|translate}}</th>
+	                                <td><checkbox class="btn" ng-change="controller.toggleDwhVisibility()" ng-model="controller.set.dwhVisible"></checkbox></td>
+                                </tr><tr>
+                                    <th>{{'UI_NETWORK_ADMIN.RESTRICTIONS.FIELDS.COMMUNICATE_TO_PLAYER.NAME'|translate}}</th>
+                                    <td><checkbox class="btn" ng-change="controller.toggleCommunicateToPlayer()" ng-model="controller.set.communicateToPlayer"></checkbox></td>
+                                </tr>
+<!--sasdasd                                -->
+                                <tr>
+	                                <th>{{'UI_NETWORK_ADMIN.RESTRICTIONS.FIELDS.PLACE_MAIL_TEMPLATE.NAME'|translate}}
+		                                <button type="button" ng-click="controller.editPlaceMailTemplate()">
+			                                <span><i class="fa fa-pencil-square-o"></i></span>
+		                                </button>
+	                                </th>
+	                                <td>{{controller.getPlaceTemplate()}}</td>&nbsp;&nbsp;
+                                </tr>
+                                <tr>
+	                                <th>{{'UI_NETWORK_ADMIN.RESTRICTIONS.FIELDS.LIFT_MAIL_TEMPLATE.NAME'|translate}}
+		                                <button type="button" ng-click="controller.editLiftMailTemplate()">
+			                                <span><i class="fa fa-pencil-square-o"></i></span>
+		                                </button>
+	                                </th>
+	                                <td>{{controller.getLiftTemplate()}}</td>&nbsp;&nbsp;
+                                </tr>
+<!--asdasd                                -->
+                                <tr>
+	                                <th>{{'UI_NETWORK_ADMIN.RESTRICTIONS.FIELDS.PLACE_OUTCOME_ACTIONS.NAME'|translate}}
+		                                <button type="button" ng-click="controller.editPlaceOutcomeActions()">
+			                                <span><i class="fa fa-pencil-square-o"></i></span>
+		                                </button>
+	                                </th>
+	                                <td>{{controller.getActionCode(controller.set.placeActions)}}</td>&nbsp;&nbsp;
+                                </tr>
+                                <tr>
+	                                <th>{{'UI_NETWORK_ADMIN.RESTRICTIONS.FIELDS.LIFT_OUTCOME_ACTIONS.NAME'|translate}}
+		                                <button type="button" ng-click="controller.editLiftOutcomeActions()">
+			                                <span><i class="fa fa-pencil-square-o"></i></span>
+		                                </button>
+	                                </th>
+	                                <td>{{controller.getActionCode(controller.set.liftActions)}}</td>&nbsp;&nbsp;
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="well-clear">
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" ng-click="controller.addRestriction()">
+                                <span><i class="fa fa-plus"></i>{{'GLOBAL.ACTION.ADD'|translate}}</span>
+                            </button>
+                        </div>
+                        <hr style="margin-top: 40px;"/>
+                        <div ng-if="controller.set.restrictions.length > 0" class="col-xs-12 table-responsive">
+                            <table class="table table-hover table-striped nowrap" cellspacing="0" width="100%">
+                                <thead>
+                                <tr>
+                                    <th>{{'UI_NETWORK_ADMIN.RESTRICTIONS.FIELDS.RESTRICTION.RESTRICTION.NAME'|translate}}</th>
+                                    <th>{{'UI_NETWORK_ADMIN.RESTRICTIONS.FIELDS.RESTRICTION.ENABLED.NAME'|translate}}</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="restriction in controller.set.restrictions track by $index">
+                                    <td style="width: 25%;">{{controller.getRestrictionTypeName(restriction.restriction.code) + " (" + restriction.restriction.code + ")"}}</td>
+                                    <td style="width: 25%;"><span class="label" ng-class="{'label-success': restriction.enabled === true, 'label-danger': restriction.enabled === false }">{{(restriction.enabled) ? 'ENABLED' : 'DISABLED'}}</span></td>
+                                    <td style="width: 50%;">
+                                        <a ng-click="controller.modifyRestriction($index)">
+                                            <span class="badge bg-blue"><i class="fa fa-cog"></i></span>
+                                        </a>
+                                        &nbsp;
+                                        <a ng-click="controller.removeRestriction(restriction.id)">
+                                            <span class="badge bg-red"><i class="fa fa-times"></i></span>
+                                        </a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div ng-if="controller.set.restrictions.length === 0">
+                            <div class="col-xs-12">
+                                <b>{{'UI_NETWORK_ADMIN.RESTRICTIONS.NORESTRICTIONSSETUPYET'|translate}}</b>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

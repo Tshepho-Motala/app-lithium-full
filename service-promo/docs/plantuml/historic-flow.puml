@@ -1,0 +1,31 @@
+.Historic Flow
+[plantuml]
+----
+
+@startuml
+
+participant "svc-accounting-pr-internal" as acctint
+participant "svc-casino" as casino
+participant "svc-avatar" as avatar
+participant "svc-cashier" as cashier
+participant "svc-raf" as raf
+participant "svc-user" as user
+participant "svc-xp" as xp
+participant "svc-missions" as missions
+
+
+activate missions
+acctint->missions: TYPE_XP | ACTION_POINTS
+acctint->missions: TYPE_CASINO | ACTION_BET
+acctint->missions: TYPE_CASINO | ACTION_WIN
+casino->missions: TYPE_CASINO | ACTION_BONUS_HOURLY
+avatar->missions: TYPE_AVATAR | ACTION_UPDATE
+cashier->raf: RAF conversion
+raf->missions: TYPE_RAF | ACTION_CONVERSATION
+raf->missions: TYPE_RAF | ACTION_REFERERAL
+user->missions: TYPE_USER | ACTION_LOGIN
+xp->missions: TYPE_XP | ACTION_LEVEL
+deactivate missions
+
+@enduml
+----

@@ -1,0 +1,27 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "LEADERBOARD": {
+      "EDIT": {
+        "SUCCESS": "Successfully saved leaderboard details."
+      },
+      "XPLEVELREQUIREDEXPLAIN": "E.g. To be eligible for this leaderboard, player needs to be on xp level between {{min}} and {{max}}. ",
+      "XPLEVELREQUIREDEXPLAIN2": "E.g. To be eligible for this leaderboard, a minimum/maximum xp level can be specified here. This is an optional grouping/restriction. If none specified, all levels will be used in the grouping specified below.",
+      "FIELDS": {
+        "REQUIREMENTS": {
+          "XPPOINTS": "XP Points Group",
+          "XPLEVEL": "XP Level"
+        },
+        "XPLEVELMIN": {
+          "TITLE": "XP Level (minimum)",
+          "PLACE": "E.g. 7",
+          "DESC": "Minimum XP Level before the grouping below is considered. If none specified, all levels considered."
+        },
+        "XPLEVELMAX": {
+          "TITLE": "XP Level (maximum)",
+          "PLACE": "E.g. 70",
+          "DESC": "Maximum XP Level before the grouping below is considered. If none specified, all levels considered."
+        }
+      }
+    }
+  }
+}

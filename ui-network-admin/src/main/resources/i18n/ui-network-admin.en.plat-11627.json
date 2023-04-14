@@ -1,0 +1,9 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "MAILQUEUE": {
+      "MAIL": {
+        "TEMPLATE": "Template"
+      }
+    }
+  }
+}

@@ -1,0 +1,23 @@
+<div class="modal-body" bs-loading-overlay bs-loading-overlay-reference-id="{{controller.referenceId}}">
+    <h3 class="text-center">{{'UI_NETWORK_ADMIN.BALANCE_LIMITS.TITLE' | translate}}</h3>
+</div>
+<modal-body>
+    <div>
+        <div ng-if="controller.oldValue > controller.newValue">
+            <p class="text-center">{{'UI_NETWORK_ADMIN.BALANCE_LIMITS.CHANGE.CONFIRMATION_MESSAGE' | translate :{
+                amount_from: (controller.oldValue  | currency: controller.domain.currencySymbol),
+                amount_to: (controller.newValue  | currency: controller.domain.currencySymbol)
+            } }} </p>
+        </div>
+        <div ng-if="controller.oldValue < controller.newValue">
+            <p class="text-center">{{'UI_NETWORK_ADMIN.BALANCE_LIMITS.CHANGE.CONFIRMATION_MESSAGE_INCREASE' | translate :{
+                amount_from: (controller.oldValue  | currency: controller.domain.currencySymbol),
+                amount_to: (controller.newValue  | currency: controller.domain.currencySymbol)
+            } }} </p>
+        </div>
+    </div>
+</modal-body>
+<div class="modal-footer">
+    <button-custom icon="edit" text="UI_NETWORK_ADMIN.BALANCE_LIMITS.CHANGE.CONFIRM" bclass="default" ng-click="controller.submit()"></button-custom>
+    <button-custom icon="ban" text="GLOBAL.ACTION.CANCEL" bclass="default" ng-click="controller.cancel()"></button-custom>
+</div>

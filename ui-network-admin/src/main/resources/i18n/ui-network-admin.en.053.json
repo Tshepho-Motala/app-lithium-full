@@ -1,0 +1,9 @@
+{
+	"UI_NETWORK_ADMIN": {
+		"CASHIER": {
+			"PROFILES": {
+				"CODEEXISTS": "The code entered already exists for this domain"
+			}
+		}
+	}
+}

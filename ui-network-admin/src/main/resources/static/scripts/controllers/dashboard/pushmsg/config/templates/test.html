@@ -1,0 +1,79 @@
+<div class="modal-content">
+	<div class="modal-header primary-blue darken-4 white-text">
+		<h3 class="modal-title" id="modal-title">
+			<i class="fa fa-bell"></i>
+			{{ 'UI_NETWORK_ADMIN.PUSHMSG.TEMPLATES.TEST.TITLE' | translate }}
+			<button-close-window ng-click="controller.cancel()"></button-close-window>
+		</h3>
+	</div>
+	
+	<form ng-submit="controller.onSubmit()" name="controller.form" novalidate>
+		<div class="modal-body" id="modal-body">
+			<div class="row v-reset-row ">
+				<div class="col-xs-12">
+					<table class="table table-hover table-striped nowrap" cellspacing="0" width="100%">
+					<tr>
+						<th>{{'UI_NETWORK_ADMIN.PUSHMSG.TEMPLATES.FIELDS.NAME.NAME'|translate}}</th>
+						<td>{{controller.model.name}}</td>
+					</tr>
+					<tr>
+						<th>{{'UI_NETWORK_ADMIN.PUSHMSG.TEMPLATES.FIELDS.PROVIDERTEMPLATEID.NAME'|translate}}</th>
+						<td>{{controller.model.current.providerTemplateId}}</td>
+					</tr>
+					<tr>
+						<th>{{'UI_NETWORK_ADMIN.PUSHMSG.TEMPLATES.FIELDS.DESCRIPTION.NAME'|translate}}</th>
+						<td>{{controller.model.current.description}}</td>
+					</tr>
+					<tr>
+						<th>{{'UI_NETWORK_ADMIN.PUSHMSG.TEMPLATES.FIELDS.ENABLED.NAME'|translate}}</th>
+						<td>{{controller.model.enabled}}</td>
+					</tr>
+					<tr>
+						<th colspan="2" class="description">{{'UI_NETWORK_ADMIN.PUSHMSG.TEMPLATES.TEST.SELECT'|translate}}</th>
+					</tr>
+					<tr>
+						<th>
+							<label>{{ 'UI_NETWORK_ADMIN.PUSHMSG.TEMPLATES.TEST.SEARCHTITLE' | translate }}</label>
+						</th><td>
+							<div class="form-group card-content">
+								<fieldset>
+									<div class="input-group">
+										<input type="text"
+											ng-model="controller.selectedUsername"
+											placeholder="search player"
+											uib-typeahead="user.guid for user in controller.searchUsers($viewValue)"
+											typeahead-loading="loadingLocations"
+											typeahead-no-results="noResults"
+											typeahead-min-length="2"
+											typeahead-show-hint="true"
+											typeahead-wait-ms="500"
+											typeahead-editable="false"
+											typeahead-on-select="controller.selectedUser = $item.guid;"
+											class="form-control"/>
+										<div class="input-group-btn">
+											<button type="button" class="btn btn-default" ng-click="resetTypeAhead()"><i class="fa fa-remove"></i></button>
+										</div>
+									</div>
+									<div ng-show="loadingLocations" class="overlay">
+										<i class="fa fa-refresh fa-spin"></i>
+									</div>
+									<div ng-show="noResults" class="form-group has-error">
+										<span class="help-block"><i class="fa fa-remove"></i>&nbsp;No Results Found</span>
+									</div>
+								</fieldset>
+							</div>
+						</td>
+					</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+		
+		<div class="modal-footer" id="modal-footer">
+			<buttonbar>
+				<button-submit class="pull-left"></button-submit>
+				<button-cancel ng-click="controller.cancel()"></button-cancel>
+			</buttonbar>
+		</div>
+	</form>
+</div>

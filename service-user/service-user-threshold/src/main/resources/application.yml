@@ -1,0 +1,53 @@
+server:
+  port: 9730
+
+spring:
+  application :
+    name : service-user-threshold
+  datasource:
+    url: jdbc:mysql://localhost/lithium_user_threshold
+#    ?autoReconnect=true&useSSL=false&createDatabaseIfNotExist=true
+    username: root
+    password: mysql
+  jpa:
+    generate-ddl: false
+    show-sql: false
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        format_sql : false
+  cloud:
+    stream:
+      bindings:
+        register-notification-type-output :
+          binder: rabbit
+          destination: register-notification-type-queue
+          producer:
+            required-groups: register-notification-type-trigger-group
+        register-notification-output :
+          binder: rabbit
+          destination: register-notification-queue
+          producer:
+            required-groups: register-notification-trigger-group
+  flyway:
+     enabled: true
+
+lithium:
+  service:
+    user:
+      threshold:
+        calculate-day-granularity-enabled: true
+        calculate-week-granularity-enabled: true
+        calculate-month-granularity-enabled: true
+        calculate-year-granularity-enabled: false
+        calculate-total-granularity-enabled: false
+        notifications:
+#          enable-auto-create: false
+          send-notifications: true
+springdoc:
+  paths-to-exclude: /.well-known/**, /version, /modules/**, /providers, /registerroles, /registertranslations/**, /roles, /user, /system/**
+
+logging:
+   level:
+     lithium.service.user.threshold: INFO

@@ -1,0 +1,61 @@
+{
+  "name": "Neteller",
+  "code": "neteller",
+  "url": "service-cashier-processor-neteller",
+  "methodNames": ["neteller"],
+  "deposit": true,
+  "withdraw": true,
+  "fees": {
+    "flat": 0,
+    "percentage": 0,
+    "minimum": 0
+  },
+  "limits": {
+    "minAmount": 2500,
+    "maxAmount": 0,
+    "maxAmountDay": 0,
+    "maxAmountWeek": 0,
+    "maxAmountMonth": 0,
+    "maxTransactionsDay": 0,
+    "maxTransactionsWeek": 0,
+    "maxTransactionsMonth": 0
+  },
+  "properties": [
+    { 
+      "name": "private_key_username",
+      "defaultValue": "",
+      "type": "string",
+      "description": "Private key username found under the registered APPs section of your NETELLER Merchant Account."
+    },
+    { 
+      "name": "private_key_password",
+      "defaultValue": "",
+      "type": "string",
+      "description": "Private key password found under the registered APPs section of your NETELLER Merchant Account."
+    },
+    { 
+      "name": "baseUrl",
+      "defaultValue": "https://api.test.paysafe.com/paymenthub",
+      "type": "url",
+      "description": "Base Neteller URL."
+    },
+    {
+      "name": "returnurl",
+      "defaultValue": "https://ionic-dev-cash.dev.playsafesa.com/",
+      "type": "string",
+      "description": "The URL endpoint to redirect the customer back to after a redirection to neteller payment."
+    },
+    {
+      "name": "iframelocation",
+      "defaultValue": "cashier_iframe_content",
+      "type": "string",
+      "description": "The cashier html document element name where the iframe should open. (_blank or cashier_iframe_content usually)"
+    },
+    {
+      "name": "simulator",
+      "defaultValue": "",
+      "type": "string",
+      "description": "Leave blank to use neteller's transaction simulator page, or set to EXTERNAL to use the payment gateway"
+    }
+  ]
+}

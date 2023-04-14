@@ -1,0 +1,18 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "LIST": {
+      "PLAYERS":{
+        "FIELDS": {
+          "FILTER": {
+            "AGE_VERIFIED": {
+              "LABEL": "Is Age verified"
+            },
+            "ADDRESS_VERIFIED": {
+              "LABEL": "Is Address verified"
+            }
+          }
+        }
+      }
+    }
+  }
+}

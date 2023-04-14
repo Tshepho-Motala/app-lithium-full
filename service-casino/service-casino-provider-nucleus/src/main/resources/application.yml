@@ -1,0 +1,9 @@
+server.port: 9779
+
+spring:
+  application:
+    name: service-casino-provider-nucleus
+    
+eureka:
+  instance:
+    appname: service-casino-provider-nucleus

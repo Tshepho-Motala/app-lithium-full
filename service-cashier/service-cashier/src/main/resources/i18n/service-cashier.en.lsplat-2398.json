@@ -1,0 +1,14 @@
+{
+  "SERVICE-CASHIER": {
+    "AUTOWITHDRAWALS": {
+      "RULESETS": {
+        "RULE": {
+          "FIELD": {
+            "PENDING_WITHDRAWALS_AMOUNT_IN_CENTS": "Pending Withdrawals Amount (in cents)",
+            "IS_WITHDRAWING_TO_LAST_DEPOSIT_METHOD_USED": "Withdrawing to last deposit method"
+          }
+        }
+      }
+    }
+  }
+}

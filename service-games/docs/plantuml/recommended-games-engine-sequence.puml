@@ -1,0 +1,56 @@
+'Recommended Games Engine Sequence Diagram
+[plantuml]
+----
+@startuml
+'https://plantuml.com/sequence-diagram
+
+
+participant frontend as fe
+participant "svc-casino-cms" as cms
+participant "svc-domain" as domain
+participant "svc-games" as games
+participant "svc-games-provider-google-rge" as rge
+boundary "rge-predict-api" as predict
+
+autonumber
+
+fe -->cms++: POST /frontend/lobby/load
+alt user access token provided and user exist
+  cms --> cms: get userGuid from access token
+else no access token was provided (user does not exist)
+  cms --> cms: userGuid = null
+end
+cms -->> cms: get json lobby and start enrichment process
+alt secondary_nav_code=for_you
+    group#orange "Get Recommended Games"
+        note over games
+        Whenever the for_you secondary navigation is being requested for, a list of recommended games will be inserted at the top
+          * **primaryNavCode** is used to select between casino and live-casino games
+          * **channel** is used to select between desktop_web, mobile_web, mobile_ios and android_native
+        end note
+        alt userGuid is null (user does not exist)
+          cms --> cms: userGuid = "domainName/0" (e.g. livescore_uk/0)
+          note right of cms: When the user token was not provided, we will need to retrieve the global recommended games list; hence we use a userGuid with domain and zero as user id
+        end
+        cms --> games++: get recommended games (userGuid, primaryNavCode, channel)
+        games --> domain: get configured recommended games engine provider
+        games --> rge++: get recommended games for userGuid
+        rge -->> rge: get access token from GoogleAuthenticationService
+        rge --> predict++: POST https://{service-endpoint}/v1/{endpoint}:predict
+
+        predict -->> rge--: predictions
+        rge -->> games--: return recommended games
+        games --> games: filter games and return only games that are enabled and visible on the domain in question
+        games --> games: filter games based on casino/live-casino flag
+        games --> games: filter games based on selected channel (mobile_web, mobile_ios, android_native or desktop_web)
+        games --> cms--: return recommended games for enabled and visible games only
+        cms --> cms: enhance lobby json with recommended games
+    end
+    alt user exist (userGuid != null)
+      cms --> cms: enhance lobby json with recently played games
+    end
+end
+cms -->> fe--: return lobby
+
+@enduml
+----

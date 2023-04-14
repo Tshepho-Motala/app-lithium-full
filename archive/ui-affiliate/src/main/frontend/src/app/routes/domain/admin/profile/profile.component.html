@@ -1,0 +1,228 @@
+<form novalidate (ngSubmit)="save(form)" #form="ngForm" style="position: relative">
+
+<md-card color="primary" class="mat-elevation-z12 margin nopadding">
+	<md-toolbar color="primary">Profile &nbsp;<small>({{model.username}})</small></md-toolbar>
+</md-card>
+
+<loading-overlay [isLoading]="isLoading"></loading-overlay>
+
+<div fxLayout="row" fxLayout.md="column" fxLayout.sm="column" fxLayout.xs="column">
+	<div fxLayout="column" fxFlex="40">
+		<md-card>
+			<md-card-header>
+				<md-card-title>Personal and Contact Information</md-card-title>
+				<md-card-subtitle>Change Your Personal and/or Contact Information</md-card-subtitle>
+				<span fxFlex></span>
+				<button type="button" md-icon-button mdTooltip="refresh" mdTooltipPosition="below" (click)="refresh()"><md-icon>refresh</md-icon></button>
+				<button type="button" md-icon-button mdTooltip="more" mdTooltipPosition="below" [mdMenuTriggerFor]="personalInfoMore"><md-icon>more_vert</md-icon></button>
+				<md-menu #personalInfoMore="mdMenu">
+					<button type="button" md-menu-item (click)="save(form)">save</button>
+				</md-menu>
+			</md-card-header>
+			<md-card-content>
+				<div fxLayout="column" fxLayout.gt-md="row">
+					<md-input-container fxFlex>
+						<input mdInput placeholder="Username" readonly name="username" [(ngModel)]="model.username" #username="ngModel" required minlength="4" maxlength="24">
+						<md-formfield-errors [field]="username"></md-formfield-errors>
+					</md-input-container>
+				</div>
+				<div fxLayout="column" fxLayout.gt-md="row">
+					<md-input-container fxFlex>
+						<input mdInput placeholder="First Name" name="firstName" [(ngModel)]="model.firstName" #firstName="ngModel" required>
+						<md-formfield-errors [field]="firstName"></md-formfield-errors>
+					</md-input-container>
+					<md-input-container fxFlex>
+						<input mdInput placeholder="Last Name" name="lastName" [(ngModel)]="model.lastName" #lastName="ngModel" required>
+						<md-formfield-errors [field]="lastName"></md-formfield-errors>
+					</md-input-container>
+				</div>
+				<div fxLayout="column" fxLayout.gt-md="row">
+					<md-input-container fxFlex>
+						<input mdInput placeholder="Date of Birth" name="dateOfBirth" [(ngModel)]="model.dateOfBirth" #dateOfBirth="ngModel">
+						<md-formfield-errors [field]="dateOfBirth"></md-formfield-errors>
+					</md-input-container>
+					<md-input-container fxFlex>
+						<input mdInput placeholder="Social Security Number" name="socialSecurityNumber" [(ngModel)]="model.socialSecurityNumber" #socialSecurityNumber="ngModel">
+						<md-formfield-errors [field]="socialSecurityNumber"></md-formfield-errors>
+					</md-input-container>
+				</div>
+				<div fxLayout="column" fxLayout.gt-md="row">
+					<md-input-container fxFlex>
+						<input mdInput placeholder="E-Mail Address" type="email" name="email" [(ngModel)]="model.email" #email="ngModel" required email>
+						<md-formfield-errors [field]="email"></md-formfield-errors>
+					</md-input-container>
+				</div>
+				<div fxLayout="column" fxLayout.gt-md="row">
+					<md-input-container fxFlex>
+						<input mdInput placeholder="Landline Number" name="telephoneNumber" [(ngModel)]="model.telephoneNumber" #telephoneNumber="ngModel">
+						<md-formfield-errors [field]="telephoneNumber"></md-formfield-errors>
+					</md-input-container>
+					<md-input-container fxFlex>
+						<input mdInput placeholder="Cellphone Number" name="cellphoneNumber" [(ngModel)]="model.cellphoneNumber" #cellphoneNumber="ngModel">
+						<md-formfield-errors [field]="cellphoneNumber"></md-formfield-errors>
+					</md-input-container>
+				</div>
+			</md-card-content>
+		</md-card>
+		<md-card>
+			<md-card-header>
+				<md-card-title>Password Information</md-card-title>
+				<md-card-subtitle>Change Your Password</md-card-subtitle>
+				<span fxFlex></span>
+				<button type="button" md-icon-button mdTooltip="refresh" mdTooltipPosition="below" (click)="refresh()"><md-icon>refresh</md-icon></button>
+				<button type="button" md-icon-button mdTooltip="more" mdTooltipPosition="below" [mdMenuTriggerFor]="passwordInfoMore"><md-icon>more_vert</md-icon></button>
+				<md-menu #passwordInfoMore="mdMenu">
+					<button type="button" md-menu-item (click)="changePassword()">change</button>
+				</md-menu>
+			</md-card-header>
+			<md-card-content>
+				<div fxLayout="column" fxLayout.gt-md="row">
+					<md-input-container fxFlex>
+						<input mdInput placeholder="Last Updated" name="passwordUpdated" [(ngModel)]="model.passwordUpdated" #passwordUpdated="ngModel" readonly>
+						<md-formfield-errors [field]="passwordUpdated"></md-formfield-errors>
+					</md-input-container>
+				</div>
+				<div fxLayout="column" fxLayout.gt-md="row">
+					<md-input-container fxFlex>
+						<input mdInput placeholder="By" name="passwordUpdatedBy" [(ngModel)]="model.passwordUpdatedBy" #passwordUpdatedBy="ngModel" readonly>
+						<md-formfield-errors [field]="passwordUpdatedBy"></md-formfield-errors>
+					</md-input-container>
+				</div>
+			</md-card-content>
+		</md-card>
+		<md-card>
+			<md-card-header>
+				<md-card-title>Corporate Information</md-card-title>
+				<md-card-subtitle>Change Your Corporate Information</md-card-subtitle>
+				<span fxFlex></span>
+				<button type="button" md-icon-button mdTooltip="refresh" mdTooltipPosition="below" (click)="refresh()"><md-icon>refresh</md-icon></button>
+				<button type="button" md-icon-button mdTooltip="more" mdTooltipPosition="below" [mdMenuTriggerFor]="corporateInfoMore"><md-icon>more_vert</md-icon></button>
+				<md-menu #corporateInfoMore="mdMenu">
+					<button type="button" md-menu-item (click)="save(form)">save</button>
+				</md-menu>
+			</md-card-header>
+			<md-card-content>
+				<div fxLayout="column" fxLayout.gt-md="row">
+					<md-input-container fxFlex>
+						<input mdInput placeholder="Company Name" type="text" name="companyName" [(ngModel)]="model.companyName" #companyName="ngModel">
+						<md-formfield-errors [field]="companyName"></md-formfield-errors>
+					</md-input-container>
+				</div>
+				<div fxLayout="column" fxLayout.gt-md="row">
+					<md-input-container fxFlex>
+						<input mdInput placeholder="Website URL" type="text" name="websiteURL" [(ngModel)]="model.websiteURL" #websiteURL="ngModel" url>
+						<md-formfield-errors [field]="websiteURL"></md-formfield-errors>
+					</md-input-container>
+				</div>
+				<div fxLayout="column" fxLayout.gt-md="row">
+					<md-input-container fxFlex>
+						<textarea mdInput placeholder="Payment Details" name="paymentDetails" [(ngModel)]="model.paymentDetails" #paymentDetails="ngModel" rows="4"></textarea>
+						<md-formfield-errors [field]="paymentDetails"></md-formfield-errors>
+					</md-input-container>
+				</div>
+			</md-card-content>
+		</md-card>
+	</div>
+	<div fxLayout="column" fxFlex="60">
+		<md-card>
+			<md-card-header>
+				<md-card-title>Residential Address</md-card-title>
+				<md-card-subtitle>Change Your Residential Address</md-card-subtitle>
+				<span fxFlex></span>
+				<button type="button" md-icon-button mdTooltip="refresh" mdTooltipPosition="below" (click)="refresh()"><md-icon>refresh</md-icon></button>
+				<button type="button" md-icon-button mdTooltip="more" mdTooltipPosition="below" [mdMenuTriggerFor]="residentialAddressMore"><md-icon>more_vert</md-icon></button>
+				<md-menu #residentialAddressMore="mdMenu">
+					<button type="button" md-menu-item (click)="save(form)">save</button>
+				</md-menu>
+			</md-card-header>
+			<md-card-content>
+				<div fxLayout="column" fxLayout.gt-md="row">
+					<md-input-container fxFlex>
+						<input mdInput placeholder="Address Line 1" name="residentialAddressLine1" [(ngModel)]="model.residentialAddress.addressLine1" #residentialAddressLine1="ngModel">
+						<md-formfield-errors [field]="residentialAddressLine1"></md-formfield-errors>
+					</md-input-container>
+				</div>
+				<div fxLayout="column" fxLayout.gt-md="row">
+					<md-input-container fxFlex>
+						<input mdInput placeholder="Address Line 2" name="residentialAddressLine2" [(ngModel)]="model.residentialAddress.addressLine2" #residentialAddressLine2="ngModel">
+						<md-formfield-errors [field]="residentialAddressLine2"></md-formfield-errors>
+					</md-input-container>
+					<md-input-container fxFlex>
+						<input mdInput placeholder="Address Line 3" name="residentialAddressLine3" [(ngModel)]="model.residentialAddress.addressLine3" #residentialAddressLine3="ngModel">
+						<md-formfield-errors [field]="residentialAddressLine3"></md-formfield-errors>
+					</md-input-container>
+				</div>
+				<div fxLayout="column" fxLayout.gt-md="row">
+					<md-input-container fxFlex>
+						<input mdInput placeholder="City" type="text" name="residentialAddressCity" [(ngModel)]="model.residentialAddress.cityObject" #residentialAddressCity="ngModel" (blur)="onRaCityBlur()" [mdAutocomplete]="residentialAddressCityAutocomplete">
+						<md-formfield-errors [field]="residentialAddressCity"></md-formfield-errors>
+					</md-input-container>
+					<md-autocomplete #residentialAddressCityAutocomplete [displayWith]="raDisplayFn.bind(this)">
+						<md-option *ngFor="let city of raFilteredCities | async" [value]="city">{{ city.name + ', ' + city.country }}</md-option>
+					</md-autocomplete>
+					<md-input-container fxFlex>
+						<input mdInput placeholder="Country" name="residentialAddressCountry" [(ngModel)]="model.residentialAddress.country" #residentialAddressCountry="ngModel" disabled>
+						<md-formfield-errors [field]="residentialAddressCountry"></md-formfield-errors>
+					</md-input-container>
+					<md-input-container fxFlex>
+						<input mdInput placeholder="ZIP" name="residentialAddressPostalCode" [(ngModel)]="model.residentialAddress.postalCode" #residentialAddressPostalCode="ngModel">
+						<md-formfield-errors [field]="residentialAddressPostalCode"></md-formfield-errors>
+					</md-input-container>
+				</div>
+			</md-card-content>
+		</md-card>
+		<md-card>
+			<md-card-header>
+				<md-card-title>Postal Address</md-card-title>
+				<md-card-subtitle>Change Your Postal Address</md-card-subtitle>
+				<span fxFlex></span>
+				<button type="button" md-icon-button mdTooltip="refresh" mdTooltipPosition="below" (click)="refresh()"><md-icon>refresh</md-icon></button>
+				<button type="button" md-icon-button mdTooltip="more" mdTooltipPosition="below" [mdMenuTriggerFor]="postalAddressMore"><md-icon>more_vert</md-icon></button>
+				<md-menu #postalAddressMore="mdMenu">
+					<button type="button" md-menu-item (click)="save()">save</button>
+				</md-menu>
+			</md-card-header>
+			<md-card-content>
+				<div fxLayout="column" fxLayout.gt-md="row">
+					<md-input-container fxFlex>
+						<input mdInput placeholder="Address Line 1" name="postalAddressLine1" [(ngModel)]="model.postalAddress.addressLine1" #postalAddressLine1="ngModel">
+						<md-formfield-errors [field]="postalAddressLine1"></md-formfield-errors>
+					</md-input-container>
+				</div>
+				<div fxLayout="column" fxLayout.gt-md="row">
+					<md-input-container fxFlex>
+						<input mdInput placeholder="Address Line 2" name="postalAddressLine2" [(ngModel)]="model.postalAddress.addressLine2" #postalAddressLine2="ngModel">
+						<md-formfield-errors [field]="postalAddressLine2"></md-formfield-errors>
+					</md-input-container>
+					<md-input-container fxFlex>
+						<input mdInput placeholder="Address Line 3" name="postalAddressLine3" [(ngModel)]="model.postalAddress.addressLine3" #postalAddressLine3="ngModel">
+						<md-formfield-errors [field]="postalAddressLine3"></md-formfield-errors>
+					</md-input-container>
+				</div>
+				<div fxLayout="column" fxLayout.gt-md="row">
+					<md-input-container fxFlex>
+						<input mdInput placeholder="City" type="text" name="postalAddressCity" [(ngModel)]="model.postalAddress.cityObject" #postalAddressCity="ngModel" (blur)="onPaCityBlur()" [mdAutocomplete]="postalAddressCityAutocomplete">
+						<md-formfield-errors [field]="postalAddressCity"></md-formfield-errors>
+					</md-input-container>
+					<md-autocomplete #postalAddressCityAutocomplete [displayWith]="paDisplayFn.bind(this)">
+						<md-option *ngFor="let city of paFilteredCities | async" [value]="city">{{ city.name + ', ' + city.country }}</md-option>
+					</md-autocomplete>
+					<md-input-container fxFlex>
+						<input mdInput placeholder="Country" name="postalAddressCountry" [(ngModel)]="model.postalAddress.country" #postalAddressCountry="ngModel">
+						<md-formfield-errors [field]="postalAddressCountry"></md-formfield-errors>
+					</md-input-container>
+					<md-input-container fxFlex>
+						<input mdInput placeholder="ZIP" name="postalAddressPostalCode" [(ngModel)]="model.postalAddress.postalCode" #postalAddressPostalCode="ngModel">
+						<md-formfield-errors [field]="postalAddressPostalCode"></md-formfield-errors>
+					</md-input-container>
+				</div>
+			</md-card-content>
+		</md-card>
+	</div>
+</div>
+
+<div class="float-bottom-right">
+	<button type="button" (click)="save(form)" mdTooltip="save" mdTooltipPosition="above" md-mini-fab color="warn"><md-icon>save</md-icon></button>
+</div>
+
+</form>

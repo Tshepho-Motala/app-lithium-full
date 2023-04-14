@@ -1,0 +1,1 @@
+ALTER TABLE `user` ADD COLUMN `auto_withdrawal_allowed` BIT(1) DEFAULT NULL;

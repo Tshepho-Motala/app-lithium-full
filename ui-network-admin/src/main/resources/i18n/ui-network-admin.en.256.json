@@ -1,0 +1,17 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "TAG": {
+      "NOTIFY": {
+        "RESPONSE": {
+          "SUCCESS": "Tag was deleted successfully.",
+          "ERROR": "Failed to delete tag."
+        }
+      },
+      "CONFIRM": {
+        "DELETE": {
+          "TITLE": "Are you sure you want to delete the tag?"
+        }
+      }
+    }
+  }
+}

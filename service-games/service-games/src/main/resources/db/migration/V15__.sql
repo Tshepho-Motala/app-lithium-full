@@ -1,0 +1,1 @@
+ALTER TABLE `game` ADD COLUMN `rtp` DECIMAL(10,2);

@@ -1,0 +1,33 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "RESTRICTIONS": {
+      "AUTORESTRICTIONS": {
+        "RULESETS": {
+          "RULE": {
+            "FIELDS": {
+              "DELAY": {
+                "NAME": "Delay in sec",
+                "DESCRIPTION": "Restriction delay"
+              },
+              "EVENT": {
+                "NAME": "Event",
+                "DESCRIPTION": "Restriction event"
+              },
+              "RESTRICTION": {
+                "NAME": "Restriction",
+                "DESCRIPTION": "Select related restriction"
+              }
+            }
+          }
+        }
+      }
+    },
+    "PLAYER": {
+      "RESTRICTIONS" : {
+        "NAME": "Name",
+        "ACTIVE_FROM": "Active from",
+        "ACTIVE": "Is active"
+      }
+    }
+  }
+}

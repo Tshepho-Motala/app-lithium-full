@@ -1,0 +1,12 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "ECOSYSTEMS": {
+        "SUCCESS_MESSAGE": "Ecosystem Added Successfully!"
+    },
+    "RELATIONSHIP_TYPE": {
+      "SUCCESS_MESSAGE": "Domain Relationship Added Successfully!"
+    }
+  }
+}
+
+

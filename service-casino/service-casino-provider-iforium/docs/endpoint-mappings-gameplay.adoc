@@ -1,0 +1,28 @@
+= Gameplay Endpoints
+
+== Wallet
+
+:leveloffset: +2
+include::endpoint-mappings-gameplay-balance.adoc[]
+
+:leveloffset: -2
+== Game Play
+
+:leveloffset: +2
+include::endpoint-mappings-gameplay-placebet.adoc[]
+
+include::endpoint-mappings-gameplay-awardwinnings.adoc[]
+
+include::endpoint-mappings-gameplay-voidbet.adoc[]
+
+include::endpoint-mappings-gameplay-rollbackbet.adoc[]
+
+include::endpoint-mappings-gameplay-endgameround.adoc[]
+
+:leveloffset: -2
+== Other
+
+:leveloffset: +2
+include::endpoint-mappings-gameplay-credittransaction.adoc[]
+
+:leveloffset: -2

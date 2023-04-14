@@ -1,0 +1,16 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "DOMAIN": {
+      "FIELDS": {
+        "ACCESS": {
+          "PRE_LOGIN_RULE": {
+            "LABEL": "Pre Login Access Rule"
+          },
+          "POST_LOGIN_RULE": {
+            "LABEL": "Post Login Access Rule"
+          }
+        }
+      }
+    }
+  }
+}

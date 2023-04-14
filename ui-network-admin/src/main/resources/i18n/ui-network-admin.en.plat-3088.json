@@ -1,0 +1,13 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "USER": {
+      "FIELDS": {
+        "VERIFICATIONSTATUS": {
+          "CODES": {
+            "AGE_ONLY_VERIFIED": "Age only Verified"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,54 @@
+<div style="margin: 10px;" class="row v-reset-row ">
+<!-- 	<div class="col-md-12"> -->
+<!-- 		<button-add lit-if-permission="admindne" lit-permission-domain="{{domain.name}}"></button-add> -->
+		<div class="pull-right">
+			<div class="input-group input-group-sm pull-right" style="width: 250px;padding-bottom: 10px;">
+				<input type="text" name="table_search" ng-model="filterValue"
+					class="form-control pull-right" placeholder="{{ 'GLOBAL.INPUT.SEARCHDYNAMIC' | translate }}">
+				<div class="input-group-btn">
+					<button type="submit" class="btn btn-default">
+						<i class="fa fa-search"></i>
+					</button>
+				</div>
+			</div>
+		</div>
+<!-- 	</div> -->
+</div>
+<div style="margin: 10px;" class="row v-reset-row " ng-init="controller.listTranTas()">
+<!-- 	<div class="col-md-12"> -->
+		<div class="box">
+			<div class="box-header with-border">
+				<i class="fa fa-tag" style="vertical-align: top;"></i>
+				<h3 class="box-title">
+					Transaction Type Accounts<br/>
+					<small>.</small>
+				</h3>
+			</div>
+			<div class="box-body no-padding">
+				<table class="table table-hover">
+				<tbody>
+				<tr>
+					<th>Transaction Type Account</th>
+					<th>Debit</th>
+					<th>Credit</th>
+				</tr>
+				<tr ng-repeat="tta in controller.ttas | filter:filterValue">
+					<td width="60%">
+						{{ tta.accountTypeCode | uppercase }}
+					</td>
+					<td valign="middle">
+						<checkbox class="btn" ng-model="tta.debit" disabled="disabled"></checkbox>
+					</td>
+					<td>
+						<checkbox class="btn" ng-model="tta.credit" disabled="disabled"></checkbox>
+					</td>
+				</tr>
+				<tr ng-if="controller.ttas.length === 0">
+					<td colspan="3">{{ 'UI_NETWORK_ADMIN.DOMAIN.ROLES.NOROLES' | translate }}</td>
+				</tr>
+				</tbody>
+				</table>
+			</div>
+		</div>
+<!-- 	</div> -->
+</div>

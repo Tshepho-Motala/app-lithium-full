@@ -1,0 +1,15 @@
+{
+	"UI_NETWORK_ADMIN": {
+		"PLAYER": {
+			"LOGINEVENTS": {
+				"SUCCESSFUL": "Successful"
+			}
+		},
+		"USERS": {
+			"TAB": {
+				"SUMMARY": "Summary",
+				"LOGINEVENTS": "Login Events"
+			}
+		}
+	}
+}

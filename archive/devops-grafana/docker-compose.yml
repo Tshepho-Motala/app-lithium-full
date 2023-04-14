@@ -1,0 +1,28 @@
+version: '3'
+services:
+    grafana:
+      image: grafana/grafana:8.4.3
+      hostname: grafana
+      depends_on:
+        - graphite
+      links:
+        - graphite
+      ports:
+        - "3000:3000"
+      volumes:
+        - ./grafana-data:/var/lib/grafana
+      restart: always
+    graphite:
+      image: graphiteapp/graphite-statsd
+      hostname: graphite
+      ports:
+        - "2003:2003"
+        - "2004:2004"
+        - "2023:2023"
+        - "2024:2024"
+        - "8125:8125"
+        - "8126:8126"
+        - "8080:8080"
+      restart: always
+      volumes:
+        - ./graphite-data:/opt/graphite/storage

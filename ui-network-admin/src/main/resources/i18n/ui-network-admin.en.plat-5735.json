@@ -1,0 +1,18 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "PLAYER": {
+      "KYC": {
+        "TAB": {
+          "FIELDS": {
+            "BVN": {
+              "LABEL": "BVN Number"
+            },
+            "ID_NUMBER": {
+              "LABEL": "ID number"
+            }
+          }
+        }
+      }
+    }
+  }
+}

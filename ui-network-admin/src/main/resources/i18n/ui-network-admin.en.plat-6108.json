@@ -1,0 +1,12 @@
+{
+  "UI_NETWORK_ADMIN":{
+    "PLAYERS": {
+      "MASS_UPDATE": {
+        "PROGRESS_BAR": {
+          "VALIDATING": "Validation in progress"
+        }
+      }
+    }
+  }
+
+}

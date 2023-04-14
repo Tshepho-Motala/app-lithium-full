@@ -1,0 +1,16 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "ACCESSRULES": {
+      "EXTERNAL": {
+        "LIST": {
+          "FIELDS": {
+            "VALIDATEONCE": {
+              "NAME": "Validate Once",
+              "DESCRIPTION": "Request to external provider once, thereafter use local data store for subsequent requests, unless details are being updated."
+            }
+          }
+        }
+      }
+    }
+  }
+}

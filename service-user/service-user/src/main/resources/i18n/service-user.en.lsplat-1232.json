@@ -1,0 +1,7 @@
+{
+  "ERROR_DICTIONARY": {
+    "REGISTRATION": {
+      "ACCESS_DENIED": "Access denied from {0} rules."
+    }
+  }
+}

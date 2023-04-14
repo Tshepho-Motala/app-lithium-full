@@ -1,0 +1,8 @@
+{
+  "ERROR_DICTIONARY": {
+    "REGISTRATION": {
+      "DEPOSIT_LIMIT_NOT_PROVIDED": "Deposit limit not provided.",
+      "TIME_LIMIT_NOT_PROVIDED": "Time limit not provided."
+    }
+  }
+}

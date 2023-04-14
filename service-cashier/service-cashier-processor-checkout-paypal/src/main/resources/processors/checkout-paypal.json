@@ -1,0 +1,57 @@
+{
+	"name": "Checkout Paypal",
+	"code": "checkout-paypal",
+	"url": "service-cashier-processor-checkout-paypal",
+	"methodNames": [
+		"checkout-paypal"
+	],
+	"deposit": true,
+	"fees": {
+		"flat": 0,
+		"percentage": 0,
+		"minimum": 0
+	},
+	"withdraw": false,
+	"limits": {
+		"minAmount": 2500,
+		"maxAmount": 0,
+		"maxAmountDay": 0,
+		"maxAmountWeek": 0,
+		"maxAmountMonth": 0,
+		"maxTransactionsDay": 0,
+		"maxTransactionsWeek": 0,
+		"maxTransactionsMonth": 0
+	},
+	"properties": [
+		{
+			"name": "redirect_url",
+			"defaultValue": "http://localhost:9000/service-cashier-processor-checkout-paypal/public/redirect",
+			"type": "url",
+			"description": "Payment Form URL."
+		},
+		{
+			"name": "use_sendbox",
+			"defaultValue": "false",
+			"type": "boolean",
+			"description": "Choose whether to use test ot live environment"
+		},
+		{
+			"name": "public_key",
+			"defaultValue": "",
+			"type": "string",
+			"description": "Checkout API publicKey. Please paste your public key here."
+		},
+		{
+			"name": "secret_key",
+			"defaultValue": "",
+			"type": "string",
+			"description": "Checkout API secretKey. Please paste your secret key here."
+		},
+		{
+			"name": "logo_url",
+			"defaultValue": "",
+			"type": "url",
+			"description": "The logo URL, that will appear at the top of the cart review area of Paypal page."
+		}
+	]
+}

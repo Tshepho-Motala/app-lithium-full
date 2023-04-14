@@ -1,0 +1,1 @@
+ALTER TABLE `bet` DROP INDEX `idx_total_stake`;

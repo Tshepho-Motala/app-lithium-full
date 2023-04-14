@@ -1,0 +1,9 @@
+{
+  "ERROR_DICTIONARY": {
+    "MY_ACCOUNT": {
+      "PROFILE_DELETION_SUCCESSFUL": "User account has been successfully deleted",
+      "PROFILE_DELETION_DENIED": "User account deletion is not allowed on provided domain: {0}",
+      "PROFILE_DELETION_INVALID_GUID_STRATEGY": "Your account was not deleted due to the system being configured on UserGuidStrategy.USERNAME; please contact your administrator"
+    }
+  }
+}

@@ -1,0 +1,1 @@
+ALTER TABLE `user` ADD COLUMN `has_self_excluded` BIT(1) DEFAULT NULL;

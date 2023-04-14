@@ -1,0 +1,19 @@
+{
+	"UI_NETWORK_ADMIN": {
+		"PLAYER": {
+			"TAB": {
+				"PENDINGBONUS": "Pending bonus list"
+			},
+			"BONUSHISTORY": {
+				"TABLE": {
+					"ID": "Id",
+					"CREATEDDATE": "Creation date",
+					"DEPOSITAMOUNT": "Deposit amount",
+					"BONUSAMOUNT": "Bonus amount",
+					"BONUSNAME": "Bonus name",
+					"BONUSCODE": "Bonus code"
+				}
+			}
+		}
+	}
+}

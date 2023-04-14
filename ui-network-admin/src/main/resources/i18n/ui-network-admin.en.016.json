@@ -1,0 +1,37 @@
+{
+	"UI_NETWORK_ADMIN": {
+		"MAILQUEUE": {
+			"LIST": {
+				"TITLE": "Mail Queue",
+				"DESCRIPTION": "A list of mail queued for your domains"
+			},
+			"VIEW": {
+				"TITLE": "Mail: {{subject}}",
+				"DESCRIPTION": "Review the mail information"
+			},
+			"MAIL": {
+				"BASICINFORMATION": "Basic Information",
+				"CREATEDDATE": "Created Date",
+				"FROM": "From",
+				"TO": "To",
+				"BCC": "Bcc",
+				"SUBJECT": "Subject",
+				"PROCESSINGINFORMATION": "Processing Information",
+				"CURRENTLYPROCESSING": "Currently Processing",
+				"PRIORITY": "Priority",
+				"SENT": "Sent",
+				"SENTDATE": "Sent Date",
+				"ERRORINFORMATION": "Error Information",
+				"ERRORCOUNT": "Error Count",
+				"LATESTERRORREASON": "Latest Error Reason",
+				"BODY": "Body",
+				"USER": "User"
+			}
+		},
+		"PLAYER": {
+			"TAB": {
+				"MAILHISTORY": "Mail History"
+			}
+		}
+	}
+}

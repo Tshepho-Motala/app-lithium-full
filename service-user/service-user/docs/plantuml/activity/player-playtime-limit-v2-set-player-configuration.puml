@@ -1,0 +1,25 @@
+[plantuml]
+----
+@startuml
+start
+:Create revision;
+:Find configuration;
+if (Configuration exists?) then (yes)
+  if (Is limit increasing?) then (yes)
+    :Set revision effective_from =
+    (now + cool off period);
+    :Set pending_config_revision_id;
+  else (no)
+    :Set effective_from = now;
+    :Set current_config_revision_id;
+  endif
+else (no)
+  :Create configuration;
+  :Set effective_from = now, set current_config_revision_id;
+endif
+:Create changelog entry;
+:Enqueue pub-sub message;
+stop
+@enduml
+----
+[plantuml]

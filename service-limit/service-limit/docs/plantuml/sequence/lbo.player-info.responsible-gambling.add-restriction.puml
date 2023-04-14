@@ -1,0 +1,51 @@
+.Overview - Player Info -> Responsible Gambling -> Add Restriction
+[plantuml]
+----
+@startuml
+'https://plantuml.com/sequence-diagram
+
+actor "CS Agent" as csa
+boundary "LBO" as lbo
+participant Lithium as li
+
+autonumber
+
+csa --> lbo: login to LBO
+activate lbo
+    csa --> lbo: Selects Player from Player Search
+    lbo -> lbo: Loads Player info screen
+    csa --> lbo: Selects Responsible Gambling tab
+    lbo -> lbo: Loads Responsible Gambling tab
+    csa --> lbo: Clicks Add button on Restrictions Section
+    lbo -> lbo: Loads "Add Restriction" popover
+    csa --> lbo: Selects "Restriction Set" from dropdown
+    alt Selects "Restriction Set" for a restriction that uses subordinate type
+        lbo -> lbo: Shows Subordinate type dropdown box (with sub types selectable values related to selected restriction set)
+        note right of lbo
+            Two restrictions currently supporting subordinate types:
+            * INTERVENTION_COMPS_BLOCK
+            * INTERVENTION_CASINO_BLOCK
+        end note
+        csa --> lbo: Selects subordinate type from dropdown
+    end
+    csa --> lbo: Adds a comment in the "text" field
+    alt Submit
+        csa --> lbo: Clicks on the Submit button
+        lbo -> li: {gateway}/service-limit/backoffice/user-restrictions/{domainName}/set
+        activate li
+        note right of li
+            * Request Params:
+            ** subType (If selected, not mandatory when selecting restriction sets that does not require it)
+            ** userGuid
+            ** domainRestrictionSetId
+            ** userId
+        end note
+        li --> lbo: Status 200
+    deactivate li
+    end
+    lbo -> lbo: Closed popover and shows newly added restriction under Restriction section
+
+deactivate lbo
+
+@enduml
+----

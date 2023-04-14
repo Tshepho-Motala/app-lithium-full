@@ -1,0 +1,4 @@
+<div class="form-group" ng-class="{'has-error': showError}" ng-attr-name="model[options.key]">
+			<input type="text"  class="form-control" ng-if="(to.hidesep === false)" ng-model="model[options.key]" ui-percentage-mask="{{to.decimals}}" ui-percentage-value min="{{to.min}}" max="{{to.max}}">
+	<input type="text"  class="form-control" ng-if="(to.hidesep === true)" ng-model="model[options.key]" ui-percentage-mask="{{to.decimals}}" ui-hide-group-sep ui-percentage-value min="{{to.min}}" max="{{to.max}}">
+</div>

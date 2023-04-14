@@ -1,0 +1,49 @@
+<div class="container-fluid" bs-loading-overlay bs-loading-overlay-reference-id="{{controller.referenceId}}">
+	<div class="card card-block" style="margin-bottom: 10px;" ng-init="">
+		<div class="d-flex justify-content-start">
+			<div class="p-2 mr-auto" style="width: 50%;">
+				<span class="title">{{ 'UI_NETWORK_ADMIN.LEADERBOARD.LIST.TITLE' | translate }}</span>
+				<span class="description">{{ 'UI_NETWORK_ADMIN.LEADERBOARD.LIST.DESCRIPTION' | translate }}</span>
+			</div>
+			<div class="ml-auto p-2 text-right" style="width: 50%;">
+				<span ng-repeat="domain in controller.selectedDomains"><span style="padding:5px; margin-right: 3px;" class="label label-primary">&nbsp;{{ domain | uppercase }}&nbsp;</span></span>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row v-reset-row ">
+		<div class="col-xs-12 bottom-space-10">
+			<button-add ng-click="controller.addLeaderboard()"></button-add>
+			<button-refresh ng-click="controller.displayList()"></button-refresh>
+			<div class="btn-group pull-right" uib-dropdown>
+				<button id="dropdown-domain" type="button" class="btn btn-default" uib-dropdown-toggle>
+					{{ controller.selectedDomainsDisplay }} <span class="caret"></span>
+				</button>
+				<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="dropdown-type">
+					<li role="menuitem" style="border-bottom: 1px solid lightgrey;">
+						<a ng-click="controller.domainSelectAll();controller.tableLoad();">All Domains</a>
+					</li>
+					<li role="menuitem" style="border-bottom: 1px solid lightgrey; margin-bottom: 5px;">
+						<a ng-click="controller.domainSelectNone();controller.tableLoad();">None</a>
+					</li>
+					<li class="domain-select" role="menuitem" ng-repeat="domain in controller.domains | unique : 'name'">
+						<label style="font-weight: normal;">
+							<checkbox class="btn" ng-change="controller.domainSelect();controller.tableLoad();" ng-model="domain.selected"></checkbox>
+							&nbsp;{{domain.name}}
+						</label>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row v-reset-row ">
+		<div class="col-xs-12">
+			<div class="box">
+				<div class="box-body no-padding table-responsive">
+					<dt table="controller.leaderboardTable"/>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

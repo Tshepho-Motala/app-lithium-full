@@ -1,0 +1,189 @@
+.Database Layout
+[plantuml]
+----
+
+@startuml
+
+top to bottom direction
+skinparam linetype ortho
+!define Table(name) class name as "name" << (T,#FFAAAA) >>
+
+Table(Activity) {
+   id:  long 
+   name:  String 
+}
+Table(Challenge) {
+   id:  Long 
+   description:  String 
+   version:  int 
+}
+Table(Domain) {
+   id:  Long 
+   name:  String 
+   version:  int 
+}
+Table(Graphic) {
+   id:  Long 
+   image:  byte[] 
+   name:  String 
+   size:  Long 
+   type:  String 
+   version:  int 
+}
+Table(Label) {
+   id:  Long 
+   name:  String 
+   version:  int 
+}
+Table(LabelValue) {
+   id:  Long 
+   value:  String 
+   version:  int 
+}
+Table(Mission) {
+   id:  Long 
+   version:  int 
+}
+Table(MissionRevision) {
+   id:  Long 
+   description:  String 
+   duration:  Integer 
+   endDate:  Date 
+   granularityBreak:  Boolean 
+   granularityStartOffset:  Integer 
+   maxRedeemable:  Integer 
+   maxRedeemableGranularity:  Integer 
+   name:  String 
+   sequenceNumber:  Integer 
+   startDate:  Date 
+   type:  Integer 
+   version:  int 
+   xpLevel:  Integer 
+}
+Table(MissionStat) {
+   id:  Long 
+   action:  String 
+   identifier:  String 
+   name:  String 
+   type:  String 
+   version:  int 
+}
+Table(MissionStatEntry) {
+   id:  Long 
+   entryDate:  DateTime 
+   value:  Long 
+   version:  int 
+}
+Table(MissionStatSummary) {
+   id:  Long 
+   value:  Long 
+   version:  int 
+}
+Table(Period) {
+   id:  long 
+   dateEnd:  Date 
+   dateStart:  Date 
+   day:  Integer 
+   granularity:  Integer 
+   hour:  Integer 
+   month:  Integer 
+   version:  int 
+   week:  Integer 
+   year:  Integer 
+}
+Table(PromoProvider) {
+   id:  long 
+   category:  String 
+   url:  String 
+}
+Table(PromoProviderExtraField) {
+   id:  long 
+   dataType:  FieldDataType 
+   description:  String 
+   name:  String 
+}
+Table(PromoProviderExtraFieldRuleValue) {
+   id:  long 
+   value:  String 
+   version:  int 
+}
+Table(Reward) {
+   id:  Long 
+   bonusCode:  String 
+   version:  int 
+}
+Table(Rule) {
+   id:  Long 
+   operation:  Operation 
+   value:  Long 
+   version:  int 
+}
+Table(User) {
+   id:  Long 
+   guid:  String 
+   isTestAccount:  boolean 
+   timezone:  String 
+   version:  int 
+}
+Table(UserMission) {
+   id:  Long 
+   active:  Boolean 
+   completed:  LocalDateTime 
+   expired:  Boolean 
+   missionComplete:  Boolean 
+   percentage:  BigDecimal 
+   started:  LocalDateTime 
+   timezone:  String 
+   version:  int 
+}
+Table(UserMissionChallenge) {
+   id:  Long 
+   challengeComplete:  Boolean 
+   completed:  LocalDateTime 
+   percentage:  BigDecimal 
+   started:  LocalDateTime 
+   version:  int 
+}
+Table(UserMissionChallengeRule) {
+   id:  Long 
+   completed:  LocalDateTime 
+   percentage:  BigDecimal 
+   ruleComplete:  Boolean 
+   started:  LocalDateTime 
+   version:  int 
+}
+
+Challenge                        "0..*" -[#595959,plain]-> "0..1" Graphic
+Challenge                        "0..*" -[#595959,plain]-> "0..1" Reward                           
+Challenge                        "0..1" <-[#595959,plain]-> "0..*" Rule                             
+LabelValue                       "0..*" -[#595959,plain]-> "0..1" Label                            
+Mission                          "0..*" -[#595959,plain]-> "0..1" MissionRevision                  
+Mission                          "0..*" -[#595959,plain]-> "0..1" User                             
+MissionRevision                  "0..1" <-[#595959,plain]-> "0..*" Challenge                        
+MissionRevision                  "0..*" -[#595959,plain]-> "0..1" Domain                           
+MissionRevision                  "0..*" -[#595959,plain]-> "0..1" Mission                          
+MissionRevision                  "0..*" -[#595959,plain]-> "0..1" Reward                           
+MissionStat                      "0..*" -[#595959,plain]-> "0..1" User                             
+MissionStatEntry                 "0..*" -[#595959,plain]-> "0..1" MissionStat                      
+MissionStatSummary               "0..*" -[#595959,plain]-> "0..1" MissionStat                      
+MissionStatSummary               "0..*" -[#595959,plain]-> "0..1" Period                           
+MissionStatSummary               "0..*" -[#595959,plain]-> "0..1" User                             
+Period                           "0..*" -[#595959,plain]-> "0..1" Domain                           
+PromoProvider                    "0..1" <-[#595959,plain]-> "0..*" Activity                         
+PromoProvider                    "0..1" <-[#595959,plain]-> "0..*" PromoProviderExtraField          
+PromoProviderExtraFieldRuleValue "0..1" -[#595959,plain]-> "0..1" PromoProviderExtraField          
+PromoProviderExtraFieldRuleValue "0..*" -[#595959,plain]-> "0..1" Rule                             
+Reward                           "0..*" -[#595959,plain]-> "0..1" Challenge                        
+Reward                           "0..*" -[#595959,plain]-> "0..1" MissionRevision                  
+Rule                             "0..*" -[#595959,plain]-> "0..1" Activity                         
+Rule                             "0..*" -[#595959,plain]-> "0..1" PromoProvider                    
+UserMission                      "0..*" -[#595959,plain]-> "0..1" MissionRevision                  
+UserMission                      "0..*" -[#595959,plain]-> "0..1" Period                           
+UserMission                      "0..*" -[#595959,plain]-> "0..1" User                             
+UserMissionChallenge             "0..*" -[#595959,plain]-> "0..1" Challenge                        
+UserMissionChallenge             "0..*" <-[#595959,plain]-> "0..1" UserMission                      
+UserMissionChallenge             "0..1" <-[#595959,plain]-> "0..*" UserMissionChallengeRule         
+UserMissionChallengeRule         "0..1" -[#595959,plain]-> "0..1" MissionStat                      
+UserMissionChallengeRule         "0..*" -[#595959,plain]-> "0..1" Rule                             
+@enduml
+----

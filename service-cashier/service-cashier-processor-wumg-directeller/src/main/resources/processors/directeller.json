@@ -1,0 +1,55 @@
+{
+  "name": "Directeller",
+  "code": "dt",
+  "url": "service-cashier-processor-wumg-directeller",
+  "methodNames": ["wu","mg"],
+  "deposit": true,
+  "withdraw": true,
+  "fees": {
+    "flat": 0,
+    "percentage": 0,
+    "minimum": 0
+  },
+  "limits": {
+    "minAmount": 5000,
+    "maxAmount": 0,
+    "maxAmountDay": 0,
+    "maxAmountWeek": 0,
+    "maxAmountMonth": 0,
+    "maxTransactionsDay": 0,
+    "maxTransactionsWeek": 0,
+    "maxTransactionsMonth": 0
+  },
+  "properties": [
+    { 
+      "name": "url",
+      "defaultValue": "https://www.transact.ag/application/services/dtapi2.asmx",
+      "type": "url",
+      "description": "The API URL.."
+    },
+    { 
+      "name": "transferType",
+      "defaultValue": "PP",
+      "type": "string",
+      "description": "Type of Transfer: “PP” or “PB” (Person to Person or Person to Business)."
+    },
+    { 
+      "name": "customerId",
+      "defaultValue": "84",
+      "type": "string",
+      "description": "The processor should supply the API company ID."
+    },
+    { 
+      "name": "username",
+      "defaultValue": "username",
+      "type": "string",
+      "description": "The processor should supply the API username."
+    },
+    { 
+      "name": "password",
+      "defaultValue": "password",
+      "type": "string",
+      "description": "The processor should supply the API password."
+    }
+  ]
+}

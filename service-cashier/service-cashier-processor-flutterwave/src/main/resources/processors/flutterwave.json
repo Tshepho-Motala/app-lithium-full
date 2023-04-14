@@ -1,0 +1,139 @@
+{
+  "name": "FlutterWave Web and USSD",
+  "code": "flutterwave",
+  "url": "service-cashier-processor-flutterwave",
+  "methodNames": ["flutterwave","flutterwaveussd"],
+  "deposit": true,
+  "withdraw": true,
+  "fees": {
+    "flat": 0,
+    "percentage": 0,
+    "minimum": 0
+  },
+  "limits": {
+    "minAmount": 2500,
+    "maxAmount": 100000000,
+    "maxAmountDay": 1000000000,
+    "maxAmountWeek": 1000000000,
+    "maxAmountMonth": 1000000000,
+    "maxTransactionsDay": 1000000000,
+    "maxTransactionsWeek": 1000000000,
+    "maxTransactionsMonth": 1000000000
+  },
+  "properties": [
+    {
+      "name": "deposit_api_url",
+      "defaultValue": "https://api.flutterwave.com/v3/payments",
+      "type": "url",
+      "description": "The deposit API URL."
+    },
+    {
+      "name": "charges_api_url",
+      "defaultValue": "https://api.flutterwave.com/v3/charges?type=ussd",
+      "type": "url",
+      "description": "The USSD deposit API URL."
+    },
+    {
+      "name": "verify_api_url",
+      "defaultValue": "https://api.flutterwave.com/v3/transactions/{id}/verify",
+      "type": "url",
+      "description": "The verify API URL."
+    },
+    { 
+      "name": "public_key",
+      "defaultValue": "",
+      "type": "string",
+      "description": "FlutterWave v2 API requires a PBFPubKey to sign requests. Please paste your public key here."
+    },
+    {
+      "name": "secret_key",
+      "defaultValue": "",
+      "type": "string",
+      "description": "FlutterWave v3 API requires a secret key to sign requests. Please paste your secret key here."
+    },
+    {
+      "name": "deposit_page_logo_url",
+      "defaultValue": "",
+      "type": "url",
+      "description": "A URL pointing to a logo that will be embedded on the deposit page"
+    },
+    {
+      "name": "deposit_page_title",
+      "defaultValue": "",
+      "type": "string",
+      "description": "The title to display on the hosted deposit page"
+    },
+    {
+      "name": "deposit_page_description",
+      "defaultValue": "",
+      "type": "string",
+      "description": "A description to display on the hosted deposit page"
+    },
+    {
+      "name": "withdraw_api_url",
+      "defaultValue": "https://api.flutterwave.com/v3/transfers",
+      "type": "url",
+      "description": "The withdraw API URL."
+    },
+    {
+      "name": "withdraw_banks_url",
+      "defaultValue": "https://api.flutterwave.com/v3/banks/{country}",
+      "type": "url",
+      "description": "Get list of banks API URL you can transfer to. Supported country values: NG, GH, KE, UG, ZA or TZ"
+    },
+    {
+      "name": "get_transfer_api_url",
+      "defaultValue": "https://api.flutterwave.com/v3/transfers/",
+      "type": "url",
+      "description": "Get transfer API URL."
+    },
+    {
+      "name": "refference_suffix",
+      "defaultValue": "",
+      "type": "string",
+      "description": "The merchant's unique reference for the transfer."
+    },
+    {
+      "name": "banks_available",
+      "defaultValue": "",
+      "type": "string",
+      "description": "The list of banks available for USSD payments"
+    },
+    {
+      "name": "dummy_email",
+      "defaultValue": "",
+      "type": "string",
+      "description": "Dummy email for NG players"
+    },
+    {
+      "name": "account_verification_url",
+      "defaultValue": "https://api.flutterwave.com/v3/accounts/resolve",
+      "type": "string",
+      "description": "Account Verification URL"
+    },
+    {
+      "name": "bank_account_lookup_bank_account_flag",
+      "defaultValue": "true",
+      "type": "boolean",
+      "description": "Bank Account Lookup. Set true to append Bank Account field to Bank Account Lookup"
+    },
+    {
+      "name": "bank_account_lookup_bank_code_flag",
+      "defaultValue": "true",
+      "type": "boolean",
+      "description": "Bank Account Lookup. Set true to append Bank Code field to Bank Account Lookup"
+    },
+    {
+      "name": "bank_account_lookup_bank_name_flag",
+      "defaultValue": "true",
+      "type": "boolean",
+      "description": "Bank Account Lookup. Set true to append Bank Name field to Bank Account Lookup"
+    },
+    {
+      "name": "country_code",
+      "defaultValue": "NG",
+      "type": "string",
+      "description": "Country Code"
+    }
+  ]
+}

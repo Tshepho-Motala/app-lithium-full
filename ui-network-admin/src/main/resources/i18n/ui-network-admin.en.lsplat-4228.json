@@ -1,0 +1,9 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "GAME": {
+      "EDIT": {
+        "DOMAIN_SELECTED": "The information displayed below is for the chosen domain. Please remember to save the information if you've made any changes."
+      }
+    }
+  }
+}

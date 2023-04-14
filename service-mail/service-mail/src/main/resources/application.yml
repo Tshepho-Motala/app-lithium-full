@@ -1,0 +1,53 @@
+server:
+  port: 9400
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost/lithium_mail
+    username: root
+    password: mysql
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        format_sql: true
+  cloud:
+    stream:
+      bindings:
+        mailprovidersregisterinput:
+          group: mailprovidersregistergroup
+          binder: rabbit
+          destination: mailprovidersregisterqueue
+        mailinput:
+          group: mailoutputgroup
+          binder: rabbit
+          destination: mailoutput
+        defaultemailtemplateinput:
+          group: default-email-template-group
+          binder: rabbit
+          destination: defaultemailtemplateoutput
+        systemmailinput:
+          group: systemmailgroup
+          binder: rabbit
+          destination: systemmailoutput
+        userattributestriggerinput :
+          group: user-attributes-trigger-group-mail
+          binder : rabbit
+          destination : userattributestriggerqueue
+        user-fullname-synchronize-input:
+          group: service-mail-user-synchronize-group
+          binder: rabbit
+          destination: service-user-synchronize-output
+
+lithium:
+  services:
+    db:
+      load-test-data: false
+    mail:
+      processing-job-cron: "*/5 * * * * *"
+      processing-job-page-size: 10
+logging:
+  level:
+    lithium.service.mail: INFO

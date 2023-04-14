@@ -1,0 +1,12 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "BALANCE": {
+      "TEMPLATES": {
+        "LIST": {
+          "UPLOAD": "Download Excel",
+          "INFO": " Excel downloads are limited to first 20000 records."
+        }
+      }
+    }
+  }
+}

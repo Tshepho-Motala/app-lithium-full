@@ -1,0 +1,17 @@
+{
+	"UI_NETWORK_ADMIN": {
+		"BONUS": {
+			"EDIT": {
+				"DESCRIPTION": {
+					"NAME": "Description",
+					"DESCRIPTION": "The field is a detailed description of the bonus."
+				},
+				"VISIBLETOPUBLIC": "Visible to public",
+				"VISIBLETOPUBLICEXPLAIN": "This indicates whether a bonus should be displayed to customers as a bonus option when performing a applicable deposit.",
+				"GRAPHIC": {
+					"NAME": "Thumbnail"
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,163 @@
+= [Lithium] LSM medium reg
+Irwin Herridge <irwin.herridge@wonderlabz.com>
+1.0, July 28, 2022: LSPLAT-6928 PLAT-7608
+:sectnums:
+:toc: left
+:toclevels: 4
+:toc-title: TA1
+:icons: font
+:url-quickref: https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/
+:table-caption!:
+
+:svc-user-sourcedir: ../../service-user/service-user/src/main/java
+:svc-oauth2-sourcedir: ../../../server-oauth2/src/main/java
+
+//This is done to keep formatting aligned with gitlab
+****
+[verse,,]
+____
+link:../../readme.adoc[Home]
+____
+****
+
+== Description
+=== Jira
+* link:https://playsafe.atlassian.net/browse/LSPLAT-6928[LSPLAT-6928]
+* link:https://jira.livescore.com/browse/PLAT-7608[PLAT-7608]
+
+=== Gitlab
+* Branch: origin/feature/LSPLAT-6928_PLAT-7608_Lithium_LSM_medium_reg
+* MR: link:https://gitlab.com/playsafe/lithium/app-lithium-full/-/merge_requests/0000[]
+
+=== Business
+
+We are adding a F2P game on LSM and want to use this as an incentive for users to add more details early on in the LSM<>LSB reg journey.
+
+This will add these fields on the medium reg:
+
+- Email
+- Password
+- First name
+- Last name
+- DOB
+- Address
+
+They will then be able to upgrade their journey at a later date by adding the additional fields needed to complete their bet journey.
+
+=== Approvals
+|===
+|Component |Reason |Comments
+
+|Li
+|
+|
+
+|FE
+|Contains FE API changes
+|The relevant swagger documentation needs to be updated and approved by FE
+
+|DWH
+|
+|
+|===
+
+
+== Architecture
+
+TIP: An understanding of ecosystems is required as a prerequisite to this architecture; link:../../../docs/svc-domain/ecosystems.adoc[see small writeup on ecosystems]
+
+TIP: An understanding of the different registration flows within an ecosystem will be beneficial to the reader;  link:../../../docs/svc-user/supported-registration-flows.adoc[see different user registration flows here]
+
+In support of a medium root user registration flow, only a small change is required to be made as part of the Status430UserUpgradeRequiredException error message response
+
+* Add the address and emailOptOut when available from the root domain user onto the additional data that gets returned whenever a Status430UserUpgradeRequiredException is thrown as part of the login flow.
+
+.Status430UserUpgradeRequiredException example response
+[source, json]
+{
+    "error": "430",
+    "error_description": "You need to provide additional information to complete registration.",
+    "addressLine1": "Piccadilly 10",
+    "city": "London",
+    "countryCode": "GB",
+    "dobDay": "5",
+    "dobMonth": "6",
+    "dobYear": "2001",
+    "email": "irwinfdvbdic9w@wonderlabz.com",
+    "emailOptOut": "false",
+    "firstName": "Vergie",
+    "lastName": "Braun",
+    "postalCode": "W2R E3X",
+    "uuid": "328baabb-118c-4a5f-8b9c-16903d7ddba7"
+}
+
+* Update the swagger documentation for our link:https://playsafe.gitlab.io/lithium/ts-lithium-core-api/#/User%20Authentication/post_server_oauth2_oauth_token[/server-oauth2/oauth/token] login endpoint to show the address that may be returned as part of the status 430 response, and have it shared with the FE/GW team.
+
+.User upgrade journey
+[plantuml]
+----
+@startuml
+
+participant gw
+participant lithium
+
+autonumber
+
+alt #lightblue Lite Registration (Stateless screen flow)
+  gw -> lithium++: /service-user/frontend/{{root-domain}}/register/v4
+  lithium -> gw--: Status 200
+  note right
+    Lite registration allows a root user to be registered by only providing an email and password
+  end note
+
+    alt #lightgreen Add additional fields post lite registration
+        alt add additional personal information
+          gw -> lithium: /service-user/profile/v2
+        end
+        alt add address
+          gw -> lithium: /service-user/profile/saveaddress
+        end
+    end
+else #lightgrey Medium Registration (State is kept on FE screen flow)
+  gw -> lithium++: /service-user/frontend/{{root-domain}}/register/v4
+  lithium -> gw--: Status 200
+  note right
+    Medium registration allows a root user to be registered by only providing an email and password + fn, ln, dob, emailOptOut and address
+    * Note that in essence, medium registration does not exist, it uses lite registration allowing any additional info to also be registered in one API call
+  end note
+end
+
+alt #lightyellow upgrade user
+  gw -> lithium++: /server-oauth2/oauth/token
+  note right
+    Prerequisite:
+      * User must be registered on a domain belonging to a root domain ecosystem type
+      * Login needs to include a domain name belonging to an exclusive domain ecosystem type as part of the login-username combination {{domain-name}}/{{email}}
+        OR
+      * Login needs to include the ecosystem name linked to the root domain the user was registered into as part of the login-username  combination {{ecosystem-name}}/{{email}}
+  end note
+
+  alt #pink exclusive user does not exist
+
+    lithium -> gw--: Status 430 including additional information containing UUID
+    note right
+      Whenever a user was registered on a root domain and firstName, lastName, DOB, emailOptOut or address is available on root domain user,
+          then the Status 430 message needs to include the available fields
+    end note
+  else #lightgrey exclusive user exist
+    lithium -> gw--: Status 200 with oauth access token response
+  end
+
+  gw -> lithium++: /service-user/frontend/{{root-domain}}/register/v4
+  lithium -> gw--: Status 200 with oauth access token response on successful registration
+end
+@enduml
+----
+
+.SecurityConfig.java
+[source,java,linenums,indent=0]
+----
+include::{svc-oauth2-sourcedir}/lithium/server/oauth2/config/SecurityConfig.java[lines=179..206]
+----
+
+

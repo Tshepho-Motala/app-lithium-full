@@ -1,0 +1,48 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+actor "GW" as gw
+participant "SVC-NOTIFICATIONS" as svcnotifications
+database "INBOX" as inbox
+database "INBOX_USER" as inbox_user
+participant "SVC-CHANGELOGS" as svcchangelogs
+
+autonumber
+
+gw -> svcnotifications: /service-notifications/frontend/inbox/{inboxId}/markRead
+activate svcnotifications
+    alt inbox item exist for player
+        inbox --> svcnotifications: findInboxByIdAndUser
+        svcnotifications -> inbox: update inbox
+        note right of inbox
+           * read=true
+           * If read_date is not set, then read_date=new Date()
+           * last_read_date=new Date()
+        end note
+        inbox_user --> svcnotifications: findByUserAlwaysLock
+        alt inbox_user row exist
+            svcnotifications -> inbox_user: Updates inbox_user by incrementing read, unread and CTA counters
+        else inbox_user row does not exist
+            svcnotifications -> inbox_user: Inserts new inbox_user record for user with read, unread and CTA counters
+        end
+        note right of inbox_user
+           * On the inbox_user table there will be 3 fields that needs to reflect read, unread and CTA inbox counters irrespectively
+            * When a message is marked read, then the readCounter needs to be ++'ed and the unreadCounter --'ed
+            * Should the inbox.cta flag set to true, then the ctaCounter will need to be --'ed to show that a CTA message has been read
+        end note
+        alt intervention message acknowledgement
+            svcnotifications --> svcchangelogs: register new changelog note
+            note right of svcchangelogs
+               * Category.RESPONSIBLE_GAMING
+               * SubCategory.RESTRICTION
+               * Entity: user.notifications.intervention
+               * priority: 100 (100 is highest priority changelog note)
+               * ChangeLogFieldChange: {notification.name} from unread to read
+                 * e.g. intervention_message.1 from unread to read
+            end note
+        end
+        svcnotifications --> gw: STATUS 200 OK_SUCCESS
+    end
+deactivate svcnotifications
+
+@enduml

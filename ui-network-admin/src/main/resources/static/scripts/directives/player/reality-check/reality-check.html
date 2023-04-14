@@ -1,0 +1,26 @@
+<div class="box box-default box-solid">
+    <div class="box-header with-border">
+        {{'UI_NETWORK_ADMIN.PLAYER.REALITYCHECK.TITLE'|translate}}
+        <div class="box-tools pull-right">
+            <button ng-if="realityCheck === undefined || realityCheck === null"  type="button" class="btn btn-box-tool" ng-click="setRealityCheckTime()" lit-if-permission="USER_REALITYCHECK_EDIT,USER_REALITYCHECK_ADD" lit-permission-domain="{{user.domain.name}}">
+                <span><i class="fa fa-plus"></i> {{'GLOBAL.ACTION.ADD'|translate}}</span>
+            </button>
+            <button ng-if="realityCheck !== undefined && realityCheck !== null"  type="button" class="btn btn-box-tool" ng-click="setRealityCheckTime()" lit-if-permission="USER_REALITYCHECK_EDIT,USER_REALITYCHECK_ADD" lit-permission-domain="{{user.domain.name}}">
+                <span><i class="fa fa-pencil-square-o"></i> {{'GLOBAL.ACTION.MODIFY'|translate}}</span>
+            </button>
+        </div>
+    </div>
+    <div class="box-body table-responsive" >
+        <div ng-if="realityCheck === undefined || realityCheck === null" class="box box-danger">
+            <div class="box-body">
+                {{'UI_NETWORK_ADMIN.PLAYER.REALITYCHECK.NOTSET'|translate}}
+            </div>
+        </div>
+        <table ng-if="realityCheck !== undefined && realityCheck !== null " class="table table-bordered" >
+           <tr>
+                <th>{{'UI_NETWORK_ADMIN.PLAYER.REALITYCHECK.FIELDS.PERIODINHRSMINS'|translate}}</th>
+                <td>{{timer}}</td>
+            </tr>
+        </table>
+    </div>
+</div>

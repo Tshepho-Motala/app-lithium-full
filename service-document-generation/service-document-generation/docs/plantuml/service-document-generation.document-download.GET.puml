@@ -1,0 +1,14 @@
+.Download Document
+[plantuml]
+----
+@startuml
+participant LBOUSER as lbo
+actor       Actor       as Foo1
+collections    ServiceDocumentGeneration  as sdg
+collections csv as Foo6
+lbo -> Foo1 : To LBO
+lbo -> sdg : GET: /document/{reference}/download
+Foo6 <- sdg : Csv collections
+lbo <- Foo6 : To csv document generation response
+@enduml
+----

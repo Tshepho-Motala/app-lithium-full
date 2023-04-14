@@ -1,0 +1,13 @@
+{
+  "UI_NETWORK_ADMIN" : {
+    "BONUS": {
+      "EDIT": {
+        "INSTANT_REWARDS": {
+          "NOGAMES": "You have not chosen a game to be associated with the Instant Reward",
+          "NO_NUMBER_OF_UNITS": "You have not chosen the number of units to be associated with the Instant Reward",
+          "NO_UNIT_VALUE": "You have not chosen the unit value to be associated with the Instant Reward"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,29 @@
+= Service User
+Riaan Schoeman <riaan.schoeman@wonderlabz.com>
+1.0, February 22, 2022: Service User
+:sectnums:
+:toc: left
+:toclevels: 4
+:toc-title: svc-user
+:icons: font
+:url-quickref: https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/
+
+//:stylesheet: css/asciidoctor.css
+//:stylesheet: css/material-blue.css
+
+:domain-client-sourcedir: ../../service-domain/client-service-domain/src/main/java
+
+//This is done tto keep formatting aligned with gitlab
+****
+[verse,,]
+____
+link:../../readme.adoc[Home]
+____
+****
+
+This document will describe everything contained inside service-user.
+
+== Features
+=== Session Inactivity Timeout
+
+* This feature is used to log out users after a configurable amount of time for inactivity. link:session-inactivity-timeout.adoc[Details]

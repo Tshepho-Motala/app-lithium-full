@@ -1,0 +1,27 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "CHANGELOGS": {
+      "GLOBAL": {
+        "FIELDS": {
+          "CATEGORY": {
+            "NAME": "Category",
+            "LABEL": "Category",
+            "PLACEHOLDER": "Select categories..."
+          },
+          "SUB_CATEGORY": {
+            "NAME": "Sub Category",
+            "LABEL": "Sub Category",
+            "PLACEHOLDER": "Select sub category..."
+          },
+          "DELETED": {
+            "LABEL": "Deleted",
+            "CHANGE": {
+              "SUCCESS": "Changelog entry deleted is updated",
+              "ERROR": "Could not update changelog deleted"
+            }
+          }
+        }
+      }
+    }
+  }
+}

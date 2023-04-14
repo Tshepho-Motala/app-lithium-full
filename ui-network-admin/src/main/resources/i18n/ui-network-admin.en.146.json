@@ -1,0 +1,33 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "CHANGELOGS": {
+      "GLOBAL": {
+        "FIELDS": {
+          "PRIORITY": {
+            "LABEL": "Priority",
+            "MODIFY": "Modify",
+            "DESCRIPTION": "Entries with priority equal or higher than specified",
+            "CHANGE": {
+              "HEADER": "Set Changelog Priority",
+              "DESCRIPTION": "Changelog Priority",
+              "SUCCESS": "Change log priority is updated successfully",
+              "ERROR": "Could not update changelog priority"
+            }
+          },
+          "PINNED": {
+            "LABEL": "Pinned",
+            "CHANGE": {
+              "SUCCESS": "Changelog entry pinned is updated",
+              "ERROR": "Could not update changelog pinned"
+            }
+          }
+        }
+      }
+    },
+    "PLAYER": {
+      "TAB": {
+        "CHANGELOGS": "Changelogs"
+      }
+    }
+  }
+}

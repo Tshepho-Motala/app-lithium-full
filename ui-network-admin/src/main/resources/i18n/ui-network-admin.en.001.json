@@ -1,0 +1,651 @@
+{
+	"GLOBAL": {
+		"NUMBEROF_RETRIES_NEXTSERVER_EXCEEDED": "Could not execute request, please try again later.",
+		"ACTION": {
+			"FILTER": "Filter",
+			"OK": "Ok",
+			"CANCEL": "Cancel",
+			"SUBMIT": "Submit",
+			"BACK": "Back",
+			"ADD": "Add",
+			"OPEN": "Open",
+			"RESET": "Reset",
+			"APPLY": "Apply",
+			"NEXT": "Next",
+			"LAST": "Last",
+			"FIRST": "First",
+			"PREVIOUS": "Previous",
+			"DELETE": "Delete",
+			"DISABLE": "Disable",
+			"ENABLE": "Enable",
+			"MODIFY": "Modify",
+			"SAVE": "Save",
+			"CHANGEPASSWORD": "Change Password",
+			"UPLOAD": "Upload",
+			"VIEW": "View",
+			"CHANGE": "Change",
+			"SIGNOUT": "Sign out"
+		},
+		"DATATABLE": {
+			"EMPTYTABLE": "No data available in table",
+			"INFO": "Showing _START_ to _END_ of _TOTAL_ entries",
+			"INFOEMPTY": "Showing 0 to 0 of 0 entries",
+			"INFOFILTERED": "(filtered from _MAX_ total entries)",
+			"LENGTHMENU": "Show _MENU_ entries",
+			"LOADINGRECORDS": "Loading...",
+			"PROCESSING": "Processing...",
+			"SEARCH": "Search:",
+			"ZERORECORDS": "No matching records found",
+			"SORTASCENDING": ": activate to sort column ascending",
+			"SORTDESCENDING": ": activate to sort column descending"
+		},
+		"RESPONSE": {
+			"FORM_ERRORS": "There are still errors on the form. Please review your submission and try again.",
+			"FORM_SUCCESS": "The data was successfully saved.",
+			"UNEXPECTED": "An unexpected error has occurred. Please try again later or contact support."
+		},
+		"FIELDS": {
+			"USERNAME": "Username",
+			"ENABLED": "Enabled",
+			"DISABLED": "Disabled",
+			"DESCRIPTION": "Description",
+			"TELEPHONE": {
+				"DESCRIPTION": "International format (for example +47 12 345 678) or local format (for example 12 345 678). Spaces are allowed."
+			},
+			"FULLNAME": "Full Name",
+			"FIRSTNAME": "First Name",
+			"LASTNAME": "Last Name",
+			"EMAILADDRESS": "Email Address",
+			"COUNTRY": "Country",
+			"TELEPHONENUMBER": "Landline Number",
+			"CELLPHONENUMBER": "Cellphone Number",
+			"COMMENTS": "Comments",
+			"BALANCE": "Balance",
+			"STATUS": "Status"
+		},
+		"GRANULARITY": {
+			"DAILY": "Daily",
+			"MONTHLY": "Monthly",
+			"YEARLY": "Yearly",
+			"WEEKLY": "Weekly",
+			"ALL_TIME": "All Time",
+			"DAYS": "Days",
+			"MONTHS": "Months",
+			"YEARS": "Years",
+			"WEEKS": "Weeks",
+			"DAY": "Day",
+			"MONTH": "Month",
+			"YEAR": "Year",
+			"WEEK": "Week"
+		},
+		"INPUT": {
+			"SEARCHDYNAMIC": "Enter a search string"
+		},
+		"VALIDATION": {
+			"REQUIRED": "This is a required field.",
+			"MINLENGTH": "The value for this field is too short.",
+			"MAXLENGTH": "The value for this field is too long.",
+			"EMAIL": "This is an invalid email address.",
+			"URL": "The entered value is not a valid URL.",
+			"TELEPHONE": "Invalid telephone number. Please use only digits, spaces and plus signs.",
+			"PASSWORD": "Invalid password. It needs to contain at least one uppercase and one lowercase character, as well as one digit."
+		},
+		"ADDRESS": {
+			"RESIDENTIALADDRESS": "Residential Address",
+			"POSTALADDRESS": "Postal Address",
+			"LINE1": {
+				"NAME": "Address Line 1",
+				"PLACEHOLDER": "Address Line 1",
+				"DESCRIPTION": "Address Line 1",
+				"MESSAGE": "First address line may not contain any special characters."
+				
+			},
+			"LINE2": {
+				"NAME": "Address Line 2",
+				"PLACEHOLDER": "Address Line 2",
+				"DESCRIPTION": "Address Line 2",
+				"MESSAGE": "Second address line may not contain any special characters."
+			},
+			"LINE3": {
+				"NAME": "Address Line 3",
+				"PLACEHOLDER": "Address Line 3",
+				"DESCRIPTION": "Address Line 3",
+				"MESSAGE": "Third address line may not contain any special characters."
+			},
+			"CITY": {
+				"NAME": "City / Town",
+				"PLACEHOLDER": "City / Town",
+				"DESCRIPTION": "City / Town",
+				"MESSAGE": "Please select your city / town."
+			},
+			"ADMINLEVEL1": {
+				"NAME": "State / Province / Region",
+				"PLACEHOLDER": "State / Province / Region",
+				"DESCRIPTION": "State / Province / Region",
+				"MESSAGE": "Please select your state / province / region."
+			},
+			"COUNTRY": {
+				"NAME": "Country",
+				"PLACEHOLDER": "Country",
+				"DESCRIPTION": "Country",
+				"MESSAGE": "Please select your country."
+			},
+			"POSTALCODE": {
+				"NAME": "Postal Code",
+				"PLACEHOLDER": "Postal Code",
+				"DESCRIPTION": "Postal Code",
+				"MESSAGE": "Postal code may not contain any special characters."
+			}
+		},
+		"CAT": {
+			"1": {
+				"NAME": "AdminGroup",
+				"DESCR": "Super Admin Group"
+			}
+		}
+	},
+	"UI_NETWORK_ADMIN": {
+		"DASHBOARD": {
+			"TITLE": "Domain Dashboard",
+			"DESCRIPTION" : "An overview of the general performance of the network or domain",
+			"DEPOSITS": "Deposits",
+			"WITHDRAWALS": "Withdrawals",
+			"NETCASH": "Net Cash",
+			"CASINOBETS": "Casino Bets",
+			"CASINOWINS": "Casino Wins",
+			"CASINONET": "Casino Net",
+			"DEPOSITS_WITHDRAWALS_HISTORY": "Deposits and Withdrawals History",
+			"CASINO_HISTORY": "Casino Bets and Wins History"
+		},
+		"BONUSES": {
+			"LIST": {
+				"TITLE": "Bonuses",
+				"DESCRIPTION": "List of bonuses"
+			}
+		},
+		"EMAILTEMPLATE": {
+			"FIELDS": {
+				"NAME": {
+					"NAME": "Template Name",
+					"DESCRIPTION": "A descriptive name for this template that should be unique per language, per domain, and will be used when referring to templates."
+				},
+				"LANG": {
+					"NAME": "Language",
+					"DESCRIPTION": "The language of this template. You may create many versions of this template, one for each language."
+				},
+				"SUBJECT": {
+					"NAME": "Email Subject",
+					"DESCRIPTION": "The subject of the email. Keep it short and to the point, and stay away from all capitals or special characters."
+				},
+				"BODY": {
+					"NAME": "Email Body",
+					"DESCRIPTION": "The html body of the email. Feel free to make use of the template fields to enhance the personality of the email. Avoid using images to present text."
+				}
+			},
+			"SUCCESS": {
+				"ADD": "E-mail template added successfully",
+				"SAVE": "E-mail template saved successfully"
+			},
+			"ERRORS": {
+				"ADD": "Could not add e-mail template",
+				"SAVE": "Could not save e-mail template",
+				"EDIT": "Could not open edit for e-mail template"
+			}
+		},
+		"PROFILE": {
+			"TITLE": "Your Profile",
+			"DESCRIPTION": "Please assist us in ensuring that your personal information is up to date.",
+			"SUCCESS": "Your profile has been updated.",
+			"SUCCESS_PASSWORD": "Your password was successfully changed."
+		},		
+		"FILTERS": {
+			"TITLE": "Filters",
+			"LARGERTHAN": "{{field}} is larger than",
+			"SMALLERTHAN": "{{field}} is smaller than"
+		},
+		"DOMAIN": {
+			"ADD": {
+				"TITLE": "Add a domain",
+				"DESCRIPTION": "Please provide us with the basic information needed to create a domain and click the submit button. A domain will be created and you will be given the opportunity to further configure the domain on the next screen.",
+				"SUCCESS": "The domain was successfully added."
+			},
+			"FIELDS": {
+				"ID": "Identification Number",
+				"NAME": {
+					"NAME": "Machine Name",
+					"PLACEHOLDER": "Eg. customer_1",
+					"DESCRIPTION": "An internal machine identifiable code for this domain that needs to be unique across all domains.",
+					"PATTERN": "Only numbers and lowercase letters, underscores and period allowed.",
+					"UNIQUE": "The machine name is already taken. Please choose another."
+				},
+				"DISPLAYNAME": {
+					"NAME": "Display Name",
+					"PLACEHOLDER": "Eg. Customer One",
+					"DESCRIPTION": "The friendly name for this domain used in most displays."
+				},
+				"DESCRIPTION": {
+					"NAME": "Description",
+					"DESCRIPTION": "A description describing the domain."
+				},
+				"PARENT": {
+					"NAME": "Parent Domain",
+					"DESCRIPTION": "The parent domain that this domain belongs to."
+				},
+				"PLAYERS": {
+					"NAME": "Players Only",
+					"DESCRIPTION": "This domain is where the players will live."
+				},
+				"SUPPORTURL": {
+					"NAME": "Support URL",
+					"DESCRIPTION": "Support URL for this domain."
+				},
+				"SUPPORTEMAIL": {
+					"NAME": "Support Email",
+					"DESCRIPTION": "Support Email for this domain."
+				},
+				"URL": {
+					"NAME": "URL",
+					"DESCRIPTION": "URL for this domain."
+				},
+				"AUTHPROVIDER": "Authentication Provider",
+				"USERPROVIDER": "User Provider"
+			},
+			"VIEW": {
+				"TITLE": "Domain {{name}}",
+				"DESCRIPTION": "The domain represents a group of users, whether player or administrative."
+			},
+			"EDIT": {
+				"TITLE": "Domain {{name}}"
+			},
+			"SAVE": {
+				"SUCCESS":"Domain details saved successfully.",
+				"FAIL": "Could not save domain details!"
+			},
+			"NODESCRIPTION": "This domain does not have a description.",
+			"ROLES": {
+				"NOROLES": "No default roles specified for this domain."
+			},
+			"ERRORS": {
+				"FETCHUNIQUE": "Problem checking if machine name in unique."
+			}
+		},
+		"DOMAINS": {
+			"LIST": {
+				"TITLE": "Domains",
+				"DESCRIPTION": "Below is a list of all your domains and subdomains that you have access to manage. Select any domain to manage it."
+			}
+		},
+		"GROUPS": {
+			"GROUP": {
+				"ROLES": {
+					"NOROLES": "There are no roles defined for this group"
+				}
+			},
+			"NOGROUPS": "There are no groups created for this domain.",
+			"SAVE": {
+				"SUCCESS": "Group details saved successfully!",
+				"FAIL": "Could not save group details, please try again."
+			},
+			"LIST": {
+				"TITLE": "Groups ({{domainName}})",
+				"DESCRIPTION": "Below is a list of all your groups for your domain. Select any group to manage it. "
+			},
+			"ROLES": {
+				"HEADERS": {
+					"THISDOMAIN": "Role(s) for this domain.",
+					"CHILDDOMAIN": "Child domain role(s)",
+					"ROLESMANAGE": "Manage Roles"
+				},
+				"FIELDS": {
+					"DOMAIN": {
+						"NAME": "Domain",
+						"SELECT": "Please select a domain..",
+						"DESCRIPTION": "This is the domain for which you will be adding roles."
+					}
+				},
+				"NOROLES": "There are no role(s) available for this domain."
+			},
+			"VIEW": {
+				"HEADER": {
+					"TITLE":"Group : {{groupName}}",
+					"DESCRIPTION": "Below you can view/manage all the details related to this group."
+				},
+				"FIELDS": {
+					"DOMAIN": {
+						"NAME": "Domain",
+						"DESCRIPTION": "This is the domain for which this group applies."
+					},
+					"GROUP": {
+						"NAME": "Group Name",
+						"PLACEHOLDER": "Enter group name.",
+						"DESCRIPTION": "This is a friendly easy to remember name to identify the group."
+					},
+					"DESCRIPTION": {
+						"LABEL": "Group Description",
+						"DESCRIPTION": "Use this to add a short explanation of the purpose of this group."
+					}
+				}
+			},
+			"ERRORS": {
+				"LIST": "Could not load list of groups for this domain."
+			}
+		},
+		"GROUP": {
+			"DELETE": {
+				"SUCCESS": "Group deleted successfully!",
+				"FAIL": "Group could not be deleted."
+			},
+			"SAVE": {
+				"SUCCESS": "Group details saved successfully.",
+				"FAIL": "Could not save group details."
+			},
+			"UPDATE": {
+				"SUCCESS": "Group details updated successfully.",
+				"FAIL": "Could not update group details."
+			},
+			"NODESCRIPTION": "No description"
+		},
+		"PROVIDER": {
+			"ADD": {
+				"TITLE": "Add a provider",
+				"DESCRIPTION": "Please provide us with the basic information needed to create a provider and click the submit button. A provider will be created and you will be given the opportunity to further configure the provider on the next screen.",
+				"SUCCESS": "Provider has been added"
+			},
+			"FIELDS": {
+				"NAME": {
+					"NAME": "Provider Name",
+					"PLACEHOLDER": "Eg. provider_1",
+					"DESCRIPTION": "An internal machine identifiable code for this provider",
+					"PATTERN": "Only numbers and lowercase letters, underscores and period allowed."
+				},
+				"URL": {
+					"NAME": "Provider URL",
+					"PLACEHOLDER": "Select a provider URL from the list",
+					"DESCRIPTION": "The provider URL as per internal system provider registry"
+				},
+				"LINK": {
+					"NAME": "Provider link",
+					"PLACEHOLDER": "Select a provider from the list to link to",
+					"DESCRIPTION": "Link this domain's provider to an existing configuration"
+				},
+				"ID": {
+					"NAME": "Id"
+				},
+				"PRIORITY": {
+					"NAME": "Priority"
+				},
+				"ENABLED": {
+					"NAME": "Enabled"
+				},
+				"DOMAIN": {
+					"NAME": "Domain"
+				},
+				"PROVIDER_TYPE": {
+					"NAME": "Provider Type"
+				}
+			},
+			"VIEW": {
+				"TITLE": "Provider {{name}}",
+				"DESCRIPTION": "The provider configuration information.",
+				"NO_PROPS_FOUND": "No properties found..."
+			},
+			"EDIT": {
+				"TITLE": "Provider {{name}} (edit)",
+				"DESCRIPTION": "Please provide us with the information needed to update the provider and click the submit button.",
+				"FAILED_TO_GET_PROPS": "Problem getting config properties from provider",
+				"SUCCESS": "The provider was successfully edited."
+			},
+			"NODESCRIPTION": "This provider does not have a description."
+		},
+		"PROVIDERS": {
+			"LIST": {
+				"TITLE": "Providers",
+				"DESCRIPTION": "Below is a list of all your providers that you have access to manage. Select any provider to manage it."
+			}
+		},
+		"TRANSLATIONS": {
+			"TITLE": "Translations",
+			"DESCRIPTION": "Select the language that you wish to provide translations for. When translating, the reference language will be shown as an example of an existing translation for each key. Once you have translated a key, click the submit button to store the translation. Translations that already have values are considered complete, and you will need to select the option to show completed translations should you wish to modify them.",
+			"SUCCESS": "The translation was stored successfully."
+		},
+		"LANGUAGES": {
+			"LIST": {
+				"TITLE": "Languages"
+			}
+		},
+		"GAMES": {
+			"LIST": {
+				"TITLE": "Games",
+				"DESCRIPTION": "The list of games."
+			}
+		},
+		"GAME": {
+			"BUTTON": {
+				"ADD_LABEL": {
+					"NAME": "Add Label"
+				},
+				"REMOVE_LABEL": {
+					"NAME": "Remove Label"
+				}
+			},
+			"ADD": {
+				"TITLE": "Add Game",
+				"DESCRIPTION": "Please provide us with the basic information needed to create a game and click the submit button. A game will be created and you will be given the opportunity to further configure the game on the next screen.",
+				"SUCCESS": "The game was successfully added."
+			},
+			"EDIT": {
+					"TITLE": "Edit Game {{name}}",
+					"DESCRIPTION": "Please provide us with the information needed to update the game and click the submit button.",
+					"GRAPHIC_SUCCESS": "The graphic was successfully updated.",
+					"SUCCESS": "The game was successfully edited."
+			},
+			"FIELDS": {
+					"NAME": {
+						"NAME": "Game Name",
+						"PLACEHOLDER": "Eg. my_awesome_game",
+						"DESCRIPTION": "An internal machine identifiable code for this game",
+						"PATTERN": "Only numbers and lowercase letters, underscores and period allowed."
+					},
+					"PROVIDER_GAME_ID": {
+						"NAME": "Provider Game Id",
+						"PLACEHOLDER": "Eg. 123456",
+						"DESCRIPTION": "The game as identified by the game provider",
+						"PATTERN": "Only numbers and lowercase letters, underscores and period allowed."
+					},
+					"LABEL_NAME": {
+						"NAME": "Label Name",
+						"PLACEHOLDER": "Label Name",
+						"DESCRIPTION": "Name of the label to be used with this game"
+					},
+					"LABEL_VALUE": {
+						"NAME": "Label Value",
+						"PLACEHOLDER": "Label Value",
+						"DESCRIPTION": "Name of the label to be used with this game"
+					},
+					"PROVIDER_GUID": {
+						"NAME": "Provider Guid",
+						"PLACEHOLDER": "Provider Guid",
+						"DESCRIPTION": "The unique identifier of the provider associated with this game"
+					},
+					"DESCRIPTION": {
+						"NAME": "Description",
+						"PLACEHOLDER": "Eg. This is an awesome game that you would like to play.",
+						"DESCRIPTION": "The description of the game"
+					}
+			}
+		},
+		"PLAYERS": {
+			"LIST": {
+				"TITLE": "PLAYER LIST",
+				"DESCRIPTION": "A list of all players in your domains."
+			}
+		},
+		"PLAYER": {
+			"TAB": {
+				"SUMMARY": "Summary",
+				"ACCOUNTING": "Accounting",
+				"EVENTS": "Events"
+			},
+			"ACCOUNTING": {
+				"TAB": {
+					"SUMMARY": "Summary",
+					"ADJUSTMENTS": "Adjustments",
+					"HISTORY": "History"
+				},
+				"BALANCEADJUST": {
+					"TITLE": "Balance Adjustment",
+					"FIELDS": {
+						"ADJUST": {
+							"LABEL": "Amount",
+							"DESC": "Please fill in the amount, or use the buttons below to change the amount to be adjusted."
+						},
+						"CURRENT": {
+							"LABEL": "Current Balance",
+							"DESC": "This is the current player balance."
+						},
+						"NEW": {
+							"LABEL": "New Balance",
+							"DESC": "This is what the player balance will be after the adjustment."
+						},
+						"COMMENT": {
+							"LABEL": "Comment",
+							"DESC": "Please specify a reason for this balance adjustment."
+						},
+						"TRANTYPE": {
+							"LABEL": "Type",
+							"PLACEHOLDER": "Select the account type",
+							"DESC": "Please specify the account type that should be affected for this balance adjustment."
+						}
+					}
+				}
+			},
+			"VIEW": {
+				"TITLE": "Player: {{ player.firstName }} {{ player.lastName }} ( {{ player.username }} )",
+				"DESCRIPTION": "Review the player information, and if you have the access to do so, click on the modify links next to information that you would like to modify."
+			},
+			"FIELDS": {
+				"USERNAME": {
+					"DESCRIPTION": "The username that this player will use to log in.",
+					"PATTERN": "A username may only contain alphanumerics and underscores."
+				}
+			},
+			"ADDRESS": {
+				"RESIDENTIALADDRESS": {
+					"TITLE": "Update Residential Address",
+					"DESC": "Please fill in your residential address details below."
+				},
+				"POSTALADDRESS": {
+					"TITLE": "Update Postal Address",
+					"DESC": "Please fill in your postal address details below."
+				}
+			}
+		},
+		"USER": {
+			"FIELDS": {
+				"COUNTRY": {
+					"NAME": "Country",
+					"DESCRIPTION": "Please select your country, by typing in the field above. Options will be filtered as you type."
+				},
+				"USERNAME": {
+					"NAME": "Username",
+					"DESCRIPTION": "The username that you will use to log in.",
+					"PATTERN": "A username may only contain alphanumerics and underscores.",
+					"UNIQUE":"This username already exists, please choose another one."
+				},
+				"DOMAIN": {
+					"NAME": "Domain",
+					"DESCRIPTION": "The domain that this user belongs to."
+				},
+				"FIRSTNAME": {
+					"NAME": "First Name",
+					"DESCRIPTION": "Your preferred first name for future communications.",
+					"PATTERN": "Your first name may not contain any numbers"
+				},
+				"LASTNAME": {
+					"NAME": "Last Name",
+					"DESCRIPTION": "Your given surname.",
+					"PATTERN": "Your surname name may not contain any numbers"
+				},
+				"EMAIL": {
+					"NAME": "Email Address",
+					"DESCRIPTION": "Your preferred email address."
+				},
+				"TELHOME": {
+					"NAME": "Landline Telephone Number"
+				},
+				"TELCELL": {
+					"NAME": "Cellphone Number"
+				},
+				"ADDRESSRESIDENTIAL": {
+					"NAME": "Residential Address",
+					"DESCRIPTION": "Your physical address of residence.",
+					"EMPTY": "No residential address saved yet."
+				},
+				"ADDRESSPOSTAL": {
+					"NAME": "Postal Address",
+					"DESCRIPTION": "Your postal address for postal communication.",
+					"EMPTY": "No postal address saved yet."
+				},
+				"CHANGEPASSWORD": {
+					"CURRENT": {
+						"NAME": "Current Password",
+						"DESCRIPTION": "Please supply your current password. Leave empty if you do not wish to modify your password."
+					},
+					"NEW": {
+						"NAME": "New Password",
+						"DESCRIPTION": "A new password needs to contain at least one digit, one lowercase and one uppercase character, and has to be 8 characters in length or more."
+					},
+					"CONFIRM": {
+						"NAME": "Confirm Password",
+						"DESCRIPTION": "Confirm your new password.",
+						"MATCH": "The passwords do not match."
+					}
+				},
+				"STATUS": {
+					"NAME": "Status",
+					"PLACEHOLDER": "Select new status",
+					"DESCRIPTION": "Please select the new status you want",
+					"COMMENT": {
+						"NAME": "Comment",
+						"PLACEHOLDER": "Fill in a reason",
+						"DESCRIPTION": "Specify the reason for this status update"
+					}
+				}
+			},
+			"ERRORS": {
+				"STATUS": "Could not load status.",
+				"BALANCE": "Could not load balance.",
+				"ADDRESS": "Could not load address details.",
+				"PERSONAL": "Could not load personal information",
+				"PASSWORD": "Could not load password details.",
+				"PASSWORDSAVE": "Problem updating password details. Please try again.",
+				"BALANCEUPDATE": "Problem updating balance. Please try again.",
+				"ADDRESSSAVE": "Problem updating address details. Please try again."
+			}
+		},
+		"CHANGELOG": {
+			"TITLE": "Change history",
+			"HEADER": {
+				"CREATEDBY": "Created by",
+				"UPDATEDBY": "Updated by",
+				"ENABLEDBY": "Enabled by",
+				"DISABLEDBY": "Disabled by",
+				"DELETEDBY": "Deleted by"
+			},
+			"BODY": {
+				"CREATE": "The {{ entity }} was created on {{ date }} by {{ author }}.",
+				"EDIT": "The {{ entity }} was edited on {{ date }} by {{ author }}.",
+				"ENABLE": "The {{ entity }} was enabled on {{ date }} by {{ author }}.",
+				"DISABLE": "The {{ entity }} was disabled on {{ date }} by {{ author }}.",
+				"DELETE": "The {{ entity }} was deleted on {{ date }} by {{ author }}."
+			},
+			"CHANGE": {
+				"NOVALUE": "Field {{ field }} was changed.",
+				"FROMTOVALUE": "Field {{ field }} changed from {{ fromValue }} to {{ toValue }}.",
+				"TOVALUE": "Field {{ field }} set to {{ toValue }}.",
+				"FROMVALUE": "Field {{ field }}  was cleared. The old value was {{ fromValue }}."
+			},
+			"LOADMORE": "Load more..."
+		}
+	}
+}

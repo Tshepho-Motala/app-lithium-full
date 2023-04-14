@@ -1,0 +1,32 @@
+<div class="modal-content">
+	<div class="modal-header primary-blue darken-4 white-text">
+		<h3 class="modal-title" id="modal-title">
+			<i class="fa fa-pencil"></i>
+			<span ng-if="controller.adding">Add a GoGame Game</span>
+			<span ng-if="!controller.adding">Changing Game Information</span>
+			<button-close-window ng-click="controller.cancel()"></button-close-window>
+		</h3>
+	</div>
+	
+	<div class="col-xs-12">
+		<div ng-if="!controller.adding" class="alert alert-warning">Math model is intentionally not applied. If you wish to change the math model, select one. If you wish to apply the latest revision, choose the same math model. If you wish to keep existing math model revision, leave as is, i.e blank.</div>
+	</div>
+	
+	<form ng-submit="controller.onSubmit()" name="controller.form" autocomplete="off" novalidate>
+		<div class="modal-body" id="modal-body">
+			<div class="row v-reset-row ">
+				<div class="col-xs-12">
+					<formly-form model="controller.model" fields="controller.fields" options="controller.options" form="controller.form">
+					</formly-form>
+				</div>
+			</div>
+		</div>
+		
+		<div class="modal-footer">
+			<buttonbar>
+				<button-submit class="pull-left"></button-submit>
+				<button-cancel ng-click="controller.cancel()"></button-cancel>
+			</buttonbar>
+		</div>
+	</form>
+</div>

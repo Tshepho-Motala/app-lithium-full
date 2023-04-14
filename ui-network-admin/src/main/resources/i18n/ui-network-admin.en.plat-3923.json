@@ -1,0 +1,26 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "SERVICE_CASHIER": {
+      "TRANSACTION": {
+        "STATUS": {
+          "START": "START",
+          "WAITFORAPPROVAL": "WAIT FOR APPROVAL",
+          "SUCCESS": "SUCCESS",
+          "APPROVED": "APPROVED",
+          "CANCEL": "CANCEL",
+          "WAITFORPROCESSOR": "WAIT FOR PROCESSOR",
+          "DECLINED": "DECLINED",
+          "EXPIRED": "EXPIRED",
+          "VALIDATEINPUT": "VALIDATE INPUT",
+          "RESERVED_FUNDS_REVERSAL_FAILURE": "RESERVED FUNDS REVERSAL FAILURE",
+          "AUTO_APPROVED": "AUTO APPROVED",
+          "PLAYER_CANCELLED": "PLAYER CANCELLED",
+          "PENDING_CANCEL": "PENDING CANCEL",
+          "ON_HOLD": "ON HOLD",
+          "FATALERROR": "FATAL ERROR"
+        }
+      }
+    }
+  }
+}
+

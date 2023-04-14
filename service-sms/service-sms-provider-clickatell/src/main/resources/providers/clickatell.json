@@ -1,0 +1,21 @@
+{
+	"code": "clickatell",
+	"name": "Clickatell",
+	"enabled": true,
+	"url": "service-sms-provider-clickatell",
+	"properties": 
+	[
+		{
+			"name": "apiKey",
+			"defaultValue": "C1530bwTSpOfqNJZJ0QoGw==",
+			"type": "string",
+			"description": "The API key provided by clickatell"
+		},
+		{
+			"name": "baseUrl",
+			"defaultValue": "https://platform.clickatell.com",
+			"type": "string",
+			"description": "The base URL for all API calls"
+		}
+	]
+}

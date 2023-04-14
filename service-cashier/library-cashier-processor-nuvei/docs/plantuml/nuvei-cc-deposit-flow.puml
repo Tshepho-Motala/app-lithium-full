@@ -1,0 +1,177 @@
+.Nuvie Hosted Fields Flow
+[plantuml]
+----
+
+@startuml
+header Nuvie Hosted Fields Flow
+footer Page %page% of %lastpage%
+skinparam sequenceMessageAlign center
+actor Player
+box "Frontend" #LightBlue
+participant Portal
+participant IFrame
+end box
+participant Lithium
+participant Nuvei
+participant Bank
+autonumber
+
+Player -> Portal  : Choose Nuvei deposit
+activate Portal
+Portal -> Lithium : GetInitializationData(authToken)
+activate Lithium
+Lithium -> Nuvei : getSessionToken(merchan_key)
+activate Nuvei
+Nuvei --> Lithium : getSessionToken(session_token)
+deactivate Nuvei
+Lithium --> Portal : GetInitializationData(session_token)
+deactivate Lithium
+Portal --> Player : Show payment page
+Portal -> IFrame : SafeCharge(session_token, style)
+activate IFrame
+ note right
+        Nuvei hosted fields
+    end note
+IFrame --> Portal: Show card fields
+Player -> IFrame : Player input (card number, expire date, cvv)
+IFrame -> IFrame : Validate show errors
+IFrame --> Portal: Card verified event
+
+Player -> Portal  : Player enters amount
+Player -> Portal  : Pay batton is pressed
+Portal -> IFrame: getToken()
+
+IFrame -> Nuvei: getToken(cardNumber, expire date, cvv)
+activate Nuvei
+Nuvei --> IFrame: getToken(temp_card_token)
+deactivate Nuvei
+IFrame --> Portal: getToken(temp_card_token)
+deactivate IFrame
+
+
+Portal -> Lithium : Deposit(amount, temp_card_token, name_on_card, return_Url, method_notification_url)
+activate Lithium
+Lithium -> Nuvei: InitPayment(amount, temp_card_token, method_notification_url)
+activate Nuvei
+Nuvei --> Lithium : InitPayment(status="DECLINED/APPROVED", error, 3DS_data)
+deactivate Nuvei
+alt#Gold  #Pink status="DECLINED"
+    Lithium --> Portal: Deposit(status="DECLINED", error)
+    Portal --> Player: Show error
+else #LightGreen status="APPROVED"
+alt#Gold  #LightGreen 3DS_data.3DSV2=true
+      alt#Gold  #LightGreen Bank supports 3DSV2 Fingerprint
+          ref over Player, Portal, Lithium, Nuvei, Bank: 3DSV2 Fingerprint
+      else #LightGreen Bank does not support 3DSV2 Fingerprint
+          ref over Player, Portal, Lithium, Nuvei, Bank: Payment
+      end
+else #LightGreen 3DS_data.3DSV2=false(non-3DS, 3DSV1)
+   ref over Player, Portal, Lithium, Nuvei, Bank: Payment
+end
+end
+ == 3DSV2 Fingerprint ==
+    Lithium --> Portal: Deposit(status="WAITFORPROCESSOR", getIframeUrl, 3DS_iframe_data(3DS_data))
+    Portal -> IFrame : init Iframe(getIframeUrl, 3DS_iframe_data)
+    activate IFrame
+     note right
+            Bank page to get browser details
+     end note
+    IFrame -> Bank : redirect to bank page
+    activate Bank
+    IFrame -> Bank : send Browser info(ip, user-agent, timeZone, screen data)
+    Bank -> IFrame : redirect to method_notification_url
+    deactivate
+    IFrame -> Portal : catch redirect to method_notification_url
+    deactivate
+    note left
+        fingerprint successed
+        if method_notification_url
+        is called with 10 sec
+    end note
+    Portal -> Lithium: deposit(fingerprint result)
+
+    ref over Player, Portal, Lithium, Nuvei, Bank: Payment
+ == Payment ==
+    Lithium -> Nuvei : payment(amount, temp_card_token, webhook_url, 3DS_data)
+    activate Nuvei
+    Nuvei -> Bank: deposit
+    activate Bank
+    Bank --> Nuvei: result
+    deactivate
+    Nuvei --> Lithium : payment(status="DECLINED/APPROVED/PENDING", error, 3DS_data)
+    deactivate
+    alt#Gold  #Pink status="DECLINED"
+        Lithium --> Portal: Deposit(status="DECLINED", error)
+        Portal --> Player: Show error
+    else #LightGreen status="APPROVED"
+        Lithium --> Portal: Deposit(status="WAITFORPROCESSOR")
+        Portal --> Player: Show spinner
+        ref over Portal: Get Transaction status show result
+    else #LightGreen status="PENDING"
+        ref over Player, Portal, Lithium, Nuvei, Bank: 3DS(V1/V2) Challenge
+    end
+ == 3DS(V1/V2) Challenge==
+    Lithium --> Portal: Deposit(status="WAITFORPROCESSOR", getIframeUrl, 3DS_iframe_data
+    Portal -> IFrame : 3DS_iframe_data
+    activate IFrame
+    note right
+        Bank challenge page
+    end note
+    IFrame -> Bank : Open bank challenge url
+    activate Bank
+    Bank --> IFrame : Bank challenge page
+    IFrame --> Player : Bank challenge
+    Player -> Bank : Player enters OTP
+    Bank --> Lithium : redirect to 3ds_notification_url(3dsResult)
+    deactivate Bank
+    Lithium -> Nuvei: LiabilitySift payment(3dsResult)
+    activate Nuvei
+     note right
+            Sale is actualy
+            created here
+        end note
+    Nuvei -> Bank: deposit
+    activate Bank
+    Bank --> Nuvei: result
+    deactivate Bank
+    Nuvei --> Lithium: LiabilitySift payment(status="DECLINE/ERROR/APPROVED")
+    deactivate Nuvei
+    Lithium --> IFrame : redirect to result_url(status=pending?trn_id={transactioId})
+    deactivate Lithium
+    IFrame --> Portal: catch result_url from iframe
+    deactivate IFrame
+    Portal --> Player: Show spinner
+    ref over Portal: Get Transaction status show result
+    ==Get Transaction status show result==
+    Portal -> Lithium: GetProviderProperties(client_processing_timeout)
+    activate Lithium
+    Lithium --> Portal: GetProviderProperties(retry list)
+    deactivate Lithium
+    loop while status="WAITFORPROCESSOR"
+               Portal -> Lithium: GetTransactionStatus(transactionId)
+               activate Lithium
+               Lithium -> Portal: GetTransactionStatus(status="WAITFORPROCESSOR")
+               deactivate Lithium
+ == Webhook==
+    Bank -> Nuvei: final notification
+    activate Nuvei
+    Nuvei -> Lithium : Notification(transactionId, type, status)
+    activate Lithium
+    Lithium -> Nuvei: GetTransactionStatus(transactionId)
+    activate Nuvei
+    Nuvei --> Lithium: GetTransactionStatus(status, error)
+    deactivate Nuvei
+    Lithium -> Lithium: Update transaction status
+    Lithium --> Nuvei: HTTP_OK
+    deactivate Lithium
+    deactivate Nuvei
+    Portal -> Lithium: GetTransactionStatus(transactionId)
+                   activate Lithium
+                   Lithium -> Portal: GetTransactionStatus(status="SUCCESS/DECLINED", error)
+                   deactivate Lithium
+    
+    end
+    Portal --> Player: Show final result
+deactivate Portal
+
+@enduml

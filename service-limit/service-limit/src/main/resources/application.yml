@@ -1,0 +1,168 @@
+server:
+  port: 7810
+spring:
+  datasource:
+    url: jdbc:mysql://localhost/lithium_limit
+    username: root
+    password: mysql
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: validate
+  cloud:
+    stream:
+      bindings:
+        autorestrictiontriggerinput:
+          group: autorestrictiontriggergroup
+          binder: rabbit
+          destination: autorestrictiontriggerqueue
+        autorestrictiontriggeroutput:
+          group: autorestrictiontriggergroup
+          binder: rabbit
+          destination: autorestrictiontriggerqueue
+          producer:
+            required-groups: autorestrictiontriggergroup
+        transactiontyperegisteroutput:
+          group: transactiontyperegistergroup
+          binder: rabbit
+          destination: transactiontyperegisterqueue
+          producer:
+            required-groups: transactiontyperegistergroup
+        userrestrictiontriggeroutput:
+          group: userrestrictiontriggergroup
+          binder: rabbit
+          destination: userrestrictiontriggerqueue
+          producer:
+            required-groups: userrestrictiontriggergroup
+        userattributestriggerinput :
+          group: user-attributes-trigger-group-limit
+          binder : rabbit
+          destination : userattributestriggerqueue
+        register-notification-output:
+          binder: rabbit
+          destination: register-notification-queue
+          producer:
+            required-groups: register-notification-trigger-group
+        self-exclusion-cool-off-preference-input:
+          consumer:
+            concurrency: 20
+            maxAttempts: 5
+            backOffInitialInterval: 5000
+            backOffMaxInterval: 60000
+            backOffMultiplier: 2.5
+          group: self-exclusion-cool-off-preference-group
+          binder: rabbit
+          destination: self-exclusion-cool-off-preference-queue
+        player-limit-preferences-migration-input :
+          consumer:
+            concurrency: 20
+            max-attempts: 5
+            back-off-initial-interval: 5000
+            back-off-max-interval: 60000
+            back-off-multiplier: 2.5
+          group: player-limit-preferences-migration-group
+          binder: rabbit
+          destination: player-limit-preferences-migration-queue
+        reality-check-migration-input:
+          consumer:
+            concurrency: 20
+            max-attempts: 5
+            back-off-initial-interval: 5000
+            back-off-max-interval: 60000
+            back-off-multiplier: 2.5
+          group: reality-check-migration-group
+          binder: rabbit
+          destination: reality-check-migration-queue
+        migration-exception-output:
+          binder: rabbit
+          destination: migration-exception-queue
+          producer:
+            required-groups: migration-exception-group
+      rabbit:
+        bindings:
+          self-exclusion-cool-off-preference-input:
+            consumer:
+              autoBindDlq: true
+              requeueRejected: true
+              republishToDlq: true
+          player-limit-preferences-migration-input:
+            consumer:
+              auto-bind-dlq: true
+              requeue-rejected: true
+              republish-to-dlq: true
+          reality-check-migration-input:
+            consumer:
+              auto-bind-dlq: true
+              requeue-rejected: true
+              republish-to-dlq: true
+
+
+
+lithium:
+  service:
+    limit:
+      dlqRetries: 3
+      self-exclusion-cool-off-preference:
+        dlq-retries: 3
+      jobs:
+        exclusion-cleanup:
+          cron: 0 0/1 * * * *
+          page-size: 1000
+        cool-off-cleanup:
+          cron: 0 0/1 * * * *
+          page-size: 1000
+        under-age-auto-restriction:
+          cron: 0 1 0 * * *
+          page-size: 1000
+          limit-page-size: 1000
+        intervention-casino-auto-restriction:
+          cron: 0 1 0 * * *
+          page-size: 1000
+        intervention-comps-auto-restriction:
+          cron: 0 1 0 * * *
+          page-size: 1000
+          limit-page-size: 2000
+        pending-deposit-limit-cleanup:
+          cron: 0 0/1 * * * *
+          page-size: 1000
+        pending-balance-limit-cleanup:
+          cron: 0 * * * * *
+          page-size: 1000
+        auto-restriction:
+          cron: 0 0 0 * * *
+        user-status-auto-restriction:
+          cron: 0 0 2 * * *
+          enabled: true
+          pageSize: 10
+        auto-age-limit-update:
+          cron: 15 * * * * *
+      public-api-authorizations:
+          - id: ls-dwh
+            secret-key: A9F24D68631A382C94D24C8D3F521210
+      queues:
+        promotion-restriction-trigger:
+          max-dlq-retries: 1
+          back-off-option-interval: 1000
+          back-off-option-max-interval: 60000
+          back-off-option-multiplier: 10
+          max-attempts: 60
+          concurrent-consumers: 5
+          default-requeue-rejected: false
+          message-delay: 1000
+
+  services:
+    db:
+      load-test-data: false
+
+promotion:
+  restriction:
+    trigger:
+      delay: 20000
+
+logging:
+  level:
+    lithium.service.limit: INFO
+#    lithium.service.limit.services.ExclusionService: TRACE
+#    lithium.service.limit.services.CoolOffService: TRACE
+#    org.hibernate.SQL: INFO
+#    org.hibernate.type.descriptor.sql.BasicBinder: INFO

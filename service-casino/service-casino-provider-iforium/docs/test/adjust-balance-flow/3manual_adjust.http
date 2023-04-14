@@ -1,0 +1,28 @@
+POST http://localhost:9000/service-user/backoffice/livescore_uk/balance-adjust
+             ?accountCode=PLAYER_BALANCE
+             &accountTypeCode=PLAYER_BALANCE
+             &amountCents=1000000
+             &authorGuid=livescore_uk/volodtest1
+             &contraAccountCode=MANUAL_BALANCE_ADJUST
+             &contraAccountTypeCode=MANUAL_BALANCE_ADJUST
+             &currencyCode=GBP
+             &date=2021-01-24T14:01:42.610Z
+             &labels=comment%3DTest
+             &transactionTypeCode=BALANCE_ADJUST
+             &ownerGuid=livescore_uk/volodtest1
+Authorization: Bearer {{USERTOKEN_UK}}
+
+###
+POST http://localhost:9000/service-user/backoffice/livescore_ua/balance-adjust
+             ?accountCode=PLAYER_BALANCE
+             &accountTypeCode=PLAYER_BALANCE
+             &amountCents=1000000
+             &authorGuid=livescore_ua/volodtest1
+             &contraAccountCode=MANUAL_BALANCE_ADJUST
+             &contraAccountTypeCode=MANUAL_BALANCE_ADJUST
+             &currencyCode=GBP
+             &date=2021-01-24T14:01:42.610Z
+             &labels=comment%3DTest
+             &transactionTypeCode=BALANCE_ADJUST
+             &ownerGuid=livescore_ua/volodtest1
+Authorization: Bearer {{USERTOKEN_UA}}

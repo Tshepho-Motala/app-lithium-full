@@ -1,0 +1,13 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "BONUSES": {
+      "GRANT_MASS": {
+        "CASH_BONUSES": {
+          "BUTTONS": {
+            "PROCESS": "Process"
+          }
+        }
+      }
+    }
+  }
+}

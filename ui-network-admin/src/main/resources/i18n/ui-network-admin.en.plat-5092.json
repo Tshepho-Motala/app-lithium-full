@@ -1,0 +1,24 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "CASHIER": {
+      "AUTOWITHDRAWALS": {
+        "RULESETS": {
+          "EXPORT": {
+            "PAGE": {
+              "ADD": "Add",
+              "LAST-UPDATE":"Last Updated: Range Start",
+              "LAST-UPDATE-END":"Last Updated: Range End",
+              "OPEN-FILTER": "Open filter",
+              "CLOSE-FILTER": "Close filter",
+              "CLEAR": "Clear",
+              "FILTER": "Filter",
+              "REFRESH":"Refresh",
+              "OPEN": "Open"
+            }
+
+          }
+        }
+      }
+    }
+  }
+}

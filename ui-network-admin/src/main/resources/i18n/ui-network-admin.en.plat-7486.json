@@ -1,0 +1,13 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "USER": {
+      "FIELDS": {
+        "LASTNAME": {
+          "NAME": "Last Name",
+          "DESCRIPTION": "Your given surname.",
+          "PATTERN": "Your surname may not contain any numbers"
+        }
+      }
+    }
+  }
+}

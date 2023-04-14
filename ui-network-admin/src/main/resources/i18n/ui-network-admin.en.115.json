@@ -1,0 +1,10 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "DASHBOARD": {
+      "PLAYER_BALANCE_WITHDRAWAL_PENDING": "Player Account Balance Pending Withdrawal",
+      "TRANSFER_TO_PLAYER_BALANCE_PENDING_WITHDRAWAL": "Transfer to player balance pending withdrawal",
+      "TRANSFER_FROM_PLAYER_BALANCE_PENDING_WITHDRAWAL": "Transfer from player balance pending withdrawal",
+      "PLAYER_BALANCE_PENDING_WITHDRAWAL_NET": "Player balance pending withdrawal net"
+    }
+  }
+}

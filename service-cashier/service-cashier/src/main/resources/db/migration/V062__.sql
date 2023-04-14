@@ -1,0 +1,1 @@
+ALTER TABLE `auto_withdrawal_rule_set` ADD COLUMN `delayed_start` BIT(1) DEFAULT 0;

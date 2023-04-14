@@ -1,0 +1,72 @@
+[plantuml]
+----
+@startuml
+
+!define p(name, alias) participant "name" as alias << (L,#AAFFCC) >>
+!define pn(name, alias) participant "name" as alias << (L,#FFAAAA) >>
+!define q(name, alias) queue "name" as alias << (L,#AAFFCC) >>
+!define qn(name, alias) queue "name" as alias << (L,#FFAAAA) >>
+
+autonumber
+
+participant "Sports Gateway" as sportsGateway
+
+box "Lithium" #LightSkyBlue
+p("service-casino-provider-sportsbook", scpSportsbook)
+p("client-service-domain", clientServiceDomain)
+end box
+
+activate sportsGateway
+sportsGateway -> scpSportsbook: POST /bet/commitreserve
+
+activate scpSportsbook
+scpSportsbook -> scpSportsbook: Validate request
+note right
+Request data
+should still
+be valid
+end note
+
+scpSportsbook -> scpSportsbook: Validate sha256
+
+scpSportsbook -> clientServiceDomain: Domain setting evaluation
+
+activate clientServiceDomain
+
+note right
+DANGEROUS_VB_
+MIGRATION_OPEN
+_BETS_INGESTION
+_WITHOUT_BALANCE
+_ADJUST_ENABLED
+end note
+
+clientServiceDomain --> scpSportsbook
+
+deactivate clientServiceDomain
+
+note right
+See notes below
+end note
+
+alt Enabled
+    scpSportsbook -> scpSportsbook: Find reservation and user and apply lock, as per normal workflow
+
+    scpSportsbook -> scpSportsbook: Check duplicate submission. Validate reservation commit does not exist
+
+    scpSportsbook -> scpSportsbook: Validate reservation state. Not cancelled, commited already, and reservation contains bets
+
+    scpSportsbook -> scpSportsbook: Persist reservation commit
+
+    scpSportsbook -> scpSportsbook: Add audit trail
+else
+    scpSportsbook -> scpSportsbook: Proceed with normal workflow
+end
+
+deactivate scpSportsbook
+
+deactivate sportsGateway
+
+@enduml
+----
+[plantuml]

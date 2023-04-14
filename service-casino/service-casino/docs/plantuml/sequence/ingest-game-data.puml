@@ -1,0 +1,105 @@
+[plantuml]
+----
+@startuml
+
+!define p(name, alias) participant "name" as alias << (L,#AAFFCC) >>
+!define pn(name, alias) participant "name" as alias << (L,#FFAAAA) >>
+!define q(name, alias) queue "name" as alias << (L,#AAFFCC) >>
+!define qn(name, alias) queue "name" as alias << (L,#FFAAAA) >>
+
+autonumber
+
+database "big-query" as bigQuery
+
+pn("service-vb-migration", svcVbMigration)
+
+box "rabbit-mq" #LightBlue
+qn("game-data-migration-queue", gameDataQueue)
+end box
+
+box "service-games" #LightSkyBlue
+pn("GameDataQueueProcessor n", gameDataQueueProcessor)
+pn("GameDataIngestionService", gameDataIngestionService)
+p("GameService", gameService)
+end box
+
+box "service-casino" #LightSkyBlue
+pn("SystemGameController", systemGameController)
+pn("GameService", casinoGameService)
+database "lithium_casino.game" as lithiumCasinoGameDB
+end box
+
+activate gameDataQueueProcessor
+gameDataQueueProcessor -> gameDataQueue: Listen
+deactivate gameDataQueueProcessor
+
+activate svcVbMigration
+
+svcVbMigration -> bigQuery: query
+
+activate bigQuery
+bigQuery --> svcVbMigration
+deactivate bigQuery
+
+loop each record
+svcVbMigration -> gameDataQueue: enqueue
+
+activate gameDataQueue
+gameDataQueue --> svcVbMigration
+
+svcVbMigration -> svcVbMigration: record progress
+end
+
+deactivate svcVbMigration
+
+activate gameDataQueue
+gameDataQueue -> gameDataQueueProcessor: dequeue
+deactivate gameDataQueue
+
+activate gameDataQueueProcessor
+gameDataQueueProcessor -> gameDataIngestionService: ingest
+
+note right
+Transactional
+end note
+activate gameDataIngestionService
+gameDataIngestionService -> gameDataIngestionService: create prerequisites
+note right
+Domain, game supplier, etc.
+
+Find or create mechanism
+with sane retryable and backoff
+end note
+gameDataIngestionService -> gameService: findOrCreateGame
+note right
+Disabled and invisible
+end note
+activate gameService
+gameService --> gameDataIngestionService
+deactivate gameService
+
+gameDataIngestionService -> systemGameController: findOrCreateGame
+activate systemGameController
+systemGameController -> casinoGameService: findOrCreateGame
+activate casinoGameService
+note right
+Find or create mechanism
+with sane retryable and backoff
+end note
+casinoGameService -> lithiumCasinoGameDB: persist
+activate lithiumCasinoGameDB
+lithiumCasinoGameDB --> casinoGameService
+deactivate lithiumCasinoGameDB
+casinoGameService --> systemGameController
+deactivate casinoGameService
+systemGameController --> gameDataIngestionService
+deactivate systemGameController
+gameDataIngestionService --> gameDataQueueProcessor
+deactivate gameDataIngestionService
+gameDataQueueProcessor --> gameDataQueue: ACK
+deactivate gameDataQueueProcessor
+
+@enduml
+----
+[plantuml]
+

@@ -1,0 +1,36 @@
+{
+	"UI_NETWORK_ADMIN": {
+		"CASHIER" : {
+			"PROCESSORS": {
+				"FIELDS": {
+					"LIMITS": {
+						"MAX_FIRST_AMOUNT": {
+							"NAME": "1st deposit max amount"
+						},
+						"MIN_FIRST_AMOUNT": {
+							"NAME": "1st deposit min amount"
+						}
+					}
+				}
+			},
+			"DEPOSIT": {
+				"GL": {
+					"MIN_FIRST_AMT": "This is the minimum amount that may be entered when making first deposit using this processor.",
+					"MAX_FIRST_AMT": "This is the maximum amount that may be entered when making first deposit using this processor."
+				},
+				"GPL": {
+					"MIN_FIRST_AMT": "This is the minimum amount that may be entered when making first deposit using this processor. This is for any player that has no overrides specified in IPL / PL.",
+					"MAX_FIRST_AMT": "This is the maximum amount that may be entered when making first deposit using this processor. This is for any player that has no overrides specified in IPL / PL."
+				},
+				"PL": {
+					"MIN_FIRST_AMT": "This is the minimum amount that may be entered when making first deposit using this processor if player is linked to this profile.",
+					"MAX_FIRST_AMT": "This is the maximum amount that may be entered when making first deposit using this processor if player is linked to this profile."
+				},
+				"IPL": {
+					"MIN_FIRST_AMT": "This is the minimum amount that may be entered when making first deposit using this processor (this overrides global player(GPL)/profile(PL) limits).",
+					"MAX_FIRST_AMT": "This is the maximum amount that may be entered when making first deposit using this processor (this overrides global player(GPL)/profile(PL) limits)."
+				}
+			}
+		}
+	}
+}

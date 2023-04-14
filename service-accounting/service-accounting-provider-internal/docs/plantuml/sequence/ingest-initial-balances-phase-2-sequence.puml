@@ -1,0 +1,80 @@
+[plantuml]
+----
+@startuml
+
+!define p(name, alias) participant "name" as alias << (L,#AAFFCC) >>
+!define pn(name, alias) participant "name" as alias << (L,#FFAAAA) >>
+!define q(name, alias) queue "name" as alias << (L,#AAFFCC) >>
+!define qn(name, alias) queue "name" as alias << (L,#FFAAAA) >>
+
+autonumber
+
+database "big-query" as bigQuery
+
+pn("service-vb-migration", svcVbMigration)
+
+box "rabbit-mq" #LightBlue
+qn("initial-balance-migration-phase-two-queue", initialBalanceQueue)
+end box
+
+box "service-accounting-provider-internal" #LightSkyBlue
+pn("InitialBalancePhaseTwoQueueProcessor n", initialBalanceQueueProcessor)
+pn("InitialBalanceIngestionService", initialBalanceIngestionService)
+p("TransactionServiceWrapper", tranServiceWrapper)
+end box
+
+activate initialBalanceQueueProcessor
+initialBalanceQueueProcessor -> initialBalanceQueue: Listen
+deactivate initialBalanceQueueProcessor
+
+activate svcVbMigration
+
+svcVbMigration -> bigQuery: query
+
+activate bigQuery
+bigQuery --> svcVbMigration
+deactivate bigQuery
+
+loop each record
+svcVbMigration -> initialBalanceQueue: enqueue
+
+activate initialBalanceQueue
+initialBalanceQueue --> svcVbMigration
+
+svcVbMigration -> svcVbMigration: record progress
+end
+
+deactivate svcVbMigration
+
+activate initialBalanceQueue
+initialBalanceQueue -> initialBalanceQueueProcessor: dequeue
+deactivate initialBalanceQueue
+
+activate initialBalanceQueueProcessor
+initialBalanceQueueProcessor -> initialBalanceIngestionService: ingestPhaseTwo
+
+note right
+These 2 steps should run in a transactional, either
+pass in full, or fail and rollback completely.
+end note
+
+activate initialBalanceIngestionService
+
+activate tranServiceWrapper
+initialBalanceIngestionService -> tranServiceWrapper: adjustMulti (step 1)
+tranServiceWrapper --> initialBalanceIngestionService
+
+initialBalanceIngestionService -> tranServiceWrapper: adjustMulti (step 2)
+tranServiceWrapper --> initialBalanceIngestionService
+
+deactivate tranServiceWrapper
+
+initialBalanceIngestionService --> initialBalanceQueueProcessor
+deactivate initialBalanceIngestionService
+
+initialBalanceQueueProcessor --> initialBalanceQueue: ACK
+deactivate initialBalanceQueueProcessor
+
+@enduml
+----
+[plantuml]

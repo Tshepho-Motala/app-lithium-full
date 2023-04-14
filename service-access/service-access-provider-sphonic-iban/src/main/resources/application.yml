@@ -1,0 +1,28 @@
+server:
+  port: 9601
+
+spring:
+ application:
+   name: service-access-provider-sphonic-iban
+ #changed to be the same like on prod, please change DB name locally
+ datasource:
+   url: jdbc:mysql://localhost/lithium_access_pr_sphonic_iban
+   username: root
+   password: mysql
+ jpa:
+   show-sql: false
+   hibernate:
+     ddl-auto: validate
+     properties:
+       hibernate:
+        format_sql: true
+   
+eureka:
+  instance:
+    appname: service-access-provider-sphonic-iban
+
+logging:
+  level:
+    lithium.service.access.provider.sphonic: INFO
+#    lithium.rest: INFO
+

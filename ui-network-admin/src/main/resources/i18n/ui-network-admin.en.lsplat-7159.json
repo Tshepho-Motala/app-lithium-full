@@ -1,0 +1,35 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "BONUSES": {
+      "GRANT_MASS": {
+        "CASH_BONUSES": {
+          "FIELDS": {
+            "AMOUNT": {
+              "INVALID": "Amount cannot be 0 and cannot exceed the default maximum of ",
+              "INVALID_AGAINST_DOMAIN": "Amount cannot be 0 and cannot exceed the domain maximum of "
+            }
+          }
+        }
+      }
+    },
+    "PLAYER": {
+      "BONUS": {
+        "GRANT_BONUS": {
+          "FIELDS": {
+            "AMOUNT": {
+              "INVALID_AGAINST_DOMAIN": "Amount cannot be 0 and cannot exceed the domain maximum of ",
+              "INVALID": "Amount cannot be 0 and cannot exceed the default maximum of "
+            }
+          }
+        }
+      }
+    }
+  },
+  "DOMAIN":{
+    "SETTING": {
+      "PERMISSION_ERROR": {
+        "MAXIMUM_BONUS_PAYOUT": "You need permissions to add, modify or delete domain setting 'maximum_bonus_payout'"
+      }
+    }
+  }
+}

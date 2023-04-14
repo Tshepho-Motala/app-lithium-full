@@ -1,0 +1,27 @@
+= ExternalAuthorizationRequest
+
+|====
+| Field | Type
+
+| domainName
+| String
+
+| ruleName
+| String
+
+| userGuid
+| String
+
+| deviceId
+| String
+
+| ip
+| String
+
+| additionalData
+| Map<String, String>
+
+// TODO: Add PlayerBasic - Entropy...
+| playerBasic
+| PlayerBasic
+|====

@@ -1,0 +1,94 @@
+<div class="box box-info box-solid">
+    <div class="box-header with-border">
+        {{'UI_NETWORK_ADMIN.LIMITS.PLAYER.LOSSLIMITS'|translate}}
+    </div>
+    <div class="box-body table-responsive">
+        <table class="table table-hover table-striped nowrap">
+            <tr>
+                <td style="width:50%">
+                    <span>{{'UI_NETWORK_ADMIN.LOSS_LIMITS.PLAYER_VISIBILITY' | translate}}</span>
+                </td><td>
+                    <span ng-if="lossLimitVisibility === 'ENABLED'" class="label label-lg label-success">{{ lossLimitVisibility | uppercase }}</span>
+                    <span ng-if="lossLimitVisibility === 'DISABLED'" class="label label-lg label-warning">{{ lossLimitVisibility | uppercase }}</span>
+                    <span ng-if="lossLimitVisibility === 'OFF'" class="label label-lg label-danger">{{ lossLimitVisibility | uppercase }}</span>
+                    <span ng-if="!lossLimitVisibility" class="label label-lg label-danger">{{ 'N/A' | uppercase }}</span>
+                </td><td>
+                    <a style="cursor: pointer;" ng-click="changeLossLimitVisibility()" lit-if-permission="PLAYER_LIMIT_EDIT" lit-permission-domain="{{user.domain.name}}" class='pull-right'>
+                        <span><i class="fa fa-pencil-square-o"></i> {{'GLOBAL.ACTION.MODIFY' | translate}}</span>
+                    </a>
+                    <a style="margin-right: 25px" ng-click="showHelpRow()" class='pull-right'>
+                        <span><i class="fa fa-question" aria-hidden="true"></i></span>
+                    </a>
+                </td>
+            </tr><tr ng-if='showHelp === true'>
+                <th colspan='3'>
+                    <div class="well description">
+                      {{ "UI_NETWORK_ADMIN.LOSS_LIMITS.PLAYER_VISIBILITY_DESC_1" | translate }}<br/>
+                      {{ "UI_NETWORK_ADMIN.LOSS_LIMITS.PLAYER_VISIBILITY_DESC_2" | translate }}<br/>
+                      {{ "UI_NETWORK_ADMIN.LOSS_LIMITS.PLAYER_VISIBILITY_DESC_3" | translate }}
+                    </div>
+                </th>
+            </tr>
+        </table>
+        <table class="table table-bordered">
+        <tr>
+            <th width="40%">{{'UI_NETWORK_ADMIN.LIMITS.PLAYER.DAILYLOSSLIMIT.LABEL'|translate}}</th>
+            <td ng-if="data.dailyLossLimit">{{data.dailyLossLimit|number:2}}</td>
+            <td ng-if="!data.dailyLossLimit">{{'UI_NETWORK_ADMIN.LIMITS.NOTSET'|translate}}</td>
+            <td lit-if-permission="PLAYER_LIMIT_EDIT" lit-permission-domain="{{user.domain.name}}">
+                <a style="cursor: pointer;" ng-click="changeLimits(3)" >
+                    <span ng-if="!data.dailyLossLimit"><i class="fa fa-pencil-square-o"></i> {{'UI_NETWORK_ADMIN.LIMITS.SET'|translate}}</span>
+                    <span ng-if="data.dailyLossLimit"><i class="fa fa-pencil-square-o"></i> {{'UI_NETWORK_ADMIN.LIMITS.MODIFY'|translate}}</span>
+                </a>
+                &nbsp;
+                <a ng-if="data.dailyLossLimit !== undefined && data.dailyLossLimit !== null" style="cursor: pointer;" ng-click="removeLimit(3)">
+                    <span><i class="fa fa-trash"></i> {{'GLOBAL.ACTION.DELETE'|translate}}</span>
+                </a>
+            </td>
+        </tr><tr ng-if="data.dailyLossLimit">
+            <td colspan="3">
+                <uib-progressbar type="info" value="data.dailyNetLossToHouse > data.dailyLossLimit ? 100 : data.dailyNetLossToHouse <= 0 ? 0 : ((data.dailyNetLossToHouse / data.dailyLossLimit) * 100)|number:2"><span style="color: black;">{{data.dailyNetLossToHouse > data.dailyLossLimit ? 100 : data.dailyNetLossToHouse <= 0 ? 0 : ((data.dailyNetLossToHouse / data.dailyLossLimit) * 100)|number:2}}%</span></uib-progressbar>
+                <span ng-if="data.dailyNetLossToHouse"><br/>{{data.dailyNetLossToHouse|currency:data.domain.currencySymbol}}</span>
+            </td>
+        </tr><tr>
+            <th width="40%">{{'UI_NETWORK_ADMIN.LIMITS.PLAYER.WEEKLYLOSSLIMIT.LABEL'|translate}}</th>
+            <td ng-if="data.weeklyLossLimit">{{data.weeklyLossLimit|number:2}}</td>
+            <td ng-if="!data.weeklyLossLimit">{{'UI_NETWORK_ADMIN.LIMITS.NOTSET'|translate}}</td>
+            <td lit-if-permission="PLAYER_LIMIT_EDIT" lit-permission-domain="{{user.domain.name}}">
+                <a style="cursor: pointer;" ng-click="changeLimits(4)" >
+                    <span ng-if="!data.weeklyLossLimit"><i class="fa fa-pencil-square-o"></i> {{'UI_NETWORK_ADMIN.LIMITS.SET'|translate}}</span>
+                    <span ng-if="data.weeklyLossLimit"><i class="fa fa-pencil-square-o"></i> {{'UI_NETWORK_ADMIN.LIMITS.MODIFY'|translate}}</span>
+                </a>
+                &nbsp;
+                <a ng-if="data.weeklyLossLimit !== undefined && data.weeklyLossLimit !== null" style="cursor: pointer;" ng-click="removeLimit(4)">
+                    <span><i class="fa fa-trash"></i> {{'GLOBAL.ACTION.DELETE'|translate}}</span>
+                </a>
+            </td>
+        </tr><tr ng-if="data.weeklyLossLimit">
+            <td colspan="3">
+                <uib-progressbar type="info" value="data.weeklyNetLossToHouse > data.weeklyLossLimit ? 100 : data.weeklyNetLossToHouse <= 0 ? 0 : ((data.weeklyNetLossToHouse / data.weeklyLossLimit) * 100)|number:2"><span style="color: #000000;">{{data.weeklyNetLossToHouse > data.weeklyLossLimit ? 100 : data.weeklyNetLossToHouse <= 0 ? 0 : ((data.weeklyNetLossToHouse / data.weeklyLossLimit) * 100)|number:2}}%</span></uib-progressbar>
+                <span ng-if="data.weeklyNetLossToHouse"><br/>{{data.weeklyNetLossToHouse|currency:data.domain.currencySymbol}}</span>
+            </td>
+        </tr><tr>
+            <th>{{'UI_NETWORK_ADMIN.LIMITS.PLAYER.MONTHLYLOSSLIMIT.LABEL'|translate}}</th>
+            <td ng-if="data.monthlyLossLimit">{{data.monthlyLossLimit|number:2}}</td>
+            <td ng-if="!data.monthlyLossLimit">{{'UI_NETWORK_ADMIN.LIMITS.NOTSET'|translate}}</td>
+            <td lit-if-permission="PLAYER_LIMIT_EDIT" lit-permission-domain="{{user.domain.name}}">
+                <a style="cursor: pointer;" ng-click="changeLimits(2)">
+                    <span ng-if="!data.monthlyLossLimit"><i class="fa fa-pencil-square-o"></i> {{'UI_NETWORK_ADMIN.LIMITS.SET'|translate}}</span>
+                    <span ng-if="data.monthlyLossLimit"><i class="fa fa-pencil-square-o"></i> {{'UI_NETWORK_ADMIN.LIMITS.MODIFY'|translate}}</span>
+                </a>
+                &nbsp;
+                <a ng-if="data.monthlyLossLimit !== undefined && data.monthlyLossLimit !== null" style="cursor: pointer;" ng-click="removeLimit(2)">
+                    <span><i class="fa fa-trash"></i> {{'GLOBAL.ACTION.DELETE'|translate}}</span>
+                </a>
+            </td>
+        </tr><tr ng-if="data.monthlyLossLimit">
+            <td colspan="3">
+                <uib-progressbar type="info" value="data.monthlyNetLossToHouse > data.monthlyLossLimit ? 100 : data.monthlyNetLossToHouse <= 0 ? 0 : ((data.monthlyNetLossToHouse / data.monthlyLossLimit) * 100)|number:2"><span style="color: black;">{{data.monthlyNetLossToHouse > data.monthlyLossLimit ? 100 : data.monthlyNetLossToHouse <= 0 ? 0 : ((data.monthlyNetLossToHouse / data.monthlyLossLimit) * 100)|number:2}}%</span></uib-progressbar>
+                <span ng-if="data.monthlyNetLossToHouse"><br/>{{data.monthlyNetLossToHouse|currency:data.domain.currencySymbol}}</span>
+            </td>
+        </tr>
+        </table>
+    </div>
+</div>

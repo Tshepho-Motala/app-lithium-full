@@ -1,0 +1,21 @@
+server.port: 9773
+ribbon:
+  ReadTimeout: 30000
+  ConnectTimeout: 30000
+  
+spring:
+  thymeleaf:
+    cache: false
+
+logging:
+  level:
+    lithium.service.casino: INFO
+lithium:
+  service:
+    casino:
+      mock:
+        connective:
+          merchant-id: b6f97256b677aab0190da6fdb0b391da
+          merchant-key: df5252e368a1eb3380ec2da44d034a340ec2e5da
+          api-key: 76E5945F62E92EFF587B96943E560964
+          endpoint-url: http://macbook-riaan.playsafesa.com:9001/service-casino-provider-connective/service-casino-provider-connective/76E5945F62E92EFF587B96943E560964/default/endpoint

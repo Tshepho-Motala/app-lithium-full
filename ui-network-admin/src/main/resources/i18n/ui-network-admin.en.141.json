@@ -1,0 +1,17 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "USER": {
+      "FIELDS": {
+        "VERIFICATIONSTATUS": {
+          "CODES" : {
+            "UNVERIFIED" : "Unverified",
+            "MANUALLY_VERIFIED" : "Manually verified",
+            "EXTERNALLY_VERIFIED" : "Externally verified",
+            "SOF_VERIFIED" : "Sof verified",
+            "NOT_SETUP" : "Not setup"
+          }
+        }
+      }
+    }
+  }
+}

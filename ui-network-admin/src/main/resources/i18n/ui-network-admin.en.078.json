@@ -1,0 +1,85 @@
+{
+	"GLOBAL": {
+		"BONUS": {
+			"TYPE": {
+				"TRIGGER": {
+					"8": "Leaderboard"
+				}
+			}
+		}
+	},
+	"SERVICE-CASHIER": {
+		"ERROR_PAYMENT_METHOD_UNAVAILABLE": "Payment method not available, please try again later."
+	},
+	"UI_NETWORK_ADMIN": {
+		"LEADERBOARD": {
+			"HISTORY": {
+				"RANK": "Rank",
+				"POINTS": "Points",
+				"SCORE": "Score",
+				"PLAYER": "Player"
+			},
+			"NOTIFICATION": {
+				"TITLE": "Notifications",
+				"RANK": "Rank",
+				"BONUSCODE": "Bonus Code",
+				"NOTIFICATION": "Notification"
+			},
+			"CONVERSION": {
+				"TITLE": "Conversion",
+				"RATE": "Conversion Rate",
+				"RANK": "Rank",
+				"BONUSCODE": "Bonus Code",
+				"NOTIFICATION": "Notification",
+				"EXAMPLE": "Example",
+				"EXPLAIN": "E.g. If 'wagered' is chosen as type, if a bet of $100 is placed, with the current conversion rate chosen ({{conversion}}), {{score}} will be counted towards the score.",
+				"ADD": {
+					"SUCCESS": "Successfully added new conversion.",
+					"ERROR": "Could not add new conversion."
+				}
+			},
+			"FIELDS": {
+				"AMOUNT": {
+					"TITLE": "Top Spots",
+					"PLACE": "E.g. Top 10",
+					"DESC": "The number of places to be displayed for this leaderboard."
+				},
+				"SCORETOPOINTS": {
+					"TITLE": "Points Conversion",
+					"PLACE": "E.g. 500",
+					"DESC": "This is the conversion rate to achieve points on the leaderboard. E.g. If the player has a score of 2550, and the conversion rate above is set to 500, the player will have 5 points, with a left over score of 50."
+				},
+				"NOTIFICATION": {
+					"TITLE": "Notification",
+					"PLACE": "E.g. Leaderboard 1 Notification",
+					"DESC": "This is the notification that will be used when a leaderboard finishes, for everyone that finished on a rank not specified on the 'Leaderboard Notification' list.",
+					"RANK": {
+						"TITLE": "Rank",
+						"PLACE": "E.g. #1",
+						"DESC": "The ranking on the leaderboard that should receive the bonus/notification configured below."
+					},
+					"NOTIFICATION": {
+						"TITLE": "Notification",
+						"PLACE": "E.g. LB1 Notification",
+						"DESC": "The notification that will be sent to the player that finished on this rank."
+					},
+					"BONUSCODE": {
+						"TITLE": "Bonus",
+						"PLACE": "E.g. LEADER1",
+						"DESC": "The bonus that will be allocated to the player that finished on this rank."
+					}
+				},
+				"CONVERSION": {
+					"TITLE": "Conversion",
+					"PLACE": "E.g. 0.75",
+					"DESC": "The type chosen will be multiplied with the conversion rate entered here. This will be counted towards the score for the entry."
+				},
+				"TYPE": {
+					"TITLE": "Type",
+					"PLACE": "E.g. Wagered",
+					"DESC": "The type chosen will be used with the conversion rate entered below. This will be counted towards the score for the entry."
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,917 @@
+= Rewards Framework
+Riaan Schoeman <riaan.schoeman@wonderlabz.com>
+1.0, November 9, 2021: Rewards Framework
+:sectnums:
+:doctype: book
+:toc: left
+:toclevels: 4
+:toc-title: svc-reward
+:icons: font
+:url-quickref: https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/
+
+:reward-sourcedir: ../service-reward/src/main/java
+:client-reward-sourcedir: ../client-service-reward/src/main/java
+:reward-srpcrx-sourcedir: ../service-reward-provider-casino-roxor/src/main/java
+
+//:stylesheet: css/asciidoctor.css
+//:stylesheet: css/material-blue.css
+
+//This is done tto keep formatting aligned with gitlab
+****
+[verse,,]
+____
+xref:../../../readme.adoc[Home] | xref:../../docs/comps-engine/readme.adoc[Comps Engine] | xref:../../service-promo/docs/readme.adoc[Promos] | xref:../../service-leaderboard/docs/readme.adoc[Leaderboards] | xref:../../service-xp/docs/readme.adoc[XP]
+____
+****
+
+This document will describe the bonus framework and how it all fits together and communicates to other services within lithium.
+
+* This document will use the terms *bonus* and *reward* interchangeably, but the correct term is '*reward*.'
+
+WARNING: This link:domain-settings.adoc[page] lists all the known settings.
+
+.link:missing-components.adoc[Missing Requirements]
+IMPORTANT: This link:missing-requirements.adoc[page] lists all the shortcomings that has been identified. (needs to be revisited, these were identified pre-comps-engine anything. Keeping for reference. Work as per rest of page can continue.)
+
+
+== Definitions
+Definitions to describe concepts/keywords used within the bonus framework. (TODO: Needs to be revisited/updated.)
+
+* link:account-types.adoc[Account Types] [Deprecated][Kept here for reference]
+//* link:bonus-structure.adoc[Basic Bonus Structure]
+
+== Basic Information
+* service-reward has been created, and code will be ported from svc-bonus and svc-casino so that svc-reward becomes the main rewards component.
+* svc-reward will be 'dumb', and the reward setup needs simplifying from what it is right now.
+* a reward should not have rules or triggers/restrictions attached to it. These should be determined/controlled from svc-promo. A reward should be a 'dumb' component that gives a reward when asked to do so.
++
+A bonus should only be awardable from:
++
+** LBO
+** service-promo
+** specific externally exposed APIs (e.g. Xtreme-Push)
+* service-reward-provider-casino-roxor has been created as an example implementation of a provider as explained below.
+
+
+[NOTE]
+.Postman Collection (Roxor GamePlay)
+====
+* Please note that there is a link:../../docs/comps-engine/framework-rewards/Roxor-GamePlay-All-Scenarios.postman_collection.json[postman collection] included covering most roxor game play scenarios.
+
+* Different scenarios covered are listed under xref:tran_types[4. Transaction Types]
+====
+
+== Architecture
+****
+[IMPORTANT]
+====
+* Possible things to expand on/think about:
+** [.line-through]#option to choose which reward to take?, currently all configured rewards will be awarded#
+** state management, e.g. bonus with multiple reward components, what happens when one reward component fails?
+====
+****
+
+=== Providers
+* service-reward-provider-casino-roxor has already been created, to demonstrate the basic provider communication flow.
+* Provider concept mentioned above:
+** These providers will communicate to external parties to award rewards (e.g. free-spins) on a specific provider.
+** Basic flow:
++
+[plantuml, format="png", id="rewards1"]
+----
+class b as "svc-reward"
+class prcrx as "svc-reward-pr-casino-roxor"
+class prcif as "svc-reward-pr-casino-iforium"
+class prsbsbt as "svc-reward-pr-sportsbook-sbt"
+
+b <|--|> prcrx
+b <|--|> prcif
+b <|--|> prsbsbt
+----
++
+[plantuml, format="png", id="flows1"]
+----
+class p as "svc-promo"
+class r as "svc-reward"
+class prcrx as "svc-reward-pr-casino-roxor"
+class rgp as "Roxor RGP"
+
+note as N
+  Player has fulfilled the
+  requirements of the promo.
+  e.g. Bet $5 and get 5 free-spins
+end note
+
+p .. N
+p -|> r
+r -|> prcrx
+prcrx -|> rgp
+----
+When svc-promo sends a message to award a certain reward(bonus), that reward would have been set up with specific types of rewards. E.g. if it was to reward a freespin/instant reward on a roxor game (the flow above)
++
+Another example (sportsbook related)
++
+[plantuml, format="png", id="flows1"]
+----
+class p as "svc-promo"
+class r as "svc-reward"
+class prcrx as "svc-reward-pr-sportsbook-sbt"
+class sbt as "SBTech / DK?"
+
+note as N
+  Player has fulfilled the
+  requirements of the promo.
+  e.g. Bet $5 and get 5 free-bets on sports
+end note
+
+p .. N
+p -|> r
+r -|> prcrx
+prcrx -|> sbt
+----
+
+=== Provider Properties
+** Each provider to register its own provider properties. (`ProviderType.REWARD`) (New tab to be implemented in LBO for Reward Provider Setup)
++
+See `lithium.service.access.provider.iovation.ServiceAccessProviderIovationModuleInfo` for an example of registering the properties.
+
+
+=== Reward Types
+* Each provider will register its reward types with svc-reward.
+** svc-reward will have two reward types predefined, namely "Cash" and "Unlock Games".
+** svc-reward-pr-casino-roxor will register "instant rewards" + "instant reward freespins" + "freespins"
+** Another example svc-reward-pr-casino-iforium will register "freespins"
+** Another example svc-reward-pr-sportsbook-sbt will register "freebets"
+*** Given the examples above, the reward setup screen will contain a drop-down to select rewards to add as a prize, and the drop-down will look something like this:
+**** svc-reward - cash (allowing a cash prize to be added)
+**** svc-reward - unlock games
+**** svc-reward-pr-casino-roxor - instant rewards
+**** svc-reward-pr-casino-roxor - instant rewards freespins
+**** svc-reward-pr-casino-roxor - freespins
+**** svc-reward-pr-casino-iforium - freespins
+**** svc-reward-pr-sportsbook-sbt - freebets
+
+** Each provider to register its own "Reward Type"s with `svc-reward`
++
+Registration Object:
++
+[source,java,linenumsscript,indent=0,highlight='']
+----
+include::{client-reward-sourcedir}/lithium/service/reward/client/dto/RewardTypeField.java[lines=20..26]
+----
++
+[source,java,linenumsscript,indent=0,highlight='']
+----
+include::{client-reward-sourcedir}/lithium/service/reward/client/dto/RewardType.java[lines=23..32]
+----
+
+** Example registration of reward types :
++
+[source,java,linenumsscript,indent=0,highlight='']
+----
+include::{reward-sourcedir}/lithium/service/reward/ServiceRewardApplication.java[lines=57..76]
+----
++
+[source,java,linenumsscript,indent=0,highlight='']
+----
+include::{reward-srpcrx-sourcedir}/lithium/service/reward/provider/casino/roxor/ServiceRewardProviderCasinoRoxorApplication.java[lines=372..394]
+----
+
+***** setup fields will be used when ever a reward is configured for a domain, e.g. REWARD1 might give 5 freespins, but REWARD2 gives 10. The setup fields are used to ask the user setting up a reward to fill in the requirements for the specific reward.
++
+setup fields will be linked to a specific reward.
+
+=== Reward Revisions
+* a reward can contain multiple reward types. Each reward type is configurable to be instant or not.
+* When the type is marked as instant, it means that when the reward is awarded to the player, the external provider will be called to give the prize immediately.
++
+If it is marked as false, it will go into a status of : `PENDING_PLAYER_APPROVAL`
+
+** *TODO*: define endpoint to record player uptake of offer.
+
+* See:
+
+[source,java,linenumsscript,indent=0,highlight='19']
+----
+include::{reward-sourcedir}/lithium/service/reward/data/entities/RewardRevisionType.java[lines=32..55]
+----
+
+=== Player History
+
+* PlayerRewardHistory contains a record for each time a reward was given to a player.
+* PlayerRewardTypeHistory contains records for each reward type that was awarded for each record above.
+* e.g. Player was awarded `REWARD1` containing a reward type of `freespins` and `instant rewards` with `freespins` being instant, and `instant rewards` not instant.
+** PlayerRewardHistory will contain one (1) record. Status: `PROCESSING`
+** PlayerRewardTypeHistory will contain two (2) records.
+** One for `freespins`. Status: `PROCESSING`
+** One for `instant rewards`. Status: `PENDING_PLAYER_APPROVAL`
+
+=== Database Layout
+
+include::plantuml/er-diagram.puml[Database Layout]
+
+=== Communications
+* Communications will happen through two main interfaces, first:
+
+==== to svc-reward
+[sidebar]
+This should be the only form of communication between other services and svc-reward
+
+`lithium.service.reward.client.stream.GiveRewardStreamService`
+[source,java,linenumsscript,indent=0,highlight='']
+----
+include::{client-reward-sourcedir}/lithium/service/reward/client/stream/GiveRewardStreamService.java[lines=8..23]
+----
+** GiveRewardStreamService for communicating *to* svc-reward.
+*** Services to add `@EnableGiveRewardStream` to be able to autowire the above service.
+
+==== to providers
+[sidebar]
+This should be the only form of communication between svc-reward and it's providers.
+
+** RewardProviderClient for communicating between svc-reward to its providers:
++
+[source,java,linenumsscript,indent=0,highlight='']
+----
+include::{client-reward-sourcedir}/lithium/service/reward/client/RewardProviderClient.java[lines=11..24]
+----
+*** Cancel endpoint not implemented, needs to be catered for.
+*** Example of svc-reward using this to communicate to rx provider:
++
+`lithium.service.reward.service.GiveRewardService.giveReward`
+//+
+//[source,java,linenumsscript,indent=0,highlight='']
+//----
+//include::{reward-sourcedir}/lithium/service/reward/service/GiveRewardService.java[lines=19..]
+//----
+*** Example of an implementation inside rx provider :
+`lithium.service.reward.provider.casino.roxor.controller.system.ProcessRewardController`
++
+[source,java,linenumsscript,indent=0,highlight='']
+----
+include::{reward-srpcrx-sourcedir}/lithium/service/reward/provider/casino/roxor/controller/system/ProcessRewardController.java[lines=18..31]
+----
+
+==== Flow Diagrams
+[plantuml, format="png", id="flows1"]
+----
+
+!define p(name,alias) participant "name" as alias
+!define q(name,alias) queue "name" as alias
+
+p("any service", "any")
+p("svc-reward", "r")
+p("svc-reward-pr-roxor", "srprx")
+q("rabbit", "rabbit")
+
+== to svc-reward ==
+
+any --> rabbit: giveRewardStreamService.giveReward(GiveRewardRequest) - (queue:giverewardoutputv1)
+rabbit --> r++: StreamListener.handleGiveRewardV1(GiveRewardRequest)
+r -> r++ #FFBBBB: GiveRewardService.giveReward - loop through rewardTypes defined in Reward
+
+== to providers ==
+
+r -> srprx++ #DarkSalmon: lithium.service.reward.service.GiveRewardService.processRewardType - RewardProviderClient
+r <- srprx--: ProcessRewardResponse : rewardProviderClient.processReward(providerRequest)
+deactivate r
+'deactivate r
+
+r <-- r--: savePlayerRewardHistory
+
+----
+
+=== Reward Tracking
+* This something that will be identified in the casino content providers. e.g. service-casino-provider-roxor, will produce a transaction with type : CASINO_WIN_INSTANTREWARD, which should be captured in the service-reward-provider-casino-roxor, and sent to service-reward for tracking against the reward that was issued.
++
+[plantuml, format="png", id="flows1"]
+----
+hide circle
+hide methods
+hide fields
+skinparam linetype ortho
+skinparam class {
+    BackgroundColor PaleGreen
+    ArrowColor SeaGreen
+    BorderColor PaleGreen
+    BackgroundColor<<Rabbit>> Wheat
+    BorderColor<<Rabbit>> Wheat
+    BackgroundColor<<rgp>> Pink
+    BorderColor<<rgp>> Pink
+}
+
+skinparam stereotypeCBackgroundColor YellowGreen
+skinparam stereotypeCBackgroundColor<< Foo >> DimGray
+
+entity rgp as "Roxor" <<RGP>>
+class crx as "svc-casino-provider-roxor"
+class c as "svc-casino"
+annotation rmq as " " <<Rabbit>>
+class a as "svc-accounting"
+class rrx as "svc-reward-provider-casino-roxor"
+class r as "svc-reward"
+
+rgp -> crx
+crx -> c
+c -> a
+a --> rmq
+rmq -left-> rrx
+rrx -left-> r
+----
+
+//== Activate Bonus (Manual)
+//
+//link:activation-examples-roxor.adoc[Activation Examples (Roxor)]
+//
+// include::plantuml/activate-bonus-flow-current.puml[Current Implementation]
+//
+//include::plantuml/activate-bonus-flow-proposed.puml[Proposed Implementation]
+
+//== Redemption Flow
+//
+//link:redemption-flow-examples-roxor.adoc[Redemption Flow Examples (Roxor)]
+//
+//include::plantuml/redemption-bonus-flow-current.puml[]
+//
+//== Bonus History View Flow (link:bonus-history-view-flow-current.adoc[explanation here])
+//
+//include::plantuml/bonus-history-view-flow-current.puml[]
+
+
+== [[tran_types]]Transaction Types
+=== Activation
+
+[cols="1,1,2,2,1",stripes=even]
+|===
+5+^.>h| Reward Activation
+
+^.>s| Tran Type ^.>s| Provider Tran Id ^.>s| Account Code - Amount ^.>s| Contra Account - Amount ^.>s| Reward
+5+^.>s| ```Comps Branch: ```
+
+| REWARD_ACTIVATE
+|
+| PLAYER_BALANCE_REWARD_RX_FREESPIN (€10.00)
+| REWARD_BALANCE_RX_FREESPIN (-€10.00)
+| REWARD1
+
+5+|
+
+| REWARD_ACTIVATE
+|
+| PLAYER_BALANCE_REWARD_RX_INSTANT_REWARD (€10.00)
+| REWARD_BALANCE_RX_INSTANT_REWARD (-€10.00)
+| REWARD1
+
+|===
+
+=== Normal Betting
+
+===== xref:a1[Bet + Win (Normal Game)]
+===== xref:a2[Bet + Loss (Normal Game)]
+===== xref:a3[Bet + Win (FREE Game)]
+===== xref:a4[Bet + Loss (FREE Game)]
+===== xref:a5[Bet + Win + Jackpot Credit (Normal Game)]
+
+[cols="1,1,2,2",stripes=even]
+|===
+4+^.>h| [[a1]]Normal Bet + Win
+
+^.>s| Tran Type ^.>s| Provider Tran Id ^.>s| Account Code - Amount ^.>s| Contra Account - Amount
+
+4+^.>s| ```Comps Branch: ```
+
+| CASINO_BET
+| 2578_DEBIT
+| PLAYER_BALANCE (-€57.57)
+| CASINO_BET_ROXOR (€57.57)
+
+| CASINO_WIN
+| 2579_CREDIT
+| PLAYER_BALANCE (€65.17)
+| CASINO_WIN_ROXOR (-€65.17)
+
+4+^.>s| ```Proposed: ```
+
+| CASINO_BET
+| 2578_DEBIT
+| PLAYER_BALANCE (-€57.57)
+h| CASINO_BET_RX (€57.57)
+
+| CASINO_WIN
+| 2579_CREDIT
+| PLAYER_BALANCE (€65.17)
+h| CASINO_WIN_RX (-€65.17)
+
+4+^.>s| ```Production: ```
+
+| CASINO_BET
+| 2578_DEBIT
+| PLAYER_BALANCE (-€57.57)
+| CASINO_BET_ROXOR (€57.57)
+
+| CASINO_WIN
+| 2579_CREDIT
+| PLAYER_BALANCE (€65.17)
+| CASINO_WIN_ROXOR (-€65.17)
+
+4+^.>h| [[a2]]Normal Bet + Loss
+
+^.>s| Tran Type ^.>s| Provider Tran Id ^.>s| Account Code - Amount ^.>s| Contra Account - Amount
+4+^.>s| ```Comps Branch: ```
+
+| CASINO_BET
+| 2578_DEBIT
+| PLAYER_BALANCE (-€57.57)
+| CASINO_BET_ROXOR (57.57)
+
+| CASINO_LOSS
+| 2583_LOSS
+| PLAYER_BALANCE (0.00)
+| CASINO_LOSS_ROXOR (0.00)
+
+4+^.>s| ```Proposed: ```
+
+| CASINO_BET
+| 2578_DEBIT
+| PLAYER_BALANCE (-€57.57)
+h| CASINO_BET_RX (57.57)
+
+| CASINO_LOSS
+| 2583_LOSS
+| PLAYER_BALANCE (0.00)
+h| CASINO_LOSS_RX (0.00)
+
+4+^.>s| ```Production: ``
+
+| CASINO_BET
+| 2644_DEBIT
+| PLAYER_BALANCE (-71.77)
+| CASINO_BET_ROXOR (71.77)
+
+| CASINO_LOSS
+| 2649_LOSS
+| PLAYER_BALANCE (0.00)
+| CASINO_LOSS_ROXOR (0.00)
+
+4+^.>h| [[a3]]Free Game Bet + Win
+
+^.>s| Tran Type ^.>s| Provider Tran Id ^.>s| Account Code - Amount ^.>s| Contra Account - Amount
+4+^.>s| ```Comps Branch: ```
+
+| CASINO_BET
+| 2585_FREEGAME_DEBIT
+| PLAYER_BALANCE_FREEGAME (-€57.57)
+| CASINO_BET_FREEGAME_ROXOR (€57.57)
+
+| CASINO_WIN
+| 2586_FREEGAME_CREDIT
+| PLAYER_BALANCE (€41.64)
+| CASINO_WIN_FREEGAME_ROXOR (€-41.64)
+
+4+^.>s| ```Proposed: ```
+
+| CASINO_BET
+| 2585_FREEGAME_DEBIT
+| PLAYER_BALANCE_FREEGAME (-€57.57)
+h| CASINO_BET_RX_FREEGAME (€57.57)
+
+| CASINO_WIN
+| 2586_FREEGAME_CREDIT
+| PLAYER_BALANCE (€41.64)
+h| CASINO_WIN_RX_FREEGAME (€-41.64)
+
+4+^.>s| ```Production: ``` (TBC)
+
+| CASINO_BET
+| 2644_DEBIT
+| PLAYER_BALANCE (0.00)
+| CASINO_BET_ROXOR (0.00)
+
+| CASINO_WIN
+| 2645_CREDIT
+| PLAYER_BALANCE (21.77)
+| CASINO_WIN_ROXOR (-21.77)
+
+4+^.>h| [[a4]]Free Game Bet + Loss
+
+^.>s| Tran Type ^.>s| Provider Tran Id ^.>s| Account Code - Amount ^.>s| Contra Account - Amount
+4+^.>s| ```Comps Branch: ```
+
+| CASINO_BET
+| 2589_FREEGAME_DEBIT
+| PLAYER_BALANCE_FREEGAME (-€57.57)
+| CASINO_BET_FREEGAME_ROXOR (€57.57)
+
+| CASINO_LOSS
+| 2590_FREEGAME_LOSS
+| PLAYER_BALANCE (€0.00)
+| CASINO_LOSS_FREEGAME_ROXOR (€0.00)
+
+4+^.>s| ```Proposed: ```
+
+| CASINO_BET
+| 2589_FREEGAME_DEBIT
+| PLAYER_BALANCE_FREEGAME (-€57.57)
+h| CASINO_BET_RX_FREEGAME (€57.57)
+
+| CASINO_LOSS
+| 2590_FREEGAME_LOSS
+| PLAYER_BALANCE (€0.00)
+h| CASINO_LOSS_RX_FREEGAME (€0.00)
+
+4+^.>s| ```Production: ``` (TBC)
+
+| CASINO_BET
+| 2644_DEBIT
+| PLAYER_BALANCE (0.00)
+| CASINO_BET_ROXOR (0.00)
+
+| CASINO_LOSS
+| 2649_LOSS
+| PLAYER_BALANCE (0.00)
+| CASINO_LOSS_ROXOR (0.00)
+
+
+4+^.>h| [[a5]]Bet + Win + Jackpot Credit
+
+^.>s| Tran Type ^.>s| Provider Tran Id ^.>s| Account Code - Amount ^.>s| Contra Account - Amount
+4+^.>s| ```Comps Branch: ```
+
+| CASINO_BET
+| 2578_DEBIT
+| PLAYER_BALANCE (-€57.57)
+| CASINO_BET_ROXOR (€57.57)
+
+| CASINO_WIN
+| 2579_CREDIT
+| PLAYER_BALANCE (€65.17)
+| CASINO_WIN_ROXOR (-€65.17)
+
+| CASINO_WIN_JACKPOT
+| 2594_JACKPOT_CREDIT
+| PLAYER_BALANCE (€66.45)
+| CASINO_WIN_ROXOR (-€66.45)
+
+4+^.>s| ```Proposed: ```
+
+| CASINO_BET
+| 2578_DEBIT
+| PLAYER_BALANCE (-€57.57)
+h| CASINO_BET_RX (€57.57)
+
+| CASINO_WIN
+| 2579_CREDIT
+| PLAYER_BALANCE (€65.17)
+h| CASINO_WIN_RX (-€65.17)
+
+h| CASINO_WIN
+| 2594_JACKPOT_CREDIT
+| PLAYER_BALANCE (€66.45)
+h| CASINO_WIN_RX_JACKPOT (-€66.45)
+
+4+^.>s| ```Production: ``` (TBC)
+
+| CASINO_BET
+| 2644_DEBIT
+| PLAYER_BALANCE (-71.77)
+| CASINO_BET_ROXOR (71.77)
+
+| CASINO_WIN
+| 2645_CREDIT
+| PLAYER_BALANCE (21.77)
+| CASINO_WIN_ROXOR (-21.77)
+
+| CASINO_WIN_JACKPOT
+| 2660_JACKPOT_CREDIT
+| PLAYER_BALANCE (31.77)
+| CASINO_WIN_ROXOR (-31.77)
+
+|===
+
+=== Freespins
+
+===== xref:a6_1[Freespin (Normal Game) BET + Win]
+===== xref:a6_2[Freespin (FREE Game) BET + Win]
+===== xref:a7_1[Freespin (Normal Game) BET + Loss]
+===== xref:a7_2[Freespin (FREE Game) BET + Loss]
+
+[cols="1,1,2,2,1",stripes=even]
+|===
+
+5+^.>h| [[a6_1]]Freespin (Normal Game) BET + Win
+
+^.>s| Tran Type ^.>s| Provider Tran Id ^.>s| Account Code - Amount ^.>s| Contra Account - Amount ^.>s| Reward
+5+^.>s| ```Comps Branch: ```
+
+| CASINO_BET_FREESPIN
+| 2597_FREE_PLAY
+| PLAYER_BALANCE_CASINO_BONUS (€0.00)
+| CASINO_BET_ROXOR (€0.00)
+|
+
+| CASINO_WIN_FREESPIN
+| 2598_CREDIT
+| PLAYER_BALANCE (€41.64)
+| CASINO_WIN_ROXOR (€-41.64)
+|
+
+5+^.>s| ```Proposed: ```
+
+h| REWARD_BET
+| 2891_FREESPIN_DEBIT
+| PLAYER_BALANCE_REWARD_RX_FREESPIN (-€0.00)
+| REWARD_BET_RX_FREESPIN (€0.00)
+|
+
+h| REWARD_WIN
+| 2598_FREESPIN_CREDIT
+| PLAYER_BALANCE (€41.64)
+| REWARD_WIN_RX_FREESPIN (€-41.64)
+|
+
+5+^.>s| ```Production: ``` (TBC)
+
+| CASINO_BET_FREESPIN
+| 2663_FREE_PLAY
+| PLAYER_BALANCE_CASINO_BONUS (0.00)
+| CASINO_BET_ROXOR (0.00)
+|
+
+| CASINO_WIN_FREESPIN
+| 2645_CREDIT
+| PLAYER_BALANCE (21.77)
+| CASINO_WIN_ROXOR (-21.77)
+|
+
+5+^.>h| [[a6_2]]Freespin (FREE Game) BET + Win
+
+^.>s| Tran Type ^.>s| Provider Tran Id ^.>s| Account Code - Amount ^.>s| Contra Account - Amount ^.>s| Reward
+5+^.>s| ```Comps Branch + Proposed: ```
+
+| REWARD_BET
+| 2887_FREESPIN_FREEGAME_DEBIT
+| PLAYER_BALANCE_REWARD_RX_FREESPIN_FREEGAME (-€57.57)
+| REWARD_BET_RX_FREESPIN_FREEGAME (€57.57)
+|
+
+| REWARD_WIN
+| 2892_FREESPIN_FREEGAME_CREDIT
+| PLAYER_BALANCE (€41.64)
+| REWARD_WIN_RX_FREESPIN_FREEGAME (-€41.64)
+|
+
+5+^.>s| ```Production: ``` (TBC)
+
+| CASINO_BET_FREESPIN
+| 2663_FREE_PLAY
+| PLAYER_BALANCE_CASINO_BONUS (0.00)
+| CASINO_BET_ROXOR (0.00)
+|
+
+| CASINO_WIN_FREESPIN
+| 2645_CREDIT
+| PLAYER_BALANCE (21.77)
+| CASINO_WIN_ROXOR (-21.77)
+|
+
+5+^.>h| [[a7_1]]Freespin (Normal Game) BET + Loss
+
+^.>s| Tran Type ^.>s| Provider Tran Id ^.>s| Account Code - Amount ^.>s| Contra Account - Amount ^.>s| Reward
+5+^.>s| ```Comps Branch: ```
+
+| CASINO_BET_FREESPIN
+| 2597_FREE_PLAY
+| PLAYER_BALANCE_CASINO_BONUS (€0.00)
+| CASINO_BET_ROXOR (€0.00)
+|
+
+| CASINO_LOSS_FREESPIN
+| 2899_FREEROUND_LOSS
+| PLAYER_BALANCE (€0.00)
+| CASINO_LOSS_FREESPIN_ROXOR (€0.00)
+|
+
+5+^.>s| ```Proposed: ```
+
+| REWARD_BET
+| 2891_FREESPIN_DEBIT
+| PLAYER_BALANCE_REWARD_RX_FREESPIN (-€0.00)
+| REWARD_BET_RX_FREESPIN (€0.00)
+|
+
+| REWARD_LOSS
+| 2892_FREESPIN_CREDIT
+| PLAYER_BALANCE (€0.00)
+| REWARD_LOSS_RX_FREESPIN (-€0.00)
+|
+
+5+^.>s| ```Production: ``` (TBC)
+
+| CASINO_BET_FREESPIN
+| 2663_FREE_PLAY
+| PLAYER_BALANCE_CASINO_BONUS (0.00)
+| CASINO_BET_ROXOR (0.00)
+|
+
+| CASINO_LOSS_FREESPIN
+| 2672_FREEROUND_LOSS
+| PLAYER_BALANCE (0.00)
+| CASINO_LOSS_FREESPIN_ROXOR (0.00)
+|
+
+5+^.>h| [[a7_2]]Freespin (FREE Game) BET + Loss
+
+^.>s| Tran Type ^.>s| Provider Tran Id ^.>s| Account Code - Amount ^.>s| Contra Account - Amount ^.>s| Reward
+5+^.>s| ```Comps Branch + Proposed: ```
+
+| REWARD_BET
+| 2907_FREESPIN_FREEGAME_DEBIT
+| PLAYER_BALANCE_REWARD_RX_FREESPIN_FREEGAME (€-57.33)
+| REWARD_BET_RX_FREESPIN_FREEGAME (€57.33)
+|
+
+| REWARD_LOSS
+| 2908_FREESPIN_FREEGAME_LOSS
+| PLAYER_BALANCE (€0.00)
+| REWARD_LOSS_RX_FREESPIN_FREEGAME (€0.00)
+|
+
+5+^.>s| ```Production: ``` (TBC)
+
+| CASINO_BET_FREESPIN
+| 2663_FREE_PLAY
+| PLAYER_BALANCE_CASINO_BONUS (0.00)
+| CASINO_BET_ROXOR (0.00)
+|
+
+| CASINO_LOSS_FREESPIN
+| 2672_FREEROUND_LOSS
+| PLAYER_BALANCE (0.00)
+| CASINO_LOSS_FREESPIN_ROXOR (0.00)
+|
+
+|===
+
+=== Rewards Framework
+
+===== xref:a8_1[Reward (Normal Game) Bet + Win (svc-rewards) (freespin)]
+===== xref:a8_2[Reward (Normal Game) Bet + Win (svc-rewards) (instant reward)]
+===== xref:a9_1[Reward (Normal Game) Bet + Loss (svc-rewards) (freespin)]
+===== xref:a9_2[Reward (Normal Game) Bet + Loss (svc-rewards) (instant reward)]
+
+[cols="1,1,2,2,1",stripes=even]
+|===
+
+5+^.>h| [[a8_1]]Reward (Normal Game) Bet + Win (svc-rewards) (freespin)
+
+^.>s| Tran Type ^.>s| Provider Tran Id ^.>s| Account Code - Amount ^.>s| Contra Account - Amount ^.>s| Reward
+5+^.>s| ```Comps Branch + Proposed: ```
+
+| REWARD_BET
+| 2611_FREESPIN_DEBIT
+| PLAYER_BALANCE_REWARD_RX_FREESPIN (€-57.33)
+| REWARD_BET_RX_FREESPIN (€57.33)
+| REWARD1
+
+| REWARD_WIN
+| 2612_FREESPIN_CREDIT
+| PLAYER_BALANCE (€10.42)
+| REWARD_WIN_RX_FREESPIN (-€10.42)
+| REWARD1
+
+5+^.>s| ```Production: ``` (TBC)
+5+^.>s| n/a
+
+5+^.>h| [[a8_2]]Reward (Normal Game) Bet + Win (svc-rewards) (instant reward)
+
+^.>s| Tran Type ^.>s| Provider Tran Id ^.>s| Account Code - Amount ^.>s| Contra Account - Amount ^.>s| Reward
+5+^.>s| ```Comps Branch + Proposed: ```
+
+| REWARD_BET
+| 2615_INSTANT_REWARD_DEBIT
+| PLAYER_BALANCE_REWARD_RX_INSTANT_REWARD (€-57.33)
+| REWARD_BET_RX_INSTANT_REWARD (€57.33)
+| REWARD1
+
+| REWARD_WIN
+| 2612_INSTANT_REWARD_CREDIT
+| PLAYER_BALANCE (€10.42)
+| REWARD_WIN_RX_INSTANT_REWARD (-€10.42)
+| REWARD1
+
+5+^.>s| ```Production: ``` (TBC)
+5+^.>s| n/a
+
+5+^.>h| [[a9_1]]Reward (Normal Game) Bet + Loss (svc-rewards) (freespin)
+
+^.>s| Tran Type ^.>s| Provider Tran Id ^.>s| Account Code - Amount ^.>s| Contra Account - Amount ^.>s| Reward
+5+^.>s| ```Comps Branch + Proposed: ```
+
+| REWARD_BET
+| 2619_FREESPIN_DEBIT
+| PLAYER_BALANCE_REWARD_RX_FREESPIN (€-57.33)
+| REWARD_BET_RX_FREESPIN (€57.33)
+| REWARD1
+
+| REWARD_LOSS
+| 2620_FREESPIN_LOSS
+| PLAYER_BALANCE (€0.00)
+| REWARD_LOSS_RX_FREESPIN (€0.00)
+| REWARD1
+
+5+^.>s| ```Production: ``` (TBC)
+5+^.>s| n/a
+
+5+^.>h| [[a9_2]]Reward (Normal Game) Bet + Loss (svc-rewards) (instant reward)
+
+^.>s| Tran Type ^.>s| Provider Tran Id ^.>s| Account Code - Amount ^.>s| Contra Account - Amount ^.>s| Reward
+5+^.>s| ```Comps Branch + Proposed: ```
+
+| REWARD_BET
+| 2622_INSTANT_REWARD_DEBIT
+| PLAYER_BALANCE_REWARD_RX_INSTANT_REWARD (€-57.33)
+| REWARD_BET_RX_INSTANT_REWARD (€57.33)
+| REWARD1
+
+| REWARD_LOSS
+| 2623_INSTANT_REWARD_LOSS
+| PLAYER_BALANCE (€0.00)
+| REWARD_LOSS_RX_INSTANT_REWARD (€0.00)
+| REWARD1
+
+5+^.>s| ```Production: ``` (TBC)
+5+^.>s| n/a
+
+|===
+
+=== Old Bonus Framework
+
+===== xref:a10[Bonus (Normal Game) Bet + Win (svc-casino - old bonus)]
+===== xref:a11[Bonus (Normal Game) Bet + Loss (svc-casino - old bonus)]
+
+[cols="1,1,2,2,1",stripes=even]
+|===
+
+5+^.>h| [[a10]]Bonus (Normal Game) Bet + Win (svc-casino - old bonus)
+
+^.>s| Tran Type ^.>s| Provider Tran Id ^.>s| Account Code - Amount ^.>s| Contra Account - Amount ^.>s| Reward
+5+^.>s| ```Comps Branch + Proposed: ```
+
+| CASINO_BET_FREESPIN
+| 2625_FREE_PLAY
+| PLAYER_BALANCE_CASINO_BONUS (€0.00)
+| CASINO_BET_ROXOR (€0.00)
+| OLDBONUS1
+
+| CASINO_WIN_FREESPIN
+| 2626_CREDIT
+| PLAYER_BALANCE (€39.76)
+| CASINO_WIN_ROXOR (-€39.76)
+| OLDBONUS1
+
+5+^.>s| ```Production: ``` (TBC)
+
+| CASINO_BET_FREESPIN
+| 2663_FREE_PLAY
+| PLAYER_BALANCE_CASINO_BONUS (0.00)
+| CASINO_BET_ROXOR (0.00)
+|
+
+| CASINO_WIN_FREESPIN
+| 2686_CREDIT
+| PLAYER_BALANCE (26.66)
+| CASINO_WIN_ROXOR (-26.66)
+|
+
+5+^.>h| [[a11]]Bonus (Normal Game) Bet + Loss (svc-casino - old bonus)
+
+^.>s| Tran Type ^.>s| Provider Tran Id ^.>s| Account Code - Amount ^.>s| Contra Account - Amount ^.>s| Reward
+5+^.>s| ```Comps Branch + Proposed: ```
+
+| CASINO_BET_FREESPIN
+| 2625_FREE_PLAY
+| PLAYER_BALANCE_CASINO_BONUS (€0.00)
+| CASINO_BET_ROXOR (€0.00)
+| OLDBONUS1
+
+| CASINO_LOSS_FREESPIN
+| 2690_FREEROUND_LOSS
+| PLAYER_BALANCE (€0.00)
+| CASINO_LOSS_FREESPIN_ROXOR (€0.00)
+| OLDBONUS1
+
+5+^.>s| ```Production: ``` (TBC)
+
+| CASINO_BET_FREESPIN
+| 2663_FREE_PLAY
+| PLAYER_BALANCE_CASINO_BONUS (0.00)
+| CASINO_BET_ROXOR (0.00)
+|
+
+| CASINO_LOSS_FREESPIN
+| 2690_FREEROUND_LOSS
+| PLAYER_BALANCE (0.00)
+| CASINO_LOSS_FREESPIN_ROXOR (0.00)
+|
+
+|===

@@ -1,0 +1,8 @@
+{
+  "name": "Interswitch Quickteller",
+  "code": "quickteller",
+  "image": {
+    "filename": "/methods/interswitch.png",
+    "filetype": "image/png"
+  }
+}

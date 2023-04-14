@@ -1,0 +1,21 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "CASHIER": {
+      "AUTOWITHDRAWALS": {
+        "RULESETS": {
+          "FIELDS": {
+            "DELAY": {
+              "NAME": "Delay",
+              "DESCRIPTION": "The withdraw processing delay in ms after approve."
+            }
+          },
+          "CHANGEDELAY": {
+            "TITLE": "Auto Restriction Rulesets Change Delay",
+            "SUCCESS": "Successfully changed the auto-restriction ruleset delay",
+            "ERROR": "Failed to change the auto-restriction ruleset delay"
+          }
+        }
+      }
+    }
+  }
+}

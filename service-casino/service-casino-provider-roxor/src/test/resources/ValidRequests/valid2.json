@@ -1,0 +1,39 @@
+{
+  "playerId" : "livescore_nigeria/708",
+  "website" : "livescorebet",
+  "platform" : "desktop",
+  "gameKey" : "play-banghai",
+  "gamePlayId" : "game-play-01",
+  "operations" : [{
+    "operationType" : "START_GAME_PLAY"
+  },
+    {
+      "operationType" : "TRANSFER",
+      "amount" : {
+        "currency" : "GBP",
+        "amount" : 100
+      },
+      "transferId" : "transfer-02-credit",
+      "type" : "CREDIT"
+    },{
+    "operationType" : "TRANSFER",
+    "amount" : {
+      "currency" : "GBP",
+      "amount" : 10
+    },
+    "transferId" : "transfer-01-debit",
+    "type" : "DEBIT"
+  },
+    {
+      "operationType" : "CANCEL_TRANSFER",
+      "amount" : {
+        "currency" : "GBP",
+        "amount" : 10
+      },
+      "transferId" : "transfer-01-debit",
+      "type" : "DEBIT"
+    }
+  ,{
+    "operationType" : "FINISH_GAME_PLAY"
+  }]
+}

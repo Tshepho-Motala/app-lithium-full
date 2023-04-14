@@ -1,0 +1,46 @@
+server:
+  port: 9300
+spring:
+  datasource:
+    url: jdbc:mysql://localhost/lithium_domain
+    username: root
+    password: mysql
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: validate
+  servlet:
+    multipart:
+      maxFileSize: 20MB
+      maxRequestSize: 20MB
+      file-size-threshold: 1MB
+  cloud:
+    stream:
+      bindings:
+        providersregisterinput:
+          group: providersregistergroup
+          binder: rabbit
+          destination: providersregisterqueue
+        templateinput:
+          group: templategroup
+          binder: rabbit
+          destination: templateoutput
+        userattributestriggerinput :
+          group: user-attributes-trigger-group-domain
+          binder : rabbit
+          destination : userattributestriggerqueue
+        domain-attributes-output:
+          binder: rabbit
+          destination: domain-attributes-queue
+          producer:
+            required-groups:
+              - domain-attributes-group
+
+lithium:
+  services:
+    db:
+      load-test-data: false
+
+logging:
+  level:
+    lithium.service.domain: INFO

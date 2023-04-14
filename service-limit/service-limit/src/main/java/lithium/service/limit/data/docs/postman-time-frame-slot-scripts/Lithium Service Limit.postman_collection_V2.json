@@ -1,0 +1,475 @@
+{
+	"info": {
+		"_postman_id": "a7ab27aa-41d4-4df4-9df4-ce99333abe54",
+		"name": "Lithium Service Limit",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Deposit Limits",
+			"item": [
+				{
+					"name": "Deposit Limits",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "TimeSlotLimit - BE",
+			"item": [
+				{
+					"name": "Set Time Slot Limits",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJsYXN0TmFtZSI6IkFkbWluaXN0cmF0b3IiLCJsYXN0TG9naW4iOjE2MjAwNDE3NTUwMjAsImp3dFVzZXIiOiJINHNJQUFBQUFBQUFBSldTelc2RE1CQ0VYOFh5R1ZxUnRBUTRGWWtlcWpaUmxEU25LcXBNdkNDcmdKRU5TRlhFdTNkZENBa2xoK2EyTzJOL08vNDVVa0VEeDZJMURTamp1U2lvUlJPc3QzVUpDdXNNNjlEb1FsZUtWZEpvZ0pvMi9oT0hoTlZaZFhlUU9lcThRL0VDL2Q0eHFxYkJ4NUgrRVUyN2tiSWlrY3paNzlTUzB5QmhtUWFMcW1GSEdDMWZWbWdpbzFJMVdyd3IybjFyZFNzeTBZQStTQVVuNnR0SklCRTBrTW1TaFAyNUxpYVVGMmttSkE3TkZMYk8yRGVvY2R3dVVqbEtNYUY5RmlJRkpkZ1VTVmFEODM5YS9UVUY3VjV2UWVnclViWWhlUWRkRWVlbUxEbndhK2RhOXZJWU5GejMzcUlNZTNmbXp1S0Z6Mnh2N25QN0laNXoyNGZFdFQyUEFZOFhNWnF4ZWZuVS9NYmQrbm1EVFhybTNKOStxeFk0eHZFZjJ4L0RmR3U0eXdJQUFBPT0iLCJzZXNzaW9uS2V5IjoiMjdmMDQ3NmEtNmE1Yi00YWMwLTgxZWItY2U4ZDc0NDY1Y2MxIiwibGFzdElQIjoiMTI3LjAuMC4xIiwidXNlcl9uYW1lIjoiYWRtaW4iLCJzZXNzaW9uSWQiOjE5NSwidXNlckd1aWQiOiJkZWZhdWx0L2FkbWluIiwidXNlcklkIjoxLCJhdXRob3JpdGllcyI6WyJST0xFX1VTRVIiXSwiY2xpZW50X2lkIjoiYWNtZSIsImZpcnN0TmFtZSI6IlN1cGVyIiwiYXVkIjpbIm9hdXRoMi1yZXNvdXJjZSJdLCJzY29wZSI6WyJvcGVuaWQiXSwiZG9tYWluTmFtZSI6ImRlZmF1bHQiLCJyZWdpc3RyYXRpb25EYXRlIjoxNjE4NDczNDczMDAwLCJleHAiOjE2MjI3ODkxMjksInNob3J0R3VpZCI6IlNVUEVSIiwianRpIjoiMGMxM2UxYmMtYmM3NC00NjcyLThmYzUtMjIyNzA5NzQxNDc4IiwiZW1haWwiOiJzdXBlckBkZWZhdWx0LmNvbSIsInVzZXJuYW1lIjoiYWRtaW4ifQ.F0bK9ZhAt7TbuR33z5NCWMywXA1jstysw3TbrvdLhQeGnrMYTtb-JO4BrrK74qODzwa5KKUFRZEcvJH6GMfDapttDcvuWzAH1781rgICTyQN9eu0P2WtzmdDbXlJk4hm10KxE8_VreN3mreVONwxjP0lWXCgq3huaC5fezZeJkQC_9w2ZUZlLa9BUbK-RdeMZLD2DhFRV8E5cqP9knN_BmqQB9WxMvJzfn6u0QA1Qmw68xvV-DoGRkCH0tgrnkB3e74VMo2asxnEvOcIB9YjnsEptDEVMtHTNHlskhaN844NQHK33-kDPb0WaJ6A9hDXOAbXGO3Pf2sJedntU5VVSlYt7PjMB8VDlXlIk7lnidvIjVCF5DViSQKKCvY79DZjsRX6BxOIfXzMzJ66fuSgS98XF7kDXGjQ67HWiymFzdngJd4Nqj1xYREbuSfKp83WhCXavyR5ffkCts39hz8Gtxp08jnvhVPVtkTxhQBOzW9Aj2D2wYKHwjIx6eahrUaViJSTBFMiOMKvGM7AyjnuNLDypDK17UQjQTsX5dwfIU-7x95TQ--6l1R9zB7pmYc2TP6tZz14CTcsAWBoHsNvHH83zx9jvFMrYsFC4PvJFHYl1RnNFMQPtzE0AfponCoIDEyJJWADKkboloElhBoEvUtj5cluNmQWYqSZoBUSmn0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{gateway}}/service-limit/backoffice/player-limit/v1/livescore_uk/set-player-time-slot-limit?playerGuid=livescore_uk/test24&timeFromUtc=1620702831568&timeToUtc=1620756831568&playerId=37",
+							"host": [
+								"{{gateway}}"
+							],
+							"path": [
+								"service-limit",
+								"backoffice",
+								"player-limit",
+								"v1",
+								"livescore_uk",
+								"set-player-time-slot-limit"
+							],
+							"query": [
+								{
+									"key": "playerGuid",
+									"value": "livescore_uk/test24"
+								},
+								{
+									"key": "timeFromUtc",
+									"value": "1620702831568",
+									"description": "±5am - 1620702831568"
+								},
+								{
+									"key": "timeToUtc",
+									"value": "1620756831568",
+									"description": "±8pm - 1620756831568"
+								},
+								{
+									"key": "playerId",
+									"value": "37"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find Time Slot Limits",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJsYXN0TmFtZSI6IkFkbWluaXN0cmF0b3IiLCJsYXN0TG9naW4iOjE2MjAwNDE3NTUwMjAsImp3dFVzZXIiOiJINHNJQUFBQUFBQUFBSldTelc2RE1CQ0VYOFh5R1ZxUnRBUTRGWWtlcWpaUmxEU25LcXBNdkNDcmdKRU5TRlhFdTNkZENBa2xoK2EyTzJOL08vNDVVa0VEeDZJMURTamp1U2lvUlJPc3QzVUpDdXNNNjlEb1FsZUtWZEpvZ0pvMi9oT0hoTlZaZFhlUU9lcThRL0VDL2Q0eHFxYkJ4NUgrRVUyN2tiSWlrY3paNzlTUzB5QmhtUWFMcW1GSEdDMWZWbWdpbzFJMVdyd3IybjFyZFNzeTBZQStTQVVuNnR0SklCRTBrTW1TaFAyNUxpYVVGMmttSkE3TkZMYk8yRGVvY2R3dVVqbEtNYUY5RmlJRkpkZ1VTVmFEODM5YS9UVUY3VjV2UWVnclViWWhlUWRkRWVlbUxEbndhK2RhOXZJWU5GejMzcUlNZTNmbXp1S0Z6Mnh2N25QN0laNXoyNGZFdFQyUEFZOFhNWnF4ZWZuVS9NYmQrbm1EVFhybTNKOStxeFk0eHZFZjJ4L0RmR3U0eXdJQUFBPT0iLCJzZXNzaW9uS2V5IjoiMjdmMDQ3NmEtNmE1Yi00YWMwLTgxZWItY2U4ZDc0NDY1Y2MxIiwibGFzdElQIjoiMTI3LjAuMC4xIiwidXNlcl9uYW1lIjoiYWRtaW4iLCJzZXNzaW9uSWQiOjE5NSwidXNlckd1aWQiOiJkZWZhdWx0L2FkbWluIiwidXNlcklkIjoxLCJhdXRob3JpdGllcyI6WyJST0xFX1VTRVIiXSwiY2xpZW50X2lkIjoiYWNtZSIsImZpcnN0TmFtZSI6IlN1cGVyIiwiYXVkIjpbIm9hdXRoMi1yZXNvdXJjZSJdLCJzY29wZSI6WyJvcGVuaWQiXSwiZG9tYWluTmFtZSI6ImRlZmF1bHQiLCJyZWdpc3RyYXRpb25EYXRlIjoxNjE4NDczNDczMDAwLCJleHAiOjE2MjI3ODkxMjksInNob3J0R3VpZCI6IlNVUEVSIiwianRpIjoiMGMxM2UxYmMtYmM3NC00NjcyLThmYzUtMjIyNzA5NzQxNDc4IiwiZW1haWwiOiJzdXBlckBkZWZhdWx0LmNvbSIsInVzZXJuYW1lIjoiYWRtaW4ifQ.F0bK9ZhAt7TbuR33z5NCWMywXA1jstysw3TbrvdLhQeGnrMYTtb-JO4BrrK74qODzwa5KKUFRZEcvJH6GMfDapttDcvuWzAH1781rgICTyQN9eu0P2WtzmdDbXlJk4hm10KxE8_VreN3mreVONwxjP0lWXCgq3huaC5fezZeJkQC_9w2ZUZlLa9BUbK-RdeMZLD2DhFRV8E5cqP9knN_BmqQB9WxMvJzfn6u0QA1Qmw68xvV-DoGRkCH0tgrnkB3e74VMo2asxnEvOcIB9YjnsEptDEVMtHTNHlskhaN844NQHK33-kDPb0WaJ6A9hDXOAbXGO3Pf2sJedntU5VVSlYt7PjMB8VDlXlIk7lnidvIjVCF5DViSQKKCvY79DZjsRX6BxOIfXzMzJ66fuSgS98XF7kDXGjQ67HWiymFzdngJd4Nqj1xYREbuSfKp83WhCXavyR5ffkCts39hz8Gtxp08jnvhVPVtkTxhQBOzW9Aj2D2wYKHwjIx6eahrUaViJSTBFMiOMKvGM7AyjnuNLDypDK17UQjQTsX5dwfIU-7x95TQ--6l1R9zB7pmYc2TP6tZz14CTcsAWBoHsNvHH83zx9jvFMrYsFC4PvJFHYl1RnNFMQPtzE0AfponCoIDEyJJWADKkboloElhBoEvUtj5cluNmQWYqSZoBUSmn0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{gateway}}/service-limit/backoffice/player-limit/v1/livescore_uk/find-player-time-slot-limit?playerGuid=livescore_uk/test24",
+							"host": [
+								"{{gateway}}"
+							],
+							"path": [
+								"service-limit",
+								"backoffice",
+								"player-limit",
+								"v1",
+								"livescore_uk",
+								"find-player-time-slot-limit"
+							],
+							"query": [
+								{
+									"key": "playerGuid",
+									"value": "livescore_uk/test24"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Remove Time Slot Limits",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJsYXN0TmFtZSI6IkFkbWluaXN0cmF0b3IiLCJsYXN0TG9naW4iOjE2MjAwNDE3NTUwMjAsImp3dFVzZXIiOiJINHNJQUFBQUFBQUFBSldTelc2RE1CQ0VYOFh5R1ZxUnRBUTRGWWtlcWpaUmxEU25LcXBNdkNDcmdKRU5TRlhFdTNkZENBa2xoK2EyTzJOL08vNDVVa0VEeDZJMURTamp1U2lvUlJPc3QzVUpDdXNNNjlEb1FsZUtWZEpvZ0pvMi9oT0hoTlZaZFhlUU9lcThRL0VDL2Q0eHFxYkJ4NUgrRVUyN2tiSWlrY3paNzlTUzB5QmhtUWFMcW1GSEdDMWZWbWdpbzFJMVdyd3IybjFyZFNzeTBZQStTQVVuNnR0SklCRTBrTW1TaFAyNUxpYVVGMmttSkE3TkZMYk8yRGVvY2R3dVVqbEtNYUY5RmlJRkpkZ1VTVmFEODM5YS9UVUY3VjV2UWVnclViWWhlUWRkRWVlbUxEbndhK2RhOXZJWU5GejMzcUlNZTNmbXp1S0Z6Mnh2N25QN0laNXoyNGZFdFQyUEFZOFhNWnF4ZWZuVS9NYmQrbm1EVFhybTNKOStxeFk0eHZFZjJ4L0RmR3U0eXdJQUFBPT0iLCJzZXNzaW9uS2V5IjoiMjdmMDQ3NmEtNmE1Yi00YWMwLTgxZWItY2U4ZDc0NDY1Y2MxIiwibGFzdElQIjoiMTI3LjAuMC4xIiwidXNlcl9uYW1lIjoiYWRtaW4iLCJzZXNzaW9uSWQiOjE5NSwidXNlckd1aWQiOiJkZWZhdWx0L2FkbWluIiwidXNlcklkIjoxLCJhdXRob3JpdGllcyI6WyJST0xFX1VTRVIiXSwiY2xpZW50X2lkIjoiYWNtZSIsImZpcnN0TmFtZSI6IlN1cGVyIiwiYXVkIjpbIm9hdXRoMi1yZXNvdXJjZSJdLCJzY29wZSI6WyJvcGVuaWQiXSwiZG9tYWluTmFtZSI6ImRlZmF1bHQiLCJyZWdpc3RyYXRpb25EYXRlIjoxNjE4NDczNDczMDAwLCJleHAiOjE2MjI3ODkxMjksInNob3J0R3VpZCI6IlNVUEVSIiwianRpIjoiMGMxM2UxYmMtYmM3NC00NjcyLThmYzUtMjIyNzA5NzQxNDc4IiwiZW1haWwiOiJzdXBlckBkZWZhdWx0LmNvbSIsInVzZXJuYW1lIjoiYWRtaW4ifQ.F0bK9ZhAt7TbuR33z5NCWMywXA1jstysw3TbrvdLhQeGnrMYTtb-JO4BrrK74qODzwa5KKUFRZEcvJH6GMfDapttDcvuWzAH1781rgICTyQN9eu0P2WtzmdDbXlJk4hm10KxE8_VreN3mreVONwxjP0lWXCgq3huaC5fezZeJkQC_9w2ZUZlLa9BUbK-RdeMZLD2DhFRV8E5cqP9knN_BmqQB9WxMvJzfn6u0QA1Qmw68xvV-DoGRkCH0tgrnkB3e74VMo2asxnEvOcIB9YjnsEptDEVMtHTNHlskhaN844NQHK33-kDPb0WaJ6A9hDXOAbXGO3Pf2sJedntU5VVSlYt7PjMB8VDlXlIk7lnidvIjVCF5DViSQKKCvY79DZjsRX6BxOIfXzMzJ66fuSgS98XF7kDXGjQ67HWiymFzdngJd4Nqj1xYREbuSfKp83WhCXavyR5ffkCts39hz8Gtxp08jnvhVPVtkTxhQBOzW9Aj2D2wYKHwjIx6eahrUaViJSTBFMiOMKvGM7AyjnuNLDypDK17UQjQTsX5dwfIU-7x95TQ--6l1R9zB7pmYc2TP6tZz14CTcsAWBoHsNvHH83zx9jvFMrYsFC4PvJFHYl1RnNFMQPtzE0AfponCoIDEyJJWADKkboloElhBoEvUtj5cluNmQWYqSZoBUSmn0",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{gateway}}/service-limit/backoffice/player-limit/v1/livescore_uk/remove-player-time-slot-limit?playerGuid=livescore_nigeria/ng2&playerId=43",
+							"host": [
+								"{{gateway}}"
+							],
+							"path": [
+								"service-limit",
+								"backoffice",
+								"player-limit",
+								"v1",
+								"livescore_uk",
+								"remove-player-time-slot-limit"
+							],
+							"query": [
+								{
+									"key": "playerGuid",
+									"value": "livescore_nigeria/ng2"
+								},
+								{
+									"key": "playerId",
+									"value": "43"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Check Time Slot Limits",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJsYXN0TmFtZSI6IkFkbWluaXN0cmF0b3IiLCJsYXN0TG9naW4iOjE2MjAwNDE3NTUwMjAsImp3dFVzZXIiOiJINHNJQUFBQUFBQUFBSldTelc2RE1CQ0VYOFh5R1ZxUnRBUTRGWWtlcWpaUmxEU25LcXBNdkNDcmdKRU5TRlhFdTNkZENBa2xoK2EyTzJOL08vNDVVa0VEeDZJMURTamp1U2lvUlJPc3QzVUpDdXNNNjlEb1FsZUtWZEpvZ0pvMi9oT0hoTlZaZFhlUU9lcThRL0VDL2Q0eHFxYkJ4NUgrRVUyN2tiSWlrY3paNzlTUzB5QmhtUWFMcW1GSEdDMWZWbWdpbzFJMVdyd3IybjFyZFNzeTBZQStTQVVuNnR0SklCRTBrTW1TaFAyNUxpYVVGMmttSkE3TkZMYk8yRGVvY2R3dVVqbEtNYUY5RmlJRkpkZ1VTVmFEODM5YS9UVUY3VjV2UWVnclViWWhlUWRkRWVlbUxEbndhK2RhOXZJWU5GejMzcUlNZTNmbXp1S0Z6Mnh2N25QN0laNXoyNGZFdFQyUEFZOFhNWnF4ZWZuVS9NYmQrbm1EVFhybTNKOStxeFk0eHZFZjJ4L0RmR3U0eXdJQUFBPT0iLCJzZXNzaW9uS2V5IjoiMjdmMDQ3NmEtNmE1Yi00YWMwLTgxZWItY2U4ZDc0NDY1Y2MxIiwibGFzdElQIjoiMTI3LjAuMC4xIiwidXNlcl9uYW1lIjoiYWRtaW4iLCJzZXNzaW9uSWQiOjE5NSwidXNlckd1aWQiOiJkZWZhdWx0L2FkbWluIiwidXNlcklkIjoxLCJhdXRob3JpdGllcyI6WyJST0xFX1VTRVIiXSwiY2xpZW50X2lkIjoiYWNtZSIsImZpcnN0TmFtZSI6IlN1cGVyIiwiYXVkIjpbIm9hdXRoMi1yZXNvdXJjZSJdLCJzY29wZSI6WyJvcGVuaWQiXSwiZG9tYWluTmFtZSI6ImRlZmF1bHQiLCJyZWdpc3RyYXRpb25EYXRlIjoxNjE4NDczNDczMDAwLCJleHAiOjE2MjI3ODkxMjksInNob3J0R3VpZCI6IlNVUEVSIiwianRpIjoiMGMxM2UxYmMtYmM3NC00NjcyLThmYzUtMjIyNzA5NzQxNDc4IiwiZW1haWwiOiJzdXBlckBkZWZhdWx0LmNvbSIsInVzZXJuYW1lIjoiYWRtaW4ifQ.F0bK9ZhAt7TbuR33z5NCWMywXA1jstysw3TbrvdLhQeGnrMYTtb-JO4BrrK74qODzwa5KKUFRZEcvJH6GMfDapttDcvuWzAH1781rgICTyQN9eu0P2WtzmdDbXlJk4hm10KxE8_VreN3mreVONwxjP0lWXCgq3huaC5fezZeJkQC_9w2ZUZlLa9BUbK-RdeMZLD2DhFRV8E5cqP9knN_BmqQB9WxMvJzfn6u0QA1Qmw68xvV-DoGRkCH0tgrnkB3e74VMo2asxnEvOcIB9YjnsEptDEVMtHTNHlskhaN844NQHK33-kDPb0WaJ6A9hDXOAbXGO3Pf2sJedntU5VVSlYt7PjMB8VDlXlIk7lnidvIjVCF5DViSQKKCvY79DZjsRX6BxOIfXzMzJ66fuSgS98XF7kDXGjQ67HWiymFzdngJd4Nqj1xYREbuSfKp83WhCXavyR5ffkCts39hz8Gtxp08jnvhVPVtkTxhQBOzW9Aj2D2wYKHwjIx6eahrUaViJSTBFMiOMKvGM7AyjnuNLDypDK17UQjQTsX5dwfIU-7x95TQ--6l1R9zB7pmYc2TP6tZz14CTcsAWBoHsNvHH83zx9jvFMrYsFC4PvJFHYl1RnNFMQPtzE0AfponCoIDEyJJWADKkboloElhBoEvUtj5cluNmQWYqSZoBUSmn0",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{gateway}}/service-limit/backoffice/player-limit/v1/livescore_uk/check-player-time-slot-limit?playerGuid=livescore_nigeria/ng2",
+							"host": [
+								"{{gateway}}"
+							],
+							"path": [
+								"service-limit",
+								"backoffice",
+								"player-limit",
+								"v1",
+								"livescore_uk",
+								"check-player-time-slot-limit"
+							],
+							"query": [
+								{
+									"key": "playerGuid",
+									"value": "livescore_nigeria/ng2"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "TimeSlotLimit - FE",
+			"item": [
+				{
+					"name": "TimeSlotLimit - Check",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{gateway}}/service-limit/frontend/player-limit/v1/check-player-time-slot-limit",
+							"host": [
+								"{{gateway}}"
+							],
+							"path": [
+								"service-limit",
+								"frontend",
+								"player-limit",
+								"v1",
+								"check-player-time-slot-limit"
+							],
+							"query": [
+								{
+									"key": "fail",
+									"value": "deposit",
+									"disabled": true
+								},
+								{
+									"key": "fail",
+									"value": "bet",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TimeSlotLimit - Get",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{service-limit}}/frontend/player-limit/v1/find-player-time-slot-limit",
+							"host": [
+								"{{service-limit}}"
+							],
+							"path": [
+								"frontend",
+								"player-limit",
+								"v1",
+								"find-player-time-slot-limit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TimeSlotLimit - Set",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "fromTimestampWithZone",
+									"value": "08:30+02:00",
+									"type": "text"
+								},
+								{
+									"key": "toTimestampWithZone",
+									"value": "19:40+02:00",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{service-limit}}/frontend/player-limit/v1/set-player-time-slot-limit",
+							"host": [
+								"{{service-limit}}"
+							],
+							"path": [
+								"frontend",
+								"player-limit",
+								"v1",
+								"set-player-time-slot-limit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "TimeSlotLimit - Remove",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{service-limit}}/frontend/player-limit/v1/remove-player-time-slot-limit",
+							"host": [
+								"{{service-limit}}"
+							],
+							"path": [
+								"frontend",
+								"player-limit",
+								"v1",
+								"remove-player-time-slot-limit"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Verfication Statuses",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{backoffice-user-access-token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{gateway}}/service-limit/backoffice/livescoredev/verification/status/all",
+					"host": [
+						"{{gateway}}"
+					],
+					"path": [
+						"service-limit",
+						"backoffice",
+						"livescoredev",
+						"verification",
+						"status",
+						"all"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Self Exclusion",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Set-player-limit",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJsYXN0TmFtZSI6IkFkbWluaXN0cmF0b3IiLCJsYXN0TG9naW4iOjE2MjAwNDE3NTUwMjAsImp3dFVzZXIiOiJINHNJQUFBQUFBQUFBSldTelc2RE1CQ0VYOFh5R1ZxUnRBUTRGWWtlcWpaUmxEU25LcXBNdkNDcmdKRU5TRlhFdTNkZENBa2xoK2EyTzJOL08vNDVVa0VEeDZJMURTamp1U2lvUlJPc3QzVUpDdXNNNjlEb1FsZUtWZEpvZ0pvMi9oT0hoTlZaZFhlUU9lcThRL0VDL2Q0eHFxYkJ4NUgrRVUyN2tiSWlrY3paNzlTUzB5QmhtUWFMcW1GSEdDMWZWbWdpbzFJMVdyd3IybjFyZFNzeTBZQStTQVVuNnR0SklCRTBrTW1TaFAyNUxpYVVGMmttSkE3TkZMYk8yRGVvY2R3dVVqbEtNYUY5RmlJRkpkZ1VTVmFEODM5YS9UVUY3VjV2UWVnclViWWhlUWRkRWVlbUxEbndhK2RhOXZJWU5GejMzcUlNZTNmbXp1S0Z6Mnh2N25QN0laNXoyNGZFdFQyUEFZOFhNWnF4ZWZuVS9NYmQrbm1EVFhybTNKOStxeFk0eHZFZjJ4L0RmR3U0eXdJQUFBPT0iLCJzZXNzaW9uS2V5IjoiMjdmMDQ3NmEtNmE1Yi00YWMwLTgxZWItY2U4ZDc0NDY1Y2MxIiwibGFzdElQIjoiMTI3LjAuMC4xIiwidXNlcl9uYW1lIjoiYWRtaW4iLCJzZXNzaW9uSWQiOjE5NSwidXNlckd1aWQiOiJkZWZhdWx0L2FkbWluIiwidXNlcklkIjoxLCJhdXRob3JpdGllcyI6WyJST0xFX1VTRVIiXSwiY2xpZW50X2lkIjoiYWNtZSIsImZpcnN0TmFtZSI6IlN1cGVyIiwiYXVkIjpbIm9hdXRoMi1yZXNvdXJjZSJdLCJzY29wZSI6WyJvcGVuaWQiXSwiZG9tYWluTmFtZSI6ImRlZmF1bHQiLCJyZWdpc3RyYXRpb25EYXRlIjoxNjE4NDczNDczMDAwLCJleHAiOjE2MjI3ODkxMjksInNob3J0R3VpZCI6IlNVUEVSIiwianRpIjoiMGMxM2UxYmMtYmM3NC00NjcyLThmYzUtMjIyNzA5NzQxNDc4IiwiZW1haWwiOiJzdXBlckBkZWZhdWx0LmNvbSIsInVzZXJuYW1lIjoiYWRtaW4ifQ.F0bK9ZhAt7TbuR33z5NCWMywXA1jstysw3TbrvdLhQeGnrMYTtb-JO4BrrK74qODzwa5KKUFRZEcvJH6GMfDapttDcvuWzAH1781rgICTyQN9eu0P2WtzmdDbXlJk4hm10KxE8_VreN3mreVONwxjP0lWXCgq3huaC5fezZeJkQC_9w2ZUZlLa9BUbK-RdeMZLD2DhFRV8E5cqP9knN_BmqQB9WxMvJzfn6u0QA1Qmw68xvV-DoGRkCH0tgrnkB3e74VMo2asxnEvOcIB9YjnsEptDEVMtHTNHlskhaN844NQHK33-kDPb0WaJ6A9hDXOAbXGO3Pf2sJedntU5VVSlYt7PjMB8VDlXlIk7lnidvIjVCF5DViSQKKCvY79DZjsRX6BxOIfXzMzJ66fuSgS98XF7kDXGjQ67HWiymFzdngJd4Nqj1xYREbuSfKp83WhCXavyR5ffkCts39hz8Gtxp08jnvhVPVtkTxhQBOzW9Aj2D2wYKHwjIx6eahrUaViJSTBFMiOMKvGM7AyjnuNLDypDK17UQjQTsX5dwfIU-7x95TQ--6l1R9zB7pmYc2TP6tZz14CTcsAWBoHsNvHH83zx9jvFMrYsFC4PvJFHYl1RnNFMQPtzE0AfponCoIDEyJJWADKkboloElhBoEvUtj5cluNmQWYqSZoBUSmn0",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{gateway}}/service-limit/backoffice/player-limit/v1/livescore_uk/set-player-limit?amount=1600&granularity=3&playerGuid=livescore_uk/fridayday13&type=2&playerId=102",
+					"host": [
+						"{{gateway}}"
+					],
+					"path": [
+						"service-limit",
+						"backoffice",
+						"player-limit",
+						"v1",
+						"livescore_uk",
+						"set-player-limit"
+					],
+					"query": [
+						{
+							"key": "amount",
+							"value": "1600"
+						},
+						{
+							"key": "granularity",
+							"value": "3"
+						},
+						{
+							"key": "playerGuid",
+							"value": "livescore_uk/fridayday13"
+						},
+						{
+							"key": "type",
+							"value": "2"
+						},
+						{
+							"key": "playerId",
+							"value": "102"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

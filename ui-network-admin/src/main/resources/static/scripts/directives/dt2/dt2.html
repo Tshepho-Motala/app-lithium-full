@@ -1,0 +1,27 @@
+<div>
+<!-- 	dt-columns="table.columns" -->
+<!-- 	dt-instance="table.instance" -->
+<table
+	datatable="ng"
+	dt-column-defs="table.columndefs"
+	dt-options="table.options"
+	class="table-hover table-striped"
+	cellspacing="0"
+	width="100%">
+	<thead>
+		<th ng-repeat="t in table.columndefs">{{t[1]}}</th>
+	</thead>
+	<tbody>
+	<tr ng-if="table.columndefs.length == 1" ng-repeat="d in table.data">
+		<td>{{d}}</td>
+	</tr>
+	<tr ng-if="table.columndefs.length > 1" ng-repeat="d in table.data">
+		<td ng-repeat="t in table.columndefs">{{d[$index]}}</td>
+	</tr>
+	</tbody>
+</table>
+<br/><hr/>
+<!-- <p>{{table.data}}</p> -->
+<!-- <p>{{table.columndefs}}</p> -->
+<!-- <p>{{table}}</p> -->
+</div>

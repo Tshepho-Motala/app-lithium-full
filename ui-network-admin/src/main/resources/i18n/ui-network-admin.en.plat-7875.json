@@ -1,0 +1,21 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "PLAYER": {
+      "DOCUMENT_UPLOAD_VERIFY": {
+        "TITLE": "Upload and verify document via Onfido",
+        "FIELDS": {
+          "INFORMATION_WINDOW": {
+            "LABEL": "Information window",
+            "PLACE_HOLDER": "Upload documents and then submit check"
+          },
+          "UPLOAD_FRONT_BUTTON": "Upload front",
+          "UPLOAD_BACK_BUTTON": "Upload back",
+          "SUBMIT_CHECK_BUTTON": "Submit check"
+        }
+      },
+      "QUICK_ACTIONS": {
+        "DOCUMENT_UPLOAD_VERIFY": "Upload and verify document via Onfido"
+      }
+    }
+  }
+}

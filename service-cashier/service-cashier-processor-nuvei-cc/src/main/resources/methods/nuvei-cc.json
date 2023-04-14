@@ -1,0 +1,169 @@
+{
+  "name": "Nuvei Credit Card",
+  "code": "nuvei-cc",
+  "image": {
+    "filename": "/methods/nuvei.png",
+    "filetype": "image/png"
+  },
+  "depositStages": [
+    {
+      "number": 1,
+      "title": "Initialize Payment",
+      "description": "Specify the amount you wish to deposit.",
+      "inputFields": [
+        {
+          "code": "return_url",
+          "name": "Return URL",
+          "description": "Return URL once transaction is complete. Will be appended with a status",
+          "type": "return_url",
+          "required": true
+        },
+        {
+          "code": "merchant_url",
+          "name": "Merchant URL",
+          "description": "Merchant URL. Will be used for 3D secure fingerprint",
+          "type": "string",
+          "required": false
+        },
+        {
+          "code": "method_notification_url",
+          "name": "Method notification URL",
+          "description": "Method notification URL. Will be used for 3D secure fingerprint",
+          "type": "string",
+          "required": false
+        },
+        {
+          "code": "session_token",
+          "name": "Nuvei session token",
+          "description": "Nuvei session token",
+          "type": "string",
+          "required": false
+        },
+        {
+          "code": "card_token",
+          "name": "Nuvei card temporary token",
+          "description": "Nuvei card temporary token",
+          "type": "string",
+          "required": false
+        },
+        {
+          "code": "processorAccountId",
+          "name": "Lithium processor account",
+          "description": "Lithium processor account contain details about Nuvei payer account",
+          "type": "long",
+          "required": false
+        },
+        {
+          "code": "cvv",
+          "name": "CVV",
+          "description": "Enter the last three digits of the CVV code on the back of your card.",
+          "type": "cvv",
+          "required": false
+        },
+        {
+          "code": "nameoncard",
+          "name": "Name on card",
+          "description": "Enter your full name as it appears on the front of your card",
+          "type": "string",
+          "required": false
+        },
+        {
+          "code": "java_enabled",
+          "name": "Java enabled",
+          "description": "Boolean that represents the ability of the cardholder browser to execute Java.",
+          "type": "boolean",
+          "required": true
+        },
+        {
+          "code": "java_script_enabled",
+          "name": "Java script enabled",
+          "description": "Boolean that represents the ability of the cardholder browser to execute Java.",
+          "type": "boolean",
+          "required": true
+        },
+        {
+          "code": "color_depth",
+          "name": "Color depth",
+          "description": "Value representing the bit depth of the color palette for displaying images, in bits per pixel.",
+          "type": "string",
+          "required": true
+        },
+        {
+          "code": "screen_height",
+          "name": "Screen height",
+          "description": "Total height of the cardholder’s screen in pixels.",
+          "type": "string",
+          "required": true
+        },
+        {
+          "code": "screen_width",
+          "name": "Screen width",
+          "description": "Total width of the cardholder’s screen in pixels.",
+          "type": "string",
+          "required": true
+        },
+        {
+          "code": "time_zone",
+          "name": "Time zone",
+          "description": "Time difference between UTC time and the cardholder browser local time, in minutes.",
+          "type": "string",
+          "required": true
+        },
+        {
+          "code": "browser_accept",
+          "name": "HTTP accept headers as sent to the 3DS Requestor",
+          "description": "Exact content of the HTTP accept headers as sent to the 3DS Requestor from the cardholder’s browser.",
+          "type": "string",
+          "required": false
+        }
+      ],
+      "outputFields": []
+    },
+    {
+      "number": 2,
+      "title": "Continue payment after fingerprint.",
+      "description": "",
+      "inputFields": [
+        {
+          "code": "method_completion_ind",
+          "name": "Method completion indication",
+          "description": "Indicates whether the 3D-Secure v2 fingerprint challenge was successfully completed.",
+          "type": "string",
+          "required": false
+        }
+      ],
+      "outputFields": []
+    },
+    {
+      "number": 3,
+      "title": "Validate payment.",
+      "description": "",
+      "inputFields": [],
+      "outputFields": []
+    }
+  ],
+  "withdrawalStages": [
+    {
+      "number": 1,
+      "title": "Enter Amount",
+      "description": "Specify the amount you wish to withdraw.",
+      "inputFields": [
+        {
+          "code": "processorAccountId",
+          "name": "Lithium processor account",
+          "description": "Lithium processor account contain details about Nuvei payer account",
+          "type": "long",
+          "required": true
+        }
+      ],
+      "outputFields": []
+    },
+    {
+      "number": 2,
+      "title": "Validate payment.",
+      "description": "",
+      "inputFields": [],
+      "outputFields": []
+    }
+  ]
+}

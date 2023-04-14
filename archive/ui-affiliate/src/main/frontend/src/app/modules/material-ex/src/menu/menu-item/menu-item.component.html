@@ -1,0 +1,21 @@
+<li [ngClass]="{'active':active}">
+  <a *ngIf="subMenuItems.length <= 1" [routerLink]="link" [ngClass]="{'active':active}" class="mtex-menu-item-content">
+    <md-icon>{{ icon }}</md-icon>
+    <div>{{ title }}</div>
+  </a>
+
+  <span *ngIf="subMenuItems.length > 1" [ngClass]="{'active':active}" class="mtex-menu-item-content" (click)="open = !open">
+    <md-icon>{{ icon }}</md-icon>
+    <div>{{ title }}</div>
+    <span fxFlex></span>
+    <div style="position: relative; width: 24px; height: 24px;">
+      <md-icon [ngClass]=" { 'md-icon-open':open } " style="font-size:24px; position: absolute;">keyboard_arrow_up</md-icon>
+    </div>
+  </span>
+
+  <div [hidden]="!open">
+    <ul>
+      <ng-content></ng-content>
+    </ul>
+  </div>
+</li>

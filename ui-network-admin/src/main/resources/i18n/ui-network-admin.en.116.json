@@ -1,0 +1,11 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "USER": {
+      "FIELDS": {
+        "ID": {
+          "NAME": "Id"
+        }
+      }
+    }
+  }
+}

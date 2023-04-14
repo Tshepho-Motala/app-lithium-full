@@ -1,0 +1,17 @@
+<div class="form-group" ng-class="{'has-error': showError}">
+	<div>
+		<label for="{{id}}" class="control-label" ng-if="to.label">
+			{{to.label}} {{to.required ? '*' : ''}}
+		</label>
+	</div>
+<!-- 	GLOBAL.GRANULARITY.YEAR -->
+	<div class="btn-group">
+		<label class="btn btn-{{(to.btnclass)?to.btnclass:'default'}}"
+			ng-repeat="day in [1,2,3,4,5,6,7] track by $index"
+			ng-class="(model[options.key][day]+'' === 'true')?'active':''"
+			ng-model="model[options.key][day]"
+			btn-checkbox-true="'true'" btn-checkbox-false="" uib-btn-checkbox>
+			<span>{{'GLOBAL.DAYS.SHORT.'+day | translate}}</span>
+		</label>
+	</div>
+</div>

@@ -1,0 +1,16 @@
+<div class="container-fluid">
+	<lit-header
+		title="UI_NETWORK_ADMIN.USERMISSIONS.VIEW.TITLE"
+		description="UI_NETWORK_ADMIN.USERMISSIONS.VIEW.DESCRIPTION">
+	</lit-header>
+	
+	<button-bar>
+		<button-back ui-sref="^.list"></button-back>
+	</button-bar>
+	
+	<div class="row v-reset-row ">
+		<div class="col-xs-12">
+			<usermission data="controller.model" games-list="controller.gamesList"></usermission>
+		</div>
+	</div>
+</div>

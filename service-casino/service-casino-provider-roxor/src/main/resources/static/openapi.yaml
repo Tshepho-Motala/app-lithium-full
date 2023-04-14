@@ -1,0 +1,402 @@
+openapi: 3.0.3
+info:
+  title: Lithium Roxor/RGP API Documentation
+
+  version: 0.0.2
+  description: |
+    The following document describes the APIs that will allow someone using the lithium platform to use roxor games.
+    ---
+
+servers:
+  - url: "https://gateway.lithium-develop.ls-g.net"
+    description: LS Lithium QA
+  - url: "https://gateway.lithium-staging.ls-g.net"
+    description: LS Lithium Staging
+  - url: "https://gateway.lithium-live.ls-g.net"
+    description: LS Lithium Production
+  - url: "https://gateway.dev.playsafesa.com"
+    description: PSSA Lithium Development
+  - url: "http://localhost:9001"
+    description: Local Lithium Gateway
+  - url: "{GATEWAY_URL}"
+    description: Custom Lithium Gateway URL
+    variables:
+      GATEWAY_URL:
+        description: Gateway server URL
+        default: http://localhost:9000
+tags:
+  - name: Games
+    description: Get a list of games.
+paths:
+  /service-games/games/{domainName}/startGame:
+    get:
+      tags:
+        - Games
+      description: >-
+        This API will require a bearer token in the Authorisation header,
+        which will be used to retrieve the player details from the Lithium system.
+      parameters:
+        - name: domainName
+          required: true
+          allowEmptyValue: false
+          example: livescore_nigeria
+          in: path
+          schema:
+            type: string
+          description: >-
+            The machine name for the registered domain to which this player belongs.
+        - name: machineGUID
+          required: false
+          allowEmptyValue: true
+          in: query
+          schema:
+            type: string
+          description: machineGUID
+        - name: token
+          required: true
+          allowEmptyValue: false
+          in: query
+          schema:
+            type: string
+          description: token
+        - name: gameguid
+          required: true
+          allowEmptyValue: false
+          in: query
+          schema:
+            type: string
+          description: gameguid
+        - name: lang
+          required: true
+          allowEmptyValue: false
+          in: query
+          schema:
+            type: string
+          description: lang
+        - name: currency
+          required: true
+          allowEmptyValue: false
+          in: query
+          schema:
+            type: string
+          description: currency
+        - name: tutorial
+          required: false
+          allowEmptyValue: true
+          in: query
+          schema:
+            type: string
+          description: tutorial
+      responses:
+        "200":
+          description: OK
+          # content:
+          #   application/json:
+          #     schema:
+          #       $ref: "#/components/schemas/ValidateSessionResponse"
+
+  /service-casino-provider-slotapi/balance:
+    get:
+      tags:
+        - Balance
+      description: >-
+        This API will require a bearer token in the Authorisation header,
+        which will be used to retrieve the player balance from the Lithium system.
+      security:
+        - BearerTokenAuth: []
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BalanceResponse"
+        "401":
+          $ref: "#/components/responses/401UnauthorizedError"
+        "404":
+          $ref: "#/components/responses/404NoSuchUserError"
+        "490":
+          $ref: "#/components/responses/490SoftSelfExclusionException"
+        "491":
+          $ref: "#/components/responses/491PermanentSelfExclusionException"
+        "500":
+          $ref: "#/components/responses/500InternalServerError"
+        "504":
+          $ref: "#/components/responses/504ServiceUnavailableError"
+
+
+  /service-casino-provider-slotapi/bet:
+    post:
+      tags:
+        - Bet
+      description: |
+        Register a bet transaction with Lithium.
+
+        Calling this will deduct the amount from the player balance with reference "roundId:betTransactionId".
+
+        * If the kind is BET, the transaction type will be CASINO_BET.
+        * If the kind is FREE_BET, the transaction type will be CASINO_FREE_BET.
+
+        If the amount is 0, the transaction type will be registered as CASINO_BET_FREE.
+
+        If the same request is resubmitted, the API will respond with the same exact result.
+        This means that the caller may repeat the call indefinitely until a repeatable code
+        (see notes on error codes) is received.
+
+        This API will require a bearer token in the Authorisation header,
+        which will be used to identify the player that should have his/her wallet adjusted.
+      security:
+        - BearerTokenAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BetRequest"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BetResponse"
+        "400":
+          $ref: "#/components/responses/400BadRequest"
+        "401":
+          $ref: "#/components/responses/401UnauthorizedError"
+        "422":
+          $ref: "#/components/responses/422DataValidationError"
+        "470":
+          $ref: "#/components/responses/470IncorrectHash"
+        "471":
+          $ref: "#/components/responses/471InsufficientFunds"
+        "490":
+          $ref: "#/components/responses/490SoftSelfExclusionException"
+        "491":
+          $ref: "#/components/responses/491PermanentSelfExclusionException"
+        "500":
+          $ref: "#/components/responses/500InternalServerError"
+        "504":
+          $ref: "#/components/responses/504ServiceUnavailableError"
+
+  /service-casino-provider-slotapi/betresult:
+    post:
+      tags:
+        - Bet Result
+      description: |
+        Register a result related to a round of betting. There may be more than one result per bet.
+
+        Calling this will add the amount to the player balance with reference "roundId:betResultTransactionId".
+
+        * If the kind is WIN, the transaction type will be CASINO_WIN.
+        * If the kind is LOSS, the transaction type will be CASINO_LOSS.
+        * If the kind is VOID, the transaction type will be CASINO_VOID.
+        * If the kind is FREE_WIN, the transaction type will be CASINO_FREE_WIN.
+        * If the kind is FREE_LOSS, the transaction type will be CASINO_FREE_LOSS.
+
+        If the same request is resubmitted, the API will respond with the same exact result.
+        This means that the caller may repeat the call indefinitely until a repeatable code
+        (see notes on error codes) is received.
+
+        This API does not require a bearer token since a result might happen while a player is logged out. To secure the endpoint,
+        the caller has to supply the unique reference to the bet, and generate a hash of the data utilising the pre-shared key
+        that is never transmitted.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/BetResultRequest"
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/BetResultResponse"
+        "400":
+          $ref: "#/components/responses/400BadRequest"
+        "401":
+          $ref: "#/components/responses/401UnauthorizedError"
+        "404":
+          $ref: "#/components/responses/404OriginalTransactionNotFound"
+        "422":
+          $ref: "#/components/responses/422DataValidationError"
+        "470":
+          $ref: "#/components/responses/470IncorrectHash"
+        "500":
+          $ref: "#/components/responses/500InternalServerError"
+        "504":
+          $ref: "#/components/responses/504ServiceUnavailableError"
+
+components:
+  responses:
+
+    400BadRequest:
+      description: The request contained a document that could not be parsed due to a syntax error. Please do not resubmit before changing the content.
+
+    401UnauthorizedError:
+      description: Access token is missing or invalid. Please supply a new bearer token and resubmit the same request.
+
+    404NoSuchUserError:
+      description: The token belongs to a user that does not exist in this environment. Do not resubmit.
+
+    404OriginalTransactionNotFound:
+      description: The referenced transaction was not found. Perhaps the original transaction was lost in transit. Resubmit the original transaction and then resubmit this transaction.
+
+    409DuplicateSubmission:
+      description: This transaction was already submitted. Do not resubmit.
+
+    422DataValidationError:
+      description: The input data failed to validate. Please fix the request and submit a new one. The same transaction ID may be used.
+
+    470IncorrectHash:
+      description: The supplied hash is incorrect. You may resubmit the same transaction with a new hash. The transaction will not be stored.
+
+    471InsufficientFunds:
+      description: Insufficient funds for this adjustment. Please resubmit the same request later. Repeatable.
+
+    490SoftSelfExclusionException:
+      description: The user has soft self-excluded. The request should not be repeated.
+
+    491PermanentSelfExclusionException:
+      description: The user has permanent self-excluded. The request should not be repeated.
+
+    500InternalServerError:
+      description: The server is experiencing technical problems and is unavailable. Please resubmit the same request later. Repeatable.
+
+    504ServiceUnavailableError:
+      description: The service is unavailabe (is it running?). Please resubmit the same request later. Repeatable.
+
+
+  schemas:
+
+    ValidateSessionResponse:
+      type: object
+      properties:
+        cellphoneNumber:
+          type: string
+        guid:
+          type: string
+        username:
+          type: string
+        balance:
+          type: number
+          format: double
+        currencyCode:
+          type: string
+
+    BalanceResponse:
+      type: object
+      properties:
+        balance:
+          type: number
+          format: double
+        currencyCode:
+          type: string
+
+    BetRequest:
+      type: object
+      properties:
+        roundId:
+          type: string
+          description: |
+            A unique identifier for a round of betting. In a game such as blackjack,
+            a roundId will encapsulate all activities by a player from the handing out of cards until the
+            dealer retrieves all cards from players and returns to the player any winnings. This identifier
+            has to be unique across all time. It should not be the same between different players or sessions.
+            It should never be reused.
+        betTransactionId:
+          type: string
+          description: |
+            A unique identifier for the individual bet. Will be used for dedupe checking. This transaction id
+            should never be reused.
+        transactionTimestamp:
+          type: integer
+          format: int64
+          description: Milliseconds since epoch for the bet placement
+        gameId:
+          type: string
+          description: A unique identifier for the game instance.
+          example: "american-roulette"
+        kind:
+          type: string
+          enum: [BET, FREE_BET]
+          description: Indicate whether this is a normal bet or a free bet.
+        amount:
+          type: number
+          format: float
+          description: |
+            The total amount to be deducted from the player balance as a decimal number.
+            In the case of a FREE_BET, the amount should be zero.
+          example: "10.05"
+        currencyCode:
+          type: string
+          description: A three letter ISO 4217 currency code
+          example: "USD"
+        sha256:
+          type: string
+          description: |
+            To calculate the SHA256 here, use the following fields:
+            "TRANSACTIONTIMESTAMP:BETTRANSACTIONID:ROUNDID".
+
+    BetResponse:
+      type: object
+      properties:
+        balance:
+          type: number
+          format: double
+        lithiumBetId:
+          type: integer
+
+    BetResultRequest:
+      type: object
+      properties:
+        betResultTransactionId:
+          type: string
+          description: A unique hash for the result, different between bet placement and bet results. Will be used for dedupe.
+        roundId:
+          type: string
+          description: |
+            A unique identifier for a round of betting. There has to be at least one bet registered for this round
+            via the bet API in order for a result to succeed.
+        kind:
+          type: string
+          enum: [WIN, LOSS, VOID, FREE_WIN, FREE_LOSS]
+        returns:
+          type: number
+          format: float
+          description: |
+            The amount to return to player. This will be 0 if the kind is "LOSS" or "FREE_LOSS", >0 if the kind is "WIN", "FREE_WIN" or "VOID".
+            For "VOID", the amount is informational only. All transactions already registered will be reversed.
+        currencyCode:
+          type: string
+          description: A three letter ISO 4217 currency code
+          example: "USD"
+        transactionTimestamp:
+          type: integer
+          format: int64
+          description: Milliseconds since Epoch for the bet placement
+        sha256:
+          type: string
+          description: |
+            To calculate the SHA256 here, use the following fields - "TRANSACTIONTIMESTAMP:BETRESULTTRANSACTIONID:ROUNDID".
+
+    BetResultResponse:
+      type: object
+      properties:
+        balance:
+          type: number
+          format: double
+        lithiumSettlementId:
+          type: integer
+          format: int64
+
+  securitySchemes:
+    BearerTokenAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+      description: >-
+        A token obtained via the Lithium login process, passed to Incentive via Cookie during Iframe open.
+        This will add a header to the request - "Authorization: Bearer TOKENVALUE"s

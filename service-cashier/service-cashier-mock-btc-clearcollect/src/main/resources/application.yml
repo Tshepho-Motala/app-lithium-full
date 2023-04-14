@@ -1,0 +1,19 @@
+server.port: 9796
+
+ribbon:
+  ReadTimeout: 30000
+  ConnectTimeout: 30000
+
+lithium:
+  service:
+    cashier:
+      mock:
+        btc:
+          clearcollect:
+#            api-key: ASDASD
+            api-secret: 10293019283
+            response-url: http://localhost:9000/service-cashier-processor-btc-clearcollect/cashier/deposit/bgreturn
+            
+logging:
+  level:
+    lithium: INFO

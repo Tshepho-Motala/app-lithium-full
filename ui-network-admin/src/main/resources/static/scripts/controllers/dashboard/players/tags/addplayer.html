@@ -1,0 +1,38 @@
+<form ng-submit="controller.registerPlayer()" bs-loading-overlay bs-loading-overlay-reference-id="{{controller.referenceId}}" autocomplete="off">
+	<div class="modal-header">
+		<div class="user-block" id="modal-title">
+			<div class="pull-right">
+				<span style="line-height:inherit;" class="label label-success">{{ controller.tag.domain.name | uppercase }}</span>
+			</div>
+			<h4 style="font-weight: bold;">
+				<a ui-sref=".">{{ controller.tag.name }}</a>
+			</h4>
+		</div>
+	</div>
+	<div class="modal-body">
+		<div class="form-group">
+			<label for="playerName">{{ 'UI_NETWORK_ADMIN.PLAYERS.TAGS.PLAYERSEARCH' | translate }}</label>
+			<input type="text"
+				id="playerName"
+				ng-model="controller.playerSearch"
+				ng-required="true"
+				placeholder="Enter player name to start search..."
+				uib-typeahead="user.username for user in controller.searchPlayer($viewValue)"
+				typeahead-loading="controller.loadingLocations"
+				typeahead-no-results="controller.noResults"
+				typeahead-min-length="2"
+				typeahead-show-hint="true"
+				typeahead-wait-ms="500"
+				typeahead-editable="false"
+				class="form-control"/>
+			<i ng-show="controller.loadingLocations" class="glyphicon glyphicon-refresh"></i>
+			<div ng-show="controller.noResults">
+				<i class="glyphicon glyphicon-remove"></i> {{ 'GLOBAL.NORESULTS' | translate }}
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<button type="button" class="btn btn-default" ng-click="controller.cancel()">{{ 'GLOBAL.ACTION.CANCEL' | translate | lowercase }}</button>
+		<button type="submit" class="btn btn-primary">{{ 'UI_NETWORK_ADMIN.PLAYERS.TAGS.ADDPLAYERBUTTON' | translate | lowercase }}</button>
+	</div>
+</form>

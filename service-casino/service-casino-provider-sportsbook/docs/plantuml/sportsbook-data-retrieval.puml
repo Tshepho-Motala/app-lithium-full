@@ -1,0 +1,34 @@
+.sportsbook settlements
+[plantuml]
+----
+
+@startuml
+
+actor GW as gw
+participant "scp-sportsbook" as sb
+database lithium_casino_sportsbook as db
+participant "svc-accounting-pr-internal" as ac
+participant "svc-missions/svc-promo" as pr
+queue "rabbitmq" as r
+actor SBTech as sbt
+
+gw -> sb++: /settle - settlement
+gw -> sb: /bet/commitreserve - bet
+sb ->ac++: balance adjust
+ac --> r: CompletedTransactionEvent
+ac -> sb--: balance adjust response
+sb -> gw: setllement response
+sb -> gw--: bet commit response
+
+sb <-- r++: Processes completed transaction event.
+sb -> sbt++: (1) - request more info using betId
+sbt -> sb--: response containing selections/stake/league etc.
+sb -> db: data saved per bet.
+
+sb --> r--: new msg produced, similar to CompletedTransactionEvent
+pr <-- r: process new msg produced
+pr -> pr: save stats for promos.
+
+@enduml
+
+----

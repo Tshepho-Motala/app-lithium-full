@@ -1,0 +1,5 @@
+.List Games
+[source,gherkin]
+----
+include::../../src/docs/gherkin/high-level-spec/listGames.feature[]
+----

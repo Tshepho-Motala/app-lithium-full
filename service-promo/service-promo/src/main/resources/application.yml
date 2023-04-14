@@ -1,0 +1,74 @@
+server:
+  port: 9904
+  
+spring:
+  datasource:
+    url: jdbc:mysql://localhost/lithium_promo
+    username: root
+    password: mysql
+    driver-class-name: org.mariadb.jdbc.Driver
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: validate
+    properties:
+      jadira.usertype.autoRegisterUserTypes: true
+  cloud:
+    stream:
+      bindings:
+        missionstatsinput:
+          group: missionstatsgroup
+          binder: rabbit
+          destination: missionstatsqueue
+        #this should be removed, is only used for testing... Riaan
+        missionstatsoutput:
+          group: missionstatsgroup
+          binder: rabbit
+          destination: missionstatsqueue
+          producer:
+            required-groups: missionstatsgroup
+        gatewayexchange:
+          binder: rabbit
+          destination: gateway
+          producer:
+            should-declare: false
+        triggerbonusoutput:
+          group: triggerbonusgroup
+          binder: rabbit
+          destination: triggerbonusqueue
+          producer:
+            required-groups: triggerbonusgroup
+        userattributestriggerinput :
+          group: user-attributes-trigger-group-missions
+          binder : rabbit
+          destination : userattributestriggerqueue
+        promoproviderinputv1:
+          group: promoprovidergroupv1
+          binder: rabbit
+          destination: promoproviderqueuev1
+        giverewardoutputv1:
+          group: giverewardgroupv1
+          binder: rabbit
+          destination: giverewardqueuev1
+          producer:
+            required-groups: giverewardgroupv1
+        domain-attributes-input:
+          binder: rabbit
+          destination: domain-attributes-queue
+          group: domain-attributes-group
+
+lithium:
+  services:
+    db:
+      load-test-data: false
+
+    promo:
+      external-secret-key: TSj9Nm62IhFTakJ5w2lM1Ul0mMU0bXbL
+      default-timezone: UTC
+        
+logging:
+  level:
+    lithium.service.promo: INFO
+    lithium.leader: WARN
+    org.springframework.cloud.netflix.feign.LithiumFeignClientFactoryBean: INFO
+    lithium.services.WebRequestInterceptorConfiguration: INFO

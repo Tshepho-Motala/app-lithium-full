@@ -1,0 +1,66 @@
+{
+	"GLOBAL": {
+		"BONUS": {
+			"TYPE": {
+				"TRIGGER": {
+					"9": "Hourly"
+				}
+			}
+		}
+	},
+	"UI_NETWORK_ADMIN": {
+		"XP": {
+			"LEVELS": {
+				"TBL": {
+					"HEADERS": {
+						"MILESTONE": "Milestone"
+					}
+				}
+			},
+			"FIELDS": {
+				"MILESTONE": {
+					"NAME": "Milestone",
+					"DESCRIPTION": "Is this level considered a milestone?"
+				}
+			}
+		},
+		"MISSIONS": {
+			"FIELDS": {
+				"CHALLENGE": {
+					"CHALLENGERULES": {
+						"RULE": {
+							"EXPLAIN": {
+								"CASINO": {
+									"BONUSHOURLY": "Collect {{val}} hourly bonuses."
+								}
+							}
+						}
+					}
+				}
+			}
+		},
+		"BONUS": {
+			"HOURLY": {
+				"TIMEOUT": "Timeout",
+				"MINUTES": "minutes",
+				"EXPLAIN": "This is an hourly bonus, and will only be redeemable once per hour. If a player has not taken up an hourly bonus, it'll become available on the hour, for the timeout specified above ({{timeout}}minutes). Thereafter it'll become available again an hour after he took up his last hourly bonus.",
+				"LABEL": "Timeout",
+				"DESCRIPTION": "This is the amount of minutes from when it becomes available to stay available to be taken up. E.g. If last hourly bonus was taken up at 13h10, and timeout was set to 15 (minutes), player will be able to collect next hourly from 14h10 - 14h25."
+			}
+		},
+		"LEADERBOARD": {
+			"FIELDS": {
+				"NOTIFICATION": {
+					"TITLE": "Notification (Top {{top}})",
+					"PLACE": "E.g. Leaderboard 1 Notification",
+					"DESC": "This is the notification that will be used when a leaderboard finishes, for everyone that finished on a rank not specified on the 'Leaderboard Notification' list."
+				},
+				"NOTIFICATIONNONTOP": {
+					"TITLE": "Notification (Rank Above {{top}})",
+					"PLACE": "E.g. Leaderboard 1 Notification",
+					"DESC": "This is the notification that will be used when a leaderboard finishes, for everyone that finished outside of the top {{top}}"
+				}
+			}
+		}
+	}
+}

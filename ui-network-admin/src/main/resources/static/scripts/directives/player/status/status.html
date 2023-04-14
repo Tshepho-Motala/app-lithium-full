@@ -1,0 +1,31 @@
+<div class="box box-{{data.box}} box-solid" bs-loading-overlay bs-loading-overlay-reference-id="{{referenceId}}">
+	<div class="box-header with-border">
+		{{data.title | translate}}
+		<div class="box-tools pull-right">
+			<button type="button" class="btn btn-box-tool" ng-click="changeStatus()" lit-if-permission="PLAYER_STATUS" lit-permission-domain="{{data.domainName}}">
+				<span><i class="fa fa-gear"></i> {{ "GLOBAL.ACTION.CHANGE" | translate }} </span>
+			</button>
+		</div>
+	</div>
+	<div class="box-body table-responsive">
+		<table class="table table-bordered">
+		<tr>
+			<th width="40%">{{ "GLOBAL.FIELDS.STATUS" | translate }}</th>
+			<td>
+				<span ng-if="user.status.userEnabled === true" class="label label-lg label-success">{{ user.status.name | uppercase }}</span>
+				<span ng-if="user.status.userEnabled === false" class="label label-lg label-danger">{{ user.status.name | uppercase }}</span>
+				<span ng-if="user.statusReason" class="label label-default">{{user.statusReason.description|uppercase}}</span>
+			</td>
+		</tr>
+		</table>
+		<table class="table table-bordered" ng-if="data.showHistory">
+		<tr>
+			<th colspan="2">Status History</th>
+		</tr><tr>
+			<td colspan="2">
+				&nbsp;
+			</td>
+		</tr>
+		</table>
+	</div>
+</div>

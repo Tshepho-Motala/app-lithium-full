@@ -1,0 +1,114 @@
+<wsdl:definitions xmlns:ns1="http://service.ws.lot.com/"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	name="ICustomerCheckWSService" targetNamespace="http://service.ws.lot.com/">
+	<wsdl:types>
+		<xsd:schema xmlns="http://service.ws.lot.com/" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+			attributeFormDefault="unqualified" elementFormDefault="unqualified"
+			targetNamespace="http://service.ws.lot.com/">
+			<xsd:complexType name="paramOutBean">
+				<xsd:sequence>
+					<xsd:element name="authStatus" type="xsd:int" />
+					<xsd:element minOccurs="0" name="barcode" type="xsd:string" />
+					<xsd:element minOccurs="0" name="fieldout_1" type="xsd:string" />
+					<xsd:element minOccurs="0" name="fieldout_2" type="xsd:string" />
+					<xsd:element minOccurs="0" name="fieldout_3" type="xsd:string" />
+					<xsd:element minOccurs="0" name="fieldout_4" type="xsd:string" />
+					<xsd:element minOccurs="0" name="fieldout_5" type="xsd:string" />
+					<xsd:element minOccurs="0" name="gatewayNo" type="xsd:string" />
+					<xsd:element minOccurs="0" name="merNo" type="xsd:string" />
+					<xsd:element minOccurs="0" name="orderNo" type="xsd:string" />
+					<xsd:element minOccurs="0" name="paytime" type="xsd:string" />
+					<xsd:element name="queryResult" type="xsd:int" />
+					<xsd:element minOccurs="0" name="sourceWebSite" type="xsd:string" />
+					<xsd:element minOccurs="0" name="tradeAmount" type="xsd:string" />
+					<xsd:element minOccurs="0" name="tradeCurrency" type="xsd:string" />
+					<xsd:element minOccurs="0" name="tradeDate" type="xsd:string" />
+					<xsd:element minOccurs="0" name="tradeNo" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="paramInBean">
+				<xsd:sequence>
+					<xsd:element minOccurs="0" name="fieldin_1" type="xsd:string" />
+					<xsd:element minOccurs="0" name="fieldin_2" type="xsd:string" />
+					<xsd:element minOccurs="0" name="fieldin_3" type="xsd:string" />
+					<xsd:element minOccurs="0" name="fieldin_4" type="xsd:string" />
+					<xsd:element minOccurs="0" name="fieldin_5" type="xsd:string" />
+					<xsd:element minOccurs="0" name="gatewayNo" type="xsd:string" />
+					<xsd:element minOccurs="0" name="merNo" type="xsd:string" />
+					<xsd:element minOccurs="0" name="orderNo" type="xsd:string" />
+					<xsd:element minOccurs="0" name="signInfo" type="xsd:string" />
+				</xsd:sequence>
+			</xsd:complexType>
+		</xsd:schema>
+		<xsd:schema xmlns:ns0="http://service.ws.lot.com/"
+			xmlns:xsd="http://www.w3.org/2001/XMLSchema" attributeFormDefault="unqualified"
+			elementFormDefault="unqualified" targetNamespace="http://service.ws.lot.com/">
+			<xsd:import namespace="http://service.ws.lot.com/" />
+			<xsd:complexType name="getTestUserCheckResultListResponse">
+				<xsd:sequence>
+					<xsd:element maxOccurs="unbounded" minOccurs="0" name="return"
+						type="ns0:paramOutBean" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="getNormalUserCheckResultList">
+				<xsd:sequence>
+					<xsd:element minOccurs="0" name="arg0" type="ns0:paramInBean" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="getNormalUserCheckResultListResponse">
+				<xsd:sequence>
+					<xsd:element maxOccurs="unbounded" minOccurs="0" name="return"
+						type="ns0:paramOutBean" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:complexType name="getTestUserCheckResultList">
+				<xsd:sequence>
+					<xsd:element minOccurs="0" name="arg0" type="ns0:paramInBean" />
+				</xsd:sequence>
+			</xsd:complexType>
+			<xsd:element name="getTestUserCheckResultListResponse"
+				type="ns0:getTestUserCheckResultListResponse" />
+			<xsd:element name="getNormalUserCheckResultList" type="ns0:getNormalUserCheckResultList" />
+			<xsd:element name="getNormalUserCheckResultListResponse"
+				type="ns0:getNormalUserCheckResultListResponse" />
+			<xsd:element name="getTestUserCheckResultList" type="ns0:getTestUserCheckResultList" />
+			<xsd:element name="SystemException" type="ns0:SystemException" />
+			<xsd:complexType name="SystemException">
+				<xsd:sequence />
+			</xsd:complexType>
+		</xsd:schema>
+
+	</wsdl:types>
+	<wsdl:message name="getTestUserCheckResultListResponse">
+		<wsdl:part element="ns1:getTestUserCheckResultListResponse"
+			name="parameters"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getNormalUserCheckResultListResponse">
+		<wsdl:part element="ns1:getNormalUserCheckResultListResponse"
+			name="parameters"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getTestUserCheckResultList">
+		<wsdl:part element="ns1:getTestUserCheckResultList" name="parameters"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getNormalUserCheckResultList">
+		<wsdl:part element="ns1:getNormalUserCheckResultList" name="parameters"></wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="SystemException">
+		<wsdl:part element="ns1:SystemException" name="SystemException"></wsdl:part>
+	</wsdl:message>
+	<wsdl:portType name="ICustomerCheckWSService">
+		<wsdl:operation name="getTestUserCheckResultList">
+			<wsdl:input message="ns1:getTestUserCheckResultList" name="getTestUserCheckResultList"></wsdl:input>
+			<wsdl:output message="ns1:getTestUserCheckResultListResponse"
+				name="getTestUserCheckResultListResponse"></wsdl:output>
+			<wsdl:fault message="ns1:SystemException" name="SystemException"></wsdl:fault>
+		</wsdl:operation>
+		<wsdl:operation name="getNormalUserCheckResultList">
+			<wsdl:input message="ns1:getNormalUserCheckResultList"
+				name="getNormalUserCheckResultList"></wsdl:input>
+			<wsdl:output message="ns1:getNormalUserCheckResultListResponse"
+				name="getNormalUserCheckResultListResponse"></wsdl:output>
+			<wsdl:fault message="ns1:SystemException" name="SystemException"></wsdl:fault>
+		</wsdl:operation>
+	</wsdl:portType>
+</wsdl:definitions>

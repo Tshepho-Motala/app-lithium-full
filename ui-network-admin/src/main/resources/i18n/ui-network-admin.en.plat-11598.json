@@ -1,0 +1,15 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "LIST": {
+      "PLAYERS":{
+        "FIELDS": {
+          "FILTER": {
+            "EMAIL_VALIDATED": {
+              "LABEL": "Is Email Validated"
+            }
+          }
+        }
+      }
+    }
+  }
+}

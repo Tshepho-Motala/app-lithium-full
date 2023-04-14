@@ -1,0 +1,14 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "GAME": {
+      "FIELDS": {
+        "COMMERCIAL_NAME": {
+          "NAME": "Commercial Game Name",
+          "PLACEHOLDER": "Eg: Commercial Game_",
+          "DESCRIPTION": "The name of the game as it is shown to the player.",
+          "PATTERN": "Only numbers, letters, space, and special characters allowed."
+        }
+      }
+    }
+  }
+}

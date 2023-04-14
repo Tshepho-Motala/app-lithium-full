@@ -1,0 +1,18 @@
+promotion = the schedule around which missions are active
+mission   = collection of tasks that need to be completed by the player
+task      = [event] the player has to do
+reward    = the value to the player
+
+
+a promotion has a mission
+a promotion has a reward
+a promotion runs on a schedule
+
+a mission is one or many tasks
+a task is an event that a user has to do which will activate a reward
+
+the tasks in a mission can be sequenced or optional
+- if sequenced, the user will have to complete each task in order
+- if optional, the user will have to complete one of the tasks
+
+once all the promotion mission tasks have been completed, the reward will be activated

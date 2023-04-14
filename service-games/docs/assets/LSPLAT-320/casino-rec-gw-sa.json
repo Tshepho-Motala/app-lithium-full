@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "gamesys-eu-dev-sbtech-data",
+  "private_key_id": "e6516acf49636525e70db90d1ca0e678cd7445ed",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQCZuVHXAJj/231k\nxA6g7qS4YLNkakc4KaMqoaPl9aw65FT6FR6PpLtYHTt8qJO7I9Q/PwC8pmk6ogyI\nIZop5TCMPk9QGGxRwblShHDAmwHFSuRsCNob0wukzjRw1yVTm7mNDNS32Fn22OnO\nDLX7pD2IsBeDnuQ5MqBrK1ghvvkK/Zo+U7Hkhj7T4Is0N1uGZxOG57ZjbOTByW2A\naxKJWFt5ffptXSzcYNjFiMzYKYXgNES2YviOmGjuyNJqkeOCQgOqcZ1G6YFFHOWh\n84DtDkCdA5e2kFc2W6Rxni3LHsxsa0ljj7nBy46wFhcO1h69kRFaKWUhbhWpVhqB\nq2IAPYjdAgMBAAECggEAFsu2+amihqqPTT6PpsjMz3SzlYv3FLqD8kH3EpZcXH1Y\npp80IXv9tiLbm/BJvAIjqt9WZiNNTn8SWauV92l/ygRBcbC1e2g9aaGvMLirygyB\nlA25/k9NFjrn5uXYqK3albKV5s9kA+mFvmL/J5pi756hVgjdcifyRwIt9w8hUkIv\nQIosAvJDdi1tYGva10gcXd0xpeY3eXp0lm2wT/kZULU8XbohaGfY7OHoIch766C1\nBz6WnSVnrlq4WngHFTNBS7E3swen/3ly4ogPNPNjgKeV9tnHLCYV3cQV003QbKrg\naruF6jNPLKCPwQ4GSdNJC9bb7y30TzQW123oIdnehwKBgQDUc351LMCm+Ff9UmYj\nLLEhh/wMENMBj78RnuthuCa55uRmSI1PrKQciT5AQdX0cMzziLlnBys71thvEWm7\nkjgsoxVumia17POgmRX4JA9cZNV2jciKK8VjBB6WpqHidYeuf7flZx33T2xQptLK\n/N+SbX4t4BqLgToDmsddblJiowKBgQC5PBO+hpXCafBFw1WDck1CnVmZ74+DItEh\nVwOhBWsTCzdjhLH2fI44e30p/GWRMfVpi6iz84FU+xxfeJk9H5bR4WASD7rTRQ1F\nuFPhZdE+LLFmOnnAHA7H4PRcI/UarvtjosSYqJBlIgDxNUxZl1/uxGvllRGljDXM\nLwiXZ2qefwKBgQCRJM6Scx6zdBt5ICBTi6cAR401GRFvkatx+GbLfipG+62zC4Iv\nmr0MGd+DuvbXZ3E+OHyiHM22thNr3jOkSENEi66Kv5oO1HGlmLDftJMiBmmn8zm8\n3CagfSIAvpr+wlkOKIeUnJxmZ8aSW0bME3MS8OcxpFe+U201JTtrY4G5jQKBgQCJ\nDBHvnNOgi5DhjKvwHNlct95bLgsYEuJ3sFFXCRM3e8z3LG4e1/jBgVwRfFQJINVZ\nyaJ/wWGm5kMPv8JgnsaPchgKROkM9sHjG4Wz9gjh319BK3J42El3SNCCe3gUzfHg\nvcSGzfBHYukfjTd38a9gkKLjsW7k9N+4ufO5USJpMQKBgFKA/6/kd728sRS4nTeM\nVhLH+MKj4xXo7E8+YvmyLvxnMRikerEmhjEnHpUXn/BLB6g5ZbB92QsRB+BEICaU\nM5j+kpGnXpViydlp7Sqxaaub39f4jD+z4fMCeZwkLtvuKyXnXQ9uDPQ5Oq615ZxX\nDq09u9SZcbfZF38Lza7/+zBN\n-----END PRIVATE KEY-----\n",
+  "client_email": "casino-recommendation-gw-sa@gamesys-eu-dev-sbtech-data.iam.gserviceaccount.com",
+  "client_id": "100094800164925151287",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/casino-recommendation-gw-sa%40gamesys-eu-dev-sbtech-data.iam.gserviceaccount.com"
+}

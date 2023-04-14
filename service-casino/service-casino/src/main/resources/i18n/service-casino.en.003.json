@@ -1,0 +1,9 @@
+{
+  "GLOBAL": {
+    "TRANTYPE": {
+      "MANUAL_BONUS_VIRTUAL": {
+        "LABEL": "Virtual bonus"
+      }
+    }
+  }
+}

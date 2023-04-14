@@ -1,0 +1,14 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "CMS": {
+      "SUB_NAVIGATION": {
+        "ADD": {
+          "ERROR": {
+            "DUPLICATE_ENTRY": "A sub navigation item with similar details already exists."
+          },
+          "SUCCESS" : "Sub navigation successfully created."
+        }
+      }
+    }
+  }
+}

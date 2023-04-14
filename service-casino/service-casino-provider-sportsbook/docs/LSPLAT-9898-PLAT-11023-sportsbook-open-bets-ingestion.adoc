@@ -1,0 +1,40 @@
+== Debit Reserve
+
+include::plantuml/sequence/vb-migration-open-bets-debitreserve.puml[]
+
+=== Notes
+* Currently, locating a reservation and the user performs a pessimistic lock on the applicable records.
+
+* During the ingestion of open bets, reservations (and potentially users) will not yet exist.
+
+* Pessimistic locking on non-existent records with mysql and innodb has a serious performance side effect. It will potentially cause an index range lock, or in some cases, a table lock.
+
+* The following test was performed to verify the above.
+
+** Using mysql workbench (with 2 separate mysql sessions, and auto-commit turned off):
+
+** Using DB table: lithium_casino_sportsbook.user
+
+*** In one session:
+
++
+[source,sql]
+----
+select * from user where guid = 'livescore_uk/nonexistantuser' for update;
+----
+
+***  In the second session:
+
++
+[source,sql]
+----
+insert into user (`guid`, `version`, `domain_id`) values ('livescore_uk/nonexistantuser8', 0, 1);
+----
+
+** Outcome: the transaction in the second session is blocked until the transaction in the first session is committed or rolled back.
+
+== Commit Reserve
+include::plantuml/sequence/vb-migration-open-bets-commitreserve.puml[]
+
+== Reserve or Settle
+include::plantuml/sequence/vb-migration-open-bets-reserve-settle.puml[]

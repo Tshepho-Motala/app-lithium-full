@@ -1,0 +1,10 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "TIME_SLOT": {
+      "ERROR": {
+        "MESSAGE_EQUAL": "FROM time cannot be the same as TO time.",
+        "MESSAGE_LESS": "FROM time must be before TO time."
+      }
+    }
+  }
+}

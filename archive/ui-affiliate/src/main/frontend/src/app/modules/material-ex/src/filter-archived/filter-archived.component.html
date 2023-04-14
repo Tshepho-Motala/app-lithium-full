@@ -1,0 +1,11 @@
+<div class="filter-archived">
+  <md-menu #appMenu="mdMenu">
+    <button md-menu-item (click)="archived = false"> Unarchived </button>
+    <button md-menu-item (click)="archived = true"> Archived </button>
+  </md-menu>
+  <button md-raised-button [mdMenuTriggerFor]="appMenu">
+     <span *ngIf="!archived">Unarchived</span>
+     <span *ngIf="archived">Archived</span>
+     <md-icon>arrow_drop_down</md-icon>
+  </button>
+</div>

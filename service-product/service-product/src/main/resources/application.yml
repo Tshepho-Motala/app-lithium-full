@@ -1,0 +1,46 @@
+server:
+  port: 9906
+  
+spring:
+  datasource:
+    url: jdbc:mysql://localhost/lithium_product
+    username: root
+    password: mysql
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: validate
+    properties:
+      jadira.usertype.autoRegisterUserTypes: true
+  cloud:
+    stream:
+      bindings:
+        productpurchaseinput:
+          group: productpurchasegroup
+          binder: rabbit
+          destination: productpurchaseoutput
+        triggerbonusoutput:
+          group: triggerbonusgroup
+          binder: rabbit
+          destination: triggerbonusqueue
+          producer:
+            required-groups: triggerbonusgroup
+#  cloud:
+#    stream:
+#      bindings:
+#        leaderboardinput:
+#          group: leaderboardgroup
+#          binder: rabbit
+#          destination: leaderboardqueue
+#        gatewayexchange:
+#          binder: rabbit
+#          destination: gateway
+#          producer:
+#            should-declare: false
+lithium:
+  services:
+    db:
+      load-test-data: false
+logging:
+  level:
+    lithium.service.product: INFO

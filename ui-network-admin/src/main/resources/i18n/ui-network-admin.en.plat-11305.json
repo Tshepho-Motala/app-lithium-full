@@ -1,0 +1,13 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "CASHIER_CONFIG": {
+      "DOMAIN_DEPOSIT_TOTALS": "Domain deposit totals",
+      "DOMAIN_WITHDRAW_TOTALS": "Domain withdraw totals",
+      "ACCOUNTING_TODAY": "Today",
+      "ACCOUNTING_WEEK": "Week",
+      "ACCOUNTING_MONTH": "Month",
+      "ACCOUNTING_LAST_MONTH": "Last month",
+      "NO_PROCESSORS_SETUP": "No processors setup"
+    }
+  }
+}

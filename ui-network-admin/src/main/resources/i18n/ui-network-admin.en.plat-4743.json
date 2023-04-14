@@ -1,0 +1,17 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "BONUS": {
+      "DELETE": {
+        "NOTIFY": {
+          "SUCCESS": "Bonus was deleted successfully.",
+          "ERROR": "Failed to delete bonus."
+        }
+      },
+      "CONFIRM": {
+        "DELETE": {
+          "TITLE": "Are you sure you want to delete the selected bonus?"
+        }
+      }
+    }
+  }
+}

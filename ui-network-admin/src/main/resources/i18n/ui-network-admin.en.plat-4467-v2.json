@@ -1,0 +1,12 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "GAME": {
+      "FIELDS": {
+        "GAME_DATETIME_INTRODUCTION": {
+          "NAME": "Introduction Date and Time",
+          "DESCRIPTION": "The date and time the game was first introduced"
+        }
+      }
+    }
+  }
+}

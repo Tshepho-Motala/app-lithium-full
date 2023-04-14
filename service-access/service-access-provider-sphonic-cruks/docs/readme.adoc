@@ -1,0 +1,49 @@
+= Service Access Provider Sphonic CRUKS Documentation
+Irwin Herridge <irwin.herridge@wonderlabz.com>
+1.0, November 13, 2021: Service Access Documentation
+:toc:
+:icons: font
+:url-quickref: https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/
+== Check Authorization
+---
+
+This is the implementation for the Sphonic CRUKS access provider.
+
+There are currently three use cases for CRUKS
+
+* Registration Flow
+    ** UC1: On registration, there is an external authorization API that is exposed to GW to pass in basic user info such as the first name, last name prefix, last name, place of birth, date of birth and BSN. This endpoint then gets called to get a CRUKS ID that is anonymously associated with the players BSN (as we do not store the BSN anywhere, not even in logs!). A isRegistered indicator is then placed on the CRUKS ID, and when isRegistered=true, the player is excluded and should not register or be allowed to login to a betting site (mutual exclusive ecosystem domain).
+    ** UC2: When the player is excluded on CRUKS, GW then do not call our registerV4 API to register a player on Lithium, but when the player is not registered, then GW will call Lithium on the registerV4 API with the cruksId added on the PlayerBasic.additionalData key value map. Lithium will then store this anonymous CRUKS ID on the players UserRevisionLabelValues or also known as the Users Additional Data store.
+* Login Flow
+    ** UC3: After successfully registering a user on Lithium with a valid CRUKS ID, on every login, Lithium needs to validate the players CRUKS ID to see if the isRegistered indicator has changed to have the player excluded. Should the player be found excluded on CRUKS, Lithium would add a Login Block After SE Restriction with a permanent self exclusion and account frozen due to CRUKS Self Exclusion. Should we not be able to validate the players CRUKS, we would allow the player to log in and continuously retry in the background until we are able to validate whether the player is excluded on CRUKS or not.
+* CRUKS Response results
+
+|===
+|Result |Description
+
+|PASS
+|The cruksId is valid and the player is not self excluded on CRUKS
+
+|FAIL
+|The cruksId is valid and the player is self excluded on CRUKS
+
+|INVALID
+|Occurs during the login workflow, whenever the cruksId is either empty or invalid (Not found on BlueM via Sphonic)
+
+|ERROR
+|Whenever there are issues between Sphonic and BlueM. Also, when the uniqueReference or cruksId is greater than the supported filed lengths which are cruksId=1024 and uniqueReference=36 characters.
+
+|NONE
+|Whenever Sphonic is unable to get an is registered value or unable to communicate with BlueM
+
+|===
+
+
+=== CRUKS Registration and Login Flow
+
+include::plantuml/svc-access-pr-sphonic-cruks.system-check-authorization.puml[]
+
+=== CRUKS Failed Attempt Retry
+
+include::plantuml/svc-access-pr-sphonic-cruks.failed-attempt-retry.puml[]
+

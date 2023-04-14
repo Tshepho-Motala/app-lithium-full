@@ -1,0 +1,162 @@
+<div class="modal-content modal-lg">
+    <div class="modal-header indigo white-text">
+        <h3 class="modal-title" id="modal-title">
+            {{'UI_NETWORK_ADMIN.SPORTBOOK.BETS.HISTORY.BET_INFO_TITLE' | translate }} {{controller.betInfomation.betId}}
+            <button-close-window ng-click="controller.cancel()"></button-close-window>
+        </h3>
+    </div>
+
+    <div class="modal-body">
+        <table class="table table-bordered">
+            <tr>
+                <th width="40%">{{ 'UI_NETWORK_ADMIN.PLAYER.CASINOHISTORY.TABLE.BETID.LABEL' | translate }}</th>
+                <td>{{controller.betInfomation.betId}}</td>
+            </tr>
+            <tr>
+                <th width="40%">{{ 'UI_NETWORK_ADMIN.SPORTSBOOK.BETS.FILTER.BET_TYPE' | translate }}</th>
+                <td>{{controller.betInfomation.betName}}</td>
+            </tr>
+            <tr>
+                <th width="40%">{{ 'UI_NETWORK_ADMIN.PLAYER.CASINOHISTORY.TABLE.BETDATE.LABEL' | translate }}
+                </th>
+                <td>{{controller.betInfomation.betDate | date:'medium'}}</td>
+            </tr>
+            <tr>
+                <th width="40%"> {{'UI_NETWORK_ADMIN.SPORTBOOK.BETS.HISTORY.YOUR_BET' | translate }}</th>
+                <td>{{controller.betInfomation.selections.length}} selection{{controller.betInfomation.selections.length > 1 ? 's' : ''}}</td>
+            </tr>
+            <tr>
+                <th width="40%"> {{'UI_NETWORK_ADMIN.SPORTBOOK.BETS.HISTORY.ODDS' | translate }}</th>
+                <td>{{controller.betInfomation.totalOdds}}</td>
+            </tr>
+            <tr>
+                <th width="40%"> {{ 'UI_NETWORK_ADMIN.PLAYER.CASINOHISTORY.TABLE.STAKE.LABEL' | translate }}
+                </th>
+                <td>{{controller.betInfomation.stake}}</td>
+            </tr>
+            <tr>
+                <th width="40%"> {{ 'UI_NETWORK_ADMIN.PLAYER.CASINOHISTORY.TABLE.RETURN.LABEL' | translate }}
+                </th>
+                <td>{{controller.betInfomation.return}}</td>
+            </tr>
+            <tr>
+                <th width="40%"> {{'UI_NETWORK_ADMIN.SPORTBOOK.BETS.HISTORY.WIN_LOSS' | translate }}</th>
+                <td>{{controller.betInfomation.return - controller.betInfomation.stake}}</td>
+            </tr>
+            <tr>
+                <th width="40%">{{ 'UI_NETWORK_ADMIN.PLAYER.CASINOHISTORY.TABLE.BETSTATUS.LABEL' | translate
+                    }}
+                </th>
+                <td>{{controller.betInfomation.betStatus}}</td>
+            </tr>
+            <tr>
+                <th width="40%">
+                    {{ 'UI_NETWORK_ADMIN.PLAYER.CASINOHISTORY.TABLE.BETSETTLEDDATE.LABEL' | translate }}
+                </th>
+                <td>{{controller.betInfomation.betSettledDate | date:'medium'}}</td>
+            </tr>
+            <tr>
+                <th width="40%">{{'UI_NETWORK_ADMIN.SPORTBOOK.BETS.HISTORY.BET_INFO_TITLE' | translate }}</th>
+                <td ng-if="controller.betInfomation.isFreeBet === 'true'"><p class="teal-text">
+                    {{'UI_NETWORK_ADMIN.SPORTBOOK.BETS.HISTORY.YES' | translate }}</p></td>
+                <td ng-if="controller.betInfomation.isFreeBet === 'false'"><p class="danger-text">
+                    {{'UI_NETWORK_ADMIN.SPORTBOOK.BETS.HISTORY.NO' | translate }}</p></td>
+            </tr>
+            <tr>
+                <th width="40%">{{'UI_NETWORK_ADMIN.SPORTBOOK.BETS.HISTORY.COMBO_BONUS' | translate }}</th>
+                <td ng-if="controller.betInfomation.isComboBonus"><p class="teal-text">
+                    {{'UI_NETWORK_ADMIN.SPORTBOOK.BETS.HISTORY.YES' | translate }}</p></td>
+                <td ng-if="!controller.betInfomation.isComboBonus"><p class="danger-text">
+                    {{'UI_NETWORK_ADMIN.SPORTBOOK.BETS.HISTORY.NO' | translate }}</p></td>
+            </tr>
+        </table>
+
+    </div>
+
+    <div class="modal-footer">
+        <div class="table table-sm table-responsive ng-isolate-scope">
+            <table class="table-hover table-striped nowrap ng-isolate-scope dataTable no-footer w-100 d-table"
+                   cellspacing="0"
+                   id="DataTables_Table_0"
+                   role="grid"
+                   aria-describedby="DataTables_Table_0_info">
+                <thead>
+                <tr>
+                    <th
+                            aria-controls="DataTables_Table_0"
+                            rowspan="1"
+                            colspan="1"
+                            aria-sort="descending"
+                            aria-label="Id: activate to sort column ascending"
+                    >{{'UI_NETWORK_ADMIN.INCENTIVEGAMES.BETS.FILTER.SPORTLABEL' | translate}}
+                    </th>
+                    <th
+                            aria-controls="DataTables_Table_0"
+                            rowspan="1"
+                            colspan="1"
+                            aria-label="Domain: activate to sort column ascending"
+                    >{{'UI_NETWORK_ADMIN.SPORTBOOK.BETS.HISTORY.LEAGUE' | translate}}
+                    </th>
+                    <th
+                            aria-controls="DataTables_Table_0"
+                            rowspan="1"
+                            colspan="1"
+                            aria-label="Domain: activate to sort column ascending"
+                    >{{'UI_NETWORK_ADMIN.SPORTBOOK.BETS.HISTORY.EVENT_DATE' | translate}}
+                    </th>
+                    <th
+                            aria-controls="DataTables_Table_0"
+                            rowspan="1"
+                            colspan="1"
+                            aria-sort="descending"
+                            aria-label="Id: activate to sort column ascending"
+                    >{{'UI_NETWORK_ADMIN.SPORTSBOOK.BETS.LABEL.MARKET_NAME' | translate}}
+                    </th>
+                    <th
+                            aria-controls="DataTables_Table_0"
+                            rowspan="1"
+                            colspan="1"
+                            aria-sort="descending"
+                            aria-label="Id: activate to sort column ascending"
+                    >{{'UI_NETWORK_ADMIN.INCENTIVEGAMES.BETS.FILTER.EVENTNAMELABEL' | translate}}
+                    </th>
+                    <th
+                            aria-controls="DataTables_Table_0"
+                            rowspan="1"
+                            colspan="1"
+                            aria-label="Domain: activate to sort column ascending"
+                    >{{'UI_NETWORK_ADMIN.SPORTBOOK.BETS.HISTORY.YOUR_BET' | translate}}
+                    </th>
+                    <th
+                            aria-controls="DataTables_Table_0"
+                            rowspan="1"
+                            colspan="1"
+                            aria-label="Domain: activate to sort column ascending"
+                    >{{'UI_NETWORK_ADMIN.SPORTBOOK.BETS.HISTORY.ODDS' | translate}}
+                    </th>
+                    <th
+                            aria-controls="DataTables_Table_0"
+                            rowspan="1"
+                            colspan="1"
+                            aria-sort="descending"
+                            aria-label="Id: activate to sort column ascending"
+                    >{{'GLOBAL.FIELDS.STATUS' | translate}}
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr data-ng-repeat="selected in controller.selections track by $index" ng-class="$index % 2 == 0 ? 'even' : 'odd'">
+                    <td>{{ selected.sportName }}</td>
+                    <td>{{ selected.leagueName }}</td>
+                    <td>{{ selected.eventDate | date: 'medium'}}</td>
+                    <td>{{ selected.marketName }}</td>
+                    <td>{{ selected.eventName }}</td>
+                    <td>{{ selected.settlementScore }}</td>
+                    <td>{{ selected.odds }}</td>
+                    <td>{{ selected.status }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

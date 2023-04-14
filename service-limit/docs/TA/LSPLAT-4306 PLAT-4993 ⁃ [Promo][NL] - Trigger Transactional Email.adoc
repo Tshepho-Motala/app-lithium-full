@@ -1,0 +1,70 @@
+= LSPLAT-4306 PLAT-4993 ⁃ [Promo][NL] - Trigger Transactional Email
+Riaan Schoeman <riaan.schoeman@wonderlabz.com>
+1.0, January 25, 2022:: TA - LSPLAT-4306 PLAT-4993 ⁃ [Promo][NL] - Trigger Transactional Email
+:toc: left
+:toclevels: 4
+:toc-title: LSPLAT-4306 PLAT-4993
+:icons: font
+:url-quickref: https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/
+
+== Information
+=== Tickets
+* https://jira.livescore.com/browse/PLAT-4993
+* https://playsafe.atlassian.net/browse/LSPLAT-4306
+
+=== Dependencies
+* https://gitlab.com/playsafe/lithium/app-lithium-full/-/merge_requests/4107[MR : LSPLAT-3984 PLAT-4693]
+
+=== MR
+* https://gitlab.com/playsafe/lithium/app-lithium-full/-/merge_requests/4156
+* This MR contains the branch that should be used to complete this task!
+
+== Description (From Ticket)
+=== Background
+As per PLAT-4693 we will be restricting customers access to Promotions when DWH informs us that the customer has triggered an intervention.
+
+This story has been raised to ensure that when Lithium applies the auto blocking of Promotions to a customer. We also send that customer a Transactional Email, informing them why they have been blocked.
+
+These will be templated emails, the same as we use today for Reset Password for example.
+
+There will be 3/4 templates for the emails, one for each stage of Intervention the customer is entering.
+
+For example:
+
+ * Customer needs to be blocked from Promotions for 30 days, we need to email them Template 1
+ * Customer is blocked for 60 days, Template 2 email should be sent to customer etc
+
+=== Requirements
+
+Lithium to trigger sending of Transactional Email (defined and created by CRM) upon auto restricting customers from Promotions for intervention purposes only
+Email should not be triggered for reasons such as customer is under 24, or user opting out of promotions voluntarily
+The sending/triggering of these emails should take place each time the customer triggers Intervention (as determined by data received by DWH)
+
+== Architecture
+
+* Intervention messages are triggered from DWH/LBO
+** For DWH flow : link:../../service-limit/doc/DwhRestrictions.set.adoc[DWH]
+** For LBO flow : When loaded via LBO → Responsible Gambling Tab → Restrictions → Add (TODO: please add a sequence diagram for this flow.)
+* For the two entry points mentioned above, we will need to send an email to the player to notify him/her of this block that has been placed.
+* Inside ``lithium.service.limit.services.UserRestrictionService.place`` is where restrictions are placed on an account.
+* Inside ``lithium.service.limit.services.UserRestrictionService.lift`` is where restrictions are lifted from an account.
+** If this is a ``INTERVENTION_COMPS_BLOCK``, meaning it was placed by LBO/DWH, we want to send the transaction email. We do not want to trigger any email for player initiated comps blocks. (``PLAYER_COMPS_OPTOUT``), **but only System Restrictions will be sending communications now.**
+** Add a new property to ``SystemRestriction``
+*** communicateToPlayer: Boolean (default false)
+*** will need to be persisted to DB
+*** will need to be editable inside LBO (only this flag on system restrictions.)
+** Looking at ``lithium.service.limit.services.ExclusionPlayerCommsService`` use this to make a copy for a similar service that could be used for the above. (Only to be triggered if the property above is set to true)
+*** Use the SystemRestriction to determine the name of the template. If the restriction that is being placed has a subType, add that to the template name sent in. Lastly append a '.place'/'.lift' depending on the method called above.
+*** e.g. 1
+**** SystemRestriction : INTERVENTION_COMPS_BLOCK
+**** template: intervention.comps.block (to lowercase!)(replace underscore with dot.)
+**** subType: 2
+**** method: place
+**** final template name sent: ``intervention.comps.block.2.place``
+
+*** e.g. 2
+**** SystemRestriction : LOGIN_BLOCK_AFTER_SE
+**** template: login.block.after.se (to lowercase!)(replace underscore with dot.)
+**** subType: none
+**** method: lift
+**** final template name sent: ``login.block.after.se.lift``

@@ -1,0 +1,21 @@
+= Bonus Framework
+:icons: font
+
+[sidebar]
+****
+link:readme.adoc[back]
+****
+
+== MVP1 (high level overview)
+---
+* RX
+** https://anzogroup.atlassian.net/browse/SBB-351 - Bonus Framework Enhancements - Phase 1
+*** saving bonus
+*** edit bonus
+*** activate bonus (manual / bulk)
+*** reporting on bonus activation/usage ?
+
+* LS
+** https://jira.livescore.com/browse/PLAT-2352 - [CASINO][LB-UK] Free Spins/Rewards Support
+***
+

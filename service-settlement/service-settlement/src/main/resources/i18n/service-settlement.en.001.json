@@ -1,0 +1,89 @@
+{
+	"GLOBAL": {
+		"FIELDS": {
+			"ACTIONS": "Actions",
+			"NODATA": "No data!"
+		},
+		"ACTION": {
+			"OPEN": "Open"
+		}
+	},
+	"UI_NETWORK_ADMIN": {
+		"SERVICE_SETTLEMENT": {
+			"BATCH": {
+				"LIST": {
+					"TITLE": "Batch Settlements List",
+					"DESCRIPTION": "A list of batched settlements",
+					"ID": "Batch ID",
+					"NAME": "Batch Name",
+					"CREATEDDATE": "Created Date",
+					"OPEN": "Open"
+				}
+			},
+			"SETTLEMENTS": {
+				"LIST": {
+					"TITLE": "View (batchId)",
+					"DESCRIPTION": "Batch: {{batchId}} ({{batchName}})",
+					"FINALIZE": {
+						"SUCCESS": "Batch settlements finalization initiated"
+					},
+					"ACTION": {
+						"FINALIZEBATCH": "Finalize Batch",
+						"EXPORTTOXLS": "Export to XLS",
+						"EXPORTTONETS": "Export to Nets"
+					},
+					"HELP": "Click on 'Finalize Batch' to close all settlements in this batch, as well as the batch itself. For all open settlements, PDF statements will be created and mailed to the respective entities or users using the 'settlement_statement' email template.",
+					"DATESTART": "Date Start",
+					"DATEEND": "Date End",
+					"CREATEDDATE": "Created Date",
+					"CREATEDBY": "Created By",
+					"TOTAL": "Total",
+					"ENTITY": "Entity",
+					"USER": "User"
+				},
+				"VIEW": {
+					"TITLE": "Settlement ({{settlementId}})",
+					"DESCRIPTION": "Settlement: {{dateStart}} to {{dateEnd}}",
+					"FINALIZE": {
+						"SUCCESS": "Finalize initiated"
+					},
+					"PDF": {
+						"RESEND": {
+							"SUCCESS": "Email added to queue"
+						}
+					},
+					"ACTION": {
+						"FINALIZE": "Finalize"
+					},
+					"HELP": "Once all settlement entries have been added, click on 'Finalize' to close this settlement. A PDF statement will be created and mailed to the respective entity or user using the 'settlement_statement' email template. The PDF statement will then be available to download and may be re-sent to the entity at any time.",
+					"DETAILS": {
+						"TITLE": "Details",
+						"CREATEDBY": "Created By:",
+						"CREATEDON": "Created On:",
+						"DATESTART": "Date Start:",
+						"DATEEND": "Date End:",
+						"ENTITY": "Entity:",
+						"USER": "User:",
+						"OPEN": "Open:",
+						"TOTAL": "Total:",
+						"PDFSTATEMENT": {
+							"TITLE": "PDF Statement:",
+							"ACTION": {
+								"PREVIEW": "preview",
+								"DOWNLOAD": "download",
+								"SENDAGAIN": "send again"
+							}
+						},
+						"PDFSTATEMENTSENT": "PDF Statement Sent:"
+					},
+					"LIST": {
+						"DATESTART": "Date Start",
+						"DATEEND": "Date End",
+						"DESCRIPTION": "Description",
+						"AMOUNT": "Amount"
+					}
+				}
+			}
+		}
+	}
+}

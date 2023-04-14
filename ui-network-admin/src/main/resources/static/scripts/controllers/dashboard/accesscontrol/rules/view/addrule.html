@@ -1,0 +1,62 @@
+<div class="modal-content">
+	<div class="modal-header primary-blue darken-4 white-text">
+		<h3 class="modal-title" id="modal-title">
+			<i class="fa fa-pencil"></i>
+ 			{{ 'UI_NETWORK_ADMIN.ACCESSCONTROL.RULESETS.VIEW.ADD_RULE.TITLE' | translate }}
+			<button-close-window ng-click="controller.cancel()"></button-close-window>
+		</h3>
+	</div>
+	
+	<form ng-submit="controller.save()" name="controller.form" novalidate>
+	<div class="modal-body" id="modal-body">
+		<div class="row v-reset-row ">
+			<div class="col-xs-12">
+				<div class="nav-tabs-custom">
+					<ul class="nav nav-tabs">
+						<li role="presentation" ng-class="{ active: controller.tab == tab }" ng-repeat="tab in controller.tabs">
+							<a ng-click="controller.setTab(tab)">{{ tab.title | translate }}</a>
+						</li>
+					</ul>
+					<div class="tab-content" style="padding: 15px;">
+						<formly-form model="controller.model" fields="controller.fields" options="controller.options" form="controller.form">
+						</formly-form>
+						<div ng-if="controller.tab.name === 'external'" class="formly-field ng-scope ng-isolate-scope formly-field-ui-select-single">
+							<div class="form-group ng-scope no-padding" ng-class="{'has-error': showError}">
+								<div>
+									<label for="controller.form_ui-select-single_outcomes_0" class="control-label">{{ 'UI_NETWORK_ADMIN.ACCESSCONTROL.RULESETS.VIEW.ADD_RULE.OUTCOMES' | translate }} * </label>
+									<table class="table">
+									<tbody>
+									<tr class="description">
+										<th style="width:25%;">{{ 'UI_NETWORK_ADMIN.ACCESSCONTROL.RULESETS.VIEW.ADD_RULE.PROVIDER_OUTCOMES' | translate }}</th>
+										<th style="width:20%;">&nbsp;</th>
+										<th style="width:55%;">{{ 'UI_NETWORK_ADMIN.ACCESSCONTROL.RULESETS.VIEW.ADD_RULE.FINAL_OUTCOMES' | translate }}</th>
+									</tr>
+									<tr ng-repeat="outcome in controller.outcomeList">
+										<th>{{outcome.name}}</th>
+										<td><span class="description">{{ 'UI_NETWORK_ADMIN.ACCESSCONTROL.RULESETS.VIEW.ADD_RULE.OUTCOMES_DESCRIPTION' | translate }}</span></td>
+										<td>
+											<ui-select theme="bootstrap" ng-model="controller.model.outputList[outcome.name]" data-required="true" search-enabled="true">
+												<ui-select-match data-allow-clear="true">{{$select.selected.name}}</ui-select-match>
+												<ui-select-choices
+													data-repeat="output.name as output in controller.outputList | filter: $select.search | limitTo: ($select.search.length <= 2) ? 100 : undefined">
+													<div ng-bind-html="output.name | highlight: $select.search"></div>
+												</ui-select-choices>
+											</ui-select>
+										</td>
+									</tr>
+									</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<button-save class="pull-left"></button-save>
+		<button-cancel ng-click="controller.cancel()"></button-cancel>
+	</div>
+	</form>
+</div>

@@ -1,0 +1,3 @@
+ALTER TABLE `mass_action_meta`
+ADD COLUMN `player_restrictions` VARCHAR(255) DEFAULT NULL,
+ALGORITHM = COPY, LOCK = SHARED;

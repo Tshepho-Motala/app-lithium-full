@@ -1,0 +1,204 @@
+<div class="box box-info box-solid bs-loading-container" bs-loading-overlay
+     bs-loading-overlay-reference-id="{{referenceId}}">
+    <div class="box-header with-border">
+        {{'UI_NETWORK_ADMIN.DEPOSITLIMITS.TITLE' | translate}}
+        <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" ng-click="refresh()">
+                <i class="fa fa-refresh"></i> refresh
+            </button>
+        </div>
+    </div>
+    <div class="box-body table-responsive" style="padding: 4px;">
+        <table class="table table-hover table-striped nowrap" cellspacing="0" width="100%" ng-if="disabledMessage">
+            <tr>
+                <td>{{disabledMessage}}</td>
+            </tr>
+        </table>
+        <table class="table table-hover table-striped nowrap" cellspacing="0" width="100%" ng-if="!disabledMessage">
+            <tr style="background-color: #d2d6de;">
+                <th>Type</th>
+                <th>Limit</th>
+                <th>Deposits</th>
+                <!--            <th>%</th>-->
+                <th>&nbsp;</th>
+            </tr>
+            <!-- Daily -->
+            <tr>
+                <th>{{'UI_NETWORK_ADMIN.DEPOSITLIMITS.DAILY.LABEL' | translate}}</th>
+                <td ng-if="data.dailyLimit > 0">{{data.dailyLimit | number:2}}</td>
+                <td ng-if="data.dailyLimit === undefined">{{'UI_NETWORK_ADMIN.DEPOSITLIMITS.NOTSET' | translate}}</td>
+                <td ng-if="data.dailyLimit === 0">{{'UI_NETWORK_ADMIN.DEPOSITLIMITS.NOTSET' | translate}}</td>
+                <td ng-if="data.dailyLimitUsed">{{data.dailyLimitUsed | number:2}}</td>
+                <td ng-if="!data.dailyLimitUsed">{{0 | number:2}}</td>
+                <!--            <td ng-if="dailyLimit">{{((dailyLimitUsed / dailyLimit) * 100)|number:2}}%</td>-->
+                <!--            <td ng-if="!dailyLimit">n/a</td>-->
+                <td>
+                    <a lit-if-permission="PLAYER_DEPOSIT_LIMIT_EDIT" lit-permission-domain="{{user.domain.name}}" style="cursor: pointer;"
+                       ng-click="changeLimits(3)">
+                        <span ng-if="data.dailyLimit === undefined"><i class="fa fa-plus-square"></i></span>
+                        <span ng-if="data.dailyLimit >= 0 && !dailyLimitPending"><i class="fa fa-pencil-square-o"></i></span>
+                    </a>
+                    
+                    <a ng-if="data.dailyLimit && data.dailyLimit >= 0" lit-if-permission="PLAYER_DEPOSIT_LIMIT_EDIT" lit-permission-domain="{{user.domain.name}}" style="cursor: pointer;"
+                       ng-click="removeLimit(3)">
+                        <span><i class="fa fa-trash"></i></span>
+                    </a>
+                </td>
+            </tr>
+            <tr ng-if="dailyLimitSupposed >= 0">
+                <td colspan="5" class="warning">
+                    {{ 'UI_NETWORK_ADMIN.DEPOSITLIMITS.SUPPOSED.DAILY' | translate: {
+                    date: (dailyLimitSupposedCreated | date:"medium"),
+                    amount: (dailyLimitSupposed | number:2)
+                } }}
+                    <a lit-if-permission="PLAYER_DEPOSIT_LIMIT_EDIT" lit-permission-domain="{{user.domain.name}}" style="cursor: pointer;"
+                       ng-click="applySupposedLimit(3)">
+                        <span><i class="fa fa-check"></i></span>
+                    </a>
+                    <a lit-if-permission="PLAYER_DEPOSIT_LIMIT_EDIT" lit-permission-domain="{{user.domain.name}}" style="cursor: pointer;"
+                       ng-click="removeSupposedLimit(3)">
+                        <span><i class="fa fa-trash"></i></span>
+                    </a>
+                </td>
+            </tr>
+            <tr ng-if="dailyLimitPending >= 0">
+                <td colspan="5" class="warning">
+                    {{ 'UI_NETWORK_ADMIN.DEPOSITLIMITS.PENDING_TIME.DAILY' | translate: {
+                    date: (dailyLimitPendingCreated | date:"medium"),
+                    amount: (dailyLimitPending | number:2),
+                    time: pendingDepositTimeLeft
+                } }}
+                    <a lit-if-permission="PLAYER_DEPOSIT_LIMIT_EDIT" lit-permission-domain="{{user.domain.name}}" style="cursor: pointer;"
+                       ng-click="removePendingLimit(3)">
+                        <span><i class="fa fa-trash"></i></span>
+                    </a>
+                </td>
+            </tr>
+            <tr ng-if="(data.dailyLimit >= 0) && ((data.dailyLimitUsed / data.dailyLimit)>0)">
+                <td colspan="5">
+                    <uib-progressbar type="info" value="((data.dailyLimitUsed / data.dailyLimit) * 100)|number:2"><span
+                            style="color: black;">{{((data.dailyLimitUsed / data.dailyLimit) * 100) | number:2}} % of daily limit used.</span>
+                    </uib-progressbar>
+                </td>
+            </tr>
+            <!-- Weekly -->
+            <tr>
+                <th>{{'UI_NETWORK_ADMIN.DEPOSITLIMITS.WEEKLY.LABEL' | translate}}</th>
+                <td ng-if="data.weeklyLimit > 0">{{data.weeklyLimit | number:2}}</td>
+                <td ng-if="data.weeklyLimit === undefined">{{'UI_NETWORK_ADMIN.DEPOSITLIMITS.NOTSET' | translate}}</td>
+                <td ng-if="data.weeklyLimit === 0">{{'UI_NETWORK_ADMIN.DEPOSITLIMITS.NOTSET' | translate}}</td>
+                <td ng-if="data.weeklyLimitUsed">{{data.weeklyLimitUsed | number:2}}</td>
+                <td ng-if="!data.weeklyLimitUsed">{{0 | number:2}}</td>
+                <!--            <td ng-if="weeklyLimit">{{((weeklyLimitUsed / weeklyLimit) * 100)|number:2}}%</td>-->
+                <!--            <td ng-if="!weeklyLimit">n/a</td>-->
+                <td>
+                    <a lit-if-permission="PLAYER_DEPOSIT_LIMIT_EDIT" lit-permission-domain="{{user.domain.name}}" style="cursor: pointer;"
+                       ng-click="changeLimits(4)">
+                        <span ng-if="data.weeklyLimit === undefined"><i class="fa fa-plus-square"></i></span>
+                        <span ng-if="data.weeklyLimit >= 0 && !weeklyLimitPending"><i
+                                class="fa fa-pencil-square-o"></i></span>
+                    </a>
+                    <a lit-if-permission="PLAYER_DEPOSIT_LIMIT_EDIT" lit-permission-domain="{{user.domain.name}}" ng-if="data.weeklyLimit && data.weeklyLimit >= 0" style="cursor: pointer;"
+                       ng-click="removeLimit(4)">
+                        <span><i class="fa fa-trash"></i></span>
+                    </a>
+                </td>
+            </tr>
+            <tr ng-if="weeklyLimitSupposed >= 0">
+                <td colspan="5" class="warning">
+                    {{ 'UI_NETWORK_ADMIN.DEPOSITLIMITS.SUPPOSED.WEEKLY' | translate: {
+                    date: (weeklyLimitSupposedCreated | date:"medium"),
+                    amount: (weeklyLimitSupposed | number:2)
+                } }}
+                    <a lit-if-permission="PLAYER_DEPOSIT_LIMIT_EDIT" lit-permission-domain="{{user.domain.name}}" style="cursor: pointer;"
+                       ng-click="applySupposedLimit(4)">
+                        <span><i class="fa fa-check"></i></span>
+                    </a>
+                    <a lit-if-permission="PLAYER_DEPOSIT_LIMIT_EDIT" lit-permission-domain="{{user.domain.name}}" style="cursor: pointer;"
+                       ng-click="removeSupposedLimit(4)">
+                        <span><i class="fa fa-trash"></i></span>
+                    </a>
+                </td>
+            </tr>
+            <tr ng-if="weeklyLimitPending >= 0">
+                <td colspan="5" class="warning">
+                    {{ 'UI_NETWORK_ADMIN.DEPOSITLIMITS.PENDING_TIME.WEEKLY' | translate: {
+                    date: (weeklyLimitPendingCreated | date:"medium"),
+                    amount: (weeklyLimitPending | number:2),
+                    time: pendingDepositTimeLeft
+                } }}
+                    <a lit-if-permission="PLAYER_DEPOSIT_LIMIT_EDIT" lit-permission-domain="{{user.domain.name}}" style="cursor: pointer;"
+                       ng-click="removePendingLimit(4)" lit-permission-domain="{{user.domain.name}}">
+                        <span><i class="fa fa-trash"></i></span>
+                    </a>
+                </td>
+            </tr>
+            <tr ng-if="(data.weeklyLimit >= 0) && ((data.weeklyLimitUsed / data.weeklyLimit)>0)">
+                <td colspan="5">
+                    <uib-progressbar type="info" value="((data.weeklyLimitUsed / data.weeklyLimit) * 100)|number:2"><span
+                            style="color: black;">{{((data.weeklyLimitUsed / data.weeklyLimit) * 100) | number:2}} % of weekly limit used.</span>
+                    </uib-progressbar>
+                </td>
+            </tr>
+            <!-- Monthly -->
+            <tr>
+                <th>{{'UI_NETWORK_ADMIN.DEPOSITLIMITS.MONTHLY.LABEL' | translate}}</th>
+                <td ng-if="data.monthlyLimit > 0">{{data.monthlyLimit | number:2}}</td>
+                <td ng-if="data.monthlyLimit === undefined">{{'UI_NETWORK_ADMIN.DEPOSITLIMITS.NOTSET' | translate}}</td>
+                <td ng-if="data.monthlyLimit === 0">{{'UI_NETWORK_ADMIN.DEPOSITLIMITS.NOTSET' | translate}}</td>
+                <td ng-if="data.monthlyLimitUsed">{{data.monthlyLimitUsed | number:2}}</td>
+                <td ng-if="!data.monthlyLimitUsed">{{0 | number:2}}</td>
+                <!--            <td ng-if="monthlyLimit">{{((monthlyLimitUsed / monthlyLimit) * 100)|number:2}}%</td>-->
+                <!--            <td ng-if="!monthlyLimit">n/a</td>-->
+                <td>
+                    <a lit-if-permission="PLAYER_DEPOSIT_LIMIT_EDIT" lit-permission-domain="{{user.domain.name}}" style="cursor: pointer;"
+                       ng-click="changeLimits(2)">
+                        <span ng-if="data.monthlyLimit === undefined"><i class="fa fa-plus-square"></i></span>
+                        <span ng-if="data.monthlyLimit >= 0 && !monthlyLimitPending"><i
+                                class="fa fa-pencil-square-o"></i></span>
+                    </a>
+                    <a lit-if-permission="PLAYER_DEPOSIT_LIMIT_EDIT" lit-permission-domain="{{user.domain.name}}" ng-if="data.monthlyLimit && data.monthlyLimit >= 0" style="cursor: pointer;"
+                       ng-click="removeLimit(2)">
+                        <span><i class="fa fa-trash"></i></span>
+                    </a>
+                </td>
+            </tr>
+            <tr ng-if="monthlyLimitSupposed >= 0">
+                <td colspan="5" class="warning">
+                    {{ 'UI_NETWORK_ADMIN.DEPOSITLIMITS.SUPPOSED.MONTHLY' | translate: {
+                    date: (monthlyLimitSupposedCreated | date:"medium"),
+                    amount: (monthlyLimitSupposed | number:2)
+                } }}
+                    <a lit-if-permission="PLAYER_DEPOSIT_LIMIT_EDIT" lit-permission-domain="{{user.domain.name}}" style="cursor: pointer;"
+                       ng-click="applySupposedLimit(2)">
+                        <span><i class="fa fa-check"></i></span>
+                    </a>
+                    <a lit-if-permission="PLAYER_DEPOSIT_LIMIT_EDIT" lit-permission-domain="{{user.domain.name}}" style="cursor: pointer;"
+                       ng-click="removeSupposedLimit(2)">
+                        <span><i class="fa fa-trash"></i></span>
+                    </a>
+                </td>
+            </tr>
+            <tr ng-if="monthlyLimitPending >= 0">
+                <td colspan="5" class="warning">
+                    {{ 'UI_NETWORK_ADMIN.DEPOSITLIMITS.PENDING_TIME.MONTHLY' | translate: {
+                    date: (monthlyLimitPendingCreated | date:"medium"),
+                    amount: (monthlyLimitPending | number:2),
+                    time: pendingDepositTimeLeft
+                } }}
+                    <a lit-if-permission="PLAYER_DEPOSIT_LIMIT_EDIT" lit-permission-domain="{{user.domain.name}}" style="cursor: pointer;"
+                       ng-click="removePendingLimit(2)">
+                        <span><i class="fa fa-trash"></i></span>
+                    </a>
+                </td>
+            </tr>
+            <tr ng-if="(data.monthlyLimit >= 0) && ((data.monthlyLimitUsed / data.monthlyLimit)>0)">
+                <td colspan="5">
+                    <uib-progressbar type="info" value="((data.monthlyLimitUsed / data.monthlyLimit) * 100)|number:2"><span
+                            style="color: black;">{{((data.monthlyLimitUsed / data.monthlyLimit) * 100) | number:2}} % of monthly limit used.</span>
+                    </uib-progressbar>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

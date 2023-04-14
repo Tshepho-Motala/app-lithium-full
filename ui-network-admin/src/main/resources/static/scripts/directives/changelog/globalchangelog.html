@@ -1,0 +1,59 @@
+<div class="row">
+    <div class="row" ng-if="!controller.isPlayersTab" style="display: list-item; margin-bottom: auto;">
+        <div class="col-xs-12 bottom-space-10 top-space-10 text-right">
+            <div  id="vueMountDomainSelect"></div>
+        </div>
+    </div>
+    <div class="col-xs-12">
+        <div class="card card-block">
+            <div class="" style="margin-bottom: 10px;">
+                <div ng-if="!controller.isKycTab">
+                    <div uib-collapse="controller.legendCollapsed">
+                        <div class="row v-reset-row " >
+                            <formly-form model="controller.model" fields="controller.fields" form="controller.form" options="controller.options">
+                            </formly-form>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="flex-row pull-right">
+                                <button-clear ng-click="controller.resetFilter(true)"></button-clear>
+                                <button-add ng-click="controller.addNote()" lit-if-permission="PLAYER_NOTE_ADD" lit-permission-domain="{{controller.domainName}}"></button-add>
+                                <button-filter ng-click="controller.applyFilter(true)"></button-filter>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="collapse" uib-collapse="!controller.legendCollapsed">
+                    <div align="center">
+                        <button-filter class="pull-left" ng-click="controller.toggleLegendCollapse()"></button-filter>
+                        <button-refresh class="pull-right" ng-click="controller.applyFilter(false)"></button-refresh>
+                        <button-clear class="pull-right" ng-click="controller.resetFilter(false)"></button-clear>
+                        <button-add class="pull-right" ng-click="controller.addNote()" lit-if-permission="PLAYER_NOTE_ADD" lit-permission-domain="{{controller.domainName}}"></button-add>
+                    </div>
+                    <div class="text-center col-xs-12" style="padding-top: 10px;">
+                        <span class="description"> <label>{{"UI_NETWORK_ADMIN.CHANGELOGS.PLAYER.TABLE.LABEL.ENTRIES" | translate}}</label><br/></span>
+                        <span ng-if="controller.model.changeDateRangeStart || controller.model.changeDateRangeEnd" class="description"> <label ng-if="controller.model.changeDateRangeStart"> from {{controller.model.changeDateRangeStart|date}}</label> <label ng-if="controller.model.changeDateRangeEnd"> up to {{controller.model.changeDateRangeEnd|date}}</label><br/></span>
+                        <span ng-if="controller.model.entities !== undefined && controller.model.entities !== null" class="description"><label>with entities: {{controller.objArrToCommaSepStr(controller.model.entities, 'name')}}</label><br/></span>
+                        <span ng-if="controller.model.types !== undefined && controller.model.types !== null" class="description"><label>with types: {{controller.objArrToCommaSepStr(controller.model.types, 'name')}}</label><br/></span>
+                        <span ng-if="controller.model.priority !== undefined && controller.model.priority !== null" class="description"><label>with priority: {{controller.model.priority}} or higher</label><br/></span>
+                    </div>
+                </div>
+                </div>
+                <div class="box-body table-responsive">
+                    <div class="col-xs-12" ng-if="controller.isPlayersTab  && !controller.isKycTab">
+                        <h3 ng-if="controller.isPlayersTab">{{"UI_NETWORK_ADMIN.CHANGELOGS.PLAYER.TABLE.LABEL.PINNED" | translate}}</h3>
+<!--                        <h3 ng-if="!controller.isPlayersTab">{{"UI_NETWORK_ADMIN.CHANGELOGS.GLOBAL.TABLE.LABEL.PINNED" | translate}}</h3>-->
+                    </div>
+                    <table ng-if="controller.isPlayersTab && !controller.isKycTab" datatable="controller.dataTable" dt-options="controller.pinnedchangelogsTable.options" dt-columns="controller.pinnedchangelogsTable.columns" dt-instance="controller.pinnedchangelogsTable.instance"
+                           class="table-hover table-striped nowrap" cellspacing="0" width="100%">
+                    </table>
+                    <div class="col-xs-12">
+                        <h3 ng-if="controller.isPlayersTab">{{"UI_NETWORK_ADMIN.CHANGELOGS.PLAYER.TABLE.LABEL.HISTORY" | translate}}</h3>
+                        <h3 ng-if="!controller.isPlayersTab">{{"UI_NETWORK_ADMIN.CHANGELOGS.GLOBAL.TABLE.LABEL.HISTORY" | translate}}</h3>
+                    </div>
+                    <table datatable="" dt-options="controller.changelogsTable.options" dt-columns="controller.changelogsTable.columns" dt-instance="controller.changelogsTable.instance"
+                           class="table-hover table-striped nowrap" cellspacing="0" width="100%">
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

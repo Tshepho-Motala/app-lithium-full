@@ -1,0 +1,95 @@
+[plantuml]
+----
+@startuml
+skinparam linetype ortho
+
+'These definitions can be removed once https://gitlab.com/playsafe/lithium/app-lithium-full/-/merge_requests/5282 is merged,
+'and rather include the base template
+!define T(name,desc) class name as "desc" << (T,#FFAAAA) >>
+!define pk(x) <b>x</b>
+!define fk(x) <color:purple><i>x</i></color>
+!define unique(x) <color:green>x</color>
+!define nn(x) <u>x</u>
+
+T(user, "user") {
+  pk(id): BIGINT(20) <<generated>>
+  --
+  .
+}
+
+T(ptl_config, "player_playtime_limit_v2_config") {
+  pk(id): BIGINT(20) <<generated>>
+  --
+  version: INT(11)
+  fk(user_id): BIGINT(20)
+  fk(current_config_revision_id): BIGINT(20)
+  fk(pending_config_revision_id): BIGINT(20)
+}
+
+T(ptl_config_revision, "player_playtime_limit_v2_config_revision") {
+  pk(id): BIGINT(20) <<generated>>
+  --
+  version: INT(11)
+  fk(user_id): BIGINT(20)
+  fk(granularity_id): BIGINT(20)
+  seconds_allocated: BIGINT(20)
+  created_date: DATETIME
+  fk(created_by_id): BIGINT(20)
+  effective_from: DATETIME
+}
+
+T(ptl_entry, "player_playtime_limit_v2_entry") {
+  pk(id): BIGINT(20) <<generated>>
+  --
+  version: INT(11)
+  fk(user_id): BIGINT(20)
+  fk(period_id): BIGINT(20)
+  seconds_accumulated: BIGINT(20)
+  limit_reached_at: DATETIME
+}
+
+T(period, "period") {
+  pk(id): BIGINT(20) <<generated>>
+  --
+  version: INT(11)
+  fk(domain_id): BIGINT(20)
+  fk(granularity_id): BIGINT(20)
+  day: INT(11)
+  week: INT(11)
+  month: INT(11)
+  year: INT(11)
+  date_start: DATETIME
+  date_end: DATETIME
+}
+
+T(granularity, "granularity") {
+  pk(id): BIGINT(20) <<generated>>
+  --
+  unique(type): VARCHAR(255)
+}
+
+T(as_metadata, "user_active_sessions_metadata") {
+  pk(id): BIGINT(20) <<generated>>
+  --
+  fk(user_id): BIGINT(20)
+  active_session_count: INT(11)
+  playtime_limit_last_updated: DATETIME
+}
+
+T(ptl_v1_migration_progress, "player_playtime_limit_v1_data_migration_progress") {
+  pk(id): BIGINT(20) <<generated>>
+  --
+  version: INT(11)
+  running: BIT(1)
+  last_id_processed: BIGINT(20)
+}
+
+user ||..|{ ptl_config
+ptl_config ||..|{ ptl_config_revision
+granularity ||..|{ ptl_config_revision
+user ||..|{ as_metadata
+user ||..|{ ptl_entry
+ptl_entry }|..|| period
+granularity ||..|{ period
+@enduml
+----

@@ -1,0 +1,9 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "BALANCE_LIMITS": {
+      "CHANGE": {
+        "CONFIRMATION_MESSAGE_INCREASE": "Are you sure you want to increase the amount from \"{{amount_from}}\" to \"{{amount_to}}\"?"
+      }
+    }
+  }
+}

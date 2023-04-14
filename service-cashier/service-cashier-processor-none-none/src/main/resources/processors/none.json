@@ -1,0 +1,37 @@
+{
+  "name": "Custom",
+  "code": "custom",
+  "url": "service-cashier-processor-none-none",
+  "methodNames": ["none"],
+  "deposit": true,
+  "withdraw": true,
+  "fees": {
+    "flat": 0,
+    "percentage": 0,
+    "minimum": 0
+  },
+  "limits": {
+    "minAmount": 2500,
+    "maxAmount": 0,
+    "maxAmountDay": 0,
+    "maxAmountWeek": 0,
+    "maxAmountMonth": 0,
+    "maxTransactionsDay": 0,
+    "maxTransactionsWeek": 0,
+    "maxTransactionsMonth": 0
+  },
+  "properties": [
+    { 
+      "name": "title",
+      "defaultValue": "Gift Cards",
+      "type": "frontend",
+      "description": "This is a custom title to display once the player has selected this method."
+    },
+    { 
+      "name": "message",
+      "defaultValue": "Contact our customer support for more information on our gift card offering.",
+      "type": "frontend",
+      "description": "This is a custom message to display once the player has selected this method."
+    }
+  ]
+}

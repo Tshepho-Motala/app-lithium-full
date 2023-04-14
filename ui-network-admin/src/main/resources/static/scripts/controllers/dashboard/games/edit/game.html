@@ -1,0 +1,63 @@
+<div class="container-fluid">
+	<div class="box box-primary box-widget" style="margin-bottom: 10px;">
+		<div class="box-body box-profile">
+			<div class="user-block">
+				<div class="pull-right">
+					<span style="line-height:inherit;" class="label label-success">{{ controller.model.providerGuid | uppercase }}</span>
+					<span style="line-height:inherit;" class="label label-success">{{ controller.model.providerGameId | uppercase }}</span>
+				</div>
+				<h4 style="font-weight: bold;">
+					<a>{{ 'UI_NETWORK_ADMIN.GAME.EDIT.TITLE' | translate: data }} - {{ controller.model.name | uppercase }}</a><br/>
+					<a class="description" style="margin:0;">{{ 'UI_NETWORK_ADMIN.GAME.EDIT.DESCRIPTION' | translate }}</a>
+				</h4>
+			</div>
+		</div>
+	</div>
+	
+	<div class="card card-block" style="margin-bottom: 10px;">
+		<div class="d-flex justify-content-start">
+			<div class="p-2 mr-auto" style="width: 50%;">
+				<span class="title" ng-if="controller.selectedDomain">{{controller.selectedDomain}}</span>
+				<span class="description" ng-if="controller.selectedDomain">{{ 'UI_NETWORK_ADMIN.GAME.EDIT.DOMAIN_SELECTED' | translate }}</span>
+			</div>
+			<div class="p-2 text-center">
+				&nbsp;
+			</div><div class="ml-auto p-2 text-right" style="width: 30%;">
+				<ui-select
+					theme="bootstrap"
+					ng-model="controller.selectedDomain"
+					search-enabled="true"
+					on-select="controller.domainSelect($item)"
+					style="min-width: 200px;">
+					<ui-select-match
+						placeholder=""
+						data-allow-clear="false">
+						{{controller.selectedDomain}}
+					</ui-select-match>
+					<ui-select-choices data-repeat="domain in controller.domains | filter: $select.search">
+						<div ng-bind-html="domain.name | highlight: $select.search"></div>
+					</ui-select-choices>
+				</ui-select>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row v-reset-row ">
+		<div class="col-xs-12">
+			<div class="nav-tabs-custom" style="margin-bottom: 5px;">
+				<ul class="nav nav-tabs">
+					<li role="presentation" ng-class="{ active: ($state.current.name.indexOf(tab.name) === 0) }"
+						ng-repeat="tab in controller.tabs" lit-if-permission="{{tab.roles}}" class="{{tab.tclass}}">
+						<a ng-click="controller.setTab(tab)">{{ tab.title | translate }}</a>
+					</li>
+				</ul>
+				<div class="tab-content" style="padding: 0px">
+					<div ui-view></div>
+				</div>
+			</div>
+		</div>
+	</div>
+    <div class="row v-reset-row ">
+        <changelog options="controller.changelogs"></changelog>
+    </div>
+</div>

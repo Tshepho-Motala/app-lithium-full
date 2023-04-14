@@ -1,0 +1,9 @@
+server.port: 9787
+
+spring:
+  application:
+    name: service-casino-provider-livedealer
+    
+eureka:
+  instance:
+    appname: service-casino-provider-livedealer

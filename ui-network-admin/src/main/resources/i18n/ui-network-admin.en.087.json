@@ -1,0 +1,75 @@
+{
+  "GLOBAL": {
+    "GRANULARITY": {
+      "YEARS": "Year(s)",
+      "MONTHS": "Month(s)",
+      "WEEKS": "Week(s)",
+      "DAYS": "Day(s)"
+    },
+    "ACTION": {
+      "ADJUST": "Adjust"
+    },
+    "SCHEDULER": {
+      "START": "Starting",
+      "TITLE": "Schedule",
+      "RRULE": "Rule",
+      "NORRULE": "No scheduling rule defined yet.",
+      "EXPLAIN": "Explanation",
+      "BYDAY": {
+        "0": "Monday",
+        "1": "Tuesday",
+        "2": "Wednesday",
+        "3": "Thursday",
+        "4": "Friday",
+        "5": "Saturday",
+        "6": "Sunday"
+      },
+      "FIELDS": {
+        "RECURRENCEPATTERN": {
+          "TITLE": "RRule",
+          "PLACE": "E.g. FREQ=WEEKLY;INTERVAL=2;BYDAY=MO,FR;COUNT=5",
+          "DESC": "Can also be compiled on https://icalendar.org/rrule-tool.html."
+        },
+        "FREQ": {
+          "TITLE": "Frequency",
+          "PLACE": "E.g. Daily/Weekly",
+          "DESC": "The frequency at which this schedule should run. Can be further customized once this field is defined."
+        },
+        "INTERVAL": {
+          "TITLE": "Interval",
+          "PLACE": "E.g. Every other day",
+          "DESC": "The interval at which this schedule should run. E.g. if 'Daily' is chosen in frequency, then this field can be used to select every 2nd/3rd day."
+        },
+        "BYDAY": {
+          "TITLE": "Days",
+          "PLACE": "E.g. Sundays and Mondays",
+          "DESC": "Select the weekdays that the schedule should run, if only certain days are required."
+        },
+        "STARTDATE": {
+        	"TITLE": "Start Date",
+        	"DESC": "The date on which this schedule should start."
+        },
+        "BYMONTH": {
+          "TITLE": "Month",
+          "PLACE": "E.g. January or June",
+          "DESC": "Select the month(s) that the schedule should run, if only certain month(s) are required."
+        },
+        "OCCURRENCE": {
+          "TITLE": "Occurrence",
+          "PLACE": "E.g. Repeat forever",
+          "DESC": "Until when should this schedule configuration be active.",
+          "UNTIL": {
+            "TITLE": "Until",
+            "PLACE": "E.g. 2019/09/10",
+            "DESC": "The date until when this schedule should run."
+          },
+          "NR": {
+            "TITLE": "Number",
+            "PLACE": "E.g. 5",
+            "DESC": "The amount of times this schedule should run." 
+          }
+        }
+      }
+    }
+  }
+}

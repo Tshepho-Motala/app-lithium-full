@@ -1,0 +1,45 @@
+### Auth
+POST /server-oauth2/backoffice/oauth/token HTTP/1.1
+Host: localhost:9000
+Authorization: Basic YWNtZTphY21lc2VjcmV0
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="grant_type"
+Content-Type: text/plain
+
+password
+--WebAppBoundary
+Content-Disposition: form-data; name="username"
+Content-Type: text/plain
+
+default/admin
+--WebAppBoundary
+Content-Disposition: form-data; name="password"
+Content-Type: text/plain
+
+Gauteng
+
+> {% client.global.set("auth_token", response.body.access_token); %}
+
+### Threshold backoffice find
+POST http://localhost:9730/backoffice/threshold/warnings/livescore_uk/v1/find
+Authorization: Bearer {{auth_token}}
+Content-Type: application/x-www-form-urlencoded
+
+draw=1&columns%5B0%5D%5Bdata%5D=id&columns%5B0%5D%5Bname%5D=&columns%5B0%5D%5Bsearchable%5D=true&columns%5B0%5D%5Borderable%5D=true&columns%5B0%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B0%5D%5Bsearch%5D%5Bregex%5D=false&columns%5B1%5D%5Bdata%5D=thresholdRevision.threshold.type.name&columns%5B1%5D%5Bname%5D=&columns%5B1%5D%5Bsearchable%5D=true&columns%5B1%5D%5Borderable%5D=true&columns%5B1%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B1%5D%5Bsearch%5D%5Bregex%5D=false&columns%5B2%5D%5Bdata%5D=&columns%5B2%5D%5Bname%5D=&columns%5B2%5D%5Bsearchable%5D=true&columns%5B2%5D%5Borderable%5D=false&columns%5B2%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B2%5D%5Bsearch%5D%5Bregex%5D=false&order%5B0%5D%5Bcolumn%5D=0&order%5B0%5D%5Bdir%5D=asc&start=0&length=100&search%5Bvalue%5D=&search%5Bregex%5D=false&playerGuid=livescore_uk%2F951&typeName=TYPE_LOSS_LIMIT
+
+> {%
+  client.log(response.body.json);
+%}
+
+### Threshold system find
+POST http://localhost:9730/system/threshold/warnings/v1/find
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdWQiOlsib2F1dGgyLXJlc291cmNlIl0sInNjb3BlIjpbImFueSJdLCJleHAiOjE2NzkzMTc1ODUsImF1dGhvcml0aWVzIjpbIlJPTEVfU1lTVEVNIl0sImp0aSI6Ik9CZW96MXNLTUVWWWdacVJrT2c1WWZla1VldyIsImNsaWVudF9pZCI6InN5c3RlbSJ9.SiBGYy-baZyH7vN-SHmeRfQDH-18DpcvlIs64HIHfUryWq3yksnTh-z5Avo275U68dOO_TCT_97pBf9JKEbIwl5J3F48vB5V9IoHfLUa5OInDOATv3HLbRlPW4WXTr_UbszUxDEXEfnifL5uXhQb1oQeUMU4oV8FBPzs7MBwiYPHReFA6hcWTAYWZ3N5TOIyRzFthpsl496X1CzXlr6jSsFwLv7bv3nnHJxNsR8htS8HRjdzZ1fRRmGgb6Xlnv1pyDRAsizFIPBsEb0Ri-Oxd9kT2_mAluJP-2_UDg6UCU8RHCeXTKXCB-qzqtmpAU9IhNags8wrfesvhf-P46lcf07bsAxwNxQqxUogZtJ85K1RJJioZ6sTOxF_w-OAVKrBlDAv3ksLG2g0UcgnI0uUoX9pNpktUED6TmIogeIRTIoVrU5gsBXiPrkVh6fsYmHt6aw9Fd3ZqTQi5j807olsZUurIpFrXGy8Lnaa_NGt3WpGShfSjXJNDHQOE-uXzNiCCEBfR2sac9bEjzHiL4HNwmdBgMy5lez2B0aUY2NGsrl6iFy8QaLVFs6t36QYcDDrNCWHQ4ZeWl9QgnpOm6SKTh2UYhFD75U4MPMrEufud0QRGuO9by873UvTZViEljbwy5X_iIc92A_PnKzhOOCnBAovH3z9Gugubli-mgmNGj0
+Content-Type: application/x-www-form-urlencoded
+
+domainName=livescore_uk&draw=1&columns%5B0%5D%5Bdata%5D=id&columns%5B0%5D%5Bname%5D=&columns%5B0%5D%5Bsearchable%5D=true&columns%5B0%5D%5Borderable%5D=true&columns%5B0%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B0%5D%5Bsearch%5D%5Bregex%5D=false&columns%5B1%5D%5Bdata%5D=thresholdRevision.threshold.type.name&columns%5B1%5D%5Bname%5D=&columns%5B1%5D%5Bsearchable%5D=true&columns%5B1%5D%5Borderable%5D=true&columns%5B1%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B1%5D%5Bsearch%5D%5Bregex%5D=false&columns%5B2%5D%5Bdata%5D=&columns%5B2%5D%5Bname%5D=&columns%5B2%5D%5Bsearchable%5D=true&columns%5B2%5D%5Borderable%5D=false&columns%5B2%5D%5Bsearch%5D%5Bvalue%5D=&columns%5B2%5D%5Bsearch%5D%5Bregex%5D=false&order%5B0%5D%5Bcolumn%5D=0&order%5B0%5D%5Bdir%5D=asc&start=0&length=100&search%5Bvalue%5D=&search%5Bregex%5D=false&playerGuid=livescore_uk%2F951&typeName=TYPE_LOSS_LIMIT
+
+> {%
+  client.log(response.body.json);
+%}

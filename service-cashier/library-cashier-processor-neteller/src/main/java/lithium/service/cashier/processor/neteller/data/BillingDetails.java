@@ -1,0 +1,24 @@
+package lithium.service.cashier.processor.neteller.data;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
+@Data
+@ToString
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@JsonIgnoreProperties(ignoreUnknown=true)
+public class BillingDetails {
+	private String id;
+	private String street;
+	private String street2;
+	private String city;
+	private String state;
+	private String zip;
+	private String country;
+}

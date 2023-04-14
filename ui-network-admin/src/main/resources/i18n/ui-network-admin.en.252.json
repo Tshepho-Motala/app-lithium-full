@@ -1,0 +1,24 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "SPORTBOOK": {
+      "BETS": {
+        "HISTORY": {
+          "LEAGUE": "League",
+          "EVENT_DATE": "Event Date",
+          "YOUR_BET": "Your bet",
+          "ODDS": "Odds",
+          "BET_TYPE": "Bet type",
+          "SELECTIONS": "Selections",
+          "WIN_LOSS": "Win/Loss",
+          "YES": "Yes",
+          "NO": "No",
+          "TITLE": "Sportsbook Bets",
+          "DESCRIPTION": "A searchable table of Sportsbook Bets",
+          "FREE_BET": "Free bet",
+          "COMBO_BONUS": "Combo bonus",
+          "BET_INFO_TITLE": "Bet full info"
+        }
+      }
+    }
+  }
+}

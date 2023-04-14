@@ -1,0 +1,32 @@
+<div class="box box-default box-solid">
+    <div class="box-header with-border">
+        {{'UI_NETWORK_ADMIN.PLAYER.COOLOFF.TITLE'|translate}}
+        <div class="box-tools pull-right">
+            <button ng-if="coolOff === undefined || coolOff === null" type="button" class="btn btn-box-tool" ng-click="cooloffPlayer()" lit-if-permission="COOLOFF_ADD" lit-permission-domain="{{user.domain.name}}">
+                <span><i class="fa fa-plus"></i> {{'GLOBAL.ACTION.ADD'|translate}}</span>
+            </button>
+            <button ng-if="coolOff !== undefined && coolOff !== null" type="button" class="btn btn-box-tool" ng-click="clearPlayerCooloff()"  lit-if-permission="COOLOFF_CLEAR" lit-permission-domain="{{user.domain.name}}">
+                <span><i class="fa fa-trash"></i> {{'GLOBAL.ACTION.DELETE'|translate}}</span>
+            </button>
+        </div>
+    </div>
+    <div class="box-body table-responsive">
+        <div ng-if="coolOff === undefined || coolOff === null" class="box box-danger">
+            <div class="box-body">
+                {{'UI_NETWORK_ADMIN.PLAYER.COOLOFF.NOTCOOLINGOFF'|translate}}
+            </div>
+        </div>
+        <table ng-if="coolOff !== undefined && coolOff !== null" class="table table-bordered">
+            <tr>
+                <th width="40%">{{'UI_NETWORK_ADMIN.PLAYER.COOLOFF.FIELDS.CREATEDDATE'|translate}}</th>
+                <td>{{coolOff.createdDateDisplay}}</td>
+            </tr><tr>
+                <th>{{'UI_NETWORK_ADMIN.PLAYER.COOLOFF.FIELDS.EXPIRYDATE'|translate}}</th>
+                <td>{{(coolOff.expiryDateDisplay)}}</td>
+            </tr><tr>
+                <th>{{'UI_NETWORK_ADMIN.PLAYER.COOLOFF.FIELDS.PERIODINDAYS'|translate}}</th>
+                <td>{{coolOff.periodInDays}}</td>
+            </tr>
+        </table>
+    </div>
+</div>

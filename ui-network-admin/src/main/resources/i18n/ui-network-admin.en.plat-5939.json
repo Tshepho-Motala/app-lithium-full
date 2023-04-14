@@ -1,0 +1,75 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "AUTOWITHDRAWALS": {
+      "RULESET": {
+        "PROCESS": {
+          "NAME": "Process Ruleset",
+          "DESC": "Run this ruleset on currently pending withdrawals",
+          "CONFIRM": "Are you sure you want to run this ruleset on currently pending withdrawals?",
+          "SUCCESS": "Successfully queued ruleset process. Processing will begin shortly.",
+          "ERROR": "Failed to  ruleset process.",
+          "ONEDIT": "A modification has been made to this ruleset. Do you want to run this ruleset on currently pending withdrawals?",
+          "SUSSPROSES": "Action completed successfully"
+        },
+        "RULE": {
+          "UPDATE": {
+            "SUCCESS": "Successfully updated the rule on this auto-withdrawal ruleset"
+          },
+          "ADD": {
+            "SUCCESS": "Successfully added the rule on this auto-withdrawal ruleset",
+            "ERROR": "Failed to add the rule on this auto-withdrawal ruleset"
+          },
+          "DELETE": {
+            "SUCCESS": "Successfully deleted the rule on this auto-withdrawal ruleset",
+            "ERROR": "Failed to add the rule on this auto-withdrawal ruleset"
+          }
+        },
+        "EDIT": {
+          "TITLE": "Viewing  Auto-Withdrawal Ruleset",
+          "DISABLE": {
+            "CONFIRM": "Are you sure you want to disable this auto-withdrawal ruleset?",
+            "SUCCESS": "Successfully disabled the auto-withdrawal ruleset"
+          },
+          "ENABLE": {
+            "CONFIRM": "Are you sure you want to enable this auto-withdrawal ruleset?",
+            "SUCCESS": "Successfully enabled the auto-withdrawal ruleset"
+          }
+        }
+      }
+    },
+    "CASHIER_CONFIG": {
+      "CHANGELOGS": {
+        "TITLE": "Change history",
+        "LOADED": "Load more",
+        "HEADER": {
+          "CREATEDBY": "Created by",
+          "UPDATEDBY": "Updated by",
+          "ENABLEDBY": "Enabled by",
+          "DISABLEDBY": "Disabled by",
+          "DELETEDBY": "Deleted by"
+        },
+        "BODY": {
+          "CREATE": "was created ",
+          "EDIT": " was edited",
+          "ENABLE": " was enabled",
+          "DISABLE": " was disabled ",
+          "DELETE": "was deleted ",
+          "COPYBONUS": "Bonus copied ",
+          "MARKBONUSCURRENT": "Bonus marked as current ",
+          "MARKBONUSEDIT": "Bonus marked as edit ",
+          "CHANGEBONUSSTATUS": "Bonus status changed "
+        },
+        "CHANGE": {
+          "NOVALUE": " was changed",
+          "FROMTOVALUE": "changed from ",
+          "TOVALUE": " set to ",
+          "FROMVALUE": " was cleared. The old value was ",
+          "COPYBONUS_START": "Revision ",
+          "COPYBONUS_END": " was copied to ",
+          "MARKBONUSCURRENT": " has been marked as current version. (Previous current revision ",
+          "FIELD": "Field"
+        }
+      }
+    }
+  }
+}

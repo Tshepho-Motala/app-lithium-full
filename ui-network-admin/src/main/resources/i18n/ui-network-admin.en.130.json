@@ -1,0 +1,53 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "PLAYER": {
+      "LOGINEVENTS": {
+        "INTERNAL": "Internal",
+        "DOMAIN": "Domain",
+        "PROVIDER": "Provider",
+        "AUTHCLIENT": "Auth Client"
+      }
+    },
+    "DOMAIN": {
+      "CLIENTS": {
+        "ERR": {
+          "EXISTS": "There is already an auth client with this code, please enter a new code, or edit existing."
+        },
+        "DELETE": {
+          "CONFIRM": "Are you sure you want to delete this auth client ?",
+          "ERROR": "Could not delete auth client, please try again.",
+          "SUCCESS": "Successfully deleted auth client."
+        },
+        "TITLE": "Provider Auth Client",
+        "MSG1": "Provider Auth Client created successfully.",
+        "ADD": {
+          "TITLE": "Add Client",
+          "SUCCESS": "Successfully added new auth client.",
+          "ERROR": "Could not add new auth client."
+        },
+        "FIELDS": {
+          "CODE": {
+            "NAME": "Code",
+            "DESCRIPTION": "An internal machine identifiable code for this client that needs to be unique for this domain."
+          },
+          "DESCRIPTION": {
+            "NAME": "Description",
+            "DESCRIPTION": "Description what this client will be used for."
+          },
+          "USERNAME": {
+            "NAME": "Username",
+            "DESCRIPTION": "The username that should be used for this client."
+          },
+          "PASSWORD": {
+            "NAME": "Password",
+            "DESCRIPTION": "The password that should be used for this client."
+          },
+          "GUID": {
+            "NAME": "Guid",
+            "DESCRIPTION": "The guid for this client, used in the clientId field when authenticating. This is derived from the domain machine name and the code."
+          }
+        }
+      }
+    }
+  }
+}

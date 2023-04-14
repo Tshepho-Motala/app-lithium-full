@@ -1,0 +1,11 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "GAMES": {
+      "LIST": {
+        "FIELDS": {
+          "PROVIDER_NAME": "Provider Name"
+        }
+      }
+    }
+  }
+}

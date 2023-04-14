@@ -1,0 +1,12 @@
+{
+	"UI_NETWORK_ADMIN": {
+		"GOGAME": {
+			"DEBUG_RESULTS": {
+				"DELETE": {
+					"SUCCESS": "Debug Result Removed Successfully",
+					"ERROR": "Failed to remove Debug Result"
+				}
+			}
+		}
+	}
+}

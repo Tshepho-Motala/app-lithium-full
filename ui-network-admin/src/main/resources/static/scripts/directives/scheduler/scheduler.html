@@ -1,0 +1,29 @@
+<div class="box box-{{data.box}} bs-loading-container" bs-loading-overlay bs-loading-overlay-reference-id="{{referenceId}}">
+	<div class="box-header with-border">
+		{{data.title | translate}}
+		<div class="box-tools pull-right">
+			<button type="button" class="btn btn-box-tool" ng-click="adjust()">
+				<i class="fa fa-adjust"></i> {{ 'GLOBAL.ACTION.ADJUST' | translate | lowercase }}
+			</button>
+		</div>
+	</div>
+	<div class="box-body">
+		<table class="table table-striped table-condensed">
+		<tbody>
+		<tr>
+			<th width="25%">{{'GLOBAL.SCHEDULER.RRULE' | translate}}</th>
+			<td ng-if="rrule" class="pull-right">{{ rrule | wordBreak }}</td>
+			<td ng-if="!rrule" class="pull-right">{{'GLOBAL.SCHEDULER.NORRULE' | translate}}</td>
+		</tr><tr>
+			<th>{{'GLOBAL.SCHEDULER.EXPLAIN' | translate}}</th>
+			<td ng-if="rruleText" class="pull-right">{{ rruleText | wordBreak }}</td>
+			<td ng-if="!rruleText" class="pull-right">{{ 'GLOBAL.NA' | translate }}</td>
+		</tr><tr>
+			<th>{{'GLOBAL.SCHEDULER.START' | translate}}</th>
+			<td ng-if="rruleStartDate" class="pull-right">{{ rruleStartDate | date:'dd MMMM yyyy':'GMT' }}</td>
+			<td ng-if="!rruleStartDate" class="pull-right">{{ 'GLOBAL.NA' | translate }}</td>
+		</tr>
+		</tbody>
+		</table>
+	</div>
+</div>

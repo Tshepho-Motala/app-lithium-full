@@ -1,0 +1,15 @@
+server:
+  port: 9814
+
+spring:
+  application:
+    name: service-cdn-provider-google
+  servlet:
+    multipart:
+      maxFileSize: 20MB
+      maxRequestSize: 20MB
+      file-size-threshold: 1MB
+
+eureka:
+  instance:
+    appname: service-cdn-provider-google

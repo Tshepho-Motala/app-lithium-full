@@ -1,0 +1,170 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Include Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous" />
+</head>
+<body>
+<div class="container-fluid">
+
+    <!-- Fragment portion -->
+    <div th:fragment="activity (obj)">
+        <div th:if="${obj}" th:object="${ obj }">
+            <div class="row">
+                <div class="col-xs-12 col-md-2"><label th:text="| Activity Id |"></label></div>
+                <div class="col-xs-12 col-md-6" th:text="*{ id }"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-md-2"><label th:text="| Request |"></label></div>
+                <div class="col-xs-12 col-md-6" th:text="*{ request }"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-md-2"><label th:text="| Round Id |"></label></div>
+                <div class="col-xs-12 col-md-6" th:text="*{ roundId }"></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-md-2"><label th:text="| User Guid |"></label></div>
+                <div class="col-xs-12 col-md-6" th:text="*{ mockSession.userGuid }"></div>
+            </div>
+            <div th:each="activityExecution : *{ mockActivityExecutionList }">
+                <div class="row">
+                    <div class="col-xs-12 col-md-2"><label th:text="| Id |"></label></div>
+                    <div class="col-xs-12 col-md-6" th:text="${ activityExecution.id }"></div>
+                </div>
+                <div class="row" th:if="${ activityExecution.response }">
+                    <div class="col-xs-12 col-md-2"><label th:text="| Response |"></label></div>
+                    <div class="col-xs-12 col-md-6" th:text="${ activityExecution.response }"></div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-md-2"><label th:text="| Execution Time (ms) |"></label></div>
+                    <div class="col-xs-12 col-md-6" th:text="${ activityExecution.executionDurationMs }"></div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-md-2"><label th:text="| Transaction Id |"></label></div>
+                    <div class="col-xs-12 col-md-6" th:text="${ activityExecution.transactionId } "></div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-md-2"><label th:text="| Lithium Transaction Id |"></label></div>
+                    <div class="col-xs-12 col-md-6" th:text="${ activityExecution.lithiumTransactionId } "></div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-md-2"><label th:text="| Request To Lithium |"></label></div>
+                    <pre><div class="small" th:text="${ activityExecution.emulatedProviderRequest }"></div></pre>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12 col-md-2"><label th:text="| Response From Lithium |"></label></div>
+                    <pre><div class="small" th:text="${ activityExecution.emulatedLithiumResponse }"></div></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Form portion -->
+    <div>
+        <form action="#" th:action="@{actions}" method="post">
+            <div class="row"><div class="col-xs-12"><strong><u>Mock session Info</u></strong></div></div>
+            <div class="row" th:object="${@mockController.test(mockSessionId)}">
+                <div class="col-xs-12 col-md-1"><label th:text="|Mock Session Id|"></label></div>
+                <div class="col-xs-12 col-md-1" th:text="${mockSessionId}"></div>
+                <div class="col-xs-12 col-md-1"><label th:text="|Original URL|"></label></div>
+                <div class="col-xs-12 col-md-8" th:text="*{gameStartUrl}"></div>
+            </div>
+            <br/>
+            <hr/>
+            <div class="row"><div class="col-xs-12 col-md-2"><strong><u>Action configuration</u></strong></div></div>
+            <input type="hidden" th:value="${ mockSessionId }" name="mockSessionId"/>
+            <div class="row">
+                <div class="col-xs-12 col-md-2"><label>Number of times to repeat</label></div>
+                <div class="col-xs-12  col-md-2"><input name="resendCount" type="number" th:value="${ resendCount }"/></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-md-2"><label>Wait duration in ms between repeats</label></div>
+                <div class="col-xs-12 col-md-2"><input name="delayBetweenResendMs" type="number" th:value="${ delayBetweenResendMs }"/></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-md-2"><label>Amount cents for first action</label></div>
+                <div class="col-xs-12 col-md-2"><input name="amountCentsPrimaryAction" type="number" th:value="${ amountCentsPrimaryAction }"/></div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-md-2"><label>Amount cents for secondary action</label></div>
+                <div class="col-xs-12 col-md-2"><input name="amountCentsSecondaryAction" type="number" th:value="${ amountCentsSecondaryAction }"/></div>
+            </div>
+            <br/>
+            <div class="row"><div class="col-xs-12 col-md-4"><strong><u>Actions to execute</u></strong></div></div>
+            <th:block th:each="actionItem : ${ actionList }">
+                <div class="row">
+                    <div class="col-xs-12 col-md-2">
+                        <input type="checkbox" name="actionItems" th:value="${ actionItem }"/>
+                        <label th:text="${ actionItem }"></label>
+                    </div>
+                </div>
+            </th:block>
+            <div class="row"><div class="col-xs-12 col-md-4"><input class="btn btn-default" type="submit" value="Submit" /></div></div>
+        </form>
+    </div>
+    <br/>
+    <!-- Action execution portion -->
+    <hr/>
+    <div th:each="actionExecution : ${ actionItems }">
+        <div th:if="${ actionExecution eq 'balance' }">
+            <div th:replace="this::activity(${@mockController.balance(mockPayload)})"></div>
+        </div>
+        <div th:if="${ actionExecution eq 'validate' }">
+            <div th:replace="this::activity(${@mockController.validateUser(mockPayload)})"></div>
+        </div>
+        <div th:if="${ actionExecution eq 'bet' }">
+            <div th:replace="this::activity(${@mockController.bet(mockPayload)})"></div>
+        </div>
+        <div th:if="${ actionExecution eq 'win' }">
+            <div th:replace="this::activity(${@mockController.win(mockPayload)})"></div>
+        </div>
+        <div th:if="${ actionExecution eq 'negativeBet' }">
+            <div th:replace="this::activity(${@mockController.negativeBet(mockPayload)})"></div>
+        </div>
+        <div th:if="${ actionExecution eq 'refund' }">
+            <div th:replace="this::activity(${@mockController.refund(mockPayload)})"></div>
+        </div>
+        <div th:if="${ actionExecution eq 'freespin' }">
+            <div th:replace="this::activity(${@mockController.freespin(mockPayload)})"></div>
+        </div>
+        <div th:if="${ actionExecution eq 'freespinFeature' }">
+            <div th:replace="this::activity(${@mockController.freespinFeature(mockPayload)})"></div>
+        </div>
+        <div th:if="${ actionExecution eq 'betAndWin' }">
+            <div th:replace="this::activity(${@mockController.betAndWin(mockPayload)})"></div>
+        </div>
+        <div th:if="${ actionExecution eq 'winAndNegativeBet' }">
+            <div th:replace="this::activity(${@mockController.winAndNegativeBet(mockPayload)})"></div>
+        </div>
+        <div th:if="${ actionExecution eq 'betAndWinAndRefund' }">
+            <div th:replace="this::activity(${@mockController.betAndWinAndRefund(mockPayload)})"></div>
+        </div>
+        <div th:if="${ actionExecution eq 'winAndRefund' }">
+            <div th:replace="this::activity(${@mockController.winAndRefund(mockPayload)})"></div>
+        </div>
+        <div th:if="${ actionExecution eq 'freespinFeatureAndRefund' }">
+            <div th:replace="this::activity(${@mockController.freespinFeatureAndRefund(mockPayload)})"></div>
+        </div>
+        <div th:if="${ actionExecution eq 'freespinAndRefund' }">
+            <div th:replace="this::activity(${@mockController.freespinAndRefund(mockPayload)})"></div>
+        </div>
+        <div th:if="${ actionExecution eq 'negativeBetAndRefund' }">
+            <div th:replace="this::activity(${@mockController.negativeBetAndRefund(mockPayload)})"></div>
+        </div>
+        <div th:if="${ actionExecution eq 'winAndNegativeBetAndRefund' }">
+            <div th:replace="this::activity(${@mockController.winAndNegativeBetAndRefund(mockPayload)})"></div>
+        </div>
+        <hr/>
+    </div>
+
+</div>
+</body>
+</html>

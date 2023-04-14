@@ -1,0 +1,20 @@
+<div class="modal-header">
+    <h3 class="modal-title" id="modal-title">{{'UI_NETWORK_ADMIN.DIRECTIVES.GLOBAL.CHANGE_LOG.EDIT_NOTES'|translate}}</h3>
+
+</div>
+
+<form ng-submit="controller.submit()" name="controller.form" autocomplete="off" novalidate>
+    <div class="modal-body" id="modal-body">
+        <div class="row">
+            <div class="col-xs-12">
+                <formly-form model="controller.model" fields="controller.fields" form="controller.form" options="controller.options">
+                </formly-form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-footer">
+        <button-save ng-disabled="controller.submitCalled || controller.form.$invalid"></button-save>
+        <button-cancel ng-click="controller.cancel()"></button-cancel>
+    </div>
+</form>

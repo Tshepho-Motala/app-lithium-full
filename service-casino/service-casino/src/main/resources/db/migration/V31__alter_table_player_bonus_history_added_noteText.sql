@@ -1,0 +1,1 @@
+ALTER TABLE `player_bonus_history` ADD COLUMN `note_text` VARCHAR(200) NULL DEFAULT NULL;

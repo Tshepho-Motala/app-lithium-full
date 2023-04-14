@@ -1,0 +1,40 @@
+{
+  "SERVICE_USER_THRESHOLD": {
+    "NOTIFICATIONS": {
+      "LOSS_LIMIT_VISIBILITY": {
+        "DISPLAY_NAME": "Loss Limit Visibility",
+        "DESCRIPTION": "Loss Limit Visibility Notification",
+        "MESSAGE": "Loss Limit Visibility has been enabled on your account. Reason: %VISIBILITY_REASON%.",
+        "VISIBILITY_REASON": {
+          "LOSS_LIMIT_REACHED": "You've reached your configured loss limit.",
+          "VISIBILITY_ACTIVATED": "Please contact customer support.",
+          "THRESHOLD_REACHED": "Early warning. Near configured loss limit. Please contact customer support."
+        }
+      },
+      "THRESHOLD_WARNING": {
+        "TYPE_LOSS_LIMIT": {
+          "GRANULARITY_DAY": {
+            "DISPLAY_NAME": "Daily Loss Limit Threshold",
+            "DESCRIPTION": "Daily Loss Limit Threshold Notification",
+            "MESSAGE": "This is an early warning. (%percentage%) of your configured daily loss limit (%limit%) was breached on %threshold_date%."
+          },
+          "GRANULARITY_WEEK": {
+            "DISPLAY_NAME": "Weekly Loss Limit Threshold",
+            "DESCRIPTION": "Weekly Loss Limit Threshold Notification",
+            "MESSAGE": "This is an early warning. (%percentage%) of your configured weekly loss limit (%limit%) was breached on %threshold_date%."
+          },
+          "GRANULARITY_MONTH": {
+            "DISPLAY_NAME": "Monthly Loss Limit Threshold",
+            "DESCRIPTION": "Monthly Loss Limit Threshold Notification",
+            "MESSAGE": "This is an early warning. (%percentage%) of your configured monthly loss limit (%limit%) was breached on %threshold_date%."
+          },
+          "GRANULARITY_YEAR": {
+            "DISPLAY_NAME": "Annual Loss Limit Threshold",
+            "DESCRIPTION": "Annual Loss Limit Threshold Notification",
+            "MESSAGE": "This is an early warning. (%percentage%) of your configured annual loss limit (%limit%) was breached on %threshold_date%."
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,28 @@
+<div class="modal-header">
+	<h3 class="modal-title" id="modal-title">Add Feature Configuration</h3>
+</div>
+
+<form ng-submit="controller.save()" name="controller.form" autocomplete="off" novalidate>
+	<div class="modal-body" id="modal-body">
+		<div class="row v-reset-row ">
+			<div class="col-xs-12">
+				<div ng-if="controller.features === null" class="panel box box-warning">
+					<div class="box-header with-border">
+						<h4 class="box-title">
+							You have not chosen an engine. Please close this dialog and first choose an engine to proceed.
+						</h4>
+					</div>
+				</div>
+				
+				<formly-form ng-if="controller.features !== null" model="controller.model" fields="controller.featureFields" options="controller.options" form="controller.form">
+				</formly-form>
+				
+<!-- 				<pre>{{controller.model|json}}</pre> -->
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<button-submit ng-if="controller.features !== null && controller.model.object !== undefined"></button-submit>
+		<button-cancel ng-click="controller.cancel()"></button-cancel>
+	</div>
+</form>

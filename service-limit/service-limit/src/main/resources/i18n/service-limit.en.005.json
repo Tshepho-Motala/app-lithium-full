@@ -1,0 +1,32 @@
+{
+  "SERVICE_LIMIT": {
+    "DEPOSITLIMIT": {
+      "COMMENT": {
+        "UPDATE_AND_DELETE": {
+          "DAILY": "Daily deposit limit replaced by a new one or canceled",
+          "WEEKLY": "Weekly deposit limit replaced by a new one or canceled",
+          "MONTHLY": "Monthly deposit limit replaced by a new one or canceled"
+        },
+        "PENDING_TO_SUPPOSED": {
+          "DAILY": "Moving pending daily deposit limit created on {0} to supposed",
+          "WEEKLY": "Moving pending weekly deposit limit created on {0} to supposed",
+          "MONTHLY": "Moving pending monthly deposit limit created on {0} to supposed"
+        },
+        "UPDATE_PENDING": {
+          "DAILY": "Updating daily pending deposit limit from {0} to {1}.",
+          "WEEKLY": "Updating weekly pending deposit limit from {0} to {1}.",
+          "MONTHLY": "Updating monthly pending deposit limit from {0} to {1}"
+        }
+      },
+      "ERROR": {
+        "SUPPOSED_DEP_LIMIT_DAILY": "Supposed daily deposit limit set on {0}, cannot save new limit until supposed comes into effect ",
+        "SUPPOSED_DEP_LIMIT_WEEKLY": "Supposed weekly deposit limit set on {0}, cannot save new limit until supposed comes into effect ",
+        "SUPPOSED_DEP_LIMIT_MONTHLY": "Supposed monthly deposit limit set on {0}, cannot save new limit until supposed comes into effect ",
+        "REST_OF_LIMIT_DAILY": "Before reaching the daily limit remains {0}",
+        "REST_OF_LIMIT_WEEKLY": "Before reaching the weekly limit remains {0}",
+        "REST_OF_LIMIT_MONTHLY": "Before reaching the monthly limit remains {0}",
+        "EMPTY_SUPPOSED_DEPOSIT_LIMIT": "No such suppose limit"
+      }
+    }
+  }
+}

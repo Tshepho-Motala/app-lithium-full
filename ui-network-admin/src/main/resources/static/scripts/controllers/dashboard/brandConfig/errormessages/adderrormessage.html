@@ -1,0 +1,27 @@
+<div class="modal-content">
+    <div class="modal-header primary-blue darken-4 white-text">
+        <h3 class="modal-title" id="modal-title">
+            <i class="fa fa-pencil"></i>
+            {{ 'UI_NETWORK_ADMIN.BRAND_CONFIG.ERROR_MESSAGES.ADD.TITLE' | translate }}
+            <button-close-window ng-click="controller.cancel()"></button-close-window>
+        </h3>
+    </div>
+
+    <form ng-submit="controller.onSubmit()" name="controller.form" novalidate>
+        <div class="modal-body" id="modal-body">
+            <div class="row v-reset-row ">
+                <div class="col-xs-12">
+                    <formly-form model="controller.model" fields="controller.fields" options="controller.options" form="controller.form">
+                    </formly-form>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-footer" id="modal-footer">
+            <buttonbar>
+                <button-submit class="pull-left"></button-submit>
+                <button-cancel ng-click="controller.cancel()"></button-cancel>
+            </buttonbar>
+        </div>
+    </form>
+</div>

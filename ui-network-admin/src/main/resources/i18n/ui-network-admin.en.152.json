@@ -1,0 +1,13 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "DOMAIN": {
+      "FIELDS": {
+        "TIMEOUT": {
+          "NAME": "Session Timeout",
+          "DESCRIPTION": "Select the duration of a session for this Domain"
+        }
+      }
+    }
+  }
+}
+

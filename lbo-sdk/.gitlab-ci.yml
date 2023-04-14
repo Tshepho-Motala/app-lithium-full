@@ -1,0 +1,18 @@
+ui-network-admin:build-lbo-sdk-assets:
+  stage: compileandtest
+  image: node:16.14-alpine
+  cache:
+    key: lbo-sdk-cache
+    paths:
+      - lbo-sdk/node_modules
+  script: 
+    - apk --upgrade add curl
+    - "sh lbo-sdk/build/gitlab/build-vue.sh"
+  only:
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /\[lbo-sdk\]/
+  except:
+    refs:
+    - /^environment/livescore-production/  
+  tags:
+    - wl-group-runner

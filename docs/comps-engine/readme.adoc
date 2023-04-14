@@ -1,0 +1,304 @@
+= Comps Engine Framework
+Riaan Schoeman <riaan.schoeman@wonderlabz.com>
+1.0, November 17, 2021: Missions Framework
+:sectnums:
+:doctype: book
+:toc: left
+:toclevels: 4
+:toc-title: Comps Engine
+:icons: font
+:url-quickref: https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/
+
+//:stylesheet: css/asciidoctor.css
+//:stylesheet: css/material-blue.css
+
+//This is done tto keep formatting aligned with gitlab
+****
+[verse,,]
+____
+xref:../../readme.adoc[Lithium Readme] | xref:../../service-promo/docs/readme.adoc[Promos] | xref:../../service-reward/docs/readme.adoc[Rewards] | xref:../../service-leaderboard/docs/readme.adoc[Leaderboards] | xref:../../service-xp/docs/readme.adoc[XP]
+____
+****
+
+This document will describe the comps-engine framework, and how it all fits together and communicates to other services within lithium.
+
+.Short Definition
+[NOTE]
+Comps (Complementary) is the overall term used to describe the various types of customer promotions where we incentivise . The system we deploy to manage and orchestrate these promotions is referred to as the Comps Engine
+
+== Product Defined Glossary
+
+* link:glossary.adoc[Glossary] has been defined, but this is not the original, so this could be updated in the future. Will confirm with Adam about final version to include here.
+
+
+== Internal Components
+
+==== xref:../../service-promotions/docs/readme.adoc[Promo Framework]
+- svc-promotions to become svc-promo
+
+==== xref:../../service-reward/docs/readme.adoc[Rewards Framework]
+- svc-bonus(parts of svc-casino) to become/ported to svc-reward
+
+==== xref:../../service-leaderboard/docs/readme.adoc[Leaderboard Framework]
+==== xref:../../service-xp/docs/readme.adoc[XP Framework]
+
+include::plantuml/promo-engine.puml[]
+
+== High Level Overview
+* Overview:
+//+
+//[plantuml, format="png", id="promo1"]
+//----
+//!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
+//!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
+//title High Level Overview
+//
+//LAYOUT_TOP_DOWN()
+//'LAYOUT_LANDSCAPE()
+//'SHOW_PERSON_PORTRAIT()
+//
+//
+//Person_Ext(p, "Players/Clients")
+//
+//Enterprise_Boundary(ls, "Livescore") {
+//    Boundary(gw, "Sportsbook GW") {
+//      System(ui, "SB Admin UI")
+//      System(bo, "SB Admin Backend")
+//      System(pgw, "Platform GW")
+//      System(dkc, "DK Crawler")
+//    }
+//
+//    Boundary(lit, "Lithium") {
+//      System(lbo, "LBO")
+//      ContainerQueue(rabbitmq, "rabbitmq", "rabbitmq")
+//      Container_Boundary(lit_ce, "Comps Engine") {
+//        System_Boundary(lit_ce_promo, "Promo Framework") {
+//          ContainerDb(lithium_promo, "lithium_promo", "DB")
+//          System(promo_pr_rx, "provider-roxor")
+//          System(promo_pr_if, "provider-iforium")
+//        }
+//        System_Boundary(lit_ce_rewards, "Rewards Framework") {
+//          ContainerDb(lithium_reward, "lithium_reward", "DB")
+//          System(reward_pr_rx, "provider-roxor")
+//          System(reward_pr_if, "provider-iforium")
+//          System(reward_pr_bp, "provider-blueprint")
+//          System(reward_pr_sb, "provider-sportsbook")
+//        }
+//      }
+//      System_Boundary(lit_cas, "Casino Framework") {
+//        System(scp_sb, "provider-sportsbook")
+//        System(scp_if, "provider-iforium")
+//        System(scp_rx, "provider-roxor")
+//      }
+//      System_Boundary(lit_acct, "Accounting Framework") {
+//        System(acct_int, "provider-internal")
+//      }
+//    }
+//}
+//BiRel(p, gw, "client comms")
+//BiRel(lbo, lit_ce, " ")
+//BiRel(lbo, lit_cas, " ")
+//BiRel(lit_acct, lit_cas, " ")
+//BiRel(lbo, lit_acct, " ")
+//BiRel(lbo, gw, " ")
+//Rel(lit_acct, rabbitmq, " ")
+//Rel(rabbitmq, promo_pr_rx, " ")
+//Rel(rabbitmq, promo_pr_if, " ")
+//
+//Boundary(ext, "External Providers") {
+//  System_Ext(ext_sb, "Sportsbook") {
+//    System(ext_sb_dk, "Draft Kings")
+//  }
+//  System_Ext(ext_cas, "Casino") {
+//    System(ext_cas_rx, "Roxor/RGP")
+//    System(ext_cas_if, "Iforium Gaming")
+//    System(ext_cas_bp, "Blueprint Gaming")
+//  }
+//}
+//
+//BiRel(gw, ext_sb_dk, " ")
+//BiRel(gw, scp_sb, " ")
+//BiRel(scp_if, ext_cas_if, " ")
+//BiRel(scp_rx, ext_cas_rx, " ")
+//BiRel(reward_pr_rx, ext_cas_rx, " ")
+//BiRel(reward_pr_if, ext_cas_if, " ")
+//BiRel(reward_pr_bp, ext_cas_bp, " ")
+//
+//SHOW_LEGEND()
+//LAYOUT_AS_SKETCH()
+//----
++
+[plantuml, format="png", id="promo1"]
+----
+!include <C4/C4_Container>
+!include <awslib/AWSCommon>
+
+' Uncomment the following line to create simplified view
+'!include <awslib/AWSSimplified>
+!include <awslib/General/Users>
+!include <awslib/Mobile/APIGateway>
+
+skinparam linetype ortho
+
+skinparam ArrowColor Black
+skinparam ArrowMessageAlignment center
+skinparam ArrowThickness 2
+skinparam ParticipantPadding 100
+skinparam componentStyle rectangle
+
+left to right direction
+
+'cloud "Players/Clients" as p
+Users(p, "Clients", "millions of users")
+
+APIGateway(sbgw, "Sportsbook GW", "Gateway to clients") {
+'frame "Sportsbook GW" as sbgw {
+  [SB Admin UI]
+  [SB Admin Backend]
+  [Platform GW]
+  [DK Crawler]
+}
+
+APIGateway(3rd, "External Providers", "3rd Party Providers") {
+'frame "External/3rd Party Providers" {
+  frame "Casino Providers" as cp {
+    [Blueprint Gaming] as bpg
+    [IForium Gaming] as ifg
+    [Roxor Gaming] as rxg
+  }
+  frame "Sportsbook Providers" as sbp {
+    [Draft Kings] as dk
+  }
+}
+
+frame "Lithium" #EFEFEF {
+  node "Accounting" as acct #Pink {
+    [svc-accounting]
+  }
+  node "Casino" as cas #BCBCBC {
+    [provider-roxor] as scprx
+    [provider-iforium] as scpif
+    [provider-sportsbook] as scpsb
+  }
+  node "Comps Engine" as ce #FFDDDD {
+    node "Promo Framework" as pf #FFDDFF {
+      database "lithium_promo" as pd
+      [provider-roxor] as sppcrx
+      [provider-iforium] as sppcif
+    }
+    node "Rewards Framework" as rf #FFDDFF {
+      database "lithium_reward" as rd
+      [provider-roxor] as srpcrx
+      [provider-iforium] as srpcif
+      [provider-blueprint] as srpcbp
+      [provider-sportsbook] as srpcsb
+    }
+    pf -> rf
+  }
+  database "RabbitMQ" as r
+  node "LBO" as lbo {
+      [ui-network-admin]
+  }
+  lbo <--> ce
+  cas <-up-> acct
+  acct --> r
+  r --> sppcrx
+  r --> sppcif
+}
+
+p --> sbgw
+sbgw --> ce
+rxg <--> scprx
+ifg <--> scpif
+sbgw <---> scpsb
+dk <-> sbgw
+
+' Rewards 2 External
+srpcrx --> rxg
+srpcif --> ifg
+srpcbp --> bpg
+
+----
+
+== Internal/External Flows
+
+* Configured rewards will be triggered from svc-promo to svc-reward using a queue.
++
+[plantuml, format="png", id="promo1"]
+----
+actor "Player/FE" as p
+
+participant "svc-casino-pr-sb" as scpsb
+entity GW as gw
+entity DK as dk
+participant "svc-casino-pr-roxor" as scprx
+entity RGP as rgp
+participant "svc-casino" as cas
+participant "svc-accounting" as acc
+participant "svc-promo" as pr
+participant "svc-promo-provider-sportsbook-sbt" as prsb
+participant "svc-promo-provider-casino-roxor" as prrx
+participant "svc-reward" as rw
+participant "svc-reward-pr-sportsbook-sbt" as rwsb
+participant "svc-reward-pr-casino-roxor" as rwrx
+'participant "svc-reward-pr-*" as rwpr
+queue "RabbitMQ" as r
+
+group betting flows [sports bet]
+  p -> gw++: Place bet
+  gw -> dk++:
+  gw <- dk--:
+  gw -> scpsb++: SPORTS_BET
+  scpsb -> cas++:
+  cas -> acc++:
+  acc --> r: Completed Transaction Event
+  cas <- acc--:
+  scpsb <- cas--:
+  gw <- scpsb--:
+  p <- gw--:
+else casino wager
+  p -> scprx++: Casino Wager
+  scprx -> rgp++:
+  scprx <- rgp--:
+  scprx -> cas++:
+  cas -> acc++:
+  acc --> r: Completed Transaction Event
+  cas <- acc--:
+  scprx <- cas--:
+  p <- scprx--:
+end
+
+group Promotions [sports related]
+  r -> prsb: SPORTS_BET Completed Transaction Event Consumer
+  prsb -> pr++:
+  group Rewards [sports reward / freebet - (when promo requirements completed)]
+    pr --> r: GiveRewardRequest
+    rw <-- r: GiveRewardRequest
+    rw -> rwsb:
+    rwsb -> gw: Award Freebet to player
+  end
+  prsb <- pr--:
+else Casino Freespin Roxor
+  r -> prrx: CASINO_BET Completed Transaction Event Consumer
+  prrx -> pr++:
+  group Rewards [casino freespin reward - (when promo requirements completed)]
+    pr --> r: GiveRewardRequest
+    rw <-- r: GiveRewardRequest
+    rw -> rwrx:
+    rwrx -> rgp: Award Freespin to player
+  end
+  prrx <- pr--:
+end
+
+----
+
+== LBO
+* Some menu changes have already been completed with the Squads Task.
+* Further details to follow.
+
+== Related Technical Analysis
+* Squads Bonus Card - Technical Analysis xref:squads.adoc[here] - a lot of work on svc-promo will be completed in this task.
+* Sports book Data Retrieval - Technical Analysis link:sportsbook-data-retrieval.adoc[here] - to follow after the squads task has been completed.
+
+//== Bonus Framework Enhancements
+//* RX / LS tasks link:bonus-mvp1.adoc[here]

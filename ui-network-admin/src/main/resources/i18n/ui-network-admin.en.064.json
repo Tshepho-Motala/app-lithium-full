@@ -1,0 +1,11 @@
+{
+	"UI_NETWORK_ADMIN": {
+		"BONUS": {
+			"TRIGGER": {
+				"TYPE": {
+					"4": "XP"
+				}
+			}
+		}
+	}
+}

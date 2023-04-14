@@ -1,0 +1,12 @@
+@import '~@angular/material/theming';
+@import 'app/modules/material-ex/styles/material-ex';
+
+@import 'styles/app';
+@import 'styles/vars';
+
+// See https://material.angular.io/guide/theming
+
+@include angular-material-theme($theme);
+@include covalent-theme($theme);
+@include material-ex($theme);
+@include app-theme($theme);

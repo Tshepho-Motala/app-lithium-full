@@ -1,0 +1,66 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost/lithium_changelog
+    username: root
+    password: mysql
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: validate
+  cloud:
+    stream:
+      bindings:
+        userattributestriggerinput :
+          group: user-attributes-trigger-group-changelog
+          binder : rabbit
+          destination : userattributestriggerqueue
+        account-notes-migration-prep-input:
+          consumer:
+            concurrency: 20
+            maxAttempts: 5
+            backOffInitialInterval: 5000
+            backOffMaxInterval: 60000
+            backOffMultiplier: 2.5
+          group: account-notes-migration-prep-group
+          binder: rabbit
+          destination: account-notes-migration-prep-queue
+        account-notes-migration-input:
+          consumer:
+            concurrency: 20
+            maxAttempts: 5
+            backOffInitialInterval: 5000
+            backOffMaxInterval: 60000
+            backOffMultiplier: 2.5
+          group: account-notes-migration-group
+          binder: rabbit
+          destination: account-notes-migration-queue
+        migration-exception-output:
+          binder: rabbit
+          destination: migration-exception-queue
+          producer:
+            required-groups: migration-exception-group
+      rabbit:
+        bindings:
+          account-notes-migration-prep-input:
+            consumer:
+              autoBindDlq: true
+              requeueRejected: true
+              republishToDlq: true
+          account-notes-migration-input:
+            consumer:
+              autoBindDlq: true
+              requeueRejected: true
+              republishToDlq: true
+server:
+  port: 9696
+
+lithium:
+  services:
+    db:
+      load-test-data: false
+    changelog:
+      dlqRetries: 3
+
+logging:
+  level:
+    lithium.service.changelog: INFO

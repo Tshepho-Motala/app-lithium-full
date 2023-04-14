@@ -1,0 +1,32 @@
+{
+	"UI_NETWORK_ADMIN": {
+		"MISSIONS": {
+			"FIELDS": {
+				"NAME": {
+					"NAME": "Name",
+					"DESCRIPTION": "The name of the mission"
+				},
+				"DESCRIPTION": {
+					"NAME": "Description",
+					"DESCRIPTION": "Provide a short description for the mission"
+				}
+			}
+		},
+		"USERMISSIONS": {
+			"LIST": {
+				"DESCRIPTION": "A searchable list of user missions"
+			},
+			"FIELDS": {
+				"COMPLETED": {
+					"NAME": "Completed"
+				},
+				"ACTIVE": {
+					"NAME": "Active"
+				},
+				"EXPIRED": {
+					"NAME": "Expired"
+				}
+			}
+		}
+	}
+}

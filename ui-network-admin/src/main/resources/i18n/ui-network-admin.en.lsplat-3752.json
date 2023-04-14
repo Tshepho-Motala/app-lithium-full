@@ -1,0 +1,14 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "GAME":{
+      "FIELDS": {
+        "GAME_DATETIME_ACTIVE": {
+          "PATTERN": "Should not be a future date"
+        },
+        "GAME_DATETIME_INACTIVE": {
+          "PATTERN": "Should not be a future date"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,92 @@
+<div class="row v-reset-row ">
+    <div class="col-xs-12">
+        <div class="card card-block">
+                <div uib-collapse="legendCollapsed">
+                    <div class="row v-reset-row ">
+                        <formly-form model="model" fields="settlementFields" form="form" options="options"></formly-form>
+                    </div>
+                    <div class="row v-reset-row ">
+                        <formly-form model="model" fields="dateFields" form="form" options="options"></formly-form>
+                    </div>
+                    <div class="row v-reset-row " ng-if="model.selectedSport">
+                        <formly-form model="model" fields="bySportFilters" form="form" options="options"></formly-form>
+                    </div>
+                    <div class="row v-reset-row " ng-if="model.leaguesBySport">
+                        <formly-form model="model" fields="byLeagueFilters" form="form" options="options"></formly-form>
+                    </div>
+                    <div class="row v-reset-row  form-group">
+                        <div ng-if="allowUserSearch" class="col-md-6 col-xs-12">
+                            <label>{{'UI_NETWORK_ADMIN.MAILQUEUE.MAIL.USER' | translate}}</label>
+                            <div class="input-group">
+                                <input type="text"
+                                       ng-model="model.selectedUser"
+                                       placeholder="search player"
+                                       uib-typeahead="user.username for user in searchUsers($viewValue)"
+                                       typeahead-loading="loadingLocations"
+                                       typeahead-no-results="noResults"
+                                       typeahead-min-length="2"
+                                       typeahead-show-hint="true"
+                                       typeahead-wait-ms="500"
+                                       typeahead-editable="false"
+                                       typeahead-on-select="model.selectedUser = $item;"
+                                       class="form-control"/>
+                                <div class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-click="resetUserSearch()"><i class="fa fa-remove"></i></button>
+                                </div>
+                            </div>
+                            <div ng-show="loadingLocations" class="overlay">
+                                <i class="fa fa-refresh fa-spin"></i>
+                            </div>
+                            <div ng-show="noResults" class="form-group has-error">
+                                <span class="help-block"><i class="fa fa-remove"></i>&nbsp;{{'GLOBAL.NORESULTS' | translate}}</span>
+                            </div>
+                        </div>
+                        <formly-form model="model" fields="idFields" form="form" options="options"></formly-form>
+                    </div>
+                    <div class="col-xs-12">
+                        <div class="flex-row pull-right">
+                            <button-clear ng-click="resetFilter(true)"></button-clear>
+                            <button-filter ng-click="applyFilter(true)"></button-filter>
+                        </div>
+                    </div>
+                </div>
+                <div class="collapse " uib-collapse="!legendCollapsed">
+                    <div align="center">
+                        <button-filter class="pull-left" ng-click="toggleLegendCollapse()"></button-filter>
+                        <button-refresh class="pull-right" ng-click="applyFilter(false)"></button-refresh>
+                        <button-clear class="pull-right" ng-click="resetFilter(false)"></button-clear>
+                    </div>
+                    <div class="text-center col-xs-12 pt-1">
+                        <span class="description"> <label>{{viewingDescription()}}</label><br/></span>
+                        <span ng-if="model.betTimestampRangeStart || model.betTimestampRangeEnd" class="description"> <label>bets</label> <label ng-if="model.betTimestampRangeStart"> from {{model.betTimestampRangeStart|date}}</label> <label ng-if="model.betTimestampRangeEnd"> up to {{model.betTimestampRangeEnd|date}}</label><br/></span>
+                        <span ng-if="model.settlementTimestampRangeStart || model.settlementTimestampRangeEnd" class="description"> <label>with settlement</label> <label ng-if="model.settlementTimestampRangeStart"> from {{model.settlementTimestampRangeStart|date}}</label> <label ng-if="model.settlementTimestampRangeEnd"> up to {{model.settlementTimestampRangeEnd|date}}</label></span>
+                    </div>
+                    <div class="text-center col-xs-12">
+                        <span ng-if="model.selectedUser" class="legend-user">
+                          <a ng-if="model.selectedUser.firstName && model.selectedUser.lastName" target="_blank" ui-sref="dashboard.players.player.summary({id:model.selectedUser.id, domainName:model.selectedUser.domain.name})">
+                            only for {{model.selectedUser.firstName + ' ' + (model.selectedUser.lastNamePrefix != undefined && model.selectedUser.lastNamePrefix != null ? model.selectedUser.lastNamePrefix + ' ' : '') + model.selectedUser.lastName + ' (' + model.selectedUser.username+')'}}
+                          </a>
+                          <a ng-if="!model.selectedUser.firstName && !model.selectedUser.lastName" target="_blank" ui-sref="dashboard.players.player.summary({id:model.selectedUser.id, domainName:model.selectedUser.domain.name})">
+                            only for {{' (' + model.selectedUser.username+')'}}
+                          </a>
+                        </span>
+                    </div>
+                </div>
+            <div class="row" style="padding-top: 2em">
+                <div class="col-xs-12">
+                    <div class="card nav-tabs-custom" style="margin-bottom: 5px;">
+                        <ul class="nav nav-tabs">
+                            <li ng-repeat="tabNow in tabs" ng-class="{ active: activeTab == tabNow }">
+                                <a ng-click="setTab(tabNow)">{{ tabNow.title | translate }}</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content" style="padding: 1px 0 0 0;">
+                            <dt ng-if="tableVisible" class="table table-sm table-responsive" table="betsTable"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

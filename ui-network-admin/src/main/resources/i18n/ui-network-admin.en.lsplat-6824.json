@@ -1,0 +1,51 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "PLAYER": {
+      "PLAYER_PROTECTION" : {
+        "TAB": {
+          "TITLE": "Player Protection"
+        },
+        "WAGER_HISTORY": {
+          "TITLE": "Wager History",
+          "LAST_TWENTY_FOUR": "Placed last 24 hours",
+          "LAST_TWENTY_FOUR_SPORT": "Sport",
+          "LAST_MONTH": "Placed last 30 days",
+          "LAST_MONTH_SPORT": "Sport"
+        },
+        "SESSION_HISTORY": {
+          "TITLE": "Session History",
+          "SUCCESSFUL_LOGINS": "Successful Logins",
+          "SUCCESSFUL_LOGINS_DETAILS": "Details",
+          "UNSUCCESSFUL_LOGINS": "Unsuccessful Logins",
+          "UNSUCCESSFUL_LOGINS_DETAILS": "Details"
+        },
+        "RESPONSIBLE_GAMBLING_TOOL": {
+          "TITLE": "Responsible Gambling Tools",
+          "CURRENT_DEPOSIT_LIMIT": "Current Deposit Limit",
+          "WEEKLY": "Weekly",
+          "MONTHLY_LOST_LIMIT": "Monthly Loss Limit",
+          "MONTHLY_DEPOSIT_LIMIT": "Monthly Deposit Limit"
+        },
+        "PAYMENT_METHODS_TRANSACTION": {
+          "TITLE": "Payment Methods & Transactions",
+          "LAST_TWENTY_FOUR": "Placed last 24 hours",
+          "LAST_TWENTY_FOUR_DETAILS": "Details",
+          "LAST_MONTH": "Placed last 30 days",
+          "LAST_MONTH_DETAILS": "Details"
+        },
+        "BIG_WIN": {
+          "TITLE": "Big Wins ",
+          "LAST_BIG_WIN": "Date Of Last Big Win",
+          "BIG_WIN_AMOUNT": "Big Win Amount"
+        },
+        "BEHAVIOUR_CHANGE": {
+          "CURRENT_TITLE": "Current 24 Hours",
+          "PREVIOUS_TITLE": "Current 24 Hours",
+          "WAGERS_PLACED": "Wagers Placed",
+          "AVERAGE_STAKE_SIZE": "Average Stake Size",
+          "LOWEST_STAKE_SIZE": "Lowest Stake Size"
+        }
+      }
+    }
+  }
+}

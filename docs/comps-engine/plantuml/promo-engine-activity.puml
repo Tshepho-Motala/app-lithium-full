@@ -1,0 +1,87 @@
+@startuml
+start
+
+:domain missions;
+-> loop through all the missions returned;
+note left
+  query current missions for the domain
+  where start date is before today or null,
+  and end date is after today or null
+end note
+:user_mission;
+note right
+  for each mission check if record exists in
+  `user_mission` table for that mission revision
+  and period and user.
+end note
+#HotPink: #1;
+note left
+Number represented in lithium.service.missions.services.UserMissionService.findUserMissions
+end note
+if (has user_mission record(s)) then (yes)
+  #HotPink: #2;
+  if (all records in completed state) then (yes)
+    #HotPink: #3;
+    if (equals mission maxRedeemable) then (yes)
+      #HotPink: #4;
+      #pink:cannot participate;
+      kill;
+    else (no)
+      #HotPink: #5;
+      #palegreen::create new user_mission record;
+    endif
+    note left
+      player has completed this mission
+      for the given period.
+    end note
+  else (no)
+      #HotPink: #15;
+      if (expired) then (true)
+        #HotPink: #18;
+        #pink:cannot participate;
+        kill;
+      else (false)
+        #HotPink: #17;
+        :return existing user_mission;
+      endif
+  endif
+else (no)
+  #HotPink: #6;
+  switch (mission type)
+    case ()
+      #HotPink: #7;
+      :non-sequence;
+      :check xp level requirements;
+      #palegreen::create new user_mission record;
+    case ()
+      #HotPink: #8;
+      :sequenced;
+      #HotPink: #9;
+      if (completed previous sequence #) then (true)
+        #HotPink: #10;
+        if (granularity break) then (false)
+          #HotPink: #11;
+        else (true)
+          #HotPink: #12;
+          if (previous completed sequence in previous granularity) then (true)
+            #HotPink: #13;
+          else (false)
+            #HotPink: #14;
+            #pink:cannot participate;
+            kill
+          endif
+        endif
+        :check xp level requirements;
+        #palegreen::create new user_mission record;
+      else (false)
+        #HotPink: #16;
+        #pink:cannot participate;
+        kill
+      endif
+  endswitch
+endif
+
+:may participate, returning user_mission record;
+stop;
+
+@enduml

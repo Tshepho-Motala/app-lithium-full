@@ -1,0 +1,11 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "SERVICE_SETTLEMENT": {
+      "SETTLEMENTS": {
+        "LIST": {
+          "TITLE": "View ({{batchId}})"
+        }
+      }
+    }
+  }
+}

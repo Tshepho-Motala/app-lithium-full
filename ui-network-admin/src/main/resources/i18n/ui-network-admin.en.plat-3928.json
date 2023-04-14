@@ -1,0 +1,13 @@
+{
+  "SERVICE-CASHIER": {
+    "AUTOWITHDRAWALS": {
+      "RULESETS": {
+        "RULE": {
+          "FIELD": {
+            "FREE_BET_USED": "Player has used a free bet"
+          }
+        }
+      }
+    }
+  }
+}

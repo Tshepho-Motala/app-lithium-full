@@ -1,0 +1,125 @@
+.Registration Flow for the Netherlands domain setup
+[plantuml]
+----
+@startuml
+'https://plantuml.com/sequence-diagram
+
+participant GW as gw
+participant DK as dk
+participant Lithium as lithium
+control "restrictions.promotions.trigger" as queue
+participant Sphonic as sphonic
+
+autonumber
+
+gw -> lithium++: external validation API for Sphonic CRUKS Registration Workflow
+  group Sphonic CRUKS Registration Workflow
+    lithium -> sphonic++: call CRUKS register workflow
+    sphonic --> lithium--: response
+    lithium -> lithium: maps CRUKS response to an access rule outcome
+    note right of lithium
+      * When the player is found on CRUKS, then a corresponding CRUKS ID will be sent back
+      ** Depending on whether the player isRegistered on CRUKS as being self excluded, the access rule will either PASS (isRegistered=false) or FAIL (isRegistered=true)
+      * When Sphonic or Bluem is down, a timeout response will be sent back
+      * When Sphonic is not able to map player to valid CRUKS, then REVIEW is returned on access provider
+      * Note that GW also uses this register endpoint to valdate whether the players BSN is correct
+    end note
+  end group
+lithium --> gw--: External Validations Response
+
+alt external validation on CRUKS was NOT successful
+  gw -> gw: User is not registered
+else external validation on CRUKS was successful
+  gw -> lithium++: register new player using register/v4 API
+
+  group pre-registration
+      lithium -> lithium: validation
+      lithium -> lithium: execute pre-signup access rules
+  end group
+
+  lithium -> lithium: creates new user
+
+  group post-registration
+    lithium -> lithium: execute post-signup access rules
+      group auto-restriction rules
+        lithium -> lithium: trigger auto-restriction rules
+        alt under 24 years of age (configurable)
+          lithium -> lithium: places underaged comps block
+          lithium -> queue++: externalRestrictBonus
+        end
+      end group
+        lithium -> lithium: updates user statuses, limits
+      alt ecosystem
+        lithium -> lithium: media account creation
+      end
+        ' Technical Debt LSPLAT-5345 - GW timing issue on restrictBonus
+  end group
+  group implicit login after successful registeration
+    lithium -> lithium: validation
+    group execute post-login access rules
+      lithium -> lithium: execute post-login access rules
+      alt ruleset includes CRUKS access rule
+        lithium -> sphonic++: call CRUKS register workflow
+        sphonic --> lithium--: response
+        lithium -> lithium: maps CRUKS response to an access rule outcome
+      end
+    end group
+    lithium --> gw--: response AccessTokenResponse
+  end group
+end
+
+... time elapses ...
+
+group #lightyellow external bonus restriction retry
+
+  ... Note that this yellow block is only to show when external bonus restrict delay was not enough ...
+
+  queue -> lithium++: dequeue external bonus restrict
+  lithium -> gw++: restrictBonus
+  alt Player does NOT exist on DK
+    gw -> dk++#red: restrictBonus
+    dk --> gw--: 500 Player not found
+    gw --> lithium--: 500 External bonus failed: player not found
+    lithium -> queue--: add to retry on .dlq
+  end
+end
+
+... time elapses ...
+
+gw -> dk: register user
+
+... restrictions.promotions.trigger delay ...
+
+queue -> lithium++: dequeue external bonus restrict
+lithium -> gw++: restrictBonus
+alt Player exists on DK
+   gw -> dk++#green: restrictBonus
+   dk --> gw--: 200 Bonus was restricted
+   gw --> lithium: 200 External bonus was successfully restricted
+   ... flow ends on lithium ...
+else Player does NOT exist on DK
+  gw -> dk++#red: restrictBonus
+  dk --> gw--: 500 Player not found
+  gw --> lithium--: 500 External bonus failed: player not found
+  lithium -> queue--: add to retry on .dlq
+end
+
+'gw -> dk: restrictBonus
+
+
+'== Outside Registration Flow ==
+'   gw -> lithium++: login
+'   alt check if external restriction on bonus was NOT succesful
+'       lithium -> gw: restrictBonus
+'       gw -> dk: restrictBonus
+'   end
+'   lithium --> gw--: AccessTokenResponse
+
+'group  login
+'        lithium -> lithium: execute post-login access rules
+'        alt#red if underaged restriction placed and restrictBonus was not done
+'            lithium -> gw: restrictBonus
+'        end
+'    end group
+@enduml
+----

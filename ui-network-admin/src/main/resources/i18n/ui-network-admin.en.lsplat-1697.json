@@ -1,0 +1,11 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "DEPOSITLIMITS": {
+      "CHANGE": {
+        "EXPLAIN": {
+          "LARGER_WITH_TIME": "This is an increase to this deposit limit, and will only take effect within {{time}} hours."
+        }
+      }
+    }
+  }
+}

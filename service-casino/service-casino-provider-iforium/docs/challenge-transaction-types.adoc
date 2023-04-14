@@ -1,0 +1,35 @@
+= Iforium Transaction Types
+
+Iforium defines the set of `AccountTransactionTypeID` values to be  *_unbounded_* - that is, new values can be added at any time.
+
+The current values can be found in
+their link:gameflex/IforiumCommonReferenceData1.9.pdf[reference data] and are listed below for convenience.
+
+IMPORTANT: What this means for us is that we can't map `AccountTransactionTypeID` directly to a specific `EBalanceAdjustmentComponentType`. The current implementation uses `EBalanceAdjustmentComponentType.CASINO_ADHOC_CREDIT` and records the `AccountTransactionTypeID` in `BalanceAdjustmentComponent.additionalReference`.
+
+.Iforium Transaction Types
+[options="header", cols="^.<10s,.<70,.<20"]
+|===
+| ID | Description | Type
+| 811 | Shadow Deposit | Casino Credit
+| 812 | Shadow Withdrawal | Casino Debit
+| 985 | Seamless Transfer Cancel Games Bonus | Casino Debit
+| 986 | Seamless Transfer Close Games Bonus | Casino Debit
+| 987 | Seamless Transfer Expire Games Bonus | Casino Debit
+| 817 | Seamless Competition Labs Reward | Casino Debit
+| 889 | Greentube Seamless Transfer Free Spin Winnings | Casino Debit
+| 13993 | Pragmatic Seamless Transfer Game Award Tournament Win | Casino Debit
+| 892 | Blueprint Gaming Free Spin Winnings Transfer | Casino Debit
+| 910 | Booongo Free Spin Winnings Transfer | Casino Debit
+| 925 | IGT Free Spin Winnings Transfer | Casino Debit
+| 939 | iSoftBet Free Spin Winnings Transfer | Casino Debit
+| 947 | Microgaming Quickfire Free Spin Winnings Transfer | Casino Debit
+| 949 | NetEnt Free Spin Winnings Transfer | Casino Debit
+| 907 | Play N Go Free Spin Winnings Transfer | Casino Debit
+| 934 | Playson Free Spin Winnings Transfer | Casino Debit
+| 888 | Red Tiger Free Spin Winnings Transfer | Casino Debit
+| 921 | Relax Gaming Free Spin Winnings Transfer | Casino Debit
+| 912 | Spinonemal Free Spin Winnings Transfer | Casino Debit
+| 894 | Wazdan Free Spin Winnings Transfer | Casino Debit
+| 919 | Yggdrasil Free Spin Winnings Transfer | Casino Debit
+|===

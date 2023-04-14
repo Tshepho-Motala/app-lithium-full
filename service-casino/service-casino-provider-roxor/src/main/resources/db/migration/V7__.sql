@@ -1,0 +1,1 @@
+CREATE INDEX idx_api_token ON `user` (api_token) ALGORITHM INPLACE LOCK NONE;

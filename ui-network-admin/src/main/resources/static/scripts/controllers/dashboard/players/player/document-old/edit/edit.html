@@ -1,0 +1,32 @@
+<div class="modal-header">
+	<h3 class="modal-title" id="modal-title">{{ "UI_NETWORK_ADMIN.DOCUMENT.EDIT.TITLE" | translate }}
+		<button-close-window ng-click="controller.cancel()" />
+	</h3>
+</div>
+<form name="controller.form" novalidate>
+	<div class="modal-body" id="modal-body">
+		<div class="row v-reset-row ">
+			<div class="col-xs-12">
+			
+				<formly-form model="controller.model" fields="controller.fields" options="controller.options" form="controller.form">
+				</formly-form>
+
+				<buttonbar>
+					<button-submit ng-click="controller.onSubmit()"></button-submit>
+					<button-reset ng-click="controller.resetModel()"></button-reset>
+					<button-delete ng-show="linkId" ng-click="controller.onRemove()"></button-delete>
+					<button-cancel ng-click="controller.cancel()"></button-cancel>
+				</buttonbar>
+			</div>
+		</div>
+		<div class="row v-reset-row ">
+			<div class="col-xs-12">
+				<hr/>
+				<label>{{ "UI_NETWORK_ADMIN.DOCUMENT.FIELDS.FILEUPLOAD" | translate }}</label>
+				<input type="file" file-model= controller.document.file />
+				<br>
+				<button-upload ng-click="controller.uploadFile( controller.model.uuid, controller.document.file )">{{ "GLOBAL.ACTION.UPLOAD" | translate }}</button-upload>
+			</div>
+		</div>
+	</div>
+</form>

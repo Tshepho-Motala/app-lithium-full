@@ -1,0 +1,2 @@
+ALTER TABLE  `user` ADD COLUMN gender VARCHAR(10) NULL; 
+ALTER TABLE  `incomplete_user` ADD COLUMN gender VARCHAR(10) NULL; 

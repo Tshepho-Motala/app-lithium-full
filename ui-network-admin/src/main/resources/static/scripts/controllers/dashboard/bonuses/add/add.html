@@ -1,0 +1,82 @@
+<div class="container-fluid">
+	<div class="card card-block" style="margin-bottom: 10px;" ng-init="">
+		<div class="d-flex justify-content-start">
+			<div class="p-2 mr-auto" style="width: 50%;">
+				<span class="title">{{ 'UI_NETWORK_ADMIN.BONUS.ADD.TITLE' | translate }}</span>
+				<span class="description">{{ 'UI_NETWORK_ADMIN.BONUS.ADD.DESCRIPTION' | translate }}</span>
+			</div>
+			<div class="ml-auto p-2 text-right" style="width: 50%;">
+				<div style="margin-bottom:5px;" ng-if="controller.model.domainName">
+					<span style="padding:5px; margin-right: 3px;" class="label label-primary">&nbsp;{{ controller.model.domainName | uppercase }}&nbsp;</span>
+				</div>
+				<div style="margin-bottom:5px;">
+					<span ng-if="controller.model.bonusType === 0" style="padding:5px; margin-right: 3px;" class="label label-warning">&nbsp;{{ 'GLOBAL.BONUS.TYPE.0' | translate | uppercase }}&nbsp;</span>
+					<span ng-if="controller.model.bonusType === 1" style="padding:5px; margin-right: 3px;" class="label label-success">&nbsp;{{ 'GLOBAL.BONUS.TYPE.1' | translate | uppercase }}&nbsp;</span>
+					<span ng-if="controller.model.bonusType === 2" style="padding:5px;" class="label label-primary">&nbsp;{{ 'GLOBAL.BONUS.TYPE.2' | translate | uppercase }}</span>
+					<span ng-if="controller.model.bonusType === 3" style="padding:5px;" class="label label-primary">&nbsp;{{ 'GLOBAL.BONUS.TYPE.3' | translate | uppercase }}</span>
+					<span ng-if="controller.model.bonusType === 2 && controller.model.bonusTriggerType === 0" style="padding:5px; margin-right: 3px;" class="label label-default">&nbsp;{{ 'GLOBAL.BONUS.TYPE.TRIGGER.0' | translate | uppercase }}&nbsp;</span>
+					<span ng-if="controller.model.bonusType === 2 && controller.model.bonusTriggerType === 1" style="padding:5px; margin-right: 3px;" class="label label-default">&nbsp;{{ 'GLOBAL.BONUS.TYPE.TRIGGER.1' | translate | uppercase }}&nbsp;</span>
+					<span ng-if="controller.model.bonusType === 2 && controller.model.bonusTriggerType === 2" style="padding:5px; margin-right: 3px;" class="label label-default">&nbsp;{{ 'GLOBAL.BONUS.TYPE.TRIGGER.2' | translate | uppercase }}&nbsp;</span>
+					<span ng-if="controller.model.bonusType === 2 && controller.model.bonusTriggerType === 3" style="padding:5px; margin-right: 3px;" class="label label-default">&nbsp;{{ 'GLOBAL.BONUS.TYPE.TRIGGER.3' | translate | uppercase }}&nbsp;</span>
+					<span ng-if="controller.model.bonusType === 2 && controller.model.bonusTriggerType === 4" style="padding:5px; margin-right: 3px;" class="label label-default">&nbsp;{{ 'GLOBAL.BONUS.TYPE.TRIGGER.4' | translate | uppercase }}&nbsp;</span>
+					<span ng-if="controller.model.bonusType === 2 && controller.model.bonusTriggerType === 5" style="padding:5px; margin-right: 3px;" class="label label-default">&nbsp;{{ 'GLOBAL.BONUS.TYPE.TRIGGER.5' | translate | uppercase }}&nbsp;</span>
+					<span ng-if="controller.model.bonusType === 2 && controller.model.bonusTriggerType === 6" style="padding:5px; margin-right: 3px;" class="label label-default">&nbsp;{{ 'GLOBAL.BONUS.TYPE.TRIGGER.6' | translate | uppercase }}&nbsp;</span>
+					<span ng-if="controller.model.bonusType === 2 && controller.model.bonusTriggerType === 7" style="padding:5px; margin-right: 3px;" class="label label-default">&nbsp;{{ 'GLOBAL.BONUS.TYPE.TRIGGER.7' | translate | uppercase }}&nbsp;</span>
+					<span ng-if="controller.model.bonusType === 2 && controller.model.bonusTriggerType === 8" style="padding:5px; margin-right: 3px;" class="label label-default">&nbsp;{{ 'GLOBAL.BONUS.TYPE.TRIGGER.8' | translate | uppercase }}&nbsp;</span>
+					<span ng-if="controller.model.bonusType === 2 && controller.model.bonusTriggerType === 9" style="padding:5px; margin-right: 3px;" class="label label-default">&nbsp;{{ 'GLOBAL.BONUS.TYPE.TRIGGER.9' | translate | uppercase }}&nbsp;</span>
+					<span ng-if="controller.model.bonusType === 2 && controller.model.bonusTriggerType === 10" style="padding:5px; margin-right: 3px;" class="label label-default">&nbsp;{{ 'GLOBAL.BONUS.TYPE.TRIGGER.10' | translate | uppercase }}&nbsp;</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<form ng-submit="controller.save()" name="controller.form">
+	<button-bar>
+<!-- 		<button-back ui-sref="dashboard.bonuses"></button-back> -->
+		<button-submit ng-if="!existingBonus" ng-disabled="controller.submitCalled || controller.form.$invalid"></button-submit>
+		<button-cancel ng-if="!existingBonus" ui-sref="dashboard.bonuses"></button-cancel>
+	</button-bar>
+	<div class="row v-reset-row ">
+		<div class="col-xs-12" ng-if="existingBonus">
+			<div class="box box-danger box-solid">
+				<div class="box-header with-border">
+					{{ 'UI_NETWORK_ADMIN.BONUS.ADD.EXISTING.TITLE' | translate }}
+					<div class="box-tools pull-right">
+						<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+					</div>
+				</div>
+				<div class="box-body">
+					<div class="user-block">
+						<img class="img-circle img-bordered-sm" src="//:0" alt="">
+						<span class="username">
+							<a ng-if="existingBonus.bonusCode" ui-sref="^">{{ existingBonus.bonusName }} ({{ existingBonus.bonusCode }})</a>
+							<a ng-if="!existingBonus.bonusCode" ui-sref="^">{{ existingBonus.bonusName }}</a>
+						</span>
+						<span class="description">
+							<span class="label label-primary">{{ 'GLOBAL.BONUS.TYPE.'+existingBonus.bonusType | translate | uppercase }}</span>
+						</span>
+						<span class="description">
+							{{ 'UI_NETWORK_ADMIN.BONUS.ADD.EXISTING.EXPLAIN' | translate }}
+						</span>
+					</div>
+					<div class="pull-right">
+						<button-continue ng-click="controller.proceed(existingBonus.id)" lit-if-permission="bonus_create"></button-continue>
+						<button-cancel ui-sref="dashboard.bonuses"></button-cancel>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-8">
+			<div class="box box-default box-solid">
+				<div class="box-header with-border">
+					{{ 'UI_NETWORK_ADMIN.BONUS.TITLE.INFO' | translate }}
+				</div>
+				<div class="box-body table-responsive">
+					<formly-form model="controller.model" fields="controller.fields" options="controller.options" form="controller.form">
+					</formly-form>
+				</div>
+			</div>
+		</div>
+	</div>
+	</form>
+</div>

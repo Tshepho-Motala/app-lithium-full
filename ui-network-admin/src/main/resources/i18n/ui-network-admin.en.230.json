@@ -1,0 +1,40 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "PLAYER": {
+      "TAB": {
+        "BONUSES": "Bonuses",
+        "CASHBONUS": {
+          "GRANTDATE": "Grant Date",
+          "BONUSID": "Bonus-ID",
+          "BONUSCODE": "Bonus Code",
+          "AMOUNT": "Amount",
+          "STATUS": "Status",
+          "DESC": "Description",
+          "GRANTED": "Granted",
+          "EXPIRED": "Expired",
+          "CANCELLED": "Cancelled",
+          "FIELDS": {
+            "DATERANGESTART": {
+              "LABEL": "Date: Range Start"
+            },
+            "DATERANGEEND": {
+              "LABEL": "Date: Range End"
+            },
+            "BONUSCODES": {
+              "LABEL": "Cash Bonus Codes",
+              "PLACEHOLDER": "Select bonus codes..."
+            }
+          },
+          "FILTERS": {
+            "BONUSCODES": "Bonus Codes being filtered on:"
+          }
+        }
+      }
+    },
+    "GLOBAL": {
+      "COMINGSOON": {
+        "MSG": "This functionality is coming soon."
+      }
+    }
+  }
+}

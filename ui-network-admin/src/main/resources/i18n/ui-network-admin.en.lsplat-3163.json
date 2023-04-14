@@ -1,0 +1,16 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "CASHIER": {
+      "TRANSACTION": {
+        "LIST": {
+          "FIELDS": {
+            "ID": {
+              "LABEL": "ID",
+              "DESCRIPTION": "Please enter at least 3 digits."
+            }
+          }
+        }
+      }
+    }
+  }
+}

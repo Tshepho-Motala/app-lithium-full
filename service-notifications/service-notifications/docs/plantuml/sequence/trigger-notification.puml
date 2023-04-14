@@ -1,0 +1,42 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+actor "SYSTEM" as system
+queue notificationinput
+control "SVC-NOTIFICATIONS" as svcnotifications
+database "USER" as user
+database "NOTIFICATION" as notification
+database "INBOX" as inbox
+database "INBOX_USER" as inbox_user
+
+autonumber
+
+svcnotifications -> notificationinput: listens
+activate notificationinput
+system -->notificationinput: process(UserNotification)
+notificationinput --> svcnotifications: handle message
+alt find user
+    user --> svcnotifications: findUserByUserGuid
+    alt find notification
+        notification --> svcnotifications: findByDomainNameAndName
+        svcnotifications -> inbox: create a new inbox item for triggered notification name
+        note right of inbox
+            * Whenever an intervention message is triggered, a cta flag will also be set to true (meaning that it is of high importance)
+            * Whenever the UserNotification does not contain a cta flag or did not set it, then we need to default to false
+        end note
+        inbox_user --> svcnotifications: findByUserAlwaysLock
+        alt inbox_user row exist
+            svcnotifications -> inbox_user: Updates inbox_user by incrementing read, unread and cta counters
+        else inbox_user row does not exist
+            svcnotifications -> inbox_user: Inserts new inbox_user record for user with read and unread counters per priority
+        end
+        note right of inbox_user
+           * On the inbox_user table there will be 3 fields that needs to reflect read, unread and CTA inbox counters irrespectively
+           * When a new message is added then the unreadCounter needs to be ++'ed
+           * Should the inbox.cta flag be set to true, then the ctaCounter will need to be ++'ed to show that a CTA message has been created
+        end note
+    end
+end
+
+
+@enduml

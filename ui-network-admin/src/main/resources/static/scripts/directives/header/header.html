@@ -1,0 +1,69 @@
+<header class="main-header">
+	<a ui-sref="dashboard.home-beta" class="logo">
+		<!-- mini logo for sidebar mini 50x50 pixels -->
+		<span class="logo-mini"><img src="images/logo_symbol.png"/></span>
+		<!-- logo for regular state and mobile devices -->
+		<span class="logo-lg"><img src="images/logo.png"/></span>
+	</a>
+
+	<!-- Header Navbar -->
+	<nav class="navbar navbar-static-top" role="navigation">
+		
+		<!-- Sidebar toggle button-->
+		<a class="sidebar-toggle" ng-click="toggleSidebar()" data-toggle="offcanvas" role="button">
+			<span class="sr-only">Toggle navigation</span>
+		</a>
+		
+		<!-- Navbar Right Menu -->
+		<div class="navbar-custom-menu">
+			<ul class="nav navbar-nav">
+				
+				<language-select></language-select>
+
+				<li class="user-menu">
+					<a> {{ currentDateUtc }} </a>
+					<span class="hidden">at:{{ token }} rt:{{ refreshToken }}</span>
+				</li>
+
+				<!-- User Account Menu -->
+				<li class="dropdown user-menu">
+					<!-- Menu Toggle Button -->
+					<a class="dropdown-toggle" data-toggle="dropdown">
+						<!-- The user image in the navbar-->
+						<!-- img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image" -->
+						<i class="fa fa-user fa-fw"></i>
+						<!-- hidden-xs hides the username on small devices so only the image appears. -->
+						<span class="hidden-xs">{{ principal.firstName }} {{ principal.lastName }}</span>
+					</a>
+				
+					<ul class="dropdown-menu">
+						<!-- The user image in the menu -->
+						<li class="user-header">
+							<!-- img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image" -->
+							<p>
+								<i class="fa fa-user fa-5x fa-fw"></i>
+							</p>
+							<p>
+								{{ principal.username }}
+								<small>{{ principal.email }}</small>
+							</p>
+						</li>
+						<!-- Menu Body -->
+						<!-- <li class="user-body">Body here</li> -->
+						<!-- Menu Footer-->
+						<li class="user-footer">
+							<div class="pull-left">
+								<button-profile ui-sref="dashboard.profile"></button-profile>
+							</div>
+							<div class="pull-right">
+								<button-signout ng-click="logout()"></button-signout>
+<!--								<button ng-click="showExtend()">Session Extend</button>-->
+							</div>
+
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</div>
+	</nav>
+</header>

@@ -1,0 +1,47 @@
+{
+	"name": "sms.validation.cellnumber.changed",
+	"description": "Please verify your email address",
+	"text": "Hi %user.firstName% %user.lastName%, We have detected that your mobile phone number at %domain.name% has changed. Please validate your new mobile phone number by entering the code %sms.validate.token% or clicking on %sms.validate.url%.",
+	"placeholders": [
+		{
+			"name": "%domain.name%",
+			"description": "The domain's display name"
+		},
+		{
+			"name": "%domain.url%",
+			"description": "The domain's URL"
+		},
+		{
+			"name": "%domain.supportEmail%",
+			"description": "The domain's support email address"
+		},
+		{
+			"name": "%user.firstName%",
+			"description": "The player's first name"
+		},
+		{
+			"name": "%user.lastName%",
+			"description": "The player's last name"
+		},
+		{
+			"name": "%user.userName%",
+			"description": "The player's username"
+		},
+		{
+			"name": "%user.emailAddress%",
+			"description": "The player's email address"
+		},
+		{
+			"name": "%sms.validate.url%",
+			"description": "A link which the player clicks on to validate his/her email address"
+		},
+		{
+			"name": "%user.cellphoneNumber%",
+			"description": "The player's mobile phone number"
+		},
+		{
+			"name": "%sms.validate.token%",
+			"description": "The player's validation code"
+		}
+	]
+}

@@ -1,0 +1,51 @@
+{
+  "GLOBAL": {
+    "FIELDS": {
+      "COUNTRY_OF_BIRTH": "Country Of Birth",
+      "IBAN": "IBAN"
+    },
+    "COUNTRY_OF_BIRTH": {
+      "NAME": "Country Of Birth",
+      "PLACEHOLDER": "Country Of Birth"
+    },
+    "LAST_NAME_PREFIX": {
+      "NAME": "Last Name Prefix",
+      "PLACEHOLDER": "Last Name Prefix"
+    },
+    "IBAN": {
+      "NAME": "IBAN",
+      "PLACEHOLDER": "IBAN"
+    },
+    "CRUKS_ID": {
+      "NAME": "CRUKS ID",
+      "PLACEHOLDER": "CRUKS ID"
+    }
+  },
+  "UI_NETWORK_ADMIN": {
+    "USER": {
+      "FIELDS": {
+        "LAST_NAME_PREFIX": {
+          "NAME": "Last Name Prefix",
+          "PLACEHOLDER": "Last Name Prefix",
+          "DESCRIPTION": "Your last name prefix."
+        },
+        "IBAN": {
+          "NAME": "IBAN",
+          "PLACEHOLDER": "IBAN",
+          "DESCRIPTION": "Your International Bank Account Number (IBAN)."
+        }
+      }
+    },
+    "PLAYER": {
+      "CRUKS": {
+        "TITLE": "CRUKS ID",
+        "CRUKS_ID_NOT_SET": "CRUKS ID not set.",
+        "FIELDS": {
+          "CRUKS_ID": {
+            "LABEL": "CRUKS ID"
+          }
+        }
+      }
+    }
+  }
+}

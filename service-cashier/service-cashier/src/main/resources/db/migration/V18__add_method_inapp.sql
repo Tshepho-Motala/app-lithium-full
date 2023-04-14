@@ -1,0 +1,1 @@
+ALTER TABLE `method` ADD COLUMN `in_app` bit(1) DEFAULT 0;

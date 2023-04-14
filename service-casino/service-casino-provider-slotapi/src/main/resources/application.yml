@@ -1,0 +1,23 @@
+server.port: 9811
+
+spring:
+  application:
+    name: service-casino-provider-slotapi
+  datasource:
+    url: jdbc:mysql://localhost/lithium_casino_slotapi
+    username: root
+    password: mysql
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: validate
+  flyway:
+    enabled: true
+
+eureka:
+  instance:
+    appname: service-casino-provider-slotapi
+
+logging:
+  level:
+    lithium.service.casino.provider.slotapi: INFO

@@ -1,0 +1,12 @@
+{
+	"UI_NETWORK_ADMIN": {
+		"REPORTS": {
+			"IA": {
+				"REPORTRUN": {
+					"DOWNLOADREGFILE": "Download Reg File",
+					"DOWNLOADSALESFILE": "Download Sales File"
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,16 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "LIMITS": {
+      "PLAYER": {
+        "REMOVED": "Player Limits Removed"
+      }
+    },
+    "PLAYER": {
+      "QUICK_ACTIONS": {
+        "DELETE": {
+          "WEEKLY_LOSS_LIMIT": "Delete Weekly Loss Limit"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,16 @@
+ALTER TABLE `incomplete_user`
+  ADD COLUMN `dob_year` INTEGER NULL,
+  ADD COLUMN `dob_month` INTEGER NULL,
+  ADD COLUMN `dob_day` INTEGER NULL,
+  ADD COLUMN `last_updated_date` datetime,
+  ADD COLUMN `residential_address_id` BIGINT(20) DEFAULT NULL,
+  ADD KEY `FKfdhgfhiy827gu` (`residential_address_id`),
+  ADD CONSTRAINT `FKfkhiojhg727gu` FOREIGN KEY (`residential_address_id`) REFERENCES `address` (`id`),
+DROP COLUMN `affiliate_guid`,
+  DROP COLUMN `affiliate_secondary_guid1`,
+  DROP COLUMN `affiliate_secondary_guid2`,
+  DROP COLUMN `affiliate_secondary_guid3`,
+  DROP COLUMN `username`,
+  DROP COLUMN `referrer_guid`,
+  DROP COLUMN `domain_name`,
+ALGORITHM COPY, LOCK SHARED;

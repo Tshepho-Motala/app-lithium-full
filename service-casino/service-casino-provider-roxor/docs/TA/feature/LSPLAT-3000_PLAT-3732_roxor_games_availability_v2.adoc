@@ -1,0 +1,111 @@
+= feature/LSPLAT-3000_PLAT-3732_roxor_games_availability_v2
+Riaan Schoeman <riaan.schoeman@wonderlabz.com>
+1.0, January 27, 2022: Service Casino Provider Roxor
+:sectnums:
+:toc: left
+:toclevels: 4
+:toc-title: SCP Roxor
+:icons: font
+:url-quickref: https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/
+
+:sourcedir: ../../../src/main/java
+:gamesourcedir: ../../../../../service-games/service-games/src/main/java
+
+//This is done tto keep formatting aligned with gitlab
+****
+[verse,,]
+____
+link:../../readme.adoc[Home]
+____
+****
+
+== Tickets
+
+* https://jira.livescore.com/browse/PLAT-3732
+* https://playsafe.atlassian.net/browse/LSPLAT-3000
+
+== Business
+
+=== Description
+==== Background
+
+* In order to display information regarding a player's progress on DFGs in a widget within the casino FE lobby, we need to retrieve data from Roxor's Games Availability endpoint v2 which is secured and not public.
+* v2 endpoint exposes player specific information which includes game play progress of the player such as:
+** the list of days player played DFG in the current week
+** total MFG contributions for the current month
+** whether player consumed all his picks in current day
+** player's wins (cash and free spins) for the current week along with timestamps
+* these are deemed as sensitive such that can be processed to get more insight about a specific player
+
+==== API
+
+https://confluence.anzogroup.com/display/DFG/freegame-system+Games+Availability+API
+
+==== Logical
+
+* All Data from the Games Availability Endpoint to be made available to the Front End.
+* Roxor to whitelist the backend service to allow access to Endpoint
+* Backend to authorise requests from Front End client
+* Data would need to be refreshed daily after the player has played the DFG
+
+== Architecture
+=== Information
+* This is a roxor provider specific function, hence it will be implemented on the roxor provider code base. We will be proxying the data to the frontend (FE).
+* svc-games does processing of completed transaction, because it contains the data about games being freegames
+* scp-roxor consumes the new msg's published, because it contains the data needed to lookup the website, and the playerId which is needed to call external roxor api.
+
+=== ``service-games``
+** ``lithium.service.games.services.RecentlyPlayedService`` is not going to be processing completed transactions anymore, and will instead be called from:
+** ``lithium.service.games.stream.CompletedTransactionProcessor``:
+*** TODO item on line 32:
+**** Create a new service for free game processing
+**** Determine if the bet received was made on a freegame (DFG/MFG)
+**** If it was, post a message on a newly created queue to be consumed in scp-roxor
+
+[source,java]
+----
+include::{gamesourcedir}/lithium/service/games/stream/CompletedTransactionProcessor.java[lines=15..32]
+----
+
+=== ``scp-roxor``
+
+* Create a consumer for the messages published above, consumer to use this service:
+* ``lithium.service.casino.provider.roxor.services.ExternalGamesAvailabilityProxyService``
+* Create a new property on service-casino-provider-roxor called lithium.queue.free-game-metadata-enabled which would allow us to disable the external endpoint call should we need to, and set it to false (this is a catch should the need arise to temporarily switch off the external call to roxor)
+** then, if the roxor-games-availability endpoint has not been blocked, determine if this message received for a player bet, is the first bet for the day. (will be a freegame bet, because svc-games will only publish freegame bets in the service/queue above.)
+*** if it is, create a record in a new table to store this, so subsequent messages for the player for the day can be ignored. (Make sure to add adequate comments to explain function.)
+*** if it is, make a call to the <<External Roxor API>> provided to retrieve the DFG/MFG information and store it locally (newly created db), to be retrieved from FE.
+*** if it is not the first free bet for the day, check whether the free bet was a win, if it is, make a call to the <<External Roxor API>> provided to retrieve the DFG/MFG information and store it locally (new created db), to be retrieved from FE.
+** Controller that will be called by FE:
+*** lithium.service.casino.provider.roxor.api.controllers.frontend.FrontendGamesAvailabilityProxyController:
+
+[source,java]
+----
+include::{sourcedir}/lithium/service/casino/provider/roxor/api/controllers/frontend/FrontendGamesAvailabilityProxyController.java[lines=11..23]
+----
+
+** lithium.service.casino.provider.roxor.ServiceCasinoProviderRoxorModuleInfo:
+
+[source,java]
+----
+include::{sourcedir}/lithium/service/casino/provider/roxor/ServiceCasinoProviderRoxorModuleInfo.java[lines=286]
+----
+
+=== External Roxor API
+
+//* Test details to be confirmed by Rob Evans. (TL for free games)
+
+Dev Example Endpoints: (website and player needs to be changed to be relevant)
+
+* https://platform.games-dev.roxor.games/free-game/v2/recent-winner/website/jackpotjoy/game-key/js-dfg-search-for-the-phoenix[Domain] - This is not part of the scope of this task, but listed here for informational purpose.
+
+* https://platform.games-dev.roxor.games/free-game/v2/games-availability/website/jackpotjoy/player/1234[Player]
+
+** response details explained https://confluence.anzogroup.com/display/DFG/freegame-system+Games+Availability+API[here]
+** this response structure can be copied into ``scp-roxor`` to provide the database structure.
+
+include::../../plantuml/roxor_games_availability_v2_erd.puml[erd]
+
+=== Diagrams
+
+include::../../plantuml/roxor_games_availability_v2_basic-flow.puml[]

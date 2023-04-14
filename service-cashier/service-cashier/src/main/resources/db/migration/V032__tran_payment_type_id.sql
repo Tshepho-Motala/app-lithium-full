@@ -1,0 +1,1 @@
+ALTER TABLE `transaction` ADD COLUMN `payment_type` VARCHAR(255) DEFAULT NULL;

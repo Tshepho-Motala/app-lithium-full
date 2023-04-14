@@ -1,0 +1,59 @@
+<div class="col-lg-9">
+    <h4>{{ 'UI_NETWORK_ADMIN.CHANGELOG.TITLE' | translate }}</h4>
+    <hr/>
+    <div id="changelog-container">
+        <ul class="timeline cms-accordion-container">
+            <li ng-repeat="(i, change) in list" class="cms-accordion-item">
+                <i ng-class="{ 'fa fa-plus-circle bg-yellow': change.type === 'create', 'fa fa-ban bg-red': change.type === 'disable',
+								'fa fa-check bg-green': change.type === 'enable', 'fa fa-trash bg-red': change.type === 'delete',
+								'fa fa-archive bg-maroon': change.type === 'archived', 'fa fa-archive bg-orange': change.type === 'unarchived',
+								'fa fa-copy bg-blue': change.type.indexOf('copy') == 0, 'fa fa-exchange bg-green': change.type.indexOf('markbonuscurrent') == 0,
+								'fa fa-pencil-square bg-blue': change.type === 'edit', 'fa fa-comment bg-teal': change.type === 'comment' }"></i>
+                <div class="timeline-item cms-accordion-item">
+                    <input type="checkbox" class="cms-accordion-radio" name="rd" id="cms-accordion-radio-{{i}}">
+                    <span class="time"><i class="fa fa-clock-o"></i> {{ change.changeDate | datetimedefault }}</span>
+                    <label class="cms-accordion-label" for="cms-accordion-radio-{{i}}">
+                        <h3 class="timeline-header cms-accordion-title">
+                            <span ng-if="change.type === 'create'">{{ 'UI_NETWORK_ADMIN.CHANGELOG.HEADER.CREATEDBY' | translate }}</span>
+                            <span ng-if="change.type === 'edit'">{{ 'UI_NETWORK_ADMIN.CHANGELOG.HEADER.UPDATEDBY' | translate }}</span>
+                            <span ng-if="change.type === 'enable'">{{ 'UI_NETWORK_ADMIN.CHANGELOG.HEADER.ENABLEDBY' | translate }}</span>
+                            <span ng-if="change.type === 'disable'">{{ 'UI_NETWORK_ADMIN.CHANGELOG.HEADER.DISABLEDBY' | translate }}</span>
+                            <span ng-if="change.type === 'delete'">{{ 'UI_NETWORK_ADMIN.CHANGELOG.HEADER.DELETEDBY' | translate }}</span>
+                            <span ng-if="change.type === 'comment'">{{ 'UI_NETWORK_ADMIN.CHANGELOG.HEADER.COMMENTBY' | translate }}</span>
+                            <span ng-if="change.type === 'copybonus'">{{ 'UI_NETWORK_ADMIN.CHANGELOG.HEADER.COPYBONUSBY' | translate }}</span>
+                            <span ng-if="change.type === 'markbonuscurrent'">{{ 'UI_NETWORK_ADMIN.CHANGELOG.HEADER.MARKBONUSCURRENTBY' | translate }}</span>
+                            {{ change.authorFullName }}
+                        </h3>
+                    </label>
+                    <div class="timeline-body cms-accordion-content">
+                        <span ng-if="change.type === 'create'">{{ 'UI_NETWORK_ADMIN.CHANGELOG.BODY.CREATE' | translate: { entity: change.entity, date: formatDate(change.changeDate), author: change.authorFullName } }}<br/><br/></span>
+                        <span ng-if="change.type === 'edit'">{{ 'UI_NETWORK_ADMIN.CHANGELOG.BODY.EDIT' | translate: { entity: change.entity, date: formatDate(change.changeDate), author: change.authorFullName } }}<br/><br/></span>
+                        <span ng-if="change.type === 'enable'">{{ 'UI_NETWORK_ADMIN.CHANGELOG.BODY.ENABLE' | translate: { entity: change.entity, date: formatDate(change.changeDate), author: change.authorFullName } }}<br/><br/></span>
+                        <span ng-if="change.type === 'disable'">{{ 'UI_NETWORK_ADMIN.CHANGELOG.BODY.DISABLE' | translate: { entity: change.entity, date: formatDate(change.changeDate), author: change.authorFullName } }}<br/><br/></span>
+                        <span ng-if="change.type === 'delete'">{{ 'UI_NETWORK_ADMIN.CHANGELOG.BODY.DELETE' | translate: { entity: change.entity, date: formatDate(change.changeDate), author: change.authorFullName } }}<br/><br/></span>
+                        <span ng-if="change.type === 'comment'">{{ 'UI_NETWORK_ADMIN.CHANGELOG.BODY.COMMENT' | translate: { date: formatDate(change.changeDate), author: change.authorFullName } }}<br/></span>
+                        <span ng-if="change.type === 'copybonus'">{{ 'UI_NETWORK_ADMIN.CHANGELOG.BODY.COPYBONUS' | translate: { date: formatDate(change.changeDate), author: change.authorFullName } }}<br/></span>
+                        <span ng-if="change.type === 'markbonuscurrent'">{{ 'UI_NETWORK_ADMIN.CHANGELOG.BODY.MARKBONUSCURRENT' | translate: { date: formatDate(change.changeDate), author: change.authorFullName } }}<br/></span>
+                        <div style="overflow-wrap: break-word;" ng-repeat="fieldChange in change.changes">
+                            <span ng-if="(change.type.indexOf('bonus') < 0) && (fieldChange.fromValue === null || fieldChange.fromValue === '') && (fieldChange.toValue === null || fieldChange.toValue === '')">{{ 'UI_NETWORK_ADMIN.CHANGELOG.CHANGE.NOVALUE' | translate: { field: fieldChange.field } }}<br/></span>
+                            <span ng-if="(change.type.indexOf('bonus') < 0) && (fieldChange.fromValue != null && fieldChange.fromValue != '') && (fieldChange.toValue != null && fieldChange.toValue != '')">{{ 'UI_NETWORK_ADMIN.CHANGELOG.CHANGE.TOVALUE' | translate: { field: fieldChange.field, toValue: fieldChange.toValue} }} <div ng-bind-html="newChanges(fieldChange.fromValue, fieldChange.toValue)"></div><br/></span>
+                            <span ng-if="(change.type.indexOf('bonus') < 0) && (fieldChange.fromValue === null || fieldChange.fromValue === '') && (fieldChange.toValue != null && fieldChange.toValue != '')">{{ 'UI_NETWORK_ADMIN.CHANGELOG.CHANGE.TOVALUE' | translate: { field: fieldChange.field, toValue: fieldChange.toValue } }}<br/></span>
+                            <span ng-if="(change.type.indexOf('bonus') < 0) && (fieldChange.fromValue != null && fieldChange.fromValue != '') && (fieldChange.toValue === null || fieldChange.toValue === '')">{{ 'UI_NETWORK_ADMIN.CHANGELOG.CHANGE.FROMVALUE' | translate: { field: fieldChange.field, fromValue: fieldChange.fromValue } }}<br/></span>
+
+                            <span ng-if="(change.entity === 'bonus') && (change.type === 'copybonus')">{{ 'UI_NETWORK_ADMIN.CHANGELOG.BONUS.COPYBONUS' | translate: { field: fieldChange.field, fromValue: fieldChange.fromValue, toValue: fieldChange.toValue } }}<br/></span>
+                            <span ng-if="(change.entity === 'bonus') && (change.type === 'markbonuscurrent')">{{ 'UI_NETWORK_ADMIN.CHANGELOG.BONUS.MARKBONUSCURRENT' | translate: { field: fieldChange.field, fromValue: ((fieldChange.fromValue === '')?'N/A':fieldChange.fromValue), toValue: fieldChange.toValue } }}<br/></span>
+
+                            <span ng-if="!fieldChange.message">{{ fieldChange.message }}</span>
+                        </div>
+                        <span ng-if="!change.comment"><br/><b>{{ change.comments }}</b></span>
+                    </div>
+                </div>
+            </li>
+            <li ng-if="hasMore === false"><i class="fa fa-clock-o bg-gray"></i></li>
+            <li id="changelog-loadmore" ng-if="hasMore">
+                <i class="fa fa-refresh bg-gray"></i>
+                <button style="margin-left: 55px; padding: 3px" class="btn btn-link" ng-click="changelogsLoadMore()">{{ 'UI_NETWORK_ADMIN.CHANGELOG.LOADMORE' | translate }}</button>
+            </li>
+        </ul>
+    </div>
+</div>

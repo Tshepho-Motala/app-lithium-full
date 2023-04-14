@@ -1,0 +1,30 @@
+<div class="container-fluid">
+	<lit-header
+		title="GoGame Games Tutorials Add" 
+		description="Use the controls below to set up a Tutorial">
+	</lit-header>
+	
+	<form ng-submit="controller.onSubmit()" name="controller.form" autocomplete="off" novalidate>
+		<buttonbar>
+			<button-submit></button-submit>
+		</buttonbar>
+		
+		<br/><br/>
+		
+		<div class="row v-reset-row ">
+			<div class="col-xs-12">
+				<div class="box box-primary">
+					<div class="box-header with-border">
+						<h3 class="box-title">General</h3>
+					</div>
+					<div class="box-body"> 
+						<formly-form model="controller.model" fields="controller.fields" options="controller.options" form="controller.form">
+						</formly-form>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+<!--  		<pre>{{controller.model|json}}</pre> -->
+	</form>
+</div>

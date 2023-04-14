@@ -1,0 +1,289 @@
+{
+	"info": {
+		"_postman_id": "ffefb644-8a3e-4364-ba24-f2fa8ba0eb77",
+		"name": "Lithium - Geolocation",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "City by \"City Name\"",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{gateway}}/geo/cities/{{city}}",
+					"host": [
+						"{{gateway}}"
+					],
+					"path": [
+						"geo",
+						"cities",
+						"{{city}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "City by \"Country Code\" and \"City Name\"",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{gateway}}/geo/countries/{{countryCode}}/cities/{{city}}",
+					"host": [
+						"{{gateway}}"
+					],
+					"path": [
+						"geo",
+						"countries",
+						"{{countryCode}}",
+						"cities",
+						"{{city}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "City by \"Country Code\", \"Level1 Code\" and \"City Name\"",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{gateway}}/geo/countries/{{countryCode}}/level1/AE.01/cities/Abu Dhabi",
+					"host": [
+						"{{gateway}}"
+					],
+					"path": [
+						"geo",
+						"countries",
+						"{{countryCode}}",
+						"level1",
+						"AE.01",
+						"cities",
+						"Abu Dhabi"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cities by \"Country Code\" and \"Level1 Code\"",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{gateway}}/geo/countries/{{countryCode}}/level1/{{level1Code}}/cities",
+					"host": [
+						"{{gateway}}"
+					],
+					"path": [
+						"geo",
+						"countries",
+						"{{countryCode}}",
+						"level1",
+						"{{level1Code}}",
+						"cities"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Cities by \"Country Code\", \"Level1 Code\" and \"Level2 Code\"",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{gateway}}/geo/countries/{{countryCode}}/level1/{{level1Code}}/level2/{{level2Code}}/cities",
+					"host": [
+						"{{gateway}}"
+					],
+					"path": [
+						"geo",
+						"countries",
+						"{{countryCode}}",
+						"level1",
+						"{{level1Code}}",
+						"level2",
+						"{{level2Code}}",
+						"cities"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Country by ISO3",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{gateway}}/geo/countries/{{country}}",
+					"host": [
+						"{{gateway}}"
+					],
+					"path": [
+						"geo",
+						"countries",
+						"{{country}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Countries",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{gateway}}/geo/countries",
+					"host": [
+						"{{gateway}}"
+					],
+					"path": [
+						"geo",
+						"countries"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Location by IPv4",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{gateway}}/geo/locationv4?ipv4={{ipv4}}",
+					"host": [
+						"{{gateway}}"
+					],
+					"path": [
+						"geo",
+						"locationv4"
+					],
+					"query": [
+						{
+							"key": "ipv4",
+							"value": "{{ipv4}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Level1 by \"Level1 Name\"",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{gateway}}/geo/level1s/{{level1}}",
+					"host": [
+						"{{gateway}}"
+					],
+					"path": [
+						"geo",
+						"level1s",
+						"{{level1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Level1 by \"Country Code\"",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{gateway}}/geo/countries/{{countryCode}}/level1",
+					"host": [
+						"{{gateway}}"
+					],
+					"path": [
+						"geo",
+						"countries",
+						"{{countryCode}}",
+						"level1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Level1 by \"Country Code\" and \"Level1 Name\"",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{gateway}}/geo/countries/{{countryCode}}/level1/{{level1}}",
+					"host": [
+						"{{gateway}}"
+					],
+					"path": [
+						"geo",
+						"countries",
+						"{{countryCode}}",
+						"level1",
+						"{{level1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Level2 by \"Country Code\" and \"Level1 Code\"",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{gateway}}/geo/countries/{{countryCode}}/level1/{{level1Code}}/level2",
+					"host": [
+						"{{gateway}}"
+					],
+					"path": [
+						"geo",
+						"countries",
+						"{{countryCode}}",
+						"level1",
+						"{{level1Code}}",
+						"level2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Neustar Compatible API",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{gateway}}/neustar/geodirectory/v1/ipinfo/{{ipv4}}?apikey={{apikey}}",
+					"host": [
+						"{{gateway}}"
+					],
+					"path": [
+						"neustar",
+						"geodirectory",
+						"v1",
+						"ipinfo",
+						"{{ipv4}}"
+					],
+					"query": [
+						{
+							"key": "apikey",
+							"value": "{{apikey}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

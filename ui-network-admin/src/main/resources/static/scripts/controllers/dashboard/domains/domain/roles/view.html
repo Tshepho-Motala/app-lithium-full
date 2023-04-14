@@ -1,0 +1,66 @@
+<div style="margin: 10px;" class="row v-reset-row ">
+<!-- 	<div class="col-md-12"> -->
+		<button-add lit-if-permission="DOMAIN_DEFAULT_ROLES_ADD" lit-permission-domain="{{domain.name}}" ng-click="controller.roleAddModal()"></button-add>
+		<div class="pull-right">
+			<div class="input-group input-group-sm pull-right" style="width: 250px;padding-bottom: 10px;">
+				<input type="text" name="table_search" ng-model="filterValue"
+					class="form-control pull-right" placeholder="{{ 'GLOBAL.INPUT.SEARCHDYNAMIC' | translate }}">
+				<div class="input-group-btn">
+					<button type="submit" class="btn btn-default">
+						<i class="fa fa-search"></i>
+					</button>
+				</div>
+			</div>
+		</div>
+<!-- 	</div> -->
+</div>
+<div style="margin: 10px;" class="row v-reset-row " ng-init="controller.listRoles()">
+<!-- 	<div class="col-md-12"> -->
+		<div class="box">
+			<div class="box-header with-border">
+				<i class="fa fa-tag" style="vertical-align: top;"></i>
+				<h3 class="box-title">
+					Default Roles<br/>
+					<small>These are roles that are linked to this domain, and users will be assigned these roles, without any specific group association.</small>
+				</h3>
+			</div>
+			<div class="box-body no-padding">
+				<table class="table table-hover">
+				<tbody>
+				<tr>
+					<th>Role</th>
+					<th>
+						<div tooltip title="Should this role be enabled for this domain">
+							Enabled&nbsp;
+							<i class="fa fa-question" aria-hidden="true"></i>
+						</div>
+					</th>
+					<th>
+						<div tooltip title="Remove this role from this domain">
+							&nbsp;
+							<i class="fa fa-question" aria-hidden="true"></i>
+						</div>
+					</th>
+				</tr>
+				<tr ng-repeat="role in controller.defaultroles | filter:filterValue">
+					<td width="60%">
+						{{ 'GLOBAL.'+role.role.roleNameKey | uppercase | translate }}&nbsp;({{ role.role.role }})<br/>{{ 'GLOBAL.'+role.role.descrKey | uppercase | translate }}
+					</td>
+					<td valign="middle">
+						<checkbox class="btn" ng-change="controller.changeEnabled(role.id, role.enabled)" ng-model="role.enabled"></checkbox>
+					</td>
+					<td>
+						<button type="button" class="btn btn-danger" ng-click="controller.deleteRole(role.id)">
+							<span class="fa fa-times"></span>
+						</button>
+					</td>
+				</tr>
+				<tr ng-if="controller.defaultroles.length === 0">
+					<td colspan="3">{{ 'UI_NETWORK_ADMIN.DOMAIN.ROLES.NOROLES' | translate }}</td>
+				</tr>
+				</tbody>
+				</table>
+			</div>
+		</div>
+<!-- 	</div> -->
+</div>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"/>
+	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"/>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css"/>
+</head>
+
+<body style="font-family: 'Roboto', sans-serif;">
+
+	<div id="main" style="width: 100vw; height: 100vh; display: flex; justify-content: space-between; align-items: center;">
+	
+		<div></div>
+
+		<div>
+		
+		
+			<div id="loading" style="display: flex; flex-direction: column; align-items: center">
+				<p>Please wait</p>
+				<span><i class="fa fa-circle-o-notch fa-spin" style="font-size:24px"></i></span>
+				<p th:text="${message}"></p>
+			</div>
+			
+	
+		</div>
+
+		<div></div>
+	
+	</div>
+	
+</body>
+
+</html>

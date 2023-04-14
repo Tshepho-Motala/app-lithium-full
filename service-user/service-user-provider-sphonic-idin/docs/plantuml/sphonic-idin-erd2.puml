@@ -1,0 +1,97 @@
+.lithium_user_pr_sphonic_idin ERD Diagram
+[plantuml]
+----
+@startuml
+'https://plantuml.com/class-diagram
+
+skinparam linetype ortho
+!define T(name,desc) class name as "desc" << (T,#FFAAAA) >>
+
+!define pk(x) <b>x</b>
+!define fk(x) <color:purple><i>x</i></color>
+!define unique(x) <color:green>x</color>
+!define nn(x) <u>x</u>
+
+T(idin_request, "idin_request\n Each new applicantHash will be linked to an idin_request") {
+  pk(id) bigint(20) <<generated>>
+  --
+  version: int(11)
+  fk(domain_id): bigint
+  fk(user_id): bigint
+  nn(idin_applicant_hash): varchar(255)
+  lithium_request_id: varchar(255)
+  sphonic_transaction_id: varchar(255)
+  bluem_transaction_id: varchar(255)
+  return_url: varchar(255)
+  verification_url: varchar(255)
+  fk(ip_address_id): bigint
+  fk(device_id): bigint
+  created_date: bigint
+  last_modified_date: bigint
+  applicant_ref_offset: bigint default 0
+}
+
+T(ip_address, "ip_address\n Contains ip addresses of clients") {
+pk(id) bigint(20) <<generated>>
+--
+address: varchar(255)
+version: int(11)
+}
+
+T(idin_response, "idin_response\n Contains responses from iDin") {
+  pk(id) bigint(20) <<generated>>
+  --
+  fk(idin_request_id): bigint
+  stage: int(2)
+  raw_response_data: longtext
+  fk(device_id): bigint
+}
+
+T(domain, "domain\n Contains domain names") {
+  pk(id) bigint(20) <<generated>>
+  --
+  version: int(11)
+  nn(unique(name)): varchar(255)
+}
+
+T(user, "user\n Contains users with guids in the form domainName/applicantHash") {
+  pk(id) bigint(20) <<generated>>
+  --
+  fk(domain_id): bigint
+  --
+  nn(unique(guid)): varchar(255)
+  address_verified: bit default '0'
+  version: int(11)
+}
+
+T(authentication, "authentication\n Contains sphonic access tokens") {
+  pk(id) bigint(20) <<generated>>
+  --
+  version: int(11)
+  nn(unique(guid)): varchar(255)
+  fk(domain_id): bigint
+  nn(access_token): longtext
+  nn(expiration_date): datetime
+}
+
+T(device, "device\n Contains client request devices") {
+pk(id) bigint(20) <<generated>>
+--
+device: varchar(255)
+os: varchar(255)
+browser: varchar(255)
+fk(ip_address_id): bigint
+fk(domain_id): bigint
+}
+
+authentication |o--o| domain
+idin_request ||--|| domain
+idin_request ||--|| user
+user ||--|| domain
+idin_request ||--o{ idin_response
+idin_request ||--o{ ip_address
+idin_request ||--|| device
+idin_response ||--|| device
+ip_address}o--|| device
+@enduml
+----

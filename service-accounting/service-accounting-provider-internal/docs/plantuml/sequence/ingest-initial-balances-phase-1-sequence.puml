@@ -1,0 +1,72 @@
+[plantuml]
+----
+@startuml
+
+!define p(name, alias) participant "name" as alias << (L,#AAFFCC) >>
+!define pn(name, alias) participant "name" as alias << (L,#FFAAAA) >>
+!define q(name, alias) queue "name" as alias << (L,#AAFFCC) >>
+!define qn(name, alias) queue "name" as alias << (L,#FFAAAA) >>
+
+autonumber
+
+database "big-query" as bigQuery
+
+pn("service-vb-migration", svcVbMigration)
+
+box "rabbit-mq" #LightBlue
+qn("initial-balance-migration-phase-one-queue", initialBalanceQueue)
+end box
+
+box "service-accounting-provider-internal" #LightSkyBlue
+pn("InitialBalancePhaseOneQueueProcessor n", initialBalanceQueueProcessor)
+pn("InitialBalanceIngestionService", initialBalanceIngestionService)
+p("TransactionServiceWrapper", tranServiceWrapper)
+end box
+
+activate initialBalanceQueueProcessor
+initialBalanceQueueProcessor -> initialBalanceQueue: Listen
+deactivate initialBalanceQueueProcessor
+
+activate svcVbMigration
+
+svcVbMigration -> bigQuery: query
+
+activate bigQuery
+bigQuery --> svcVbMigration
+deactivate bigQuery
+
+loop each record
+svcVbMigration -> initialBalanceQueue: enqueue
+
+activate initialBalanceQueue
+initialBalanceQueue --> svcVbMigration
+
+svcVbMigration -> svcVbMigration: record progress
+end
+
+deactivate svcVbMigration
+
+activate initialBalanceQueue
+initialBalanceQueue -> initialBalanceQueueProcessor: dequeue
+deactivate initialBalanceQueue
+
+activate initialBalanceQueueProcessor
+initialBalanceQueueProcessor -> initialBalanceIngestionService: ingestPhaseOne
+
+activate initialBalanceIngestionService
+
+activate tranServiceWrapper
+initialBalanceIngestionService -> tranServiceWrapper: adjustMulti
+tranServiceWrapper --> initialBalanceIngestionService
+
+deactivate tranServiceWrapper
+
+initialBalanceIngestionService --> initialBalanceQueueProcessor
+deactivate initialBalanceIngestionService
+
+initialBalanceQueueProcessor --> initialBalanceQueue: ACK
+deactivate initialBalanceQueueProcessor
+
+@enduml
+----
+[plantuml]

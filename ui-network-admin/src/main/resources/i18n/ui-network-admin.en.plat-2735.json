@@ -1,0 +1,12 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "TEMPLATES": {
+      "ERRORS": {
+        "UNPUBLISH": "Could not remove the template from the CDN"
+      },
+      "SUCCESS": {
+        "UNPUBLISH": "The template was removed from the CDN"
+      }
+    }
+  }
+}

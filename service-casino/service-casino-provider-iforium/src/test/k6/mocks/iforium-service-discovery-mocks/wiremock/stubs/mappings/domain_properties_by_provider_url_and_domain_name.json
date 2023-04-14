@@ -1,0 +1,13 @@
+{
+  "request": {
+    "method": "GET",
+    "urlPath": "/domain/provider/propertiesByProviderUrlAndDomainName"
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "domain_properties_by_provider_url_and_domain_name.json",
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}

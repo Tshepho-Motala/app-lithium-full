@@ -1,0 +1,24 @@
+= Comps Restrictions
+Riaan Schoeman <riaan.schoeman@wonderlabz.com>
+1.0, December 14, 2021: Comps Restrictions
+:sectnums:
+:toc: left
+:toclevels: 4
+:toc-title: Comps Restrictions
+:icons: font
+:url-quickref: https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/
+
+//:stylesheet: css/asciidoctor.css
+//:stylesheet: css/material-blue.css
+
+//This is done tto keep formatting aligned with gitlab
+****
+[verse,,]
+____
+link:readme.adoc[back]
+____
+****
+
+include::plantuml/intervention-message-flow.puml[Intervention Message Basic Flow]
+
+include::plantuml/intervention-message-usecase.puml[Intervention Message Use Cases]

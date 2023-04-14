@@ -1,0 +1,106 @@
+<div class="row v-reset-row " lit-if-permission="GROUP_ROLES_ADD" lit-permission-domain="{{domainName}}">
+	<div class="col-xs-12">
+		<button-add ng-click="controller.grdAddModal()"></button-add>
+	</div>
+</div>
+<div class="row v-reset-row " ng-init="controller.getGrds()">
+	<div class="col-xs-12">
+		<div ng-if="controller.grds !== null" class="input-group input-group-sm pull-right" style="width: 250px;padding-bottom: 10px;">
+			<input type="text" ng-model="controller.filter.key"
+				class="form-control pull-right" placeholder="{{ 'GLOBAL.INPUT.SEARCHDYNAMIC' | translate }}">
+			<div class="input-group-btn">
+				<button type="submit" class="btn btn-default">
+					<i class="fa fa-search"></i>
+				</button>
+			</div>
+		</div>
+		
+		<div class="row v-reset-row " ng-if="controller.grds === null">
+			<br/>
+			<div class="col-xs-12">
+				<div class="box box-danger">
+					<div class="box-body">
+						{{ 'UI_NETWORK_ADMIN.GROUPS.GROUP.ROLES.NOROLES' | translate }}
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- domain row -->
+		<div class="row v-reset-row " ng-repeat="domain in controller.grds">
+			<div class="col-md-12">
+				<!-- domain box -->
+				<div class="box box-solid box-default">
+					<!-- domain box-header -->
+					<div class="box-header no-border">
+						<i class="fa fa-cloud"></i>
+						<h3 class="box-title">
+							<div ng-if="domain.name === domainName">{{ 'UI_NETWORK_ADMIN.GROUPS.ROLES.HEADERS.THISDOMAIN' | translate }} ({{domain.name}})</div>
+							<div ng-if="domain.name != domainName">{{ 'UI_NETWORK_ADMIN.GROUPS.ROLES.HEADERS.CHILDDOMAIN' | translate }} ({{domain.name}})</div>
+						</h3>
+					</div>
+					<!-- domain box-header end-->
+					<!-- domain box-body -->
+					<div class="box-body no-padding" ng-repeat="category in domain.categories" style="margin-bottom: 10px;margin-top: 10px;margin-right: 20px;margin-left: 20px;>
+						<!-- domain.category box -->
+						<div class="box box-solid">
+							<!-- domain.category box-header -->
+							<div class="box-header with-border">
+								<i class="fa fa-tag"></i>
+								<h3 class="box-title">
+									{{category.nameKey | translate}}
+									<small>{{category.descriptionKey | translate}}</small>
+								</h3>
+<!-- 								<div class="box-tools pull-right"> -->
+<!-- 									<label style="font-weight: normal;">this domain&nbsp; -->
+<!-- 										<checkbox lit-enabled-permission="GROUP_ROLES_EDIT" ng-model="categorySelectSelf"></checkbox> -->
+<!-- 									</label>&nbsp; -->
+<!-- 									<label style="font-weight: normal;">sub domains&nbsp;(1st level)&nbsp; -->
+<!-- 										<checkbox lit-enabled-permission="GROUP_ROLES_EDIT" ng-model="categorySelectChild"></checkbox> -->
+<!-- 									</label> -->
+<!-- 								</div> -->
+							</div>
+							<!-- domain.category box-header end-->
+							<!-- domain.category box-body -->
+							<div class="box-body">
+								<!-- category.grd table -->
+								<table class="table table-condensed table-hover">
+								<tbody>
+								<tr ng-repeat="grd in category.grds | filter:{name:controller.filter.key, role:controller.filter.key, description:controller.filter.key}" style="background-color: #f4f4f4;vertical-align: middle;">
+									<td width="50%">
+										{{grd.nameKey | translate}}&nbsp;<small><i>({{grd.role}})</i></small><br/>
+										<small>{{grd.descriptionKey | translate}}</small>
+									</td>
+									<td style="display: table-cell;vertical-align: middle;">
+										Applies to&nbsp;:&nbsp;
+										<label style="font-weight: normal;">this domain&nbsp;
+											<checkbox lit-enabled-permission="GROUP_ROLES_EDIT" lit-permission-domain="{{domainName}}" class="btn" ng-change="controller.changeSelfApplied(grd.id, grd.selfApplied)" ng-model="grd.selfApplied"></checkbox>
+										</label>&nbsp;
+										<label style="font-weight: normal;">sub domains&nbsp;
+											<checkbox lit-enabled-permission="GROUP_ROLES_EDIT" lit-permission-domain="{{domainName}}" class="" ng-change="controller.changeDescending(grd.id, grd.descending)" ng-model="grd.descending"></checkbox>
+										</label>
+									</td>
+									<td style="display: table-cell;vertical-align: middle;">
+										<div tooltip title="Remove this role from this group/domain">
+											<button lit-enabled-permission="group_roles_remove" lit-permission-domain="{{domainName}}" type="button" class="btn btn-danger" ng-click="controller.removeRole(grd.id)">
+												<span class="fa fa-times"></span>
+											</button>
+										</div>
+									</td>
+								</tr>
+								</tbody>
+								</table>
+								<!-- category.grd table end -->
+							</div>
+							<!-- domain.category box-body end -->
+						</div>
+						<!-- domain.category box end -->
+					</div>
+					<!-- domain box-body -->
+				</div>
+				<!-- domain box end -->
+			</div>
+		</div>
+		<!-- domain row end -->
+	</div>
+</div>

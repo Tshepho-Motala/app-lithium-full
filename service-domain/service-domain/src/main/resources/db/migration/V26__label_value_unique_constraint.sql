@@ -1,0 +1,1 @@
+ALTER TABLE `label_value` ADD UNIQUE KEY `idx_label_value` (`label_id`, `value`(255));

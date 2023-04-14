@@ -1,0 +1,31 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "PLAYER": {
+      "BVN": {
+        "TITLE": "Verify Bvn Number",
+        "NUMBER": "Bvn Number",
+        "PLACEHOLDER": "Bvn Number",
+        "DESCRIPTION": "Enter Bvn Number",
+        "RESULT": "Result",
+        "RESPONSE": "Paystack Bvn response",
+        "ERROR": "Failed to verify Bvn",
+        "SUCCESS": "Bvn verification successful",
+        "FIRSTNAME": "First Name",
+        "LASTNAME": "Last Name",
+        "DATEOFBIRTH": "Date of Birth",
+        "MOBILE": "Mobile",
+        "BVN": "Bvn",
+        "MESSAGE": "Message",
+        "STATUS": "Status"
+      }
+    }
+  }
+}
+
+
+
+
+
+
+
+

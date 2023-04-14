@@ -1,0 +1,17 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "PLAYER": {
+      "BONUS": {
+        "REGISTER": {
+          "FIELDS": {
+            "DESC": {
+              "LABEL": "Description",
+              "DESC": "Enter the description"
+            }
+          }
+        },
+        "DESC": "Description"
+      }
+    }
+  }
+}

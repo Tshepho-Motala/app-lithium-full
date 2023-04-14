@@ -1,0 +1,17 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "BONUS": {
+      "EDIT": {
+        "RESTRICTION": {
+          "EXAMPLE": {
+            "START": "Bonus starts running on {{startDate | date:'medium':'GMT'}}. ",
+            "END": "Expires on {{endDate | date:'medium':'GMT'}}. "
+          }
+        }
+      }
+    },
+    "PLAYER": {
+      "HASSELFEXCLUDED": "Has ever self excluded?"
+    }
+  }
+}

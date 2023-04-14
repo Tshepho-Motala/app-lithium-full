@@ -1,0 +1,28 @@
+# Comps Engine ChangeLog
+
+## [Unreleased] - 2022-10-04
+
+Here we write upgrading notes for brands. It's a team effort to make them as
+straightforward as possible.
+
+### Added
+* [service-reward]
+** A new endpoint to list all the games for a reward provider by reward type (e.g. get all free spins games for roxor)
+{{gateway}}/service-reward/backoffice/livescore_uk/games/{{provider}}/{{rewardtype}}. reference https://www.getpostman.com/collections/8fcd466dd998b039b16b
+** The reward create reward endpoint now expects a gameId and gameName to be sent, this is an attempt to simply object construction on the reward providers and
+    to help FE with friendly game names instead of game guid. reference https://www.getpostman.com/collections/8fcd466dd998b039b16b
+
+### Changed
+* Reduced unnecessary info logs
+* Now using single domain permissions for actions across various endpoints
+* [service-reward]
++
+--
+** Player Reward History endpoint have changed from GET to POST reference https://www.getpostman.com/collections/8fcd466dd998b039b16b
+*** {{gateway}}/service-reward/backoffice/livescore_uk/rewards/player/all-domain?draw=0&start=0&length=10
+*** {{gateway}}/service-reward/backoffice/livescore_uk/rewards/player/all-player?draw=0&start=0&length=10
+--
+
+### Fixed
+* Failing to list promotions events when one promotion has an invalid recurrence pattern
+* Failing Roxor awards

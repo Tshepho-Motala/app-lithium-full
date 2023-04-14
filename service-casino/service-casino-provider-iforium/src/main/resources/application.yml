@@ -1,0 +1,53 @@
+server:
+  port: 9816
+  servlet:
+    context-path: /
+
+logging:
+  level:
+    lithium.service.casino.provider.iforium: INFO
+
+api:
+  iforium:
+    base-path: "/v1.0"
+    balance: "${api.iforium.base-path}/balance"
+    session:
+      base-path: "${api.iforium.base-path}/session"
+      redeem-token:
+        path: "${api.iforium.session.base-path}/redeemtoken"
+        ttl: 60000
+      create-token:
+        path: "${api.iforium.session.base-path}/createtoken"
+    game-round:
+      base-path: "${api.iforium.base-path}/gameround"
+      place-bet:
+        path: "${api.iforium.game-round.base-path}/placebet"
+      end:
+        path: "${api.iforium.game-round.base-path}/end"
+      award-winnings:
+        path: "${api.iforium.game-round.base-path}/awardwinnings"
+      roll-back-bet:
+        path: "${api.iforium.game-round.base-path}/rollbackbet"
+      void-bet:
+        path: "${api.iforium.game-round.base-path}/voidbet"
+    alerts:
+      alert-wallet-callback-notification: "${api.iforium.base-path}/alertwalletcallbacknotification"
+    account-transaction:
+      base-path: "${api.iforium.base-path}/accounttransaction"
+      credit:
+        path: "${api.iforium.account-transaction.base-path}/credit"
+
+jasypt:
+  encryptor:
+    password: ${spring.application.name}
+
+# To encode the value use the following command
+# java -cp jasypt-1.9.2.jar org.jasypt.intf.cli.JasyptPBEStringEncryptionCLI input="password" password=service-casino-provider-iforium algorithm=PBEWithMD5AndDES
+
+lithium:
+  service:
+    casino:
+      provider:
+        jackpots:
+          progressive:
+            timeout-in-seconds: 30

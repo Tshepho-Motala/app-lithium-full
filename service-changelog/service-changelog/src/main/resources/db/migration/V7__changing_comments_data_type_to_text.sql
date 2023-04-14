@@ -1,0 +1,1 @@
+ALTER TABLE `change_log` CHANGE COLUMN `comments` `comments` TEXT NULL DEFAULT NULL;

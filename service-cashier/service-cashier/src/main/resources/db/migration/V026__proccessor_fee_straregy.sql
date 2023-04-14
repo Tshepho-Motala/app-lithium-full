@@ -1,0 +1,1 @@
+ALTER TABLE `fees` ADD COLUMN `strategy` int(1) DEFAULT 1;

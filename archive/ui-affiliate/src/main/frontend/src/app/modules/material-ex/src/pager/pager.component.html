@@ -1,0 +1,20 @@
+<div class="pager-container" *ngIf="state.totalPages > 1">
+
+  <span fxHide fxShow.gt-xs="true">
+    <button [disabled]="currentPage == 1" md-button (click)="currentPage = 1">First</button>
+
+    <span *ngFor="let b of pages">
+      <button *ngIf="b == currentPage" md-raised-button color="primary">{{ getButtonText(b) }}</button>
+      <button *ngIf="b != currentPage" md-button (click)="currentPage = b;">{{ getButtonText(b) }}</button>
+    </span>
+
+    <button [disabled]="state.currentPage == state.totalPages" md-button (click)="currentPage = state.totalPages">Last</button>
+  </span>
+
+  <span fxHide.gt-xs="true">
+    <button [disabled]="currentPage == 1" md-button (click)="currentPage = currentPage - 1">Back</button>
+    <span>Page {{ state.currentPage }} of {{ state.totalPages }}</span>
+    <button [disabled]="currentPage == state.totalPages" md-button (click)="currentPage = currentPage + 1">Next</button>
+  </span>
+
+</div>

@@ -1,0 +1,15 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "PLAYER": {
+      "RESTRICTIONS": {
+        "SUBORDINATE_TYPE": "Subordinate Type",
+        "SUBORDINATES": {
+          "1": "30 Days Intervention Message",
+          "2": "60 Days Intervention Message",
+          "3": "90 Days Intervention Message"
+        }
+
+      }
+    }
+  }
+}

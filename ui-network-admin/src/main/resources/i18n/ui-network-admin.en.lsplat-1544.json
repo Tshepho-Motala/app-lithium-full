@@ -1,0 +1,23 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "ACCOUNTING": {
+      "TRANSACTIONS": {
+        "FIELDS": {
+          "CANCEL": {
+            "REASON": {
+              "CLOSED_LOOP" : "Closed Loop",
+              "UNVERIFIED_ACCOUNT" : "Unverified Account",
+              "PROMO_ABUSER" : "Promo/Bonus Abuser",
+              "DUPLICATE_ACCOUNT" : "Duplicate Account",
+              "DEPOSIT_WAGERING" : "Deposit Wagering",
+              "TECHNICAL_ERROR" : "Technical Error",
+              "NAME_MISMATCHED" : "Name Mismatched",
+              "CUSTOMER_REQUEST" : "Customer Request",
+              "OTHERS" : "Others"
+            }
+          }
+        }
+      }
+    }
+  }
+}

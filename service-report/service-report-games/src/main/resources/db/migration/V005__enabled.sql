@@ -1,0 +1,2 @@
+ALTER TABLE `report_run_results` ADD COLUMN `enabled_id` BIGINT(20) DEFAULT NULL;
+ALTER TABLE `report_run_results` ADD CONSTRAINT `fkenabled` FOREIGN KEY (`enabled_id`) REFERENCES `string_value` (`id`);

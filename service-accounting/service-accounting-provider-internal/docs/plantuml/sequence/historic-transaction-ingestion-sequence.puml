@@ -1,0 +1,138 @@
+[plantuml]
+----
+@startuml
+
+!define p(name, alias) participant "name" as alias << (L,#AAFFCC) >>
+!define pn(name, alias) participant "name" as alias << (L,#FFAAAA) >>
+!define q(name, alias) queue "name" as alias << (L,#AAFFCC) >>
+!define qn(name, alias) queue "name" as alias << (L,#FFAAAA) >>
+
+autonumber
+
+qn("historic-transaction-ingestion-queue", histTranIngestionQueue)
+pn("HistoricTransactionQueueProcessor n", histTranQueueProcessor)
+pn("HistoricTransactionIngestionService", histTranIngestService)
+p("AccountService", accService)
+p("TransactionServiceWrapper", tranServiceWrapper)
+p("TransactionService", tranService)
+
+activate histTranQueueProcessor
+
+histTranQueueProcessor -> histTranIngestionQueue: Listen
+
+deactivate histTranQueueProcessor
+
+activate histTranIngestionQueue
+
+histTranIngestionQueue -> histTranQueueProcessor: Dequeue
+
+activate histTranQueueProcessor
+
+histTranQueueProcessor -> histTranIngestService: ingest(tranData)
+
+activate histTranIngestService
+
+histTranIngestService -> accService: findOrCreate(accountCode, accountTypeCode, currencyCode, domainName, ownerGuid)
+
+activate accService
+accService --> histTranIngestService
+deactivate accService
+
+alt labels
+histTranIngestService -> tranServiceWrapper: preCreateLabelValues
+
+activate tranServiceWrapper
+tranServiceWrapper --> histTranIngestService
+deactivate tranServiceWrapper
+end
+
+note across
+From this point onwards, all code execution should run in a @Transactional, and database records should be rolled back if there are any exceptions.
+end note
+
+histTranIngestService -> tranService: beginTransaction(transactionTypeCode, authorGuid, tranDate)
+
+activate tranService
+tranService --> histTranIngestService
+note right
+Overload transactionService
+.beginTransaction, to include
+a past transaction date.
+
+Existing methods should
+be able to call transactionService
+.beginTransaction
+(transactionTypeCode, authorGuid)
+and pass the current date.
+end note
+deactivate tranService
+
+alt labels
+histTranIngestService -> tranService: labels(tid, labels)
+
+activate tranService
+tranService --> histTranIngestService
+deactivate tranService
+end
+
+histTranIngestService -> tranService: adjust(tid, accountCode, accountTypeCode, currencyCode, amountCents * -1, date, domainName, ownerGuid, postEntryAccountBalance)
+note left
+PLB adjust
+end note
+
+activate tranService
+tranService --> histTranIngestService
+note right
+Overload transactionService.adjust, to
+include the post entry account balance.
+
+Existing methods should be able
+to function, passing null for post
+entry account balance.
+
+Within transactionService
+.adjust, if post entry account
+balance is not passed in, it
+should be calculated as per
+normal flow.
+end note
+deactivate tranService
+
+histTranIngestService -> tranService: adjust(tid, contraAccountCode, contraAccountTypeCode, currencyCode, amountCents, date, domainName, ownerGuid, postEntryAccountBalance)
+note left
+Contra adjust
+end note
+
+activate tranService
+tranService --> histTranIngestService
+deactivate tranService
+
+histTranIngestService -> tranService: endHistoricTransaction
+
+activate tranService
+tranService --> histTranIngestService
+
+note right
+This is by far the most important
+method.
+
+It is similar to transactionService
+.endTransaction, but we need to skip
+account balance update, summary account
+updates, etc.
+end note
+deactivate tranService
+
+histTranIngestService --> histTranQueueProcessor
+
+deactivate histTranIngestService
+
+histTranQueueProcessor --> histTranIngestionQueue: ACK
+
+deactivate histTranQueueProcessor
+
+deactivate histTranIngestionQueue
+
+@enduml
+----
+[plantuml]

@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"/>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css"/>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
+</head>
+
+<body style="font-family: 'Roboto', sans-serif; padding-top: 100px;">
+
+	<div id="main" style="width: 100vw; height: 100vh; display: flex; justify-content: space-between; align-items: center;" class="hide">
+	
+		<div></div>
+
+		<div>
+		
+			<div id="loading" style="display: flex; flex-direction: column; align-items: center">
+				<p>Please wait</p>
+				<span><i class="fa fa-spinner fa-spin" style="font-size:24px"></i></span>
+				<p>Processing your voucher purchase request...</p>
+			</div>
+			
+			<div id="error">
+				<div class="row">
+					<div class="col s12 offset-m3 m6">
+						<div class="card">
+							<div class="card-content">
+								<span class="card-title">The request failed</span>
+								<p>The request was invalid. With the real processor you would not see this, you would simply be sent back to the merchant and the merchant will show an error page.</p>
+								<br/>
+								<p>In this fake world, we show you the raw error, and then you click to go back to the real world...</p>
+								<br/>
+								
+								<p>
+										<label for="errorcode">Error Code</label>
+										<span id="errorcode">Test</span>
+								</p>
+								<p>
+										<label for="errormessage">Error Message</label>
+										<span id="errormessage">Test</span>
+								</p>
+							</div>
+							<div class="card-action">
+								<a id="errorok" class="waves-effect btn">Ok</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+	
+			<div id="bankinput">
+				<div class="row">
+					<div class="col s12 offset-m3 m6">
+						<div class="card">
+							<form id="bankform" method="POST" action="buyPostRequest">
+								<input type="hidden" id="redirectUrl" name="redirectUrl" th:value="${br.redirectUrl}"/>
+								<input type="hidden" id="requestReference" name="requestReference" th:value="${br.requestReference}"/>
+								<div style="padding-top: 100px;" class="card-content">
+									<span class="card-title">Checkout Page</span>
+									<p>In the real world, you would now be redirected to a unique URL on Quickbit's system.</p>
+									<br/>
+									<p>In this fake world, all you need to do is enter anything below and submit the request.</p>
+									<br/>
+									<div class="row">
+										<div class="input-field col offset-s3 s6">
+											<input id="amount" name="amount" type="text" class="validate" th:value="${br.fiatAmount}" readonly="readonly"/>
+											<label for="amount">Amount</label>
+										</div>
+									</div>
+									<div class="row">
+										<div class="input-field col offset-s3 s6">
+											<input id="cardNo" name="cardNo" type="text" class="validate"/>
+											<label for="cardNo">Card number</label>
+										</div>
+									</div>
+									<div class="row">
+										<div class="input-field col offset-s3 s6">
+											<input id="month" name="month" type="text" class="validate"/>
+											<label for="month">Month</label>
+										</div>
+									</div>
+									<div class="row">
+										<div class="input-field col offset-s3 s6">
+											<input id="year" name="year" type="text" class="validate"/>
+											<label for="year">Year</label>
+										</div>
+									</div>
+									<div class="row">
+										<div class="input-field col offset-s3 s6">
+											<input id="cvc" name="cvc" type="text" class="validate"/>
+											<label for="cvc">CVC</label>
+										</div>
+									</div>
+								</div>
+								<div class="card-action">
+									<input type="submit" id="banksubmit" class="waves-effect btn" name="action" value="Submit"/>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div></div>
+	
+	</div>
+		
+	<script type="text/javascript" th:inline="javascript">
+	/*<![CDATA[*/
+	/*]]>*/
+	</script>
+	
+	<script>
+		$(function() {
+			
+			var mainDiv = $('#main');
+			var loadingDiv = $('#loading');
+			var bankinputDiv = $('#bankinput');
+			var errorDiv = $('#error');
+			
+			bankinputDiv.addClass("hide");
+			errorDiv.addClass("hide");
+			mainDiv.removeClass("hide");
+						
+/* 			$('#banksubmit').click(function(e) {
+				e.preventDefault();
+				bankinputDiv.addClass("hide");
+				loadingDiv.removeClass("hide");
+			});
+ */
+/* 			$('#bankcancel').click(function(e) {
+				e.preventDefault();
+				bankinputDiv.addClass("hide");
+				loadingDiv.removeClass("hide");
+			});
+ */			
+			$('#errorok').click(function(e) {
+				e.preventDefault();
+				errorDiv.addClass("hide");
+				loadingDiv.removeClass("hide");
+				$("#bankform").submit();
+			});
+			
+// 			if (data.resultCode != 0) {
+// 				$('#errorcode').text(data.errorCode);
+// 				$('#errormessage').text(data.remark);
+// 				loadingDiv.addClass("hide");
+// 				errorDiv.removeClass("hide");
+// 			} else {
+// 				loadingDiv.addClass("hide");
+// 				bankinputDiv.removeClass("hide");
+// 			}
+			loadingDiv.addClass("hide");
+			bankinputDiv.removeClass("hide");
+		});
+	</script>
+	
+</body>
+
+</html>

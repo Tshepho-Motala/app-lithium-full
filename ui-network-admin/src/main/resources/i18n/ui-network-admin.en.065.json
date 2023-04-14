@@ -1,0 +1,57 @@
+{
+	"UI_NETWORK_ADMIN": {
+		"DOMAIN": {
+			"AVATARS": {
+				"ADD": {
+					"TITLE": "Add an Avatar",
+					"SUCCESS": "Avatar added successfully",
+					"ERROR": "There was a problem while trying to add the avatar"
+				},
+				"VIEW": {
+					"BOXES": {
+						"AVATAR": "Avatar",
+						"FILE": "File"
+					},
+					"ACTIONS": {
+						"SETASDEFAULT": "Set as default"
+					}
+				},
+				"FIELDS": {
+					"ENABLED": {
+						"NAME": "Enabled",
+						"DESCRIPTION": "Enable the avatar"
+					},
+					"DEFAULT": {
+						"NAME": "Default",
+						"DESCRIPTION": "Set the avatar as the default"
+					},
+					"NAME": {
+						"NAME": "Name",
+						"DESCRIPTION": "The name of the avatar"
+					},
+					"DESCRIPTION": {
+						"NAME": "Description",
+						"DESCRIPTION": "A short description of the avatar"
+					},
+					"IMAGE": {
+						"NAME": "Image"
+					},
+					"FILE": {
+						"NAME": {
+							"NAME": "File name"
+						},
+						"TYPE": {
+							"NAME": "File type"
+						},
+						"SIZE": {
+							"NAME": "File size"
+						},
+						"IMAGE": {
+							"NAME": "Image"
+						}
+					}
+				}
+			}
+		}
+	}
+}

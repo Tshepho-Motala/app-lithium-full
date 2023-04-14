@@ -1,0 +1,167 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "REPORTS": {
+      "PLAYERS": {
+        "REPORTRUN": {
+          "REPORTCOMPLETED": "This report is currently running. The result list is incomplete",
+          "REPORTFAILED": "The report failed to run. Please see the failure reason below",
+          "FAILEDREASON": "Failed Reason residential",
+          "RUNDETAILS": "Run Details",
+          "SIGNUPBONUS": "Signup Bonus",
+          "FILTEREDRECORDS": "Filtered Records",
+          "ACTIONSPERFORMED": "Actions Performed",
+          "RUNHISTORY": "Run History",
+          "NEXT_RUN": "Next run",
+          "LAST_COMPLETED": "Last Completed",
+          "LAST_FAILED": "Last Failed",
+          "RUNNING_SINCE": "Running Since",
+          "COMMITALLCHANGES": "Commit all changes",
+          "CONTINUEEDIT": "Continue later with this edit",
+          "CANCELEDIT": "Cancel edit",
+          "DOB": "D.O.B.",
+          "DEPOSITFEES": "Deposit Fees",
+          "AFFILIATE": "Affiliate",
+          "PAYOUTS": "Payouts",
+          "CASINOMAXPAYOUTEXCESS": "Casino Max Payout Excess",
+          "BANNER": "Banner",
+          "GAMSTOPSTATUS": "Gamstop Status",
+          "OPTOUT": {
+            "SMS": "SMS Opt Out",
+            "EMAIL": "Email Opt Out",
+            "CALL": "Call Opt Out"
+          },
+          "CASINOBONUS": {
+            "CANCEL": "Casino Bonus Cancel",
+            "PENDINGCANCEL": "Casino Bonus Pending Cancel",
+            "PENDING": "Casino Bonus Pending",
+            "EXPIRE": "Casino Bonus Expire",
+            "BETS": "Casino Bonus Bets",
+            "WINS": "Casino Bonus Wins",
+            "TRANSFERTOPENDING": "Transfer To Casino Bonus Pending",
+            "TRANSFERFROMPENDING": "Transfer From Casino Bonus Pending",
+            "TRANSFERTO": "Transfer To Casino Bonus",
+            "TRANSFERFROM": "Transfer From Casino Bonus",
+            "NET": "Casino Bonus Net",
+            "ACTIVATED": "Casino Bonus Activated"
+          },
+          "CAMPAIGN": "Campaign",
+          "DOBDAY": "D.O.B. Day",
+          "DOBMONTH": "D.O.B. Month",
+          "DOBYEAR": "D.O.B. Year",
+          "EMAILVALIDATED": "Email Validated",
+          "COUNT": {
+            "CASINOBONUSBETS": "Casino Bonus Bets (#)",
+            "CASINOBONUSWINS": "Casino Bonus Wins (#)",
+            "CASINOBONUSPENDING": "Casino Bonus Pending (#)",
+            "DEPOSITS": "Deposits (#)",
+            "PAYOUTS": "Payouts (#)",
+            "ADJUSTMENTS": "Adjustments (#)",
+            "CASINOBETS": "Casino Bets (#)",
+            "VIRTUALBETS": "Virtual Bets (#)",
+            "VIRTUALLOSS": "Virtual Loss (#)",
+            "CASINOWINS": "Casino Wins (#)",
+            "VIRTUALBETSVOIDED": "Virtual Bets Voided (#)",
+            "VIRTUALWINS": "Virtual Wins (#)"
+          },
+          "PENDINGWITHDRAWAL": {
+            "CURRENTBALANCE": "Current Balance (Pending Withdrawal)",
+            "OPENINGBALANCE": "Opening Balance (Pending Withdrawal)",
+            "CLOSINGBALANCE": "Closing Balance (Pending Withdrawal)"
+          },
+          "RESIDENTIAL": {
+            "LINE1": "R. Address Line1",
+            "LINE2": "R. Address Line2",
+            "LINE3": "R. Address Line3",
+            "CITY": "R. Address City",
+            "REGION": "R. Address Region",
+            "COUNTRY": "R. Address Country",
+            "POSTALCODE": "R. Postal Code"
+          },
+          "POSTAL": {
+            "LINE1": "P. Address Line1",
+            "LINE2": "P. Address Line2",
+            "LINE3": "P. Address Line3",
+            "CITY": "P. Address City",
+            "REGION": "P. Address Region",
+            "COUNTRY": "P. Address Country",
+            "POSTALCODE": "P. Postal Code"
+          },
+          "TITLE": "Gamstop Report"
+        },
+        "EDIT": {
+          "INFO_FIRST": "Report edit started on",
+          "INFO_SECOND": "Click modify to continue editing the report, commit all changes, or cancel the edit."
+        },
+        "FIELDS": {
+          "SECTION_LABELS": {
+            "PLAYER_DATA_PERIOD": "Period of Player Data",
+            "IMMEDIATE": "Immediate",
+            "DATE_AND_TIME": "Date and Time",
+            "RECURRING": "Recurring",
+            "SCHEDULE_TYPE": "Schedule Type",
+            "CHOOSE_DATE": "Choose a Date",
+            "CHOOSE_TIME": "Choose a Time",
+            "INCOME_DATA_PERIOD": "Period of Income Access Data"
+          },
+          "ELIGIBLE_ACTIONS": {
+            "SEND_FULL_VIA_EMAIL": "Send Full Report Via Email",
+            "SEND_STATS_VIA_EMAIL": "Send Report Stats Via Email",
+            "SEND_EMAIL_TO_PLAYER": "Send Email to Player",
+            "SEND_SMS_TO_PLAYER": "Send SMS to Player",
+            "SEND_NOTIFICATION_TO_PLAYER": "Send Notification to Player",
+            "CHECK_STATUS": "Check Gamstop status",
+            "SEND_STATS_VIA_SFTP": "Send Report Via SFTP"
+          },
+          "NOTIFICATION": {
+            "CREATION_SUCCESS": "Report created successfully",
+            "CREATION_FAIL": "Unable to create report",
+            "EDIT_SAVE_SUCCESS": "Report edited successfully",
+            "EDIT_CANCEL_SUCCESS": "Report edit cancelled successfully",
+            "EDIT_CONTINUE_FAIL": "Unable to save report for continuing later",
+            "EDIT_CANCEL_FAIL": "Unable to cancel edit report",
+            "EDIT_SAVE_FAIL": "Unable to save edited report",
+            "VALID_EMAIL": "Enter a valid email address"
+          },
+          "PLAYER_FILTERS": {
+            "BIRTHDAY": "Player Birthday",
+            "DEPOSIT_COUNT": "Player Deposit Count",
+            "LAST_LOGIN_DATE": "Player Last Login Date",
+            "CASINO_BET_CENTS": "Player Casino Bet Amount Cents",
+            "CREATED_DATE": "Player Created Date",
+            "DEPOSIT_CENTS": "Player Deposit Amount Cents",
+            "STATUS": "Player Status",
+            "EQUAL_TO": "Equal To",
+            "LESS_THAN": "Less Than",
+            "GREATER_THAN": "Greater Than",
+            "IS": "Is",
+            "BEFORE": "Before",
+            "AFTER": "After",
+            "NO_FILTERS_FOUND": "No filters found",
+            "NO_ACTIONS_FOUND": "No actions found",
+            "RECIPIENTS": "Recipients"
+          }
+        },
+        "ACTIONS": {
+          "TABLE": {
+            "ADD": "Add",
+            "RUN_GRANULARITY": "Run Granularity",
+            "RUN_GRANULARITY_OFFSET": "Run Granularity Offset",
+            "INTERNAL_ID": "Internal ID",
+            "PROVIDER_ID": "Provider ID",
+            "GGR_DEDUCTION_PERCENTAGE": {
+              "TITLE": "Gross Gaming Revenue Deduction Percentage"
+            },
+            "NOTIFICATION_NAME": "Notification Name",
+            "SMS_ACTION_TEMPLATE": "Report Action SMS Template",
+            "REPORT_RECIPIENT": "Report Recipients",
+            "NO_RECIPIENT_ADDED": "No recipients added yet",
+            "NOTIFICATION_NAME_DESCRIPTION": "The name of the notification",
+            "MODIFY_NOTIFICATION_NAME": "Modify Notification Name",
+            "ACTION_EMAIL_TEMPLATE": "Report Action Email Template",
+            "ACTION_NOTIFICATION_TEMPLATE": "Report Action Notification Name"
+          }
+        }
+      }
+    }
+  }
+}

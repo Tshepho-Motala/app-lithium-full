@@ -1,0 +1,28 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "GAME": {
+      "IMAGES": {
+        "DOMAIN": {
+          "LABEL": "Domain"
+        },
+        "CDN_EXTERNAL": {
+          "LABEL": "CDN/External Graphic",
+          "SAVE": {
+            "SUCCESS": "CDN/External game graphic saved successfully",
+            "ERROR": "Could not save cdn/external game graphic."
+          },
+          "REMOVE": {
+            "SUCCESS": "CDN/External game graphic removed successfully",
+            "ERROR": "Could not remove cdn/external game graphic."
+          },
+          "FIELDS": {
+            "URL": {
+              "LABEL": "URL",
+              "DESCRIPTION": "The URL where the graphic is located"
+            }
+          }
+        }
+      }
+    }
+  }
+}

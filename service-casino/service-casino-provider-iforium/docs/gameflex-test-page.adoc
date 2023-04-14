@@ -1,0 +1,71 @@
+= Running the Gameflex Test Page
+:icons: font
+
+Iforium provide a Gameflex Test Page that exercises a set of 150 tests against the implementation as deployed in ls-develop.
+
+* *URL:* https://gameflex-s000.iforium.com/gamelaunch/test/ggo-test-harness[]
+* *Username:* _ggo-LVS_
+* *Password:* _84t1swyxl_
+
+IMPORTANT: The implementation of `/createToken` does not create new players or establish new sessions. To run the Gameflex Test Page, a valid account with an active session will be required. See link:https://gitlab.com/playsafe/lithium/app-lithium-full/-/tree/develop/service-casino/service-casino-provider-iforium/docs/test-session-creation.adoc[Test Session Creation] for details on how to achieve this.
+
+[options="header", cols="<.20m,.<30"]
+|===
+| Parameter| Value
+
+| Platform
+| S009
+
+| Operator
+| LVS - Livescore
+
+| Brand
+| 142 - LivescoreUK
+
+| Regulator ID
+| 11
+
+| Wallet Url
+| https://gateway.lithium-develop.ls-g.net/service-casino-provider-iforium
+
+| Operator Account ID
+| icon:exclamation-circle[role="red" size="1x"] livescore_uk/76397
+
+| Wallet Username
+| roxor_user
+
+| Wallet Password
+| e5MBduV3
+
+| Currency
+| GBP - Pound Sterling
+
+| Language
+| en - English
+
+| Offline Gateway Session Token (Enter a previously expired Gateway Session Token)
+|
+
+| Free Game Offer Code
+| FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+
+| Integration Provider
+| 1X2gaming-16
+
+| Content Provider
+| All
+
+| Channel
+| Desktop
+
+| Games
+| 10s or Better - 5044
+
+| Alternate Game
+| Alice and the Red Queen - 5013
+
+| Run
+| GGO Default - 1
+
+|===
+

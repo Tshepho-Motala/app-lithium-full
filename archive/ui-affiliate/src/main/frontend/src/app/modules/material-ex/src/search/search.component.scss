@@ -1,0 +1,18 @@
+.mtex-search-container {
+  display: flex;
+  align-items: center;
+
+  md-input-container {
+    flex-grow: 1;
+    margin: 0 0.5em 0 0.5em;
+  }
+
+  button {
+    min-width: inherit !important;
+    padding: 0;
+  }
+}
+//
+// .mat-input-wrapper {
+//   margin: 0 !important;
+// }

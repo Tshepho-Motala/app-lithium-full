@@ -1,0 +1,132 @@
+<div class="row v-reset-row ">
+	<div class="user-block">
+		<img class="img-circle img-bordered-sm" src="//:0" alt="">
+		<span class="username">
+			<a>{{ mail.subject }} ({{ mail.to }})</a>
+		</span>
+		<span class="description">
+			{{ "UI_NETWORK_ADMIN.MAILQUEUE.MAIL.CREATEDDATE" | translate }} - {{ mail.createdDate | datetimedefault }}
+		</span>
+	</div>
+	<hr/>
+	<div class="row v-reset-row ">
+		<div class="col-md-7">
+			<div class="box box-info box-solid">
+				<div class="box-header with-border">
+					{{ "UI_NETWORK_ADMIN.MAILQUEUE.MAIL.BASICINFORMATION" | translate }}
+				</div>
+				<div class="box-body table-responsive">
+					<table class="table table-bordered">
+						<tr>
+							<th>{{ "UI_NETWORK_ADMIN.MAILQUEUE.MAIL.CREATEDDATE" | translate }}</th>
+							<td>{{ mail.createdDate | datetimedefault }}</td>
+						</tr>
+						<tr>
+							<th>{{ "UI_NETWORK_ADMIN.MAILQUEUE.MAIL.FROM" | translate }}</th>
+							<td>{{ mail.from }}</td>
+						</tr>
+						<tr>
+							<th>{{ "UI_NETWORK_ADMIN.MAILQUEUE.MAIL.TO" | translate }}</th>
+							<td>{{ mail.to }}</td>
+						</tr>
+						<tr>
+							<th>{{ "UI_NETWORK_ADMIN.MAILQUEUE.MAIL.BCC" | translate }}</th>
+							<td>{{ mail.bcc }}</td>
+						</tr>
+						<tr>
+							<th>{{ "UI_NETWORK_ADMIN.MAILQUEUE.MAIL.SUBJECT" | translate }}</th>
+							<td>{{ mail.subject }}</td>
+						</tr>
+						<tr>
+							<th>{{ "UI_NETWORK_ADMIN.MAILQUEUE.MAIL.TEMPLATE" | translate }}</th>
+							<td>{{mail.template != null ? mail.template.name : ""}}</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-5">
+			<div class="box box-info box-solid">
+				<div class="box-header with-border">
+					{{ "UI_NETWORK_ADMIN.MAILQUEUE.MAIL.PROCESSINGINFORMATION" | translate }}
+				</div>
+				<div class="box-body table-responsive">
+					<table class="table table-bordered">
+						<tr>
+							<th>{{ "UI_NETWORK_ADMIN.MAILQUEUE.MAIL.CURRENTLYPROCESSING" | translate }}</th>
+							<td>{{ mail.processing }}</td>
+						</tr>
+						<tr>
+							<th>{{ "UI_NETWORK_ADMIN.MAILQUEUE.MAIL.PRIORITY" | translate }}</th>
+							<td>{{ mail.priority === 1? "High":"Low" }}</td>
+						</tr>
+						<tr>
+							<th>{{ "UI_NETWORK_ADMIN.MAILQUEUE.MAIL.SENT" | translate }}</th>
+							<td>{{ mail.sentDate != null? true:false }}</td>
+						</tr>
+						<tr>
+							<th>{{ "UI_NETWORK_ADMIN.MAILQUEUE.MAIL.SENTDATE" | translate }}</th>
+							<td>{{ mail.sentDate | datetimedefault }}</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div ng-if="currentState != 'dashboard.players.player.mailhistory.view'" class="col-md-12">
+			<div class="box box-info box-solid">
+				<div class="box-header with-border">
+					{{ "UI_NETWORK_ADMIN.MAILQUEUE.MAIL.USERINFO.TITLE" | translate }}
+				</div>
+				<div class="box-body table-responsive">
+					<div ng-if="mail.fullUser === null" class="box box-danger ng-scope">
+						<div class="box-body ng-binding">
+							No user found.
+						</div>
+					</div>
+					<table ng-if="mail.fullUser != null" class="table table-bordered">
+						<tr>
+							<th style="width: 15%;">{{ "UI_NETWORK_ADMIN.MAILQUEUE.MAIL.USERINFO.NAME" | translate }}</th>
+							<td>{{ mail.fullUser.firstName + ' ' + mail.fullUser.lastName }}</td>
+						</tr>
+						<tr>
+							<th style="width: 15%;">{{ "UI_NETWORK_ADMIN.MAILQUEUE.MAIL.USERINFO.USERNAME" | translate }}</th>
+							<td><a ng-href="{{ linkToProfile }}">{{ mail.fullUser.username }}</a></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-12">
+			<div class="box box-info box-solid">
+				<div class="box-header with-border">
+					{{ "UI_NETWORK_ADMIN.MAILQUEUE.MAIL.ERRORINFORMATION" | translate }}
+				</div>
+				<div class="box-body table-responsive">
+					<div ng-if="mail.errorCount === 0" class="box box-danger ng-scope">
+						<div class="box-body ng-binding">
+							No errors found.
+						</div>
+					</div>
+					<table ng-if="mail.errorCount > 0" class="table table-bordered">
+						<tr>
+							<th style="width: 25%;">{{ "UI_NETWORK_ADMIN.MAILQUEUE.MAIL.ERRORCOUNT" | translate }}</th>
+							<td>{{ mail.errorCount }}</td>
+						</tr>
+						<tr>
+							<th style="width: 25%;">{{ "UI_NETWORK_ADMIN.MAILQUEUE.MAIL.LATESTERRORREASON" | translate }}</th>
+							<td>{{ mail.latestErrorReason }}</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-12">
+			<div class="box box-info box-solid">
+				<div class="box-header with-border">
+					{{ "UI_NETWORK_ADMIN.MAILQUEUE.MAIL.BODY" | translate }}
+				</div>
+				<div style="padding: 20px;" ng-bind-html="mail.body"></div>
+			</div>
+		</div>
+	</div>
+</div>

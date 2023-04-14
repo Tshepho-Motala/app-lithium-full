@@ -1,0 +1,22 @@
+<div class="box box-{{data.box}} box-solid" bs-loading-overlay bs-loading-overlay-reference-id="{{referenceId}}">
+	<div class="box-header with-border">
+		{{data.title | translate}}
+		<div class="box-tools pull-right">
+			<button type="button" class="btn btn-box-tool" ng-click="changeStatus()" lit-if-permission="PLAYER_TAG_EDIT" lit-permission-domain="{{data.domainName}}">
+				<span><i class="fa fa-gear"></i> {{ "GLOBAL.ACTION.CHANGE" | translate }} </span>
+			</button>
+		</div>
+	</div>
+	<div class="box-body table-responsive">
+		<table class="table table-bordered">
+		<tr>
+			<td>
+				<span class="username">
+					<span ng-repeat="uc in user.userCategories"><span style="line-height:inherit; margin-right: 3px; padding:5px;" class="label label-primary">&nbsp;{{ uc.name }}&nbsp;</span></span>
+				</span>
+				<span ng-if="user.userCategories.length === 0">No tags specified</span>
+			</td>
+		</tr>
+		</table>
+	</div>
+</div>

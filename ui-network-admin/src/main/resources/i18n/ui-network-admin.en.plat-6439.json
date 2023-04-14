@@ -1,0 +1,10 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "MAILQUEUE": {
+      "MAIL": {
+        "AUTHOR_GUID": "Author guid",
+        "AUTHOR_FULL_NAME": "Author full name"
+      }
+    }
+  }
+}

@@ -1,0 +1,978 @@
+openapi: 3.0.1
+info:
+  title: Lithium Geolocation API Documentation
+  version: 1.1.0
+  description: |
+    The following document describes the APIs for Geolocation Services within Lithium.
+servers:
+  - url: "https://gateway.lithium-develop.ls-g.net"
+    description: Livescore Lithium Develop
+  - url: "https://gateway.lithium-staging.ls-g.net"
+    description: Livescore Lithium Staging Gateway
+  - url: "https://gateway.lithium-live.ls-g.net"
+    description: Livescore Lithium Live
+  - url: "{GATEWAY_URL}"
+    description: Custom Lithium Gateway URL
+    variables:
+      GATEWAY_URL:
+        description: Gateway server URL
+        default: http://localhost:9000
+paths:
+  /neustar/geodirectory/v1/ipinfo/{address}:
+    get:
+      tags:
+        - Neustar Compatible Geolocation
+      operationId: location
+      parameters:
+        - name: address
+          in: path
+          required: true
+          schema:
+            type: string
+            example: '192.123.4.12'
+        - name: apikey
+          in: query
+          required: true
+          schema:
+            type: string
+            example: '22EF69B5-49A5-4865-BAB9-D97235B2A60E'
+      responses:
+        200:
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeolocationResponse'
+              examples:
+                ok:
+                  value: |
+                    {
+                        "ipinfo": {
+                            "anonymizer_status": null,
+                            "Location": {
+                                "CountryData": {
+                                    "country": "United States",
+                                    "country_code": "US"
+                                }
+                            },
+                            "NetworkData": {
+                                "isp": {
+                                    "autonomousSystemNumber": 217,
+                                    "autonomousSystemOrganization": "UMN-SYSTEM",
+                                    "isp": "University of Minnesota",
+                                    "organization": "University of Minnesota"
+                                },
+                                    "connection_type": {
+                                    "name": "Cable/DSL"
+                                }
+                            }
+                        },
+                        "gds_error": null
+                    }
+        401:
+          description: UNAUTHORIZED
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeolocationResponse'
+              examples:
+                UNAUTHORIZED:
+                  value: |
+                    {
+                      "ipinfo": null,
+                      "gds_error": {
+                        "message": "Unauthorised",
+                        "http_status": "401"
+                      }
+                    }
+        404:
+          description: NOT FOUND
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeolocationResponse'
+              examples:
+                NOT FOUND:
+                  value: |
+                    {
+                        "ipinfo": null,
+                        "gds_error": {
+                            "message": "The URI doesn’t correspond to any known resource, or the referenced IP address is not mapped in the current data set : [169.254.30.247]",
+                            "http_status": "404"
+                        }
+                    }
+        500:
+          description: BAD REQUEST
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GeolocationResponse'
+              examples:
+                BAD REQUEST:
+                  value: |
+                    {
+                      "ipinfo": null,
+                      "gds_error": {
+                        "message": "Invalid IP address received in request : [192.168.1.2]",
+                        "http_status": "500"
+                      }
+                    }
+  /geo/locationv4:
+    get:
+      description: "Returns a Location matching a IPv4 address"
+      tags:
+        - Locationv4
+      operationId: locationv4
+      parameters:
+        - name: ipv4
+          in: query
+          required: true
+          schema:
+            type: string
+          example: "192.123.4.12"
+      responses:
+        200:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseLocation'
+  /geo/level1s/{level1}:
+    get:
+      description: "Returns Level1 information matching a Level1 Name."
+      tags:
+        - Level1
+      operationId: level1s
+      parameters:
+        - name: level1
+          in: path
+          required: true
+          schema:
+            type: string
+          example: "Alabama"
+          description: "Level1 Name"
+      responses:
+        200:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseListAdminLevel1ListEntry'
+  /geo/countries/{country}:
+    get:
+      tags:
+        - Country
+      operationId: countries
+      description: "Returns a Country matching a ISO3."
+      parameters:
+        - name: country
+          in: path
+          required: true
+          schema:
+            type: string
+          example: "US"
+          description: "ISO3 Code"
+      responses:
+        200:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseListCountryListEntry'
+  /geo/countries:
+    get:
+      tags:
+        - Countries
+      operationId: countries_1
+      description: "Returns all Countries"
+      responses:
+        200:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseListCountryListEntry'
+  /geo/countries/{countryCode}/level1:
+    get:
+      description: "Returns Level1 information matching a Country Code."
+      tags:
+        - Country Level1
+      operationId: countryLevel1s
+      parameters:
+        - name: countryCode
+          in: path
+          required: true
+          schema:
+            type: string
+          example: "US"
+          description: "Country Code"
+      responses:
+        200:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseListAdminLevel1ListEntry'
+  /geo/countries/{countryCode}/level1/{level1}:
+    get:
+      description: "Returns Level1 information matching a Country Code and Level1 Name."
+      tags:
+        - Country Level1
+      operationId: countryLevel1s_1
+      parameters:
+        - name: countryCode
+          in: path
+          required: true
+          schema:
+            type: string
+          example: "US"
+          description: "Country Code"
+        - name: level1
+          in: path
+          required: true
+          schema:
+            type: string
+          example: "Alabama"
+          description: "Level1 Name"
+      responses:
+        200:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseListAdminLevel1ListEntry'
+  /geo/countries/{countryCode}/level1/{level1Code}/level2:
+    get:
+      description: "Returns Level2 information matching a Country Code and Level1 Code."
+      tags:
+        - Level2
+      operationId: level2
+      parameters:
+        - name: countryCode
+          in: path
+          required: true
+          schema:
+            type: string
+          example: "US"
+          description: "Country Code"
+        - name: level1Code
+          in: path
+          required: true
+          schema:
+            type: string
+          example: "US.AL"
+          description: "Level1 Code"
+      responses:
+        200:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseListAdminLevel2ListEntry'
+  /geo/countries/{countryCode}/level1/{level1Code}/cities:
+    get:
+      description: "Returns Cities matching a Country Code and Level1 Code."
+      tags:
+        - Country Level1 Cities
+      operationId: level1Cities
+      parameters:
+        - name: countryCode
+          in: path
+          required: true
+          schema:
+            type: string
+          example: "US"
+          description: "Country Code"
+        - name: level1Code
+          in: path
+          required: true
+          schema:
+            type: string
+          example: "US.AL"
+          description: "Level1 Code"
+      responses:
+        200:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseListCityListEntry'
+  /geo/countries/{countryCode}/level1/{level1Code}/cities/{city}:
+    get:
+      description: "Returns City information matching a Country Code, Level1 Code and City Name."
+      tags:
+        - Level1 City
+      operationId: level1CitiesSearch
+      parameters:
+        - name: countryCode
+          in: path
+          required: true
+          schema:
+            type: string
+          example: "US"
+          description: "Country Code"
+        - name: level1Code
+          in: path
+          required: true
+          schema:
+            type: string
+          example: "US.AL"
+          description: "Level1 Code"
+        - name: city
+          in: path
+          required: true
+          schema:
+            type: string
+          example: "Bellamy"
+          description: "City Name"
+      responses:
+        200:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseListCityListEntry'
+  /geo/countries/{countryCode}/cities:
+    get:
+      description: "Returns Cities matching a Country Code"
+      tags:
+        - Cities
+      operationId: countryCities
+      parameters:
+        - name: countryCode
+          in: path
+          required: true
+          schema:
+            type: string
+          example: "US"
+          description: "Country Code"
+      responses:
+        200:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseListCityListEntry'
+  /geo/countries/{countryCode}/cities/{city}:
+    get:
+      description: "Returns City information matching a Country Code and City Name"
+      tags:
+        - Country City
+      operationId: countryCities_1
+      parameters:
+        - name: countryCode
+          in: path
+          required: true
+          schema:
+            type: string
+          example: "US"
+          description: "Country Code"
+        - name: city
+          in: path
+          required: true
+          schema:
+            type: string
+          example: "Alabama"
+          description: "City Name"
+      responses:
+        200:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseListCityListEntry'
+  /geo/cities/{city}:
+    get:
+      description: "Returns City information matching a City Name"
+      tags:
+        - City
+      operationId: cities
+      parameters:
+        - name: city
+          in: path
+          required: true
+          schema:
+            type: string
+          example: "Alabama"
+          description: "City Name"
+      responses:
+        200:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseListCityListEntry'
+  /geo/countries/{countryCode}/level1/{level1Code}/level2/{level2Code}/cities:
+    get:
+      description: "Returns Cities matching a Country Code, Level1 Code and Level2 Code"
+      tags:
+        - Level2 Cities
+      operationId: level2Cities
+      parameters:
+        - name: countryCode
+          in: path
+          required: true
+          schema:
+            type: string
+          description: "Country Code"
+          example: "US"
+        - name: level1Code
+          in: path
+          required: true
+          schema:
+            type: string
+          example: "US.AL"
+          description: "Level1 Code"
+        - name: level2Code
+          in: path
+          required: true
+          schema:
+            type: string
+          example: "US.AL.009"
+          description: "Level2 Code"
+      responses:
+        200:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseListCityListEntry'
+  /geo/locationFromRequest:
+    post:
+      tags:
+        - Location From Request
+      operationId: locationByIp_4
+      responses:
+        200:
+          description: default response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ResponseLocation'
+
+components:
+  schemas:
+    CountryDataType:
+      type: object
+      properties:
+        country:
+          type: string
+          example: 'United States'
+        country_code:
+          type: string
+          example: 'US'
+    NetworkDataType:
+      type: object
+      properties:
+        isp:
+          type: object
+          properties:
+            autonomousSystemNumber:
+              type: integer
+              example: 217
+            autonomousSystemOrganization:
+              type: string
+              example: UMN-SYSTEM
+            isp:
+              type: string
+              example: University of Minnesota
+            organization:
+              type: string
+              example: University of Minnesota
+        connection_type:
+          type: object
+          properties:
+            name:
+              type: string
+              example: Cable/DSL
+    GDSError:
+      type: object
+      properties:
+        message:
+          type: string
+          example: 'Invalid IP address received in request : [192.168.1.2]'
+        http_status:
+          type: string
+          example: '500'
+    GeolocationResponse:
+      type: object
+      properties:
+        ipinfo:
+          $ref: '#/components/schemas/IpInfo'
+        gds_error:
+          $ref: '#/components/schemas/GDSError'
+    IpInfo:
+      type: object
+      properties:
+        anonymizer_status:
+          type: string
+        Location:
+          $ref: '#/components/schemas/LocationType'
+    LocationType:
+      type: object
+      properties:
+        CountryData:
+          $ref: '#/components/schemas/CountryDataType'
+        NetworkData:
+          $ref: '#/components/schemas/NetworkDataType'
+    AdminLevel1:
+      type: object
+      properties:
+        version:
+          type: integer
+          format: int32
+          example: 0
+        id:
+          type: integer
+          format: int64
+          example: 3677
+        code:
+          type: string
+          example: "US.IL"
+        name:
+          type: string
+          example: "Illinois"
+        enabled:
+          type: boolean
+          example: true
+        manual:
+          type: boolean
+          example: false
+    AdminLevel2:
+      type: object
+      properties:
+        version:
+          type: integer
+          format: int32
+          example: 0
+        id:
+          type: integer
+          format: int64
+          example: 41405
+        code:
+          type: string
+          example: "US.IL.031"
+        name:
+          type: string
+          example: "Cook County"
+        enabled:
+          type: boolean
+          example: true
+        manual:
+          type: boolean
+          example: false
+    City:
+      type: object
+      properties:
+        version:
+          type: integer
+          format: int32
+        id:
+          type: integer
+          format: int64
+        code:
+          type: string
+        name:
+          type: string
+        latitude:
+          type: number
+          format: double
+        longitude:
+          type: number
+          format: double
+        population:
+          type: integer
+          format: int64
+        enabled:
+          type: boolean
+        manual:
+          type: boolean
+    Country:
+      type: object
+      properties:
+        version:
+          type: integer
+          format: int32
+          example: 0
+        id:
+          type: integer
+          format: int64
+          example: 234
+        code:
+          type: string
+          example: "US"
+        iso3:
+          type: string
+          example: "USA"
+        isoNr:
+          type: integer
+          format: int32
+          example: 840
+        fips:
+          type: string
+          example: "US"
+        name:
+          type: string
+          example: "United States"
+        capital:
+          type: string
+          example: "Washington"
+        sqkm:
+          type: integer
+          format: int64
+          example: 9629091
+        population:
+          type: integer
+          format: int64
+          example: 327167434
+        continent:
+          type: string
+          example: "NA"
+        topLevelDomain:
+          type: string
+          example: ".us"
+        currencyCode:
+          type: string
+          example: "USD"
+        currencyName:
+          type: string
+          example: "Dollar"
+        phone:
+          type: string
+          example: "1"
+        postalCodeFormat:
+          type: string
+          example: "#####-####"
+        postalCodeRegex:
+          type: string
+          example: "^\\d{5}(-\\d{4})?$"
+        languages:
+          type: string
+          example: "en-US,es-US,haw,fr"
+        neighbours:
+          type: string
+          example: "CA,MX,CU"
+        equivalentFips:
+          type: string
+        enabled:
+          type: boolean
+          example: true
+        manual:
+          type: boolean
+          example: false
+    Location:
+      type: object
+      properties:
+        latitude:
+          type: number
+          format: double
+          example: "42.11369323730469"
+        longitude:
+          type: number
+          format: double
+          example: "-87.76090240478516"
+        country:
+          $ref: '#/components/schemas/Country'
+        level1:
+          $ref: '#/components/schemas/AdminLevel1'
+        level2:
+          $ref: '#/components/schemas/AdminLevel2'
+        city:
+          $ref: '#/components/schemas/City'
+        ipv4Start:
+          type: integer
+          format: int64
+        ipv4End:
+          type: integer
+          format: int64
+    ResponseLocation:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Location'
+        data2:
+          type: object
+        message:
+          type: string
+        status:
+          type: string
+          enum:
+            - Response.Status(id=0, message=OK)
+            - Response.Status(id=1, message=EXISTS)
+            - Response.Status(id=401, message=UNAUTHORIZED)
+            - Response.Status(id=403, message=FORBIDDEN)
+            - Response.Status(id=404, message=NOT_FOUND)
+            - Response.Status(id=405, message=DISABLED)
+            - Response.Status(id=409, message=CONFLICT)
+            - Response.Status(id=500, message=INTERNAL_SERVER_ERROR)
+            - Response.Status(id=501, message=NOT_IMPLEMENTED)
+            - Response.Status(id=503, message=SERVICE_UNAVAILABLE)
+            - Response.Status(id=504, message=INVALID_DATA)
+            - Response.Status(id=200, message=SUCCESS)
+            - Response.Status(id=null, message=null)
+            - Response.Status(id=900, message=FAILED_LOGIN_BLOCK)
+        successful:
+          type: boolean
+    AdminLevel1ListEntry:
+      type: object
+      properties:
+        postalCodeFormat:
+          type: string
+          example: "#####-####"
+        countryCode:
+          type: string
+          example: "US"
+        adminLevel1WithCountry:
+          type: string
+          example: "Alabama - United States"
+        name:
+          type: string
+          example: "Alabama"
+        country:
+          type: string
+          example: "United States"
+        enabled:
+          type: boolean
+          example: true
+        code:
+          type: string
+          example: "US.AL"
+    ResponseListAdminLevel1ListEntry:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/AdminLevel1ListEntry'
+        data2:
+          type: object
+        message:
+          type: string
+        status:
+          type: string
+          enum:
+            - Response.Status(id=0, message=OK)
+            - Response.Status(id=1, message=EXISTS)
+            - Response.Status(id=401, message=UNAUTHORIZED)
+            - Response.Status(id=403, message=FORBIDDEN)
+            - Response.Status(id=404, message=NOT_FOUND)
+            - Response.Status(id=405, message=DISABLED)
+            - Response.Status(id=409, message=CONFLICT)
+            - Response.Status(id=500, message=INTERNAL_SERVER_ERROR)
+            - Response.Status(id=501, message=NOT_IMPLEMENTED)
+            - Response.Status(id=503, message=SERVICE_UNAVAILABLE)
+            - Response.Status(id=504, message=INVALID_DATA)
+            - Response.Status(id=200, message=SUCCESS)
+            - Response.Status(id=null, message=null)
+            - Response.Status(id=900, message=FAILED_LOGIN_BLOCK)
+        successful:
+          type: boolean
+    CountryListEntry:
+      type: object
+      properties:
+        iso3:
+          type: string
+          example: "USA"
+        phone:
+          type: string
+          example: 1
+        isoNr:
+          type: integer
+          format: int32
+          example: 840
+        capital:
+          type: string
+          example: "Washington"
+        sqkm:
+          type: integer
+          format: int64
+          example: 9629091
+        population:
+          type: integer
+          format: int64
+          example: 327167434
+        continent:
+          type: string
+          example: "NA"
+        topLevelDomain:
+          type: string
+          example: ".us"
+        postalCodeFormat:
+          type: string
+          example: "#####-####"
+        postalCodeRegex:
+          type: string
+          example: "^\\d{5}(-\\d{4})?$"
+        languages:
+          type: string
+          example: "en-US,es-US,haw,fr"
+        neighbours:
+          type: string
+          example: "CA,MX,CU"
+        equivalentFips:
+          type: string
+        name:
+          type: string
+          example: "United States"
+        enabled:
+          type: boolean
+          example: true
+        fips:
+          type: string
+          example: "US"
+        currencyCode:
+          type: string
+          example: "USD"
+        code:
+          type: string
+          example: "US"
+        currencyName:
+          type: string
+          example: "Dollar"
+    ResponseListCountryListEntry:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CountryListEntry'
+        data2:
+          type: object
+        message:
+          type: string
+        status:
+          type: string
+          enum:
+            - Response.Status(id=0, message=OK)
+            - Response.Status(id=1, message=EXISTS)
+            - Response.Status(id=401, message=UNAUTHORIZED)
+            - Response.Status(id=403, message=FORBIDDEN)
+            - Response.Status(id=404, message=NOT_FOUND)
+            - Response.Status(id=405, message=DISABLED)
+            - Response.Status(id=409, message=CONFLICT)
+            - Response.Status(id=500, message=INTERNAL_SERVER_ERROR)
+            - Response.Status(id=501, message=NOT_IMPLEMENTED)
+            - Response.Status(id=503, message=SERVICE_UNAVAILABLE)
+            - Response.Status(id=504, message=INVALID_DATA)
+            - Response.Status(id=200, message=SUCCESS)
+            - Response.Status(id=null, message=null)
+            - Response.Status(id=900, message=FAILED_LOGIN_BLOCK)
+        successful:
+          type: boolean
+    AdminLevel2ListEntry:
+      type: object
+      properties:
+        level1Code:
+          type: string
+          example: "US.AL"
+        name:
+          type: string
+          example: "Russell County"
+        enabled:
+          type: boolean
+          example: true
+        code:
+          type: string
+          example: "US.AL.113"
+    ResponseListAdminLevel2ListEntry:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/AdminLevel2ListEntry'
+        data2:
+          type: object
+        message:
+          type: string
+        status:
+          type: string
+          enum:
+            - Response.Status(id=0, message=OK)
+            - Response.Status(id=1, message=EXISTS)
+            - Response.Status(id=401, message=UNAUTHORIZED)
+            - Response.Status(id=403, message=FORBIDDEN)
+            - Response.Status(id=404, message=NOT_FOUND)
+            - Response.Status(id=405, message=DISABLED)
+            - Response.Status(id=409, message=CONFLICT)
+            - Response.Status(id=500, message=INTERNAL_SERVER_ERROR)
+            - Response.Status(id=501, message=NOT_IMPLEMENTED)
+            - Response.Status(id=503, message=SERVICE_UNAVAILABLE)
+            - Response.Status(id=504, message=INVALID_DATA)
+            - Response.Status(id=200, message=SUCCESS)
+            - Response.Status(id=null, message=null)
+            - Response.Status(id=900, message=FAILED_LOGIN_BLOCK)
+        successful:
+          type: boolean
+    CityListEntry:
+      type: object
+      properties:
+        population:
+          type: integer
+          format: int64
+          example: 9118
+        postalCodeFormat:
+          type: string
+          example: "#####-####"
+        latitude:
+          type: number
+          format: double
+          example: 30.88296
+        longitude:
+          type: number
+          format: double
+          example: -87.77305
+        countryCode:
+          type: string
+          example: "US"
+        level1Code:
+          type: string
+          example: "US.AL"
+        level2Code:
+          type: string
+          example: "US.AL.003"
+        cityWithCountry:
+          type: string
+          example: "Bay Minette - Alabama - United States"
+        name:
+          type: string
+          example: "Bay Minette"
+        country:
+          type: string
+          example: "United States"
+        level1:
+          type: string
+          example: "Alabama"
+        code:
+          type: string
+          example: "4046255"
+    ResponseListCityListEntry:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/CityListEntry'
+        data2:
+          type: object
+        message:
+          type: string
+        status:
+          type: string
+          enum:
+            - Response.Status(id=0, message=OK)
+            - Response.Status(id=1, message=EXISTS)
+            - Response.Status(id=401, message=UNAUTHORIZED)
+            - Response.Status(id=403, message=FORBIDDEN)
+            - Response.Status(id=404, message=NOT_FOUND)
+            - Response.Status(id=405, message=DISABLED)
+            - Response.Status(id=409, message=CONFLICT)
+            - Response.Status(id=500, message=INTERNAL_SERVER_ERROR)
+            - Response.Status(id=501, message=NOT_IMPLEMENTED)
+            - Response.Status(id=503, message=SERVICE_UNAVAILABLE)
+            - Response.Status(id=504, message=INVALID_DATA)
+            - Response.Status(id=200, message=SUCCESS)
+            - Response.Status(id=null, message=null)
+            - Response.Status(id=900, message=FAILED_LOGIN_BLOCK)
+        successful:
+          type: boolean

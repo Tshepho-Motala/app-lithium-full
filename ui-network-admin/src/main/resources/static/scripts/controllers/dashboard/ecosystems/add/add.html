@@ -1,0 +1,25 @@
+<lit-header
+    <div class="col-xs-12">
+        <h2 class="title">{{'UI_NETWORK_ADMIN.ECOSYSTEMS.TITLE.TEXT' | translate}}</h2>
+        <p class="description" style="padding-bottom: 5px; margin-bottom: 15px; border-bottom: 1px solid #ddd">{{'UI_NETWORK_ADMIN.ECOSYSTEMS.TITLE.DESCRIPTION' | translate}}</p>
+    </div>
+</lit-header>
+
+<form ng-submit="controller.onSubmit()" name="controller.form" novalidate>
+    <div class="row v-reset-row ">
+        <div class="col-md-8 col-md-offset-2">
+            <div class="box box-default" bs-loading-overlay bs-loading-overlay-reference-id="{{controller.referenceId}}">
+                <div class="box-body">
+                    <formly-form model="controller.model" fields="controller.fields" options="controller.options" form="controller.form">
+                    </formly-form>
+
+                    <buttonbar>
+                        <button-submit></button-submit>
+                        <button-reset ng-click="controller.options.resetModel();"></button-reset>
+                        <button-cancel ng-click="controller.onCancel()"></button-cancel>
+                    </buttonbar>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

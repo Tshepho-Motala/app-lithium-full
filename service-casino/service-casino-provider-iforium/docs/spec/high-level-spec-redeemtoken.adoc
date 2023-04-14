@@ -1,0 +1,5 @@
+.Redeem Token
+[source,gherkin]
+----
+include::../../src/docs/gherkin/high-level-spec/redeemtoken.feature[]
+----

@@ -1,0 +1,15 @@
+<div class="modal-body" bs-loading-overlay bs-loading-overlay-reference-id="{{controller.referenceId}}">
+	<h3 ng-if="controller.isDelete" class="text-center">{{'UI_NETWORK_ADMIN.PLAYER.NOTE.DELETE.TITLE' | translate}}</h3>
+	<h3 ng-if="!controller.isDelete" class="text-center">{{'UI_NETWORK_ADMIN.PLAYER.NOTE.RESTORE.TITLE' | translate}}</h3>
+</div>
+<div class="modal-footer">
+	<div class="row v-reset-row ">
+		<div class="col-xs-6 text-center">
+			<button-custom ng-if="controller.isDelete" icon="trash-o" text="GLOBAL.ACTION.DELETE" bclass="danger" ng-click="controller.submit()"></button-custom>
+			<button ng-if="!controller.isDelete" class="btn btn-info" ng-click="controller.submit()"><i class="fa fa-trash-o"></i> <span>{{"GLOBAL.ACTION.RESTORE" | translate }}</span></button>
+		</div>
+		<div class="col-xs-6 text-center">
+			<button-custom icon="ban" text="GLOBAL.ACTION.CANCEL" bclass="default" ng-click="controller.cancel()"></button-custom>
+		</div>
+	</div>
+</div>

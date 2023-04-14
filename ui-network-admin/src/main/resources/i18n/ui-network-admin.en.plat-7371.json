@@ -1,0 +1,13 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "DROP_DOWN_MENU": {
+      "AFFILIATE": {
+        "ALL": "All affiliates selected",
+        "NO": "No affiliates selected",
+        "MANY": "affiliates selected",
+        "ONE": "affiliate selected",
+        "EMPTY": "List is empty"
+      }
+    }
+  }
+}

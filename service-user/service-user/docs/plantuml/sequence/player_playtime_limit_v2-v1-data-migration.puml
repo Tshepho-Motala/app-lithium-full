@@ -1,0 +1,41 @@
+[plantuml]
+----
+@startuml
+'These definitions can be removed once https://gitlab.com/playsafe/lithium/app-lithium-full/-/merge_requests/5282 is merged,
+'and rather include the base template
+!define p(name, alias) participant "name" as alias << (L,#AAFFCC) >>
+!define q(name, alias) queue "name" as alias << (L,#AAFFCC) >>
+!define pn(name, alias) participant "name" as alias << (L,#FFAAAA) >>
+
+autonumber
+
+actor "Release Manager" as le2
+
+p("Server-Oauth2", auth)
+
+box "SVC-User" #LightBlue
+pn("SystemPlaytimeLimitV2Controller", sysptlv2c)
+pn("PlaytimeLimitsV2Service", ptlv2s)
+end box
+
+le2 -> auth: Request system authentication
+activate auth
+auth -> auth: Validate credentials
+auth --> le2
+deactivate auth
+le2 -> sysptlv2c: POST: /system/player-playtime-limit/v2/migrate-v1-data
+note right
+With sys access,
+init migration of
+v1 data
+end note
+activate sysptlv2c
+sysptlv2c -> ptlv2s: migrateV1Data
+activate ptlv2s
+ptlv2s --> sysptlv2c
+deactivate ptlv2s
+sysptlv2c --> le2
+deactivate sysptlv2c
+@enduml
+----
+[plantuml]

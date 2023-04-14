@@ -1,0 +1,24 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "PLAYERS": {
+      "TAGS": {
+        "ADD": {
+          "SUCCESS": "Tag successfully added",
+          "ERROR": {
+            "BAD_REQUEST": "Could not add tag, please check the page for any possible missing fields/errors.",
+            "CONFLICT": "Could not add tag, a tag with a similar name already exists.",
+            "DOMAIN": "Selected domain not found."
+          }
+        },
+        "EDIT": {
+          "SUCCESS": "Tag changes successfully saved.",
+          "DESCRIPTION": "Tag description successfully saved.",
+          "ERROR" : {
+            "BAD_REQUEST": "Could not modify tag details, please check the page for any possible missing fields/errors.",
+            "CONFLICT": "Could not edit tag, a tag with a similar name already exists."
+          }
+        }
+      }
+    }
+  }
+}

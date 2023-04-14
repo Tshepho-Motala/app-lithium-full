@@ -1,0 +1,13 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "PLAYER": {
+      "QUICK_ACTIONS": {
+        "SEND_TEMPLATE": {
+          "TITLE": "Send Email",
+          "LABEL": "Send email using Template",
+          "AVAILABLE_TEMPLATES_LABEL": "Available templates for user domain"
+        }
+      }
+    }
+  }
+}

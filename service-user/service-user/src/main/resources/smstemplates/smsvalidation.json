@@ -1,0 +1,47 @@
+{
+	"name": "sms.validation",
+	"description": "Validate mobile phone number",
+	"text": "Hi %user.firstName% %user.lastName%. This is a message from %domain.name%. Please validate your mobile phone number by entering the code %sms.validate.token% or clicking on the following link: %sms.validate.url%. **Requires an internet connection.",
+	"placeholders": [
+		{
+			"name": "%domain.name%",
+			"description": "The domain's display name"
+		},
+		{
+			"name": "%domain.url%",
+			"description": "The domain's URL"
+		},
+		{
+			"name": "%domain.supportEmail%",
+			"description": "The domain's support email address"
+		},
+		{
+			"name": "%user.firstName%",
+			"description": "The player's first name"
+		},
+		{
+			"name": "%user.lastName%",
+			"description": "The player's last name"
+		},
+		{
+			"name": "%user.userName%",
+			"description": "The player's username"
+		},
+		{
+			"name": "%user.emailAddress%",
+			"description": "The player's email address"
+		},
+		{
+			"name": "%user.cellphoneNumber%",
+			"description": "The player's mobile phone number"
+		},
+		{
+			"name": "%sms.validate.url%",
+			"description": "A link which the player clicks on to validate his/her mobile phone number"
+		},
+		{
+			"name": "%sms.validate.token%",
+			"description": "The player's validation code"
+		}
+	]
+}

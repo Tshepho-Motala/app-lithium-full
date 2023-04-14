@@ -1,0 +1,81 @@
+<div class="modal-content">
+	<div class="modal-header primary-blue darken-4 white-text">
+		<h3 class="modal-title" id="modal-title">
+			<i class="fa fa-pencil"></i>
+			{{ 'UI_NETWORK_ADMIN.ACCESSCONTROL.RULESETS.EDITRULE.TITLE' | translate }}
+			<button-close-window ng-click="controller.cancel()"></button-close-window>
+		</h3>
+	</div>
+
+	<form ng-submit="controller.save()" name="controller.form" novalidate>
+		<div class="modal-body" id="modal-body">
+			<div class="row v-reset-row ">
+				<div class="col-xs-12">
+					<div class="card card-block" style="margin-bottom: 20px;">
+						<div class="p-2 text-center">
+							<span class="title ng-binding">{{controller.accessRule.name}}</span>
+						</div>
+					</div>
+<!--					<div class="well text-center bold-text large-text">{{controller.accessRule.name}}</div>-->
+				</div>
+				<div class="col-xs-7">
+					<formly-form model="controller.model" fields="controller.fields" options="controller.options" form="controller.form">
+					</formly-form>
+				</div>
+				<div class="col-xs-5">
+					<div class="well">
+						<table class="table table-bordered table-striped well">
+							<tbody>
+							<tr>
+								<th>{{ 'UI_NETWORK_ADMIN.ACCESSCONTROL.RULESETS.VIEW.ACTIONS.REJECT' | translate }}</th>
+								<td>{{ 'UI_NETWORK_ADMIN.ACCESSCONTROL.RULESETS.VIEW.ACTIONS.REJECT_DESC' | translate }}</td>
+							</tr><tr>
+								<th>{{ 'UI_NETWORK_ADMIN.ACCESSCONTROL.RULESETS.VIEW.ACTIONS.ACCEPT' | translate }}</th>
+								<td>{{ 'UI_NETWORK_ADMIN.ACCESSCONTROL.RULESETS.VIEW.ACTIONS.ACCEPT_DESC' | translate }}</td>
+							</tr><tr ng-if="(!controller.model.default)">
+								<th>{{ 'UI_NETWORK_ADMIN.ACCESSCONTROL.RULESETS.VIEW.ACTIONS.CONTINUE' | translate }}</th>
+								<td>{{ 'UI_NETWORK_ADMIN.ACCESSCONTROL.RULESETS.VIEW.ACTIONS.CONTINUE_DESC' | translate }}</td>
+							</tr><tr>
+								<th>{{ 'UI_NETWORK_ADMIN.ACCESSCONTROL.RULESETS.VIEW.ACTIONS.ACCEPT_VERIFY' | translate }}</th>
+								<td>{{ 'UI_NETWORK_ADMIN.ACCESSCONTROL.RULESETS.VIEW.ACTIONS.ACCEPT_VERIFY_DESC' | translate }}</td>
+							</tr>
+							</tbody>
+						</table>
+					</div>
+					<div class="well" ng-if="(controller.model.type !== 'list') && (!controller.model.default)">
+						<p class="description">{{ 'UI_NETWORK_ADMIN.ACCESSCONTROL.RULESETS.EDITRULE.OUTCOME_DESC' | translate }}</p>
+						<table class="table table-bordered table-striped">
+							<tbody>
+							<tr>
+								<th width="25%">Outcome</th>
+								<th width="5%">&nbsp;</th>
+								<th>Returns</th>
+							</tr>
+							<tr ng-repeat="outcome in controller.model.ruleOutcomes">
+								<th>{{outcome.outcome.name}}</th>
+<!--								<td><span class="description">should return</span></td>-->
+								<td><span><i class="fa fa-arrow-right"></i></span></td>
+								<td>
+									<ui-select ng-model="controller.model.outcomes[outcome.outcome.name]" data-required="true" search-enabled="false">
+										<ui-select-match data-allow-clear="false">{{$select.selected.name}}</ui-select-match>
+										<ui-select-choices
+												data-repeat="output.name as output in controller.outputList | filter: $select.search | limitTo: ($select.search.length <= 2) ? 100 : undefined">
+											<div ng-bind-html="output.name | highlight: $select.search"></div>
+										</ui-select-choices>
+									</ui-select>
+								</td>
+							</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<buttonbar>
+				<button-save class="pull-left"></button-save>
+				<button-cancel ng-click="controller.cancel()"></button-cancel>
+			</buttonbar>
+		</div>
+	</form>
+</div>

@@ -1,0 +1,28 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "PLAYER": {
+      "QUICK_ACTIONS": {
+        "REALITYCHECK":{
+          "TITLE":"Update Reality Check"
+        },
+        "UPLOAD":{
+          "DOCUMENT":"Upload Document"
+        },
+        "MODIFY": {
+          "TAG":"Add/Remove Tag",
+          "STATUS": "Update Account Status",
+          "VERIFICATION_STATUS": "Update Verification Status",
+          "PROMOTIONAL_OPTOUT":"Update communication channels",
+
+          "DAILY_LOSS_LIMIT": "Update Daily Loss Limit",
+          "WEEKLY_LOSS_LIMIT": "Update Weekly Loss Limit",
+          "MONTHLY_LOSS_LIMIT": "Update Monthly Loss Limit",
+
+          "DAILY_DEPOSIT_LIMIT": "Update Daily Deposit Limit",
+          "WEEKLY_DEPOSIT_LIMIT": "Update Weekly Deposit Limit",
+          "MONTHLY_DEPOSIT_LIMIT": "Update Monthly Deposit Limit"
+        }
+      }
+    }
+  }
+}

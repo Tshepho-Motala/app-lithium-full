@@ -1,0 +1,20 @@
+# State Management (Data Store)
+
+https://vuex.vuejs.org/[VueX Documentation]  
+https://github.com/michaelolof/vuex-class-component[VueX Class Component]
+
+The SDK uses a VueX Store in order to create an persist a state of information across local components, independent plugins, as well as optionally across browser sessions. This powerful tool is also completely driven by Vue's event-driven design, meaning that all properties and functions are two-way bound out of the box.  
+
+Demo: `/src/demo/vue-store/`
+
+The best way to understand the implementation is to read the code structure and comments in the demo. The most important high-level points are:
+
+**Registering a store** using `this.storeService.get()` can be done anywhere - the only requirement is that you call it at least once to get your store setup before requiring it.
+
+**Placing your store** code within `/plugin-xxx/meta/store.ts` ensures a consistent structure through plugins and will allow us to work on creating an auto-registering store process. (Coming soon)  
+
+**Getting a store** can happen from any location in any plugin. You can get a store that a separate plugin has registered (Ensure that plugin has loaded first)
+
+**Getting or Registering** a store uses a *Class Reference* rather than an instantiated class to ensure the SDK and plugins will use only one main store.
+
+**Read the official documentation** for VueX and Vue Class Library.

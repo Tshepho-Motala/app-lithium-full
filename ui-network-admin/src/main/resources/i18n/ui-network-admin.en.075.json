@@ -1,0 +1,12 @@
+{
+	"UI_NETWORK_ADMIN": {
+		"MISSIONS": {
+			"FIELDS": {
+				"XPLEVEL": {
+					"NAME": "XP Level",
+					"DESCRIPTION": "The XP Level required to activate this mission"
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,36 @@
+<div class="row v-reset-row " lit-if-permission="DOMAIN_ADD">
+	<div class="col-xs-12" style="margin-bottom: 10px">
+		<button-add ui-sref="dashboard.domains.add"></button-add>
+	</div>
+</div>
+
+<div class="row v-reset-row ">
+	<div class="col-md-8 col-md-offset-2">
+		<div class="box box-default">
+			<div class="box-body">
+				<div class="input-group">
+					<input type="text" ng-model="filterValue" class="form-control" placeholder="{{ 'GLOBAL.INPUT.SEARCHDYNAMIC' | translate }}">
+					<span class="input-group-addon"><i class="fa fa-search"></i></span>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row v-reset-row " ng-repeat="domain in controller.domains | filter:filterValue ">
+	<div class="col-md-8 col-md-offset-2">
+		<div class="box box-default" style=":hover { background-color: #aaaaaa }">
+			<div class="box-header bg-gray-lighter">
+				<i class="fa fa-cloud"></i>
+				<h3 class="box-title">{{domain.displayName}} ({{domain.name}})</h3>
+				<div class="box-tools pull-right">
+					<button-view lit-if-permission="DOMAIN_ADD,DOMAIN_EDIT,PLAYER_,USER_" lit-permission-domain="{{domain.name}}" ui-sref="dashboard.domains.domain.view({ domainName: domain.name })"></button-view>
+				</div>
+			</div>
+			<div class="box-body">
+					<p class="text-muted" ng-if="domain.description">{{domain.description}}</p>
+					<p class="text-muted" ng-if="!domain.description">{{ "UI_NETWORK_ADMIN.DOMAIN.NODESCRIPTION" | translate }}</p>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,8 @@
+{
+	"UI_NETWORK_ADMIN": {
+		"PASSWORDRESET": {
+			"EXPLAIN": "Password reset token requested by the user.",
+			"EXPLAIN2": "Password updated using password reset token."
+		}
+	}
+}

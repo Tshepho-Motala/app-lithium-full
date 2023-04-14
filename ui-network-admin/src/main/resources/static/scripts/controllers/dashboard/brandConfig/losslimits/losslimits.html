@@ -1,0 +1,328 @@
+<br/>
+<div sportbookbetstable></div>
+<div bs-loading-overlay bs-loading-overlay-reference-id="{{referenceId}}">
+    <div style="margin: 10px;" class="row v-reset-row ">
+        <div class="col-md-12">
+            <div class="box box-default box-solid">
+                <div class="box-header with-border">
+                    {{'UI_NETWORK_ADMIN.LIMITS.DOMAIN.LOSSLIMITS' | translate}}
+                </div>
+                <div class="box-body table-responsive">
+                    <table class="table table-bordered">
+                        <tr>
+                            <th>{{'UI_NETWORK_ADMIN.PLAYER.LOSS_LIMITS.TYPE' | translate}}</th>
+                            <th>{{'UI_NETWORK_ADMIN.PLAYER.LOSS_LIMITS.LIMIT' | translate}}</th>
+                            <th style="width: 30%">{{'UI_NETWORK_ADMIN.PLAYER.LOSS_LIMITS.WARNING' | translate}}</th>
+                            <th></th>
+
+                        </tr>
+                        <tr>
+                            <th style="width:20%">
+                                {{'UI_NETWORK_ADMIN.LIMITS.DOMAIN.DAILYLOSSLIMIT.LABEL' | translate}}
+                            </th>
+                            <td style="width: 30%" ng-if="dailyLossLimit">{{dailyLossLimit | number:2}}</td>
+                            <td style="width: 30%" ng-if="!dailyLossLimit">{{'UI_NETWORK_ADMIN.LIMITS.NOTSET' | translate}}</td>
+                            <td ng-if="dailyWarningThreshold">{{dailyWarningThreshold | number:'2.0'}}%</td>
+                            <td ng-if="!dailyWarningThreshold">{{'UI_NETWORK_ADMIN.LIMITS.NOTSET' | translate}}</td>
+                            <td style="width: 20%" lit-if-permission="PLAYER_EDIT">
+                                <a style="cursor: pointer;" ng-click="controller.changeLimits(3, 2)">
+                                    <span ng-if="!dailyLossLimit"><i
+                                            class="fa fa-pencil-square-o"></i> {{'UI_NETWORK_ADMIN.LIMITS.SET' | translate}}</span>
+                                    <span ng-if="dailyLossLimit"><i
+                                            class="fa fa-pencil-square-o"></i> {{'UI_NETWORK_ADMIN.LIMITS.MODIFY' | translate}}</span>
+                                </a>&nbsp;
+                                <a ng-if="dailyLossLimit !== undefined && dailyLossLimit !== null"
+                                   style="cursor: pointer;" ng-click="controller.removeLimit(3, 2)">
+                                    <span><i class="fa fa-trash"></i> {{'GLOBAL.ACTION.DELETE' | translate}}</span>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                {{'UI_NETWORK_ADMIN.LIMITS.DOMAIN.WEEKLYLOSSLIMIT.LABEL' | translate}}
+                            </th>
+                            <td ng-if="weeklyLossLimit">{{weeklyLossLimit | number:2}}</td>
+                            <td ng-if="!weeklyLossLimit">{{'UI_NETWORK_ADMIN.LIMITS.NOTSET' | translate}}</td>
+                            <td ng-if="weeklyWarningThreshold">{{weeklyWarningThreshold | number:'2.0'}}%</td>
+                            <td ng-if="!weeklyWarningThreshold">{{'UI_NETWORK_ADMIN.LIMITS.NOTSET' | translate}}</td>
+                            <td lit-if-permission="PLAYER_EDIT">
+                                <a style="cursor: pointer;" ng-click="controller.changeLimits(4, 2)">
+                                    <span ng-if="!weeklyLossLimit"><i
+                                            class="fa fa-pencil-square-o"></i> {{'UI_NETWORK_ADMIN.LIMITS.SET' | translate}}</span>
+                                    <span ng-if="weeklyLossLimit"><i
+                                            class="fa fa-pencil-square-o"></i> {{'UI_NETWORK_ADMIN.LIMITS.MODIFY' | translate}}</span>
+                                </a>&nbsp;
+                                <a ng-if="weeklyLossLimit !== undefined && weeklyLossLimit !== null"
+                                   style="cursor: pointer;" ng-click="controller.removeLimit(4, 2)">
+                                    <span><i class="fa fa-trash"></i> {{'GLOBAL.ACTION.DELETE' | translate}}</span>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>
+                                {{'UI_NETWORK_ADMIN.LIMITS.DOMAIN.MONTHLYLOSSLIMIT.LABEL' | translate}}
+                            </th>
+                            <td ng-if="monthlyLossLimit">{{monthlyLossLimit | number:2}}</td>
+                            <td ng-if="!monthlyLossLimit">{{'UI_NETWORK_ADMIN.LIMITS.NOTSET' | translate}}</td>
+                            <td ng-if="monthlyWarningThreshold">{{monthlyWarningThreshold | number:'2.0'}}%</td>
+                            <td ng-if="!monthlyWarningThreshold">{{'UI_NETWORK_ADMIN.LIMITS.NOTSET' | translate}}</td>
+                            <td lit-if-permission="PLAYER_EDIT">
+                                <a style="cursor: pointer;" ng-click="controller.changeLimits(2, 2)">
+                                    <span ng-if="!monthlyLossLimit"><i
+                                            class="fa fa-pencil-square-o"></i> {{'UI_NETWORK_ADMIN.LIMITS.SET' | translate}}</span>
+                                    <span ng-if="monthlyLossLimit"><i
+                                            class="fa fa-pencil-square-o"></i> {{'UI_NETWORK_ADMIN.LIMITS.MODIFY' | translate}}</span>
+                                </a>&nbsp;
+                                <a ng-if="monthlyLossLimit !== undefined && monthlyLossLimit !== null"
+                                   style="cursor: pointer;" ng-click="controller.removeLimit(2, 2)">
+                                    <span><i class="fa fa-trash"></i> {{'GLOBAL.ACTION.DELETE' | translate}}</span>
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="box box-info box-solid">
+                <div class="box-header with-border">
+                    {{'UI_NETWORK_ADMIN.LIMITS.DOMAIN.WINLIMITS' | translate}}
+                </div>
+                <div class="box-body table-responsive">
+                    <table class="table table-bordered">
+                        <tr>
+                            <th width="40%">{{'UI_NETWORK_ADMIN.LIMITS.DOMAIN.DAILYWINLIMIT.LABEL' | translate}}</th>
+                            <td ng-if="dailyWinLimit">{{dailyWinLimit | number:2}}</td>
+                            <td ng-if="!dailyWinLimit">{{'UI_NETWORK_ADMIN.LIMITS.NOTSET' | translate}}</td>
+                            <td>
+                                <a style="cursor: pointer;" ng-click="controller.changeLimits(3, 1)">
+                                    <span ng-if="!dailyWinLimit"><i
+                                            class="fa fa-pencil-square-o"></i> {{'UI_NETWORK_ADMIN.LIMITS.SET' | translate}}</span>
+                                    <span ng-if="dailyWinLimit"><i
+                                            class="fa fa-pencil-square-o"></i> {{'UI_NETWORK_ADMIN.LIMITS.MODIFY' | translate}}</span>
+                                </a>
+                                &nbsp;
+                                <a ng-if="dailyWinLimit !== undefined && dailyWinLimit !== null"
+                                   style="cursor: pointer;" ng-click="controller.removeLimit(3, 1)">
+                                    <span><i class="fa fa-trash"></i> {{'GLOBAL.ACTION.DELETE' | translate}}</span>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th width="40%">{{'UI_NETWORK_ADMIN.LIMITS.DOMAIN.WEEKLYWINLIMIT.LABEL' | translate}}</th>
+                            <td ng-if="weeklyWinLimit">{{weeklyWinLimit | number:2}}</td>
+                            <td ng-if="!weeklyWinLimit">{{'UI_NETWORK_ADMIN.LIMITS.NOTSET' | translate}}</td>
+                            <td>
+                                <a style="cursor: pointer;" ng-click="controller.changeLimits(4, 1)">
+                                    <span ng-if="!weeklyWinLimit"><i
+                                            class="fa fa-pencil-square-o"></i> {{'UI_NETWORK_ADMIN.LIMITS.SET' | translate}}</span>
+                                    <span ng-if="weeklyWinLimit"><i
+                                            class="fa fa-pencil-square-o"></i> {{'UI_NETWORK_ADMIN.LIMITS.MODIFY' | translate}}</span>
+                                </a>
+                                &nbsp;
+                                <a ng-if="weeklyWinLimit !== undefined && weeklyWinLimit !== null"
+                                   style="cursor: pointer;" ng-click="controller.removeLimit(4, 1)">
+                                    <span><i class="fa fa-trash"></i> {{'GLOBAL.ACTION.DELETE' | translate}}</span>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>{{'UI_NETWORK_ADMIN.LIMITS.DOMAIN.MONTHLYWINLIMIT.LABEL' | translate}}</th>
+                            <td ng-if="monthlyWinLimit">{{monthlyWinLimit | number:2}}</td>
+                            <td ng-if="!monthlyWinLimit">{{'UI_NETWORK_ADMIN.LIMITS.NOTSET' | translate}}</td>
+                            <td>
+                                <a style="cursor: pointer;" ng-click="controller.changeLimits(2, 1)">
+                                    <span ng-if="!monthlyWinLimit"><i
+                                            class="fa fa-pencil-square-o"></i> {{'UI_NETWORK_ADMIN.LIMITS.SET' | translate}}</span>
+                                    <span ng-if="monthlyWinLimit"><i
+                                            class="fa fa-pencil-square-o"></i> {{'UI_NETWORK_ADMIN.LIMITS.MODIFY' | translate}}</span>
+                                </a>
+                                &nbsp;
+                                <a ng-if="monthlyWinLimit !== undefined && monthlyWinLimit !== null"
+                                   style="cursor: pointer;" ng-click="controller.removeLimit(2, 1)">
+                                    <span><i class="fa fa-trash"></i> {{'GLOBAL.ACTION.DELETE' | translate}}</span>
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="box box-info box-solid">
+                <div class="box-header with-border">
+                    {{'UI_NETWORK_ADMIN.LIMITS.DOMAIN.DEPOSITTHRESHOLDS' | translate}}
+                </div>
+                <div class="box-body table-responsive">
+                    <table class="table table-bordered">
+                        <tr>
+                            <th width="40%">{{'UI_NETWORK_ADMIN.LIMITS.DOMAIN.DAILYDEPOSITTRIGGER.LABEL' | translate}}</th>
+                            <td ng-if="dailyDepositThreshold">{{dailyDepositThreshold | number:2}}</td>
+                            <td ng-if="!dailyDepositThreshold">{{'UI_NETWORK_ADMIN.LIMITS.NOTSET' | translate}}</td>
+                            <td>
+                                <a style="cursor: pointer;" ng-click="controller.changeLimits(3, 3)">
+                                    <span ng-if="!dailyDepositThreshold"><i
+                                            class="fa fa-pencil-square-o"></i> {{'UI_NETWORK_ADMIN.LIMITS.SET' | translate}}</span>
+                                    <span ng-if="dailyDepositThreshold"><i
+                                            class="fa fa-pencil-square-o"></i> {{'UI_NETWORK_ADMIN.LIMITS.MODIFY' | translate}}</span>
+                                </a>
+                                &nbsp;
+                                <a ng-if="dailyDepositThreshold !== undefined && dailyDepositThreshold !== null"
+                                   style="cursor: pointer;" ng-click="controller.removeLimit(3, 3)">
+                                    <span><i class="fa fa-trash"></i> {{'GLOBAL.ACTION.DELETE' | translate}}</span>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th width="40%">{{'UI_NETWORK_ADMIN.LIMITS.DOMAIN.WEEKLYDEPOSITTRIGGER.LABEL' | translate}}</th>
+                            <td ng-if="weeklyDepositThreshold">{{weeklyDepositThreshold | number:2}}</td>
+                            <td ng-if="!weeklyDepositThreshold">{{'UI_NETWORK_ADMIN.LIMITS.NOTSET' | translate}}</td>
+                            <td>
+                                <a style="cursor: pointer;" ng-click="controller.changeLimits(4, 3)">
+                                    <span ng-if="!weeklyDepositThreshold"><i
+                                            class="fa fa-pencil-square-o"></i> {{'UI_NETWORK_ADMIN.LIMITS.SET' | translate}}</span>
+                                    <span ng-if="weeklyDepositThreshold"><i
+                                            class="fa fa-pencil-square-o"></i> {{'UI_NETWORK_ADMIN.LIMITS.MODIFY' | translate}}</span>
+                                </a>
+                                &nbsp;
+                                <a ng-if="weeklyDepositThreshold !== undefined && weeklyDepositThreshold !== null"
+                                   style="cursor: pointer;" ng-click="controller.removeLimit(4, 3)">
+                                    <span><i class="fa fa-trash"></i> {{'GLOBAL.ACTION.DELETE' | translate}}</span>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>{{'UI_NETWORK_ADMIN.LIMITS.DOMAIN.MONTHLYDEPOSITTRIGGER.LABEL' | translate}}</th>
+                            <td ng-if="monthlyDepositThreshold">{{monthlyDepositThreshold | number:2}}</td>
+                            <td ng-if="!monthlyDepositThreshold">{{'UI_NETWORK_ADMIN.LIMITS.NOTSET' | translate}}</td>
+                            <td>
+                                <a style="cursor: pointer;" ng-click="controller.changeLimits(2, 3)">
+                                    <span ng-if="!monthlyDepositThreshold"><i
+                                            class="fa fa-pencil-square-o"></i> {{'UI_NETWORK_ADMIN.LIMITS.SET' | translate}}</span>
+                                    <span ng-if="monthlyDepositThreshold"><i
+                                            class="fa fa-pencil-square-o"></i> {{'UI_NETWORK_ADMIN.LIMITS.MODIFY' | translate}}</span>
+                                </a>
+                                &nbsp;
+                                <a ng-if="monthlyDepositThreshold !== undefined && monthlyDepositThreshold !== null"
+                                   style="cursor: pointer;" ng-click="controller.removeLimit(2, 3)">
+                                    <span><i class="fa fa-trash"></i> {{'GLOBAL.ACTION.DELETE' | translate}}</span>
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-12">
+            <button-add lit-if-permission="BRAND_CONFIG_SET" ng-click="controller.addAgeException()"></button-add>
+        </div>
+    </div>
+    <div style="margin: 10px;" class="row v-reset-row " ng-if="domainName">
+        <div class="col-md-12" ng-repeat="value in controller.ageExceptionList">
+            <div class="box box-solid box-warning">
+                <div class="box-header with-border">
+                    <h3 class="box-title">{{'UI_NETWORK_ADMIN.LIMITSAGE.FROMAGE.TITLE' | translate}} {{value[0].ageMin}} To
+                        {{value[0].ageMax}}</h3>
+                    <div class="box-tools pull-right">
+                        <span data-toggle="tooltip" title="{{value.length}} limits set on age"
+                              class="badge bg-yellow">{{value.length}}</span>
+
+                        <button class="btn btn-box-tool" data-widget="collapse">
+                            <i class="fa fa-minus"></i>
+                        </button>
+
+                        <button ng-if="value.length < 3" class="btn btn-box-tool" data-toggle="tooltip" ng-click="controller.addGranularity(value)"
+                                lit-if-permission="BRAND_CONFIG_SET" title="{{'UI_NETWORK_ADMIN.LIMITSAGE.ADD.ACTION' | translate}}">
+                            <i class="fa fa-calendar-plus-o"></i>
+                            <span>{{'UI_NETWORK_ADMIN.LIMITSAGE.ADD.ACTION' | translate}}</span>
+                        </button>
+
+                        <button class="btn btn-box-tool" data-toggle="tooltip" ng-click="controller.updateAgeRange(value)"
+                                lit-if-permission="BRAND_CONFIG_EDIT" title="{{'UI_NETWORK_ADMIN.LIMITSAGE.EDIT.ACTION' | translate}} ">
+                            <i class="fa fa-pencil-square-o"></i>
+                            <span>{{'UI_NETWORK_ADMIN.LIMITSAGE.EDIT.ACTION' | translate}}</span>
+                        </button>
+
+                        <button class="btn btn-box-tool" data-toggle="tooltip" ng-click="controller.deleteAgeRange(value)"
+                                lit-if-permission="BRAND_CONFIG_CLEAR" title="{{'UI_NETWORK_ADMIN.LIMITSAGE.DELETE.ACTION' | translate}}">
+                            <i class="fa fa-trash"></i>
+                            <span>{{'UI_NETWORK_ADMIN.LIMITSAGE.DELETE.ACTION' | translate}}</span>
+                        </button>
+
+                    </div>
+                </div>
+                <div class="box-body table-responsive">
+                    <table class="table table-bordered" ng-repeat="exceptions in value | orderBy:'screenorder'">
+                        <tr ng-if="exceptions.granularity == 3">
+                            <th style="width: 20%">
+                                {{'UI_NETWORK_ADMIN.LIMITS.DOMAIN.DAILYLOSSLIMIT.LABEL' | translate}}
+                            </th>
+                            <td style="width: 20%">{{(exceptions.amount / 100) | number:2}}</td>
+                            <th style="width: 20%">{{'UI_NETWORK_ADMIN.PLAYER.LOSS_LIMITS.WARNING' | translate}}</th>
+                            <td style="width: 20%" ng-if="exceptions.thresholdPercentage">{{exceptions.thresholdPercentage | number:'2.0'}}%</td>
+                            <td style="width: 20%" ng-if="!exceptions.thresholdPercentage">{{'UI_NETWORK_ADMIN.LIMITS.NOTSET' | translate}}</td>
+                            <td style="width: 20%">
+                                <a style="cursor: pointer;" ng-click="controller.editAgeException(exceptions)">
+                                    <span>
+                                        <i class="fa fa-pencil-square-o"></i> {{'UI_NETWORK_ADMIN.LIMITS.MODIFY' | translate}}
+                                    </span>
+                                </a>
+                                &nbsp;
+                                <a ng-click="controller.removeAgeException(exceptions)">
+                                    <span><i class="fa fa-trash"></i> {{'GLOBAL.ACTION.DELETE' | translate}}</span>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr ng-if="exceptions.granularity == 4">
+                            <th style="width: 20%">
+                                {{'UI_NETWORK_ADMIN.LIMITS.DOMAIN.WEEKLYLOSSLIMIT.LABEL' | translate}}
+                            </th>
+                            <td style="width: 20%">{{(exceptions.amount / 100) | number:2}}</td>
+                            <th style="width: 20%">{{'UI_NETWORK_ADMIN.PLAYER.LOSS_LIMITS.WARNING' | translate}}</th>
+                            <td style="width: 20%" ng-if="exceptions.thresholdPercentage">{{exceptions.thresholdPercentage | number:'2.0'}}%</td>
+                            <td style="width: 20%" ng-if="!exceptions.thresholdPercentage">{{'UI_NETWORK_ADMIN.LIMITS.NOTSET' | translate}}</td>
+                            <td style="width: 20%">
+                                <a style="cursor: pointer;" ng-click="controller.editAgeException(exceptions)">
+                                    <span>
+                                        <i class="fa fa-pencil-square-o"></i> {{'UI_NETWORK_ADMIN.LIMITS.MODIFY' | translate}}
+                                    </span>
+                                </a>
+                                &nbsp;
+                                <a ng-click="controller.removeAgeException(exceptions)">
+                                    <span><i class="fa fa-trash"></i> {{'GLOBAL.ACTION.DELETE' | translate}}</span>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr ng-if="exceptions.granularity == 2">
+                            <th style="width: 20%">
+                                {{'UI_NETWORK_ADMIN.LIMITS.DOMAIN.MONTHLYLOSSLIMIT.LABEL' | translate}}
+                            </th>
+                            <td style="width: 20%">{{(exceptions.amount / 100) | number:2}}</td>
+                            <th style="width: 20%">{{'UI_NETWORK_ADMIN.PLAYER.LOSS_LIMITS.WARNING' | translate}}</th>
+                            <td style="width: 20%" ng-if="exceptions.thresholdPercentage">{{exceptions.thresholdPercentage | number:'2.0'}}%</td>
+                            <td style="width: 20%" ng-if="!exceptions.thresholdPercentage">{{'UI_NETWORK_ADMIN.LIMITS.NOTSET' | translate}}</td>
+                            <td style="width: 20%">
+                                <a style="cursor: pointer;" ng-click="controller.editAgeException(exceptions)">
+                                    <span>
+                                        <i class="fa fa-pencil-square-o"></i> {{'UI_NETWORK_ADMIN.LIMITS.MODIFY' | translate}}
+                                    </span>
+                                </a>&nbsp;
+                                <a ng-click="controller.removeAgeException(exceptions)">
+                                    <span><i class="fa fa-trash"></i> {{'GLOBAL.ACTION.DELETE' | translate}}</span>
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="padding: 19px;" ng-if="controller.changelogs">
+        <div class="row v-reset-row  well">
+            <changelog options="controller.changelogs" model=""></changelog>
+        </div>
+    </div>
+</div>

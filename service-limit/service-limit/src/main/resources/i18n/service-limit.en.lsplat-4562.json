@@ -1,0 +1,9 @@
+{
+  "SERVICE-LIMIT": {
+    "RESTRICTIONS": {
+      "ERROR_MESSAGES": {
+        "EXCLUSION_ERROR": "The restriction cannot be applied to the player because the player is in the exclusion whitelist for this restriction"
+      }
+    }
+  }
+}

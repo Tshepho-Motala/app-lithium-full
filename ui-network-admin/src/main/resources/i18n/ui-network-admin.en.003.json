@@ -1,0 +1,14 @@
+{
+	"UI_NETWORK_ADMIN": {
+		"DASHBOARD": {
+			"TRANSFERTOBONUS": "Transfer To Bonus",
+			"TRANSFERFROMBONUS": "Transfer From Bonus",
+			"BONUSNET": "Bonus Net",
+			"BONUSHISTORY": "Bonus History",
+			"CASINOBETSBONUS": "Casino Bets - Bonus",
+			"CASINOWINSBONUS": "Casino Wins - Bonus",
+			"CASINONETBONUS": "Casino Net - Bonus",
+			"CASINO_BONUS_HISTORY": "Casino Bets and Wins History - Bonus"
+		}
+	}
+}

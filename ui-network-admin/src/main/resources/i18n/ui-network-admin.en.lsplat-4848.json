@@ -1,0 +1,82 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "GAMES": {
+      "EDIT": {
+        "SUCCESS": "Game successfully edited.",
+        "ERROR": "Error encountered while editing game.",
+        "FLAG": {
+          "CONFIRM": {
+            "TITLE" : "Are you sure you want to make the following change?"
+          },
+          "CHANGE_FIELD" : "Change field",
+          "FROM"   : " from ",
+          "TO_VALUE" : " to "
+        }
+      },
+      "LIST": {
+          "FIELDS" : {
+            "ID" : "Id",
+            "NAME" : "Name",
+            "DOMAIN" : "Domain",
+            "GAME_SUPPLIER" : "Game Supplier",
+            "PROVIDER_GUID" : "Provider Guid",
+            "ENABLED" : "Enabled",
+            "FREE_GAME" : "Free Game",
+            "VISIBLE" : "Visible",
+            "LOCAL_JACKPOT" : "Local Jackpot",
+            "PROGRESSIVE_JACKPOT" : "Jackpot",
+            "COMMERCIAL_GAME" : "Commercial Game",
+            "INSTANT_REWARD_ENABLED" : "Instant Reward",
+            "LIVE_CASINO" : "Live Casino",
+            "EXCLUDE_RECENTLY_PLAYED" : "Exclude Recently Played"
+          },
+          "TITLE": "GAMES",
+          "DESCRIPTION": "List of Games"
+      }
+    },
+    "GAME_SUPPLIERS" : {
+      "LIST" : {
+        "ERROR" : {
+          "RETRIEVE" : "failed to retrieve game suppliers"
+        }
+      }
+    },
+    "GAME_PROVIDERS" : {
+      "LIST" : {
+        "ERROR" : {
+          "RETRIEVE" : "failed to retrieve game providers"
+        }
+      }
+    },
+    "GAME_CONFIGS" : {
+      "LIST" : {
+        "ERROR" : {
+          "RETRIEVE" : "failed to retrieve game configurations"
+        }
+      }
+    },
+    "DROP_DOWN_MENU" : {
+      "GAME_SUPPLIERS" : {
+        "ALL" : "All game suppliers",
+        "EMPTY" : "empty list",
+        "NO" : "No game suppliers",
+        "MANY" : "game suppliers",
+        "ONE" : "game supplier"
+      },
+      "GAME_PROVIDERS" : {
+        "ALL" : "All game providers",
+        "EMPTY" : "empty list",
+        "NO" : "No game providers",
+        "MANY" : "game providers",
+        "ONE" : "game provider"
+      },
+      "GAME_CONFIGS" : {
+        "ALL" : "All game configurations",
+        "EMPTY" : "empty list",
+        "NO" : "No game configurations",
+        "MANY" : "game configurations",
+        "ONE" : "game configuration"
+      }
+    }
+  }
+}

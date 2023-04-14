@@ -1,0 +1,1 @@
+ALTER TABLE `report_run_results` ADD COLUMN `user_guid` varchar(255);

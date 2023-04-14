@@ -1,0 +1,7 @@
+{
+  "ERROR_DICTIONARY": {
+    "LOGIN": {
+      "USER_EXIST_IN_ECOSYSTEM_IN_OTHER_DOMAIN": "The player already has an account in the ecosystem and has an account on another mutually exclusive domain. Try logging in using the correct domain name in your username combination. domainName = {0}."
+    }
+  }
+}

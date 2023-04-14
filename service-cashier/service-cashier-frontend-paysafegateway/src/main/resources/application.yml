@@ -1,0 +1,10 @@
+server:
+  port: 9717
+
+logging:
+  level:
+    lithium.service.cashier.frontend.paysafegateway: INFO
+
+lithium:
+  service:
+    cashier.frontend.paysafegateway.tokenPostUrl: /service-cashier-processor-paysafegateway/callback/0f6348fc25c2ad469f99f402d661a461/

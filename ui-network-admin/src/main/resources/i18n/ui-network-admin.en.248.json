@@ -1,0 +1,13 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "CHANGELOGS": {
+      "GLOBAL": {
+        "FIELDS": {
+          "SUB_CATEGORY": {
+            "COMING_SOON": "More Sub-Categories Coming Real Soon!"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,12 @@
+== Error Codes
+
+=== User Authentication
+
+In case of a failure, User Authentication 2.0 API will return HTTP status 4xx or 5xx and the following response body:
+
+Error codes are classified into following categories:
+
+- G - generic failures
+- V - validation of input parameters failed
+
+IMPORTANT:  https://studio.evolution.com/api/userauthentication/docs/v2/protocol.html#_4-error-handling[See user-authentication error handling for more information]

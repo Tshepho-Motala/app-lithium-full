@@ -1,0 +1,14 @@
+{
+	"UI_NETWORK_ADMIN": {
+		"MAILQUEUE": {
+			"MAIL": {
+				"USERINFO": {
+					"TITLE": "User Information",
+					"USER": "User",
+					"NAME": "Name",
+					"USERNAME": "Username"
+				}
+			}
+		}
+	}
+}

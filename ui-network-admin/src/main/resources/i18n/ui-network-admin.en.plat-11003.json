@@ -1,0 +1,20 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "PLAYERS": {
+      "BIOMETRICS_STATUS": {
+        "STATUS": {
+          "NAME": "Biometrics Status",
+          "PLACEHOLDER": "Select new biometrics status",
+          "DESCRIPTION": "Please select the new biometrics status you want"
+        },
+        "MASS_UPDATE": {
+          "ACTIONS": {
+            "CHANGE_BIOMETRICS_STATUS": {
+              "LABEL": "Change Biometrics Status"
+            }
+          }
+        }
+      }
+    }
+  }
+}

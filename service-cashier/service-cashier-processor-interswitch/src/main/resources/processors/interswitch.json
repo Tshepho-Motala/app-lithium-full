@@ -1,0 +1,234 @@
+{
+  "name": "Interswitch",
+  "code": "interswitch",
+  "url": "service-cashier-processor-interswitch",
+  "methodNames": ["interswitch","paydirect","quickteller"],
+  "deposit": true,
+  "withdraw": true,
+  "fees": {
+    "flat": 0,
+    "percentage": 0,
+    "minimum": 0
+  },
+  "limits": {
+    "minAmount": 2500,
+    "maxAmount": 100000000,
+    "maxAmountDay": 1000000000,
+    "maxAmountWeek": 1000000000,
+    "maxAmountMonth": 1000000000,
+    "maxTransactionsDay": 1000000000,
+    "maxTransactionsWeek": 1000000000,
+    "maxTransactionsMonth": 1000000000
+  },
+  "properties": [
+    {
+      "name": "secret_key",
+      "defaultValue": "a+usZudl2Aq2PjwDJRTSDNsIIlmdRi4zDhZDamWKdLo=",
+      "type": "string",
+      "description": "Interswitch API requires a secret key to sign requests. Please paste your secret key here."
+    },
+    {
+      "name": "client_id",
+      "defaultValue": "IKIAB01D1B32B023B7682B8FB14505BDC60159DD083F",
+      "type": "string",
+      "description": "Interswitch API requires a client id to sign requests. Please paste your client id here."    },
+    {
+      "name": "country_code",
+      "defaultValue": "NG",
+      "type": "string",
+      "description": "ISO 4217 standard currency code, always NG"
+    },
+    {
+      "name": "currency_code",
+      "defaultValue": "566",
+      "type": "string",
+      "description": "ISO 4217 standard currency code, currency code for Naira is 566"
+    },
+    {
+      "name": "currency_code_str",
+      "defaultValue": "NGN",
+      "type": "string",
+      "description": "ISO 4217 standard string currency code, currency code for Naira is 'NGN'"
+    },
+    {
+      "name": "initiation_payment_method_code",
+      "defaultValue": "CA",
+      "type": "string",
+      "description": "Payment Method Code of where transfer is being initiated from. InitiationPaymentMethodCode must always be CA."
+    },
+    {
+      "name": "initiation_channel",
+      "defaultValue": "7",
+      "type": "string",
+      "description": "See Payment channel in Appendix.Channel must always be 7."
+    },
+    {
+      "name": "terminating_payment_method_code",
+      "defaultValue": "AC",
+      "type": "string",
+      "description": "One of the payment method codes for where the transfer is to be terminated.TerminatingPaymentMethodCode must always be AC."
+    },
+    {
+      "name": "terminating_account_type",
+      "defaultValue": "10",
+      "type": "string",
+      "description": "For bank accounts only.10 = Savings account; 20 = Current Account; 00 = default value / not sure"
+    },
+    {
+      "name": "withdraw_api_url",
+      "defaultValue": "https://sandbox.interswitchng.com/api/v2/quickteller/payments/transfers",
+      "type": "url",
+      "description": "The withdraw API URL."
+    },
+    {
+      "name": "web_deposit_api_url",
+      "defaultValue": "https://pwq.sandbox.interswitchng.com/scripts/quickteller-checkout-min.js?v=",
+      "type": "url",
+      "description": "The Web deposit widget API URL."
+    },
+    {
+      "name": "withdraw_transaction_api_url",
+      "defaultValue": "https://sandbox.interswitchng.com/api/v2/quickteller/transactions?requestreference={transactionRef}",
+      "type": "url",
+      "description": "The deposit transaction API URL."
+    },
+    {
+      "name": "deposit_transaction_api_url",
+      "defaultValue": "https://sandbox.interswitchng.com/collections/api/v1/gettransaction.json?productId={product_id}&transactionReference={transactionReference}&amount={amount}",
+      "type": "url",
+      "description": "The deposit transaction API URL."
+    },
+    {
+      "name": "deposit_widget_url",
+      "defaultValue": "https://sandbox.interswitchng.com/collections/w/pay",
+      "type": "url",
+      "description": "The deposit widget URL."
+    },
+    {
+      "name": "pay_item_id",
+      "defaultValue": "101",
+      "type": "string",
+      "description": "Pay item ID from Interswitch developer tools page"
+    },
+    {
+      "name": "signature_method",
+      "defaultValue": "SHA-512",
+      "type": "string",
+      "description": "Signature Method"
+    },
+    {
+      "name": "header_signature_method",
+      "defaultValue": "SHA1",
+      "type": "string",
+      "description": "Signature Method"
+    },
+    {
+      "name": "terminal_id",
+      "defaultValue": "3BAM0001",
+      "type": "string",
+      "description": ""
+    },
+    {
+      "name": "initiating_entity_code",
+      "defaultValue": "DMO",
+      "type": "string",
+      "description": "Client Entity Code issued by Interswitch"
+    },
+    {
+      "name": "time_zone",
+      "defaultValue": "Africa/Lagos",
+      "type": "string",
+      "description": "Time zone"
+    },
+    {
+      "name": "hash_charset",
+      "defaultValue": "utf8",
+      "type": "string",
+      "description": "Hash (SHA-512) charset"
+    },
+    {
+      "name": "bank_list_url",
+      "defaultValue": "https://sandbox.interswitchng.com/api/v2/quickteller/configuration/fundstransferbanks",
+      "type": "url",
+      "description": "Banks list URL."
+    },
+    {
+      "name": "dummy_email",
+      "defaultValue": "",
+      "type": "string",
+      "description": "Dummy email for NG players"
+    },
+    {
+      "name": "product_id",
+      "defaultValue": "1076",
+      "type": "string",
+      "description": "Product ID"
+    },
+    {
+      "name": "mac_key",
+      "defaultValue": "D3D1D05AFE42AD50818167EAC73C109168A0F108F32645C8B59E897FA930DA44F9230910DAC9E20641823799A107A02068F7BC0F4CC41D2952E249552255710F",
+      "type": "string",
+      "description": "Mac Key"
+    },
+    {
+      "name": "retryBeforeExpireProperty",
+      "defaultValue": "true",
+      "type": "string",
+      "description": "Retry Processing before Expiring Transaction"
+    },
+    {
+      "name": "ip_whitelist",
+      "defaultValue": "127.0.0.1",
+      "type": "string",
+      "description": "White list for PAYDirect requests. Addreses delimiter is ',' "
+    },
+    {
+      "name": "merchant_reference",
+      "defaultValue": "",
+      "type": "string",
+      "description": "Unique ID given by Interswitch to the client using the bill payment solution"
+    },
+    {
+      "name": "product_name",
+      "defaultValue": "PayAtBank",
+      "type": "string",
+      "description": "This is the name of the item that customer should/can pay for"
+    },
+    {
+      "name": "name_enquiry_url",
+      "defaultValue": "https://sandbox.interswitchng.com/api/v1/nameenquiry/banks/accounts/names",
+      "type": "url",
+      "description": "Name Enquiry URL."
+    },
+    {
+      "name": "initialValidation",
+      "defaultValue": "true",
+      "type": "boolean",
+      "description": "Set true to enable account number validation before do withdraw"
+    },
+    {
+      "name": "request_reference_prefix",
+      "defaultValue": "",
+      "type": "string",
+      "description": "Request Reference Prefix. Should be with length 5"
+    },
+    {
+      "name": "bank_account_lookup_bank_account_flag",
+      "defaultValue": "true",
+      "type": "boolean",
+      "description": "Bank Account Lookup. Set true to append Bank Account field to Bank Account Lookup"
+    },
+    {
+      "name": "bank_account_lookup_bank_code_flag",
+      "defaultValue": "true",
+      "type": "boolean",
+      "description": "Bank Account Lookup. Set true to append Bank Code field to Bank Account Lookup"
+    },
+    {
+      "name": "bank_account_lookup_bank_name_flag",
+      "defaultValue": "true",
+      "type": "boolean",
+      "description": "Bank Account Lookup. Set true to append Bank Name field to Bank Account Lookup"
+    }
+  ]
+}

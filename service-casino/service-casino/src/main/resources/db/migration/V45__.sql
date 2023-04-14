@@ -1,0 +1,1 @@
+CREATE UNIQUE INDEX idx_user_guid ON `player_bonus` (player_guid) ALGORITHM INPLACE LOCK NONE;

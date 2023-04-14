@@ -1,0 +1,110 @@
+.Intervention Message Basic Flow
+[plantuml]
+----
+
+@startuml
+'https://plantuml.com/sequence-diagram
+
+actor "DWH/SCV" as dwh
+
+participant "Lithium" as l
+participant "GW" as gw
+
+actor player as p
+
+group System Initiated
+  == Intervention #1 ==
+  dwh->l: intervention message
+  l->l:
+  note right
+    * promotions flag set on player account
+    * system restriction placed on player account
+  end note
+  gw->l++: poll on restrictions endpoint every 30s
+  l->gw--: checkAccess response
+  note right
+    * compsAllowed == true
+    * compsSystemPlaced == true : system placed, cannot be altered by player
+    * compsErrorMessage == e.g. "First intervention msg, blocked for 30 days"
+  end note
+  gw->p: display intervention message
+  note right
+    * if player is logged on display message received.
+    * if player logged out, message needs to be displayed on login
+  end note
+
+  == Intervention #2 ==
+  note over p
+    1st restriction has expired (30 days), betting has continued, and was flagged again
+    in DWH, so DWH sends intervention message to lithium.
+  end note
+  dwh->l: intervention message
+  l->l:
+  note right
+    * promotions flag set on player account
+    * system restriction placed on player account, counter increase to 2
+  end note
+  gw->l++: poll on restrictions endpoint every 30s
+  l->gw--: checkAccess response
+  note right
+    * compsAllowed == true
+    * compsSystemPlaced == true : system placed, cannot be altered by player
+    * compsErrorMessage == e.g. "Second intervention msg, blocked for 60 days"
+  end note
+  gw->p: display intervention message
+  note right
+    * if player is logged on display message received.
+    * if player logged out, message needs to be displayed on login
+  end note
+
+  == Intervention #n ==
+  note over p
+    n th restriction has expired (n days), betting has continued, and was flagged again
+    in DWH, so DWH sends intervention message to lithium.
+  end note
+  dwh->l: intervention message
+  l->l:
+  note right
+    * promotions flag set on player account
+    * system restriction placed on player account, counter increase to n
+  end note
+  gw->l++: poll on restrictions endpoint every 30s
+  l->gw--: checkAccess response
+  note right
+    * compsAllowed == true
+    * compsSystemPlaced == true : system placed, cannot be altered by player
+    * compsErrorMessage == e.g. "N th intervention msg, blocked for X days"
+  end note
+  gw->p: display intervention message
+  note right
+    * if player is logged on display message received.
+    * if player logged out, message needs to be displayed on login
+  end note
+end
+
+group Player Initiated
+  p->l++: request opt out of promo's
+  l->l:
+  note right
+    * promotions flag set on player account
+    * restriction placed on player account
+  end note
+  l->p--: response
+
+  gw->l++: poll on restrictions endpoint every 30s
+  l->gw--: checkAccess response
+  note right
+    * compsAllowed == true
+    * compsSystemPlaced == false : player initiated, so player can change it again.
+    ** unless a system initiated restriction is placed, then player can't change it anymore.
+    * compsErrorMessage == n/a
+    * no intervention message displayed to player
+  end note
+end
+
+
+
+
+@enduml
+
+----

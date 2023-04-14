@@ -1,0 +1,26 @@
+{
+	"UI_NETWORK_ADMIN": {
+		"REPORTS": {
+			"PLAYERS": {
+				"FIELDS": {
+					"SMSTEMPLATE": {
+						"NAME": "SMS Template Name",
+						"DESCRIPTION": "The sms template to use for the action",
+						"PLACEHOLDER": "Enter the sms template name"
+					}
+				},
+				"ACTIONS": {
+					"TABLE": {
+						"SMSTEMPLATE": "SMS Template",
+						"MODIFYSMSTEMPLATE": "Modify SMS Template"
+					}
+				},
+				"TEMPLATES": {
+					"PLACEHOLDERS": {
+						"TITLE": "Player Placeholders (Send Email to Player/Send SMS to Player)"
+					}
+				}
+			}
+		}
+	}
+}

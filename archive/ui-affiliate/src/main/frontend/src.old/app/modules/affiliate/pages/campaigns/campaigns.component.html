@@ -1,0 +1,61 @@
+<md-card color="primary" class="mat-elevation-z12 margin nopadding">
+
+  <!--<md-toolbar color="primary">Campaigns will go here</md-toolbar>-->
+
+  <div class="filter-primary">
+
+    <filter-brand [(brand)]="brand" (brandChange)="load()"></filter-brand>
+    <mtex-filter-archived [(archived)]="archived" (archivedChange)="load()"></mtex-filter-archived>
+
+  </div>
+
+  <md-card-content style="position: relative;" class="padding">
+
+    <loading-overlay [isLoading]="isLoading"></loading-overlay>
+
+    <mtex-search (valueChanged)="search($event)"></mtex-search>
+
+    <md-card *ngFor="let campaign of campaigns" class="hover-mat-elevation-z4 margin nopadding" (click)="open(campaign)">
+      <div fxLayout="row" fxLayoutAlign="start stretch" fxLayoutWrap="wrap">
+        <div fxFlex class="campaign padding" fxLayout="row" fxLayoutAlign="start center" fxLayoutWrap="wrap">
+          <div fxFlex>
+            <h3>{{campaign.name}}</h3>
+            <div><small>Created: {{ campaign.createdDate | date:'medium' }}</small></div>
+            <div><small>Brand: {{ campaign.brand?.displayName }}</small></div>
+          </div>
+          <div><md-chip-list><md-chip class="margin-top margin-bottom margin-right" *ngIf="campaign.archived" color="accent" selected="true">Archived</md-chip></md-chip-list></div>
+        </div>
+        <div fxFlex fxLayout="row" fxLayoutAlign="end stretch" fxLayoutWrap="wrap" >
+          <div fxFlex class="padding statbox stat-1">
+            <h3>1231</h3>
+            <small>Views</small>
+          </div>
+          <div fxFlex class="padding statbox stat-2">
+            <h3>221</h3>
+            <small>Clicks</small>
+          </div>
+          <div fxFlex class="padding statbox stat-3">
+            <h3>41</h3>
+            <small>Signups</small>
+          </div>
+          <div fxFlex class="padding statbox stat-4">
+            <h3>$213214.20</h3>
+            <small>Revenue</small>
+          </div>
+        </div>
+      </div>
+    </md-card>
+
+    <mdex-pager (currentPageChanged)="load()"></mdex-pager>
+
+    <div *ngIf="campaigns.length == 0 && filtered">The search returned no results.</div>
+    <div *ngIf="campaigns.length == 0 && !filtered">
+      You have no campaigns yet. Use the add button bottom right to create your first campaign.
+    </div>
+
+  </md-card-content>
+</md-card>
+
+<div class="float-bottom-right">
+  <button md-mini-fab color="warn" (click)="add()"><md-icon>add</md-icon></button>
+</div>

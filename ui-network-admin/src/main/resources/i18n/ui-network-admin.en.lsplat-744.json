@@ -1,0 +1,12 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "CASHIER": {
+      "TRANSACTION": {
+        "CANCEL_AFTER_APPROVE": {
+          "EXPLANATION": "The status of the transaction will be overridden to Cancel. This will not contact the processor. The transaction will be cancelled and the player will receive an email based on the 'deposit.cancel.player' email template if it exists.",
+          "CONFIRM": "Warning! This transactions has already been Approved. Cancelling it now will not stop the pay-out request. Are you sure you want to cancel this transaction?"
+        }
+      }
+    }
+  }
+}

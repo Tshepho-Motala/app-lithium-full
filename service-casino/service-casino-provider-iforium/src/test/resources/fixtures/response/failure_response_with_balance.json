@@ -1,0 +1,9 @@
+{
+  "ErrorCode": %s,
+  "Balance": {
+    "CurrencyCode": %s,
+    "CashFunds": "%s",
+    "BonusFunds": "0.00",
+    "FundsPriority": "Unknown"
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "USER": {
+      "DIRECT_WITHDRAWAL": "Direct withdrawal executed. {0} {1} [{2}] [{3}]"
+    },
+    "DIRECT_WITHDRAWAL": {
+      "WARNINGS": {
+        "DW_WARNING_DESC_1": "No restrictions will be applied for this transaction. All policies, account and player limitations are circumvented.",
+        "DW_WARNING_DESC_2": "Double-check player' restrictions If you are not confident with the transaction."
+      },
+      "PAYMENT_METHOD": {
+        "LABEL": "Payment Method",
+        "PLACEHOLDER": "Select one of the available payment methods for this account",
+        "DESC": "Please specify the payment method the withdrawal should be made to."
+      },
+      "DOMAIN_METHOD": {
+        "LABEL": "Domain Method",
+        "PLACEHOLDER": "Select one of the available domain methods",
+        "DESC": "Please specify the domain method for the payment method that should be used."
+      },
+      "RESPONSE": {
+        "ERRORS": {
+          "EXAGGERATED_ADJUSTMENT": "Your adjustment amount is higher than your balance. Decrease it for successful withdrawal."
+        }
+      }
+    },
+    "CASHIER": {
+      "TRANS": {
+        "TABLE": {
+          "HEAD": {
+            "DIRECT_WITHDRAWAL": "Direct Withdrawal",
+            "INITIATED_BY": "Initiated by"
+          }
+        },
+        "VIEW": {
+          "INFO": {
+            "DIRECT_WITHDRAWAL": "Direct Withdrawal",
+            "INITIATED_BY": "Initiated by"
+          }
+        }
+      }
+    },
+    "PLAYER": {
+      "QUICK_ACTIONS": {
+        "CHANGE": {
+          "DIRECT_WITHDRAWAL": "Direct Withdrawal"
+        }
+      },
+      "ACCOUNTING": {
+        "DIRECT_WITHDRAWAL": {
+          "TITLE": "Direct Withdrawal"
+        }
+      }
+    }
+  }
+}

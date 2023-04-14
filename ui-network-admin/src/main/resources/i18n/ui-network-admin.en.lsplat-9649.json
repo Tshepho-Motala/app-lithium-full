@@ -1,0 +1,13 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "CMS": {
+      "LAYOUT_BUILDER_WIDGET": {
+        "OUTPUT": {
+          "CREATE_WIDGET_DIALOG": {
+            "TITLE": "Create Widget"
+          }
+        }
+      }
+    }
+  }
+}

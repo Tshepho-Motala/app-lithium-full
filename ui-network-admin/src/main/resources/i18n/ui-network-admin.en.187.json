@@ -1,0 +1,33 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "PLAYER": {
+      "TEST": {
+        "MARK": {
+          "SUCCESS": "Marked as test player",
+          "ERROR": "Failed to mark player as test"
+        },
+        "UNMARK": {
+          "SUCCESS": "Unmarked as test player",
+          "ERROR": "Failed to unmark player as test"
+        }
+      },
+      "QUICK_ACTIONS": {
+        "TEST": {
+          "MARK": "Mark as test player",
+          "UNMARK": "Unmark as test player"
+        }
+      }
+    },
+    "LIST": {
+      "PLAYERS":{
+        "FIELDS": {
+          "FILTER": {
+            "IS_TEST": {
+              "LABEL": "Is Test Account"
+            }
+          }
+        }
+      }
+    }
+  }
+}

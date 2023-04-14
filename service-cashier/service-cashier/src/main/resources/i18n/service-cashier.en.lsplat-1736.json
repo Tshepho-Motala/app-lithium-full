@@ -1,0 +1,12 @@
+{
+  "SERVICE-CASHIER": {
+    "TRAN": {
+      "DEPOSIT": {
+        "LABEL": "Deposit"
+      },
+      "WITHDRAWAL": {
+        "LABEL": "Withdrawal"
+      }
+    }
+  }
+}

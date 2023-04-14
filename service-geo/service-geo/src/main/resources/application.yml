@@ -1,0 +1,61 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost/lithium_geo
+    username: root
+    password: mysql
+  jpa:
+    hibernate:
+      ddl-auto: validate
+  cloud:
+    stream:
+      bindings:
+        geoinput:
+          group: geogroup
+          binder: rabbit
+          destination: geoqueue
+        transaction-label-accounting-output:
+          group: transaction-label-accounting-group
+          binder: rabbit
+          destination: transaction-label-accounting-queue
+          producer:
+            required-groups: transaction-label-accounting-group
+
+server:
+  port: 9797
+  
+lithium:
+  service:
+    geo:
+      max-mind-db-folder: /tmp/GeoIP2/
+      max-mind-update-enabled: true
+      max-mind-update-cron: '0 0 * * * *'
+      max-mind-city-db-url: https://download.maxmind.com/app/geoip_download?edition_id=GeoIP2-City&license_key=YOUR_LICENSE_KEY&suffix=tar.gz
+      max-mind-city-db-path: GeoIP2-City.mmdb
+      max-mind-city-db-age-before-refresh: 604800000 # 7 days
+      max-mind-isp-db-age-before-refresh: 604800000 # 7 days
+      max-mind-license-key: E8oaagqAhzNmzsQe
+      max-mind-isp-db-url: https://download.maxmind.com/app/geoip_download?edition_id=GeoIP2-ISP&license_key=YOUR_LICENSE_KEY&suffix=tar.gz
+      max-mind-isp-db-path: GeoIP2-ISP.mmdb
+      max-mind-connection-type-db-url: https://download.maxmind.com/app/geoip_download?edition_id=GeoIP2-Connection-Type&license_key=YOUR_LICENSE_KEY&suffix=tar.gz
+      max-mind-connection-type-db-path: GeoIP2-Connection-Type.mmdb
+      max-mind-connection-type-db-age-before-refresh: 604800000 # 7 days
+      geo-names-update-enabled: true
+      geo-names-update-cron: '0 0 * * * *'
+      geo-names-all-countries-url: http://download.geonames.org/export/dump/allCountries.zip
+      geo-names-all-countries-path: /tmp/geonames_allcountries.txt
+      geo-names-country-info-url: http://download.geonames.org/export/dump/countryInfo.txt
+      geo-names-country-info-path: /tmp/geonames_countryinfo.txt
+      geo-names-admin1-url: http://download.geonames.org/export/dump/admin1CodesASCII.txt
+      geo-names-admin1-path: /tmp/geonames_admin1.txt
+      geo-names-admin2-url: http://download.geonames.org/export/dump/admin2Codes.txt
+      geo-names-admin2-path: /tmp/geonames_admin2.txt
+      geo-names-age-before-refresh: 604800000 # 7 days
+      override-geo-data : {
+                            "admin1|NG.11": "Abuja",
+                            "admin1|NG.56" : "Nasarawa"
+      }
+      neustar-compatible-api-key : 22EF69B5-49A5-4865-BAB9-D97235B2A60E
+
+logging:
+  level:
+    lithium.service.geo: INFO

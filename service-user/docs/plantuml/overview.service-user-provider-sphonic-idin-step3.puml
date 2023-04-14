@@ -1,0 +1,187 @@
+.iDin Integration via Sphonic Overview
+[plantuml]
+----
+@startuml
+'https://plantuml.com/sequence-diagram
+
+actor player
+boundary "Livescore App / GW" as lsa
+participant "svc-user" as su
+participant "svc-user-pr-sphonic-idin" as supsi
+participant "svc-access" as sa
+participant "svc-domain" as svcdomain
+participant "svc-changelog" as svcchangelog
+boundary "iDin Screens" as idin
+participant Sphonic as sphonic
+
+autonumber
+
+==STEP#3: Redirects back to returnURL ==
+
+lsa->lsa: Loads the returnURL
+note right of lsa
+    * The returnURL is essentially a magic link, since it may be used by the LivescoreApp to load the registration screen with some of the players personal details prefilled
+
+    Due to the nature of this API being open to the world and would essentially allow a hacker to resume with the players personal details prefilled, an SHA key needs to be calculated by the LivescoreApp
+    to secure the call to Lithium when retrieving sensitive information.
+    * To calculate the SHA, we will be using payload = apiAuthorizationId + "|" + iDinApplicantHash + "|" + sharedSecret, then MDA5'ed with a payload
+end note
+    lsa->su: {{gateway}}/service-user/players/livescore_nl/register/incomplete/v1?method=idin&sha=calculatedusingpayloadandsharedsecret&apiAuthorizationId=ls-gw
+    activate su
+        note left of su
+            Request body {
+                 "stage": "2",
+                 "additionalData": {
+                     "iDinApplicantHash": "averyuniquehash"
+                 }
+             }
+        end note
+        alt method=idin, stage=2
+            su->su: validate SHA calculated payload apiAuthorizationId|iDinApplicantHash|sharedSecret
+            su->su: find incomplete_user by iDinApplicantHash
+            su->supsi: {{gateway}}/service-user-provider-sphonic-idin/system/external-register
+            note left of supsi
+                ExternalUserDetailsRequest {
+                    "stage": 2,
+                    "domainName": "livescore_nl",
+                    "playerBasic": {
+                        "additionalData": {
+                            "iDinApplicantHash": "averyuniquehash"
+                        }
+                    }
+                }
+            end note
+            activate supsi
+                supsi->supsi: find idin_request for unique iDinApplicantHash
+                supsi -> sphonic: get access token
+                activate sphonic
+                    sphonic -->> supsi: accessToken
+                deactivate sphonic
+                supsi->sphonic: iDinRetrieve Worflow request(requestId, bluemTransactionId)
+                activate sphonic
+                    note left of sphonic
+                        IDINRetrieve Request: {
+                            "requestDetails": {
+                              "requestId": "{{idinRequest.lithiumRequestId}}",
+                              "requestDateTime": "2021-11-09T17:32:28Z"
+                            },
+                            "requestData": {
+                              "bluemTransactionId": "{{idinRequest.bluemTransactionId}}"
+
+                            }
+                        }
+                    end note
+                    note right of sphonic
+                        * If the check is successful the response will show that the outcome is “success” and will return the applicants name, address, dob, gender
+                          and contact details.
+                        * If the check is not successful it will return in the response an outcome "Failure"
+                    end note
+                    note left of sphonic
+                        IDINRetrieve Response: {
+                           "SphonicResponse": {
+                               "data": {
+                                   "traceData": {
+                                       "responseDateTime": "2021-11-10T14:09:27.882Z",
+                                       "livescoreRequestId": "{{idinRequest.lithiumRequestId}}",
+                                       "livescoreApplicantId": "{{idinRequest.id}}",
+                                       "sphonicTransactionId": "fce35022-3ce1-4208-a449-02b0e63f4593",
+                                       "bluemTransactionId": "f7e57b272bf3cebb"
+                                   },
+                                   "outcome": {
+                                       "transactionResult": "Success",
+                                       "reason": "Bank data received",
+                                       "authenticationAuthorityId": "RABONL2U",
+                                       "authenticationAuthorityName": "Rabobank iDIN issuer simulatie",
+                                       "idResponse": {
+                                           "type": "BIN",
+                                           "identifier": "FANTASYBANK1234567890"
+                                       }
+                                   },
+                                   "nameData": {
+                                       "initials": "VJ",
+                                       "legalLastName": "Vries",
+                                       "legalLastNamePrefix": "de",
+                                       "preferredLastName": "Vries-Jansen",
+                                       "legalFirstName": "",
+                                       "preferredFirstName": ""
+                                   },
+                                   "addressData": {
+                                       "houseNumber": "19",
+                                       "houseNumberSuffix": "",
+                                       "street": "Pascalstreet",
+                                       "addressExtra": "",
+                                       "city": "Aachen",
+                                       "postalCode": "0000AA",
+                                       "countryCode": "DE",
+                                       "internationalAddressLine1": "",
+                                       "internationalAddressLine2": "",
+                                       "internationalAddressLine3": ""
+                                   },
+                                   "ageData": {
+                                       "dateOfBirth": "1975-07-25"
+                                   },
+                                   "genderData": {
+                                       "gender": "MALE"
+                                   },
+                                   "contactData": {
+                                       "phoneNumber": "+31203051900",
+                                       "email": "info@equensworldline.nl"
+                                   }
+                               }
+                           }
+                       }
+                    end note
+                    sphonic-->supsi: iDinRetrieve Worflow response(outcome, personalData)
+                deactivate sphonic
+                supsi->supsi: store iDinRetrieve Worflow response as json string on new table on idin_response
+                note right of supsi
+                  * The following table needs to be updated on every response from iDin
+
+                  TABLE: idin_respone:
+                  - integer: id (pk)
+                  - idin_request_id (fk)
+                  - integer: stage
+                  - string: raw_json_response
+                end note
+                alt SphonicResponse.data.outcome.reason= "None" OR "New"
+                  supsi -> supsi: buildExternalUserDetailsResponse.status = "INCOMPLETE"
+                else SphonicResponse.data.outcome.reason="Success"
+                  note right of supsi
+                      * All personal details needs to be mapped to the PlayerBasic
+                  end note
+                  supsi -> supsi: buildExternalUserDetailsResponse from iDinRetrieve response(outcome, applicantName, address, dob, gender, contactDetails)
+                  alt "SphonicResponse" contain required "addressData"
+                      supsi->supsi: update lithium_user_pr_sphonic_idin.user.address_verified = true
+                  end
+                end
+                note left of supsi
+                    ExternalUserDetailsResponse {
+                        "stage": 2,
+                        "domainName": "livescore_nl",
+                        "outcome": "{{SphonicResponse.data.outcome.transactionResult}}"
+                        "playerBasic": {
+                            ...mapped personal information...
+                            "additionalData"": {
+                                "iDinApplicantHash": "averyuniquehash"
+                            }
+                        }
+                    }
+                end note
+                supsi-->su: Response ExternalUserDetailsResponse
+            deactivate supsi
+            alt ExternalUserDetailsResponse.status="INCOMPLETE"
+              su --> lsa: Status463IncompleteUserRegistrationException
+            else ExternalUserDetailsResponse.status="SUCCESS"
+              su->su: update incomplete_user with personalData | status=success
+            end
+        end
+        note right of su
+            * For method=idin, we will be removing the incomplete_user.id from the Incomplete User response since the iDinApplicantHash would need
+              to be used as a secure identifier when finally registering the user on Lithium using the register/v4 endpoint
+        end note
+        su-->lsa: Response Incomplete User
+    deactivate su
+    lsa->lsa: LivescoreApp loads registration screen with players personal Data retrieve
+
+@enduml
+----

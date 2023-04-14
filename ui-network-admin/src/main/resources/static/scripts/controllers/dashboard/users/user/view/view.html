@@ -1,0 +1,58 @@
+<button-bar>
+	<button-back ui-sref="^.^.list"></button-back>
+</button-bar>
+
+<div class="well" style="margin-bottom: 0px">
+
+<div class="user-block">
+	<img class="img-circle img-bordered-sm" src="//:0" alt="">
+	<span class="username">
+		<a ui-sref="^.user.view({id:controller.user.id, domainName:controller.domain.name})">{{ controller.user.firstName }} {{ controller.user.lastName }} ({{ controller.user.username }})</a>
+	</span>
+	<span class="description">Last Updated - {{controller.user.updatedDate | datetimedefault}}</span>
+</div>
+<hr/>
+
+<div class="row v-reset-row ">
+	<div class="col-md-5">
+		<status data="controller.status" ng-model="controller.user"></status>
+		<password data="controller.password" ng-model="controller.user"></password>
+		<div class="box box-solid box-default">
+			<div class="box-header with-border">
+				User Groups
+				<div class="box-tools pull-right">
+					<button type="button" class="btn btn-box-tool" ng-click="controller.addGroup()" lit-if-permission="USER_EDIT" lit-permission-domain="{{controller.domain.name}}">
+						<span><i class="fa fa-plus"></i> {{ "GLOBAL.ACTION.ADD" | translate }} </span>
+					</button>
+				</div>
+			</div>
+			<div class="box-body">
+				<div class="table-responsive mailbox-messages">
+					<table class="table table-hover table-striped">
+					<tbody>
+					<tr ng-repeat="group in controller.user.groups">
+						<td>{{group.name}}</td>
+						<td>
+							<a lit-enabled-permission="user_edit" lit-permission-domain="{{controller.domain.name}}" ng-click="controller.removeGroup(group)">
+								<span class="pull-right badge bg-red"><i class="fa fa-times"></i></span>
+							</a>
+						</td>
+					</tr>
+					<tr ng-if="!controller.user.groups.length">
+						<td>This user does not currently belong to any groups</td>	
+					</tr>
+					</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-7">
+		<personal data="controller.personalinfo" ng-model="controller.user"></personal>
+		<address data="controller.residentialAddress" ng-model="controller.user"></address>
+		<address data="controller.postalAddress" ng-model="controller.user"></address>
+	</div>
+	
+	<changelog options="controller.changelogs" model="controller.user"></changelog>
+</div>
+</div>

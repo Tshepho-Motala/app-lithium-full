@@ -1,0 +1,115 @@
+{
+  "name": "Hexopay Web",
+  "code": "hexopay",
+  "url": "service-cashier-processor-hexopay",
+  "methodNames": ["hexopay"],
+  "deposit": true,
+  "withdraw": true,
+  "fees": {
+    "flat": 0,
+    "percentage": 0,
+    "minimum": 0
+  },
+  "limits": {
+    "minAmount": 2500,
+    "maxAmount": 100000000,
+    "maxAmountDay": 1000000000,
+    "maxAmountWeek": 1000000000,
+    "maxAmountMonth": 1000000000,
+    "maxTransactionsDay": 1000000000,
+    "maxTransactionsWeek": 1000000000,
+    "maxTransactionsMonth": 1000000000
+  },
+  "properties": [
+    {
+      "name": "shop_id",
+      "defaultValue": "",
+      "type": "string",
+      "description": "Hexopay shop id"
+    },
+    {
+      "name": "secret_key",
+      "defaultValue": "",
+      "type": "string",
+      "description": "Hexopay secret key"
+    },
+    {
+      "name": "public_key",
+      "defaultValue": "",
+      "type": "string",
+      "description": "Hexopay public key"
+    },
+    {
+      "name": "test",
+      "defaultValue": "true",
+      "type": "boolean",
+      "description": "Hexopay test mode enabled"
+    },
+    {
+      "name": "payments_page_url",
+      "defaultValue": "https://paymentpage.hexopay.com",
+      "type": "string",
+      "description": "Hexopay payment page url"
+    },
+    {
+      "name": "gateway_api_url",
+      "defaultValue": "https://sonicgateway.hexopay.com",
+      "type": "string",
+      "description": "Hexopay gateway api url"
+    },
+    {
+      "name": "send_billing_address",
+      "defaultValue": "true",
+      "type": "boolean",
+      "description": "Send billing address to Hexopay. Default is true."
+    },
+    {
+      "name": "auto_return",
+      "defaultValue": "",
+      "type": "string",
+      "description": "Number of seconds Hexopay will show its result page. Infinite if not specified."
+    },
+    {
+      "name": "use_3DSecure",
+      "defaultValue": "true",
+      "type": "boolean",
+      "description": "Choose whether to use 3DS"
+    },
+    {
+      "name": "payment_description",
+      "defaultValue": "",
+      "type": "string",
+      "description": "The payment short description that will appear in the Hexopay backoffice transaction data."
+    },
+    {
+      "name": "expired_after",
+      "defaultValue": "",
+      "type": "string",
+      "description": "Time specified in ms after start of transaction before it will will be expired on the Hexopay side. Default is 24 hours. Should be less then ttl."
+    },
+    {
+      "name": "handle_widget_redirect",
+      "defaultValue": "true",
+      "type": "boolean",
+      "description": "Handle Hexopay widget redirect on Lithium side."
+    },
+    {
+      "name": "avs_reject_codes",
+      "defaultValue": "",
+      "type": "string",
+      "description": "Those AVS codes will be sent to Hexopay. Payment will be failed in case of match of AVS verification results to one of these codes."
+    },
+    {
+      "name": "cvc_reject_codes",
+      "defaultValue": "",
+      "type": "string",
+      "description": "Those CVC codes will be sent to Hexopay. Payment will be failed in case of match of CVV verification results to one of these codes."
+    },
+    {
+      "name": "allow_card_types",
+      "defaultValue": "debit",
+      "type": "frontend",
+      "description": "Allowed card types (debit, credit)."
+    }
+  ]
+}

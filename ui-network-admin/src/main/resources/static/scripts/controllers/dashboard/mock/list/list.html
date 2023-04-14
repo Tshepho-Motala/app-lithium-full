@@ -1,0 +1,25 @@
+<div class="container-fluid">
+	<lit-header
+		title="{{ 'UI_NETWORK_ADMIN.MOCK.LIST.TITLE' | translate }}"
+		description="{{ 'UI_NETWORK_ADMIN.MOCK.LIST.DESCRIPTION' | translate }}">
+	</lit-header>
+
+	<div class="row v-reset-row ">
+		<div class="col-lg-12">
+			<div class="pull-right">
+				<button type="button" class="btn btn-default select2-dropdown" data-toggle="dropdown" aria-expanded="false">
+					{{ controller.selectedDomainsDisplay }} <span class="caret"></span>
+					<span class="sr-only">Toggle Dropdown</span>
+				</button>
+				<ul class="dropdown-menu" role="menu">
+					<li class="domain-select" ng-repeat="domain in controller.domains | unique : 'name'">
+							<label>
+								<input ng-model="domain.selected" type="radio" title="DOMAIN" ng-change="controller.domainSelect();"/>
+									{{domain.name}}
+							</label>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>

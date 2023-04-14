@@ -1,0 +1,5 @@
+{"properties": [{
+  "name": "lithium.service.games.blank-image-url",
+  "type": "java.lang.String",
+  "description": "The URL for the image placeholder to be used when a game image can not be found"
+}]}

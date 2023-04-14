@@ -1,0 +1,53 @@
+server:
+  port: 9730
+
+spring:
+  application :
+    name : service-user-provider-threshold
+  datasource:
+    url: jdbc:mysql://localhost/lithium_user_pr_threshold
+    username: root
+    password: mysql
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: validate
+      properties:
+         hibernate :
+           format_sql : false
+  cloud:
+    stream:
+      bindings:
+        register-notification-type-output :
+          binder: rabbit
+          destination: register-notification-type-queue
+          producer:
+            required-groups: register-notification-type-trigger-group
+        register-notification-output :
+          binder: rabbit
+          destination: register-notification-queue
+          producer:
+            required-groups: register-notification-trigger-group
+flyway:
+    enabled: true
+
+eureka:
+  instance:
+    appname: service-user-provider-threshold
+
+lithium:
+  services:
+    user:
+      threshold:
+        calculate-day-granularity-enabled: true
+        calculate-week-granularity-enabled: true
+        calculate-month-granularity-enabled: true
+        calculate-year-granularity-enabled: false
+        calculate-total-granularity-enabled: false
+        notifications:
+          enable-auto-create: false
+          send-notifications: false
+
+logging:
+   level:
+     lithium.service.user.provider.threshold: INFO

@@ -1,0 +1,13 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "GAME": {
+      "FIELDS": {
+        "GAME_DATETIME_INACTIVE": {
+          "NAME": "Inactive Date",
+          "PLACEHOLDER": "Eg. YYYY-MM-DD",
+          "DESCRIPTION": "The initial date that this game was inactive"
+        }
+      }
+    }
+  }
+}

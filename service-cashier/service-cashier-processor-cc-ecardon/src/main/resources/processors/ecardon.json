@@ -1,0 +1,67 @@
+{
+  "name": "eCardOn",
+  "code": "ecardon",
+  "url": "service-cashier-processor-cc-ecardon",
+  "methodNames": ["cc"],
+  "deposit": true,
+  "withdraw": false,
+  "fees": {
+    "flat": 0,
+    "percentage": 0,
+    "minimum": 0
+  },
+  "limits": {
+    "minAmount": 2500,
+    "maxAmount": 0,
+    "maxAmountDay": 0,
+    "maxAmountWeek": 0,
+    "maxAmountMonth": 0,
+    "maxTransactionsDay": 0,
+    "maxTransactionsWeek": 0,
+    "maxTransactionsMonth": 0
+  },
+  "properties": [
+    { 
+      "name": "cardType",
+      "type": "string",
+      "defaultValue": "VISA,MASTER",
+      "description": "ANY or Specific comma separated shortcode(s) for card type(s). eg. VISA,MASTER"
+    },
+    { 
+      "name": "testMode",
+      "type": "string",
+      "defaultValue": "LIVE",
+      "description": "LIVE == production, EXTERNAL causes test transactions to be forwarded to the processor's test system for 'end-to-end' testing, INTERNAL causes transactions to be sent to our simulators, which is useful when switching to the live endpoint for connectivity testing."
+    },
+    { 
+      "name": "paymentUrl",
+      "type": "url",
+      "defaultValue": "https://test.oppwa.com/v1/payments",
+      "description": "Server to Server Payment URL."
+    },
+    { 
+      "name": "authentication.userId",
+      "defaultValue": "8a90818a1c767c4e011c8eca17be05b4",
+      "type": "string",
+      "description": "The userId for the entity. Required to authenticate a server-to-server request."
+    },
+    { 
+      "name": "authentication.password",
+      "defaultValue": "demo",
+      "type": "string",
+      "description": "The password for the userId. Required to authenticate a server-to-server request."
+    },
+    { 
+      "name": "authentication.entityId",
+      "defaultValue": "8a90818a1c767c4e011c8eca17be05b5",
+      "type": "string",
+      "description": "The entity for the request. By default this is the channel's ID. It can be the division, merchant or channel identifier. Division is for requesting registrations only, merchant only in combination with channel dispatching."
+    },
+    {
+      "name": "callback.url",
+      "defaultValue": "/service-cashier/external/callback/do/ecardon/27f973b2e31d7d315d0e625ba4977ffd568bab2a/",
+      "type": "string",
+      "description": "This is the url that should be called from the processor side. Called Shopper Result Url. /service-cashier/external/callback/do/ecardon/27f973b2e31d7d315d0e625ba4977ffd568bab2a/ or /service-cashier-processor-cc-ecardon/callback/RUNhcmRPbkNhbGxiYWNrQ29udHJvbGxlcg/"
+    }
+  ]
+}

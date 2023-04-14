@@ -1,0 +1,149 @@
+= PLAT-10745 - Incomplete process evaluation on limit check for token enhancement
+Riaan Schoeman <riaan.schoeman@wonderlabz.com>
+1.0, July 20, 2022: TA1
+:sectnums:
+:toc: left
+:toclevels: 4
+:toc-title: PLAT-10745
+:icons: font
+:url-quickref: https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/
+:table-caption!:
+
+:erd-include: ../../includes/erd.puml
+:seq-include: ../../includes/sequence.puml
+
+:svc-limit-sourcedir: ../../../service-limit/service-limit/src/main/java
+
+//This is done to keep formatting aligned with gitlab
+****
+[verse,,]
+____
+link:../../readme.adoc[Home] | link:../readme.adoc[Limits]
+____
+****
+
+== Description
+=== Jira
+* link:https://playsafe.atlassian.net/browse/LSPLAT-9615[LSPLAT-9615]
+* link:https://livescoregroup.atlassian.net/browse/PLAT-10745[PLAT-10745]
+
+=== Gitlab
+* Branch: bugfix/LSPLAT-9615_PLAT-10745_incomplete_process_evaluation-awesome_new_feauture
+* MR: link:https://gitlab.com/playsafe/lithium/app-lithium-full/-/merge_requests/5776[]
+
+=== External Dependencies
+==== Swagger (To be completed *before* development starts)
+* Return codes changed. Extra values in returned object. Details below.
+* TL to facilitate timeline and communication to GW/FE for the changes.
+
+==== DWH
+* n/a
+
+==== Other
+* n/a
+
+=== Business
+
+Whenever a limit type is disabled, then none of the limits will be enhanced in the token, because an exception is thrown, and other limits are ignored.
+
+== Architecture
+
+* The methods discussed here is for display purposes only, and the actual checking of limits when certain functions is performed will be documented in the parent "Limits" document.
+* The method below is what is used to retrieve these limits:
++
+[source,java,linenums,indent=0,highlight=0]
+----
+include::{svc-limit-sourcedir}/lithium/service/limit/services/PlayerLimitsSummaryService.java[lines=39..62]
+----
+
+* This method is called from three places:
+** `lithium.service.limit.api.controllers.FrontendLimitsSummaryController`
+*** Contract will need to be updated and communicated with GW/FE
+*** Changes to response:
++
+[source,java,linenums,indent=0,highlight=0]
+----
+public class PlayerLimitSummaryFE {
+  private List<PlayerLimitFE> balanceLimits;
+  private boolean balanceLimitsDisabled;
+  private List<PlayerLimitFE> depositLimits;
+  private boolean depositLimitsDisabled;
+  private PlayerTimeSlotLimitResponse timeSlotLimit;
+  private boolean timeSlotLimitsDisabled;
+  private List<PlayTimeLimitFE> playTimeLimits;
+  private boolean playTimeLimitsDisabled;
+}
+----
+**** Note the extra booleans added to indicate that the limit type is enabled/disabled. (Empty list does not equate to disabled type)
+*** Changes to endpoint:
++
+[source,java,linenums,indent=0,highlight=0]
+----
+@GetMapping("/find-player-summary-limits")
+public PlayerLimitSummaryFE get(LithiumTokenUtil tokenUtil, Locale locale) throws Status500LimitInternalSystemClientException;
+----
+**** Note removal of Return Codes apart from one.
+*** Inside `lithium.service.limit.services.PlayerLimitsSummaryService#findPlayerLimitSummary`:
+**** Wrap each call for the limit types to catch the disabled exception
+**** TimeSlot & PlayTimeLimit currently does not implement a check for enabled/disabled. This needs to be implemented.
+**** *`limitInternalSystemService.getPlayTimeTimeForUserLimits` is an external call to svc-user, and the disabled check needs to be performed before making the call to svc-user, to save on network traffic if not needed.*
+
+** `lithium.service.limit.controllers.backoffice.BackofficeLimitsSummaryController`  (Don’t see this being used anywhere? - To be confirmed as part of work for this TA.)
+*** If not used then remove the controller
+*** Document how/where LBO is getting the limits from.
+** `lithium.service.limit.controllers.system.SystemLimitsSummaryController` (Used in system call from svr-oauth for token enhancement)
+
+* With changes above implemented, a response object will be returned with information for either the set limits for the player, or the flag to indicate if it has been disabled on domain level. No more exceptions for specific limit types disabled.
+
+=== Simplified General Flow
+.Diagram explaining endpoints mentioned above.
+["plantuml"]
+----
+
+include::{seq-include}[]
+
+
+a("FE/GW/LBO", a)
+p("service-limit", sl)
+p("service-user", su)
+p("server-oauth", so)
+
+== BO/FE ==
+
+a -> sl++: find-player-summary-limits
+note bottom
+    * /frontend/limits-summary/v1/find-player-summary-limits
+    * /backoffice/limits-summary/{domainName}/find-player-summary-limits
+end note
+sl --> sl: depositLimitService.findAllFE
+sl --> sl: balanceLimitService.findAllFE
+sl --> sl: playerTimeSlotLimitService.findPlayerLimit
+note left
+ Needs disabled check to be implemented.
+end note
+sl --> su++: limitInternalSystemService.getPlayTimeTimeForUserLimits - /system/play-time-limit/get-limits
+sl <-- su--:
+note left
+ Needs disabled check to be implemented.
+end note
+a <- sl--
+
+== System/Internal ==
+
+a -> so: Login request
+so -> sl++: /system/limits-summary/find-player-summary-limits
+sl --> sl: depositLimitService.findAllFE
+sl --> sl: balanceLimitService.findAllFE
+sl --> sl: playerTimeSlotLimitService.findPlayerLimit
+note left
+ Needs disabled check to be implemented.
+end note
+sl --> su++: limitInternalSystemService.getPlayTimeTimeForUserLimits - /system/play-time-limit/get-limits
+sl <-- su--:
+note left
+ Needs disabled check to be implemented.
+end note
+so <- sl--:
+a <- so: Login Response
+----
+

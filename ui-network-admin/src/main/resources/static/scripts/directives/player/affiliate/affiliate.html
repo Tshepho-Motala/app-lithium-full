@@ -1,0 +1,25 @@
+<div class="box box-{{data.box}} box-solid" bs-loading-overlay bs-loading-overlay-reference-id="{{referenceId}}">
+	<div class="box-header with-border">
+		{{data.title|translate}}
+	</div>
+	<div class="box-body table-responsive">
+		<table class="table table-bordered">
+			<tr>
+				<th width="40%">{{'UI_NETWORK_ADMIN.USER.AFFILIATE.PRIMARY_REFERENCE'|translate}}</th>
+				<td>{{affiliate.affiliateGuid}}</td>
+			</tr>
+			<tr>
+				<th width="40%">{{'UI_NETWORK_ADMIN.USER.AFFILIATE.SECONDARY_REFERENCE_1'|translate}}</th>
+				<td>{{affiliate.affiliateSecondaryGuid1}}</td>
+			</tr>
+			<tr>
+				<th width="40%">{{'UI_NETWORK_ADMIN.USER.AFFILIATE.SECONDARY_REFERENCE_2'|translate}}</th>
+				<td>{{affiliate.affiliateSecondaryGuid2}}</td>
+			</tr>
+			<tr>
+				<th width="40%">{{'UI_NETWORK_ADMIN.USER.AFFILIATE.SECONDARY_REFERENCE_3'|translate}}</th>
+				<td>{{affiliate.affiliateSecondaryGuid3}}</td>
+			</tr>
+		</table>
+	</div>
+</div>

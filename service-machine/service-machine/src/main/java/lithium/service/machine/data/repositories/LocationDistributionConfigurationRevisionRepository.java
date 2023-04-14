@@ -1,0 +1,25 @@
+package lithium.service.machine.data.repositories;
+
+import java.util.List;
+
+import javax.transaction.Transactional;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.repository.PagingAndSortingRepository;
+
+import lithium.service.machine.data.entities.LocationDistributionConfiguration;
+import lithium.service.machine.data.entities.LocationDistributionConfigurationRevision;
+import lithium.service.machine.data.entities.Machine;
+
+public interface LocationDistributionConfigurationRevisionRepository extends PagingAndSortingRepository<LocationDistributionConfigurationRevision, Long>, JpaSpecificationExecutor<LocationDistributionConfigurationRevision> {
+	List<LocationDistributionConfigurationRevision> findByLocationDistributionConfigurationLocationMachine(Machine machine);
+	Page<LocationDistributionConfigurationRevision> findByLocationDistributionConfigurationLocationMachineOrderByStartDescEndDesc(Machine machine, Pageable pageable);
+	List<LocationDistributionConfigurationRevision> findByLocationDistributionConfiguration(LocationDistributionConfiguration locationDistributionConfiguration);
+	@Modifying
+	@Transactional
+	void deleteByLocationDistributionConfiguration(LocationDistributionConfiguration locationDistConfig);
+	Page<LocationDistributionConfigurationRevision> findByLocationDistributionConfigurationAndEndNotNullOrderByEndDesc(LocationDistributionConfiguration locationDistributionConfiguration, Pageable pageRequest);
+}

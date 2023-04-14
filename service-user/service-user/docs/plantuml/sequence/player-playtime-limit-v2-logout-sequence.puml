@@ -1,0 +1,64 @@
+[plantuml]
+----
+@startuml
+'These definitions can be removed once https://gitlab.com/playsafe/lithium/app-lithium-full/-/merge_requests/5282 is merged,
+'and rather include the base template
+!define p(name, alias) participant "name" as alias << (L,#AAFFCC) >>
+!define q(name, alias) queue "name" as alias << (L,#AAFFCC) >>
+!define pn(name, alias) participant "name" as alias << (L,#FFAAAA) >>
+
+autonumber
+
+actor Player as player
+
+participant "Frontend" as fe
+
+box "SVC-User" #LightBlue
+p("UserProviderController", upc)
+p("LoginEventService", les)
+p("UserActiveSessionsMetadataService", uasm)
+pn("PlayTimeLimitsV2Service", plv2s)
+end box
+
+activate player
+player -> fe: Logout
+activate fe
+fe -> upc: POST: /frontend/player/logout
+activate upc
+upc -> les: logout
+activate les
+upc --> fe
+deactivate upc
+fe --> player
+deactivate fe
+deactivate player
+les -> uasm: updateMetadata
+activate uasm
+alt Playtime limits enabled for domain
+  uasm -> plv2s: updatePlayerEntry
+  activate plv2s
+    note right
+      If the player has a playtime
+      limit configuration, find or
+      create the playtime limit entry,
+      then find the active session
+      metadata and use the playtime
+      limit last updated timestamp
+      to calculate the seconds since
+      last updated to now, then add the
+      value to seconds accumulated
+      on the player playtime limit
+      entry. Update the playtime
+      limit last updated timestamp
+      on metadata to the time now.
+    end note
+  deactivate plv2s
+end
+uasm -> uasm: Decrement active session count
+alt Active session count is 0
+uasm -> uasm: Clear limit last updated timestamp
+end
+uasm --> les
+@enduml
+----
+[plantuml]

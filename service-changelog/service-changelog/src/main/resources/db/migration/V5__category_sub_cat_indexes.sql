@@ -1,0 +1,2 @@
+CREATE UNIQUE INDEX `idx_name` ON `category` (`name`) ALGORITHM INPLACE LOCK NONE;
+CREATE UNIQUE INDEX `idx_name` ON `sub_category` (`name`) ALGORITHM INPLACE LOCK NONE;

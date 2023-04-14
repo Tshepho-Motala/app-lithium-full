@@ -1,0 +1,25 @@
+server:
+  port: 9916
+  
+lithium:
+  services:
+    db:
+      load-test-data: true
+
+spring:
+  cloud:
+    stream:
+      bindings:
+        missionstatsoutput:
+          group: missionstatsgroup
+          binder: rabbit
+          destination: missionstatsqueue
+          producer:
+            required-groups: missionstatsgroup
+        
+logging:
+  level:
+    lithium.leader: WARN
+    org.springframework.cloud.netflix.feign.LithiumFeignClientFactoryBean: INFO
+    lithium.services.WebRequestInterceptorConfiguration: INFO
+

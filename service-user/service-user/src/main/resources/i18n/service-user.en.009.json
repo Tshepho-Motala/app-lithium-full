@@ -1,0 +1,9 @@
+{
+	"SERVICE_USER": {
+		"PASSWORDRESET": {
+			"ERROR_493": "Excessive failed attempts to reset your password. This account is now blocked. Please contact customer support.",
+			"CLEAR_FAILED_ATTEMPTS": "Failed reset password counter was cleared.",
+			"493_BLOCKED_ATTEMPT": "Password reset attempt blocked because of excessive failed attempts."
+		}
+    }
+}

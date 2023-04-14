@@ -1,0 +1,22 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "RESTRICTIONS": {
+        "FIELDS": {
+          "COMMUNICATE_TO_PLAYER": {
+            "NAME": "Communicate to player",
+            "DESCRIPTION": "Should this be communicated to a player?"
+          }
+        },
+        "EDIT": {
+          "COMMUNICATE_TO_PLAYER": {
+            "ENABLE": {
+              "SUCCESS": "Successfully turned on to communicate to a player"
+            },
+            "DISABLE": {
+              "SUCCESS": "Successfully turned off not to communicate to a player"
+            }
+          }
+        }
+      }
+  }
+}

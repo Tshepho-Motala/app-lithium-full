@@ -1,0 +1,17 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "PLAYERS": {
+      "MASS_UPDATE": {
+        "ACTIONS": {
+          "PROCESS_ACCESS_RULE" : {
+            "LABEL" : "Process Access Control Rulesets",
+            "NAME" : "Access Rulesets",
+            "PLACEHOLDER" : "Choose the desired rule set",
+            "DESCRIPTION" : "During processing, the ruleset will be applied to User",
+            "TABLE_LABEL": "Ruleset Result"
+          }
+        }
+      }
+    }
+  }
+}

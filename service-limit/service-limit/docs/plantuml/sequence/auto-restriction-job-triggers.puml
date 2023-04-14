@@ -1,0 +1,22 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+actor "AutoRestrictionJob" as arj
+participant "service-user" as su
+database "domain" as sd
+queue trigger
+
+
+autonumber
+
+arj -> arj: run
+activate arj
+    arj <-- sd: find all domains
+
+    loop for each domain
+
+    end loop
+
+deactivate arj
+
+@enduml

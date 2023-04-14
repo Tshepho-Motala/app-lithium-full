@@ -1,0 +1,22 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "CMS": {
+      "SUB_NAVIGATION": {
+        "OUTPUT_FIELDS": {
+          "SUB_NAVIGATION": "Sub Navigation",
+          "LOBBY_NOT_SELECTED_MESSAGE": "Please select a lobby first"
+        }
+      },
+      "ADD_SUB_NAVIGATION": {
+        "OUTPUT_FIELDS": {
+          "ADD_SUB_NAVIGATION": "Add Sub Navigation"
+        }
+      },
+      "REMOVE_SUB_NAVIGATION": {
+        "OUTPUT_FIELDS": {
+          "REMOVE_SUB_NAVIGATION": "Remove Sub Navigation"
+        }
+      }
+    }
+  }
+}

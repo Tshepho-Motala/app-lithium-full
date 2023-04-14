@@ -1,0 +1,35 @@
+[plantuml]
+----
+@startuml
+start
+:Find progress record with ID 1;
+if (Does not exist?) then (yes)
+  :Create progress record with ID 1,
+  initialise __running__ to false;
+endif
+if (Is running?) then (yes)
+  :Log warning message,
+  migration currently running;
+  stop
+else
+  :Set running = true, save;
+  while (Has more pages?)
+    :Select data from
+    old v1 table > last_id_processed,
+    paged, by ID ascending;
+    while (Has more page content?)
+      :Process record,
+      migrateV1PlayerConfiguration();
+      if (Record is active and has PT minutes used?) then (yes)
+        :Create the player period entry,
+        set seconds_accumulated;
+      endif
+      :Set last_id_processed = record.id;
+    endwhile
+  endwhile
+  :Set running = false;
+  stop
+endif
+@enduml
+----
+[plantuml]

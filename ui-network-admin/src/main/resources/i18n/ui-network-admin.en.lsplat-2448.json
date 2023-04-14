@@ -1,0 +1,20 @@
+{
+  "GLOBAL": {
+    "ACTION": {
+      "VERIFY": "Verify"
+    }
+  },
+  "UI_NETWORK_ADMIN": {
+    "PLAYER" : {
+      "CRUKS": {
+        "RESPONSES": {
+          "PASS": "CRUKS ID is valid and is not excluded",
+          "FAIL": "CRUKS ID is valid and is excluded",
+          "NONE": "No data available, try again later",
+          "INVALID": "CRUKS ID is not valid",
+          "ERROR": "No data available, try again later"
+        }
+      }
+    }
+  }
+}

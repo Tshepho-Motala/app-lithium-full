@@ -1,0 +1,11 @@
+= PayPal Billing Agreement Flow
+1.0, Aug 5, 2022: LSBet-UK
+:sectnums:
+:toc: left
+:toclevels: 2
+:toc-title: LSBet-UK
+:icons: font
+:url-quickref: https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/
+
+.Nuvei Deposit Flow
+include::plantuml/paypal-billing-agreement-flow.puml[Flow Diagram]

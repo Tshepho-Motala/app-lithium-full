@@ -1,0 +1,8 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "DASHBOARD": {
+      "FIRST_TIME_DEPOSITS": "First Time Deposits",
+      "FIRST_TIME_DEPOSITS_REG_SAME_DAY": "First Time Deposits (Reg. Same Day)"
+    }
+  }
+}

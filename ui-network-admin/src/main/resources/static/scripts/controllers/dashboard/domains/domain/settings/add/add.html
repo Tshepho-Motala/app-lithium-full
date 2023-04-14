@@ -1,0 +1,49 @@
+<div class="modal-content">
+	<div class="modal-header primary-blue darken-4 white-text">
+		<h3 class="modal-title" id="modal-title">
+			<i class="fa fa-pencil"></i>
+			<span ng-if="controller.adding">Adding Domain Settings</span>
+			<span ng-if="!controller.adding">Modifying Domain Settings</span>
+			<button-close-window ng-click="controller.cancel()"></button-close-window>
+		</h3>
+	</div>
+	
+	<form ng-submit="controller.save()" name="controller.form" autocomplete="off" novalidate>
+		<div class="modal-body" id="modal-body">
+			<div class="row v-reset-row ">
+				<div class="col-xs-12">
+					<table class="table table-hover table-striped nowrap" cellspacing="0" width="100%">
+						<thead ng-if="controller.settings !== undefined && controller.settings !== null && controller.settings.length > 0">
+							<tr>
+								<th>Label</th>
+								<th>Value</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="setting in controller.settings track by $index">
+								<td><input type="text" ng-model="setting.label" class="form-control"/></td>
+								<td><input type="text" ng-model="setting.value" class="form-control"/></td>
+								<td>
+									<a class="pull-right" ng-click="controller.removeSetting($index)">
+										<span class="badge bg-red"><i class="fa fa-times"></i></span>
+									</a>
+								</td>
+							</tr>
+							<tr ng-if="controller.settings === undefined || controller.settings === null || controller.settings.length === 0">
+								<td>No settings configured yet.</td>
+							</tr>
+						</tbody>
+					</table>
+					<button-add class="pull-right" ng-click="controller.addSetting()"></button-submit>
+				</div>
+			</div>
+		</div>
+		
+		<div class="modal-footer">
+			<buttonbar>
+				<button-submit class="pull-left"></button-submit>
+				<button-cancel ng-click="controller.cancel()"></button-cancel>
+			</buttonbar>
+		</div>
+	</form>
+</div>

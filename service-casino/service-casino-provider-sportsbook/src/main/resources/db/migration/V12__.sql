@@ -1,0 +1,1 @@
+CREATE INDEX `idx_created_date` ON `reservation` (`created_date`) ALGORITHM INPLACE LOCK NONE;

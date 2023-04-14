@@ -1,0 +1,8 @@
+{
+  "ERROR_DICTIONARY": {
+    "GAMES": {
+      "DEPOSIT_REQUIRED": "A deposit is required to play free games",
+      "FREE_GAMES_LOCKED": "Free games locked for player"
+    }
+  }
+}

@@ -1,0 +1,76 @@
+<div class="box box-info box-solid bs-loading-container" bs-loading-overlay
+     bs-loading-overlay-reference-id="{{referenceId}}">
+    <div class="box-header with-border">
+        {{'UI_NETWORK_ADMIN.BALANCE_LIMITS.TITLE' | translate}}
+        <div class="box-tools pull-right" ng-if="!balanceLimits.disabled">
+            <button type="button" class="btn btn-box-tool" ng-click="modifyBalanceLimit()"
+                    lit-if-permission="PLAYER_BALANCE_LIMIT_EDIT" lit-permission-domain="{{user.domain.name}}">
+                <span><i class="fa fa-pencil-square-o"></i> {{'GLOBAL.ACTION.MODIFY' | translate}}</span>
+            </button>
+        </div>
+    </div>
+    <div class="box-body table-responsive" style="padding: 4px;" ng-if="balanceLimits.disabled">
+        <table class="table table-hover table-striped nowrap" cellspacing="0" width="100%">
+            <tr>
+                <td colspan="3" style="text-align: center">
+                    {{'UI_NETWORK_ADMIN.BALANCE_LIMITS.DISABLED_MESSAGE' | translate}}
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div class="box-body table-responsive" style="padding: 4px;" ng-if="!balanceLimits.disabled">
+        <table class="table table-hover table-striped nowrap" cellspacing="0" width="100%"
+               ng-if="balanceLimits.current.amount === undefined">
+            <tr>
+                <td colspan="3" style="text-align: center">
+                    {{'UI_NETWORK_ADMIN.BALANCE_LIMITS.NOT_SET' | translate}}
+                </td>
+            </tr>
+        </table>
+        <table class="table table-hover table-striped nowrap" cellspacing="0" width="100%"
+               ng-if="balanceLimits.current.amount >= 0">
+            <tr>
+                <th>{{'UI_NETWORK_ADMIN.BALANCE_LIMITS.LABEL' | translate}}</th>
+                <td>{{(balanceLimits.current.amount / 100) | currency: domain.currencySymbol}}</td>
+                <td ng-if="balanceLimits.current.amount === undefined">
+                    {{'UI_NETWORK_ADMIN.BALANCE_LIMITS.NOT_SET' | translate}}
+                </td>
+            </tr>
+            <tr ng-if="balanceLimits.pending">
+                <td colspan="3" class="warning">
+                    {{
+                    'UI_NETWORK_ADMIN.BALANCE_LIMITS.PENDING' | translate: {
+                        date_requested: (balanceLimits.pending.createdDate | date:"medium" :'GMT'),
+                        amount: ((balanceLimits.pending.amount / 100) | currency: domain.currencySymbol),
+                        date_affected: ((balanceLimits.pending.createdDate + balanceLimits.pendingLimitDelay * 3600000) | date:"medium" :'GMT')
+                    }
+                    }}
+                    <a style="cursor: pointer;" ng-click="removePendingBalanceLimit()"
+                       lit-if-permission="PLAYER_BALANCE_LIMIT_EDIT"  lit-permission-domain="{{user.domain.name}}">
+                        <span><i class="fa fa-trash"></i></span>
+                    </a>
+                </td>
+            </tr>
+            <tr>
+                <th colspan="2" width="40%">{{'UI_NETWORK_ADMIN.BALANCE_LIMITS.LIMIT_USED' | translate}}</th>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    <uib-progressbar type="info"
+                                     value="(balanceLimits.current.amountUsed > balanceLimits.current.amount ? 100 : balanceLimits.current.amountUsed <= 0 ? 0 : ((balanceLimits.current.amountUsed / balanceLimits.current.amount) * 100)) | number:2">
+                        <span style="color: #000000;">{{(balanceLimits.current.amountUsed > balanceLimits.current.amount ? 100 : balanceLimits.current.amountUsed <= 0 ? 0 : ((balanceLimits.current.amountUsed / balanceLimits.current.amount) * 100)) | number:2}}%</span>
+                    </uib-progressbar>
+                </td>
+            </tr>
+            <tr>
+                <th colspan="2" width="40%">{{'UI_NETWORK_ADMIN.BALANCE_LIMITS.REMAIN_TO_LIMIT' | translate}}</th>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    {{((balanceLimits.current.amount - balanceLimits.current.amountUsed) / 100) | currency: domain.currencySymbol}}
+                </td>
+            </tr>
+
+        </table>
+    </div>
+</div>

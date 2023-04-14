@@ -1,0 +1,63 @@
+{
+	"name": "iDEAL",
+	"code": "ideal",
+	"image": {
+		"filename": "/methods/ideal.png",
+		"filetype": "image/png"
+	},
+	"depositStages": [
+		{
+			"number": 1,
+			"title": "Enter Amount",
+			"description": null,
+			"inputFields": [
+				{
+					"code": "return_url",
+					"name": "Return URL",
+					"description": "Return URL once transaction is complete. Will be appended with a status",
+					"type": "return_url",
+					"required": true
+				},
+				{
+					"code": "save_card",
+					"name": "Save card",
+					"description": "Save card for the future payments.",
+					"type": "boolean",
+					"required": true
+				}
+
+			],
+			"outputFields": []
+		},
+		{
+			"number": 2,
+			"title": "Validate payment",
+			"description": null,
+			"inputFields": [],
+			"outputFields": []
+		}
+	],
+	"withdrawalStages": [
+		{
+			"number": 1,
+			"title": "Enter Amount",
+			"description": null,
+			"inputFields": [
+				{
+					"code": "cardReference",
+					"name": "Trustly account id",
+					"type": "string",
+					"required": true
+				}
+			],
+			"outputFields": []
+		},
+		{
+			"number": 2,
+			"title": "Validate payment",
+			"description": null,
+			"inputFields": [],
+			"outputFields": []
+		}
+	]
+}

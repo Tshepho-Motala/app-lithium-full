@@ -1,0 +1,12 @@
+{
+  "ERROR_DICTIONARY" : {
+    "MY_ACCOUNT" : {
+      "COLLECTION_DATA_INVALID_INPUT" : "Data collection name or keys are not snake_case"
+    }
+  },
+  "SERVICE_USER": {
+    "GLOBAL": {
+      "DATA_COLLECTIONS_CHANGELOG": "Players {0} collection data has been saved."
+    }
+  }
+}

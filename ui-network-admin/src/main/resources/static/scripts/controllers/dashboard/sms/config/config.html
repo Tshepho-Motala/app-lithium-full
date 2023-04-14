@@ -1,0 +1,17 @@
+<div class="container-fluid">
+	<div id="vueMountPageHeader"/>
+	<div class="row v-reset-row ">
+		<div class="col-xs-12">
+			<div class="card nav-tabs-custom" style="margin-bottom: 5px;" ng-if="controller.selectedDomain">
+				<ul class="nav nav-tabs">
+					<li role="presentation" ng-class="{ active: controller.tab == tab }" ng-repeat="tab in controller.tabs" lit-if-permission="{{tab.roles}}" lit-permission-domain="{{controller.selectedDomain}}">
+						<a ng-click="controller.setTab(tab)">{{ tab.title | translate }}</a>
+					</li>
+				</ul>
+				<div class="tab-content" style="padding: 0px;padding-top: 1px;">
+					<div ui-view></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

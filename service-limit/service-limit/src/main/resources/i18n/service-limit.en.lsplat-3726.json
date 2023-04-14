@@ -1,0 +1,13 @@
+{
+  "SERVICE-LIMIT": {
+    "RESTRICTIONS": {
+      "RULESETS": {
+        "RULE": {
+          "FIELD": {
+            "CONTRA_PAYMENT_ACCOUNT_SET": "User contra account is set."
+          }
+        }
+      }
+    }
+  }
+}

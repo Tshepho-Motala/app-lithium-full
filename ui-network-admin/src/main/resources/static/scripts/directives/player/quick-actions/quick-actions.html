@@ -1,0 +1,346 @@
+<div class="btn-group pull-right" uib-dropdown ng-init="controller.domainSettings()">
+    <button ng-if="!controller.experimentalFeatures" id="dropdown-domain" type="button" class="btn btn-default" uib-dropdown-toggle>
+        Quick Actions&nbsp;<span class="caret"></span>
+    </button>
+    <ul ng-if="!controller.experimentalFeatures" class="dropdown-menu dropdown-menu-right" uib-dropdown-menu role="menu">
+        <li role="menuitem">
+            <a lit-if-permission="PLAYER_STATUS" lit-permission-domain="{{user.domain.name}}"
+               ng-click="controller.changeStatus()">{{"UI_NETWORK_ADMIN.PLAYER.QUICK_ACTIONS.MODIFY.STATUS"|translate}}</a>
+        </li>
+        <li role="menuitem">
+            <a lit-if-permission="PLAYER_VERIFICATION_STATUS" lit-permission-domain="{{user.domain.name}}"
+               ng-click="controller.changeVerificationStatus()">{{"UI_NETWORK_ADMIN.PLAYER.QUICK_ACTIONS.MODIFY.VERIFICATION_STATUS"|translate}}</a>
+        </li>
+        <li role="menuitem">
+            <a ng-if="user.testAccount === undefined || user.testAccount === null || user.testAccount === false"
+               ng-click="controller.toggleTest()" lit-if-permission="PLAYER_MARK_TEST" lit-permission-domain="{{user.domain.name}}">
+                {{'UI_NETWORK_ADMIN.PLAYER.QUICK_ACTIONS.TEST.MARK'|translate}}
+            </a>
+            <a ng-if="user.testAccount === true"
+               ng-click="controller.toggleTest()" lit-if-permission="PLAYER_UNMARK_TEST" lit-permission-domain="{{user.domain.name}}">
+                {{'UI_NETWORK_ADMIN.PLAYER.QUICK_ACTIONS.TEST.UNMARK'|translate}}
+            </a>
+        </li>
+        <li role="menuitem">
+            <a lit-if-permission="PLAYER_VALIDATE_AGE" lit-permission-domain="{{user.domain.name}}"
+               ng-click="controller.toggleAgeVerification()" ng-if="user.ageVerified === true">
+                {{ "UI_NETWORK_ADMIN.PLAYER.QUICK_ACTIONS.CHANGE.AGE_VERIFIED.UNVERIFIED" | translate }}
+            </a>
+            <a lit-if-permission="PLAYER_VALIDATE_AGE" lit-permission-domain="{{user.domain.name}}"
+               ng-click="controller.toggleAgeVerification()" ng-if="user.ageVerified === false">
+                {{ "UI_NETWORK_ADMIN.PLAYER.QUICK_ACTIONS.CHANGE.AGE_VERIFIED.VERIFIED" | translate }}
+            </a>
+        </li>
+        <li role="menuitem">
+            <a lit-if-permission="PLAYER_VALIDATE_ADDRESS" lit-permission-domain="{{user.domain.name}}"
+               ng-click="controller.toggleAddressVerification()" ng-if="user.addressVerified === true">
+                {{ "UI_NETWORK_ADMIN.PLAYER.QUICK_ACTIONS.CHANGE.ADDRESS_VERIFIED.UNVERIFIED" | translate }}
+            </a>
+            <a lit-if-permission="PLAYER_VALIDATE_ADDRESS" lit-permission-domain="{{user.domain.name}}"
+               ng-click="controller.toggleAddressVerification()" ng-if="user.addressVerified === false">
+                {{ "UI_NETWORK_ADMIN.PLAYER.QUICK_ACTIONS.CHANGE.ADDRESS_VERIFIED.VERIFIED" | translate }}
+            </a>
+        </li>
+        <li role="menuitem">
+            <a lit-if-permission="GAME_USER_STATUS_EDIT" lit-permission-domain="{{user.domain.name}}"
+               ng-click="controller.lockAllFreeGamesForPlayer()" ng-if="!data.freeGamesLocked">
+                {{ "UI_NETWORK_ADMIN.PLAYER.QUICK_ACTIONS.FREE_GAMES.LOCK" | translate }}
+            </a>
+            <a lit-if-permission="GAME_USER_STATUS_EDIT" lit-permission-domain="{{user.domain.name}}"
+               ng-click="controller.unlockAllFreeGamesForPlayer()" ng-if="data.freeGamesLocked">
+                {{ "UI_NETWORK_ADMIN.PLAYER.QUICK_ACTIONS.FREE_GAMES.UNLOCK" | translate }}
+            </a>
+        </li>
+        <li role="menuitem">
+            <a lit-if-permission="PLAYER_TAG_EDIT" lit-permission-domain="{{user.domain.name}}"
+               ng-click="controller.changeTag()">{{"UI_NETWORK_ADMIN.PLAYER.QUICK_ACTIONS.MODIFY.TAG"|translate}}</a>
+        </li>
+        <li role="menuitem">
+            <a lit-if-permission="PLAYER_PASSWD" lit-permission-domain="{{user.domain.name}}"
+               ng-click="controller.changePassword()">{{"UI_NETWORK_ADMIN.PLAYER.QUICK_ACTIONS.CHANGE.PASSWORD"|translate}}</a>
+        </li>
+        <li role="menuitem">
+            <a ng-click="controller.resetPassword()" lit-if-permission="PLAYER_PASSWORD_RESET" lit-permission-domain="{{user.domain.name}}">{{"UI_NETWORK_ADMIN.PLAYER.QUICK_ACTIONS.RESET.PASSWORD"|translate}}</a>
+        </li>
+        <li role="menuitem">
+            <a ng-click="controller.addNote()" lit-if-permission="PLAYER_NOTE_ADD" lit-permission-domain="{{user.domain.name}}">{{"UI_NETWORK_ADMIN.PLAYER.QUICK_ACTIONS.ADD.NOTE"|translate}}</a>
+        </li>
+        <li role="menuitem">
+            <a ng-click="controller.addComment()" lit-if-permission="PLAYER_COMMENT_ADD" lit-permission-domain="{{user.domain.name}}">{{"UI_NETWORK_ADMIN.PLAYER.QUICK_ACTIONS.ADD.COMMENT"|translate}}</a>
+        </li>
+        <li role="menuitem">
+            <a ng-click="controller.toggleMobileValidation()" ng-if="user.cellphoneValidated === true"
+               lit-if-permission="PLAYER_VALIDATE_MOBILE" lit-permission-domain="{{user.domain.name}}">
+                {{ "GLOBAL.ACTION.INVALIDATE_MOBILE" | translate }}
+            </a>
+            <a ng-click="controller.toggleMobileValidation()" ng-if="user.cellphoneValidated === false"
+               lit-if-permission="PLAYER_VALIDATE_MOBILE" lit-permission-domain="{{user.domain.name}}">
+                {{ "GLOBAL.ACTION.VALIDATE_MOBILE" | translate }}
+            </a>
+        </li>
+        <li role="menuitem">
+            <a ng-click="controller.toggleEmailValidation()" ng-if="user.emailValidated === true"
+               lit-if-permission="PLAYER_VALIDATE_EMAIL" lit-permission-domain="{{user.domain.name}}">
+                {{ "GLOBAL.ACTION.INVALIDATE_EMAIL" | translate }}
+            </a>
+            <a ng-click="controller.toggleEmailValidation()" ng-if="user.emailValidated === false"
+               lit-if-permission="PLAYER_VALIDATE_EMAIL" lit-permission-domain="{{user.domain.name}}">
+                {{ "GLOBAL.ACTION.VALIDATE_EMAIL" | translate }}
+            </a>
+        </li>
+        <li role="menuitem">
+            <a ng-click="controller.changePromotionalOptout()" lit-if-permission="PLAYER_OPTOUT_EDIT" lit-permission-domain="{{user.domain.name}}">
+                {{"UI_NETWORK_ADMIN.PLAYER.PROMOOPTOUT.UPDATE_MARKETING_PREFERENCES"|translate}}
+            </a>
+        </li>
+        <li lit-if-permission="PLAYER_INFO_EDIT" role="menuitem">
+            <a ng-click="controller.changePersonalInfo()" lit-if-permission="PLAYER_EDIT" lit-permission-domain="{{user.domain.name}}">
+                {{"UI_NETWORK_ADMIN.PLAYER.QUICK_ACTIONS.CHANGE.PERSONAL_INFO"|translate}}
+            </a>
+        </li>
+        <li lit-if-permission="PLAYER_DOB_EDIT" lit-permission-domain="{{user.domain.name}}" role="menuitem">
+            <a ng-click="controller.changeDateOfBirth()" lit-if-permission="PLAYER_DOB_EDIT" lit-permission-domain="{{user.domain.name}}">
+                {{"UI_NETWORK_ADMIN.PLAYER.QUICK_ACTIONS.CHANGE.DOB"|translate}}
+            </a>
+        </li>
+        <li role="menuitem">
+            <a ng-click="controller.changeAddress('residentialAddress')" lit-if-permission="PLAYER_ADDRESS_EDIT" lit-permission-domain="{{user.domain.name}}">
+                {{"UI_NETWORK_ADMIN.PLAYER.QUICK_ACTIONS.CHANGE.RESIDENTIAL_ADDRESS"|translate}}
+            </a>
+        </li>
+        <li role="menuitem">
+            <a ng-click="controller.changeAddress('postalAddress')" lit-if-permission="PLAYER_ADDRESS_EDIT" lit-permission-domain="{{user.domain.name}}">
+                {{"UI_NETWORK_ADMIN.PLAYER.QUICK_ACTIONS.CHANGE.POSTAL_ADDRESS"|translate}}
+            </a>
+        </li>
+        <li role="menuitem" ng-if="data.domainSettings['iban'] === 'show'" lit-if-permission="IBAN_EDIT" lit-permission-domain="{{user.domain.name}}">
+            <a ng-click="controller.changeIBAN('IBAN')">
+                {{"UI_NETWORK_ADMIN.PLAYER.QUICK_ACTIONS.CHANGE.NAME"|translate}}
+            </a>
+        </li>
+        <li role="menuitem" ng-if="data.domainSettings['placeOfBirth'] == 'show'" lit-if-permission="PLAYER_PLACE_OF_BIRTH_EDIT"
+            lit-permission-domain="{{user.domain.name}}">
+            <a ng-click="controller.changePlaceOfBirth('placeOfBirth')">
+                {{"UI_NETWORK_ADMIN.PLAYER.QUICK_ACTIONS.FIELDS.CHANGE_PLACE_OF_BIRTH.NAME" |translate}}
+            </a>
+        </li>
+        <li role="menuitem" style="border-bottom: 1px solid lightgrey"></li>
+        <li ng-repeat="pb in data.playerBalance" role="menuitem" ng-style="$last ? { 'border-bottom':'1px solid lightgrey' } : null">
+            <a ng-click="controller.adjust(pb.id)" lit-if-permission="PLAYER_BALANCE_ADJUST" lit-permission-domain="{{user.domain.name}}">
+                {{"UI_NETWORK_ADMIN.PLAYER.QUICK_ACTIONS.CHANGE.ADJUST_BALANCE"|translate}} [{{pb.balance | cents : ''}} {{pb.currency.code}}]
+            </a>
+            <a ng-click="controller.direct_withdrawal(pb.id)" lit-if-permission="CASHIER_DIRECT_WITHDRAWAL" lit-permission-domain="{{user.domain.name}}">
+                {{"UI_NETWORK_ADMIN.PLAYER.QUICK_ACTIONS.CHANGE.DIRECT_WITHDRAWAL"|translate}} [{{pb.balance | cents : ''}} {{pb.currency.code}}]
+            </a>
+            <a ng-click="controller.writeoff(pb.id)" lit-if-permission="PLAYER_BALANCE_ADJUST_WRITE_OFF" lit-permission-domain="{{user.domain.name}}">
+                {{"UI_NETWORK_ADMIN.PLAYER.QUICK_ACTIONS.CHANGE.WRITE_OFF_BALANCE"|translate}} [{{pb.balance | cents : ''}} {{pb.currency.code}}]
+            </a>
+	        <a ng-click="controller.withdrawalOnHold()" lit-if-permission="CASHIER_WITHDRAWAL_HOLD" lit-permission-domain="{{user.domain.name}}">
+		        {{"UI_NETWORK_ADMIN.PLAYER.QUICK_ACTIONS.WITHDRAWAL_HOLD"|translate}}
+	        </a>
+	        <a ng-click="controller.withdrawalReprocess()" lit-if-permission="CASHIER_WITHDRAWAL_HOLD" lit-permission-domain="{{user.domain.name}}">
+		        {{"UI_NETWORK_ADMIN.PLAYER.QUICK_ACTIONS.WITHDRAWAL_REPROCESS"|translate}}
+	        </a>
+        </li>
+        <li role="menuitem">
+            <a lit-if-permission="PLAYER_TIME_SLOT_VIEW" lit-permission-domain="{{user.domain.name}}" ng-if="controller.timeSlotLimitAllowed"
+               ng-click="controller.changeTimeFrame()">{{"UI_NETWORK_ADMIN.TIME_FRAME.MENU_ITEM_LABEL"|translate}}</a>
+        </li>
+        <li role="menuitem">
+            <a ng-if="!data.balanceLimits.disabled" ng-click="controller.changeBalanceLimit()" lit-if-permission="PLAYER_BALANCE_LIMIT_EDIT" lit-permission-domain="{{user.domain.name}}">
+                <span>{{"UI_NETWORK_ADMIN.PLAYER.QUICK_ACTIONS.MODIFY.BALANCE_LIMIT"|translate}}</span>
+            </a>
+        </li>
+        <li role="menuitem">
+            <a ng-click="controller.changeLimits(3)" lit-if-permission="PLAYER_LIMIT_EDIT" lit-permission-domain="{{user.domain.name}}">
+                <span>{{"UI_NETWORK_ADMIN.PLAYER.QUICK_ACTIONS.MODIFY.DAILY_LOSS_LIMIT"|translate}}</span>
+            </a>
+            <a ng-if="data.limits.dailyLossLimit"  ng-click="controller.removeLimit(3)" lit-if-permission="PLAYER_LIMIT_EDIT" lit-permission-domain="{{user.domain.name}}">
+                {{"UI_NETWORK_ADMIN.PLAYER.QUICK_ACTIONS.DELETE.DAILY_LOSS_LIMIT"|translate}}
+            </a>
+        </li>
+        <li role="menuitem">
+            <a ng-click="controller.changeLimits(4)" lit-if-permission="PLAYER_LIMIT_EDIT" lit-permission-domain="{{user.domain.name}}">
+                <span>{{"UI_NETWORK_ADMIN.PLAYER.QUICK_ACTIONS.MODIFY.WEEKLY_LOSS_LIMIT"|translate}}</span>
+            </a>
+            <a ng-if="data.limits.weeklyLossLimit"  ng-click="controller.removeLimit(4)" lit-if-permission="PLAYER_LIMIT_EDIT" lit-permission-domain="{{user.domain.name}}">
+                {{"UI_NETWORK_ADMIN.PLAYER.QUICK_ACTIONS.DELETE.WEEKLY_LOSS_LIMIT"|translate}}
+            </a>
+        </li>
+        <li role="menuitem">
+            <a ng-click="controller.changeLimits(2)" lit-if-permission="PLAYER_LIMIT_EDIT" lit-permission-domain="{{user.domain.name}}">
+                <span>{{"UI_NETWORK_ADMIN.PLAYER.QUICK_ACTIONS.MODIFY.MONTHLY_LOSS_LIMIT"|translate}}</span>
+            </a>
+            <a ng-if="data.limits.monthlyLossLimit"  ng-click="controller.removeLimit(2)" lit-if-permission="PLAYER_LIMIT_EDIT" lit-permission-domain="{{user.domain.name}}">
+                {{"UI_NETWORK_ADMIN.PLAYER.QUICK_ACTIONS.DELETE.MONTHLY_LOSS_LIMIT"|translate}}
+            </a>
+        </li>
+        <li role="menuitem">
+            <a ng-click="controller.changeDepositLimits(3)" lit-if-permission="PLAYER_DEPOSIT_LIMIT_EDIT" lit-permission-domain="{{user.domain.name}}">
+                <span>{{"UI_NETWORK_ADMIN.PLAYER.QUICK_ACTIONS.CHANGE.DAILY_DEPOSIT_LIMIT"|translate}}</span>
+            </a>
+            <a ng-if="data.depositLimits.dailyLimit"  ng-click="controller.removeDepositLimit(3)" lit-if-permission="PLAYER_DEPOSIT_LIMIT_EDIT" lit-permission-domain="{{user.domain.name}}">
+                {{"UI_NETWORK_ADMIN.PLAYER.QUICK_ACTIONS.DELETE.DAILY_DEPOSIT_LIMIT"|translate}}
+            </a>
+        </li>
+        <li role="menuitem">
+            <a ng-click="controller.changeDepositLimits(4)" lit-if-permission="PLAYER_DEPOSIT_LIMIT_EDIT" lit-permission-domain="{{user.domain.name}}">
+                <span>{{"UI_NETWORK_ADMIN.PLAYER.QUICK_ACTIONS.CHANGE.WEEKLY_DEPOSIT_LIMIT"|translate}}</span>
+            </a>
+            <a ng-if="data.depositLimits.weeklyLimit"  ng-click="controller.removeDepositLimit(4)" lit-if-permission="PLAYER_DEPOSIT_LIMIT_EDIT" lit-permission-domain="{{user.domain.name}}">
+                {{"UI_NETWORK_ADMIN.PLAYER.QUICK_ACTIONS.DELETE.WEEKLY_DEPOSIT_LIMIT"|translate}}
+            </a>
+        </li>
+        <li role="menuitem">
+            <a ng-click="controller.changeDepositLimits(2)" lit-if-permission="PLAYER_DEPOSIT_LIMIT_EDIT" lit-permission-domain="{{user.domain.name}}">
+                <span>{{"UI_NETWORK_ADMIN.PLAYER.QUICK_ACTIONS.CHANGE.MONTHLY_DEPOSIT_LIMIT"|translate}}</span>
+            </a>
+            <a ng-if="data.depositLimits.monthlyLimit"  ng-click="controller.removeDepositLimit(2)" lit-if-permission="PLAYER_DEPOSIT_LIMIT_EDIT" lit-permission-domain="{{user.domain.name}}">
+                {{"UI_NETWORK_ADMIN.PLAYER.QUICK_ACTIONS.DELETE.MONTHLY_DEPOSIT_LIMIT"|translate}}
+            </a>
+        </li>
+        <li role="menuitem">
+            <a ng-click="controller.editPlayTimeLimits()" ng-if="controller.ptlSettingsActive"
+               lit-if-permission="PLAYER_PLAY_TIME_LIMIT_EDIT" lit-permission-domain="{{user.domain.name}}">
+                <span>{{"UI_NETWORK_ADMIN.PLAY_TIME_LIMITS.QUICK_ACTIONS.TITLE"|translate}}</span>
+            </a>
+        </li>
+        <li role="menuitem">
+            <a ng-if="data.selfExclusion === undefined || data.selfExclusion === null"
+               ng-click="controller.changeSelfExclusion()" lit-if-permission="EXCLUSION_ADD" lit-permission-domain="{{user.domain.name}}">
+                {{"UI_NETWORK_ADMIN.PLAYER.QUICK_ACTIONS.ADD.SELF_EXCLUSION"|translate}}
+            </a>
+            <a ng-if="data.selfExclusion !== undefined && data.selfExclusion !== null"
+               ng-click="controller.removeSelfExclusion()" lit-if-permission="EXCLUSION_REVOKE" lit-permission-domain="{{user.domain.name}}">
+                {{"UI_NETWORK_ADMIN.PLAYER.QUICK_ACTIONS.DELETE.SELF_EXCLUSION"|translate}}
+            </a>
+        </li>
+        <li role="menuitem">
+            <a ng-click="controller.uploadAndSubmitDocument()" lit-if-permission="KYC_ONFIDO_VERIFY_DOCUMENTS" lit-permission-domain="{{user.domain.name}}">
+                {{"UI_NETWORK_ADMIN.PLAYER.QUICK_ACTIONS.DOCUMENT_UPLOAD_VERIFY"|translate}}
+            </a>
+        </li>
+        <li role="menuitem">
+            <a ng-click="controller.checkBvn()" lit-if-permission="PAYSTACK_BVN_MANUAL_VERIFY" lit-permission-domain="{{user.domain.name}}">
+                {{"UI_NETWORK_ADMIN.PLAYER.QUICK_ACTIONS.BVN_VERIFY"|translate}}
+            </a>
+        </li>
+        <li role="menuitem">
+            <a ng-click="controller.checkByBankAccount()" lit-if-permission="PAYSTACK_BVN_MANUAL_VERIFY" lit-permission-domain="{{user.domain.name}}">
+                {{"UI_NETWORK_ADMIN.PLAYER.QUICK_ACTIONS.VERIFY_BY_BANK_ACCOUNT"|translate}}
+            </a>
+        </li>
+        <li role="menuitem">
+            <a ng-click="controller.checkNinPhone()" lit-if-permission="NIN_PHONE_MANUAL_VERIFY" lit-permission-domain="{{user.domain.name}}">
+                {{"UI_NETWORK_ADMIN.PLAYER.QUICK_ACTIONS.VERIFY_NIN_PHONE"|translate}}
+            </a>
+        </li>
+        <li role="menuitem">
+
+        </li>
+
+        <li role="menuitem" style="border-bottom: 1px solid lightgrey;">
+            <a ng-if="!data.coolOff" ng-click="controller.cooloffPlayer()" lit-if-permission="COOLOFF_ADD"  lit-permission-domain="{{user.domain.name}}">
+                {{"UI_NETWORK_ADMIN.PLAYER.QUICK_ACTIONS.ADD.COOL_OFF"|translate}}
+            </a>
+            <a ng-if="data.coolOff" ng-click="controller.clearPlayerCooloff()" lit-if-permission="COOLOFF_CLEAR"  lit-permission-domain="{{user.domain.name}}">
+                {{"UI_NETWORK_ADMIN.PLAYER.QUICK_ACTIONS.DELETE.COOL_OFF"|translate}}
+            </a>
+        </li>
+
+        <li role="menuitem" style="border-bottom: 1px solid lightgrey;" >
+            <a ng-click="controller.setRealityCheckTime()" lit-if-permission="USER_REALITYCHECK_EDIT, USER_REALITYCHECK_ADD" lit-permission-domain="{{user.domain.name}}">
+                {{"UI_NETWORK_ADMIN.PLAYER.QUICK_ACTIONS.REALITY_CHECK_UPDATE.TITLE"|translate}}
+            </a>
+        </li>
+
+        <li role="menuitem" style="border-bottom: 1px solid lightgrey;" lit-if-permission="USER_RESTRICTIONS_SET" lit-permission-domain="{{user.domain.name}}">
+            <a ng-click="controller.addRestriction()">
+                {{"UI_NETWORK_ADMIN.PLAYER.QUICK_ACTIONS.ADD.RESTRICTION"|translate}}
+            </a>
+        </li>
+
+        <li ng-repeat="userRestriction in data.userRestrictions track by $index" role="menuitem" style="border-bottom: 1px solid lightgrey;" lit-if-permission="USER_RESTRICTIONS_LIFT" lit-permission-domain="{{user.domain.name}}">
+            <a ng-click="controller.liftRestriction($index)">
+                {{"UI_NETWORK_ADMIN.PLAYER.QUICK_ACTIONS.DELETE.RESTRICTION" | translate: {restriction: userRestriction.set.name} }}
+            </a>
+        </li>
+        <li role="menuitem">
+            <a ng-click="controller.registerBonus()" lit-if-permission="MANUAL_BONUS_ALLOCATION" lit-permission-domain="{{user.domain.name}}">
+                {{'UI_NETWORK_ADMIN.PLAYER.QUICK_ACTIONS.REGISTER_BONUS'|translate}}
+            </a>
+        </li>
+        <li role="menuitem">
+            <a ng-click="controller.grantBonus()" lit-if-permission="GRANT_BONUS_ALLOCATION" lit-permission-domain="{{user.domain.name}}">
+                {{'UI_NETWORK_ADMIN.PLAYER.QUICK_ACTIONS.GRANT_BONUS'|translate}}
+            </a>
+        </li>
+        <li role="menuitem" style="border-bottom: 1px solid lightgrey;">
+            <a ng-if="user.autoWithdrawalAllowed !== undefined && user.autoWithdrawalAllowed !== null && user.autoWithdrawalAllowed === false"
+               ng-click="controller.toggleAutoWithdrawalAllowed()" lit-if-permission="PLAYER_AUTO_WITHDRAWAL_EDIT" lit-permission-domain="{{user.domain.name}}">
+                {{'UI_NETWORK_ADMIN.PLAYER.ALLOW_AUTO_WITHDRAWALS'|translate}}
+            </a>
+            <a ng-if="((user.autoWithdrawalAllowed === undefined || user.autoWithdrawalAllowed === null) ||
+    					   (user.autoWithdrawalAllowed !== undefined && user.autoWithdrawalAllowed !== null && user.autoWithdrawalAllowed === true))"
+               ng-click="controller.toggleAutoWithdrawalAllowed()" lit-if-permission="PLAYER_AUTO_WITHDRAWAL_EDIT" lit-permission-domain="{{user.domain.name}}">
+                {{'UI_NETWORK_ADMIN.PLAYER.DISALLOW_AUTO_WITHDRAWALS'|translate}}
+            </a>
+        </li>
+        <li role="menuitem">
+            <a ng-click="controller.documentAdd()" lit-if-permission="DOCUMENT_REGULAR_EDIT,DOCUMENT_SENSITIVE_EDIT" lit-permission-domain="{{user.domain.name}}">
+                {{"UI_NETWORK_ADMIN.PLAYER.QUICK_ACTIONS.UPLOAD.DOCUMENT"|translate}}
+            </a>
+        </li>
+        <li role="menuitem">
+            <a ng-click="controller.sendNotification()" lit-if-permission="NOTIFICATIONS_EDIT" lit-permission-domain="{{user.domain.name}}">
+                {{ "UI_NETWORK_ADMIN.PLAYER.QUICK_ACTIONS.SEND_NOTIFICATION" | translate }}
+            </a>
+        </li>
+        <li role="menuitem">
+            <a ng-if="user.cellphoneNumber !== undefined && user.cellphoneNumber !== null && user.cellphoneNumber !== ''"
+               ng-click="controller.sendSMS()" lit-if-permission="NOTIFICATIONS_EDIT" lit-permission-domain="{{user.domain.name}}">
+                {{ "UI_NETWORK_ADMIN.PLAYER.QUICK_ACTIONS.SEND_SMS" | translate }}
+            </a>
+        </li>
+        <li role="menuitem">
+            <a ng-if="user.email !== undefined && user.email !== null && user.email !== ''"
+               ng-click="controller.sendEmail()" lit-if-permission="SEND_PLAYER_TEMPLATE" lit-permission-domain="{{user.domain.name}}">
+                {{ "UI_NETWORK_ADMIN.PLAYER.QUICK_ACTIONS.SEND_TEMPLATE.TITLE" | translate }}
+            </a>
+        </li>
+        <li role="menuitem">
+            <a lit-if-permission="PLAYER_LINK_ADD" lit-permission-domain="{{user.domain.name}}"
+               ng-click="controller.addPlayerLink(true)">
+                {{ "UI_NETWORK_ADMIN.PLAYER_LINKING.ADD.LABEL" | translate }}
+            </a>
+        </li>
+	    <li role="menuitem">
+		    <a lit-if-permission="CASHIER_DEV_TOOLS" lit-permission-domain="{{user.domain.name}}"
+		       ng-click="controller.emptyOutPendingWithdrawBalance(false)">
+			    {{ "UI_NETWORK_ADMIN.PLAYER.DEV_TOOLS.FIELDS.REVERT_PENDING_WITHDRAW_BALANCE.LABEL" | translate }}
+		    </a>
+	    </li>
+	    <li role="menuitem">
+		    <a lit-if-permission="CASHIER_DEV_TOOLS" lit-permission-domain="{{user.domain.name}}"
+		       ng-click="controller.emptyOutPendingWithdrawBalance(true)">
+			    {{ "UI_NETWORK_ADMIN.PLAYER.DEV_TOOLS.FIELDS.CLEAR_PENDING_WITHDRAW_BALANCE.LABEL" | translate }}
+		    </a>
+	    </li>
+        <li role="menuitem">
+            <a ng-click="controller.toggleSowValidation()" ng-if="user.requireSowDocument === true"
+               lit-if-permission="PLAYER_ALLOW_SOW_DOCUMENT" lit-permission-domain="{{user.domain.name}}">
+                {{ "UI_NETWORK_ADMIN.PLAYER.SOW_LABELS.INVALIDATE_SOW" | translate }}
+            </a>
+            <a ng-click="controller.toggleSowValidation()" ng-if="user.requireSowDocument === false"
+               lit-if-permission="PLAYER_ALLOW_SOW_DOCUMENT" lit-permission-domain="{{user.domain.name}}">
+                {{ "UI_NETWORK_ADMIN.PLAYER.SOW_LABELS.VALIDATE_SOW" | translate }}
+            </a>
+        </li>
+        <li role="menuitem">
+            <a ng-click="controller.changeLossLimitVisibility()"  lit-if-permission="PLAYER_LIMIT_EDIT" lit-permission-domain="{{user.domain.name}}">
+                {{ "UI_NETWORK_ADMIN.LOSS_LIMITS.VISIBILITY.LABEL" | translate }}
+            </a>
+        </li>
+    </ul>
+    <div  ng-if="controller.experimentalFeatures" id="vueMountQuickActions"></div>
+</div>

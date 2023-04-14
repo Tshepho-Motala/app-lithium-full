@@ -1,0 +1,44 @@
+[plantuml]
+----
+
+@startuml
+'https://plantuml.com/sequence-diagram
+
+actor DWH as dwh
+participant "SVC-LIMIT" as sl
+
+||10||
+
+note over dwh, sl: ExternalDwhRestrictionController#get
+
+autonumber
+
+dwh -> sl: POST /external/restriction/v1/get
+    activate sl
+
+    ||10||
+
+    alt Invalid authorization identification
+        sl -> sl: validate hash (check if apiAuthorizationId secret key has been configured on application.yml)
+        sl --> dwh: Status401UnAuthorisedException
+
+        ||10||
+    else Could not calculate hash
+        sl -> sl: validate hash
+        sl --> dwh: Status500InternalServerErrorException
+
+        ||10||
+    else Hash received does not match expected hash
+        sl -> sl: validate hash (compares calculated hash and received hash)
+        sl --> dwh: Status470HashInvalidException
+
+        ||10||
+    end
+
+    ||10||
+
+    sl -> sl: Find all restrictions that are enabled and has a dwhVisible = true
+    sl --> dwh: return a list of restrictions
+deactivate sl
+
+@enduml

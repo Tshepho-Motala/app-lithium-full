@@ -1,0 +1,114 @@
+{
+  "GLOBAL": {
+    "FIELDS": {
+      "ALLOWED": "Allowed",
+      "NOT_ALLOWED": "Not Allowed"
+    }
+  },
+  "UI_NETWORK_ADMIN": {
+    "PLAYER": {
+      "AUTO_WITHDRAWAL_ALLOWED": "Auto Withdrawal Allowed?",
+      "ALLOW_AUTO_WITHDRAWALS": "Allow Auto Withdrawals",
+      "DISALLOW_AUTO_WITHDRAWALS": "Disallow Auto Withdrawals"
+    },
+    "CASHIER": {
+      "AUTOWITHDRAWALS": {
+        "RULESETS": {
+          "FIELDS": {
+            "DOMAIN": {
+              "NAME": "Domain",
+              "DESCRIPTION": "Choose the domain that you are creating the ruleset for"
+            },
+            "NAME": {
+              "NAME": "Name",
+              "DESCRIPTION": "Add a unique name for the ruleset"
+            },
+            "ENABLED": {
+              "NAME": "Enabled",
+              "DESCRIPTION": "Should this ruleset be enabled?"
+            },
+            "DISABLED": {
+              "NAME": "Disabled"
+            },
+            "LASTUPDATED": {
+              "NAME": "Last Updated"
+            },
+            "LASTUPDATEDBY": {
+              "NAME": "Last Updated By"
+            }
+          },
+          "NORULESSETUPYET": "No rules setup yet.",
+          "RULE": {
+            "TITLE": "Auto Withdrawal Ruleset Rule",
+            "BETWEEN": {
+              "RANGEWARN": "The value for range end must be less than or equal to the value for range start"
+            },
+            "UPDATE": {
+              "SUCCESS": "Successfully updated the rule on this auto-withdrawal ruleset",
+              "ERROR": "Failed to update the rule on this auto-withdrawal ruleset"
+            },
+            "ADD": {
+              "SUCCESS": "Successfully added the rule on this auto-withdrawal ruleset",
+              "ERROR": "Failed to add the rule on this auto-withdrawal ruleset"
+            },
+            "FIELDS": {
+              "ENABLED": {
+                "NAME": "Enabled",
+                "DESCRIPTION": "Should this rule be enabled?"
+              },
+              "FIELD": {
+                "NAME": "Field",
+                "DESCRIPTION": "The field to filter by"
+              },
+              "OPERATOR": {
+                "NAME": "Operator",
+                "DESCRIPTION": "The operator to be used against the filter field value"
+              },
+              "VALUE": {
+                "NAME": "Value"
+              }
+            }
+          },
+          "LIST": {
+            "TITLE": "Auto-Withdrawal Rulesets",
+            "DESCRIPTION": "A searchable list of auto-withdrawal rulesets",
+            "FIELDS": {
+              "ENABLED": {
+                "NAME": "Enabled"
+              },
+              "NAME": {
+                "NAME": "Name"
+              },
+              "LASTUPDATEDSTART": {
+                "NAME": "Last Updated: Range Start"
+              },
+              "LASTUPDATEDEND": {
+                "NAME": "Last Updated: Range End"
+              }
+            }
+          },
+          "ADD": {
+            "TITLE": "Add an Auto-Withdrawal Ruleset",
+            "DESCRIPTION": "Use the controls below to setup an auto-withdrawal ruleset",
+            "SUCCESS": "Successfully added the auto-withdrawal ruleset",
+            "ERROR": "Failed to add the auto-withdrawal ruleset"
+          },
+          "EDIT": {
+            "TITLE": "Editing Auto-Withdrawal Ruleset",
+            "DISABLE": {
+              "CONFIRM": "Are you sure you want to disable this auto-withdrawal ruleset?",
+              "SUCCESS": "Successfully disabled the auto-withdrawal ruleset"
+            },
+            "ENABLE": {
+              "CONFIRM": "Are you sure you want to enable this auto-withdrawal ruleset?",
+              "SUCCESS": "Successfully enabled the auto-withdrawal ruleset"
+            }
+          },
+          "VIEW": {
+            "TITLE": "Viewing Auto-Withdrawal Ruleset"
+          }
+        }
+      }
+    }
+  }
+}

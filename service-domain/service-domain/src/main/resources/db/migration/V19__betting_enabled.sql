@@ -1,0 +1,1 @@
+ALTER TABLE `domain` ADD COLUMN `betting_enabled` BIT(1) NOT NULL DEFAULT 1;

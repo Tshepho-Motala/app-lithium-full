@@ -1,0 +1,54 @@
+[plantuml]
+----
+@startuml
+skinparam linetype ortho
+
+!define T(name,desc) class name as "desc" << (T,#FFAAAA) >>
+!define pk(x) <b>x</b>
+!define fk(x) <color:purple><i>x</i></color>
+!define unique(x) <color:green>x</color>
+!define nn(x) <u>x</u>
+
+T(g, "game") {
+    pk(id): BIGINT(20) <<generated>>
+    --
+    .
+}
+
+T(c, "currency") {
+    pk(id): BIGINT(20) <<generated>>
+    --
+    unique(code): VARCHAR(10)
+}
+
+T(gs, "game_supplier") {
+    pk(id): BIGINT(20) <<generated>>
+    --
+    .
+}
+
+T(pjgb, "progressive_jackpot_game_balance") {
+    pk(id): BIGINT(20) <<generated>>
+    --
+    fk(game_id): BIGINT(20)
+    fk(currency_id): BIGINT(20)
+    progressive_id: VARCHAR(255)
+    amount: DECIMAL(20, 2)
+    won_by_amount: DECIMAL(20, 2)
+}
+
+T(pjb, "progressive_jackpot_balance") {
+    pk(id): BIGINT(20) <<generated>>
+    --
+    fk(game_supplier_id): BIGINT(20)
+    fk(currency_id): BIGINT(20)
+    progressive_id: VARCHAR(255)
+    amount: DECIMAL(20, 2)
+    won_by_amount: DECIMAL(20, 2)
+}
+g ||..|{ pjgb
+c ||..|{ pjgb
+gs ||..|{ pjb
+c ||..|{ pjb
+@enduml
+----

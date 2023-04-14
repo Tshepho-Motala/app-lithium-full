@@ -1,0 +1,22 @@
+.Basic Flow
+[plantuml]
+----
+
+@startuml
+
+participant "svc-user" as u
+participant "svc-domain" as d
+participant "hazelcast" as h
+
+
+u -> d++: findAllPlayerDomains
+d -> u++: return player domains
+u -> u++: loop through player domains
+u -> d: getSessionInactivityTimeoutSetting
+u -> d: getSessionTimeoutSetting
+u -> u: findByDomainNameAndSuccessfulTrueAndLogoutIsNullAndLastActivityNotNullAndLastActivityBefore
+u -> u: if inactive timeout reached, set logout+duration, add to cache
+u -> h: cachePut("lithium.service.user.inactive-session")
+
+@enduml
+----

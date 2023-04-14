@@ -1,0 +1,30 @@
+= Service Access Provider Sphonic IBAN Documentation
+Steven Makunzva <readme.adoc>
+1.0, January 17, 2022: Service Access Documentation
+:toc:
+:icons: font
+:url-quickref: https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/
+== IBAN
+---
+
+This is the implementation for the Sphonic IBAN access provider.
+
+IBAN is a player’s international bank account number. We compare full name and international bank account number to do validation check on the person’s bank account number.
+
+* When an IBAN request is made, Sphonic will return a response with several outcomes:
+   ** PASS : The iban request was successful, player account is active and response is mapped to ACCEPT authorization outcome access rule
+   ** FAIL : The iban request was successful, player account unidentified and response is mapped to REJECT authorization outcome access rule
+   ** REVIEW : The iban request was successful, player account is not active yet and response is mapped to REVIEW authorization outcome access rule
+   ** ERROR : The iban request was successful, no response from sphonic regarding account and is mapped to TIMEOUT authorization outcome access rule. This response outcome will be logged and monitored through a grafana dashboard
+
+* On LBO we configure IBANMode and set it to
+   ** test_pass :  it always passes
+   ** test_fail always fails (test_pass, test_fail performs a mock and it will not call sphonic)
+   ** live does a call to sphonic
+
+=== IBAN API request flow
+
+include::plantuml/svc-access-sphonic-iban.puml[]
+
+
+

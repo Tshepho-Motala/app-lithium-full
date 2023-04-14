@@ -1,0 +1,9 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "USER": {
+      "BALANCE": {
+        "ADJUST": "Balance adjusted. {0} {1} [{2}] [{3}]"
+      }
+    }
+  }
+}

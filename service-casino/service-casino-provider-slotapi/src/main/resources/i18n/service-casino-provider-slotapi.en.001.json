@@ -1,0 +1,11 @@
+{
+  "SERVICE_CASINO_PROVIDER_SLOTAPI": {
+    "BETHISTORY": {
+      "TRAN_TYPE": {
+        "WIN": "Casino win",
+        "LOSS": "Casino loss",
+        "VOID": "Casino void"
+      }
+    }
+  }
+}

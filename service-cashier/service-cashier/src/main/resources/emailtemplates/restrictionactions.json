@@ -1,0 +1,63 @@
+{
+  "name": "[restriction].[action]",
+  "subject": "Restriction action was applied",
+  "body": "<html><body><p>[restriction] possible values are : 'withdraw', 'deposit', 'login', 'casino','betplacement', 'comps'</p><br/><p>[action] possible values are: 'place' or 'lift'</p><br/><p></p><br/><p>Template name example: </p><br/><p>Restriction 'Withdraw' action 'place' -> 'withdraw.place'</p><br/><p>Restriction 'Deposit' action 'lift' -> 'deposit.lift'</p><br/><p>Restriction 'Login' action 'lift' -> 'login.lift' etc.</p></body></html>",
+  "placeholders": [
+    {
+      "name": "%user.userName%",
+      "description": "The player's name"
+    },
+    {
+      "name": "%user.firstName%",
+      "description": "The player's first name"
+    },
+    {
+      "name": "%user.lastName%",
+      "description": "The player's last name"
+    },
+    {
+      "name": "%user.lastNamePrefix%",
+      "description": "The player's last name predix"
+    },
+    {
+      "name": "%user.emailAddress%",
+      "description": "The player's email address"
+    },
+    {
+      "name": "%user.cellphoneNumber%",
+      "description": "The player's phone number"
+    },
+    {
+      "name": "%user.verificationStatus%",
+      "description": "The player's verification status"
+    },
+    {
+      "name": "%user.guid%",
+      "description": "The player's giId"
+    },
+    {
+      "name": "%user.playerLink%",
+      "description": "The player's account link"
+    },
+    {
+      "name": "%user.accountStatus%",
+      "description": "The player's account status"
+    },
+    {
+      "name": "%user.ageVerified%",
+      "description": "The player's age was verified"
+    },
+    {
+      "name": "%user.addressVerified%",
+      "description": "The player's address was verified"
+    },
+    {
+      "name": "%user.dateOfBirth%",
+      "description": "The player's DOB"
+    },
+    {
+      "name": "%user.createdDate%",
+      "description": "Date create of the account"
+    }
+  ]
+}

@@ -1,0 +1,102 @@
+<div class="row v-reset-row ">
+	<div class="user-block">
+		<a ng-href="/#/dashboard/players/{{data.fullUser.domain.name}}/{{data.fullUser.id}}/summary"><img class="img-circle img-bordered-sm" src="//:0" ng-src="{{avatarImageUrl}}" alt=""></a>
+		<span class="username">
+			<a ng-href="/#/dashboard/players/{{data.fullUser.domain.name}}/{{data.fullUser.id}}/summary">{{data.fullUser.firstName + " " + data.fullUser.lastName + " ("+data.fullUser.username+")"}}</a>
+		</span>
+		<span class="description">
+			{{data.notification.name}} - {{data.createdDate|datetimedefault}}
+			&nbsp;
+			<label class="label" 
+				   ng-class="{'label-success': data.read === true,
+							'label-danger': data.read === false}">{{(data.read)?"READ":"UNREAD"}}</label>
+		</span>
+	</div>
+	<hr/>
+	<div class="row v-reset-row ">
+		<div class="col-xs-7">
+			<div class="box box-default">
+				<div class="box-header with-border">
+					<h3 class="box-title">{{'UI_NETWORK_ADMIN.NOTIFICATIONS.INBOX.BOXES.USER'|translate}}</h3>
+				</div>
+				<div class="box-body">
+					<table class="table table-hover table-striped nowrap" cellspacing="0" width="100%">
+					<tbody>
+						<tr>
+							<th style="width: 40%;">{{'UI_NETWORK_ADMIN.NOTIFICATIONS.INBOX.FIELDS.USER.NAME'|translate}}</th>
+							<td><a ng-href="/#/dashboard/players/{{data.fullUser.domain.name}}/{{data.fullUser.id}}/summary">{{data.fullUser.firstName + " " + data.fullUser.lastName + " ("+data.fullUser.username+")"}}</a></td>
+						</tr>
+					</tbody>
+					</table>	
+				</div>
+			</div>
+			<div class="box box-default">
+				<div class="box-header with-border">
+					<h3 class="box-title">{{'UI_NETWORK_ADMIN.NOTIFICATIONS.INBOX.BOXES.NOTIFICATION'|translate}}</h3>
+				</div>
+				<div class="box-body">
+					<table class="table table-hover table-striped nowrap" cellspacing="0" width="100%">
+					<tbody>
+						<tr>
+							<th>{{'UI_NETWORK_ADMIN.NOTIFICATIONS.INBOX.FIELDS.SENTDATE.NAME'|translate}}</th>
+							<td>{{data.sentDate|datetimedefault}}</td>
+						</tr><tr>
+							<th>{{'UI_NETWORK_ADMIN.NOTIFICATIONS.INBOX.FIELDS.READ.NAME'|translate}}</th>
+							<td>{{data.read}}</td>
+						</tr><tr>
+							<th>{{'UI_NETWORK_ADMIN.NOTIFICATIONS.INBOX.FIELDS.READDATE.NAME'|translate}}</th>
+							<td>{{data.readDate|datetimedefault}}</td>
+						</tr><tr>
+							<th>{{'UI_NETWORK_ADMIN.NOTIFICATIONS.INBOX.FIELDS.LASTREADDATE.NAME'|translate}}</th>
+							<td>{{data.lastReadDate|datetimedefault}}</td>
+						</tr>
+					</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-5">
+			<div class="box box-default">
+				<div class="box-header with-border">
+					<h3 class="box-title">{{'UI_NETWORK_ADMIN.NOTIFICATIONS.BOXES.CHANNELS'|translate}}</h3>
+				</div>
+				<div class="box-body">
+					<table class="table table-hover table-striped nowrap" cellspacing="0" width="100%">
+						<thead>
+							<tr>
+								<th>{{'UI_NETWORK_ADMIN.NOTIFICATIONS.FIELDS.CHANNEL.CHANNEL.NAME'|translate}}</th>
+								<th>{{'UI_NETWORK_ADMIN.NOTIFICATIONS.FIELDS.CHANNEL.FORCED.NAME'|translate}}</th>
+								<th>{{'UI_NETWORK_ADMIN.NOTIFICATIONS.FIELDS.CHANNEL.TEMPLATE.NAME'|translate}}</th>
+								<th>{{'UI_NETWORK_ADMIN.NOTIFICATIONS.FIELDS.CHANNEL.TEMPLATELANG.NAME'|translate}}</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="channel in data.notification.channels">
+								<td>{{channel.channel.name}}</td>
+								<td>{{channel.forced}}</td>
+								<td>{{channel.templateName}}</td>
+								<td>{{channel.templateLang}}</td>
+							</tr>
+							<tr ng-if="controller.model.channels.length === 0">
+								<td colspan="3">No channels added yet.</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="row v-reset-row ">
+		<div class="col-xs-12">
+			<div class="box box-default">
+				<div class="box-header with-border">
+					<h3 class="box-title">{{'UI_NETWORK_ADMIN.NOTIFICATIONS.INBOX.BOXES.MESSAGE'|translate}}</h3>
+				</div>
+				<div class="box-body">
+					<div style="padding: 20px;" ng-bind-html="data.message"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+<!-- 	<pre>{{data|json}}</pre> -->
+</div>

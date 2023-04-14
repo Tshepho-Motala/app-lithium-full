@@ -1,0 +1,167 @@
+.Basic Flow
+[plantuml]
+----
+
+@startuml
+
+rectangle svc-user {
+  rectangle LoginEventService {
+    (validateSession) as (vs)
+    'note left of (vs)
+    '  lithium.service.user.services.LoginEventService.validateSession
+    'end note
+
+    (validateAndUpdateSession) as (vaus)
+    'note left of (vaus)
+    '  lithium.service.user.services.LoginEventService.validateAndUpdateSession
+    'end note
+
+    (vs) <|-- (vaus)
+
+  }
+
+  rectangle SystemUserController {
+    (validateSession) as (vs2)
+    'note right of (vs2)
+    '  lithium.service.user.controllers.system.SystemUserController.validateSession
+    'end note
+    (vs) <|-- (vs2)
+
+    (validateAndUpdateSession) as (vaus2)
+
+    (vaus) <|-- (vaus2)
+
+  }
+}
+
+rectangle client-service-user {
+  rectangle UserApiInternalClient {
+    (validateAndUpdateSession) as vaus3
+
+    (vaus2) <|-- vaus3
+
+  }
+
+  rectangle UserApiInternalClientService {
+    (performUserChecks) as puc
+
+    vaus3 <|-- puc
+
+    (validateAndUpdateSession) as vaus4
+
+    vaus3 <|-- vaus4
+  }
+}
+
+rectangle server-oauth2 {
+  rectangle lithium.server.oauth2.services.TokenService {
+    (validateAndUpdateSession) as vaus5
+    vaus4 <|-- vaus5
+  }
+  rectangle lithium.server.oauth2.controllers.AccessTokenController {
+    note "/oauth/token" as n1
+    (postAccessToken) as pat
+    vaus5 <|-- pat
+  }
+
+  rectangle lithium.server.oauth2.controllers.RefreshTokenController {
+    note "/token/refresh" as n2
+    (postAccessToken) as pat2
+    vaus5 <|-- pat2
+  }
+}
+
+rectangle svc-accounting {
+  rectangle lithium.service.accounting.controllers.PlayerController {
+    note "/player/{domainName}/all/balances" as abn
+    (allBalances) as ab
+    ab .. abn
+    puc <|-- ab
+    note "/player/{domainName}/balances/{currencyCode}" as abn2
+    (balances) as b
+    b .. abn2
+    puc <|-- b
+    note "/player/{domainName}/balances/v2/{currencyCode}" as abn3
+    (balancesAmount) as ba
+    ba .. abn3
+    puc <|-- ba
+  }
+}
+
+rectangle svc-accounting-pr-internal {
+  rectangle lithium.service.accounting.provider.internal.controllers.PlayerController {
+    note "/player/{domainName}/all/balances" as abn4
+    (allBalances) as ab2
+    ab2 .. abn4
+    puc <|-- ab2
+    note "/player/{domainName}/balances/{currencyCode}" as abn5
+    (balances) as b2
+    b2 .. abn5
+    puc <|-- b2
+    note "/player/{domainName}/balances/v2/{currencyCode}" as abn6
+    (balancesAmount) as ba2
+    ba2 .. abn6
+    puc <|-- ba2
+  }
+}
+
+rectangle svc-casino {
+  rectangle lithium.service.casino.api.frontend.controllers.BalanceController {
+    (getUsableBalance) as bc1
+    note bottom of bc1 :/frontend/balance/v1/usable
+    puc <|-- bc1
+    (getUsableBalanceV2) as bc2
+    note bottom of bc2 :/frontend/balance/v2/usable
+    puc <|-- bc2
+    (getWithdrawableBalance) as bc3
+    note bottom of bc3 :/frontend/balance/v1/withdrawable
+    puc <|-- bc3
+  }
+  rectangle lithium.service.casino.api.frontend.controllers.BonusTokenFrontendController {
+    (getActivePlayerBonusTokenList) as bc4
+    note bottom of bc4 :/frontend/bonus-token/v1/list/active
+    puc <|-- bc4
+  }
+  rectangle lithium.service.casino.controllers.BetController {
+    (handleBetRequestInternal) as bc5
+    note bottom of bc5
+      /casino/settle/v2
+      /casino/bet/v2
+      /casino/bet
+    end note
+    puc <|-- bc5
+  }
+  rectangle lithium.service.casino.system.controllers.MultiBetController {
+    (multiBetV1) as bc6
+    note bottom of bc6 :/system/casino/multi-bet/v1
+    puc <|-- bc6
+  }
+}
+
+rectangle scp-incentive {
+  rectangle lithium.service.casino.provider.incentive.api.controllers.PlacementController {
+    (placement) as pc1
+    note bottom of pc1 :/placement
+    puc <|-- pc1
+  }
+  rectangle lithium.service.casino.provider.incentive.api.controllers.PickAnyEntryController {
+    (pickAnyEntry) as pae1
+    note bottom of pae1 :/pickany/entry
+    puc <|-- pae1
+  }
+}
+
+rectangle scp-roxor {
+
+}
+
+rectangle scp-slotapi {
+
+}
+
+rectangle scp-sportsbook {
+
+}
+@enduml
+
+----

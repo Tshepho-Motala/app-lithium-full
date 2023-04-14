@@ -1,0 +1,145 @@
+== Missing Requirements
+'''
+:icons: font
+
+[sidebar]
+link:readme.adoc[Home]
+
+[sidebar]
+*This will be revisited once feature/LSPLAT-2183_BonusFrameworkBeta has been merged into develop.*
+
+=== LBO
+
+* "Bonus Management (beta)" menu item needs to move to "Bonuses" menu item.
+* Bonus Management screen lists invalid types. (E.g.  SIGNUP/DEPOSIT/TRIGGER)
+* If navigatiing between current bonus mangemanent and new beta version, page gets confused about which one to display between the two.
+* View Summary does not list all reward components configured. (Should follow same layout as the modify screens.)
+* Activation History does not show player activations.
+
+'''
+=== Tasks Identified
+
+* icon:check[role="Lime"] <<PLAT-1067>> [Lithium Casino] FreeSpin Accounts Verification
+* icon:close[role="Maroon"] <<PLAT-1066>> [Lithium Casino] FreeSpin Counter Management
+* icon:close[role="Maroon"] <<PLAT-1078>> [Lithium Casino] Free Play Loss Limit Validation Enhancement
+* icon:close[role="Maroon"] <<PLAT-1065>> [Lithium Casino] Cancel Rewards from Lithium
+* icon:check[role="Lime"] <<PLAT-2982>> [Lithium Casino] new Bonus Types for freespin/cash bonus
+* icon:close[role="Maroon"] <<PLAT-2564>> [Lithium Casino] Showing Free Spins in Bonuses tab in Player Info
+* icon:close[role="Maroon"] <<PLAT-2910>> [Lithium Casino] Flagging Free Spins as Free Spin bets
+* icon:battery-2[role="yellow"] <<PLAT-2561>> [Lithium Casino] Exposing Free Spins Stake Amount
+* icon:battery-2[role="yellow"] <<PLAT-2562>> [Lithium Casino] Exposing Free Spins Win Amount	Story
+* icon:check[role="Lime"] <<PLAT-2563>> [Lithium Casino] Exposing Bonus ID to DWH
+* icon:check[role="Lime"] <<PLAT-2565>> [Lithium Casino] Player Uptake Levels
+
+
+'''
+.https://jira.livescore.com/browse/PLAT-1067[PLAT-1067 - FreeSpin Accounts Verification]
+****
+[#PLAT-1067]
+* Verify the transaction types, accounts and contra accounts made use of for RGP initiated FREE_PLAY, CANCEL_FREE_PLAY transactions.
+****
+* Explained link:account-types.adoc[here]
+* Examples
+** link:activation-examples-roxor.adoc[Activation Examples (Roxor)]
+** link:redemption-flow-examples-roxor.adoc[Redemption Flow Examples (Roxor)]
+
+
+'''
+.https://jira.livescore.com/browse/PLAT-1066[PLAT-1066 - FreeSpin Counter Management]
+****
+[#PLAT-1066]
+* This is to enhance the process to also trigger free spin counter management on non current historic bonuses
+****
+WARNING: This seems to be missing.
+
+
+'''
+.https://jira.livescore.com/browse/PLAT-1078[PLAT-1078 - Free Play Loss Limit Validation Enhancement]
+****
+[#PLAT-1078]
+* Currently the Lithium Roxor provider component will always perform loss limit validation to allow / disallow a spin.
+* This validation however should be excluded for free_play events as this will never increase the amount lost for the player but can decrease the amount if they win from the free_play.
+****
+WARNING: This seems to be missing.
+
+
+'''
+.https://jira.livescore.com/browse/PLAT-1065[PLAT-1065 - Cancel Rewards from Lithium]
+****
+[#PLAT-1065]
+* Roxor exposes an API allowing operators to cancel rewards they have previously granted.
+* This can be triggered from the lithium back office if needed
+****
+WARNING: This seems to be missing.
+
+
+'''
+.https://jira.livescore.com/browse/PLAT-2982[PLAT-2982 - new Bonus Types for freespin/cash bonus]
+****
+[#PLAT-2982]
+* Current setup of bonuses causes an issue within the Bonus API as they are all manual triggers so it's difficult to distinguish between cash/free-spin bonus on LBO and front end portal.
+****
+* This was communicated and decided that creating new bonus types are not feasible for the future.
+* Ability to add different reward types to a bonus, with clearly identifiable transaction types and account types was implemented.
+
+
+'''
+.https://jira.livescore.com/browse/PLAT-2564[PLAT-2564 - Showing Free Spins in Bonuses tab in Player Info]
+****
+[#PLAT-2564]
+* So that CS and other LBO users can see a player's bonus history, each Free Spins bonus campaign that a player receives needs to give information on when it was used by the player and also their progression through the bonus.
+* This information also needs to be available as part of the Bonus API which the Portal uses to display bonus information to players in the account history.
+****
+WARNING: This seems to be missing.
+
+
+'''
+.https://jira.livescore.com/browse/PLAT-2910[PLAT-2910 - Flagging Free Spins as Free Spin bets]
+****
+[#PLAT-2910]
+* Free Spins are not currently being flagged in the data being sent from Lithium to Livescore.
+* Free Spins are shown in the Casino History as either 'FREE_WIN' or 'FREE_LOSS' as a bet status but this information is not being sent to the Livescore data team.
+****
+WARNING: New bonus framework seems to bypass casino bet round tracking, so this will need to be investigated.
+
+
+'''
+.https://jira.livescore.com/browse/PLAT-2561[PLAT-2561 - Exposing Free Spins Stake Amount]
+****
+[#PLAT-2561]
+* Currently, within the Casino History in LBO, Free spins stakes show as £0.00 but Roxor are sending the amount in their APIs. This information should be exposed in LBO and accounting so that DWH can understand the total amount of Free Spins used and the amount of money given to players as a bonus.
+****
+WARNING: Some elements of this is catered for in the new bonus framework (Accounting history). Needs further testing, and probably some dev work to cater for in casino reporting tab.
+
+.casino bet/win freespin v2
+image::images/casino-bet-win-freespin-v2.png[]
+
+
+'''
+.https://jira.livescore.com/browse/PLAT-2562[PLAT-2562 - Exposing Free Spins Win Amount]
+****
+[#PLAT-2562]
+* Currently, within the Casino History in LBO, Free spins wins show against 'FREE_WIN' bet statuses in LBO. This information should be exposed in LBO and accounting so that DWH can understand the total amount of cash given away from Free Spins.
+****
+WARNING: Some elements of this is catered for in the new bonus framework (Accounting history). Needs further testing, and probably some dev work to cater for in casino reporting tab.
+
+.casino bet/win freespin v2
+image::images/casino-bet-win-freespin-v2.png[]
+
+
+'''
+.https://jira.livescore.com/browse/PLAT-2563[PLAT-2563 - Exposing Bonus ID to DWH]
+****
+[#PLAT-2563]
+* In order to understand how much money was given away per bonus campaign, we need to link Free spins stakes and winnings to individual bonus IDs and expose this to DWH.
+****
+* This can be seen in the accounting history page. The bonus information for the transaction is reported.
+
+
+'''
+.https://jira.livescore.com/browse/PLAT-2565[PLAT-2565 - Player Uptake Levels]
+****
+[#PLAT-2565]
+* To assess the popularity of a Free Spins bonus, we need to expose the number of players who were given Free Spins vs the number of players who completed or part completed the bonus.
+****
+* This kind of reporting should be possible using the new bonus framework.

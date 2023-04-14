@@ -1,0 +1,7 @@
+{
+	"SERVICE_GAMES": {
+		"SYSTEM": {
+			"GAME411NOTFOUND": "Game not found for domain, providerGuid and providerGameId."
+		}
+    }
+}

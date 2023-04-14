@@ -1,0 +1,27 @@
+{
+  "name": "profile.delete",
+  "subject": "Account Deleted",
+  "body": "User account %user.emailAddress% has been successfully deleted",
+  "placeholders": [
+    {
+      "name": "%user.cellphoneNumber%",
+      "description": "The player's mobile phone number"
+    },
+    {
+      "name": "%user.emailAddress%",
+      "description": "The player's email address"
+    },
+    {
+      "name": "%user.firstName%",
+      "description": "The player's first name"
+    },
+    {
+      "name": "%user.lastNamePrefix%",
+      "description": "The player's last name prefix"
+    },
+    {
+      "name": "%user.lastName%",
+      "description": "The player's last name"
+    }
+  ]
+}

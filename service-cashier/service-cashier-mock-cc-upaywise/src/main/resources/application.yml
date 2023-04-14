@@ -1,0 +1,6 @@
+server:
+  port: 9795
+
+logging:
+  level:
+    lithium.service.cashier: INFO

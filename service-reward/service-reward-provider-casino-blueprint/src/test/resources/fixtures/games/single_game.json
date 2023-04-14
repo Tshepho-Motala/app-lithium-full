@@ -1,0 +1,8 @@
+{
+  "name": "Once Upon A Time",
+  "commercialName": "Once Upon A Time",
+  "enabled": true,
+  "providerGameId": "service-casino-provider-iforium_1000",
+  "description": "Just a game",
+  "supplierGameRewardGuid": "BP_OnceUponATime"
+}

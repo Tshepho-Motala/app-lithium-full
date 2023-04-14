@@ -1,0 +1,60 @@
+.Alert Wallet Callback Notification Sequence
+[plantuml]
+----
+@startuml
+
+    participant "Player" as player
+    box "iForium" #LightGreen
+       participant "Game" as game
+       participant "Generic Operator Wallet API" as ggo
+    end box
+
+    box "Lithium" #LightBlue
+        participant "iForium Casino Provider" as provider
+        participant "Config Service" as config
+        participant "CasinoClientService" as casino
+    end box
+
+    skinparam handwritten false
+    skinparam backgroundColor transparent
+    skinparam roundcorner 10
+    skinparam BoxPadding 20
+
+    skinparam sequence {
+
+        ArrowColor 3292b4
+        ArrowThickness 2
+
+        LifeLineBorderColor 3292b4
+        LifeLineBackgroundColor #3292b4
+
+        ParticipantBorderColor 3292b4
+        ParticipantBackgroundColor 3292b4
+        ParticipantFontName Arial
+        ParticipantFontSize 17
+        ParticipantFontColor white
+
+        ActorBorderColor 3292b4
+        ActorBackgroundColor aqua
+        ActorFontColor 3292b4
+        ActorFontSize 17
+        ActorFontName Arial
+    }
+
+    game ->> player ++: Alert (Dialog)
+    player ->> game ++: Click Alert action button
+    game ->> ggo++: alert
+
+    ggo ->> provider ++: /v1.0/alertwalletcallbacknotification
+    provider ->> provider: Log the Alert
+    note right of provider
+        For now, we simply log. If LSB decide
+        to use the Iforium UKGC capabilities, then
+        we will make the appropriate upstream calls.
+    end note
+
+    provider -->> ggo -- :
+    ggo -->> game --:
+    game -->> player --:
+@enduml
+----

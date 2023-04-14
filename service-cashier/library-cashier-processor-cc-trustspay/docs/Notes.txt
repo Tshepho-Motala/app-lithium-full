@@ -1,0 +1,21 @@
+Hi Montse
+33546002 is test model
+
+Now your gateway is under testing.
+Please do the interface firstly according to our channel interface,
+please check attachment of interface document.
+your interface data is Merchant No.:33546,Gateway No.:33546002,key:
+2n2zXX6N
+Your Testing Gateway:Indirect payments:
+https://shoppingingstore.com/TestTPInterface
+After make it the interface, you can test it by card No.4111 1111 1111
+1111 or any other card to make a deal,
+then you can see this deal at your back office.
+If the deal shows successful, it means the gateway is okay, and please
+inform us.
+we will change your gateway to the formal gateway, meanwhile, you should
+change the Testing Gateway to https://shoppingingstore.com/TPInterface
+From https://shoppingingstore.com/TestTPInterface
+
+As more details, you can refer to the attachment documents
+Thanks

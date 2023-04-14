@@ -1,0 +1,40 @@
+<div class="modal-header" bs-loading-overlay bs-loading-overlay-reference-id="{{controller.referenceId}}">
+    <h3 class="modal-title" id="modal-title">
+        <span>{{'UI_NETWORK_ADMIN.PLAYER.DOCUMENT_UPLOAD_VERIFY.TITLE' | translate}}</span>
+    </h3>
+</div>
+
+<div class="row v-reset-row">
+    <form>
+        <div class="modal-body" id="modal-body">
+            <div class="row v-reset-row ">
+                <div class="col-xs-12">
+                    <formly-form model="controller.model" fields="controller.fields" form="controller.form" options="controller.options">
+                    </formly-form>
+                </div>
+            </div>
+            <div class="row v-reset-row">
+                <buttonbar>
+                    <div class="col-xs-4" >
+                        <input ng-disabled="controller.model.frontUploading" type="file" id="frontFile" class="hidden" ngf-select="controller.upload($file,'front')"/>
+                        <label ng-disabled="controller.model.frontUploading" for="frontFile" class="btn btn-default">{{'UI_NETWORK_ADMIN.PLAYER.DOCUMENT_UPLOAD_VERIFY.FIELDS.UPLOAD_FRONT_BUTTON' | translate}}</label>
+                    </div>
+                    <div class="col-xs-4">
+                        <input ng-disabled="controller.model.backUploading" type="file" id="backFile" class="hidden" ngf-select="controller.upload($file,'back')"/>
+                        <label ng-disabled="controller.model.backUploading" for="backFile" class="btn btn-default">{{'UI_NETWORK_ADMIN.PLAYER.DOCUMENT_UPLOAD_VERIFY.FIELDS.UPLOAD_BACK_BUTTON' | translate}}</label>
+                    </div>
+                    <div class="col-xs-4">
+                        <input ng-disabled="controller.model.checkPending" type="button" id="submitButton" ng-click="controller.submitCheck()"/>
+                        <label ng-disabled="controller.model.checkPending" for="submitButton" class="btn btn-default">{{'UI_NETWORK_ADMIN.PLAYER.DOCUMENT_UPLOAD_VERIFY.FIELDS.SUBMIT_CHECK_BUTTON' | translate}}</label>
+                    </div>
+                </buttonbar>
+            </div>
+
+        </div>
+        <div class="modal-footer">
+            <button ng-click="controller.closeAndNavigate()" type="button" class="btn btn-default">Navigate to player's KYC tab</button>
+            <button ng-click="controller.cancel()" type="button" class="btn btn-default">Close</button>
+        </div>
+
+    </form>
+</div>

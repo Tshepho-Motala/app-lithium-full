@@ -1,0 +1,82 @@
+.job_template: &createdockerimages
+  stage: createdockerimages
+  image: registry.gitlab.com/playsafe/docker/maven-docker-builder:openjdk17
+  cache:
+    key: app-lithium-full-maven-cache-no-lithium
+    paths:
+      - repository
+  except:
+    - develop
+    - schedules
+  services:
+    - docker:dind
+
+.job_template: &createdockerimages_all
+  stage: createdockerimages
+  image: registry.gitlab.com/playsafe/docker/maven-docker-builder:openjdk17
+  when: manual
+  cache:
+    key: app-lithium-full-maven-cache-no-lithium
+    paths:
+      - repository
+  except:
+    - develop
+    - schedules
+  services:
+    - docker:dind
+  only:
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /\[all\]/
+
+.job_template: &deploy
+  stage: deploy
+  image: registry.gitlab.com/playsafe/docker/lithium-deployer:latest
+  environment:
+    name: $CI_COMMIT_REF_NAME
+  except:
+    - develop
+    - schedules
+  # only:
+  #   refs:
+  #     - /^environment/.*$/
+
+.job_template: &deploy_all
+  stage: deploy
+  image: registry.gitlab.com/playsafe/docker/lithium-deployer:latest
+  when: manual
+  environment:
+    name: $CI_COMMIT_REF_NAME
+  # except:
+  #   - develop
+  #   - schedules
+  only:
+    refs:
+      - /^environment/.*$/
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /\[all\]/
+
+#### service-user-threshold
+svc-user-threshold:createdockerimage:
+  <<: *createdockerimages
+  script: "sh build/gitlab/build-image.sh svc-user-threshold service-user/service-user-threshold"
+  only:
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /\[service-user-threshold\]/
+
+svc-user-threshold:createdockerimage_all:
+  <<: *createdockerimages_all
+  script: "sh build/gitlab/build-image.sh svc-user-threshold service-user/service-user-threshold"
+
+svc-user-threshold:deploy:
+  <<: *deploy
+  script: "bash build/gitlab/deploy.sh svc-user-threshold"
+  only:
+    refs:
+      - /^environment/.*$/
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /\[service-user-threshold\]/
+
+svc-user-threshold:deploy_all:
+  <<: *deploy_all
+  script: "bash build/gitlab/deploy.sh svc-user-threshold"
+

@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html ng-app="lithium" >
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title ng-bind="$root.title + ' | LBO'">LBO</title>
+	<!-- Tell the browser to be responsive to screen width -->
+
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+
+	<!-- Material & Vuetify Styles -->
+	<link href="https://cdn.jsdelivr.net/npm/@mdi/font@7.0.96/css/materialdesignicons.min.css" rel="stylesheet">
+
+
+	<link rel="stylesheet" href="wro/vendor.css">
+	<link rel="stylesheet" href="webjars/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+	<link rel="stylesheet" href="css/app.css">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="manifest" href="/manifest.json" />
+	<link href="/favicon.ico" rel="icon" type="image/x-icon" />
+	<!-- VueJS Import from CDN (Ensure to use production builds after develop) -->
+	<script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/vuetify@2.5.8/dist/vuetify.min.js"></script>
+	<script src="https://unpkg.com/vue-router@3.2.0/dist/vue-router.js"></script>
+	<script src="https://unpkg.com/vuex@3.4.0/dist/vuex.js"></script>
+
+	<link href="https://cdn.jsdelivr.net/npm/vuetify@2.5.8/dist/vuetify.min.css" rel="stylesheet">
+
+	<!-- Important style overrides to undo Vue changes -->
+	<style type="text/css">
+		.sidebar-menu {
+			padding-left: initial !important;
+		}
+
+		.v-reset-row  {
+			display: inherit !important;
+			flex-wrap: initial !important;
+			flex: initial !important;
+			margin: initial !important;
+		}
+
+		.v-reset-col {
+			/* In case we need this later for other CSS resets */
+		}
+
+		.btn-primary, .btn-danger, .btn-warning, .btn-success {
+			color: #fff !important;
+		}
+
+		.btn-default {
+			color: #444 !important;
+		}
+
+		label {
+			font-weight: inherit !important;
+		}
+</style>
+</head>
+
+<!-- <body class="hold-transition skin-black-light sidebar-mini"> -->
+<body class="hold-transition" ng-class="{ 'sidebar-open': sidebarOpen, 'login-page': !authenticated, 'skin-blue sidebar-mini': authenticated }" >
+
+	<div id="app">
+		<v-app fluid color="transparent" style="background-color: #d2d6de;">
+			<v-main fluid>
+				<div growl></div>
+				<div ui-view class="fadein" bs-loading-overlay bs-loading-overlay-reference-id="global-loading-overlay"></div>
+			</v-main>
+		</v-app>
+	</div>
+
+	<script src="//cdn.ckeditor.com/4.5.11/standard/ckeditor.js"></script>
+
+	<script src="wro/vendor.js" type="text/javascript"></script>
+	<script src="wro/app.js" type="text/javascript"></script>
+
+	<script src="scripts/services/dt.js" type="text/javascript"></script>
+	<script src="scripts/services/dt2.js" type="text/javascript"></script>
+	<script src="scripts/services/token.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/domainRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/providerAuthClientRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/casinoRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/cashierRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/cashierDmpRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/cashierDmRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/accountingRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/accountingInternalRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/groupRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/rolesRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/tranTypeAcctRest.js" type="text/javascript"></script>
+	<script src="scripts/services/user.js" type="text/javascript"></script>
+	<script src="scripts/services/changelog.js" type="text/javascript"></script>
+	<script src="scripts/app-config-formly.js" type="text/javascript"></script>
+	<script src="scripts/app-config-states.js" type="text/javascript"></script>
+
+	<!-- VueJS Dynamic UMD Injector -->
+	<script src="scripts/vue-plugin-registry.js" type="text/javascript"></script>
+	<script src="scripts/app-vue.js" type="text/javascript"></script>
+	<!-- / VueJS Dynamic UMD Injector -->
+
+	<!-- VueJS Mock Scripts -->
+	<script src="scripts/vue-mocks/ListenerServiceMock.js" type="text/javascript"></script>
+	<script src="scripts/vue-mocks/StoreServiceMock.js" type="text/javascript"></script>
+	<script src="scripts/vue-mocks/LogProviderMock.js" type="text/javascript"></script>
+	<script src="scripts/vue-mocks/CasinoCmsProviderMock.js" type="text/javascript"></script>
+	<script src="scripts/vue-mocks/DomainProviderMock.js" type="text/javascript"></script>
+	<script src="scripts/vue-mocks/ChallengeProvider.js" type="text/javascript"></script>
+	<script src="scripts/vue-mocks/GamesProvider.js" type="text/javascript"></script>
+	<script src="scripts/vue-mocks/AxiosApiClients.js" type="text/javascript"></script>
+	<!-- / VueJS Mock Scripts -->
+
+	<script src="scripts/app.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/emailTemplateRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/transTypeRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/userRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/profileRest.js" type="text/javascript"></script>
+	<script src="scripts/services/formly.js" type="text/javascript"></script>
+	<script src="scripts/services/menu.js" type="text/javascript"></script>
+	<script src="scripts/services/notify.js" type="text/javascript"></script>
+	<script src="scripts/directives/language-select/language-select.js"></script>
+	<script src="scripts/services/rest/providerRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/gamesRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/geoRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/statusRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/verificationStatusRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/biometricsStatusRest.js" type="text/javascript"></script>
+	<script src="scripts/controllers/login/password-reset/password-reset.js" type="text/javascript"></script>
+	<script src="scripts/controllers/login/password-reset/password-resetPt2.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/reportPlayers.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/reportIa.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/reportIncompletePlayers.js" type="text/javascript"></script>
+	<script src="scripts/directives/buttons/buttons.js"></script>
+	<script src="scripts/services/fields/userfields.js"></script>
+	<script src="scripts/services/fields/accountingFields.js"></script>
+	<script src="scripts/services/fields/utilityfields.js"></script>
+	<script src="scripts/services/fields/limitFields.js"></script>
+	<script src="scripts/services/fields/validatorService.js"></script>
+	<script src="scripts/directives/fileupload/fileupload.js"></script>
+	<script src="scripts/services/fileupload.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/userEventRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/mailRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/accessControlRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/closureReasonsRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/accessRulesRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/signupEventsRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/authorizationRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/userLimitsRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/smsTemplateRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/domainLimitsRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/smsTemplateRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/smsRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/pushmsgTemplateRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/pushmsgRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/reportGames.js" type="text/javascript"></script>
+	<script src="scripts/directives/clickconfirm/clickconfirm.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/rafRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/affiliateRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/templatesRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/xpRest.js" type="text/javascript"></script>
+	<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async="true"></script>
+	<script src="scripts/services/rest/avatarRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/notificationRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/paymentMethodsRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/leaderboardRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/productRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/timezoneRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/promoRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/gogameGamesRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/cataboomCampaignRest.js" type="text/javascript"></script>
+	<script src="scripts/directives/validnumbercommasep/validnumbercommasep.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/batchSettlementsRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/settlementsRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/incentiveGamesRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/sportsbookRest.js" type="text/javascript"></script>
+	<script src="scripts/services/period.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/incompleteUserRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/changelogsRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/cooloffRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/realityCheckRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/exclusionRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/autoWithdrawalRulesetRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/restrictionsRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/autoRestrictionRulesetRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/userRestrictionsRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/bvnVerifyRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/kycVerifyRest.js" type="text/javascript"></script>
+    <script src="scripts/services/rest/limitSysAccessRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/cdnGoogleRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/ecosystemRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/casinoCMSRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/domainAgeLimitsRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/userMassActionRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/gameSuppliersRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/translateRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/documentControlRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/assetTemplateRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/cmsAssetRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/documentGenerationRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/documentVerifyRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/accessProviderRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/devToolRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/gameTypesRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/userThresholdRevisionRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/userThresholdRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/userNotificationRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/userThresholdHistoryRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/playerProtectionRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/thresholdAgeGroupRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/gameStudioRest.js" type="text/javascript"></script>
+	<script src="scripts/services/rest/progressiveFeedsRest.js" type="text/javascript"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,26 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "CMS": {
+      "NAVIGATION_MANAGEMENT": {
+        "FIELDS": {
+          "PRIMARY_REQUIRED_NEW": {
+            "PLACEHOLDER": "This is a required field"
+          },
+          "PRIMARY_ADD_NEW": {
+            "PLACEHOLDER": "Add Sub Navigation"
+          }
+        }
+      },
+      "ADD_SUB_NAVIGATION": {
+        "FIELDS": {
+          "CODE": {
+            "PLACEHOLDER": "Sub Navigation Code"
+          },
+          "TITLE": {
+            "PLACEHOLDER": "Sub Navigation Title"
+          }
+        }
+      }
+    }
+  }
+}

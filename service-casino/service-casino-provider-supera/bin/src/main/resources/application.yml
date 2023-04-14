@@ -1,0 +1,9 @@
+server.port: 9750
+
+spring:
+  application:
+    name: service-casino-provider-supera
+    
+eureka:
+  instance:
+    appname: service-casino-provider-supera

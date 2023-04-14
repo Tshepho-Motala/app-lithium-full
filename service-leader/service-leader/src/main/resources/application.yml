@@ -1,0 +1,32 @@
+server:
+  port: 9005
+
+eureka:
+  instance:
+    appname: service-leader
+
+spring:
+ application:
+   name: service-leader
+ datasource:
+   url: jdbc:mysql://localhost/lithium_leader?useSSL=false
+   username: root
+   password: mysql
+ jpa:
+   show-sql: false
+   hibernate:
+     ddl-auto: validate
+     properties:
+       hibernate:
+        format_sql: true
+lithium:
+ services:
+   leader:
+     cleanup-job:
+       initial-delay-ms: 240000
+       delay-ms: 5000
+     instance:
+       keep-alive-ms: 120000
+logging:
+  level:
+    lithium.service.leader: INFO

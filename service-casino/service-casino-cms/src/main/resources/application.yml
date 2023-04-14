@@ -1,0 +1,33 @@
+server.port: 9815
+
+spring:
+  application:
+    name: service-casino-cms
+  datasource:
+    url: jdbc:mysql://localhost/lithium_casino_cms
+    username: root
+    password: mysql
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: validate
+  flyway:
+    enabled: true
+
+eureka:
+  instance:
+    appname: service-casino-cms
+
+lithium:
+  services:
+    casino:
+      provider:
+        cms:
+          jobs:
+            banner-schedules-cleanup:
+              cron: 0 1 0 * * *
+              batch-size: 500
+
+logging:
+  level:
+    lithium.service.casino.cms: INFO

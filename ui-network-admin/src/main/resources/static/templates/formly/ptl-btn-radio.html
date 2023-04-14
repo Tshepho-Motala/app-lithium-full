@@ -1,0 +1,7 @@
+<div class="form-group" style="margin-top: 10px" ng-class="{'has-error': showError}">
+	<label style="margin-right: 10px" ng-repeat="o in to.options" class="btn btn-{{to.btnclass}}"
+		   ng-class="(value === o[to.valueProp])?'active':''"
+		   ng-model="model[options.key]" uib-btn-radio="{{o[to.valueProp]}}">
+		<i ng-class="(value === o[to.valueProp])?'fa fa-check-circle-o':'fa fa-circle-o'"></i>
+		<span>{{o[to.labelProp]}}</span></label>
+</div>

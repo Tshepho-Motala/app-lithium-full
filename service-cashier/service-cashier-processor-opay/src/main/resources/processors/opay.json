@@ -1,0 +1,85 @@
+{
+  "name": "Opay Web",
+  "code": "opay",
+  "url": "service-cashier-processor-opay",
+  "methodNames": ["opay"],
+  "deposit": true,
+  "withdraw": true,
+  "fees": {
+    "flat": 0,
+    "percentage": 0,
+    "minimum": 0
+  },
+  "limits": {
+    "minAmount": 2500,
+    "maxAmount": 100000000,
+    "maxAmountDay": 1000000000,
+    "maxAmountWeek": 1000000000,
+    "maxAmountMonth": 1000000000,
+    "maxTransactionsDay": 1000000000,
+    "maxTransactionsWeek": 1000000000,
+    "maxTransactionsMonth": 1000000000
+  },
+  "properties": [
+    {
+      "name": "public_key",
+      "defaultValue": "",
+      "type": "string",
+      "description": "Opay API requires a publicKey to get access code. Please paste your public key here."
+    },
+    {
+      "name": "private_key",
+      "defaultValue": "",
+      "type": "string",
+      "description": "Opay API requires a privateKey to get access token. Please paste your private key here."
+    },
+    {
+      "name": "rsa_pub",
+      "defaultValue": "",
+      "type": "string",
+      "description": "A public key to verify Opay public_key deposit requests"
+    },
+    {
+      "name": "rsa_private",
+      "defaultValue": "",
+      "type": "string",
+      "description": "A private key to sign Opay withdraw requests"
+    },
+    {
+      "name": "base_v3_url",
+      "defaultValue": "http://sandbox-cashierapi.opayweb.com/api/v3/",
+      "type": "url",
+      "description": "Base V3 API url."
+    },
+    {
+      "name": "merchant_id",
+      "defaultValue": "",
+      "type": "string",
+      "description": "Opay API requires a merchant id to get access code. Provides by Opay."
+    },
+    {
+      "name": "country_code",
+      "defaultValue": "NG",
+      "type": "string",
+      "description": "Country code"
+    },
+    {
+      "name": "initialValidation",
+      "defaultValue": "true",
+      "type": "boolean",
+      "description": "Set true to enable account number validation before do withdraw"
+    },
+    {
+      "name": "block_unverified_users",
+      "defaultValue": "true",
+      "type": "boolean",
+      "description": "Block deposits for unverified users"
+    },
+    {
+      "name": "bank_account_lookup_phone_number_flag",
+      "defaultValue": "true",
+      "type": "boolean",
+      "description": "Bank Account Lookup. Set true to append Phone Number field to Bank Account Lookup"
+    }
+  ]
+}

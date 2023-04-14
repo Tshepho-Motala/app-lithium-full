@@ -1,0 +1,2 @@
+ALTER TABLE `player_transaction` ADD COLUMN `tran_currency` VARCHAR(15) NULL DEFAULT NULL AFTER `tran_type`;
+CREATE INDEX `idx_pt_tran_currency_crit_id` ON `player_transaction`(`query_criteria_id`, `tran_currency`) ALGORITHM INPLACE LOCK NONE;

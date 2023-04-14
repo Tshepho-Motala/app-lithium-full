@@ -1,0 +1,22 @@
+<div class="modal-header">
+	<h3 class="modal-title" id="modal-title">{{ "UI_NETWORK_ADMIN.DOCUMENT.ADD.TITLE" | translate }}
+		<button-close-window ng-click="controller.cancel()"></button-close-window>
+	</h3>
+</div>
+<form ng-submit="controller.onSubmit()" name="controller.form" novalidate>
+	<div class="modal-body" id="modal-body">
+		<div class="row v-reset-row ">
+			<div class="col-xs-12">
+			
+				<formly-form model="controller.model" fields="controller.fields" options="controller.options" form="controller.form">
+				</formly-form>
+				
+				<buttonbar>
+					<button-submit></button-submit>
+					<button-reset ng-click="controller.options.resetModel()"></button-reset>
+					<button-cancel ng-click="controller.cancel()"></button-cancel>
+				</buttonbar>
+			</div>
+		</div>
+	</div>
+</form>

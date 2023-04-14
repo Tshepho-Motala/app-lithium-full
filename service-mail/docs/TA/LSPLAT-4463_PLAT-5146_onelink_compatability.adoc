@@ -1,0 +1,39 @@
+= LSPLAT-4463 - PLAT-5146 ⁃ Lithium/Onelink compatability
+Riaan Schoeman <riaan.schoeman@wonderlabz.com>
+1.0, January 19, 2022:: TA - LSPLAT-4463 - PLAT-5146 ⁃ Lithium/Onelink compatability
+:toc:
+:icons: font
+:url-quickref: https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/
+
+== Tickets
+
+* https://jira.livescore.com/browse/PLAT-5146
+* https://playsafe.atlassian.net/browse/LSPLAT-4463
+
+== Description
+=== Business
+
+We have a CMS template here to validate LSBNL email addresses https://lbo.lithium-prod.ls-g.net/#/dashboard/mail/config/livescore_nl/templates/livescore_nl/45/view, . We want users to validate their email by clicking on the link. The link should then return the user to the application they came from, either web/native etc. This is usually done via OneLinks but OneLinks are not compatible currently due to encoding.
+
+*Technical* (from Eugene)
+
+We need to urlencode values from lithium which it put into mail templates like %user.emailAddress% and %validate.token%
+
+If we put those variables as is the whole flow doesn’t work as email and token can contain extra chars (for example email contains @ char).
+
+
+== Architecture
+
+* Various services can send requests to service-mail to send out a mail according to a defined template.
+** Part of this request contains 'placeholders', if defined in the template, the will be replaced by whatever was passed into the request, and as defined in the service generating the request.
+
+include::../plantuml/basic-mail-flow.puml[basic-mail-flow]
+
+* to enhance this functionality:
+** lithium.service.mail.stream.MailQueueProcessor is the processor receiving these requests on service-mail side. Inside lithium.service.mail.services.MailService.replacePlaceholdersInText make the following changes:
+*** search the text for any placeholders ending with ".urlencode"
+**** if found (could be more than one occurrence), find the complete placeholder, and urlencode the value.
+***** e.g. "%user.emailAddress.urlencode%" found in text. Find the placeholder value for "%user.emailAddress%" and encode the value before replacing the placeholder in the text.
+***** e.g. "%validate.token.urlencode%" found in text. Find the placeholder value for "%validate.token%" and encode the value before replacing the placeholder in the text.
+**** This means that the templates can replace any current placeholder with a ".urlencode" suffix at the end, and the value will be url encoded before being replaced in the text.
+****

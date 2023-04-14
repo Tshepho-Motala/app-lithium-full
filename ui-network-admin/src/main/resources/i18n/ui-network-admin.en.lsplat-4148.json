@@ -1,0 +1,11 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "PLAYER": {
+      "EXCESSIVE_FAILED_LOGIN_BLOCK_UPDATE": "Do you want to update the excessive failed login block?",
+      "EXCESSIVE_FAILED_LOGIN_BLOCK_UPDATE_SUCCESS": "Excessive failed login block updated successfully",
+      "DATE_OF_BIRTH_UPDATE_SUCCESS": "Date Of Birth updated successfully",
+      "EXCESSIVE_FAILED_LOGIN_BLOCK_UPDATE_ERROR": "Problem updating the excessive failed login block. Please try again.",
+      "BLOCKED": "Blocked"
+    }
+  }
+}

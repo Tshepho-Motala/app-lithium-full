@@ -1,0 +1,35 @@
+<div  class="box box-info box-solid bs-loading-container" bs-loading-overlay
+     bs-loading-overlay-reference-id="{{referenceId}}">
+
+    <!-- Header with Title -->
+    <div class="box-header with-border">
+      <span>{{'UI_NETWORK_ADMIN.PLAYER.PLAYER_LABELS.THRESHOLD_LABEL' | translate}}</span>
+        <div class="box-tools pull-right">
+          <button type="button" class="btn btn-box-tool pull-right" ng-click="refresh()">
+            <span><i class="fa fa-refresh"></i> {{'GLOBAL.ACTION.REFRESH' | translate}}</span>
+          </button>
+        </div>
+    </div>
+
+    <div class="box-body table-responsive" style="padding: 4px;">
+      <table class="table table-hover table-striped nowrap">
+        <tr>
+          <td>
+            <span>{{'UI_NETWORK_ADMIN.THRESHOLDS.WARNINGS.PLAYER_NOTIFICATIONS' | translate}}</span><br/>
+            <span class="description">
+              {{ "UI_NETWORK_ADMIN.THRESHOLDS.WARNINGS.PLAYER_NOTIFICATIONS_DESC" | translate }}
+            </span>
+          </td><td>
+            <span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <span ng-if="notification && lossLimitVisibility !== 'OFF'" class="label label-lg label-success">{{ 'GLOBAL.YES' | translate | uppercase }}</span>
+            <span ng-if="!notification || (notification && lossLimitVisibility === 'OFF')" class="label label-lg label-warning">{{ 'GLOBAL.NO' | translate | uppercase }}</span>
+          </td><td ng-if='lossLimitVisibility !== "OFF"'>
+            <a style="cursor: pointer;" ng-click="activateNotification()" class='pull-right'>
+              <span><i class="fa fa-pencil-square-o"></i> {{'GLOBAL.ACTION.MODIFY' | translate}}</span>
+            </a>
+          </td>
+        </tr>
+      </table>
+      <dt class="table table-sm table-responsive" table="thresholdWarningsTable"/>
+    </div>
+</div>

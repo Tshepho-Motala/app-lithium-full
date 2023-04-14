@@ -1,0 +1,56 @@
+<div class="row v-reset-row " lit-if-permission="GROUP_ADD" lit-permission-domain="{{domainName}}">
+	<div class="col-xs-12" style="margin-bottom: 10px">
+		<button-add ui-sref="^.add({domainName:domainName})"></button-add>
+	</div>
+</div>
+
+<div class="row v-reset-row " ng-if="controller.groups.length === 0">
+	<div class="col-md-8 col-md-offset-2">
+		<div class="box box-danger">
+			<div class="box-body">
+				{{ "UI_NETWORK_ADMIN.GROUPS.NOGROUPS" | translate }}
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row v-reset-row " ng-if="controller.groups.length >= 2">
+	<div class="col-md-8 col-md-offset-2">
+		<div class="box box-default">
+			<div class="box-body">
+				<div class="input-group">
+					<input type="text" ng-model="filterValue" class="form-control" placeholder="{{ 'GLOBAL.INPUT.SEARCHDYNAMIC' | translate }}">
+					<span class="input-group-addon"><i class="fa fa-search"></i></span>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="row v-reset-row " ng-repeat="group in controller.groups | filter:filterValue ">
+	<div class="col-md-8 col-md-offset-2" bs-loading-overlay bs-loading-overlay-reference-id="{{referenceId}}">
+		<div class="box box-default" style=":hover { background-color: #aaaaaa }">
+			<div class="box-header bg-gray-lighter">
+				<i class="fa fa-cloud" ng-if="((group.id != 1) && (group.enabled === true))"></i>
+				<i class="fa fa-ban" ng-if="((group.id != 1) && (group.enabled === false))" aria-hidden="true"></i>
+				<h3 class="box-title">{{group.name}}</h3>
+				<div class="box-tools pull-right" style="z-index: 90;">
+					<button-view ng-if="group.id !== 1" lit-if-permission="GROUP_VIEW,GROUP_EDIT" lit-permission-domain="{{domainName}}" ui-sref="^.group.view({ domainName: domainName, groupId: group.id })"></button-view>
+					<button-view ng-if="group.id === 1" lit-admin-permission ui-sref="^.group.view({ domainName: domainName, groupId: group.id })"></button-view>
+					<button-disable ng-if="((group.id != 1) && (group.enabled === true))" lit-if-permission="group_enable" lit-permission-domain="{{domainName}}" ng-click="controller.changeEnabled(group.id, false)"></button-disable>
+					<button-enable ng-if="((group.id != 1) && (group.enabled === false))" lit-if-permission="group_enable" lit-permission-domain="{{domainName}}" ng-click="controller.changeEnabled(group.id, true)" style="z-index:100;"></button-enable>
+					
+					<button type="button" ng-click="controller.remove(group.id)" class="btn btn-danger" ng-if="group.id !== 1" lit-if-permission="GROUP_DELETE" lit-permission-domain="{{domainName}}">
+						<i class="fa fa-trash-o"></i>
+					</button>
+				</div>
+			</div>
+			<div class="box-body">
+				<p class="text-muted" ng-if="group.description">{{group.description}}</p>
+				<p class="text-muted" ng-if="!group.description">{{ "UI_NETWORK_ADMIN.GROUP.NODESCRIPTION" | translate }}</p>
+			</div>
+			<div class="overlay" ng-if="((group.id != 1) && (group.enabled === false))">
+			</div>
+		</div>
+	</div>
+</div>

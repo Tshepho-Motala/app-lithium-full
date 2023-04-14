@@ -1,0 +1,30 @@
+.Basic Flow
+[plantuml]
+----
+
+@startuml
+
+participant "svc-casino-provider-*" as scp
+participant "svc-casino" as svccasino
+participant "svc-accounting-pr-internal" as svcacctint
+participant "svc-xp" as svcxp
+participant "svc-bonus" as svcbonus
+participant "svc-mission" as svcmission
+
+scp->svccasino: casino_bet
+activate svccasino
+svccasino->svcacctint: transaction processed
+activate svcacctint
+svcacctint->svccasino: transaction response
+activate svcxp
+svcacctint->svcxp: completed transaction message
+svcxp->svcxp: process completed transaction
+svcxp->svcbonus: trigger bonus if configured
+svcxp->svcmission: send mission stats if XP level gained
+svcxp->svcacctint: CASINO_XP_GAIN
+deactivate svcxp
+deactivate svcacctint
+svccasino->scp: casino win/loss
+
+@enduml
+----

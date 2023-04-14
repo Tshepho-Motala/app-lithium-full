@@ -1,0 +1,15 @@
+= Logging and Monitoring
+
+== Logs and APM - Kibana
+
+* link:https://kibana.lithium-develop.ls-g.net/login[Development (kibana.lithium-develop.ls-g.net)]
+* link:https://kibana.lithium-qa.ls-g.net/login[QA (kibana.lithium-develop.ls-g.net)]
+* link:https://kibana.lithium-staging.ls-g.net/login[Staging (kibana.lithium-develop.ls-g.net)]
+* link:https://kibana.lithium-prod.ls-g.net/login[Production (kibana.lithium-develop.ls-g.net)]
+
+== Monitoring - Grafana
+
+* link:https://grafana.lithium-develop.ls-g.net/login[Development (grafana.lithium-develop.ls-g.net)]
+* link:https://grafana.lithium-qa.ls-g.net/login[QA (grafana.lithium-develop.ls-g.net)]
+* link:https://grafana.lithium-staging.ls-g.net/login[Staging (grafana.lithium-develop.ls-g.net)]
+* link:https://grafana.lithium-prod.ls-g.net/login[Production (grafana.lithium-develop.ls-g.net)]

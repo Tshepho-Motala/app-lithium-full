@@ -1,0 +1,49 @@
+[plantuml]
+----
+@startuml
+'https://plantuml.com/sequence-diagram
+
+actor fe as "FE"
+participant games as "svc-games"
+participant scpe as "scp-evolution"
+boundary evocore as "Evolution Core"
+participant wallet as "One Wallet"
+
+autonumber
+
+fe -> games++: get game url
+games -> scpe++: start game
+scpe -> evocore++: user authentication
+evocore -> wallet++: initialize wallet
+wallet -> scpe++: /external/check
+scpe --> wallet--: check response
+wallet --> evocore--: initialize response
+evocore --> scpe--: user authentication response
+scpe --> games--: start game response
+games --> fe--: get game url response
+
+== Automation Testing ==
+
+alt Test Harness Execution
+
+  note right of scpe
+
+    ----
+    IMPORTANT: Should be only available on test environments!
+    ----
+
+    * Used for sid generation for REST API test automation (without dependency on test UI availability).
+    * Returned sid will be used for authentication in “check”.
+  end note
+
+  wallet -> scpe++: /external/sid
+  activate wallet
+  scpe --> wallet--: sid response
+  wallet -> scpe++: /external/check
+  scpe --> wallet--: check response
+  deactivate wallet
+end
+
+@enduml
+----
+

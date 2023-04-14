@@ -1,0 +1,20 @@
+server.port: 9616
+
+spring:
+  application:
+    name: service-cashier-processor-btc-globalbitlocker
+  cloud:
+    stream:
+      bindings:
+        processorsregisteroutput:
+          group: processorsregistergroup
+          binder: rabbit
+          destination: processorsregisterqueue
+          producer:
+            required-groups: processorsregistergroup
+  thymeleaf:
+    cache: false
+
+logging:
+  level:
+    lithium.service.cashier: INFO

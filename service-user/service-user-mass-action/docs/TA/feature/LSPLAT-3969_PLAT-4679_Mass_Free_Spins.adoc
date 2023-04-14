@@ -1,0 +1,59 @@
+= Mass Bonus Tool -  Custom Amount(s)
+Riaan Schoeman <riaan.schoeman@wonderlabz.com>
+1.0, June 13, 2022: Mass Bonus Tool
+:sectnums:
+:toc: left
+:toclevels: 4
+:toc-title: Comps Engine
+:icons: font
+:url-quickref: https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/
+
+
+== Information
+=== Links
+* PLAT: https://jira.livescore.com/browse/PLAT-4679[PLAT-4679]
+* LSPLAT: https://playsafe.atlassian.net/browse/LSPLAT-3969[LSPLAT-3969]
+* MR: https://gitlab.com/playsafe/lithium/app-lithium-full/-/merge_requests/5019
+
+=== Description (From Ticket)
+==== Background
+Currently, when our Casino Promo team credit Free Spins to customers. They can only credit the same FS amounts to customers on a single upload list. The team does not have the ability to credit unique FS values by customers on a single Upload list, instead it's on a campaign by campaign basis.
+
+This means for example, to run a campaign like this:
+
+Get 1 Free Spin on Blackbeards Buccaneers for every £10 wagered on any Selected Slot Games, up to 25 Free Spins.
+
+The Promo team would need to create 25 separate Free Spin Campaigns (1 for each amount of Free Spins).
+
+==== Problem
+The current functionality is extremely time-consuming and difficult to create.
+
+==== Requirements
+
+Provide the functionality for Promo Team to award unique FS amounts per customer on a single upload list
+This already exists for Cash credits, so perhaps we could reuse that for FS
+Example of how the list would work is as follows:
+Column A = User ID / Column B = the amount of reward
+This is as per the Cash credits
+As a result of the above change, when Promo Team create Free Spin Program the FS value they enter must be treated as a Max Value instead of fixed amount
+
+== Architecture
+* Flow:
++
+[plantuml]
+----
+start
+  :LBO - mass bonus;
+  :upload;
+  :svc-user-mass-action: lithium.service.user.mass.action.services.FileUploadService.uploadBonusCSV;
+  :svc-user-mass-action: lithium.service.user.mass.action.services.MassValidationService.run(java.lang.Long);
+  :svc-user-mass-action: lithium.service.user.mass.action.services.MassValidationService.validate;
+stop
+start
+  :LBO - mass bonus;
+  :process;
+  :svc-user-mass-action: lithium.service.user.mass.action.services.MassActionService.performActionOnFileData;
+  :svc-casino: lithium.service.casino.api.system.SystemBonusController.massActionRegisterForCashBonus;
+  :svc-casino: lithium.service.casino.service.CasinoTriggerBonusService.processTriggerOrTokenBonusWithCustomMoney;
+stop
+----

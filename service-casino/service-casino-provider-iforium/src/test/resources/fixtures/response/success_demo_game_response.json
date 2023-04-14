@@ -1,0 +1,7 @@
+{
+  "data": "http://localhost:9000/service-casino-provider-iforium/#!?url=baseurl.com%3Fcasinoid%3DS0009%26sessiontoken%26gameid%3DgameId%26languagecode%3Den%26playmode%3Ddemo%26channelid%3Ddesktop%26devicechannel%3Dweb%26lobbyurl%3Dhttps%3A%2F%2Fwww.operator.com%2Flobby%26currencycode%3DGBP%26regulationsenabled%3Dtrue%26reg_override_rts13mode%3Ddisabled%26reg_override_cmamode%3Ddisabled%26reg_sessionduration%3D0%26reg_interval%3D86400%26reg_gamehistoryurl%3Dhttps%3A%2F%2Fwww.operator.com%2Fhistory%26reg_bonusurl%3Dhttps%3A%2F%2Fwww.operator.com%2Fbonud",
+  "data2": null,
+  "message": null,
+  "status": 0,
+  "successful": true
+}

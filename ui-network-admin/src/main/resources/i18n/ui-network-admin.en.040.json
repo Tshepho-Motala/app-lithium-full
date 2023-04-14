@@ -1,0 +1,9 @@
+{
+	"UI_NETWORK_ADMIN": {
+		"SMSQUEUE": {
+			"SMS": {
+				"RECEIVEDDATE": "Received Date"
+			}
+		}
+	}
+}

@@ -1,0 +1,28 @@
+<div class="modal-content card-danger-shadow">
+	<div class="modal-header danger-modal darken-4 white-text card-danger-shadow">
+		<h3 class="modal-title" id="modal-title">
+			<i class="fa fa-trash-o"></i>
+			{{ 'UI_NETWORK_ADMIN.PUSHMSG.PROVIDERS.DELETE.TITLE' | translate }}
+			<button-close-window ng-click="controller.cancel()"></button-close-window>
+		</h3>
+	</div>
+	
+	<div class="modal-body" id="modal-body">
+		<div class="row v-reset-row ">
+			<div class="col-xs-12">
+				<span class="danger-text bold-text large-text">{{ 'UI_NETWORK_ADMIN.PUSHMSG.PROVIDERS.DELETE.WARNING' | translate }}<br/></span>
+				{{ 'UI_NETWORK_ADMIN.PUSHMSG.PROVIDERS.DELETE.WARNING2' | translate }}<br/><br/>
+				<div class="md-form">
+					<input type="text" ng-model="controller.deleteConfirm" placeholder="Type DELETE here and click Delete button" class="form-control card-danger-shadow">
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal-footer" id="modal-body">
+		<buttonbar>
+			<button-custom icon="trash-o" text="{{'GLOBAL.ACTION.DELETE' | translate }}" ng-click="controller.doDelete()" ng-disabled="controller.deleteConfirm !== 'DELETE'" class="pull-left btn btn-danger white-text card-danger-shadow"></button-custom>
+			<button-cancel ng-click="controller.cancel()"></button-cancel>
+		</buttonbar>
+	</div>
+</div>

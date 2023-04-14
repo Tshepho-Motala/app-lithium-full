@@ -1,0 +1,12 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "GAME": {
+      "FIELDS": {
+        "LIVE_CASINO": {
+          "NAME": "Live Casino",
+          "DESCRIPTION": "The game is a Live Casino game"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,30 @@
+<div class="container-fluid">
+	<div ng-if="controller.lobby.current.id != controller.lobbyRevision.id">
+		<br/>
+		<div class="panel box box-warning">
+			<div class="box-header with-border">
+				<h4 class="box-title">{{'UI_NETWORK_ADMIN.CASINO.LOBBIES.VIEW.OLD_REVISION'|translate}}</h4>
+			</div>
+		</div>
+	</div>
+
+	<div ng-if="controller.lobby.edit != null">
+		<span ng-if="controller.lobby.current.id === controller.lobbyRevision.id"><br/></span>
+		<div class="panel box box-warning">
+			<div class="box-header with-border">
+				<h4 class="box-title">{{'UI_NETWORK_ADMIN.CASINO.LOBBIES.VIEW.EDIT_STARTED'|translate: {createdBy: controller.lobby.edit.createdBy.guid} }}</h4>
+			</div>
+		</div>
+	</div>
+
+
+	<div class="row v-reset-row ">
+		<div class="col-xs-12">
+			<span ng-if="((controller.lobby.current.id != controller.lobbyRevision.id) && (controller.lobby.edit != null && controller.lobby.current.id === controller.lobbyRevision.id))"><br/></span>
+			<div class="well-clear">
+				<formly-form model="controller.model" fields="controller.fields" options="controller.options" form="controller.form">
+				</formly-form>
+			</div>
+		</div>
+	</div>
+</div>

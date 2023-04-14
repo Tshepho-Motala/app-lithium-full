@@ -1,0 +1,9 @@
+{
+  "ERROR_DICTIONARY": {
+    "LOGIN": {
+      "UNAUTHORIZED_USER": "Unauthorized request",
+      "ACCOUNT_FROZEN_CRUKS_SELF_EXCLUSION": "Account Frozen - CRUKS Self Excluded.",
+      "INVALID_CLIENT_AUTH": "Invalidated client auth."
+    }
+  }
+}

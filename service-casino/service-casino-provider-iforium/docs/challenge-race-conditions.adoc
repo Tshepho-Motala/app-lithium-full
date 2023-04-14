@@ -1,0 +1,9 @@
+= Race Conditions
+
+== Cancelling Transactions
+
+There is a scenario wherein the cancellation for a given `DEBIT` can arrive _before_ the `DEBIT` itself:
+
+include::plantuml/challenge-race-conditions-sequence.puml[]
+
+To mitigate this, without requiring orchestration by the caller, the core wallet would need to accept the cancellation without impacting the player's balance and offset it against the `OriginalPlaceBetGameRoundTransactionID` should it ever arrive.

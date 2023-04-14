@@ -1,0 +1,37 @@
+<form ng-submit="controller.onSubmit()" name="controller.form" novalidate>
+<div class="container-fluid">
+	<button-bar>
+		<button-back ui-sref="^.list"></button-back>
+	</button-bar>
+	<div class="row v-reset-row ">
+		<div class="col-xs-8">
+			<div class="box box-default box-solid">
+				<div class="box-header with-border">
+					{{"UI_NETWORK_ADMIN.DOMAIN.CLIENTS.TITLE" | translate}}
+					<div class="box-tools pull-right">
+						<button type="button" ng-click="controller.onEdit()" ng-show="controller.options.formState.readOnly" class="btn btn-box-tool">
+							<span><i class="fa fa-pencil"></i> Edit</span>
+						</button>
+						<button type="button" class="btn btn-box-tool" ng-click="controller.deleteProviderAuthClient()">
+							<span><i class="fa fa-trash"></i> {{"GLOBAL.ACTION.DELETE" | translate}}</span>
+						</button>
+					</div>
+				</div>
+				<div class="box-body table-responsive">
+						<formly-form model="controller.model" fields="controller.fields" form="controller.form" options="controller.options">
+						</formly-form>
+						
+						<button-submit ng-show="!controller.options.formState.readOnly"></button-submit>
+						<button-cancel ng-show="!controller.options.formState.readOnly" ng-click="controller.onCancel()"></button-cancel>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div style="padding: 19px;">
+		<div class="row v-reset-row  well">
+			<changelog options="controller.changelogs" model=""></changelog>
+		</div>
+	</div>
+<!-- 	<pre>{{controller.model|json}}</pre> -->
+</div>
+</form>

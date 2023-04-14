@@ -1,0 +1,46 @@
+{
+	"GLOBAL": {
+		"ACTION": {
+			"VALIDATE_EMAIL": "Validate E-Mail",
+			"INVALIDATE_EMAIL": "Invalidate E-Mail"
+		}
+	},
+	"UI_NETWORK_ADMIN": {
+		"COMMENTS": {
+			"NO_COMMENTS": "No comments",
+			"LAST_COMMENTED": "Last commented",
+			"COMMENT": "Comment",
+			"COMMENT_BY": "Comment by",
+			"COMMENTED_ON": "Commented on"
+		},
+		"PLAYER": {
+			"TAB": {
+				"COMMENTS": "Comments"
+			}
+		},
+		"CHANGELOG": {
+			"HEADER": {
+				"COMMENTBY": "Comment by"
+			},
+			"BODY": {
+				"COMMENT": "Comment added on {{ date }} by {{ author }}"
+			}
+		},
+		"USER": {
+			"ERRORS": {
+				"VALIDATE_EMAIL": "Problem validating e-mail",
+				"INVALIDATE_EMAIL": "Problem invalidating e-mail"
+			},
+			"EMAIL": {
+				"VALIDATED": "VALIDATED",
+				"NOT_VALIDATED": "NOT VALIDATED",
+				"VALIDATION": {
+					"SUCCESS": "E-Mail validated successfully"
+				},
+				"INVALIDATION": {
+					"SUCCESS": "E-Mail invalidated successfully"
+				}
+			}
+		}
+	}
+}

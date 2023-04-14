@@ -1,0 +1,658 @@
+{
+	"info": {
+		"_postman_id": "4c6b3388-5a1b-4903-be2b-10be153ca05f",
+		"name": "SmartCash",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "3450993"
+	},
+	"item": [
+		{
+			"name": "Collectiion",
+			"item": [
+				{
+					"name": "Payment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{SMARTCASH_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-country-code",
+								"value": "NG",
+								"type": "text"
+							},
+							{
+								"key": "x-currency-code",
+								"value": "NGN",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"payer\": {\r\n        \"msisdn\": 8022220282,\r\n        \"transfer_type\": \"WALLET\",\r\n        \"wallet_id\": 2997662243\r\n    },\r\n    \"reference\": \"Enjoy the funds\",\r\n    \"authentication_medium\": \"USSD_PUSH\",\r\n    \"transaction\": {\r\n        \"amount\": 100,\r\n        \"id\": \"00013\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://openapiuat.smartcashpsb.ng/merchant/v1/payments/",
+							"protocol": "https",
+							"host": [
+								"openapiuat",
+								"smartcashpsb",
+								"ng"
+							],
+							"path": [
+								"merchant",
+								"v1",
+								"payments",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetTransaction",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{SMARTCASH_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-country-code",
+								"value": "NG",
+								"type": "text"
+							},
+							{
+								"key": "x-currency-code",
+								"value": "NGN",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://openapiuat.smartcashpsb.ng/merchant/v1/payments/06247",
+							"protocol": "https",
+							"host": [
+								"openapiuat",
+								"smartcashpsb",
+								"ng"
+							],
+							"path": [
+								"merchant",
+								"v1",
+								"payments",
+								"06247"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetCustomer",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{SMARTCASH_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-country-code",
+								"value": "NG",
+								"type": "text"
+							},
+							{
+								"key": "x-currency-code",
+								"value": "NGN",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://openapiuat.smartcashpsb.ng/merchant/v1/payments/user/instruments?msisdn=8022220282",
+							"protocol": "https",
+							"host": [
+								"openapiuat",
+								"smartcashpsb",
+								"ng"
+							],
+							"path": [
+								"merchant",
+								"v1",
+								"payments",
+								"user",
+								"instruments"
+							],
+							"query": [
+								{
+									"key": "msisdn",
+									"value": "8022220282"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Disbursement",
+			"item": [
+				{
+					"name": "Payment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{SMARTCASH_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "x-country-code",
+								"value": "NG",
+								"type": "text"
+							},
+							{
+								"key": "x-currency-code",
+								"value": "NGN",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"payee\": {\r\n        \"msisdn\": 8022220282,\r\n        \"transfer_type\": \"WALLET\",\r\n        \"wallet_id\": 2997662243\r\n    },\r\n    \"pin\" : \"mo9s6txSBmdlFdBBX/Ei9XTR8B80nlEsnlQgXOJ8urUNIv0mKFOuRFLjaucuTmH3zndQLVB3UPDCgz9rWh4ry7LZvSO7I8pzzHrv8d/j9yErU68x0eUm1+nYiCiZbdqLDTyW1M5leT4s4tMT9umUcOPjooJ6dFCUGY/l4hL+817=\",\r\n    \"reference\": \"Enjoy the funds\",\r\n    \"transaction\": {\r\n        \"amount\": 100.00,\r\n        \"id\": \"6424175989489\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://openapiuat.smartcashpsb.ng/standard/v1/disbursements/",
+							"protocol": "https",
+							"host": [
+								"openapiuat",
+								"smartcashpsb",
+								"ng"
+							],
+							"path": [
+								"standard",
+								"v1",
+								"disbursements",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetTransaction",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{SMARTCASH_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-country-code",
+								"value": "NG",
+								"type": "text"
+							},
+							{
+								"key": "x-currency-code",
+								"value": "NGN",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://openapiuat.smartcashpsb.ng/standard/v1/disbursements/06252",
+							"protocol": "https",
+							"host": [
+								"openapiuat",
+								"smartcashpsb",
+								"ng"
+							],
+							"path": [
+								"standard",
+								"v1",
+								"disbursements",
+								"06252"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "GetCustomer",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"accept": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{SMARTCASH_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "x-country-code",
+								"value": "NG",
+								"type": "text"
+							},
+							{
+								"key": "x-currency-code",
+								"value": "NGN",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "*/*",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://openapiuat.smartcashpsb.ng/merchant/v1/payments/user/instruments?msisdn=8022220282",
+							"protocol": "https",
+							"host": [
+								"openapiuat",
+								"smartcashpsb",
+								"ng"
+							],
+							"path": [
+								"merchant",
+								"v1",
+								"payments",
+								"user",
+								"instruments"
+							],
+							"query": [
+								{
+									"key": "msisdn",
+									"value": "8022220282"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "LITHIUM",
+			"item": [
+				{
+					"name": "LITIUM Player Signup",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									"",
+									"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"smartcash1\",\n    \"password\": \"Password1\",\n    \"cellphoneNumber\": \"8022220282\",\n    \"firstName\": \"Temitope\",\n    \"lastName\": \"Oyemade\",\n    \"email\": \"smartcash1@test.com\",\n    \"dobYear\": 1988,\n    \"dobMonth\": 9,\n    \"dobDay\": 5\n}"
+						},
+						"url": {
+							"raw": "{{gateway}}/service-user/frontend/{{playerdomain}}/register/v2",
+							"host": [
+								"{{gateway}}"
+							],
+							"path": [
+								"service-user",
+								"frontend",
+								"{{playerdomain}}",
+								"register",
+								"v2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "LITIUM Player Authentication",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									"",
+									"tests[\"Response time is less than 1000ms\"] = responseTime < 1000;",
+									"",
+									"var jsonData = JSON.parse(responseBody);",
+									"tests[\"Token reveived\"] = jsonData.access_token;",
+									"",
+									"postman.setEnvironmentVariable(\"USERTOKEN\", jsonData.access_token);",
+									"postman.setEnvironmentVariable(\"REFRESHTOKEN\", jsonData.refresh_token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"user-agent": true
+						}
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "acme",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "acmesecret",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic YWNtZTphY21lc2VjcmV0"
+							},
+							{
+								"key": "X-Forwarded-For",
+								"value": "10.0.0.2",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "User-Agent",
+								"value": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/85.0.4183.121 Safari/537.36",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "{{playerdomain}}/{{playerusername}}",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "{{playerpassword}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{gateway}}/server-oauth2/oauth/token",
+							"host": [
+								"{{gateway}}"
+							],
+							"path": [
+								"server-oauth2",
+								"oauth",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "LITIUM Deposit",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{USERTOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"inputFieldGroups\": {\n\t\t\"1\": {\n\t\t\t\"fields\": {\n\t\t\t\t\"amount\": {\n\t\t\t\t\t\"value\": \"100\"\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t},\n\t\"state\": \"VALIDATEINPUT\",\n\t\"stage\": \"1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{gateway}}/service-cashier/frontend/deposit/v2?methodCode=smartcash",
+							"host": [
+								"{{gateway}}"
+							],
+							"path": [
+								"service-cashier",
+								"frontend",
+								"deposit",
+								"v2"
+							],
+							"query": [
+								{
+									"key": "methodCode",
+									"value": "smartcash"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "LITIUM Withdraw",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{USERTOKEN}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"inputFieldGroups\": {\n\t\t\"1\": {\n\t\t\t\"fields\": {\n\t\t\t\t\"amount\": {\n\t\t\t\t\t\"value\": \"10\"\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\t},\n\t\"state\": \"VALIDATEINPUT\",\n\t\"stage\": \"1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{gateway}}/service-cashier/frontend/withdraw/v2?methodCode=smartcash",
+							"host": [
+								"{{gateway}}"
+							],
+							"path": [
+								"service-cashier",
+								"frontend",
+								"withdraw",
+								"v2"
+							],
+							"query": [
+								{
+									"key": "methodCode",
+									"value": "smartcash"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "LITIUM Webhook Test",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{USERTOKEN}}",
+								"disabled": true
+							},
+							{
+								"key": "content-signature",
+								"value": "hM0rPXHIp3FeLvVfLlUGl5FOQVyL9R460DWuXuGn+cOtuQ4u0uKOnJpL3O8i5D8DExiB2HguWfJDd/xtAjcc1zdBTQJwE2SS8lznZAtKHwqgYrt5uhQb6dXqGhbtxD2ZimQwymIUAuTiRBilc8lU46/KhRd6ZDES23xXMgqH0eiL0cfDdyyZSEXPQT1twolnJiNXOWxl+Wn5UsZAIVaqbBPpCrO/d6/Rj3GzH8roEDytfwswHZfuh8zTNmNzCF229i15uUKVnYZWCCoplZqiLePjYojkWsD5kgVSCKKqFsPft5OeUR+EOgI+ooQ0eb/SFJ/ECnD5U6kBlN3OzkNErQ==",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\"transaction\":{\"uid\":\"64036221-901eec5b20\",\"status\":\"successful\",\"amount\":50000,\"currency\":\"GBP\",\"description\":\"Livescore deposit\",\"type\":\"payment\",\"payment_method_type\":\"credit_card\",\"tracking_id\":\"3648\",\"message\":\"Successfully processed\",\"test\":true,\"created_at\":\"2021-06-24T12:41:37.977Z\",\"updated_at\":\"2021-06-24T12:42:01.859Z\",\"paid_at\":\"2021-06-24T12:42:01.803Z\",\"expired_at\":null,\"closed_at\":null,\"settled_at\":null,\"language\":\"en\",\"redirect_url\":\"https://sonicgateway.hexopay.com/process/64036221-901eec5b20\",\"credit_card\":{\"holder\":\"TEET\",\"stamp\":\"fdf187f6da86ed3b2d58916382fd213ee4608fffdb3e91eb8a083d1debf298d9\",\"brand\":\"visa\",\"last_4\":\"3010\",\"first_1\":\"4\",\"bin\":\"401200\",\"issuer_country\":null,\"issuer_name\":null,\"product\":null,\"exp_month\":1,\"exp_year\":2033,\"token_provider\":null,\"token\":\"eef5acc5-df21-4d9a-87fa-6af13095c892\"},\"id\":\"64036221-901eec5b20\",\"be_protected_verification\":{\"status\":\"successful\",\"message\":null,\"white_black_list\":{\"email\":\"absent\",\"ip\":\"absent\",\"card_number\":\"white\"}},\"three_d_secure_verification\":{\"status\":\"successful\",\"message\":\"Authentication Successful\",\"ve_status\":\"Y\",\"acs_url\":null,\"pa_req\":null,\"md\":null,\"pa_res_url\":\"https://sonicgateway.hexopay.com/process/64036221-901eec5b20\",\"eci\":\"05\",\"pa_status\":\"Y\",\"xid\":\"f8517bd5-2995-4c11-afb2-61c7b7cef87a\",\"cavv\":\"AAABBZEEBgAAAAAAAAQGAAAAAAA=\",\"cavv_algorithm\":null,\"fail_reason\":null},\"payment\":{\"auth_code\":\"654321\",\"bank_code\":\"05\",\"rrn\":\"999\",\"ref_id\":\"777888\",\"message\":\"Payment was approved\",\"amount\":50000,\"currency\":\"GBP\",\"billing_descriptor\":\"test descriptor\",\"gateway_id\":30449,\"status\":\"successful\"},\"avs_cvc_verification\":{\"avs_verification\":{\"result_code\":\"1\"},\"cvc_verification\":{\"result_code\":\"1\"}},\"customer\":{\"ip\":\"127.0.0.1\",\"email\":\"niktestuk22@ptest.com\",\"device_id\":null,\"birth_date\":\"1982-05-26\"},\"billing_address\":{\"first_name\":null,\"last_name\":null,\"address\":null,\"country\":null,\"city\":null,\"zip\":null,\"state\":null,\"phone\":null}}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://27e1-195-177-237-196.ngrok.io/service-cashier-processor-smartcash/public/webhook",
+							"protocol": "https",
+							"host": [
+								"27e1-195-177-237-196",
+								"ngrok",
+								"io"
+							],
+							"path": [
+								"service-cashier-processor-smartcash",
+								"public",
+								"webhook"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Authorization",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var jsonData = JSON.parse(responseBody);\r",
+							"\r",
+							"postman.setEnvironmentVariable(\"SMARTCASH_TOKEN\", jsonData.access_token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"client_id\": \"407531ff-10a9-435e-a7b9-dda9f4e13e07\",\r\n  \"client_secret\": \"20643a01-37a3-47af-a4d5-880b687a212e\",\r\n  \"grant_type\": \"client_credentials\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://openapiuat.smartcashpsb.ng/auth/oauth2/token",
+					"protocol": "https",
+					"host": [
+						"openapiuat",
+						"smartcashpsb",
+						"ng"
+					],
+					"path": [
+						"auth",
+						"oauth2",
+						"token"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

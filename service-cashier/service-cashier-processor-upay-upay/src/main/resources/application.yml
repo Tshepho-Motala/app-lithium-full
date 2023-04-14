@@ -1,0 +1,32 @@
+server.port: 9618
+
+ribbon:
+  ReadTimeout: 30000
+  ConnectTimeout: 30000
+  
+spring:
+  application:
+    name: service-cashier-processor-upay-upay
+  config:
+    import: classpath:/lithium/common/application.yml,classpath:/lithium/service/application.yml,configserver:http://localhost:8888
+  cloud:
+    config:
+      fail-fast: true
+      retry:
+        max-attempts: 50
+    stream:
+      bindings:
+        processorsregisteroutput:
+          group: processorsregistergroup
+          binder: rabbit
+          destination: processorsregisterqueue
+          producer:
+            required-groups: processorsregistergroup
+  thymeleaf:
+    cache: false
+
+logging:
+  level:
+    lithium.service.cashier: INFO
+    lithium.service.cashier.processor.http: INFO
+    lithium.service.cashier.processor.upay.util: INFO

@@ -1,0 +1,10 @@
+{
+  "SERVICE_USER": {
+    "GLOBAL": {
+      "COUNTRY_OF_BIRTH_EDIT": "Country Of Birth was changed from ",
+      "DATE_OF_BIRTH_EDIT": "The Date Of Birth was changed from ",
+      "COUNTRY_OF_BIRTH_ERROR" : "can't sent pub-sub message for countryCodeOfBirth update",
+      "DATE_OF_BIRTH_ERROR" : "can't sent pub-sub message for DOB update"
+    }
+  }
+}

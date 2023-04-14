@@ -1,0 +1,16 @@
+{
+  "SERVICE-CASHIER": {
+    "AUTOWITHDRAWALS": {
+      "RULESETS": {
+        "RULE": {
+          "FIELD": {
+            "PAYMENT_METHOD": "Payment Method"
+          },
+          "OPERATOR": {
+            "IN": "In"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "PLAYER": {
+      "QUICK_ACTIONS": {
+        "WITHDRAWAL_HOLD": "Withdrawal Hold",
+        "WITHDRAWAL_REPROCESS": "Withdrawal reprocess"
+      },
+      "WITHDRAWAL_HOLD": {
+        "TITLE": "Withdrawal Hold",
+        "COMMENT": "Specify the reason for this player withdrawal update",
+        "ERROR": "Failed to move withdrawal on hold"
+      },
+      "WITHDRAWAL_REPROCESS": {
+        "TITLE": "Withdrawal reprocess",
+        "COMMENT": "Specify the reason for this player withdrawal update",
+        "ERROR": "Failed to reprocess withdrawal from hold"
+      }
+    },
+    "SERVICE_CASHIER": {
+      "TRANSACTION": {
+        "STATUS": {
+          "ON_HOLD_REPROCESS": "ON-HOLD REPROCESS"
+        }
+      }
+    }
+  }
+}
+

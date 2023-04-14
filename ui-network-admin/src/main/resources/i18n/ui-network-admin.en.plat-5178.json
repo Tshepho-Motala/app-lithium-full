@@ -1,0 +1,13 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "GAME_TYPES": {
+      "FIELDS": {
+        "GAMES": {
+          "LABEL": "Games",
+          "VIEW_BUTTON": "View Games",
+          "GAME_NAME": "Game Name"
+        }
+      }
+    }
+  }
+}

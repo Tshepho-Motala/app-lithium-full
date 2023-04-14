@@ -1,0 +1,13 @@
+{
+  "SERVICE-LIMIT": {
+    "RESTRICTIONS": {
+      "RULESETS": {
+        "RULE": {
+          "FIELD": {
+            "HOURS_SINCE_1ST_DEPOSIT": "Hours Since 1st deposit"
+          }
+        }
+      }
+    }
+  }
+}

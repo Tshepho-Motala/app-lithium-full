@@ -1,0 +1,37 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "ACTIVE_BONUSES" : {
+      "GLOBAL" : {
+        "FIELDS": {
+          "INSTANT_REWARDS": "Instant Rewards"
+        }
+      }
+    },
+    "GAME" : {
+      "FIELDS" : {
+        "INSTANT_REWARD_ENABLED" : {
+          "NAME" : "Instant Reward Enabled",
+          "DESCRIPTION" : "Is this game enabled for Instant Rewards"
+        }
+      }
+    },
+    "BONUS" : {
+      "EDIT" : {
+        "BUTTON" : {
+          "INSTANT_REWARDS" : "Instant Rewards"
+        },
+        "INSTANT_REWARD" : {
+          "INSTANT_REWARD_UNIT_VALUE" : "Unit Value",
+          "INSTANT_REWARD_UNIT_VALUE_EXAMPLE" : "Description",
+          "INSTANT_REWARD_NUMBER_OF_UNITS" : "Number of Units ",
+          "INSTANT_REWARD_UNIT_VALUE_EXPLAIN" : "A value of 25 would mean a single unit of an instant reward is worth 25 units of the given currency",
+          "INSTANT_REWARD_NUMBER_OF_UNITS_EXAMPLE" : "Description",
+          "INSTANT_REWARD_NUMBER_OF_UNITS_EXPLAIN" : "The number of units associated with the Instant Reward"
+        },
+        "TABS": {
+          "INSTANT_REWARD" : "Instant Rewards"
+        }
+      }
+    }
+  }
+}

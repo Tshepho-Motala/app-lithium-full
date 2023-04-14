@@ -1,0 +1,131 @@
+.PayPal Billing Agreement Flow
+[plantuml]
+----
+
+@startuml
+header PayPal Billing Agreement Flow
+footer Page %page% of %lastpage%
+skinparam sequenceMessageAlign center
+actor Player
+box "Frontend" #LightBlue
+participant Portal
+participant IFrame
+end box
+participant Lithium
+participant PayPal
+autonumber
+
+Player -> Portal  : Choose PayPal deposit
+activate Portal #Black
+Portal -> PayPal : render PayPal Button(client_id, createOrder(), onApprove(), onCancel(), onError())
+activate PayPal
+PayPal -> Portal : PayPal button
+deactivate PayPal
+activate Portal #Yellow
+note left
+    Paypal button is rendered on Portal page.
+    Lithium APIs are signed to PayPal events.
+    createBillingAgreement = billingagreement/token, onApprove = callback(action=return),
+    onCansel = callback(action=cancel), onError = callback(action=decline)
+end note
+
+Portal --> Player : Show payment page
+Player -> Portal  : Player enters amount
+Player -> Portal : **Set create billing agreement check box**
+Player -> Portal  : Pay button is pressed
+Portal -> Portal : createBillingAgreement()
+Portal -> Lithium : billingagreement/token(token, amount)
+activate Lithium
+Lithium -> PayPal : getAgreementTokens(BA_credentials, userGuid)
+activate PayPal
+PayPal --> Lithium : agreement-tokens(ba_token)
+deactivate PayPal
+Lithium --> Portal : billingagreement/token(ba_token)
+deactivate Lithium
+Portal -> IFrame: open(ba_token)
+activate IFrame
+IFrame --> Player: Show PayPal login page
+Player -> IFrame: Player enters paypal credentials
+IFrame -> PayPal: Authenticate(email, password)
+activate PayPal
+PayPal --> IFrame: Ok
+deactivate PayPal
+IFrame --> Player: Show PayPal billing agreement page
+Player -> IFrame: Player finalize billing agreement
+IFrame -> PayPal: Agree
+activate PayPal
+deactivate IFrame
+PayPal -> Portal: result notification(onApprove(ba_token,playerId,orderId)/onCancel/onError)
+activate Lithium
+alt#Gold  #Pink notification=onError,onCancel
+    Portal --> Player: Show error
+else #LightGreen notification=onApprove
+    Portal -> Lithium: addProcessorAccount(ba_token, playerId, orderId)
+    ref over Lithium: Create Billing Agreement
+end
+ == Create Billing Agreement ==
+Lithium -> PayPal: getOrder(orderId)
+PayPal --> Lithium: getOrder(status=APPROVED,accountDetails)
+Lithium -> Lithium: verifyProcessorAccount()
+note right
+    Verify processor account
+    according to the account_verifications processor property
+    (ONE_ACCOUNT_PER_USER,DUPLICATE_ACCOUNT)
+    Fail billing agreement in case verification is failed
+end note
+Lithium -> PayPal: createAgreement(userGuid, ba_token, ba_credentials)
+PayPal --> Lithium: createAgreement(status=ACTIVE, agreement_Id)
+alt#Gold  #Pink status != ACTIVE
+Lithium --> Portal: addProcessorAccount(status=FAILED, errorMessage)
+Portal --> Player: Show error
+else #LightGreen status = ACTIVE
+Lithium -> Lithium: Save/Update processor account
+Lithium --> Portal: addProcessorAccount(status=SUCCESS, processorAccountId, errorMessage)
+ref over Portal: Quick deposit
+end
+
+ == Quick deposit ==
+Portal -> Lithium : deposit(token, amount, processorAccountId)
+activate Lithium
+Lithium -> Lithium : Get agreement_id from processor account by processorAccountId
+Lithium -> PayPal : createOrder(amount, agreement_id)
+activate PayPal
+PayPal --> Lithium : createOrder(status="CREATED", orderId)
+deactivate PayPal
+
+Lithium -> PayPal: captureOrder(orderId)
+PayPal --> Lithium: captureOrder(status=COMPLETED/CREATED/SAVED/APPROVED/PAYER_ACTION_REQUIRED/VOIDED, orderId)
+alt#Gold  #LightBlue status=CREATED/SAVED/APPROVED/PAYER_ACTION_REQUIRED
+ref over Lithium: CAPTURE.COMPLETED Webhook
+else #Pink status = VOIDED
+Lithium -> Lithium: Decline transaction
+else #LightGreen status = COMPLETED
+Lithium -> Lithium: Update transaction status
+note right
+    Move transaction to final SUCCESS state
+    Update player balance
+    Save processor account
+end note
+end
+Lithium --> Portal: deposit(status,errorMessage)
+Portal --> Player: show result
+ == CAPTURE.COMPLETED Webhook ==
+ PayPal -> Lithium: webhook(PAYMENT.CAPTURE.COMPLETED)
+ note left
+     Do nothing in case transaction
+     is already in final state
+ end note
+ Lithium -> PayPal: getOrder(orderId)
+ PayPal --> Lithium: getOrder(status=COMPLETED,accountDetails)
+ Lithium -> Lithium: Update transaction status
+ note right
+     Move transaction to final SUCCESS state
+     Update player balance
+     Save processor account
+ end note
+Lithium --> PayPal: HTTP_OK
+deactivate Lithium
+deactivate PayPal
+deactivate Portal
+
+@enduml

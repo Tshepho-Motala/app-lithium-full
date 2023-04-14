@@ -1,0 +1,36 @@
+<div class="container-fluid" bs-loading-overlay
+	bs-loading-overlay-reference-id="{{controller.referenceId}}">
+	<div class="well">
+	
+	
+	<div class="card card-block" style="margin-bottom: 10px;" ng-init="">
+		<div class="d-flex justify-content-start">
+			<div class="p-2 mr-auto" style="width: 30%;">
+				<span class="title">{{ controller.user.firstName }}</span> <span
+					class="description">{{ controller.user.lastName }}</span>
+			</div>
+			<div class="p-2 text-center">
+				<span class="title">{{controller.domain}}</span>
+			</div>
+			<div class="ml-auto p-2 text-right" style="width: 30%;">
+				<button-back ui-sref="^.^.incomplete"></button-back>
+			</div>
+		</div>
+	</div>
+	<span class="description">Last Updated -
+		{{controller.user.createdDate | datetimedefault}}</span>
+
+
+
+
+ 
+	<div class="row v-reset-row ">
+
+		<div class="col-md-7">
+			<personal data="controller.personalinfo" ng-model="controller.user"></personal>
+		</div>
+	</div>
+
+</div>
+
+</div>

@@ -1,0 +1,19 @@
+package lithium.service.shards;
+
+import lithium.modules.ModuleInfoAdapter;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.stereotype.Component;
+
+@Component
+public class ServiceShardsModuleInfo extends ModuleInfoAdapter {
+    public ServiceShardsModuleInfo() {
+        super();
+    }
+
+    @Override
+    public void configureHttpSecurity(HttpSecurity http) throws Exception {
+        super.configureHttpSecurity(http);
+        http.authorizeRequests()
+                .antMatchers("/system/**").access("@lithiumSecurity.authenticatedSystem(authentication)");
+    }
+}

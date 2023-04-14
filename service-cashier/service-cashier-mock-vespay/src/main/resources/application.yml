@@ -1,0 +1,9 @@
+server:
+  port: 9710
+
+logging:
+  level:
+    lithium.service.cashier.mock.vespay: INFO
+    
+lithium:
+  gateway-public-url: http://localhost:9001

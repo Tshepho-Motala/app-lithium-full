@@ -1,0 +1,13 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "CMS": {
+      "GAME_ENTRY_LAYOUT_SELECTED_WIDGET": {
+        "WIDGET": {
+          "NO_DUPLICATES": {
+            "MESSAGE": "Widget does not allow duplicates"
+          }
+        }
+      }
+    }
+  }
+}

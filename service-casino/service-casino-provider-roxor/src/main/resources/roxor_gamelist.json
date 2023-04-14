@@ -1,0 +1,52 @@
+{
+  "GameList": [
+    {
+      "name": "Banghai",
+      "id": "play-banghai",
+      "platform": "Desktop",
+      "category": "slots",
+      "freeSpinEnabled": true,
+      "freeSpinValueRequired": true
+    },
+    {
+      "name": "Secrets of The Phoenix",
+      "id": "play-secrets-of-the-phoenix",
+      "platform": "Desktop",
+      "category": "slots",
+      "freeSpinEnabled": true,
+      "freeSpinValueRequired": true
+    },
+    {
+      "name": "10p Roulette",
+      "id": "play-10p-roulette",
+      "platform": "Desktop",
+      "category": "table_games,roulette",
+      "freeSpinEnabled": true,
+      "freeSpinValueRequired": true
+    },
+    {
+      "name": "European Roulette - La Partage",
+      "id": "play-european-roulette-sog",
+      "platform": "Desktop",
+      "category": "table_games,roulette",
+      "freeSpinEnabled": true,
+      "freeSpinValueRequired": true
+    },
+    {
+      "name": "Singledeck Blackjack",
+      "id": "play-blackjack-singlehand",
+      "platform": "Desktop",
+      "category": "table_games,blackjack",
+      "freeSpinEnabled": true,
+      "freeSpinValueRequired": true
+    },
+    {
+      "name": "Classic Blackjack",
+      "id": "play-blackjack-classic",
+      "platform": "Desktop",
+      "category": "table_games,blackjack",
+      "freeSpinEnabled": true,
+      "freeSpinValueRequired": true
+    }
+  ]
+}

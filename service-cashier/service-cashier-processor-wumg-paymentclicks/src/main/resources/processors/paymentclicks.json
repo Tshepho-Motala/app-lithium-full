@@ -1,0 +1,43 @@
+{
+  "name": "PaymentClicks",
+  "code": "paymentclicks",
+  "url": "service-cashier-processor-wumg-paymentclicks",
+  "methodNames": ["wu","mg"],
+  "deposit": true,
+  "withdraw": true,
+  "fees": {
+    "flat": 0,
+    "percentage": 0,
+    "minimum": 0
+  },
+  "limits": {
+    "minAmount": 2500,
+    "maxAmount": 0,
+    "maxAmountDay": 0,
+    "maxAmountWeek": 0,
+    "maxAmountMonth": 0,
+    "maxTransactionsDay": 0,
+    "maxTransactionsWeek": 0,
+    "maxTransactionsMonth": 0
+  },
+  "properties": [
+    { 
+      "name": "url",
+      "defaultValue": "http://localhost:9000/service-cashier-mock-wumg-paymentclicks/api",
+      "type": "url",
+      "description": "The API URL. We will add /request_name.php to the end to call the request_name service."
+    },
+    { 
+      "name": "username",
+      "defaultValue": "9844",
+      "type": "string",
+      "description": "PaymentClicks should supply the API username."
+    },
+    { 
+      "name": "password",
+      "defaultValue": "Hsdf3234fsdfaf234ef23e2",
+      "type": "string",
+      "description": "PaymentClicks should supply the API password."
+    }
+  ]
+}

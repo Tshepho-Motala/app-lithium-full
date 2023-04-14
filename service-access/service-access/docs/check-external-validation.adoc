@@ -1,0 +1,72 @@
+:toc:
+:icons: font
+:url-quickref: https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/
+== Check External Validation
+---
+
+....
+POST {gateway}/external/authorization/{domainName}/{accessRuleName}/check-authorization
+....
+
+=== Parameters
+
+[cols="2,2,2,4a"]
+|====
+| Field | Object Type | Request Type |Description
+
+| domainName
+| String
+| Path
+| The name for the domain on which the ACR has been configured on LBO: _Administration -> Access Control Rulesets_
+
+| accessRuleName
+| String
+| Path
+| The name for the ACR that has been configured on LBO: _Administration -> Access Control Rulesets_
+
+| externalValidationRequest
+| link:external-validation-request.adoc[ExternalValidationRequest]
+| Request Body
+|
+
+| User-Agent
+| String
+| Request Header
+|
+
+| test
+| Boolean
+| Request Parameter (required=false, default=false)
+|
+
+|====
+
+==== curl example
+
+....
+curl --location --request POST 'localhost:9000/service-access/external/authorization/livescore_nl/cruksAccessRule/check-authorization' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+  "firstName": "Ivan",
+  "lastNamePrefix": "de la",
+  "lastName": "Pena",
+  "dobDay": 23,
+  "dobMonth": 11,
+  "dobYear": 2001,
+  "email": "thisisthefastestcar@intheworld.com",
+  "sha256": "a1502a9ab4e4ebf1d83a9ad791e72369d121f623eae4c681a3ee31a33e194370",
+  "placeOfBirth": "",
+  "additionalData": {
+    "bsn": ""
+  }
+}'
+....
+
+=== External Validations Flow
+
+include::plantuml/svc-access.external-validation-controller.puml[]
+
+=== References
+
+* link:check-authorization.adoc[Check Authorization Flow]
+

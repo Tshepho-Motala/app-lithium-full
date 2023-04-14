@@ -1,0 +1,216 @@
+= Lithium User Registration
+Irwin Herridge <irwin.herridge@wonderlabz.com>
+1.0, July 27, 2022:
+:sectnums:
+:toc: left
+:toclevels: 4
+:toc-title: Lithium User Registration
+:icons: font
+:url-quickref: https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/
+:table-caption!:
+
+:svc-user-sourcedir: ../../service-user/service-user/src/main/java
+
+//This is done to keep formatting aligned with gitlab
+****
+[verse,,]
+____
+link:../../readme.adoc[Home]
+____
+****
+
+== Supported Registration Flows
+
+TIP: An understanding of ecosystems is required as a prerequisite to this architecture; link:../../../docs/svc-domain/ecosystems.adoc[see small writeup on ecosystems]
+
+=== User registration inside any ecosystem configuration
+
+.User upgrade journey
+[plantuml]
+----
+@startuml
+
+participant gw
+participant lithium
+
+autonumber
+
+alt #lightblue Lite Registration (Stateless screen flow)
+  gw -> lithium++: /service-user/frontend/{{root-domain}}/register/v4
+  lithium -> gw--: Status 200
+  note right
+    Lite registration allows a root user to be registered by only providing an email and password
+  end note
+
+    alt #lightgreen Add additional fields post lite registration
+        alt add additional personal information
+          gw -> lithium: /service-user/profile/v2
+        end
+        alt add address
+          gw -> lithium: /service-user/profile/saveaddress
+        end
+    end
+else #lightgrey Medium Registration (State is kept on FE screen flow)
+  gw -> lithium++: /service-user/frontend/{{root-domain}}/register/v4
+  lithium -> gw--: Status 200
+  note right
+    Medium registration allows a root user to be registered by only providing an email and password + fn, ln, dob, emailOptOut and address
+    * Note that in essence, medium registration does not exist, it uses lite registration allowing any additional info to also be registered in one API call
+  end note
+end
+
+alt #lightyellow upgrade user
+  gw -> lithium++: /server-oauth2/oauth/token
+  note right
+    Prerequisite:
+      * User must be registered on a domain belonging to a root domain ecosystem type
+      * Login needs to include a domain name belonging to an exclusive domain ecosystem type as part of the login-username combination {{domain-name}}/{{email}}
+        OR
+      * Login needs to include the ecosystem name linked to the root domain the user was registered into as part of the login-username  combination {{ecosystem-name}}/{{email}}
+  end note
+
+  alt #pink exclusive user does not exist
+
+    lithium -> gw--: Status 430 including additional information containing UUID
+    note right
+      Whenever a user was registered on a root domain and firstName, lastName, DOB, emailOptOut or address is available on root domain user,
+          then the Status 430 message needs to include the available fields
+    end note
+  else #lightgrey exclusive user exist
+    lithium -> gw--: Status 200 with oauth access token response
+  end
+
+  gw -> lithium++: /service-user/frontend/{{root-domain}}/register/v4
+  lithium -> gw--: Status 200 with oauth access token response on successful registration
+end
+@enduml
+----
+
+.Exclusive user registration with auto root creation
+[plantuml]
+----
+@startuml
+
+participant gw
+participant lithium
+
+autonumber
+
+gw -> lithium++: /service-user/frontend/{{root-domain}}/register/v4
+lithium -> lithium: auto-register root user from exclusive user
+lithium -> gw--: Status 200 with oauth access token response on successful registration
+
+@enduml
+----
+
+=== User registration outside any ecosystem configuration
+.User upgrade journey
+[plantuml]
+----
+@startuml
+
+participant gw
+participant lithium
+
+autonumber
+
+gw -> lithium++: /service-user/frontend/{{root-domain}}/register/v4
+lithium -> gw--: Status 200 with oauth access token response on successful registration
+
+@enduml
+----
+
+=== Incomplete user journey
+
+Currently, the incomplete user flow only supports a 3 step iDin address verification workflow.
+
+==== iDin Address Verification (Incomplete User Registration Flow)
+
+[cols="h,a,a"]
+|===
+|API |Short Description | Curl
+
+|Register incomplete user using iDin address verification (Stage1)
+|Used to initiate the idin address verification user registration; on successful response a temporary user will be created on Lithium, as well as an application on iDin that is linked to an applicant hash that is only known between GW and Lithium.
+
+Also provided as part of the response is a verificationUrl that the frontend will need to display to the user inside the app; allowing the user to externally provide consent from their bank via the pop-out screen from iDin. On success, the applicants details will be retrievable on stage 2 from Lithium.
+
+
+|[source, httprequest]
+```
+curl --location --request POST 'https://gateway.lithium-staging.ls-g.net/service-user/players/livescore_nl/register/incomplete/v1?method=idin' \
+--header 'accept: application/json' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Basic {ommitted}' \
+--data-raw '{
+"stage": "1",
+"domainName": "livescore_nl",
+"additionalData": {
+"iDinReturnUrl": "http://returnUrl/prodValidate",
+"playerIpAddress": "10.0.0.100"
+}
+}'
+```
+
+|Register incomplete user using iDin address verification (Stage2)
+|On completion of the pop-out screen mentioned that happens prior to calling this endpoint, stage 2 may be called to retieve the players details that was made available by means of the user providing concent via IDin.
+
+The details will also be stored against the incomplete user that was created on stage 1, to allow for later retrieval on the final register endpoint call where additional information can be provided such as limits and marketing preferences.
+|[source, httprequest]
+```
+curl --location --request POST 'https://gateway.lithium-staging.ls-g.net/service-user/players/livescore_nl/register/incomplete/v1?method=idin&apiAuthorizationId=ls-gw&sha=bd7da2bd452ad77207d6758e2f0e779a' \
+--header 'accept: application/json' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Basic {ommitted}' \
+--data-raw '{
+    "stage": "2",
+    "domainName": "livescore_nl",
+    "additionalData": {
+       "iDinApplicantHash": "0e33ec7cb6f65b4defb978f1903a1878f104bda58df0eee71dd9981f77630837"
+    }
+}'
+```
+
+|Register user from Incomplete User Flow
+|When all steps on the incomplete user flow has been successfully executed and the player has successfully provided concent via iDin for address verification; a player may be registered by providing the applicant hash in the additional data section as part of the registration API.
+
+Lithim will retrieve the information that was provided from iDin on stage 2 by use of the uniqie applicant hash that was provided on step 1.
+
+On successful registration, the incomplete user will be registered as a player on Lithium.
+|[source, httprequest]
+```
+curl --location --request POST 'https://gateway.lithium-staging.ls-g.net/service-user/frontend/livescore_nl/register/v4' \
+--header 'Authorization: Basic YWNtZTphY21lc2VjcmV0' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "username": "irwin0jSTh1m4m",
+    "password": "********",
+    "firstName": "Leda",
+    "email": "irwin0jSTh1m4m@wonderlabz.com",
+    "placeOfBirth": "Praag",
+    "cellphoneNumber": "05585023239",
+    "countryCode": "NL",
+    "balanceLimit": 50000000,
+    "timeCap": "DAILY",
+    "timeCapAmount": 1440,
+    "depositLimitDaily": "100000.00",
+    "depositLimitWeekly": "700000.00",
+    "depositLimitMonthly": "3000000.00",
+    "additionalData": {
+        "iDinApplicantHash": "0e33ec7cb6f65b4defb978f1903a1878f104bda58df0eee71dd9981f77630837"
+    },
+    "emailOptOut": true,
+    "postOptOut": true,
+    "smsOptOut": true,
+    "callOptOut": true,
+    "pushOptOut": true,
+    "leaderboardOptOut": true,
+    "parentEmailOptOut": true,
+    "parentPostOptOut": true,
+    "parentSmsOptOut": true,
+    "parentCallOptOut": true,
+    "parentPushOptOut": true,
+    "parentLeaderboardOptOut": true
+}'
+```
+|===

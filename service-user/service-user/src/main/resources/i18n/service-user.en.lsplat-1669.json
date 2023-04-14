@@ -1,0 +1,9 @@
+{
+  "ERROR_DICTIONARY": {
+    "REGISTRATION": {
+      "INVALID_LASTNAME_PREFIX": "Last name prefix validation failed. Only character values are allowed",
+      "INVALID_USERNAME": "Username validation failed. Required (8+ characters and only letters and numbers are allowed)",
+      "PASSWORD_NOT_COMPLEX": "Password validation failed. Required (8+ characters and your password may not be your username and have at least 3 of the following [uppercase letters, lowercase letters, numbers and special characters])"
+    }
+  }
+}

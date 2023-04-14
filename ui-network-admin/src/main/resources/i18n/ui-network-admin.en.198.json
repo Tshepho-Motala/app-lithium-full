@@ -1,0 +1,12 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "CHANGELOGS": {
+      "GLOBAL": {
+        "FIELDS": {
+          "CATEGORYNAME": "Category",
+          "SUBCATEGORY": "Sub-Category"
+        }
+      }
+    }
+  }
+}

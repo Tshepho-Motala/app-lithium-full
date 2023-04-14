@@ -1,0 +1,1036 @@
+{
+	"info": {
+		"_postman_id": "4d2cd041-3ac9-4887-a54a-2b97379097cd",
+		"name": "Lithium User Ecosystem",
+		"description": "The following document describes the APIs that will allow a sportsbook provider to register transactions\nwithin Lithium.\n---\nSome requests require a sha256 checksum that accompanies the payload. To calculate the checksum, concatenate \nthe fields identified in the description of the respective sha256 field, using a colon as separator. \nThereafter pass it to your preferred hmac sha256 function together with the pre-shared key supplied by \nLithium. \n\nSee https://www.freeformatter.com/hmac-generator.html to test (ensure to select SHA256)\n\n    hmac_sha256(\"TESTDATA\", PRESHAREDKEY\") = cd322232cde0f9f6f8c3c0c7833ee8931af66677f1bf4c85691e0d777c9c567d\n    \n",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "service-user",
+			"item": [
+				{
+					"name": "backoffice",
+					"item": [
+						{
+							"name": "ecosystem",
+							"item": [
+								{
+									"name": "User link add",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{backoffice-user-access-token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{gateway}}/service-user/backoffice/user-link/add-user-link?primaryUserGuid={{player-guid}}&secondaryUserGuid={{player-guid-secondary}}&userLinkTypeCode=SIMILAR_DETAILS&linkNote=The players have similar details",
+											"host": [
+												"{{gateway}}"
+											],
+											"path": [
+												"service-user",
+												"backoffice",
+												"user-link",
+												"add-user-link"
+											],
+											"query": [
+												{
+													"key": "primaryUserGuid",
+													"value": "{{player-guid}}",
+													"description": "The initiating user for a link"
+												},
+												{
+													"key": "secondaryUserGuid",
+													"value": "{{player-guid-secondary}}",
+													"description": "The destination user for the link"
+												},
+												{
+													"key": "userLinkTypeCode",
+													"value": "SIMILAR_DETAILS",
+													"description": "Use a code from the User link type list"
+												},
+												{
+													"key": "linkNote",
+													"value": "The players have similar details",
+													"description": "A freeform text field for link notes"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "User link type list",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{backoffice-user-access-token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{gateway}}/service-user/backoffice/user-link/type-list",
+											"host": [
+												"{{gateway}}"
+											],
+											"path": [
+												"service-user",
+												"backoffice",
+												"user-link",
+												"type-list"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "User link update",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{backoffice-user-access-token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{gateway}}/service-user/backoffice/user-link/update-user-link?userLinkId=1&linkNote=My link is updated now&deleted=false",
+											"host": [
+												"{{gateway}}"
+											],
+											"path": [
+												"service-user",
+												"backoffice",
+												"user-link",
+												"update-user-link"
+											],
+											"query": [
+												{
+													"key": "userLinkId",
+													"value": "1",
+													"description": "Id of the user link relationship. Can be obtained by viewing user links"
+												},
+												{
+													"key": "linkNote",
+													"value": "My link is updated now",
+													"description": "Freeform link note"
+												},
+												{
+													"key": "deleted",
+													"value": "false",
+													"description": "Optional field to delete a link"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "User link list",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{backoffice-user-access-token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{gateway}}/service-user/backoffice/user-link/list-by-user?userGuid={{player-guid}}",
+											"host": [
+												"{{gateway}}"
+											],
+											"path": [
+												"service-user",
+												"backoffice",
+												"user-link",
+												"list-by-user"
+											],
+											"query": [
+												{
+													"key": "userGuid",
+													"value": "{{player-guid}}"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "User link table",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{backoffice-user-access-token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{gateway}}/service-user/backoffice/user-link/table?ecosystemName=echosystem007&draw=1&start=0&length=10",
+											"host": [
+												"{{gateway}}"
+											],
+											"path": [
+												"service-user",
+												"backoffice",
+												"user-link",
+												"table"
+											],
+											"query": [
+												{
+													"key": "domainNames",
+													"value": null,
+													"description": "Array of domain names to check for user links and return",
+													"disabled": true
+												},
+												{
+													"key": "ecosystemName",
+													"value": "echosystem007",
+													"description": "user links on a specific ecosystem. Ecosystem name as configured in the ecosystem config."
+												},
+												{
+													"key": "draw",
+													"value": "1"
+												},
+												{
+													"key": "start",
+													"value": "0"
+												},
+												{
+													"key": "length",
+													"value": "10"
+												}
+											]
+										},
+										"description": "Pass in either domain names or ecosystem name to show user links on the relevant criteria"
+									},
+									"response": []
+								}
+							],
+							"protocolProfileBehavior": {},
+							"_postman_isSubFolder": true
+						},
+						{
+							"name": "Domain List",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{backoffice-user-access-token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{gateway}}/service-domain/domains/findAllDomains",
+									"host": [
+										"{{gateway}}"
+									],
+									"path": [
+										"service-domain",
+										"domains",
+										"findAllDomains"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "frontend",
+					"item": [
+						{
+							"name": "Player Username Unique v2",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "e5ed7771-b017-48a1-a26b-d486566a778e",
+										"exec": [
+											"tests[\"Status code is 200\"] = responseCode.code === 200;",
+											"",
+											"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{gateway}}/service-user/frontend/players/{{player-domain-primary}}/v2/is-username-unique?username=aaa011_12232&domainOnly=false",
+									"host": [
+										"{{gateway}}"
+									],
+									"path": [
+										"service-user",
+										"frontend",
+										"players",
+										"{{player-domain-primary}}",
+										"v2",
+										"is-username-unique"
+									],
+									"query": [
+										{
+											"key": "username",
+											"value": "aaa011_12232"
+										},
+										{
+											"key": "domainOnly",
+											"value": "false",
+											"description": "Optional param. if domain only is true, it is not ecosystem-aware"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Player Email Unique v2",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "b844c2f8-4481-44e6-8cb4-3e9e8c296eee",
+										"exec": [
+											"tests[\"Status code is 200\"] = responseCode.code === 200;",
+											"",
+											"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{gateway}}/service-user/frontend/players/{{player-domain-primary}}/v2/is-email-unique?email={{player-email}}&domainOnly=false",
+									"host": [
+										"{{gateway}}"
+									],
+									"path": [
+										"service-user",
+										"frontend",
+										"players",
+										"{{player-domain-primary}}",
+										"v2",
+										"is-email-unique"
+									],
+									"query": [
+										{
+											"key": "email",
+											"value": "{{player-email}}"
+										},
+										{
+											"key": "domainOnly",
+											"value": "false",
+											"description": "Optional param. if domain only is true, it is not ecosystem-aware"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "PlayerFull Name Unique v2",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "5ac0c819-11a2-45f4-8852-d99c03c2ebab",
+										"exec": [
+											"tests[\"Status code is 200\"] = responseCode.code === 200;",
+											"",
+											"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{gateway}}/service-user/frontend/players/{{player-domain-primary}}/v2/is-full-name-unique?domainOnly=false&firstName=Gert&lastName=Groottoon&dobDay=10&dobMonth=11&dobYear=1995",
+									"host": [
+										"{{gateway}}"
+									],
+									"path": [
+										"service-user",
+										"frontend",
+										"players",
+										"{{player-domain-primary}}",
+										"v2",
+										"is-full-name-unique"
+									],
+									"query": [
+										{
+											"key": "domainOnly",
+											"value": "false",
+											"description": "Optional param. if domain only is true, it is not ecosystem-aware"
+										},
+										{
+											"key": "firstName",
+											"value": "Gert"
+										},
+										{
+											"key": "lastName",
+											"value": "Groottoon"
+										},
+										{
+											"key": "dobDay",
+											"value": "10"
+										},
+										{
+											"key": "dobMonth",
+											"value": "11"
+										},
+										{
+											"key": "dobYear",
+											"value": "1995"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Player Comms Opt In",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "d98eee62-7cf7-4f50-9040-b00699e994d3",
+										"exec": [
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{player-access-token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [],
+									"options": {
+										"formdata": {}
+									}
+								},
+								"url": {
+									"raw": "{{gateway}}/service-user/frontend/player/opt-in-to-communications?optIn=true&locale=en_GB",
+									"host": [
+										"{{gateway}}"
+									],
+									"path": [
+										"service-user",
+										"frontend",
+										"player",
+										"opt-in-to-communications"
+									],
+									"query": [
+										{
+											"key": "optIn",
+											"value": "true"
+										},
+										{
+											"key": "locale",
+											"value": "en_GB"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Player Signup v3 (primary domain)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "808350f1-b78a-499f-b23a-3a536458bb57",
+										"exec": [
+											"tests[\"Status code is 200\"] = responseCode.code === 200;",
+											"",
+											"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "acmesecret",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "acme",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"password\" : \"{{player-password}}\",\n    \"dobDay\" : \"09\",\n    \"dobMonth\" : \"11\",\n    \"dobYear\" : \"1979\",\n    \"email\" : \"{{player-email}}\",\n    \"firstName\" : \"Gert\",\n    \"lastName\" : \"Groottoon\"\n}",
+									"options": {
+										"raw": {}
+									}
+								},
+								"url": {
+									"raw": "{{gateway}}/service-user/frontend/{{player-domain-primary}}/register/v3",
+									"host": [
+										"{{gateway}}"
+									],
+									"path": [
+										"service-user",
+										"frontend",
+										"{{player-domain-primary}}",
+										"register",
+										"v3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Player Signup v3 (secondary domain)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "24983c9a-c777-4a7c-98ce-12ed248766d6",
+										"exec": [
+											"tests[\"Status code is 200\"] = responseCode.code === 200;",
+											"",
+											"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "acmesecret",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "acme",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\" : \"{{player-username}}\",\n    \"password\" : \"{{player-password}}\",\n    \"dobDay\" : \"10\",\n    \"dobMonth\" : \"12\",\n    \"dobYear\" : \"1978\",\n    \"email\" : \"{{player-email}}\",\n    \"firstName\" : \"Gert\",\n    \"lastName\" : \"Groottoon\"\n}",
+									"options": {
+										"raw": {}
+									}
+								},
+								"url": {
+									"raw": "{{gateway}}/service-user/frontend/{{player-domain}}/register/v3",
+									"host": [
+										"{{gateway}}"
+									],
+									"path": [
+										"service-user",
+										"frontend",
+										"{{player-domain}}",
+										"register",
+										"v3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Player Signup v3 (uuid secondary domain)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "c9f085f5-c7c3-4d4f-9862-41ffcf22982a",
+										"exec": [
+											"tests[\"Status code is 200\"] = responseCode.code === 200;",
+											"",
+											"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "basic",
+									"basic": [
+										{
+											"key": "password",
+											"value": "acmesecret",
+											"type": "string"
+										},
+										{
+											"key": "username",
+											"value": "acme",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\" : \"{{player-username}}\",\n    \"password\" : \"{{player-password}}\",\n    \"dobDay\" : \"10\",\n    \"dobMonth\" : \"12\",\n    \"dobYear\" : \"1978\",\n    \"email\" : \"{{player-email}}\",\n    \"firstName\" : \"Gert\",\n    \"lastName\" : \"Groottoon\",\n    \"cellphoneNumber\" : \"234284945839\",\n    \"deviceId\" : \"magical-device-id\",\n    \"uuid\": \"{{uuid}}\"\n}",
+									"options": {
+										"raw": {}
+									}
+								},
+								"url": {
+									"raw": "{{gateway}}/service-user/frontend/{{player-domain}}/register/v3",
+									"host": [
+										"{{gateway}}"
+									],
+									"path": [
+										"service-user",
+										"frontend",
+										"{{player-domain}}",
+										"register",
+										"v3"
+									]
+								}
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "UNA (Backoffice) Authentication",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0a59f5dc-d77d-403b-b2f0-5066b14d8591",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Token reveived\"] = jsonData.access_token;",
+							"",
+							"postman.setEnvironmentVariable(\"backoffice-user-access-token\", jsonData.access_token);",
+							"postman.setEnvironmentVariable(\"backoffice-user-refresh-token\", jsonData.refresh_token);",
+							"postman.setEnvironmentVariable(\"backoffice-user-guid\", jsonData.userGuid);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "acme",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "acmesecret",
+							"type": "string"
+						},
+						{
+							"key": "saveHelperData",
+							"value": true,
+							"type": "boolean"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic YWNtZTphY21lc2VjcmV0",
+						"warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman."
+					},
+					{
+						"key": "X-Forwarded-For",
+						"type": "text",
+						"value": "10.0.0.2"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "{{backoffice-domain}}/{{backoffice-username}}",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "{{backoffice-password}}",
+							"type": "text"
+						}
+					],
+					"options": {
+						"formdata": {}
+					}
+				},
+				"url": {
+					"raw": "{{gateway}}/server-oauth2/oauth/token",
+					"host": [
+						"{{gateway}}"
+					],
+					"path": [
+						"server-oauth2",
+						"oauth",
+						"token"
+					]
+				},
+				"description": "You will need to add the required parameters to the active environment or global scope to allow the authentication to function"
+			},
+			"response": []
+		},
+		{
+			"name": "Player Authentication (primary domain)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a1a7663e-9811-4ec8-9236-c3182d172532",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Token reveived\"] = jsonData.access_token;",
+							"",
+							"postman.setEnvironmentVariable(\"player-access-token\", jsonData.access_token);",
+							"postman.setEnvironmentVariable(\"player-refresh-token\", jsonData.refresh_token);",
+							"postman.setEnvironmentVariable(\"player-guid\", jsonData.userGuid);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "acme",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "acmesecret",
+							"type": "string"
+						},
+						{
+							"key": "saveHelperData",
+							"value": true,
+							"type": "boolean"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic YWNtZTphY21lc2VjcmV0",
+						"warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman."
+					},
+					{
+						"key": "X-Forwarded-For",
+						"type": "text",
+						"value": "10.0.0.2"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "{{player-domain-primary}}/{{player-email}}",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "{{player-password}}",
+							"type": "text"
+						}
+					],
+					"options": {
+						"formdata": {}
+					}
+				},
+				"url": {
+					"raw": "{{gateway}}/server-oauth2/oauth/token",
+					"host": [
+						"{{gateway}}"
+					],
+					"path": [
+						"server-oauth2",
+						"oauth",
+						"token"
+					]
+				},
+				"description": "You will need to add the required parameters to the active environment or global scope to allow the authentication to function"
+			},
+			"response": []
+		},
+		{
+			"name": "Player Authentication (secondary domain)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0e69cff9-8396-4daf-b66d-25d14e3556e1",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Token reveived\"] = jsonData.access_token;",
+							"postman.setEnvironmentVariable(\"player-access-token\", jsonData.access_token);",
+							"postman.setEnvironmentVariable(\"player-refresh-token\", jsonData.refresh_token);",
+							"postman.setEnvironmentVariable(\"player-guid\", jsonData.userGuid);",
+							"",
+							"tests[\"Error 430 reveived\"] = jsonData.uuid;",
+							"postman.setEnvironmentVariable(\"uuid\", jsonData.uuid);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "acme",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "acmesecret",
+							"type": "string"
+						},
+						{
+							"key": "saveHelperData",
+							"value": true,
+							"type": "boolean"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic YWNtZTphY21lc2VjcmV0",
+						"warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman."
+					},
+					{
+						"key": "X-Forwarded-For",
+						"type": "text",
+						"value": "10.0.0.2"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "{{player-domain}}/{{player-email}}",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "{{player-password}}",
+							"type": "text"
+						}
+					],
+					"options": {
+						"formdata": {}
+					}
+				},
+				"url": {
+					"raw": "{{gateway}}/server-oauth2/oauth/token",
+					"host": [
+						"{{gateway}}"
+					],
+					"path": [
+						"server-oauth2",
+						"oauth",
+						"token"
+					]
+				},
+				"description": "You will need to add the required parameters to the active environment or global scope to allow the authentication to function"
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"id": "baseUrl",
+			"key": "baseUrl",
+			"value": "https://gateway.lithium-develop.ls-g.net",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}

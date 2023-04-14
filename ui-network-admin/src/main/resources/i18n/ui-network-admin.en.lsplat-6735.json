@@ -1,0 +1,20 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "RESTRICTIONS": {
+      "AUTO_RESTRICTIONS": {
+        "RULE_SETS": {
+          "SKIP_TEST_USER": {
+            "SUCCESS": "Successfully changed the auto-restriction ruleset for skipping test users",
+            "ERROR": "Failed to change the auto-restriction ruleset on skipping test users"
+          },
+          "FIELDS": {
+            "SKIP_TEST_USER": {
+              "NAME": "Skip Test User",
+              "DESCRIPTION": "When you want to skip the ruleset for test users"
+            }
+          }
+        }
+      }
+    }
+  }
+}

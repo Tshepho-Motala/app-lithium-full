@@ -1,0 +1,11 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "CMS": {
+      "LAYOUT_BUILDER_WIDGET" : {
+        "SAVE_WIDGET": {
+          "EMPTY_INPUT": "Would you please add a layout to configure?"
+        }
+      }
+    }
+  }
+}

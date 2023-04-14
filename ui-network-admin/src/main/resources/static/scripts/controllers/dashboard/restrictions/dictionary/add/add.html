@@ -1,0 +1,67 @@
+<div class="container-fluid" bs-loading-overlay bs-loading-overlay-reference-id="loading">
+    <div class="card card-block" style="margin-bottom: 10px;" ng-init="">
+        <div class="d-flex justify-content-start">
+            <div class="p-2 mr-auto">
+                <span class="title">{{'UI_NETWORK_ADMIN.RESTRICTIONS.ADD.TITLE'|translate}}</span>
+                <span class="description">{{'UI_NETWORK_ADMIN.RESTRICTIONS.ADD.DESCRIPTION'|translate}}</span>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <form ng-submit="controller.onSubmit()" name="controller.form" autocomplete="off" novalidate>
+        <buttonbar>
+            <button-back ui-sref="^.list"></button-back>
+            <button-submit></button-submit>
+        </buttonbar>
+        <br/><br/>
+        <div class="row v-reset-row ">
+            <div class="col-xs-12">
+                <div class="card card-block">
+                    <div class="well-clear">
+                        <formly-form model="controller.model" fields="controller.fields" options="controller.options" form="controller.form">
+                        </formly-form>
+                    </div>
+                    <div class="well-clear">
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" ng-click="controller.addRestriction()">
+                                <span><i class="fa fa-plus"></i>{{'GLOBAL.ACTION.ADD'|translate}}</span>
+                            </button>
+                        </div>
+                        <hr style="margin-top: 40px;"/>
+                        <div ng-if="controller.model.restrictions.length > 0" class="col-xs-12 table-responsive">
+                            <table class="table table-hover table-striped nowrap" cellspacing="0" width="100%">
+                                <thead>
+                                <tr>
+                                    <th>{{'UI_NETWORK_ADMIN.RESTRICTIONS.FIELDS.RESTRICTION.RESTRICTION.NAME'|translate}}</th>
+                                    <th>{{'UI_NETWORK_ADMIN.RESTRICTIONS.FIELDS.RESTRICTION.ENABLED.NAME'|translate}}</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="restriction in controller.model.restrictions track by $index">
+                                    <td style="width: 25%;">{{controller.getRestrictionTypeName(restriction.restriction.code) + " (" + restriction.restriction.code + ")"}}</td>
+                                    <td style="width: 25%;"><span class="label" ng-class="{'label-success': restriction.enabled === true, 'label-danger': restriction.enabled === false }">{{(restriction.enabled) ? 'ENABLED' : 'DISABLED'}}</span></td>
+                                    <td style="width: 50%;">
+                                        <a ng-click="controller.modifyRestriction($index)">
+                                            <span class="badge bg-blue"><i class="fa fa-cog"></i></span>
+                                        </a>
+                                        &nbsp;
+                                        <a ng-click="controller.removeRestriction($index)">
+                                            <span class="badge bg-red"><i class="fa fa-times"></i></span>
+                                        </a>
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div ng-if="controller.model.restrictions.length === 0">
+                            <div class="col-xs-12">
+                                <b>{{'UI_NETWORK_ADMIN.RESTRICTIONS.NORESTRICTIONSSETUPYET'|translate}}</b>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,25 @@
+server:
+  port: 9933
+
+spring:
+  application:
+    name: service-csv-provider-casino
+  cloud:
+    stream:
+      bindings:
+        service-csv-provider-casino-input:
+          binder: rabbit
+          group: csv-casino-group
+          destination: csv-casino-queue
+          consumer:
+            concurrency: 2
+
+lithium:
+  service-csv-provider-casino:
+    processing-job-page-size: 500
+
+
+
+logging:
+  level:
+    lithium.service.csv.casino.provider: INFO

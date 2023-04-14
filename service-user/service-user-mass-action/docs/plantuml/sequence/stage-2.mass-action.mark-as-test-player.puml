@@ -1,0 +1,32 @@
+.Mass Action Mark as Test Player
+[plantuml]
+----
+@startuml
+'https://plantuml.com/sequence-diagram
+
+participant  "svc-user-mass-action" as usermassaction
+participant "svc-user" as user
+
+alt Perform MARK_AS_TEST_PLAYER action
+    usermassaction->user:markAsTestPlayer {gateway}/service-user/system/user/{id}/test-account/{isTestAccount}
+    activate user
+    alt success
+        user-->usermassaction: Successful Response
+    else exception
+        user-->usermassaction: Error Response
+        deactivate user
+        usermassaction->usermassaction: create error_log record (fileData.id, action.id, errorCode, errorMessage)
+        note right of usermassaction
+            * When an error occurs on a action, then a record will be written to the error_log that provides
+              reference back to the player and action being performed
+
+            ErrorCode:
+            * a unique it will be based on action being executed.
+            ErrorMessage
+            * a unique code that gets created per errorMessage
+        end note
+    end
+end
+
+@enduml
+----

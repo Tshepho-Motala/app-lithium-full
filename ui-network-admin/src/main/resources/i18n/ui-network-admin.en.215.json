@@ -1,0 +1,8 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "DEPOSITLIMITS": {
+      "CONFIRMATION_MESSAGE": "Are you sure you want to decrease the amount from",
+      "TEXT":"Confirm"
+    }
+  }
+}

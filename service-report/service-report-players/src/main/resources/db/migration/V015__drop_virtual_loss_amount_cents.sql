@@ -1,0 +1,1 @@
+ALTER TABLE `report_run_results` DROP COLUMN `virtual_loss_amount_cents`;

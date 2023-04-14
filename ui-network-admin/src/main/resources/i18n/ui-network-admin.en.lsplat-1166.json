@@ -1,0 +1,14 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "DIRECTIVES": {
+      "GLOBAL": {
+        "CHANGE_LOG": {
+          "EDIT_NOTES": "Edit notes",
+          "SUCCESS_UPDATE" : "Change log comment update success",
+          "ERROR" : "Change log comment could not be updated",
+          "SUCCESS" : "Change log comment is updated"
+        }
+      }
+    }
+  }
+}

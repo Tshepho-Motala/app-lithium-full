@@ -1,0 +1,134 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "RESTRICTIONS": {
+      "AUTORESTRICTIONS": {
+        "RULESETS": {
+          "FIELDS": {
+            "DOMAIN": {
+              "NAME": "Domain",
+              "DESCRIPTION": "Choose the domain that you are creating the ruleset for"
+            },
+            "NAME": {
+              "NAME": "Name",
+              "DESCRIPTION": "Add a unique name for the ruleset"
+            },
+            "ENABLED": {
+              "NAME": "Enabled",
+              "DESCRIPTION": "Should this ruleset be enabled?"
+            },
+            "DISABLED": {
+              "NAME": "Disabled"
+            },
+            "LASTUPDATED": {
+              "NAME": "Last Updated"
+            },
+            "LASTUPDATEDBY": {
+              "NAME": "Last Updated By"
+            },
+            "OUTCOME": {
+              "NAME": "Outcome",
+              "DESCRIPTION": "Choose the outcome of the ruleset"
+            },
+            "RESTRICTION": {
+              "NAME": "Restriction",
+              "DESCRIPTION": "Choose the restriction for the auto-restriction outcome"
+            }
+          },
+          "NORULESSETUPYET": "No rules setup yet.",
+          "RULE": {
+            "TITLE": "Auto Restriction Ruleset Rule",
+            "BETWEEN": {
+              "RANGEWARN": "The value for range end must be less than or equal to the value for range start"
+            },
+            "UPDATE": {
+              "SUCCESS": "Successfully updated the rule on this auto-restriction ruleset",
+              "ERROR": "Failed to update the rule on this auto-restriction ruleset"
+            },
+            "ADD": {
+              "SUCCESS": "Successfully added the rule on this auto-restriction ruleset",
+              "ERROR": "Failed to add the rule on this auto-restriction ruleset"
+            },
+            "FIELDS": {
+              "ENABLED": {
+                "NAME": "Enabled",
+                "DESCRIPTION": "Should this rule be enabled?"
+              },
+              "FIELD": {
+                "NAME": "Field",
+                "DESCRIPTION": "The field to filter by"
+              },
+              "OPERATOR": {
+                "NAME": "Operator",
+                "DESCRIPTION": "The operator to be used against the filter field value"
+              },
+              "VALUE": {
+                "NAME": "Value"
+              }
+            }
+          },
+          "LIST": {
+            "TITLE": "Auto-Restriction Rulesets",
+            "DESCRIPTION": "A searchable list of auto-restriction rulesets",
+            "FIELDS": {
+              "ENABLED": {
+                "NAME": "Enabled"
+              },
+              "NAME": {
+                "NAME": "Name"
+              },
+              "LASTUPDATEDSTART": {
+                "NAME": "Last Updated: Range Start"
+              },
+              "LASTUPDATEDEND": {
+                "NAME": "Last Updated: Range End"
+              }
+            }
+          },
+          "ADD": {
+            "TITLE": "Add an Auto-Restriction Ruleset",
+            "DESCRIPTION": "Use the controls below to setup an auto-restriction ruleset",
+            "SUCCESS": "Successfully added the auto-restriction ruleset",
+            "ERROR": "Failed to add the auto-restriction ruleset"
+          },
+          "EDIT": {
+            "TITLE": "Editing Auto-Restriction Ruleset",
+            "DISABLE": {
+              "CONFIRM": "Are you sure you want to disable this auto-restriction ruleset?",
+              "SUCCESS": "Successfully disabled the auto-restriction ruleset"
+            },
+            "ENABLE": {
+              "CONFIRM": "Are you sure you want to enable this auto-restriction ruleset?",
+              "SUCCESS": "Successfully enabled the auto-restriction ruleset"
+            },
+            "DELETE": {
+              "CONFIRM": "Are you sure you want to delete this auto-restriction ruleset?",
+              "SUCCESS": "Successfully deleted the auto-restriction ruleset"
+            },
+            "DELETERULE": {
+              "CONFIRM": "Are you sure you want to delete this auto-restriction ruleset rule?",
+              "SUCCESS": "Successfully deleted the auto-restriction ruleset rule"
+            }
+          },
+          "VIEW": {
+            "TITLE": "Viewing Auto-Restriction Ruleset"
+          },
+          "CHANGENAME": {
+            "TITLE": "Auto Restriction Rulesets Change Name",
+            "SUCCESS": "Successfully changed the auto-restriction ruleset name",
+            "ERROR": "Failed to change the auto-restriction ruleset name"
+          },
+          "CHANGEOUTCOME": {
+            "TITLE": "Auto Restriction Rulesets Change Outcome",
+            "SUCCESS": "Successfully changed the auto-restriction ruleset outcome",
+            "ERROR": "Failed to change the auto-restriction ruleset outcome"
+          },
+          "CHANGERESTRICTION": {
+            "TITLE": "Auto Restriction Rulesets Change Restriction",
+            "SUCCESS": "Successfully changed the auto-restriction ruleset restriction",
+            "ERROR": "Failed to change the auto-restriction ruleset restriction"
+          }
+        }
+      }
+    }
+  }
+}

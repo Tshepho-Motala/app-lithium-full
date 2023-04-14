@@ -1,0 +1,128 @@
+[plantuml]
+----
+@startuml
+autonumber
+participant "SVC-Casino/SVC-Cashier" as c
+participant "SVC-Accounting" as a
+queue "AdjustmentQueue" as aq
+participant "Processor n" as qp
+participant "SummaryService" as ss
+participant "ShardsRegistry" as sr
+participant "SVC-Shards" as sh
+participant "SummaryDomainService" as sd
+participant "SummaryDomainLabelValueService" as sdlv
+participant "SummaryDomainTransactionTypeService" as sdtt
+
+activate qp
+aq <-- qp: Listen
+deactivate qp
+activate c
+activate a
+c -> a: Adjustment
+a ->> aq: Enqueue
+a --> c
+deactivate c
+deactivate a
+activate qp
+aq -> qp: Dequeue
+activate ss
+qp -> ss: Process (thread name, transactions)
+ss -> sr: Get Shard UUID (pool name, processor thread name)
+note right
+A pool signifies a collection
+of shards related to a specific
+component, eg. AdjustmentQueueProcessor,
+or, AsyncLabelValueQueueProcessor.
+
+The thread processor name is used as a unique key per shard
+in the collection, eg. adjustmentqueue.adjustmentgroup-1,
+or, asynclabelvaluequeue.asynclabelvaluegroup-1.
+end note
+activate sr
+alt Found in memory
+    sr --> ss
+else
+    activate sh
+    sr -> sh: Create
+    note right
+    Shards (basically just UUID’s) are managed in a central
+    repository manipulated by SVC-shards. They’re created
+    by module (eg. service-accounting-domain-summary) and pool
+    (eg. AdjustmentQueueProcessor.) We do this to reuse
+    UUID’s that service instances may abandon, either by a
+    shutdown, or by not sending a keep alive heartbeat.
+    Once we breach a certain threshold of keep alive time,
+    another create request may reuse an abandoned UUID.
+    The consequence of this is limiting the number of
+    records we create in consuming components.
+    end note
+    sh --> sr: Store in Memory
+    deactivate sh
+    note right
+    Will be kept alive
+    with a heartbeat
+    from a thread in the
+    ShardsRegistry
+    bean to SVC-shards.
+    end note
+    sr --> ss
+end
+deactivate sr
+ss -> ss: Find or Create Shared Data (Domain, Currency, ..)
+activate sd
+ss -> sd: Process (shard uuid, transactions)
+loop each transaction
+    loop each transaction entry
+        loop each granularity
+        sd -> sd: findByShardAndAccountCodeAndCurrencyAndPeriod
+        alt Found
+            sd -> sd: Update
+        else
+            sd -> sd: Create
+        end
+        end
+    end
+end
+sd --> ss
+deactivate sd
+activate sdlv
+ss -> sdlv: Process (shard uuid, transactions)
+loop each transaction
+    loop each transaction entry
+        loop each granularity
+            loop each label value
+            sdlv -> sdlv: findByShardAndAccountCodeAndTransactionTypeAndCurrencyAndPeriodAndLabelValue
+            alt Found
+                sdlv -> sdlv: Update
+            else
+                sdlv -> sdlv: Create
+            end
+            end
+        end
+    end
+end
+sdlv --> ss
+deactivate sdlv
+activate sdtt
+ss -> sdtt: Process (shard uuid, transactions)
+loop each transaction
+    loop each transaction entry
+        loop each granularity
+            sdtt -> sdtt: findByShardAndAccountCodeAndTransactionTypeAndCurrencyAndPeriod
+            alt Found
+                sdtt -> sdtt: Update
+            else
+                sdtt -> sdtt: Create
+            end
+        end
+    end
+end
+sdtt --> ss
+deactivate sdtt
+ss --> qp
+deactivate ss
+qp --> aq: ACK
+deactivate qp
+@enduml
+----
+[plantuml]

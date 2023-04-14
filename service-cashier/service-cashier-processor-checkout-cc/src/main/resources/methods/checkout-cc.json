@@ -1,0 +1,107 @@
+{
+	"name": "Checkout Credit Card",
+	"code": "checkout-cc",
+	"image": {
+		"filename": "/methods/checkout-cc.png",
+		"filetype": "image/png"
+	},
+	"depositStages": [
+		{
+			"number": 1,
+			"title": "Initialize payment with card token",
+			"description": null,
+			"inputFields": [
+				{
+					"code": "cvv",
+					"name": "CVV",
+					"description": "Enter the last three digits of the CVV code on the back of your card.",
+					"type": "cvv",
+					"required": false
+				},
+				{
+					"code": "nameoncard",
+					"name": "Name on card",
+					"description": "Enter your full name as it appears on the front of your card",
+					"type": "string",
+					"required": false
+				},
+				{
+					"code": "paymentToken",
+					"name": "Checkout payment token",
+					"type": "string",
+					"required": false
+				},
+				{
+					"code": "paymentToken2",
+					"name": "Checkout payment token used after soft decline",
+					"type": "string",
+					"required": false
+				},
+				{
+					"code": "cardReference",
+					"name": "Checkout card source id",
+					"type": "string",
+					"required": false
+				},
+				{
+					"code": "return_url",
+					"name": "Return URL",
+					"description": "Return URL once transaction is complete. Will be appended with a status",
+					"type": "return_url",
+					"required": true
+				},
+				{
+					"code": "set_default",
+					"name": "Set default card",
+					"description": "Save cards as default for the future payments",
+					"type": "boolean",
+					"required": false
+				},
+				{
+					"code": "save_card",
+					"name": "Save card",
+					"description": "Save card for the future payments.",
+					"type": "boolean",
+					"required": true
+				}
+			],
+			"outputFields": []
+		},
+		{
+			"number": 2,
+			"title": "Validate payment",
+			"description": null,
+			"inputFields": [],
+			"outputFields": []
+		}
+	],
+	"withdrawalStages": [
+		{
+			"number": 1,
+			"title": "Enter Amount",
+			"description": null,
+			"inputFields": [
+				{
+					"code": "cardReference",
+					"name": "Checkout card source id",
+					"type": "string",
+					"required": false
+				},
+				{
+					"code": "processorAccountId",
+					"name": "Processor account id",
+					"type": "string",
+					"required": false
+				}
+			],
+			"outputFields": []
+		},
+		{
+			"number": 2,
+			"title": "Validate payment",
+			"description": null,
+			"inputFields": [],
+			"outputFields": []
+		}
+	]
+}

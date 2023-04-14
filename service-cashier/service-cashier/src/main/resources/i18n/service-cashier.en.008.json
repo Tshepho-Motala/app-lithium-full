@@ -1,0 +1,15 @@
+{
+  "SERVICE-CASHIER": {
+    "AUTOWITHDRAWALS": {
+      "RULESETS": {
+        "RULE": {
+          "FIELD": {
+            "NO_OF_AUTO_APPROVED_WITHDRAWALS": "No. of Auto-Approved Withdrawals",
+            "DAYS_SINCE_LAST_DEPOSIT": "Days Since Last Deposit",
+            "LAST_DEPOSIT_AMOUNT_CENTS": "Last Deposit Amount (in cents)"
+          }
+        }
+      }
+    }
+  }
+}

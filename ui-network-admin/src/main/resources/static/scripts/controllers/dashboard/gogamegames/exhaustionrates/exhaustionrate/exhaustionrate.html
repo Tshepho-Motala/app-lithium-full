@@ -1,0 +1,132 @@
+<div class="container-fluid">
+	<div class="box box-primary box-widget">
+		<div class="box-body box-profile">
+			<div class="user-block">
+				<div class="pull-right">
+					<span class="label">&nbsp;</span>
+					<br/>
+					<span style="line-height:inherit;" class="label label-primary">{{controller.exhaustionRate.ledger.name|uppercase}}</span>
+					<span style="line-height:inherit;" class="label label-success">{{controller.exhaustionRate.ledger.currencyCode}}</span>
+					<span style="line-height:inherit;" class="label label-warning">{{controller.exhaustionRate.ledger.totalPlay|currency}}</span>
+				</div>
+				<h4 style="font-weight: bold;">
+					Exhaustion Rate: ({{controller.exhaustionRate.id}})<br/>
+				</h4>
+			</div>
+		</div>
+	</div>
+	
+	<buttonbar>
+		<button-back ui-sref="dashboard.gogamegames.exhaustionrates"></button-back>
+		<button-download-excel ng-if="controller.exhaustionRate.processingCompleted !== null" ng-click="controller.downloadxls()"></button-download-excel>
+		<button-refresh ng-click="controller.refresh()"></button-refresh>
+	</buttonbar>
+	
+	<br/><br/>
+	
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<i class="fa fa-info-circle"></i> EHR Information
+		</div>
+		<div class="panel-body">
+			<div class="row v-reset-row ">
+				<div class="col-lg-6">
+					<table class="table table-hover table-striped nowrap" cellspacing="0" width="100%">
+						<tbody>
+							<tr>
+								<th style="width: 40%;">Created</th>
+								<td>{{controller.exhaustionRate.created|datetimedefault}}</td>
+							</tr><tr>
+								<th>Processing</th>
+								<td>{{controller.exhaustionRate.processing}}</td>
+							</tr><tr>
+								<th>Processing Started</th>
+								<td>{{controller.exhaustionRate.processingStarted|datetimedefault}}</td>
+							</tr><tr>
+								<th>Processing Completed</th>
+								<td>{{controller.exhaustionRate.processingCompleted|datetimedefault}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				
+				<div class="col-lg-6">
+					<table class="table table-hover table-striped nowrap" cellspacing="0" width="100%">
+						<tbody>
+							<tr>
+								<th style="width: 40%;">Ledger</th>
+								<td>({{controller.exhaustionRate.ledger.id}}) {{controller.exhaustionRate.ledger.name}}</td>
+							</tr><tr>
+								<th>Currency</th>
+								<td>{{controller.exhaustionRate.ledger.currencyCode}}</td>
+							</tr><tr>
+								<th>Total Play</th>
+								<td>{{controller.exhaustionRate.ledger.totalPlay|currency}}</td>
+							</tr><tr>
+								<th>Player Balance (EHR started with)</th>
+								<td>{{controller.exhaustionRate.pbCents|cents}}</td>
+							</tr><tr>
+								<th>Ledger Entry ID (EHR started at)</th>
+								<td>{{controller.exhaustionRate.startLedgerEntryId}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<i class="fa fa-exclamation-triangle"></i> EHR Errors
+		</div>
+		<div class="panel-body">
+			<div class="row v-reset-row ">
+				<div class="col-lg-12">
+					<table class="table table-hover table-striped nowrap" cellspacing="0" width="100%">
+						<tbody>
+							<tr>
+								<th style="width: 20%;">Failed</th>
+								<td>{{controller.exhaustionRate.failed}}</td>
+							</tr><tr>
+								<th>Failure Reason</th>
+								<td>{{controller.exhaustionRate.failureReason}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<i class="fa fa-bar-chart-o fa-fw"></i> EHR Graph
+		</div>
+		<div class="panel-body">
+			<div class="row v-reset-row ">
+				<div class="col-lg-12">
+					<c3chart bindto-id="exhaustionrate" show-labels="false" show-subchart="true" enable-zoom="true"
+						chart-data="controller.exhaustionRateData.dataPoints"
+						chart-columns="controller.exhaustionRateData.dataColumns"
+						callback-function="callback">
+						<chart-axis>
+							<chart-axis-y axis-id="y" axis-position="outer-right" axis-label="Player Balance" padding-top="100" padding-bottom="0" range-min="0">
+<!-- 								<chart-axis-y-tick tick-values="{{controller.exhaustionRateData.tickValues}}" tick-format-function="controller.formatcurrency"/> -->
+								<chart-axis-y-tick tick-format-function="controller.formatcurrency"/>
+							</chart-axis-y>
+							<chart-axis-x axis-min="1" axis-position="outer-center">
+								<chart-axis-x-tick tick-format-function="controller.formatspinno"/>
+							</chart-axis-x>
+						</chart-axis>
+						<chart-grid show-x="false" show-y="true"/>
+						<chart-legend show-legend="true" legend-position="right"/>
+					</c3chart>
+				</div>
+			</div>
+		</div>
+	</div>
+
+<!-- 	<pre>{{controller.exhaustionRate|json}}</pre> -->	
+<!-- 	<pre>{{controller.exhaustionRateData|json}}</pre> -->
+</div>

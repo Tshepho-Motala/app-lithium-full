@@ -1,0 +1,71 @@
+{
+  "name": "Opay Web",
+  "code": "opay",
+  "image": {
+    "filename": "/methods/opay.png",
+    "filetype": "image/png"
+  },
+  "depositStages": [
+    {
+      "number": 1,
+      "title": "Enter Amount",
+      "description": "Specify the amount you wish to deposit.",
+      "inputFields": [
+
+      ],
+      "outputFields": []
+    },
+    {
+      "number": 2,
+      "title": "Your transaction is awaiting approval.",
+      "description": "We have submitted your transaction and we are awaiting approval. Please check back later.",
+      "inputFields": [],
+      "outputFields": []
+    }
+  ],
+  "withdrawalStages": [
+    {
+      "number": 1,
+      "title": "Enter Amount",
+      "description": "Specify the amount and account number you wish to withdraw.",
+      "inputFields": [
+        {
+          "code": "account_number",
+          "name": "Account number",
+          "description": "Opay account holder phone number",
+          "type": "string",
+          "required": true
+        },
+        {
+          "code": "full_name",
+          "name": "Opay account holder name",
+          "description": "Opay account holder name",
+          "type": "string",
+          "required": false
+        },
+        {
+          "code": "user_id",
+          "name": "Opay account holder id",
+          "description": "Opay account holder id",
+          "type": "string",
+          "required": false
+        },
+        {
+          "code": "processorAccountId",
+          "name": "Lithium processor account",
+          "description": "Lithium processor account contain details about bank payer account",
+          "type": "long",
+          "required": false
+        }
+      ],
+      "outputFields": []
+    },
+    {
+      "number": 2,
+      "title": "Your transaction is awaiting approval.",
+      "description": "We have submitted your transaction and we are awaiting approval. Please check back later.",
+      "inputFields": [],
+      "outputFields": []
+    }
+  ]
+}

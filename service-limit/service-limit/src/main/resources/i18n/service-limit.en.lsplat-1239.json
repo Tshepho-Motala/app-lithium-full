@@ -1,0 +1,8 @@
+{
+  "ERROR_DICTIONARY": {
+    "MY_ACCOUNT": {
+      "BLOCKED_BY_TIME_SLOT_LIMIT": "Current Time Slot Limit prevents this action.",
+      "DOMAIN_TIME_SLOT_LIMIT_DISABLED": "Domain is not configured to access Time Slot Limits."
+    }
+  }
+}

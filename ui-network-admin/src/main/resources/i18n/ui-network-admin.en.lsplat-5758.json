@@ -1,0 +1,16 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "PLAY_TIME_LIMITS": {
+      "DISABLE": {
+        "MESSAGE": "Time Limit is disabled for this domain."
+      },
+      "ERRORS": {
+        "RETRIEVE_LIMIT": "Failed to retrieve player limits data, kindly contact your administrator"
+      },
+      "POP_UP_DIALOG":{
+        "INCREASE_LIMIT_EXPLANATION_4": "to the play time limit, and will only take effect after ",
+        "INCREASE_LIMIT_EXPLANATION_5": " have elapsed."
+      }
+    }
+  }
+}

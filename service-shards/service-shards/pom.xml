@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>lithium</groupId>
+		<artifactId>common-parent-service</artifactId>
+		<version>1.12-SNAPSHOT</version>
+		<relativePath>../../common-parent-service</relativePath>
+	</parent>
+
+	<artifactId>service-shards</artifactId>
+
+	<name>service-shards</name>
+	<description>Service Shards</description>
+
+	<dependencies>
+		<dependency>
+			<groupId>lithium</groupId>
+			<artifactId>client-service-shards</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>lithium</groupId>
+			<artifactId>library-common-jpa</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-jpamodelgen</artifactId>
+		</dependency>
+	</dependencies>
+</project>

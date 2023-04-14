@@ -1,0 +1,20 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "BALANCE_LIMITS": {
+      "CHANGE": {
+        "EXPLAIN": {
+          "LARGER": "This is an increase to this balance limit, and will only take effect after 7 days have elapsed"
+        }
+      }
+    },
+    "CASHIER": {
+      "TRANS": {
+        "VIEW": {
+          "INFO": {
+            "REVIEWED_BY": "Reviewed by"
+          }
+        }
+      }
+    }
+  }
+}

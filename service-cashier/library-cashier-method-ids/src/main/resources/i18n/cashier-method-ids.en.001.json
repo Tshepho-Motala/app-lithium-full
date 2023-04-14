@@ -1,0 +1,8 @@
+{
+	"CASHIER-METHOD-IDS": {
+		"DEPOSIT_AMOUNT_FIELD_TITLE": "Enter Amount",
+		"DEPOSIT_AMOUNT_FIELD_DESCRIPTION": "Specify an amount that you wish to deposit.",
+		"DEPOSIT_WAIT_FOR_PR_RESPONSE_TITLE": "Waiting for Confirmation",
+		"DEPOSIT_WAIT_FOR_PR_RESPONSE_DESCRIPTION": "Thank you. We have received all your information for this deposit and now we wait for the funds to arrive on our end."
+	}
+}

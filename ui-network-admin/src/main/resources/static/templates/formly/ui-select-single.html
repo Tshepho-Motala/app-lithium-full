@@ -1,0 +1,18 @@
+<ui-select
+	theme="bootstrap"
+	ng-model="model[options.key]"
+	data-required="{{to.required}}"
+	ng-required="{{to.required}}"
+	disabled={{to.disabled}}
+	search-enabled="{{to.searchEnabled}}"
+	append-to-body="{{(to.appendToBody !== undefined)? to.appendToBody: false}}">
+	<ui-select-match
+		placeholder="{{to.placeholder}}"
+		data-allow-clear="{{to.dataAllowClear}}">{{$select.selected[to.labelProp]}}
+	</ui-select-match>
+	<ui-select-choices
+		group-by="'{{to.groupBy}}'"
+		data-repeat="option[to.valueProp] as option in to.options | filter: $select.search | limitTo: ($select.search.length <= 2) ? 300 : undefined">
+		<div ng-bind-html="option[to.labelProp] | highlight: $select.search"></div>
+	</ui-select-choices>
+</ui-select>

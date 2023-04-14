@@ -1,0 +1,36 @@
+.Intervention Message Basic Use Cases
+[plantuml]
+----
+@startuml
+skinparam actorStyle awesome
+
+actor Player as p
+actor "DWH" as dwh
+
+usecase oo as "
+Player sends request to opt out of promotions.
+--
+PLAYER_COMPS_OPTOUT - System Restriction
+--
+no subordinate type, dwh_visible = false
+--
+May be removed by player/lbo, will remove record
+from user_restriction_set table.
+"
+p -> oo
+
+
+usecase im as "
+dwh/scv sends intervention message to lithium
+--
+INTERVENTION_COMPS_BLOCK - System Restriction
+--
+subordinate type (not provided=indefinite, else tied to auto-restriction rules), dwh_visible = true
+--
+Cannot be removed by player.
+Can be removed in LBO.
+Can be removed by Auto-Restriction Rules.
+"
+dwh --> im
+@enduml
+----

@@ -1,0 +1,24 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "PLAYER": {
+      "TAB": {
+        "LOGINEVENTS": "Login History"
+      },
+      "LOGINEVENTS": {
+        "COUNTRY": "Country"
+      }
+    },
+    "LOGINEVENTS": {
+      "LIST": {
+        "TITLE": "Login History",
+        "DESCRIPTION": "A list of login history for the network or domain"
+      }
+    },
+    "USERS": {
+      "TAB": {
+        "SUMMARY": "Summary",
+        "LOGINEVENTS": "Login History"
+      }
+    }
+  }
+}

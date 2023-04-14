@@ -1,0 +1,47 @@
+.Bonus History View Flow (current implementation)
+[plantuml]
+----
+
+@startuml
+
+autonumber
+
+participant "LBO" as lbo
+participant "svc-accounting-history" as svcaccthist
+participant "svc-accounting-pr-internal" as svcacct
+participant "svc-casino" as svccasino
+participant "svc-games" as svcgames
+participant "svc-bonus" as svcbonus
+
+lbo -> svcaccthist: /admin/transaction/table
+activate svcaccthist
+svcaccthist -> svcacct: /admin/transaction/table
+activate svcacct
+svcacct -> svcaccthist: Result
+deactivate svcacct
+' casino
+svcaccthist -> svccasino: /system/casino/transaction-detail-url/findTransactionDetailUrls
+activate svccasino
+svccasino -> svcaccthist: Result
+deactivate svccasino
+' games
+svcaccthist -> svcgames: /games/{domainName}/listDomainGames
+activate svcgames
+svcgames -> svcaccthist: Result
+deactivate svcgames
+' casino 2
+svcaccthist -> svccasino: /backoffice/bonus/player/queryBonus
+activate svccasino
+svccasino -> svcaccthist: Result
+deactivate svccasino
+' bonus
+svcaccthist -> svcbonus: /backoffice/bonus/player/queryBonus
+activate svcbonus
+svcbonus -> svcaccthist: Result
+deactivate svcbonus
+'
+svcaccthist -> lbo: Result
+deactivate svcaccthist
+
+@enduml
+----

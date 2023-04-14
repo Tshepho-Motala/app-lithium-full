@@ -1,0 +1,36 @@
+.Mass Action Replace Player Tags
+[plantuml]
+----
+@startuml
+'https://plantuml.com/sequence-diagram
+
+participant  "svc-user-mass-action" as usermassaction
+participant "svc-user" as user
+
+alt Perform REPLACE_PLAYER_TAGS action
+    usermassaction->user:replacePlayerTags {gateway}/service-user/system/user/{id}/tag/remove
+    activate user
+    usermassaction->user:addPlayerTags {gateway}/service-user/system/user/{id}/tag/add
+    alt success
+        user-->usermassaction: Successful Remove Response
+        user-->usermassaction: Successful Add Response
+    else exception
+        user-->usermassaction: Error Remove Response
+        user-->usermassaction: Error Add Response
+        note over usermassaction: If any of the two responses are not successful, we need to write to the log that there was an issue on the replace player tags
+        deactivate user
+        usermassaction->usermassaction: create error_log record (fileData.id, action.id, errorCode, errorMessage)
+        note right of usermassaction
+            * When an error occurs on a action, then a record will be written to the error_log that provides
+              reference back to the player and action being performed
+
+            ErrorCode:
+            * a unique it will be based on action being executed.
+            ErrorMessage
+            * a unique code that gets created per errorMessage
+        end note
+    end
+end
+
+@enduml
+----

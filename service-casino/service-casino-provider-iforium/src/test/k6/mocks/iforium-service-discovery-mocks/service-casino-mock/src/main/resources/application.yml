@@ -1,0 +1,10 @@
+server:
+  port: 7071
+
+spring:
+  application:
+    name: service-casino
+
+sidecar:
+  port: 8080
+  health-uri: http://localhost:8080/health

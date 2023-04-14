@@ -1,0 +1,667 @@
+sonarscan_branch:
+  stage: sonarscan
+  image: maven:3.8.4-eclipse-temurin-17-alpine
+  cache:
+    key: sonarqube-maven-cache
+    paths:
+    - repository
+  except:
+    refs:
+      - /^environment/.*$/
+      - develop
+    variables:
+    - $SONAR_OVERRIDE =~ /yes/
+  when: manual
+  allow_failure: true
+  variables:
+    MAVEN_OPTS: -Xmx16g -DskipTests=true -Dmaven.test.skip=true -Dmaven.test.failure.ignore=true
+    GIT_DEPTH: 50
+  script:
+    - mkdir logs
+    - echo $MAVEN_OPTS
+    - mvn -e clean install -s build/gitlab/maven-settings.xml -T 1C
+    - mvn -e sonar:sonar -s build/gitlab/maven-settings.xml
+  tags:
+    - wl-group-runner
+
+sonarscan_branch_override:
+  stage: sonarscan
+  image: maven:3.8.4-eclipse-temurin-17-alpine
+  cache:
+    key: sonarqube-maven-cache
+    paths:
+    - repository
+  only:
+    variables:
+      - $SONAR_OVERRIDE =~ /yes/
+  allow_failure: true
+  variables:
+    GIT_DEPTH: 50
+    MAVEN_OPTS: -Xmx16g -DskipTests=true -Dmaven.test.skip=true -Dmaven.test.failure.ignore=true
+  script:
+    - mkdir logs
+    - echo $MAVEN_OPTS
+    - mvn -e clean install -s build/gitlab/maven-settings.xml -T 1C
+    - mvn -e sonar:sonar -s build/gitlab/maven-settings.xml
+  tags:
+    - wl-group-runner
+
+.job_template: &createdockerimages
+  stage: createdockerimages
+  image: registry.gitlab.com/playsafe/docker/maven-docker-builder:openjdk17
+  cache:
+    key: app-lithium-full-maven-cache-no-lithium
+    paths:
+      - repository
+  except:
+    - develop
+    - schedules
+  services:
+    - docker:dind
+
+.job_template: &createdockerimages_all
+  stage: createdockerimages
+  image: registry.gitlab.com/playsafe/docker/maven-docker-builder:openjdk17
+  when: manual
+  cache:
+    key: app-lithium-full-maven-cache-no-lithium
+    paths:
+      - repository
+  except:
+    - develop
+    - schedules
+  services:
+    - docker:dind
+  only:
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /\[all\]/
+
+.job_template: &deploy
+  stage: deploy
+  image: registry.gitlab.com/playsafe/docker/lithium-deployer:latest
+  environment:
+    name: $CI_COMMIT_REF_NAME
+  except:
+    - develop
+    - schedules
+  # only:
+  #   refs:
+  #     - /^environment/.*$/
+
+.job_template: &deploy_all
+  stage: deploy
+  image: registry.gitlab.com/playsafe/docker/lithium-deployer:latest
+  when: manual
+  environment:
+    name: $CI_COMMIT_REF_NAME
+  # except:
+  #   - develop
+  #   - schedules
+  only:
+    refs:
+      - /^environment/.*$/
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /\[all\]/
+
+#### service-access-mock-gamstop
+svc-access-mock-gamstop:createdockerimage:
+  <<: *createdockerimages
+  script: "sh build/gitlab/build-image.sh svc-access-mock-gamstop service-access/service-access-mock-gamstop"
+  only:
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /\[service-access-mock-gamstop\]/
+
+svc-access-mock-gamstop:createdockerimage_all:
+  <<: *createdockerimages_all
+  script: "sh build/gitlab/build-image.sh svc-access-mock-gamstop service-access/service-access-mock-gamstop"
+
+svc-access-mock-gamstop:deploy:
+  <<: *deploy
+  script: "bash build/gitlab/deploy.sh svc-access-mock-gamstop"
+  only:
+    refs:
+      - /^environment/.*$/
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /\[service-access-mock-gamstop\]/
+
+svc-access-mock-gamstop:deploy_all:
+  <<: *deploy_all
+  script: "bash build/gitlab/deploy.sh svc-access-mock-gamstop"
+
+svc-cdn-cms:createdockerimage:
+  <<: *createdockerimages
+  script: "sh build/gitlab/build-image.sh svc-cdn-cms service-cdn/service-cdn-cms"
+  only:
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /\[service-cdn-cms\]/
+
+svc-cdn-cms:createdockerimage_all:
+  <<: *createdockerimages_all
+  script: "sh build/gitlab/build-image.sh svc-cdn-cms service-cdn/service-cdn-cms"
+
+svc-cdn-cms:deploy:
+  <<: *deploy
+  script: "bash build/gitlab/deploy.sh svc-cdn-cms"
+  only:
+    refs:
+      - /^environment/.*$/
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /\[service-cdn-cms\]/
+
+svc-cdn-cms:deploy_all:
+  <<: *deploy_all
+  script: "bash build/gitlab/deploy.sh svc-cdn-cms"
+
+svc-access-pr-google-recaptcha:createdockerimage:
+  <<: *createdockerimages
+  script: "sh build/gitlab/build-image.sh svc-access-pr-google-recaptcha service-access/service-access-provider-google-recaptcha"
+  only:
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /\[service-access-provider-google-recaptcha\]/
+
+svc-access-pr-google-recaptcha:createdockerimage_all:
+  <<: *createdockerimages_all
+  script: "sh build/gitlab/build-image.sh svc-access-pr-google-recaptcha service-access/service-access-provider-google-recaptcha"
+
+svc-access-pr-google-recaptcha:deploy:
+  <<: *deploy
+  script: "bash build/gitlab/deploy.sh svc-access-pr-google-recaptcha"
+  only:
+    refs:
+      - /^environment/.*$/
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /\[service-access-provider-google-recaptcha\]/
+
+svc-access-pr-google-recaptcha:deploy_all:
+  <<: *deploy_all
+  script: "bash build/gitlab/deploy.sh svc-access-pr-google-recaptcha"
+
+
+#### service-cashier-processor-bluem-ideal
+
+svc-cashier-pr-bluem-ideal:createdockerimage:
+  <<: *createdockerimages
+  script: "sh build/gitlab/build-image.sh svc-cashier-pr-bluem-ideal service-cashier/service-cashier-processor-bluem-ideal"
+  only:
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /\[service-cashier-processor-bluem-ideal\]/
+
+svc-cashier-pr-bluem-ideal:createdockerimage_all:
+  <<: *createdockerimages_all
+  script: "sh build/gitlab/build-image.sh svc-cashier-pr-bluem-ideal service-cashier/service-cashier-processor-bluem-ideal"
+
+svc-cashier-pr-bluem-ideal:deploy:
+  <<: *deploy
+  script: "bash build/gitlab/deploy.sh svc-cashier-pr-bluem-ideal"
+  only:
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /\[service-cashier-processor-bluem-ideal\]/
+
+svc-cashier-pr-bluem-ideal:deploy_all:
+  <<: *deploy_all
+  script: "bash build/gitlab/deploy.sh svc-cashier-pr-bluem-ideal"
+
+#### service-cashier-processor-inpay
+svc-cashier-pr-inpay:createdockerimage:
+  <<: *createdockerimages
+  script: "sh build/gitlab/build-image.sh svc-cashier-pr-inpay service-cashier/service-cashier-processor-inpay"
+  only:
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /\[service-cashier-processor-inpay\]/
+
+svc-cashier-pr-inpayl:createdockerimage_all:
+  <<: *createdockerimages_all
+  script: "sh build/gitlab/build-image.sh svc-cashier-pr-inpay service-cashier/service-cashier-processor-inpay"
+
+svc-cashier-pr-inpay:deploy:
+  <<: *deploy
+  script: "bash build/gitlab/deploy.sh svc-cashier-pr-inpay"
+  only:
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /\[service-cashier-processor-inpay\]/
+
+svc-cashier-pr-inpay:deploy_all:
+  <<: *deploy_all
+  script: "bash build/gitlab/deploy.sh svc-cashier-pr-inpay"
+
+#### service-cashier/service-cashier-mock-flutterwave
+
+svc-cashier-mock-flutterwave:createdockerimage:
+  <<: *createdockerimages
+  script: "sh build/gitlab/build-image.sh svc-cashier-mock-flutterwave service-cashier/service-cashier-mock-flutterwave"
+  only:
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /\[service-cashier-mock-flutterwave\]/
+
+svc-cashier-mock-flutterwave:createdockerimage_all:
+  <<: *createdockerimages_all
+  script: "sh build/gitlab/build-image.sh svc-cashier-mock-flutterwave service-cashier/service-cashier-mock-flutterwave"
+
+svc-cashier-mock-flutterwave:deploy:
+  <<: *deploy
+  script: "bash build/gitlab/deploy.sh svc-cashier-mock-flutterwave"
+  only:
+    refs:
+      - /^environment/.*$/
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /\[service-cashier-mock-flutterwave\]/
+
+svc-cashier-mock-flutterwave:deploy_all:
+  <<: *deploy_all
+  script: "bash build/gitlab/deploy.sh svc-cashier-mock-flutterwave"
+
+#### service-cashier-mock-inpay
+
+svc-cashier-mock-inpay:createdockerimage:
+  <<: *createdockerimages
+  script: "sh build/gitlab/build-image.sh svc-cashier-mock-inpay service-cashier/service-cashier-mock-inpay"
+  only:
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /\[service-cashier-mock-inpay\]/
+
+svc-cashier-mock-inpay:createdockerimage_all:
+  <<: *createdockerimages_all
+  script: "sh build/gitlab/build-image.sh svc-cashier-mock-inpay service-cashier/service-cashier-mock-inpay"
+
+svc-cashier-mock-inpay:deploy:
+  <<: *deploy
+  script: "bash build/gitlab/deploy.sh svc-cashier-mock-inpay"
+  only:
+    refs:
+      - /^environment/.*$/
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /\[service-cashier-mock-inpay\]/
+
+svc-cashier-mock-inpay:deploy_all:
+  <<: *deploy_all
+  script: "bash build/gitlab/deploy.sh svc-cashier-mock-inpay"
+
+#### service-access-provider-sphonic-kyc
+
+svc-access-pr-sphonic-kyc:createdockerimage:
+  <<: *createdockerimages
+  script: "sh build/gitlab/build-image.sh svc-access-pr-sphonic-kyc service-access/service-access-provider-sphonic-kyc"
+  only:
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /\[service-access-provider-sphonic-kyc\]/
+
+svc-access-pr-sphonic-kyc:createdockerimage_all:
+  <<: *createdockerimages_all
+  script: "sh build/gitlab/build-image.sh svc-access-pr-sphonic-kyc service-access/service-access-provider-sphonic-kyc"
+
+svc-access-pr-sphonic-kyc:deploy:
+  <<: *deploy
+  script: "bash build/gitlab/deploy.sh svc-access-pr-sphonic-kyc"
+  only:
+    refs:
+      - /^environment/.*$/
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /\[service-access-provider-sphonic-kyc\]/
+
+svc-access-pr-sphonic-kyc:deploy_all:
+  <<: *deploy_all
+  script: "bash build/gitlab/deploy.sh svc-access-pr-sphonic-kyc"
+
+#### service-accounting-domain-summary-v2
+
+svc-accounting-domain-summary-v2:createdockerimage:
+  <<: *createdockerimages
+  script: "sh build/gitlab/build-image.sh svc-accounting-domain-summary-v2 service-accounting/service-accounting-domain-summary-v2"
+  only:
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /\[service-accounting-domain-summary-v2\]/
+
+svc-accounting-domain-summary-v2:createdockerimage_all:
+  <<: *createdockerimages_all
+  script: "sh build/gitlab/build-image.sh svc-accounting-domain-summary-v2 service-accounting/service-accounting-domain-summary-v2"
+
+svc-accounting-domain-summary-v2:deploy:
+  <<: *deploy
+  script: "bash build/gitlab/deploy.sh svc-accounting-domain-summary-v2"
+  only:
+    refs:
+      - /^environment/.*$/
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /\[service-accounting-domain-summary-v2\]/
+
+svc-accounting-domain-summary-v2:deploy_all:
+  <<: *deploy_all
+  script: "bash build/gitlab/deploy.sh svc-accounting-domain-summary-v2"
+
+#### service-cashier-processor-nuvei-cc
+
+svc-cashier-pr-nuvei-cc:createdockerimage:
+  <<: *createdockerimages
+  script: "sh build/gitlab/build-image.sh svc-cashier-pr-nuvei-cc service-cashier/service-cashier-processor-nuvei-cc"
+  only:
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /\[service-cashier-processor-nuvei-cc\]/
+
+svc-cashier-pr-nuvei-cc:createdockerimage_all:
+  <<: *createdockerimages_all
+  script: "sh build/gitlab/build-image.sh svc-cashier-pr-nuvei-cc service-cashier/service-cashier-processor-nuvei-cc"
+
+svc-cashier-pr-nuvei-cc:deploy:
+  <<: *deploy
+  script: "bash build/gitlab/deploy.sh svc-cashier-pr-nuvei-cc"
+  only:
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /\[service-cashier-processor-nuvei-cc\]/
+
+svc-cashier-pr-nuvei-cc:deploy_all:
+  <<: *deploy_all
+  script: "bash build/gitlab/deploy.sh svc-cashier-pr-nuvei-cc"
+
+#### service-cashier-frontend-nuvei-cc
+
+svc-cashier-fe-nuvei-cc:createdockerimage:
+  <<: *createdockerimages
+  script: "sh build/gitlab/build-image.sh svc-cashier-fe-nuvei-cc service-cashier/service-cashier-frontend-nuvei-cc"
+  only:
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /\[service-cashier-frontend-nuvei-cc\]/
+
+svc-cashier-fe-nuvei-cc:createdockerimage_all:
+  <<: *createdockerimages_all
+  script: "sh build/gitlab/build-image.sh svc-cashier-fe-nuvei-cc service-cashier/service-cashier-frontend-nuvei-cc"
+
+svc-cashier-fe-nuvei-cc:deploy:
+  <<: *deploy
+  script: "bash build/gitlab/deploy.sh svc-cashier-fe-nuvei-cc"
+  only:
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /\[service-cashier-frontend-nuvei-cc\]/
+
+svc-cashier-fe-nuvei-cc:deploy_all:
+  <<: *deploy_all
+  script: "bash build/gitlab/deploy.sh svc-cashier-fe-nuvei-cc"
+
+#### service-cashier-mock-paynl
+
+svc-cashier-mock-paynl:createdockerimage:
+  <<: *createdockerimages
+  script: "sh build/gitlab/build-image.sh svc-cashier-mock-paynl service-cashier/service-cashier-mock-paynl"
+  only:
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /\[service-cashier-mock-paynl\]/
+
+svc-cashier-mock-paynl:createdockerimage_all:
+  <<: *createdockerimages_all
+  script: "sh build/gitlab/build-image.sh svc-cashier-mock-paynl service-cashier/service-cashier-mock-paynl"
+
+svc-cashier-mock-paynl:deploy:
+  <<: *deploy
+  script: "bash build/gitlab/deploy.sh svc-cashier-mock-paynl"
+  only:
+    refs:
+      - /^environment/.*$/
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /\[service-cashier-mock-paynl\]/
+
+svc-cashier-mock-paynl:deploy_all:
+  <<: *deploy_all
+  script: "bash build/gitlab/deploy.sh svc-cashier-mock-paynl"
+
+#### service-cashier-processor-paynl
+svc-cashier-pr-paynl:createdockerimage:
+  <<: *createdockerimages
+  script: "sh build/gitlab/build-image.sh svc-cashier-pr-paynl service-cashier/service-cashier-processor-paynl"
+  only:
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /\[service-cashier-processor-paynl\]/
+
+svc-cashier-pr-paynl:createdockerimage_all:
+  <<: *createdockerimages_all
+  script: "sh build/gitlab/build-image.sh svc-cashier-pr-paynl service-cashier/service-cashier-processor-paynl"
+
+svc-cashier-pr-paynl:deploy:
+  <<: *deploy
+  script: "bash build/gitlab/deploy.sh svc-cashier-pr-paynl"
+  only:
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /\[service-cashier-processor-paynl\]/
+
+svc-cashier-pr-paynl:deploy_all:
+  <<: *deploy_all
+  script: "bash build/gitlab/deploy.sh svc-cashier-pr-paynl"
+
+#### service-kyc-provider-onfido
+
+svc-kyc-pr-onfido:createdockerimage:
+  <<: *createdockerimages
+  script: "sh build/gitlab/build-image.sh svc-kyc-pr-onfido service-kyc/service-kyc-provider-onfido"
+  only:
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /\[service-kyc-provider-onfido\]/
+
+svc-kyc-pr-onfido:createdockerimage_all:
+  <<: *createdockerimages_all
+  script: "sh build/gitlab/build-image.sh svc-kyc-pr-onfido service-kyc/service-kyc-provider-onfido"
+
+svc-kyc-pr-onfido:deploy:
+  <<: *deploy
+  script: "bash build/gitlab/deploy.sh svc-kyc-pr-onfido"
+  only:
+    refs:
+      - /^environment/.*$/
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /\[service-kyc-provider-onfido\]/
+
+svc-kyc-pr-onfido:deploy_all:
+  <<: *deploy_all
+  script: "bash build/gitlab/deploy.sh svc-kyc-pr-onfido"
+
+#### service-user-provider-sphonic-idin
+
+svc-user-pr-sphonic-idin:createdockerimage:
+  <<: *createdockerimages
+  script: "sh build/gitlab/build-image.sh svc-user-pr-sphonic-idin service-user/service-user-provider-sphonic-idin"
+  only:
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /\[service-user-provider-sphonic-idin\]/
+
+svc-user-pr-sphonic-idin:createdockerimage_all:
+  <<: *createdockerimages_all
+  script: "sh build/gitlab/build-image.sh svc-user-pr-sphonic-idin service-user/service-user-provider-sphonic-idin"
+
+svc-user-pr-sphonic-idin:deploy:
+  <<: *deploy
+  script: "bash build/gitlab/deploy.sh svc-user-pr-sphonic-idin"
+  only:
+    refs:
+      - /^environment/.*$/
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /\[service-user-provider-sphonic-idin\]/
+
+svc-user-pr-sphonic-idin:deploy_all:
+  <<: *deploy_all
+  script: "bash build/gitlab/deploy.sh svc-user-pr-sphonic-idin"
+
+
+#### service-games-provider-google-rge
+
+svc-games-pr-google-rge:createdockerimage:
+  <<: *createdockerimages
+  script: "sh build/gitlab/build-image.sh svc-games-pr-google-rge service-games/service-games-provider-google-rge"
+  only:
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /\[service-games-provider-google-rge\]/
+
+svc-games-pr-google-rge:createdockerimage_all:
+  <<: *createdockerimages_all
+  script: "sh build/gitlab/build-image.sh svc-games-pr-google-rge service-games/service-games-provider-google-rge"
+
+svc-games-pr-google-rge:deploy:
+  <<: *deploy
+  script: "bash build/gitlab/deploy.sh svc-games-pr-google-rge"
+  only:
+    refs:
+      - /^environment/.*$/
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /\[service-games-provider-google-rge\]/
+
+svc-games-pr-google-rge:deploy_all:
+  <<: *deploy_all
+  script: "bash build/gitlab/deploy.sh svc-games-pr-google-rge"
+
+#### ui-network-admin
+
+ui-network-admin:createdockerimage:
+  <<: *createdockerimages
+  script: 
+    - apk --update add curl
+    - wget --header "PRIVATE-TOKEN:${GITLAB_PACKAGE_TOKEN}" ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/lbo-sdk/1.0/vue-components-${CI_COMMIT_REF_SLUG}.tar.gz
+    - tar zxvf vue-components-${CI_COMMIT_REF_SLUG}.tar.gz
+    - cp -R assets/ ui-network-admin/src/main/resources/static
+    - "sh build/gitlab/build-image.sh ui-network-admin ui-network-admin"
+  only:
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /\[ui-network-admin\]/
+  except:
+    refs:
+    - /^environment/livescore-production/  
+  tags:
+    - wl-group-runner
+
+ui-network-admin:createdockerimage_prod:
+  <<: *createdockerimages
+  script:
+    - apk --update add curl
+    - wget --header "PRIVATE-TOKEN:${GITLAB_PACKAGE_TOKEN}" ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/lbo-sdk/1.0/vue-components-environment-livescore-staging.tar.gz
+    - tar zxvf vue-components-environment-livescore-staging.tar.gz
+    - cp -R assets/ ui-network-admin/src/main/resources/static
+    - "sh build/gitlab/build-image.sh ui-network-admin ui-network-admin"
+  only:
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /\[ui-network-admin\]/
+    refs:
+      - /^environment/livescore-production/
+  tags:
+    - wl-group-runner
+
+ui-network-admin:createdockerimage_all:
+  <<: *createdockerimages_all
+  script: 
+    - apk --update add curl
+    - wget --header "PRIVATE-TOKEN:${GITLAB_PACKAGE_TOKEN}" ${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/lbo-sdk/1.0/vue-components-${CI_COMMIT_REF_SLUG}.tar.gz
+    - tar zxvf vue-components-${CI_COMMIT_REF_SLUG}.tar.gz
+    - cp -R assets/ ui-network-admin/src/main/resources/static
+    - "sh build/gitlab/build-image.sh ui-network-admin ui-network-admin"
+  tags:
+    - wl-group-runner
+
+ui-network-admin:deploy:
+  <<: *deploy
+  script: "bash build/gitlab/deploy.sh ui-network-admin"
+  only:
+    refs:
+      - /^environment/.*$/
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /\[ui-network-admin\]/
+
+ui-network-admin:deploy_all:
+  <<: *deploy_all
+  script: "bash build/gitlab/deploy.sh ui-network-admin"
+
+
+#### service-user-provider-threshold
+svc-user-pr-threshold:createdockerimage:
+  <<: *createdockerimages
+  script: "sh build/gitlab/build-image.sh svc-user-pr-threshold service-user/service-user-provider-threshold"
+  only:
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /\[service-user-provider-threshold\]/
+
+svc-user-pr-threshold:createdockerimage_all:
+  <<: *createdockerimages_all
+  script: "sh build/gitlab/build-image.sh svc-user-pr-threshold service-user/service-user-provider-threshold"
+
+svc-user-pr-threshold:deploy:
+  <<: *deploy
+  script: "bash build/gitlab/deploy.sh svc-user-pr-threshold"
+  only:
+    refs:
+      - /^environment/.*$/
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /\[service-user-provider-threshold\]/
+
+svc-user-pr-threshold:deploy_all:
+  <<: *deploy_all
+  script: "bash build/gitlab/deploy.sh svc-user-pr-threshold"
+
+#### service-cashier-processor-smartcash
+
+svc-cashier-pr-smartcash:createdockerimage:
+  <<: *createdockerimages
+  script: "sh build/gitlab/build-image.sh svc-cashier-pr-smartcash service-cashier/service-cashier-processor-smartcash"
+  only:
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /\[service-cashier-processor-smartcash\]/
+
+svc-cashier-pr-smartcash:createdockerimage_all:
+  <<: *createdockerimages_all
+  script: "sh build/gitlab/build-image.sh svc-cashier-pr-smartcash service-cashier/service-cashier-processor-smartcash"
+
+svc-cashier-pr-smartcash:deploy:
+  <<: *deploy
+  script: "bash build/gitlab/deploy.sh svc-cashier-pr-smartcash"
+  only:
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /\[service-cashier-processor-smartcash\]/
+
+svc-cashier-pr-smartcash:deploy_all:
+  <<: *deploy_all
+  script: "bash build/gitlab/deploy.sh svc-cashier-pr-smartcash"
+
+#### service-cashier-mock-smartcash
+
+svc-cashier-mock-smartcash:createdockerimage:
+  <<: *createdockerimages
+  script: "sh build/gitlab/build-image.sh svc-cashier-mock-smartcash service-cashier/service-cashier-mock-smartcash"
+  only:
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /\[service-cashier-mock-smartcash\]/
+
+svc-cashier-mock-smartcash:createdockerimage_all:
+  <<: *createdockerimages_all
+  script: "sh build/gitlab/build-image.sh svc-cashier-mock-smartcash service-cashier/service-cashier-mock-smartcash"
+
+svc-cashier-mock-smartcash:deploy:
+  <<: *deploy
+  script: "bash build/gitlab/deploy.sh svc-cashier-mock-smartcash"
+  only:
+    refs:
+      - /^environment/.*$/
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /\[service-cashier-mock-smartcash\]/
+
+svc-cashier-mock-smartcash:deploy_all:
+  <<: *deploy_all
+  script: "bash build/gitlab/deploy.sh svc-cashier-mock-smartcash"
+
+#### service-casino-provider-evolution
+
+svc-casino-pr-evolution:createdockerimage:
+  <<: *createdockerimages
+  script: "sh build/gitlab/build-image.sh svc-casino-pr-evolution service-casino/service-casino-provider-evolution"
+  only:
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /\[service-casino-provider-evolution\]/
+
+svc-casino-pr-evolution:createdockerimage_all:
+  <<: *createdockerimages_all
+  script: "sh build/gitlab/build-image.sh svc-casino-pr-evolution service-casino/service-casino-provider-evolution"
+
+svc-casino-pr-evolution:deploy:
+  <<: *deploy
+  script: "bash build/gitlab/deploy.sh svc-casino-pr-evolution"
+  only:
+    refs:
+      - /^environment/.*$/
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /\[service-casino-provider-evolution\]/
+
+svc-casino-pr-evolution:deploy_all:
+  <<: *deploy_all
+  script: "bash build/gitlab/deploy.sh svc-casino-pr-evolution"
+

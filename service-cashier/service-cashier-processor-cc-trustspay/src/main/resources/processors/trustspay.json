@@ -1,0 +1,55 @@
+{
+  "name": "TrustsPay",
+  "code": "trustspay",
+  "url": "service-cashier-processor-cc-trustspay",
+  "methodNames": ["cc"],
+  "deposit": true,
+  "withdraw": false,
+  "fees": {
+    "flat": 0,
+    "percentage": 0,
+    "minimum": 0
+  },
+  "limits": {
+    "minAmount": 2500,
+    "maxAmount": 0,
+    "maxAmountDay": 0,
+    "maxAmountWeek": 0,
+    "maxAmountMonth": 0,
+    "maxTransactionsDay": 0,
+    "maxTransactionsWeek": 0,
+    "maxTransactionsMonth": 0
+  },
+  "properties": [
+    { 
+      "name": "testMode",
+      "type": "boolean",
+      "defaultValue": "false",
+      "description": "Whether to use the test query interface for transaction verifiation."
+    },
+    { 
+      "name": "paymentUrl",
+      "type": "url",
+      "defaultValue": "https://shoppingingstore.com/TestTPInterface",
+      "description": "Server to Server Payment URL."
+    },
+    { 
+      "name": "merchantNo",
+      "defaultValue": "33546",
+      "type": "string",
+      "description": "TrustsPay should provide a merchant number."
+    },
+    { 
+      "name": "gatewayNo",
+      "defaultValue": "33546002",
+      "type": "string",
+      "description": "TrustsPay should provide a gateway number."
+    },
+    { 
+      "name": "key",
+      "defaultValue": "2n2zXX6N",
+      "type": "string",
+      "description": "TrustsPay should provide an encryption key."
+    }
+  ]
+}

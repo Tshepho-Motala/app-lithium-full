@@ -1,0 +1,11 @@
+server:
+  port: 8761
+eureka:
+  client:
+    registerWithEureka: false
+    fetchRegistry: false
+  server:
+    # When self preservation is false eureka will remove the pod registrations even if the 85% instance removal threshold is reached
+    # It could cause pods to not be removed if this is left to the default true in large cluster rollouts or on local
+    enableSelfPreservation: false
+    waitTimeInMsWhenSyncEmpty: 5000

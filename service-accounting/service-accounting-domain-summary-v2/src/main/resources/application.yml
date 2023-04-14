@@ -1,0 +1,87 @@
+server:
+  port: 9303
+
+eureka:
+  instance:
+    appname: service-accounting-domain-summary-v2
+
+spring:
+ application:
+   name: service-accounting-domain-summary-v2
+ datasource:
+   url: jdbc:mysql://localhost/lithium_accounting_domain_summary_v2?useSSL=false
+   username: root
+   password: mysql
+ jpa:
+   show-sql: false
+   database-platform: org.hibernate.dialect.MySQLDialect
+   hibernate:
+     ddl-auto: validate
+     properties:
+       hibernate:
+        format_sql: true
+ cloud:
+   stream:
+     bindings:
+       adjustmentinputv2:
+         consumer:
+          concurrency: 5
+          maxAttempts: 5
+          backOffInitialInterval: 5000
+          backOffMaxInterval: 60000
+          backOffMultiplier: 2.5
+         group: adjustmentgroupv2
+         binder: rabbit
+         destination: adjustmentqueuev2
+       asynclabelvalueinputv2:
+         consumer:
+           concurrency: 5
+           maxAttempts: 5
+           backOffInitialInterval: 5000
+           backOffMaxInterval: 60000
+           backOffMultiplier: 2.5
+         group: asynclabelvaluegroupv2
+         binder: rabbit
+         destination: asynclabelvaluequeuev2
+     rabbit:
+       bindings:
+         adjustmentinputv2:
+           consumer:
+             autoBindDlq: true
+             requeueRejected: true
+             republishToDlq: true
+         asynclabelvalueinputv2:
+           consumer:
+             autoBindDlq: true
+             requeueRejected: true
+             republishToDlq: true
+lithium:
+  services:
+    accounting:
+      domain:
+        summary:
+          v2:
+            adjustments:
+              process:
+                enabled: true
+            dlq-retries: 1
+            reconciliation:
+              enabled: false
+              cron: "*/5 * * * * *"
+              seed-date-format: "yyyy-MM-dd"
+              seed-date-value: "2020-05-01"
+              log-error-on-mismatched-data-enabled: true
+              update-mismatched-data-enabled: true
+              data-fetch-size-per-type: 100
+logging:
+  level:
+    lithium.shards: INFO
+    lithium.service.accounting.domain.summary.v2: INFO
+#    org:
+#      hibernate:
+#        SQL: DEBUG
+#        type:
+#          descriptor:
+#            sql: trace
+#    lithium.service.accounting.domain.summary.services.SummaryReconciliationService: TRACE
+#    lithium.service.accounting.domain.summary.stream.AsyncLabelValueQueueProcessor: TRACE

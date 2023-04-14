@@ -1,0 +1,1 @@
+ALTER TABLE `lithium_cashier`.domain_method_processor ADD COLUMN `active` BIT(1) NULL AFTER `enabled`;

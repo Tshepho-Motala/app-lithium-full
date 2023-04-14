@@ -1,0 +1,62 @@
+<mtex-layout-page mtexFixed *ngIf="campaign">
+
+  <loading-overlay [isLoading]="loading"></loading-overlay>
+
+  <div *mtexLayoutToolbarSecondaryStart>
+    <h3>Campaign {{ campaign.name }}</h3>
+  </div>
+
+  <div *mtexLayoutToolbarSecondaryEnd>
+    <button md-icon-button [mdMenuTriggerFor]="menu">
+      <md-icon>more_vert</md-icon>
+    </button>
+  </div>
+
+  <md-menu #menu="mdMenu">
+    <button md-menu-item>
+      <md-icon>publish</md-icon>
+      <span>Publish</span>
+    </button>
+    <button md-menu-item (click)="archive()">
+      <md-icon>archive</md-icon>
+      <span>Archive</span>
+    </button>
+    <button md-menu-item (click)="selectAd()">
+      <md-icon>link</md-icon>
+      <span>Link Ad</span>
+    </button>
+  </md-menu>
+
+  <md-card>
+    <md-card-title [@floatUpAnimation]='true'>Campaign {{ campaign.name }}</md-card-title>
+    <md-card-content [@fadeAnimation]='true'>
+      <p>Created date: {{ campaign.createdDate | date:'medium' }}</p>
+      <p>Archived: {{ campaign.archived }}</p>
+
+      <div fxLayout="row" fxLayoutAlign="center center">
+        <h4 fxFlex>Linked Ads({{ ads?.recordsTotal }})</h4>
+        <button md-raised-button (click)="selectAd()">Link an Ad</button>
+      </div>
+
+
+      <md-card class="hover ad margin" *ngFor="let ca of ads?.data">
+        <md-card-title>{{ca.id}} - {{ca.ad.name}}</md-card-title>
+        <md-card-content>{{ ca.guid }}</md-card-content>
+        <md-card-actions align="end">
+          <button color="primary" md-raised-button (click)="embedAd(ca)">Embed</button>
+        </md-card-actions>
+      </md-card>
+
+      <mdex-pager (currentPageChanged)="load()" [state]="pagerState"></mdex-pager>
+    </md-card-content>
+
+    <md-card-actions align="end">
+      <button color="accent" md-button [routerLink]="['linkads']">Link Ads</button>
+      <button md-button [routerLink]="['..']">Cancel</button>
+    </md-card-actions>
+  </md-card>
+
+
+</mtex-layout-page>
+
+<router-outlet></router-outlet>

@@ -1,0 +1,11 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "PLAYER": {
+      "LINK": {
+        "CONFIRM": {
+          "TITLE": "Are you sure you want to delete the player link?"
+        }
+      }
+    }
+  }
+}

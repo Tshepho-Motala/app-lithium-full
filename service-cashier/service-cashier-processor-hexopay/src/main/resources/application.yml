@@ -1,0 +1,27 @@
+server.port: 9625
+
+ribbon:
+  ReadTimeout: 30000
+  ConnectTimeout: 30000
+
+spring:
+  application:
+    name: service-cashier-processor-hexopay
+  cloud:
+    stream:
+      bindings:
+        processorsregisteroutput:
+          group: processorsregistergroup
+          binder: rabbit
+          destination: processorsregisterqueue
+          producer:
+            required-groups: processorsregistergroup
+  thymeleaf:
+    cache: false
+
+logging:
+  level:
+    lithium.service.cashier: INFO
+    lithium.service.cashier.processor: INFO
+    lithium.service.cashier.processor.http: INFO
+    lithium.service.cashier.processor.trustly: INFO

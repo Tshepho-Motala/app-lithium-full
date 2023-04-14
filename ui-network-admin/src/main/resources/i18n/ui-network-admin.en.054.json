@@ -1,0 +1,171 @@
+{
+	"UI_NETWORK_ADMIN": {
+		"CASHIER" :{
+			"PLAYER": {
+				"TITLE": "Example Cashier for {{player}}",
+				"NOSELECTED": "Select a player from the filter dropdown to view the cashier methods seen by this player.",
+				"MIN": "Min",
+				"MAX": "Max",
+				"BAL": "Player Balance",
+				"PROCESSOR": "Processor",
+				"MAX_AMT": "Amount",
+				"MAX_TRN": "Transactions",
+				"PD": "p/d",
+				"PW": "p/w",
+				"PM": "p/m"
+			},
+			"BADGES": {
+				"TITLE": "Overrides Specified",
+				"GPLIMITSOVERRIDES": "Global Player Limits (GPL) / Global Player Fees (GPF)",
+				"DOMAINOVERRIDES": "Domain Limits (DL)",
+				"PROFILEOVERRIDES": "Profile Limits (PL) / Profile Fees (PF)",
+				"USEROVERRIDES": "Individual Player Limits (IPL) / Individual Player Fees (IPF)"
+			},
+			"LIMITS_NOT_SET": "Please note that this needs to be configured. No limits are specified, so this processor will not be available to players until it has been configured with sensible values. Please use the override button below to start configuring your processor.",
+			"FEES_NOT_SET": "No fees have been configured for this processor. No fees will be charged when transacting using this processor. Please click on the override button below to define the applicable fees for this processor.",
+			"NODEF_LIMITS": "Missing Limits",
+			"SHOW_HELP": "Show Help",
+			"HIDE_HELP": "Hide Help"
+		},
+		"SERVICE_CASHIER": {
+			"FEES": {
+				"EXAMPLE": {
+					"TITLE": "Example",
+					"START": "E.g. Player enters amount of {{player_amount|currency}} ",
+					"PERC": "Percentage ({{percentage}}%) specified. {{percentage_amount|currency}} will be deducted. ",
+					"FLAT": "Flat fee of ({{flat|currency}}) will be added to the fees. ",
+					"MIN": "Minimum fee ({{min|currency}}) specified. ",
+					"MIN_MORE": "Minimum fee equals more than percentage+flat fee, so using minimum fee.",
+					"MIN_LESS": "Total fee being deducted will be {{fee_amount|currency}} ",
+					"TOTAL": "Total player amount left : {{total_amount|currency}}",
+					"NO_FEES": "No fees were defined, so player will receive full amount entered ({{player_amount|currency}}). "
+				},
+				"GPF": {
+					"TITLE": "Global Player Fees (GPF)",
+					"DESC_MIN": "This is the minimum amount that should be subtracted from the amount entered by the player.. If this amount is specified and is greater than the percentage fee together with the flat fee, this minimum fee is the amount that will be deducted from player amount entered. This is the global player fee, and can be overridden by PF / IPF.",
+					"DESC_PERC": "This is a percentage of the amount entered by the player. This will be added to the flat fee (if specified), before subtracting from player amount entered. E.g. if a player enters $10, and percentage specified here is 10%, then $1 will be subtracted from the $10, and the player will receive $9. (if no flat fee was specified.) This is the global player fee, and can be overridden by PF / IPF.",
+					"DESC_FLAT": "This is the flat fee that will be subtracted from the amount entered by the player. This will be added to the percentage amount (if specified), before subtracting from player amount entered. E.g. if a player enters $10 and flat fee specified is $1, then $1 will be subtracted from the $10, and the player will receive $9. (if no percentage was specified.) This is the global player fee, and can be overridden by PF / IPF."
+				},
+				"PF": {
+					"TITLE": "Profile Fees (PF)",
+					"DESC_MIN": "This is the minimum amount that should be subtracted from the amount entered by the player.. If this amount is specified and is greater than the percentage fee together with the flat fee, this minimum fee is the amount that will be deducted from player amount entered. This is the profile fee, and overrides the GPF, but can be overridden by IPF.",
+					"DESC_PERC": "This is a percentage of the amount entered by the player. This will be added to the flat fee (if specified), before subtracting from player amount entered. E.g. if a player enters $10, and percentage specified here is 10%, then $1 will be subtracted from the $10, and the player will receive $9. (if no flat fee was specified.) This is the profile fee, and overrides the GPF, but can be overridden by IPF.",
+					"DESC_FLAT": "This is the flat fee that will be subtracted from the amount entered by the player. This will be added to the percentage amount (if specified), before subtracting from player amount entered. E.g. if a player enters $10 and flat fee specified is $1, then $1 will be subtracted from the $10, and the player will receive $9. (if no percentage was specified.) This is the profile fee, and overrides the GPF, but can be overridden by IPF."
+				},
+				"IPF": {
+					"TITLE": "Individual Player Fees (IPF)",
+					"DESC_MIN": "This is the minimum amount that should be subtracted from the amount entered by the player.. If this amount is specified and is greater than the percentage fee together with the flat fee, this minimum fee is the amount that will be deducted from player amount entered. This is the individual player fee, and overrides both  GPF / PF.",
+					"DESC_PERC": "This is a percentage of the amount entered by the player. This will be added to the flat fee (if specified), before subtracting from player amount entered. E.g. if a player enters $10, and percentage specified here is 10%, then $1 will be subtracted from the $10, and the player will receive $9. (if no flat fee was specified.) This is the individual player fee, and overrides both  GPF / PF.",
+					"DESC_FLAT": "This is the flat fee that will be subtracted from the amount entered by the player. This will be added to the percentage amount (if specified), before subtracting from player amount entered. E.g. if a player enters $10 and flat fee specified is $1, then $1 will be subtracted from the $10, and the player will receive $9. (if no percentage was specified.) This is the individual player fee, and overrides both  GPF / PF."
+				}
+			},
+			"LIMITS": {
+				"GL": "Global Limit (GL)",
+				"DL": "Domain Limit (DL)",
+				"PL": "Profile Limit (PL)",
+				"IPL": "Individual Player Limit (IPL)",
+				"GPL": "Global Player Limit (GPL)"
+			},
+			"DEPOSIT": {
+				"GL": {
+					"MIN_AMT": "This is the minimum amount that may be entered when making a deposit using this processor.",
+					"MAX_AMT": "This is the maximum amount that may be entered when making a deposit using this processor.",
+					"MAX_AMT_PD": "The maximum amount that players will be able to deposit per day. This is a system setup and cannot be changed, start by adding a sensible override for the domain.",
+					"MAX_AMT_PW": "The maximum amount that players will be able to deposit per week. This is a system setup and cannot be changed, start by adding a sensible override for the domain.",
+					"MAX_AMT_PM": "The maximum amount that players will be able to deposit per month. This is a system setup and cannot be changed, start by adding a sensible override for the domain.",
+					"TRANS_PD": "The maximum amount of transactions that players will be able to perform per day. This is a system setup and cannot be changed, start by adding a sensible override for the domain.",
+					"TRANS_PW": "The maximum amount of transactions that players will be able to perform per week. This is a system setup and cannot be changed, start by adding a sensible override for the domain.",
+					"TRANS_PM": "The maximum amount of transactions that players will be able to perform per month. This is a system setup and cannot be changed, start by adding a sensible override for the domain."
+				},
+				"DL": {
+					"MAX_AMT_PD": "The maximum amount that players will be able to deposit per day for the domain as a whole. E.g. If limit specified here is $100, then one player can deposit $100, and further deposits for the domain for all players for this processor will be blocked, or two players can each deposit $50, and further deposits will be blocked. It's a domain level limit for this processor. (This limit overrides GL, but cannot be overridden by player(GPL/IPL)/profile(PL) limits)",
+					"MAX_AMT_PW": "The maximum amount that players will be able to deposit per week for the domain as a whole. E.g. If limit specified here is $1000, then one player can deposit $1000, and further deposits for the domain for all players for this processor will be blocked, or two players can each deposit $500, and further deposits will be blocked. It's a domain level limit for this processor. (This limit overrides GL, but cannot be overridden by player(GPL/IPL)/profile(PL) limits)",
+					"MAX_AMT_PM": "The maximum amount that players will be able to deposit per month for the domain as a whole. E.g. If limit specified here is $10000, then one player can deposit $10000, and further deposits for the domain for all players for this processor will be blocked, or two players can each deposit $5000, and further deposits will be blocked. It's a domain level limit for this processor. (This limit overrides GL, but cannot be overridden by player(GPL/IPL)/profile(PL) limits)",
+					"TRANS_PD": "The maximum amount of transactions that players will be able to perform per day for the domain as a whole. E.g. If limit specified here is 10, then only 10 deposit transactions will be allowed for the day, and further deposits for the domain for all players for this processor will be blocked. It's a domain level limit for this processor. (This limit overrides GL, but cannot be overridden by player(GPL/IPL)/profile(PL) limits)",
+					"TRANS_PW": "The maximum amount of transactions that players will be able to perform per week for the domain as a whole. E.g. If limit specified here is 100, then only 100 deposit transactions will be allowed for the week, and further deposits for the domain for all players for this processor will be blocked. It's a domain level limit for this processor. (This limit overrides GL, but cannot be overridden by player(GPL/IPL)/profile(PL) limits)",
+					"TRANS_PM": "The maximum amount of transactions that players will be able to perform per month for the domain as a whole. E.g. If limit specified here is 1000, then only 1000 deposit transactions will be allowed for the month, and further deposits for the domain for all players for this processor will be blocked. It's a domain level limit for this processor. (This limit overrides GL, but cannot be overridden by player(GPL/IPL)/profile(PL) limits)"
+				},
+				"GPL": {
+					"MIN_AMT": "This is the minimum amount that may be entered when making a deposit using this processor. This is for any player that has no overrides specified in IPL / PL.",
+					"MAX_AMT": "This is the maximum amount that may be entered when making a deposit using this processor. This is for any player that has no overrides specified in IPL / PL.",
+					"MAX_AMT_PD": "The maximum amount that a player will be able to deposit per day (not linked to a profile or with individual overrides). E.g. If limit specified here is $100, then a player (with no individual/profile overrides) can deposit $100 in total for the day, and further deposits for this processor will be blocked after that. (This limit can be overridden by player(IPL)/profile(PL) limits)",
+					"MAX_AMT_PW": "The maximum amount that a player will be able to deposit per week (not linked to a profile or with individual overrides). E.g. If limit specified here is $1000, then a player (with no individual/profile overrides) can deposit $1000 in total for the week, and further deposits for this processor will be blocked after that. (This limit can be overridden by player(IPL)/profile(PL) limits)",
+					"MAX_AMT_PM": "The maximum amount that a player will be able to deposit per month (not linked to a profile or with individual overrides). E.g. If limit specified here is $10000, then a player (with no individual/profile overrides) can deposit $10000 in total for the month, and further deposits for this processor will be blocked after that. (This limit can be overridden by player(IPL)/profile(PL) limits)",
+					"TRANS_PD": "The maximum amount of transactions that a player will be able to perform per day (not linked to a profile or with individual overrides). E.g. If limit specified here is 10, then only 10 deposit transactions will be allowed for the day, and further deposits for this processor will be blocked. (This limit can be overridden by player(IPL)/profile(PL) limits)",
+					"TRANS_PW": "The maximum amount of transactions that a player will be able to perform per week (not linked to a profile or with individual overrides). E.g. If limit specified here is 100, then only 100 deposit transactions will be allowed for the week, and further deposits for this processor will be blocked. (This limit can be overridden by player(IPL)/profile(PL) limits)",
+					"TRANS_PM": "The maximum amount of transactions that a player will be able to perform per month (not linked to a profile or with individual overrides). E.g. If limit specified here is 1000, then only 1000 deposit transactions will be allowed for the month, and further deposits for this processor will be blocked. (This limit can be overridden by player(IPL)/profile(PL) limits)"
+				},
+				"PL": {
+					"MIN_AMT": "This is the minimum amount that may be entered when making a deposit using this processor if player is linked to this profile.",
+					"MAX_AMT": "This is the maximum amount that may be entered when making a deposit using this processor if player is linked to this profile.",
+					"MAX_AMT_PD": "The maximum amount that a player (linked to this profile and does not have individual overrides) will be able to deposit per day. E.g. If limit specified here is $100, then a player (with no individual overrides) can deposit $100 in total for the day, and further deposits for this processor will be blocked after that. (This limit can be overridden by player(IPL) limits)",
+					"MAX_AMT_PW": "The maximum amount that a player (linked to this profile and does not have individual overrides) will be able to deposit per week. E.g. If limit specified here is $1000, then a player (with no individual overrides) can deposit $1000 in total for the week, and further deposits for this processor will be blocked after that. (This limit can be overridden by player(IPL) limits)",
+					"MAX_AMT_PM": "The maximum amount that a player (linked to this profile and does not have individual overrides) will be able to deposit per month. E.g. If limit specified here is $10000, then a player (with no individual overrides) can deposit $10000 in total for the month, and further deposits for this processor will be blocked after that. (This limit can be overridden by player(IPL) limits)",
+					"TRANS_PD": "The maximum amount of transactions that a player will be able to perform per day (linked to this profile and does not have individual overrides). E.g. If limit specified here is 10, then only 10 deposit transactions will be allowed for the day, and further deposits for this processor will be blocked. (This limit can be overridden by player(IPL) limits)",
+					"TRANS_PW": "The maximum amount of transactions that a player will be able to perform per week (linked to this profile and does not have individual overrides). E.g. If limit specified here is 100, then only 100 deposit transactions will be allowed for the week, and further deposits for this processor will be blocked. (This limit can be overridden by player(IPL) limits)",
+					"TRANS_PM": "The maximum amount of transactions that a player will be able to perform per month (linked to this profile and does not have individual overrides). E.g. If limit specified here is 1000, then only 1000 deposit transactions will be allowed for the month, and further deposits for this processor will be blocked. (This limit can be overridden by player(IPL) limits)"
+				},
+				"IPL": {
+					"MIN_AMT": "This is the minimum amount that may be entered when making a deposit using this processor (this overrides global player(GPL)/profile(PL) limits).",
+					"MAX_AMT": "This is the maximum amount that may be entered when making a deposit using this processor (this overrides global player(GPL)/profile(PL) limits).",
+					"MAX_AMT_PD": "The maximum amount that this player will be able to deposit per day. E.g. If limit specified here is $100, then this player can deposit $100 in total for the day, and further deposits for this processor will be blocked after that. (this overrides global player(GPL)/profile(PL) limits)",
+					"MAX_AMT_PW": "The maximum amount that this player will be able to deposit per week. E.g. If limit specified here is $1000, then this player can deposit $1000 in total for the week, and further deposits for this processor will be blocked after that. (this overrides global player(GPL)/profile(PL) limits)",
+					"MAX_AMT_PM": "The maximum amount that this player will be able to deposit per month. E.g. If limit specified here is $10000, then this player can deposit $10000 in total for the month, and further deposits for this processor will be blocked after that. (this overrides global player(GPL)/profile(PL) limits)",
+					"TRANS_PD": "The maximum amount of transactions that this player will be able to perform per day. E.g. If limit specified here is 10, then only 10 deposit transactions will be allowed for the day, and further deposits for this processor will be blocked. (this overrides global player(GPL)/profile(PL) limits)",
+					"TRANS_PW": "The maximum amount of transactions that this player will be able to perform per week. E.g. If limit specified here is 100, then only 100 deposit transactions will be allowed for the week, and further deposits for this processor will be blocked. (this overrides global player(GPL)/profile(PL) limits)",
+					"TRANS_PM": "The maximum amount of transactions that this player will be able to perform per month. E.g. If limit specified here is 1000, then only 1000 deposit transactions will be allowed for the month, and further deposits for this processor will be blocked. (this overrides global player(GPL)/profile(PL) limits)"
+				}
+			},
+			"WITHDRAW": {
+				"GL": {
+					"MIN_AMT": "This is the minimum amount that may be entered when making a withdrawal using this processor.",
+					"MAX_AMT": "This is the maximum amount that may be entered when making a withdrawal using this processor.",
+					"MAX_AMT_PD": "The maximum amount that players will be able to withdraw per day. This is a system setup and cannot be changed, start by adding a sensible override for the domain.",
+					"MAX_AMT_PW": "The maximum amount that players will be able to withdraw per week. This is a system setup and cannot be changed, start by adding a sensible override for the domain.",
+					"MAX_AMT_PM": "The maximum amount that players will be able to withdraw per month. This is a system setup and cannot be changed, start by adding a sensible override for the domain.",
+					"TRANS_PD": "The maximum amount of transactions that players will be able to perform per day. This is a system setup and cannot be changed, start by adding a sensible override for the domain.",
+					"TRANS_PW": "The maximum amount of transactions that players will be able to perform per week. This is a system setup and cannot be changed, start by adding a sensible override for the domain.",
+					"TRANS_PM": "The maximum amount of transactions that players will be able to perform per month. This is a system setup and cannot be changed, start by adding a sensible override for the domain."
+				},
+				"DL": {
+					"MAX_AMT_PD": "The maximum amount that players will be able to withdraw per day for the domain as a whole. E.g. If limit specified here is $100, then one player can withdraw $100, and further withdrawals for the domain for all players for this processor will be blocked, or two players can each withdraw $50, and further withdrawals will be blocked. It's a domain level limit for this processor. (This limit overrides GL, but cannot be overridden by player(GPL/IPL)/profile(PL) limits)",
+					"MAX_AMT_PW": "The maximum amount that players will be able to withdraw per week for the domain as a whole. E.g. If limit specified here is $1000, then one player can withdraw $1000, and further withdrawals for the domain for all players for this processor will be blocked, or two players can each withdraw $500, and further withdrawals will be blocked. It's a domain level limit for this processor. (This limit overrides GL, but cannot be overridden by player(GPL/IPL)/profile(PL) limits)",
+					"MAX_AMT_PM": "The maximum amount that players will be able to withdraw per month for the domain as a whole. E.g. If limit specified here is $10000, then one player can withdraw $10000, and further withdrawals for the domain for all players for this processor will be blocked, or two players can each withdraw $5000, and further withdrawals will be blocked. It's a domain level limit for this processor. (This limit overrides GL, but cannot be overridden by player(GPL/IPL)/profile(PL) limits)",
+					"TRANS_PD": "The maximum amount of transactions that players will be able to perform per day for the domain as a whole. E.g. If limit specified here is 10, then only 10 withdrawal transactions will be allowed for the day, and further withdrawals for the domain for all players for this processor will be blocked. It's a domain level limit for this processor. (This limit overrides GL, but cannot be overridden by player(GPL/IPL)/profile(PL) limits)",
+					"TRANS_PW": "The maximum amount of transactions that players will be able to perform per week for the domain as a whole. E.g. If limit specified here is 100, then only 100 withdrawal transactions will be allowed for the week, and further withdrawals for the domain for all players for this processor will be blocked. It's a domain level limit for this processor. (This limit overrides GL, but cannot be overridden by player(GPL/IPL)/profile(PL) limits)",
+					"TRANS_PM": "The maximum amount of transactions that players will be able to perform per month for the domain as a whole. E.g. If limit specified here is 1000, then only 1000 withdrawal transactions will be allowed for the month, and further withdrawals for the domain for all players for this processor will be blocked. It's a domain level limit for this processor. (This limit overrides GL, but cannot be overridden by player(GPL/IPL)/profile(PL) limits)"
+				},
+				"GPL": {
+					"MIN_AMT": "This is the minimum amount that may be entered when making a withdrawal using this processor.",
+					"MAX_AMT": "This is the maximum amount that may be entered when making a withdrawal using this processor.",
+					"MAX_AMT_PD": "The maximum amount that a player will be able to withdraw per day (not linked to a profile or with individual overrides). E.g. If limit specified here is $100, then a player (with no individual/profile overrides) can withdraw $100 in total for the day, and further withdrawals for this processor will be blocked after that. (This limit can be overridden by player(IPL)/profile(PL) limits)",
+					"MAX_AMT_PW": "The maximum amount that a player will be able to withdraw per week (not linked to a profile or with individual overrides). E.g. If limit specified here is $1000, then a player (with no individual/profile overrides) can withdraw $1000 in total for the week, and further withdrawals for this processor will be blocked after that. (This limit can be overridden by player(IPL)/profile(PL) limits)",
+					"MAX_AMT_PM": "The maximum amount that a player will be able to withdraw per month (not linked to a profile or with individual overrides). E.g. If limit specified here is $10000, then a player (with no individual/profile overrides) can withdraw $10000 in total for the month, and further withdrawals for this processor will be blocked after that. (This limit can be overridden by player(IPL)/profile(PL) limits)",
+					"TRANS_PD": "The maximum amount of transactions that a player will be able to perform per day (not linked to a profile or with individual overrides). E.g. If limit specified here is 10, then only 10 withdrawal transactions will be allowed for the day, and further withdrawals for this processor will be blocked. (This limit can be overridden by player(IPL)/profile(PL) limits)",
+					"TRANS_PW": "The maximum amount of transactions that a player will be able to perform per week (not linked to a profile or with individual overrides). E.g. If limit specified here is 100, then only 100 withdrawal transactions will be allowed for the week, and further withdrawals for this processor will be blocked. (This limit can be overridden by player(IPL)/profile(PL) limits)",
+					"TRANS_PM": "The maximum amount of transactions that a player will be able to perform per month (not linked to a profile or with individual overrides). E.g. If limit specified here is 1000, then only 1000 withdrawal transactions will be allowed for the month, and further withdrawals for this processor will be blocked. (This limit can be overridden by player(IPL)/profile(PL) limits)"
+				},
+				"PL": {
+					"MIN_AMT": "This is the minimum amount that may be entered when making a withdrawal using this processor if player is linked to this profile.",
+					"MAX_AMT": "This is the maximum amount that may be entered when making a withdrawal using this processor if player is linked to this profile.",
+					"MAX_AMT_PD": "The maximum amount that a player (linked to this profile and does not have individual overrides) will be able to withdraw per day. E.g. If limit specified here is $100, then a player (with no individual overrides) can withdraw $100 in total for the day, and further withdrawals for this processor will be blocked after that. (This limit can be overridden by player(IPL) limits)",
+					"MAX_AMT_PW": "The maximum amount that a player (linked to this profile and does not have individual overrides) will be able to withdraw per week. E.g. If limit specified here is $1000, then a player (with no individual overrides) can withdraw $1000 in total for the week, and further withdrawals for this processor will be blocked after that. (This limit can be overridden by player(IPL) limits)",
+					"MAX_AMT_PM": "The maximum amount that a player (linked to this profile and does not have individual overrides) will be able to withdraw per month. E.g. If limit specified here is $10000, then a player (with no individual overrides) can withdraw $10000 in total for the month, and further withdrawals for this processor will be blocked after that. (This limit can be overridden by player(IPL) limits)",
+					"TRANS_PD": "The maximum amount of transactions that a player will be able to perform per day (linked to this profile and does not have individual overrides). E.g. If limit specified here is 10, then only 10 withdrawal transactions will be allowed for the day, and further withdrawals for this processor will be blocked. (This limit can be overridden by player(IPL) limits)",
+					"TRANS_PW": "The maximum amount of transactions that a player will be able to perform per week (linked to this profile and does not have individual overrides). E.g. If limit specified here is 100, then only 100 withdrawal transactions will be allowed for the week, and further withdrawals for this processor will be blocked. (This limit can be overridden by player(IPL) limits)",
+					"TRANS_PM": "The maximum amount of transactions that a player will be able to perform per month (linked to this profile and does not have individual overrides). E.g. If limit specified here is 1000, then only 1000 withdrawal transactions will be allowed for the month, and further withdrawals for this processor will be blocked. (This limit can be overridden by player(IPL) limits)"
+				},
+				"IPL": {
+					"MIN_AMT": "This is the minimum amount that may be entered when making a withdrawal using this processor (this overrides global player(GPL)/profile(PL) limits).",
+					"MAX_AMT": "This is the maximum amount that may be entered when making a withdrawal using this processor (this overrides global player(GPL)/profile(PL) limits).",
+					"MAX_AMT_PD": "The maximum amount that this player will be able to withdraw per day. E.g. If limit specified here is $100, then this player can withdraw $100 in total for the day, and further withdrawals for this processor will be blocked after that. (this overrides global player(GPL)/profile(PL) limits)",
+					"MAX_AMT_PW": "The maximum amount that this player will be able to withdraw per week. E.g. If limit specified here is $1000, then this player can withdraw $1000 in total for the week, and further withdrawals for this processor will be blocked after that. (this overrides global player(GPL)/profile(PL) limits)",
+					"MAX_AMT_PM": "The maximum amount that this player will be able to withdraw per month. E.g. If limit specified here is $10000, then this player can withdraw $10000 in total for the month, and further withdrawals for this processor will be blocked after that. (this overrides global player(GPL)/profile(PL) limits)",
+					"TRANS_PD": "The maximum amount of transactions that this player will be able to perform per day. E.g. If limit specified here is 10, then only 10 withdrawal transactions will be allowed for the day, and further withdrawals for this processor will be blocked. (this overrides global player(GPL)/profile(PL) limits)",
+					"TRANS_PW": "The maximum amount of transactions that this player will be able to perform per week. E.g. If limit specified here is 100, then only 100 withdrawal transactions will be allowed for the week, and further withdrawals for this processor will be blocked. (this overrides global player(GPL)/profile(PL) limits)",
+					"TRANS_PM": "The maximum amount of transactions that this player will be able to perform per month. E.g. If limit specified here is 1000, then only 1000 withdrawal transactions will be allowed for the month, and further withdrawals for this processor will be blocked. (this overrides global player(GPL)/profile(PL) limits)"
+				}
+			}
+		}
+	}
+}

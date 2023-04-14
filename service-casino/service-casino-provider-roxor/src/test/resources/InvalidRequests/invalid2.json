@@ -1,0 +1,28 @@
+{
+  "playerId" : "Richard/708",
+  "website" : "90",
+  "platform" : "mobile",
+  "gameKey" : "play-theBass",
+  "gamePlayId" : null,
+  "operations" : [{
+    "operationType" : "START_GAME_PLAY"
+  },{
+    "operationType" : "TRANSFER",
+    "amount" : {
+      "currency" : "GBP",
+      "amount" : 10
+    },
+    "transferId" : "transfer-01-debit",
+    "type" : "DEBIT"
+  },{
+    "operationType" : "TRANSFER",
+    "amount" : {
+      "currency" : "GBP",
+      "amount" : 100
+    },
+    "transferId" : "transfer-02-credit",
+    "type" : "CREDIT"
+  },{
+    "operationType" : "FINISH_GAME_PLAY"
+  }]
+}

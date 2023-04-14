@@ -1,0 +1,90 @@
+[plantuml]
+----
+@startuml
+
+!define p(name, alias) participant "name" as alias << (L,#AAFFCC) >>
+!define pn(name, alias) participant "name" as alias << (L,#FFAAAA) >>
+!define q(name, alias) queue "name" as alias << (L,#AAFFCC) >>
+!define qn(name, alias) queue "name" as alias << (L,#FFAAAA) >>
+
+autonumber
+
+database "big-query" as bigQuery
+
+pn("service-vb-migration", svcVbMigration)
+
+box "rabbit-mq" #LightBlue
+qn("casino-historic-bet-migration-queue", casinoBetQueue)
+end box
+
+box "service-casino" #LightSkyBlue
+pn("CasinoHistoricBetProcessor n", casinoHistoricBetProcessor)
+pn("CasinoHistoricBetIngestionService", casinoHistoricBetIngestionService)
+p("BetPersistService", betPersistService)
+p("BetResultPersistService", betResultPersistService)
+end box
+
+activate casinoHistoricBetProcessor
+casinoHistoricBetProcessor -> casinoBetQueue: Listen
+deactivate casinoHistoricBetProcessor
+
+activate svcVbMigration
+
+svcVbMigration -> bigQuery: query
+
+activate bigQuery
+bigQuery --> svcVbMigration
+deactivate bigQuery
+
+loop each record
+svcVbMigration -> casinoBetQueue: enqueue
+
+activate casinoBetQueue
+casinoBetQueue --> svcVbMigration
+
+svcVbMigration -> svcVbMigration: record progress
+end
+
+deactivate svcVbMigration
+
+activate casinoBetQueue
+casinoBetQueue -> casinoHistoricBetProcessor: dequeue
+deactivate casinoBetQueue
+
+activate casinoHistoricBetProcessor
+casinoHistoricBetProcessor -> casinoHistoricBetIngestionService: ingest
+
+note right
+Transactional
+end note
+
+activate casinoHistoricBetIngestionService
+casinoHistoricBetIngestionService -> betPersistService: persist
+note right
+Bet Round and Bet
+is created
+end note
+activate betPersistService
+betPersistService --> casinoHistoricBetIngestionService
+deactivate betPersistService
+casinoHistoricBetIngestionService -> betResultPersistService: persist
+note right
+Bet Result is
+now created
+end note
+activate betResultPersistService
+betResultPersistService --> casinoHistoricBetIngestionService
+deactivate betResultPersistService
+casinoHistoricBetIngestionService -> casinoHistoricBetIngestionService: finalize
+note right
+Set last_bet_result_id on bet_round
+end note
+casinoHistoricBetIngestionService --> casinoHistoricBetProcessor
+deactivate casinoHistoricBetIngestionService
+casinoHistoricBetProcessor --> casinoBetQueue: ACK
+deactivate casinoHistoricBetProcessor
+
+@enduml
+----
+[plantuml]
+

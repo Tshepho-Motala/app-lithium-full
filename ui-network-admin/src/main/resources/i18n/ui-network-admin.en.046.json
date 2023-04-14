@@ -1,0 +1,19 @@
+{
+	"UI_NETWORK_ADMIN": {
+		"CASHIER": {
+			"TRANSACTION": {
+				"MANUAL": {
+					"TYPE": {
+						"NAME": "Type"
+					},
+					"CARDS": {
+						"TRANSACTIONTYPEINFORMATION": "Transaction Type Information"
+					},
+					"WITHDRAWAL": {
+						"NAME": "WITHDRAWAL"
+					}
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,55 @@
+[plantuml]
+----
+@startuml
+
+!define p(name, alias) participant "name" as alias << (L,#AAFFCC) >>
+!define qn(name, alias) queue "name" as alias << (L,#FFAAAA) >>
+
+autonumber
+
+p("SCP", scp)
+qn("progressive-jackpot-feed-registration", jfreg)
+p("SVC-games", svcgames)
+
+activate jfreg
+svcgames -> jfreg: Listen
+deactivate jfreg
+
+activate scp
+scp -> scp: Started up
+note right
+Application started
+event fired.
+end note
+loop Each progressive jackpot feed
+scp -> jfreg: Enqueue
+note right
+Payload to contain
+casino module name
+and game supplier
+name.
+end note
+jfreg --> scp
+end
+deactivate scp
+
+jfreg -> svcgames: Dequeue
+activate svcgames
+note right
+Lookup progressive jackpot feed
+by module and game supplier.
+If it does not exist, create it.
+This is done per player domain,
+since the game_supplier table
+holds a foreign reference to
+domain_id. Initially, the
+__enabled__ flag should be false
+and require enabling via LBO.
+end note
+svcgames -> svcgames: Register
+svcgames --> jfreg: ACK
+deactivate svcgames
+
+@enduml
+----
+[plantuml]

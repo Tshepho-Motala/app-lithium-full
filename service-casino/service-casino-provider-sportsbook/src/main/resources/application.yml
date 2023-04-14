@@ -1,0 +1,33 @@
+server.port: 9812
+
+spring:
+  application:
+    name: service-casino-provider-sportsbook
+  datasource:
+    url: jdbc:mysql://localhost/lithium_casino_sportsbook
+    username: root
+    password: mysql
+  jpa:
+#    show-sql: true
+    hibernate:
+      ddl-auto: validate
+  flyway:
+    enabled: true
+
+lithium:
+  services:
+    casino:
+      provider:
+        sportsbook:
+          pending-reservation-job:
+            delay-ms: 300000
+            fetch-size: 10
+            expire-after-ms: 3600000
+
+eureka:
+  instance:
+    appname: service-casino-provider-sportsbook
+
+logging:
+  level:
+    lithium.service.casino.provider.sportsbook: INFO

@@ -1,0 +1,49 @@
+.Campaign ERD1
+[plantuml]
+----
+
+@startuml
+
+' hide the spot
+hide circle
+
+' avoid problems with angled crows feet
+skinparam linetype ortho
+
+'entity "SupplierGameMetaHours" as metahours {
+'  *id : long <<generated>>
+'  --
+'  type: text # FullTime / Bounded (works during hours specified time)
+'  startTime: text
+'  endTime: text
+'}
+
+mission }|--|{ mission_revision
+mission_revision ||--|| user
+mission_revision ||--|| domain
+mission_stat_summary ||--|| user
+mission_stat_summary ||--|| mission_stat
+mission_stat_summary ||--|| period
+
+period ||--|| domain
+period ||--|| user_mission
+
+graphic ||--|| challenge
+label ||--|| label_value
+
+mission_stat_entry ||--|| mission_stat
+mission_stat_summary ||--|| mission_stat
+
+reward ||--|| mission_revision
+reward ||--|| challenge
+
+rule ||--|| challenge
+rule ||--|| user_mission_challenge_rule
+
+user_mission_challenge_rule ||--|| mission_stat
+user_mission_challenge_rule ||--|| user_mission_challenge
+
+
+@enduml
+
+----

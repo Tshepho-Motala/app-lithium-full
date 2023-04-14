@@ -1,0 +1,55 @@
+{
+  "name": "Idebit",
+  "code": "idebit",
+  "url": "service-cashier-processor-ids-idebit",
+  "methodNames": ["ids"],
+  "deposit": true,
+  "withdraw": true,
+  "fees": {
+    "flat": 0,
+    "percentage": 0,
+    "minimum": 0
+  },
+  "limits": {
+    "minAmount": 100,
+    "maxAmount": 100000,
+    "maxAmountDay": 0,
+    "maxAmountWeek": 0,
+    "maxAmountMonth": 0,
+    "maxTransactionsDay": 0,
+    "maxTransactionsWeek": 0,
+    "maxTransactionsMonth": 0
+  },
+  "properties": [
+    { 
+      "name": "baseUrl",
+      "defaultValue": "https://staging.instadebit.com",
+      "type": "url",
+      "description": "The API base URL.."
+    },
+    { 
+      "name": "merchantId",
+      "defaultValue": "99999999",
+      "type": "string",
+      "description": "The processor should supply the API merchant id."
+    },
+    {
+      "name": "merchantSubId",
+      "defaultValue": "0",
+      "type": "string",
+      "description": "The processor should supply the API merchant sub id or 0 (zero) when not applicable."
+    },
+    {
+      "name": "merchantPassword",
+      "defaultValue": "",
+      "type": "string",
+      "description": "The processor should supply the API merchant password."
+    },
+    {
+      "name": "processorImplName",
+      "defaultValue": "",
+      "type": "string",
+      "description": "The processor implementation to use type either IDEBIT or INSTADEBIT"
+    }
+  ]
+}

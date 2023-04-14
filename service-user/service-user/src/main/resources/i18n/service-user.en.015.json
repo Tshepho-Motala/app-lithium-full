@@ -1,0 +1,8 @@
+{
+  "SERVICE_USER": {
+    "LOGIN_HISTORY": {
+      "FAIL_REASON": "Login is restricted",
+      "RAW_STATUS_FAIL_REASON": "Login failed with the following status:"
+    }
+  }
+}

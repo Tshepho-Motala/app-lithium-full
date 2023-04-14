@@ -1,0 +1,84 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "PLAY_TIME_LIMITS": {
+      "TABLE": {
+        "TITLE": "Play Time Limits",
+        "TYPE": "Type",
+        "PLAY_TIME_LIMIT": "Play Time Limit",
+        "PERIOD": "Period",
+        "DAILY": "Daily",
+        "WEEKLY": "Weekly",
+        "MONTHLY": "Monthly",
+        "NOT_SET": "Not Set",
+        "LIMIT": "Limit",
+        "REMAINING": "Remaining",
+        "LIMIT_INCREASE_REQUESTED": "Limit increase requested on",
+        "TO": "to",
+        "LIMIT_AFFECT": "This new limit will take affect on"
+      },
+      "POP_UP_DIALOG": {
+        "EDIT_PLAY_TIME_LIMIT": "Edit Play Time Limit",
+        "NEW_PLAY_TIME_LIMIT": "New Play Time Limit",
+        "DAILY": "Daily",
+        "WEEKLY": "Weekly",
+        "MONTHLY": "Monthly",
+        "DAYS": "Days",
+        "HOURS": "Hours",
+        "MINUTES": "Minutes",
+        "TIME_LIMIT_SETTINGS_DESCRIPTION": "Set the maximum time of play for the selected period.",
+        "CURRENT_PLAY_TIME_LIMIT": "Current Play Time Limit",
+        "CURRENT_TIME_LIMIT_SETTINGS_DESCRIPTION": "The current play time limit of the player for the selected period.",
+        "EXPLANATION": "Explanation",
+        "INCREASE_LIMIT_EXPLANATION_1": "This is an",
+        "INCREASE_LIMIT_EXPLANATION_2": "increase",
+        "INCREASE_LIMIT_EXPLANATION_3": "to the play time limit, and will only take effect after 7 days have elapsed.",
+        "DECREASE_LIMIT_EXPLANATION_1": "This is a",
+        "DECREASE_LIMIT_EXPLANATION_2": "decrease",
+        "DECREASE_LIMIT_EXPLANATION_3": "to the play time limit, and will take instant effect."
+      },
+      "CONFIRMATION_POP_UP_DIALOG": {
+        "PLAY_TIME_LIMIT": "Play Time Limit",
+        "DECREASE_WARNING_DESCRIPTION": "Are you sure you want to decrease play time limits",
+        "INCREASE_WARNING_DESCRIPTION": "Are you sure you want to increase play time limits",
+        "CONFIRM": "Confirm",
+        "CANCEL": "Cancel",
+        "SAVE": {
+          "SUCCESS": "Play Time limit saved successfully.",
+          "ERROR": "Play Time limit could not be saved, please try again."
+        }
+      },
+      "QUICK_ACTIONS": {
+        "TITLE": "Update Play Time Limits"
+      }
+    }
+  },
+  "GLOBAL": {
+    "RESPONSE": {
+      "SUCCESS_FORMS": {
+        "PENDING_PLAY_TIME_LIMIT_REMOVED": "Successfully removed pending play time limit.",
+        "ADDED_NEW_PLAY_TIME_LIMIT": "Successfully added new play time limit."
+      },
+      "WARNING_FORMS": {
+        "NEGATIVE_VALUE_WARNING": "The value can't be negative.",
+        "OUT_OF_DAILY_LIMIT_WARNING": "The days value can't be less than zero and more than daily limit (1 day).",
+        "OUT_OF_WEEKLY_LIMIT_WARNING": "The days value can't be less than zero and more than daily limit (7 days).",
+        "OUT_OF_MONTHLY_LIMIT_WARNING": "The days value can't be less than zero and more than daily limit (31 days).",
+        "OUT_OF_HOURS_LIMIT_WARNING": "The hours value can't be less than zero and more than 24 hours.",
+        "OUT_OF_MINUTES_LIMIT_WARNING": "The minutes value can't be less than zero and more than 60 minutes."
+      },
+      "ERROR_FORMS": {
+        "DAILY_DECREASE_HOURS_AND_MINUTES_ERROR": "Decrease your hours and minutes value to zero. Max limit: 1d / 24h / 23h 60m",
+        "DAILY_DECREASE_DAYS_AND_MINUTES_ERROR": "Decrease your days and minutes value to zero. Max limit: 1d / 24h / 23h 60m",
+        "DAILY_DECREASE_DAYS_ERROR": "Decrease your days value to zero. Max limit: 1d / 24h / 23h 60m",
+        "WEEKLY_DECREASE_HOURS_AND_MINUTES_ERROR": "Decrease your hours and minutes value to zero. Max limit: 7d / 6d 24h / 6d 23h 60m",
+        "WEEKLY_DECREASE_DAYS_AND_MINUTES_ERROR": "Decrease your days and minutes value to zero. Max limit: 7d / 6d 24h / 6d 23h 60m",
+        "WEEKLY_DECREASE_DAYS_ERROR": "Decrease your days value to zero. Max limit: 7d / 6d 24h / 6d 23h 60m",
+        "MONTHLY_DECREASE_HOURS_AND_MINUTES_ERROR": "Decrease your hours and minutes value to zero. Max limit: 31d / 30d 24h / 30d 23h 60m",
+        "MONTHLY_DECREASE_DAYS_AND_MINUTES_ERROR": "Decrease your days and minutes value to zero. Max limit: 31d / 30d 24h / 30d 23h 60m",
+        "MONTHLY_DECREASE_DAYS_ERROR": "Decrease your days value to zero. Max limit: 31d / 30d 24h / 30d 23h 60m",
+        "ZERO_PLAY_TIME_LIMIT_ERROR": "Play Time Limit can't have zero value.",
+        "EQUAL_NEW_PTL_AND_CURRENT_PTL_ERROR": "Play Time Limit can't be equal with current Play Time Limit."
+      }
+    }
+  }
+}

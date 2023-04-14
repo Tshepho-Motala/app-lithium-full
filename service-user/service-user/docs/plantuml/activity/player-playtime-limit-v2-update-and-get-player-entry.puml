@@ -1,0 +1,14 @@
+[plantuml]
+----
+@startuml
+start
+:Find playtime limit configuration;
+if (Configuration exists) then (yes)
+  :periodService.findOrCreatePeriod;
+  :self.updateAndGetPlayerEntry(configuration, period);
+  stop
+else (no)
+  stop
+@enduml
+----
+[plantuml]

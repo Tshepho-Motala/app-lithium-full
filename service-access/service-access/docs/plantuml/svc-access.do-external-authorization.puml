@@ -1,0 +1,50 @@
+.Access Control Rulesets (Basic Flow)
+[plantuml]
+----
+@startuml
+'https://plantuml.com/sequence-diagram
+
+actor internal
+participant  "svc-access" as sa
+participant "svc-access-provider-*" as sap
+
+autonumber
+
+activate sa
+  internal -> sa: Do external authorization Flow
+  ||10||
+  ref over sa: Check if External Access Rule has isValidateOnce enabled
+  ||10||
+  note over sa: Needs to be populated with results from access provider on return
+  sa -> sa: Build CheckAuthorizationResult with default values
+  note over sa: Used to populate all pre-conditions for the access provider that will be called for this external access rule
+  sa -> sa: Build ExternalAuthorizationRequest in preparation to call the internal system access provider endpoint
+  sa -> sa: Get ExternalAuthorizationClient from provider URL
+  sa -> sap: /service-access-provider-*/system/checkAuthorization
+  activate sap
+    ||10|
+    ref over sap: Do External Access Provider
+    ||10||
+    sap --> sa: authorizationResultResponse
+  deactivate sap
+  alt Response.Status.OK
+    ||10||
+    ref over sa: Store external raw list data if found
+    ||10||
+    note over sa: checkAuthorizationResult: found=true, passed=[depending on access_rule_status_options configured]
+    sa -> sa: Set checkAuthorizationResult with access provider outcomes and response data
+  else Not Response.Status.OK
+    ||10||
+    note over sa: checkAuthorizationResult: found=false, passed=[depending on access_rule_status_options configured]
+    sa -> sa: Set checkAuthorizationResult with access provider outcomes and response data
+  end
+  alt checkAuthorizationResult.passed=false
+    alt Outcome was not a timeout
+      sa -> sa: Set checkAuthorizationResult.answerMessage = default Reject Message that was configured on external accessRule
+    else Outcome was a timeout
+      sa -> sa: Set checkAuthorizationResult.answerMessage = default Timeout Message that was configured on external accessRule
+  end
+sa --> internal: return checkAuthorizationResult
+
+@enduml
+----

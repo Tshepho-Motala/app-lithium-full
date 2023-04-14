@@ -1,0 +1,193 @@
+.example flows
+[plantuml]
+----
+
+@startuml
+
+participant "svc-cashier" as cashier
+participant "svc-user" as user
+participant "svc-missions/campaigns" as cam
+participant "svc-bonus/promo" as promo
+participant "svc-bonus-pr-casino-roxor" as sbprx
+participant "svc-bonus-pr-sportsbook-1" as sbpsb1
+participant "svc-casino" as casino
+participant "svc-casino-pr-roxor" as scprx
+participant "svc-accounting-pr-internal" as account
+
+== 1. Deposit Campaign (Immediate)(Cash Reward)==
+cashier->account:deposit $50
+activate account
+account->cashier: successful deposit response
+deactivate account
+account->cam: Completed Transaction Event
+activate cam
+note left
+'* campaigns (C) controls if money is released immediately.
+* campaign 'challenge': deposit $25-$100
+**  has promo configured.
+end note
+cam->promo: allocate promo
+activate promo
+promo->account: award 10% cash
+deactivate cam
+activate account
+account->account
+note right
+* money added directly into PB
+* $5 added to PB
+end note
+account->promo:
+deactivate account
+deactivate promo
+
+== 2. Deposit Campaign (Immediate)(Cash Reward & Freespins)==
+cashier->account:deposit $50
+activate account
+account->cashier: successful deposit response
+deactivate account
+account->cam: Completed Transaction Event
+activate cam
+note left
+'* campaigns (C) controls if money is released immediately.
+* campaign 'challenge': deposit $25-$100
+**  has promo configured.
+end note
+cam->promo: allocate promo
+activate promo
+promo->account: award 10% cash
+deactivate cam
+activate account
+account->account
+note right
+* money added directly into PB
+* $5 added to PB
+end note
+account->promo:
+deactivate account
+promo->casino: award freespins
+activate casino
+casino->sbprx: allocate freespins on RX game
+activate sbprx
+deactivate casino
+deactivate sbprx
+deactivate promo
+
+== 3. Signup Campaign (Immediate)(Cash Reward)==
+user->cam: Event to notify of signup
+activate cam
+note right
+* campaign 'challenge': signup
+** promo configured
+end note
+cam->promo: allocate promo
+activate promo
+promo->account: award 10% cash
+deactivate cam
+activate account
+account->account
+note right
+* money added directly into PB
+* $5 added to PB
+end note
+account->promo:
+deactivate account
+deactivate promo
+
+== 4. Sportsbook Campaign (Bet £10 Get £30)==
+note right of cashier
+Place single £10 wager at odds 1.5+ for single bet OR at odds 1.01+ per leg in multiple (any market)
+
+Bet £10 on any sport with odds 1.5 or higher and get £30 in free bets. Single entry per individual customer
+end note
+account->cam: Completed Transaction Event (SPORTS_BET)
+activate cam
+note over cam #FFAAAA
+we currently do not have any information
+about the details of the SPORTS_BET
+end note
+cam->promo: allocate promo
+activate promo
+promo->casino: award freebets
+activate casino
+casino->sbpsb1: allocate freebets on SB
+activate sbpsb1
+deactivate casino
+deactivate sbpsb1
+deactivate promo
+deactivate cam
+
+== 5. Sportsbook Campaign (Bet £10 Get £20 - Welcome Offer)==
+note right of cashier
+Place single £10 wager at odds 1.5+ for single bet OR at odds 1.01+ per leg in multiple (any market). Within 14 days from registration date.
+
+Bet £10 on any sport with odds 1.5 or higher and get £20 in free bets. Single entry per individual customer after registration
+end note
+account->cam: Completed Transaction Event (SPORTS_BET)
+activate cam
+note over cam #FFAAAA
+we currently do not have any information
+about the details of the SPORTS_BET
+end note
+note over cam #FFAAAA
+if qualifying campaign found for betting data, last check would be
+to svc-user to find out if user falls within the 14 days.
+end note
+cam->promo: allocate promo
+activate promo
+promo->casino: award freebets
+activate casino
+casino->sbpsb1: allocate freebets on SB
+activate sbpsb1
+deactivate casino
+deactivate sbpsb1
+deactivate promo
+deactivate cam
+
+|||
+|||
+|||
+|||
+|||
+|||
+|||
+|||
+|||
+|||
+== ==
+note over sbpsb1 #FFAAAA
+WIP - NOT FINISHED!!  WIP - NOT FINISHED!!  WIP - NOT FINISHED!!
+Wagering requirements / playthrough needs more discussion and more specs from product
+end note
+
+== Deposit Campaign (Wagering Requirements)(Cash Reward)==
+cashier->account:deposit $50
+activate account
+account->cashier: successful deposit response
+deactivate account
+account->cam: Completed Transaction Event (Deposit)
+activate cam
+note left
+'* campaigns (C) controls if money is released immediately.
+* campaign 'challenge': deposit $25-$100
+**  has promo configured.
+end note
+cam->promo: allocate promo
+activate promo
+promo->account: award 10% cash
+deactivate cam
+activate account
+account->account
+note right
+* money added into PLAYER_BALANCE_CASINO_BONUS
+* $5 added to PLAYER_BALANCE_CASINO_BONUS
+end note
+account->promo:
+deactivate account
+deactivate promo
+account->cam: Completed Transaction Event (CASINO_WIN)
+activate cam
+deactivate cam
+
+@enduml
+
+----

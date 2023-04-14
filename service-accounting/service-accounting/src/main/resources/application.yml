@@ -1,0 +1,11 @@
+server:
+  port: 9100
+lithium:
+  enable-secondary-read-only: false
+  enable-read-only: false
+
+logging:
+  level:
+    ROOT: INFO
+#    org.springframework.web: INFO
+#    feign: INFO

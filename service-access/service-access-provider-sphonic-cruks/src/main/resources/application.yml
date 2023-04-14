@@ -1,0 +1,42 @@
+server:
+  port: 9602
+
+spring:
+ application:
+   name: service-access-provider-sphonic-cruks
+ datasource:
+   url: jdbc:mysql://localhost/lithium_access_provider_sphonic_cruks
+   username: root
+   password: mysql
+ jpa:
+   show-sql: false
+   hibernate:
+     ddl-auto: validate
+     properties:
+       hibernate:
+        format_sql: true
+   
+eureka:
+  instance:
+    appname: service-access-provider-sphonic-cruks
+
+lithium:
+  service:
+    access:
+      sphonic:
+        cruks:
+          failed-attempt-job:
+            batch-attempts: 10
+            error-logging-threshold: 5
+            backoff-threshold: 10
+            delay-ms: 60000
+
+  rest:
+    logging:
+      obfuscate-fields-request:
+        - BSN
+
+logging:
+  level:
+    lithium.service.access.provider.sphonic: INFO
+#    lithium.rest: INFO

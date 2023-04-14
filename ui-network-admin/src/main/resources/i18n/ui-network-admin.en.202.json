@@ -1,0 +1,41 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "ECOSYSTEMS": {
+      "TITLE": {
+        "PRIMARY": "Primary player (this player)",
+        "SECONDARY": "Secondary player (other player) link through",
+        "TYPE": "Link type",
+        "COMMENT": "Link note"
+      },
+      "NOTIFY": {
+        "UPDATE": "Player linking updated successfully",
+        "ADD": "Player linking added successfully",
+        "DELETE": "Player linking deleted successfully"
+      },
+      "MODAL": {
+        "ADD": "Add Player Link",
+        "UPDATE": "Update Player Link",
+        "PLACEHOLDER": {
+          "SECONDARY": "Enter player name to start search...",
+          "COMMENT": "Fill in a reason"
+        },
+        "DESCRIPTION": {
+          "COMMENT": "Specify the reason for this player link update",
+          "TYPE": "Select player link type"
+        },
+        "LABEL": {
+          "PRIMARY": "Primary player",
+          "SECONDARY": "Secondary player",
+          "TYPE": "Link type",
+          "COMMENT": "Link note"
+        }
+      },
+      "CUSTOM": {
+        "BUTTONS": {
+          "DELETE": "Delete",
+          "MODIFY": "Modify"
+        }
+      }
+    }
+  }
+}

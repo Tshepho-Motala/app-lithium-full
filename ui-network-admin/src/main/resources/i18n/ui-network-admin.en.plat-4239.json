@@ -1,0 +1,13 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "DOMAIN": {
+      "SETTING": {
+        "ERROR": "Could not save domain settings",
+        "SUCCESS": "Successfully saved domain settings"
+      },
+      "ROOT_SETTING": {
+        "ERROR": "Could not save root domain settings"
+      }
+    }
+  }
+}

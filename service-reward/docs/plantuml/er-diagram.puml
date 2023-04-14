@@ -1,0 +1,107 @@
+.Database Layout
+[plantuml]
+----
+
+@startuml
+
+'!theme plain
+top to bottom direction
+skinparam linetype ortho
+
+' uncomment the line below if you're using computer with a retina display
+' skinparam dpi 300
+!define Table(name) class name as "name" << (T,#FFAAAA) >>
+' we use bold for primary key
+' green color for unique
+' and underscore for not_null
+!define pk(x) <b>x</b>
+!define unique(x) <color:green>x</color>
+!define not_null(x) <u>x</u>
+' other tags available:
+' <i></i>
+' <back:COLOR></color>, where color is a color name or html color code
+' (#FFAACC)
+' see: http://plantuml.com/classes.html#More
+hide methods
+hide stereotypes
+
+' entities
+
+Table(Domain) {
+   primary_key(id)  Long
+   name:  String 
+   version:  int 
+}
+Table(PlayerRewardHistory) {
+   id:  Long 
+   awardedDate:  Date 
+   redeemedDate:  Date 
+   rewardSource:  RewardSource 
+   status:  PlayerRewardHistoryStatus 
+   version:  int 
+}
+Table(PlayerRewardTypeHistory) {
+   id:  Long 
+   referenceId:  String 
+   status:  PlayerRewardTypeStatus 
+   typeCounter:  BigDecimal 
+   version:  int 
+}
+Table(Reward) {
+   id:  Long 
+}
+Table(RewardRevision) {
+   id:  Long 
+   code:  String 
+   description:  String 
+   enabled:  boolean 
+   name:  String 
+}
+Table(RewardRevisionType) {
+   id:  Long 
+   instant:  boolean 
+}
+Table(RewardRevisionTypeGame) {
+   id:  long 
+   guid:  String 
+}
+Table(RewardRevisionTypeValue) {
+   id:  long 
+   value:  String 
+   version:  int 
+}
+Table(RewardType) {
+   id:  long 
+   displayGames:  boolean 
+   name:  String 
+   url:  String 
+}
+Table(RewardTypeField) {
+   id:  long 
+   dataType:  FieldDataType 
+   description:  String 
+   name:  String 
+}
+Table(User) {
+   id:  Long 
+   guid:  String 
+   isTestAccount:  boolean 
+   version:  int 
+}
+
+PlayerRewardHistory     "0..*" -[#595959,plain]-> "0..1" RewardRevision
+PlayerRewardHistory     "0..*" -[#595959,plain]-> "0..1" User
+PlayerRewardTypeHistory "0..*" -[#595959,plain]-> "0..1" PlayerRewardHistory     
+PlayerRewardTypeHistory "0..*" -[#595959,plain]-> "0..1" RewardRevisionType      
+Reward                  "0..*" -[#595959,plain]-> "0..1" Domain                  
+Reward                  "0..*" -[#595959,plain]-> "0..1" RewardRevision          
+Reward                  "0..*" -[#595959,plain]-> "0..1" User                    
+RewardRevision          "0..*" -[#595959,plain]-> "0..1" Reward                  
+RewardRevision          "0..1" <-[#595959,plain]-> "0..*" RewardRevisionType      
+RewardRevisionType      "0..*" -[#595959,plain]-> "0..1" RewardType              
+RewardRevisionTypeGame  "0..*" -[#595959,plain]-> "0..1" RewardRevisionType      
+RewardRevisionTypeValue "0..*" -[#595959,plain]-> "0..1" RewardRevisionType      
+RewardRevisionTypeValue "0..1" -[#595959,plain]-> "0..1" RewardTypeField         
+RewardType              "0..1" <-[#595959,plain]-> "0..*" RewardTypeField         
+@enduml
+----

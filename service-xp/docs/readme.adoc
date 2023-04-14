@@ -1,0 +1,30 @@
+= XP Framework
+Riaan Schoeman <riaan.schoeman@wonderlabz.com>
+1.0, November 17, 2021: Missions Framework
+:sectnums:
+:toc: left
+:toclevels: 4
+:toc-title: svc-xp
+:icons: font
+:url-quickref: https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/
+
+//:stylesheet: css/asciidoctor.css
+//:stylesheet: css/material-blue.css
+
+//This is done tto keep formatting aligned with gitlab
+****
+[verse,,]
+____
+xref:../../readme.adoc[Home] | xref:../../docs/comps-engine/readme.adoc[Comps Engine] | xref:../../service-promo/docs/readme.adoc[Promos] | xref:../../service-reward/docs/readme.adoc[Rewards] | xref:../../service-leaderboard/docs/readme.adoc[Leaderboards]
+____
+****
+
+This document will describe the xp framework, and how it all fits together and communicates to other services within lithium.
+
+XP is required for use in the promotions framework. To learn more about promotions, look at the link:../../service-promo/docs/readme.adoc[documentation] for promotions.
+
+== Basic Flow
+
+* This service receives events from svc-accounting, for completed transactions. Everytime a casino_bet transaction is completed, this service processes that transaction to keep track of player XP levels. (Provided XP was enabled for the domain)
+
+include::plantuml/basic-flow.puml[Basic Flow]

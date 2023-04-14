@@ -1,0 +1,15 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "PLAYERS": {
+      "TAGS": {
+        "FIELDS": {
+          "DWHVISIBLE": {
+            "TITLE": "DWH Visible",
+            "DESC": "Is the Tag Visible For DWH Selection",
+            "PLACE": "Silver Players"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,48 @@
+.Inpay Withdraw Flow
+[plantuml]
+----
+
+@startuml
+
+actor Player
+participant Lithium
+participant WebPortal
+actor LBOOperator
+participant Inpay
+
+autonumber
+
+Player -> WebPortal  : Login and request Withdraw page
+WebPortal -> Lithium : Get Player accounts
+Lithium --> WebPortal : Player accounts list
+
+Player -> WebPortal : Player choose IBAN number & enters amount
+WebPortal -> Lithium : withdraw request
+
+Lithium -> Lithium : Check account
+
+Lithium --> WebPortal : withdraw(status=declined,error)
+Lithium --> WebPortal : withdraw(status=WAITFORAPPROVE)
+
+WebPortal --> Player : withdraw result
+
+LBOOperator -> Lithium : Approve Withdraw
+Lithium -> Inpay : Payout
+
+Inpay --> Lithium : response(status=received)
+Lithium -> LBOOperator : response(status=pending)
+
+Inpay --> Lithium : response(status!=received)
+Lithium -> LBOOperator : response(status=declined)
+
+Inpay -> Lithium : webhook change status
+Lithium -> Inpay : verify request
+
+Inpay --> Lithium : transaction in progress status (processing, pending, refund_pending, action-required)
+Inpay --> Lithium : transaction failed status (rejected, returned)
+Lithium -> LBOOperator : response(status=declined)
+Inpay --> Lithium : transaction finished status (completed)
+Lithium -> LBOOperator : response(status=success)
+Lithium -> Lithium : Update balance
+
+@enduml

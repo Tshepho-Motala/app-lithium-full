@@ -1,0 +1,13 @@
+{
+  "SERVICE-CASHIER": {
+    "AUTOWITHDRAWALS": {
+      "RULESETS": {
+        "RULE": {
+          "FIELD": {
+            "LT_WITHDRAWALS_AMOUNT_IN_CENTS": "Lifetime Withdrawals Amount (in cents)"
+          }
+        }
+      }
+    }
+  }
+}

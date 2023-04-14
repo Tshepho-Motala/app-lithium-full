@@ -1,0 +1,28 @@
+{
+  "UI_NETWORK_ADMIN" : {
+    "GAME" : {
+      "IMAGES" : {
+        "CDN_EXTERNAL" : {
+          "LIVE_CASINO" : {
+            "LABEL" : "Live Casino Lobby Image",
+            "FIELDS" : {
+              "URL" : {
+                "LABEL" : "URL",
+                "DESCRIPTION" : "The URL where the live casino lobby image is located"
+               }
+            }
+          },
+          "CASINO" : {
+            "LABEL" : "Casino Lobby Image",
+            "FIELDS" : {
+              "URL" : {
+                "LABEL" : "URL",
+                "DESCRIPTION" : "The URL where the casino lobby image is located"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

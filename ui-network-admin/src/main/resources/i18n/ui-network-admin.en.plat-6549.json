@@ -1,0 +1,12 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "CMS": {
+      "BADGE_MANAGEMENT": {
+        "ADD": {
+          "DUPLICATE": "A badge with a similar code or image already exists.",
+          "SUCCESS": "Badge successfully created."
+        }
+      }
+    }
+  }
+}

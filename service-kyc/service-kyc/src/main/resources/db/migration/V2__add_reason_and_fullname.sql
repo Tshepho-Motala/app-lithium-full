@@ -1,0 +1,2 @@
+ALTER TABLE `verification_result` ADD COLUMN `reason` int(11) DEFAULT NULL, ALGORITHM=INPLACE, LOCK=NONE;
+ALTER TABLE `verification_result` ADD COLUMN `full_name` varchar(255) DEFAULT NULL, ALGORITHM=INPLACE, LOCK=NONE;

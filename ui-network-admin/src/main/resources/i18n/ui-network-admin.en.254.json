@@ -1,0 +1,15 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "LIST": {
+      "PLAYERS": {
+        "FIELDS": {
+          "FILTER": {
+            "CURRENT_ACCOUNT_BALANCE": {
+              "LABEL": "Current Account Balance"
+            }
+          }
+        }
+      }
+    }
+  }
+}

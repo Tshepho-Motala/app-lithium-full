@@ -1,0 +1,8 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "DASHBOARD": {
+      "DESCRIPTION": "An overview of the general performance of the chosen domain",
+      "DESCRIPTION2": "An overview of the general performance of {{domain}}"
+    }
+  }
+}

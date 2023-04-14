@@ -1,0 +1,13 @@
+{
+  "SERVICE-CASHIER": {
+    "AUTOWITHDRAWALS": {
+      "RULESETS": {
+        "RULE": {
+          "FIELD": {
+            "CASINO_BETS_COVERAGE": "Sports/Casino bets last deposit coverage in %"
+          }
+        }
+      }
+    }
+  }
+}

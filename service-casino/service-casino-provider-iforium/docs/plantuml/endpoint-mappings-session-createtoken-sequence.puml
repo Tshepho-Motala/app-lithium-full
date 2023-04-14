@@ -1,0 +1,75 @@
+.Create Token Sequence
+[plantuml]
+----
+@startuml
+
+    box "Lithium" #LightBlue
+        participant "LoginEventService" as login
+'        participant "SignupService" as signup
+        participant "iForium Casino Provider" as provider
+        participant "Config Service" as config
+    end box
+
+    box "iForium" #LightGreen
+       participant "Gameflex Universal Launcher" as gul
+       participant "Generic Operator Wallet API" as ggo
+       participant "Gameflex Test" as test
+    end box
+
+    skinparam handwritten false
+    skinparam backgroundColor transparent
+    skinparam roundcorner 10
+    skinparam BoxPadding 20
+
+    skinparam sequence {
+
+        ArrowColor 3292b4
+        ArrowThickness 2
+
+        LifeLineBorderColor 3292b4
+        LifeLineBackgroundColor #3292b4
+
+        ParticipantBorderColor 3292b4
+        ParticipantBackgroundColor 3292b4
+        ParticipantFontName Arial
+        ParticipantFontSize 17
+        ParticipantFontColor white
+
+        ActorBorderColor 3292b4
+        ActorBackgroundColor aqua
+        ActorFontColor 3292b4
+        ActorFontSize 17
+        ActorFontName Arial
+    }
+
+    group Test Session Launch
+        test ->> provider ++ : /v1.0/session/createtoken (OperatorAccountID, GameID)
+            group Access Control
+                note right of provider: Domain extracted from OperatorAccountID
+                provider ->> config ++: getConfig(Domain)
+                config -->> provider --: IPWhitelist
+                alt IP not found
+                    provider -->> test : 403 Access Denied
+                else IP found
+'                    provider ->> signup ++ : register
+'                    signup -->> provider -- : guid
+'                    provider ->> login ++ : createSession(guid)
+'                    login -->> provider -- : sessionKey
+                    provider ->> provider : createTempToken (sessionKey)
+                    note right of provider : TempToken has a 60s TTL
+                    provider -->> test -- : token
+                    test ->> gul ++ : launch (gameKey, token)
+                        gul ->> ggo ++ : /v1.0/session/redeemtoken (token)
+                            ggo ->> provider ++ : /v1.0/session/redeemtoken (token)
+                            note right of provider : See standard launch for detail
+                            provider -->> ggo -- : sessionKey + playerInfo
+                        ggo -->> gul -- : sessionKey + playerInfo
+                        gul ->> gul: loadGame (gameKey, sessionKey)
+                    gul -->> test -- :
+                end
+            end group
+
+    end group
+
+@enduml
+----

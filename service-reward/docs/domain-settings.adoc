@@ -1,0 +1,9 @@
+= Settings
+
+[sidebar]
+link:readme.adoc[Home]
+
+
+=== Domain Settings
+
+* use_v2_bonus_tran_types_in_v1 - Boolean - Default:false  (To be implemented when feature/LSPLAT-2183_BonusFrameworkBeta is merged into develop)

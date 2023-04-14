@@ -1,0 +1,1 @@
+ALTER TABLE `domain`ADD COLUMN `currency` VARCHAR(3) NOT NULL DEFAULT 'USD' AFTER `signup_access_rule`;

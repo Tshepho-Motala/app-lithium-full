@@ -1,0 +1,60 @@
+<div class="container-fluid">
+    <div class="row v-reset-row ">
+        <div class="col-xs-12">
+            <div class="card card-block">
+                <div class="" style="margin-bottom: 10px;">
+                    <div uib-collapse="controller.legendCollapsed">
+                        <div class="row v-reset-row ">
+                            <formly-form model="controller.model" fields="controller.fields" form="controller.form" options="controller.options">
+                            </formly-form>
+                            <div ng-if="!controller.playerSpecificScreen" class="col-md-4 col-xs-6">
+                                <label>User</label>
+                                <div class="input-group">
+                                    <input type="text"
+                                           ng-model="controller.selectedUser"
+                                           placeholder="search player"
+                                           uib-typeahead="user.username for user in controller.searchUsers($viewValue)"
+                                           typeahead-loading="loadingLocations"
+                                           typeahead-no-results="noResults"
+                                           typeahead-min-length="2"
+                                           typeahead-show-hint="true"
+                                           typeahead-wait-ms="500"
+                                           typeahead-editable="false"
+                                           typeahead-on-select="controller.selectedUser = $item;"
+                                           class="form-control"/>
+                                    <div class="input-group-btn">
+                                        <button type="button" class="btn btn-default" ng-click="resetUserSearch()"><i class="fa fa-remove"></i></button>
+                                    </div>
+                                </div>
+                                <div ng-show="loadingLocations" class="overlay">
+                                    <i class="fa fa-refresh fa-spin"></i>
+                                </div>
+                                <div ng-show="noResults" class="form-group has-error">
+                                    <span class="help-block"><i class="fa fa-remove"></i>&nbsp;{{'GLOBAL.NORESULTS' | translate}}</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="flex-row pull-right">
+                                <button-clear ng-click="controller.resetFilter(true)"></button-clear>
+                                <button-filter ng-click="controller.applyFilter(true)"></button-filter>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="collapse" uib-collapse="!controller.legendCollapsed">
+                        <div align="center">
+                            <button-filter class="pull-left" ng-click="controller.toggleLegendCollapse()"></button-filter>
+                            <button-refresh class="pull-right" ng-click="controller.applyFilter(false)"></button-refresh>
+                            <button-clear class="pull-right" ng-click="controller.resetFilter(false)"></button-clear>
+                        </div>
+                        <div class="text-center col-xs-12" style="padding-top: 10px;">
+                            <span class="description"> <label>{{'UI_NETWORK_ADMIN.PLAYER.ACCOUNTINGHISTORY.VIEWINGTRANSACTIONS' | translate}}</label><br/></span>
+                            <span ng-if="controller.model.dateRangeStart || controller.model.dateRangeEnd" class="description"> <label ng-if="controller.model.dateRangeStart"> from {{controller.model.dateRangeStart|date}}</label> <label ng-if="controller.model.dateRangeEnd"> up to {{controller.model.dateRangeEnd|date}}</label><br/></span>
+                        </div>
+                    </div>
+                    <dt class="table table-sm table-responsive" table="controller.transactionsTable"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

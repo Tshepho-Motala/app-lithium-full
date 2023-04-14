@@ -1,0 +1,44 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "CHANGELOGS": {
+      "BONUSES": {
+        "TRIGGER_MANUAL": "Cash bonus granted."
+      }
+    },
+    "PLAYER": {
+      "BONUS": {
+        "GRANT_BONUS": {
+          "FIELDS": {
+            "BONUS_TYPE": {
+              "LABEL": "Bonus Type",
+              "DESC": "Choose the bonus type"
+            },
+            "BONUS_CODE": {
+              "LABEL": "Bonus Code",
+              "DESC": "Choose the bonus code"
+            },
+            "AMOUNT": {
+              "LABEL": "Amount",
+              "DESC": "Enter the amount",
+              "PATTERN": "The max amount you may enter is 9999.99 and may not be 0"
+            },
+            "DESC": {
+              "LABEL": "Bonus Description",
+              "DESC": "Enter the bonus description"
+            },
+            "NOTE_TEXT": {
+              "LABEL": "Note Text",
+              "DESC": "Enter the note text"
+            }
+          },
+          "ERROR": "Could not grant a bonus",
+          "SUCCESS": "Successfully granted a bonus"
+        }
+      },
+      "QUICK_ACTIONS": {
+        "REGISTER_BONUS": "Register Bonus",
+        "GRANT_BONUS": "Grant Bonus"
+      }
+    }
+  }
+}

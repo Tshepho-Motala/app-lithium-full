@@ -1,0 +1,28 @@
+.Assign banner to a lobby
+[plantuml]
+----
+@startuml
+autonumber
+    actor LBO as lbo
+    participant "service-casino-cms" as svc_cms
+    database "lithium_casino_cms" as cms_db
+
+    lbo -> svc_cms: POST /service-casino-cms/backoffice/lobbies/add-banner-to-pages
+    activate svc_cms
+        svc_cms -> cms_db: findLobbyById
+        cms_db --> svc_cms: lobby object
+        svc_cms -> cms_db: findBannerById
+        cms_db --> svc_cms: banner object
+        loop subNavCodes list
+            svc_cms -> svc_cms: create PageBanner object with navigation
+            svc_cms -> svc_cms: Add Lobby to the created PageBanner
+            svc_cms -> svc_cms: Add Banner to created PageBanner
+            svc_cms -> cms_db: Save PageBanner
+            cms_db --> svc_cms: return saved banner object
+        end
+
+    deactivate svc_cms
+    svc_cms --> lbo: Status 200 with created Banner
+
+@enduml
+----

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"/>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css"/>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
+</head>
+
+<body style="font-family: 'Roboto', sans-serif;">
+
+	<div id="main" style="width: 100vw; height: 100vh; display: flex; justify-content: space-between; align-items: center;" class="hide">
+	
+		<div></div>
+
+		<div>
+		
+			<div id="loading" style="display: flex; flex-direction: column; align-items: center">
+				<p>Please wait</p>
+				<span><i class="fa fa-spinner fa-spin" style="font-size:24px"></i></span>
+				<p>Processing your payment request...</p>
+			</div>
+			
+			<div id="error">
+				<div class="row">
+					<div class="col s12 offset-m3 m6">
+						<div class="card">
+							<div class="card-content">
+								<span class="card-title">The request failed</span>
+								<p>The request was invalid. With the real processor you would not see this, you would simply be sent back to the merchant and the merchant will show an error page.</p>
+								<br/>
+								<p>In this fake world, we show you the raw error, and then you click to go back to the real world...</p>
+								<br/>
+								
+								<p>
+										<label for="errorcode">Error Code</label>
+										<span id="errorcode">Test</span>
+								</p>
+								<p>
+										<label for="errormessage">Error Message</label>
+										<span id="errormessage">Test</span>
+								</p>
+							</div>
+							<div class="card-action">
+								<a id="errorok" class="waves-effect btn">Ok</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+	
+			<div id="bankinput">
+				<div class="row">
+					<div class="col s12 offset-m3 m6">
+						<div class="card">
+							<form id="bankform" method="POST" action="confirmOTP">
+								<div class="card-content">
+									<span class="card-title">Payment Verification</span>
+									<p>In the real world, you would now receive an email or sms with a PIN in to verify the payment.</p>
+									<br/>
+									<p>In this fake world, all you need to do is enter anything below and submit the payment or cancel it.</p>
+									<br/>
+									<div class="row">
+										<div class="input-field col offset-s3 s6">
+											<input id="otp" name="otp" type="text" class="validate"/>
+											<label for="otp">One Time Pin</label>
+										</div>
+									</div>
+									<div class="row">
+										<div class="input-field col offset-s3 s6">
+											<input id="tranId" name="tranId" type="text" th:value="${transactionId}" class="validate"/>
+											<label for="tranId">Tran Id</label>
+										</div>
+									</div>
+								</div>
+								<div class="card-action">
+									<input type="submit" id="banksubmit" class="waves-effect btn" name="action" value="Submit"/>
+									<a id="bankcancel" class="waves-effect waves-teal btn-flat">Cancel</a>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div></div>
+	
+	</div>
+		
+	<script type="text/javascript" th:inline="javascript">
+	/*<![CDATA[*/
+// 		var data = [[${response}]];
+// 		console.log(data);
+	/*]]>*/
+	</script>
+	
+	<script>
+		$(function() {
+			
+			var mainDiv = $('#main');
+			var loadingDiv = $('#loading');
+			var bankinputDiv = $('#bankinput');
+			var errorDiv = $('#error');
+			
+			bankinputDiv.addClass("hide");
+			errorDiv.addClass("hide");
+			mainDiv.removeClass("hide");
+						
+/* 			$('#banksubmit').click(function(e) {
+				e.preventDefault();
+				bankinputDiv.addClass("hide");
+				loadingDiv.removeClass("hide");
+			});
+ */
+/* 			$('#bankcancel').click(function(e) {
+				e.preventDefault();
+				bankinputDiv.addClass("hide");
+				loadingDiv.removeClass("hide");
+			});
+ */			
+			$('#errorok').click(function(e) {
+				e.preventDefault();
+				errorDiv.addClass("hide");
+				loadingDiv.removeClass("hide");
+				$("#bankform").submit();
+			});
+			
+// 			if (data.resultCode != 0) {
+// 				$('#errorcode').text(data.errorCode);
+// 				$('#errormessage').text(data.remark);
+// 				loadingDiv.addClass("hide");
+// 				errorDiv.removeClass("hide");
+// 			} else {
+// 				loadingDiv.addClass("hide");
+// 				bankinputDiv.removeClass("hide");
+// 			}
+			loadingDiv.addClass("hide");
+			bankinputDiv.removeClass("hide");
+		});
+	</script>
+	
+</body>
+
+</html>

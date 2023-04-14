@@ -1,0 +1,29 @@
+POST http://localhost:9800/services/service-domain/domain/settings/livescore_uk/add
+Authorization: Bearer {{USERTOKEN_UK}}
+Content-Type: application/json;charset=UTF-8
+
+{
+  "domainName": "livescore_uk",
+  "labelValues": [
+    {
+      "label": "allow_register_v3",
+      "value": "true"
+    }
+  ]
+}
+
+###
+POST http://localhost:9800/services/service-domain/domain/settings/livescore_ua/add
+Authorization: Bearer {{USERTOKEN_UA}}
+Content-Type: application/json;charset=UTF-8
+
+{
+  "domainName": "livescore_ua",
+  "labelValues": [
+    {
+      "label": "allow_register_v3",
+      "value": "true"
+    }
+  ]
+}
+

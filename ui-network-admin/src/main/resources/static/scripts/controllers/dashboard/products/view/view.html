@@ -1,0 +1,138 @@
+<div class="container-fluid" bs-loading-overlay bs-loading-overlay-reference-id="{{controller.referenceId}}">
+	<div class="card card-block" style="margin-bottom: 10px;" ng-init="">
+		<div class="d-flex justify-content-start">
+			<div class="p-2 mr-auto">
+				<span class="title">{{controller.model.name}}</span>
+				<span class="description">{{controller.model.description}}</span>
+			</div>
+			<div class="ml-auto p-2 text-right" style="width: 50%;">
+				<span style="padding:5px; margin-right: 3px;" class="label label-primary">&nbsp;{{ controller.model.domain.name | uppercase }}&nbsp;</span>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row v-reset-row ">
+		<div class="col-xs-12 bottom-space-10">
+			<button-back ng-click="controller.list()"></button-back>
+			<button-enable ng-if="!controller.model.enabled" ng-click="controller.enable()"></button-enable>
+			<button-disable ng-if="controller.model.enabled" ng-click="controller.enable()"></button-disable>
+			<button-save ng-show="!controller.options.formState.readOnly" class=""></button-save>
+			<button-cancel ng-show="!controller.options.formState.readOnly" ng-click="controller.onCancel()"></button-cancel>
+		</div>
+	</div>
+	
+	<div class="row v-reset-row ">
+		<div class="col-xs-12">
+			<div class="box box-default box-solid" ng-class="(controller.model.enabled)?'':'card-danger-shadow'">
+				<div class="box-header bold-text with-border bg-gray-lighter">
+					&nbsp;
+				</div>
+				<div class="box-body">
+					<div class="row v-reset-row ">
+						<div class="col-xs-6">
+							<div class="box box-default box-solid">
+								<div class="box-header bold-text with-border bg-gray-lighter">
+									{{ 'UI_NETWORK_ADMIN.CATALOG.VIEW.DETAILS' | translate }}
+									<div class="box-tools pull-right">
+										<button type="button" ng-click="controller.onEdit()" ng-show="controller.options.formState.readOnly" class="btn btn-box-tool">
+											<span><i class="fa fa-pencil"></i> {{ 'GLOBAL.ACTION.EDIT' | translate }}</span>
+										</button>
+									</div>
+								</div>
+								<div class="box-body">
+									<form ng-submit="controller.onSubmit()" name="controller.form" novalidate>
+										<formly-form model="controller.model" fields="controller.fields" options="controller.options" form="controller.form">
+										</formly-form>
+										<buttonbar>
+											<button-save ng-show="!controller.options.formState.readOnly" class="pull-left"></button-save>
+											<button-cancel ng-show="!controller.options.formState.readOnly" ng-click="controller.onCancel()"></button-cancel>
+										</buttonbar>
+									</form>
+								</div>
+							</div>
+							<div class="box box-default box-solid" bs-loading-overlay bs-loading-overlay-reference-id="{{controller.referenceId}}_default">
+								<div class="box-header bold-text with-border">
+									{{ 'UI_NETWORK_ADMIN.CATALOG.IMAGE.TITLE' | translate }}
+									<div class="box-tools pull-right">
+										<button type="button" ng-click="controller.removeFile()" class="btn btn-box-tool">
+											<span><i class="fa fa-minus"></i> {{ 'UI_NETWORK_ADMIN.CATALOG.IMAGE.REMOVE' | translate }}</span>
+										</button>
+									</div>
+								</div>
+								<div class="box-body">
+									<div class="col-xs-12">
+										<img class="img-game-thumb img-bordered" src="//:0" ng-src="{{controller.imageUrl}}&function=default&nothig={{controller.model.forceImageReload}}">
+									</div>
+								</div>
+								<div class="box-footer">
+									<div class="input-group">
+										<div class="input-group-btn">
+											<div class="btn btn-default btn-file">
+												<i class="fa fa-paperclip"></i> {{ 'UI_NETWORK_ADMIN.CATALOG.IMAGE.CHOOSE' | translate }}
+												<input type="file" class="form-control" id="myPreviewFile" file-model="controller.mydefaultFile"/>
+											</div>
+										</div>
+										<input type="text" class="form-control" placeholder="..." disabled="disabled" value="{{controller.mydefaultFile.name}}">
+										<div class="input-group-btn">
+											<button-custom icon="upload" text="GLOBAL.ACTION.UPLOADFILE" bclass="primary pull-right" ng-click="controller.uploadFile('default')"></button-custom>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="col-xs-6">
+							<div class="box box-default box-solid">
+								<div class="box-header bold-text with-border bg-gray-lighter">
+									{{ 'UI_NETWORK_ADMIN.CATALOG.FIELDS.BASECURRENCY.TITLE' | translate }}
+									<div class="box-tools pull-right">
+										<button type="button" ng-click="controller.onEdit()" ng-show="controller.options.formState.readOnly" class="btn btn-box-tool">
+											<span><i class="fa fa-pencil"></i> {{ 'GLOBAL.ACTION.EDIT' | translate }}</span>
+										</button>
+									</div>
+								</div>
+								<div class="box-body">
+									<form ng-submit="controller.onSubmit()" name="controller.form" novalidate>
+										<formly-form model="controller.model" fields="controller.currencyfields" options="controller.options" form="controller.form">
+										</formly-form>
+										<buttonbar>
+											<button-save ng-show="!controller.options.formState.readOnly" class="pull-left"></button-save>
+											<button-cancel ng-show="!controller.options.formState.readOnly" ng-click="controller.onCancel()"></button-cancel>
+										</buttonbar>
+									</form>
+								</div>
+							</div>
+							
+							<div class="box box-default box-solid">
+								<div class="box-header bold-text with-border bg-gray-lighter">
+									{{ 'UI_NETWORK_ADMIN.CATALOG.FIELDS.LOCALCURRENCY.TITLE' | translate }}
+									<div class="box-tools pull-right">
+										<button type="button" ng-click="controller.addLocalCurrency()" class="btn btn-box-tool">
+											<span><i class="fa fa-plus"></i> {{ 'GLOBAL.ACTION.ADD' | translate }}</span>
+										</button>
+									</div>
+								</div>
+								<div class="box-body no-padding table-responsive">
+									<dt table="controller.localcurrencyTable"/>
+								</div>
+							</div>
+							
+							<div class="box box-default box-solid">
+								<div class="box-header bold-text with-border bg-gray-lighter">
+									{{ 'UI_NETWORK_ADMIN.CATALOG.FIELDS.PAYOUT.TITLE' | translate }}
+									<div class="box-tools pull-right">
+										<button type="button" ng-click="controller.addPayout()" class="btn btn-box-tool">
+											<span><i class="fa fa-plus"></i> {{ 'GLOBAL.ACTION.ADD' | translate }}</span>
+										</button>
+									</div>
+								</div>
+								<div class="box-body no-padding table-responsive">
+									<dt table="controller.payoutsTable"/>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

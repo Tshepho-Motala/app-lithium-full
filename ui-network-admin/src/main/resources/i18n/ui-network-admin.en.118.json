@@ -1,0 +1,19 @@
+{
+  "UI_NETWORK_ADMIN": {
+      "PROVIDERS": {
+        "CASINO": {
+          "BETTING": {
+            "DISABLED": "Betting for {{domain}} has been disabled!",
+            "DISABLE": {
+              "LABEL": "DISABLE BETTING",
+              "CONFIRM": "Are you sure you want to disable betting?"
+            },
+            "ENABLE": {
+              "LABEL": "ENABLE BETTING",
+              "CONFIRM": "Are you sure you want to enable betting?"
+            }
+          }
+        }
+      }
+  }
+}

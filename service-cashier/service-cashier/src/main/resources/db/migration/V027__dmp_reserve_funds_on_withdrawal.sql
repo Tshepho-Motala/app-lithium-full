@@ -1,0 +1,1 @@
+ALTER TABLE `domain_method_processor` ADD COLUMN `reserve_funds_on_withdrawal` BIT(1) DEFAULT NULL;

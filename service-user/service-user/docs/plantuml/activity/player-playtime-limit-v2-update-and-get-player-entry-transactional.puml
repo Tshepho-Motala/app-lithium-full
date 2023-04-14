@@ -1,0 +1,64 @@
+[plantuml]
+----
+@startuml
+start
+:Find and lock user;
+:Find user active session metadata;
+if (Active session count is 0) then (yes)
+  stop
+else (no)
+  :Find current period player entry;
+  if (Does not exist?) then (yes)
+    if (Is __playtime_limit_last_updated__
+running since the previous period?) then (yes)
+      note left
+      This update to be done on the
+      __previous period player entry.__ This
+      is to cater for an edge case where
+      the player has an active session that
+      has been running since the previous
+      period. In order to be fair (and correct)
+      with __seconds_accumulated__, a partial
+      update (up to end of previous period)
+      will have to be done on the previous
+      period entry.
+      end note
+      :Calculate seconds since
+      __playtime_limit_last_updated__
+      until __end of previous period__;
+      if ((value + accumulated_seconds) > allocated_seconds) then (yes)
+        :Set accumulated_seconds =
+        allocated_seconds;
+      else (no)
+        :Set accumulated_seconds =
+        (value + accumulated_seconds);
+      endif
+      if (seconds_accumulated >= seconds_allocated) then (yes)
+        :Set limit_reached_at = now;
+      endif
+      :Set __playtime_limit_last_updated__ = __end of previous period__;
+    endif
+    :Create current period player entry;
+  endif
+:Calculate the seconds between
+__playtime_limit_last_updated__ and __now__;
+note right
+From here on out, update will
+be for the __current period player entry__
+end note
+if ((value + accumulated_seconds) > allocated_seconds) then (yes)
+  :Set accumulated_seconds =
+  allocated_seconds;
+else (no)
+  :Set accumulated_seconds =
+  (value + accumulated_seconds);
+endif
+if (seconds_accumulated >= seconds_allocated) then (yes)
+  :Set limit_reached_at = now;
+endif
+:Set __playtime_limit_last_updated__ = now;
+endif
+stop
+@enduml
+----
+[plantuml]

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>service-reward-provider-casino-blueprint</artifactId>
+	<packaging>jar</packaging>
+	<parent>
+		<groupId>lithium</groupId>
+		<artifactId>common-parent-service</artifactId>
+		<version>1.12-SNAPSHOT</version>
+		<relativePath>../../common-parent-service</relativePath>
+	</parent>
+	<dependencies>
+		<dependency>
+			<groupId>lithium</groupId>
+			<artifactId>client-service-changelog</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>lithium</groupId>
+			<artifactId>client-service-reward</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>lithium</groupId>
+			<artifactId>client-service-user</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>lithium</groupId>
+			<artifactId>client-service-domain</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-rest</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-configuration-processor</artifactId>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.dataformat</groupId>
+			<artifactId>jackson-dataformat-xml</artifactId>
+		</dependency>
+        <dependency>
+            <groupId>lithium</groupId>
+            <artifactId>client-service-games</artifactId>
+        </dependency>
+    </dependencies>
+</project>

@@ -1,0 +1,18 @@
+{
+  "UI_NETWORK_ADMIN" : {
+    "ECOSYSTEM": {
+      "FIELDS": {
+        "TITLE" : {
+          "ECOSYSTEM" : "Do you want to delete ecosystem?",
+          "DOMAIN": "Do you want to delete domain from ecosystem?"
+        }
+      },
+      "MESSAGES": {
+        "ERROR_ECOSYSTEM": "There was an error deleting the ecosystem",
+        "ERROR_DOMAIN": "There was an error deleting the relationship",
+        "DELETE_ECOSYSTEM_SUCCESS": "Deleting ecosystem was successful",
+        "DELETE_DOMAIN_SUCCESS": "Deleting ecosystem relationship was successful"
+      }
+    }
+  }
+}

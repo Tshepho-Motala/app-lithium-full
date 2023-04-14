@@ -1,0 +1,46 @@
+
+### Auth
+POST /server-oauth2/backoffice/oauth/token HTTP/1.1
+Host: localhost:9000
+Authorization: Basic YWNtZTphY21lc2VjcmV0
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="grant_type"
+Content-Type: text/plain
+
+password
+--WebAppBoundary
+Content-Disposition: form-data; name="username"
+Content-Type: text/plain
+
+default/admin
+--WebAppBoundary
+Content-Disposition: form-data; name="password"
+Content-Type: text/plain
+
+Gauteng
+
+> {% client.global.set("auth_token", response.body.access_token); %}
+
+### Threshold backoffice save (domain default)
+POST /service-user-threshold/backoffice/threshold/loss-limit/livescore_uk/v1/save
+Host: localhost:9000
+Authorization: Bearer {{auth_token}}
+Content-Type: application/x-www-form-urlencoded
+
+percentage=71.00&granularity=2&id=3
+
+### Threshold backoffice save (age based)
+POST /service-user-threshold/backoffice/threshold/loss-limit/livescore_uk/v1/save
+Host: localhost:9000
+Authorization: Bearer {{auth_token}}
+Content-Type: application/x-www-form-urlencoded
+
+percentage=61.00&granularity=2&ageMin=18&ageMax=25
+
+### Threshold backoffice find
+GET /service-user-threshold/backoffice/threshold/loss-limit/livescore_uk/v1/find?domainName=livescore_uk&granularity=2
+Host: localhost:9000
+Authorization: Bearer {{auth_token}}
+#Content-Type: application/x-www-form-urlencoded

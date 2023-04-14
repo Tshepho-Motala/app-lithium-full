@@ -1,0 +1,5 @@
+package lithium.service.user.client.objects;
+
+public enum PubSubEventType {
+  ACCOUNT_CREATE, ACCOUNT_UPDATE, LINK_CREATE, LINK_NOTE_UPDATE, AUTOLINK_CREATE, ACCOUNT_DELETED, MARKETING_PREFERENCES
+}

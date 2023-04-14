@@ -1,0 +1,7 @@
+{
+  "ERROR_DICTIONARY": {
+    "ACCOUNT": {
+      "SOFT_SELF_EXCLUSION": "Player is soft excluded. Cooling off cannot be applied."
+    }
+  }
+}

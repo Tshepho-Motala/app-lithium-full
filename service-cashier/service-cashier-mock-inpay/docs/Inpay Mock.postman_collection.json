@@ -1,0 +1,282 @@
+{
+	"info": {
+		"_postman_id": "06b68574-c35c-43f6-a827-a13f96625d37",
+		"name": "Inpay Mock",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Lithium Player Authentication",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"",
+							"tests[\"Response time is less than 1000ms\"] = responseTime < 1000;",
+							"",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Token reveived\"] = jsonData.access_token;",
+							"",
+							"postman.setEnvironmentVariable(\"USERTOKEN\", jsonData.access_token);",
+							"postman.setEnvironmentVariable(\"REFRESHTOKEN\", jsonData.refresh_token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "acme",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "acmesecret",
+							"type": "string"
+						},
+						{
+							"key": "saveHelperData",
+							"value": true,
+							"type": "boolean"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic YWNtZTphY21lc2VjcmV0"
+					},
+					{
+						"key": "X-Forwarded-For",
+						"value": "10.0.0.2",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "{{playerdomain}}/{{playerusername}}",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "{{playerpassword}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{gateway}}/server-oauth2/oauth/token",
+					"host": [
+						"{{gateway}}"
+					],
+					"path": [
+						"server-oauth2",
+						"oauth",
+						"token"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Bluem Deposit",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{USERTOKEN}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"inputFieldGroups\": {\n\t\t\"1\": {\n\t\t\t\"fields\": {\n\t\t\t\t\"amount\": {\n\t\t\t\t\t\"value\": \"25.00\"\n\t\t\t\t}\n\t\t\t}\n\t\t},\n        \"2\": {\n\t\t\t\"fields\": {\n\t\t\t\t\"return_url\": {\n\t\t\t\t\t\"value\": \"https://clientUrl/public\"\n\t\t\t\t},\n                 \"bank_code\": {\n                    \"value\": \"RABONL2U\"\n                }\n\t\t\t}\n\t\t}\n\t},\n\t\"state\": \"VALIDATEINPUT\",\n\t\"stage\": \"1\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{gateway}}/service-cashier/frontend/deposit/v2?methodCode=bluem-ideal",
+					"host": [
+						"{{gateway}}"
+					],
+					"path": [
+						"service-cashier",
+						"frontend",
+						"deposit",
+						"v2"
+					],
+					"query": [
+						{
+							"key": "methodCode",
+							"value": "bluem-ideal"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Lithium Get Processor Accounts",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"type": "text",
+						"value": "Bearer {{USERTOKEN}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{gateway}}/service-cashier/frontend/processor-accounts?isDeposit=false",
+					"host": [
+						"{{gateway}}"
+					],
+					"path": [
+						"service-cashier",
+						"frontend",
+						"processor-accounts"
+					],
+					"query": [
+						{
+							"key": "isDeposit",
+							"value": "false"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Inpay Withdraw",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "BEARER {{USERTOKEN}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"inputFieldGroups\": {\r\n\t\t\"1\": {\r\n\t\t\t\"fields\": {\r\n\t\t\t\t\"amount\": {\r\n\t\t\t\t\t\"value\": 33\r\n\t\t\t\t}\r\n\t\t\t}\r\n\t\t},\r\n        \"2\": {\r\n\t\t\t\"fields\": {\r\n                \"processorAccountId\": {\r\n                    \"value\": 61\r\n                }\r\n\t\t\t}\r\n\t\t}\r\n\t},\r\n\t\"state\": \"VALIDATEINPUT\",\r\n\t\"stage\": \"1\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{gateway}}/service-cashier/frontend/withdraw/v2?methodCode=inpay",
+					"host": [
+						"{{gateway}}"
+					],
+					"path": [
+						"service-cashier",
+						"frontend",
+						"withdraw",
+						"v2"
+					],
+					"query": [
+						{
+							"key": "methodCode",
+							"value": "inpay"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "d38b96d268a04396ca689ec037745c45",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					"function generateUUID() { // Public Domain/MIT",
+					"    var d = new Date().getTime();//Timestamp",
+					"    var d2 = ((typeof performance !== 'undefined') && performance.now && (performance.now()*1000)) || 0;//Time in microseconds since page-load or 0 if unsupported",
+					"    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {",
+					"        var r = Math.random() * 16;//random number between 0 and 16",
+					"        if(d > 0){//Use timestamp until depleted",
+					"            r = (d + r)%16 | 0;",
+					"            d = Math.floor(d/16);",
+					"        } else {//Use microseconds since page-load if supported",
+					"            r = (d2 + r)%16 | 0;",
+					"            d2 = Math.floor(d2/16);",
+					"        }",
+					"        return (c === 'x' ? r : (r & 0x3 | 0x8)).toString(16);",
+					"    });",
+					"}",
+					"pm.environment.set(\"xRequestID\", generateUUID());"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

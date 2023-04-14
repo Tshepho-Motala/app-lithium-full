@@ -1,0 +1,22 @@
+{
+  "UI_NETWORK_ADMIN":{
+    "ACCESSCONTROL":{
+      "BASIC":{
+        "MESSAGE": {
+          "LABEL": "Message",
+          "PLACEHOLDER": "Leave the field empty to use the standard message",
+          "DESCRIPTION": "Message received by the user in the case of triggering rule"
+        }
+      },
+      "SAVEMESSAGE":{
+        "MESSAGE": {
+          "HEAD" : "Change List Message",
+          "LABEL": "Current message",
+          "PLACEHOLDER": "Your account is currently disabled. Please contact customer support.",
+          "DESCRIPTION": "Leave the field empty or clean the field to use the standard message",
+          "DEFAULT" : "Default"
+        }
+      }
+    }
+  }
+}

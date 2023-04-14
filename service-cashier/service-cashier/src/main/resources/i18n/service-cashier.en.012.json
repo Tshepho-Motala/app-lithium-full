@@ -1,0 +1,21 @@
+{
+  "ERROR_DICTIONARY": {
+    "CASHIER": {
+      "GENERAL_ERROR": "Transaction declined. Please verify your details and try again or use another method.",
+      "DUPLICATE_CARD": "You cannot deposit with these payment details, try another option or contact Customer Service",
+      "TRY_AGAIN_LATER": "Transaction declined. Please try again later or use another method.",
+      "CONTACT_YOUR_BANK": "Transaction declined. Please contact your bank or try another payment method.",
+      "VERIFY_CARD_DETAILS": "Transaction declined. Please verify the card details and try again or use another method.",
+      "VERIFY_INPUT_DETAILS": "Transaction declined. Please check your details and try again or use another method.",
+      "LIMIT_EXCEEDED": "Transaction declined due to exeeded bank limits. Please try again later or use another method.",
+      "CREDIT_CARD_PROHIBITED": "Regulation does not permit credit card deposits. Please use a debit card.",
+      "FAILED_TO_ADD_ACCOUNT": "Sorry, bank account could not be added. Please try again later or contact Customer Service.",
+      "FAILED_TO_ADD_BILLING_AGREEMENT": "Sorry, PayPal Billing agreement could not be added. Please try again later or contact Customer Service.",
+      "AVS_CHECK_FAILED": "Transaction declined. The address on your account did not match your card information. Please try another method or contact Customer Service.",
+      "INSUFFICIENT_FUNDS": "Transaction declined. Please try different amount or another debit card.",
+      "ANOTHER_METHOD": "Transaction declined. Please try again with another method",
+      "LIMIT_BALANCE_CAP": "Sorry, this amount will exceed your balance limit. Maximum allowed is X.XX",
+      "FAILED_NAME_MISMATCH": "Transaction declined. The name on the payment method does not match your account details. Try again by using your own financial instruments or contact us for assistance."
+    }
+  }
+}

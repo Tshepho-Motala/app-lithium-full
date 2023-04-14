@@ -1,0 +1,31 @@
+<div class="row v-reset-row ">
+	<div class="col-md-5">
+		<status data="controller.status" ng-model="controller.user"></status>
+		<verificationstatus data="controller.verificationstatus" ng-model="controller.user"></verificationstatus>
+		<biometrics-status data="controller.biometricsStatus" ng-model="controller.user" ></biometrics-status>
+		<tag data="controller.usertag" ng-model="controller.user"></tag>
+		<password data="controller.password" ng-model="controller.user"></password>
+<!-- 		<balance data="controller.playerBalance"></balance> -->
+		<div id="balances" ng-repeat="pb in controller.balances">
+			<balance data="pb" balance="controller.userData.playerBalance[pb.id].balance"></balance>
+		</div>
+		<bonus data="controller.activeBonus"></bonus>
+		<external-bonus data="controller.externalBonusNucleus"></external-bonus>
+		<external-bonus data="controller.externalBonusBetsoft"></external-bonus>
+		<referral lit-if-permission="RAF_REFERRAL" lit-permission-domain="{{controller.user.domain.name}}" data="controller.referral" ng-model="controller.user"></referral>
+		<affiliate data="controller.affiliate" ng-model="controller.user"></affiliate>
+		<playerlinks data="controller.playerLinks" ng-model="controller.user"></playerlinks>
+	</div>
+	<div class="col-md-7">
+		<personal data="controller.personalinfo" ng-model="controller.user"></personal>
+		<attributes data="controller.playerAttributes" ng-model="controller.user"></attributes>
+		<address data="controller.residentialAddress" ng-model="controller.user"></address>
+		<address data="controller.postalAddress" ng-model="controller.user"></address>
+		<comment data="controller.userData.comment"></comment>
+		<promooptout data="controller.promooptout" ng-model="controller.user"></promooptout>
+	</div>
+</div>
+
+<div class="row v-reset-row ">
+	<changelog options="controller.changelogs" model="controller.user"></changelog>
+</div>

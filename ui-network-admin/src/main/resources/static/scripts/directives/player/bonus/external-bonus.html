@@ -1,0 +1,37 @@
+<div class="box box-{{data.box}} box-solid bs-loading-container" bs-loading-overlay bs-loading-overlay-reference-id="{{referenceId}}">
+	<div class="box-header with-border">
+		{{data.title | translate}}
+		<div class="box-tools pull-right">
+			<button type="button" class="btn btn-box-tool" ng-click="refresh()">
+				<i class="fa fa-refresh"></i> refresh
+			</button>
+		</div>
+	</div>
+	<div class="box-body">
+		<div ng-if="!bonus" class="box box-danger ng-scope">
+			<div class="box-body ng-binding">
+				No active bonus found for player.
+			</div>
+		</div>
+		<table class="table table-condensed table-striped" ng-if="bonus">
+		<tbody>
+		<tr>
+			<th>Ext BonusId</th>
+			<th>Description</th>
+			<th>Rounds</th>
+			<th>&nbsp;</th>
+		</tr>
+		<tr ng-repeat="b in bonus">
+			<td>{{b.bonusId}}</td>
+			<td>{{b.description}}</td>
+			<td>{{b.roundsLeft}}/{{b.rounds}}</td>
+			<td>
+				<button type="button" class="btn btn-box-tool" ng-click="cancel(b.bonusId)">
+					<i class="fa fa-ban"></i> cancel
+				</button>
+			</td>
+		</tr>
+		</tbody>
+		</table>
+	</div>
+</div>

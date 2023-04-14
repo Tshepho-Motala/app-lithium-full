@@ -1,0 +1,16 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "DOMAIN": {
+      "TOGGLE_ERROR_MESSAGE": {
+        "REASON": {
+          "LABEL": {
+            "ENABLED": "enable",
+            "DISABLED": "disable"
+          }
+        }
+      }
+    }
+  }
+}
+
+

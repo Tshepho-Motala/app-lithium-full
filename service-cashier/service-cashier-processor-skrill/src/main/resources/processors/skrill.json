@@ -1,0 +1,117 @@
+{
+	"name": "Skrill",
+	"code": "skrill",
+	"url": "service-cashier-processor-skrill",
+	"methodNames": [
+		"skrill"
+	],
+	"deposit": true,
+	"fees": {
+		"flat": 0,
+		"percentage": 0,
+		"minimum": 0
+	},
+	"withdraw": true,
+	"limits": {
+		"minAmount": 2500,
+		"maxAmount": 0,
+		"maxAmountDay": 0,
+		"maxAmountWeek": 0,
+		"maxAmountMonth": 0,
+		"maxTransactionsDay": 0,
+		"maxTransactionsWeek": 0,
+		"maxTransactionsMonth": 0
+	},
+	"properties": [
+		{
+			"name": "baseUrl",
+			"defaultValue": "https://pay.skrill.com/",
+			"type": "url",
+			"description": "Base Skrill URL."
+		},
+		{
+			"name": "customerVerificationUrl",
+			"defaultValue": "https://api.skrill.com/mqi/customer-verifications/",
+			"type": "url",
+			"description": "The endpoint of the customer verification service"
+		},
+		{
+			"name": "skrillMerchantEmail",
+			"defaultValue": "",
+			"type": "string",
+			"description": "Email address associated with the Skrill merchant account."
+		},
+		{
+			"name": "skrillMerchantId",
+			"defaultValue": "",
+			"type": "string",
+			"description": "The customer ID of your merchant account. The customer ID is shown in brackets under your account email address when you login to your Skrill account at https://www.skrill.com/login/ e.g. (ID: 275556522)"
+		},
+		{
+			"name": "returnUrl",
+			"defaultValue": "",
+			"type": "string",
+			"description": "URL to which the customer is returned once the payment is made. If this field is not filled, the Skrill Quick Checkout page closes automatically at the end of the transaction and the customer is returned to the page on your website from where they were redirected to Skrill."
+		},
+		{
+			"name": "returnUrlText",
+			"defaultValue": "",
+			"type": "string",
+			"description": "The text on the button when the customer finishes their payment."
+		},
+		{
+			"name": "returnUrlTarget",
+			"defaultValue": "",
+			"type": "string",
+			"description": "Specifies a target in which the return_url value is displayed upon successful payment from the customer. Default value is 1.\n1 = '_top'\n2 = '_parent'\n3 = '_self'\n4= '_blank'"
+		},
+		{
+			"name": "cancelUrl",
+			"defaultValue": "",
+			"type": "string",
+			"description": "URL to which the customer is returned if the payment is cancelled or fails. If no cancel URL is provided the Cancel button is not displayed."
+		},
+		{
+			"name": "cancelUrlTarget",
+			"defaultValue": "",
+			"type": "string",
+			"description": "Specifies a target in which the cancel_url value is displayed upon cancellation of payment by the customer. Default value is 1.\n1 = '_top'\n2 = '_parent'\n3 = '_self'\n4= '_blank'"
+		},
+		{
+			"name": "logoUrl",
+			"defaultValue": "",
+			"type": "string",
+			"description": "The URL of the logo which you would like to appear in the top right of the Skrill page. The logo must be accessible via HTTPS or it will not be shown."
+		},
+		{
+			"name": "callbackUrl",
+			"defaultValue": "https://sslforward.playsafesa.com:5000/service-cashier-processor-skrill/callback/7A64CCD179E2BB63EA372DEB17CA3A7C/",
+			"type": "string",
+			"description": "Internal callback URL that is provided to Skrill"
+		},
+		{
+			"name": "secretWord",
+			"defaultValue": "(averyGOODsecretWORD)",
+			"type": "string",
+			"description": "Secret word that is setup on the Skrill merchant backoffice under developer settings"
+		},
+		{
+			"name": "mqiPasswordMd5",
+			"defaultValue": "",
+			"type": "string",
+			"description": "MD5 hash of the MQI password that was setup on the merchant backoffice under developer settings"
+		},
+		{
+			"name": "withdrawalNotificationSubject",
+			"defaultValue": "Test subject",
+			"type": "string",
+			"description": "This is a required field and should be overridden. Subject of the notification email sent by Skrill. Up to 250 1-byte characters."
+		},
+		{
+			"name": "withdrawalNotificationNote",
+			"defaultValue": "Test note",
+			"type": "string",
+			"description": "This is a required field and should be overridden. Comment to be included in the notification email sent by Skrill. Up to 2000 1-byte characters."
+		}
+	]
+}

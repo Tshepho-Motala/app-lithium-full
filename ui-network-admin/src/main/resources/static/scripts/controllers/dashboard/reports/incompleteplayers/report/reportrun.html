@@ -1,0 +1,56 @@
+<div class="container-fluid">
+	<lit-header
+		title="UI_NETWORK_ADMIN.REPORTS.INCOMPLETEPLAYERS.REPORTRUN.TITLE"
+		description="UI_NETWORK_ADMIN.REPORTS.INCOMPLETEPLAYERS.REPORTRUN.DESCRIPTION">
+	</lit-header>
+
+ 	<button-bar>
+		<button-back ng-click="controller.back()"></button-back>
+		<button-refresh ng-click="controller.refresh()"></button-refresh>
+		<button-download-excel ng-click="controller.downloadxls()"></button-download-excel>
+	</button-bar>
+
+	<div ng-cloak ng-if="!reportRun.completed" class="alert alert-warning">
+         This report is currently running. The result list is incomplete.
+    </div>
+
+	<div ng-cloak ng-if="reportRun.failed" class="alert alert-danger">
+		The report failed to run. Please see the failure reason below.<br/><br/>
+		Failed Reason: {{reportRun.failReason }}
+    </div>
+	
+	<div class="row v-reset-row ">
+		<div class="col-xs-12">
+			<div class="box box-primary" bs-loading-overlay bs-loading-overlay-reference-id="player-reportrun">
+				<div class="box-header with-border">
+					<h3 class="box-title">Run Details</h3>
+				</div>
+				<div class="box-body">
+					<div class="row v-reset-row ">
+						<div class="col-xs-12 col-md-6">
+							<p>Started On: {{reportRun.startedOn | datetimedefault }}</p>
+							<p>Total Records: {{reportRun.totalRecords}}</p>
+							<p>Processed Records: {{reportRun.processedRecords}}</p>
+							<p ng-if="reportRun.completed">Completed On: {{reportRun.completedOn | datetimedefault}}</p>
+							<p ng-if="reportRun.failed">Failed Reason: {{reportRun.failReason}}</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+ 	<div class="row v-reset-row ">
+		<div class="col-xs-12">
+			<div class="box box-info">
+				<div class="box-header with-border">
+					<h3 class="box-title">Results</h3>
+				</div>
+				<div class="box-body table-responsive no-padding">
+					<dt table="controller.table"/>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>

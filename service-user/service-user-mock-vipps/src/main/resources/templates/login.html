@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<title>User Form</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<link th:href="@{/css/style.css}" rel="stylesheet" type="text/css" />
+		<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet" type="text/css" />
+		<link th:href="@{/css/mdb.min.css}" rel="stylesheet" type="text/css" />
+	</head>
+	<body class="fixed-sn mdb-skin-custom">
+		<main>
+		<div class="main-wrapper">
+			<div class="container">
+				<div class="row">
+					<div class="col-12 col-md-12 mb-md-0 mb-4">
+					<div class="jumbotron p-5 text-center text-md-center author-box">
+						<h3 class="h3-responsive text-center font-weight-bold dark-grey-text">Vipps Mock Login</h3>
+						<hr/>
+						<div class="row">
+							<div class="col-12 col-md-12 mb-md-0 mb-4">
+								<form th:object="${loginForm}" th:action="@{/login/v1/}" method="post">
+									<input type="hidden" th:field="*{callbackPrefix}"/>
+									<input type="hidden" th:field="*{requestId}"/>
+									<input type="hidden" th:field="*{fallBack}"/>
+									<input type="hidden" th:field="*{consentRemovalPrefix}"/>
+									<div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
+										<p th:text="#{form.hasErrors}">Error Message</p>
+									</div>
+									<div th:class="${#fields.hasErrors('username')} ? 'md-form has-error' : 'md-form'">
+										<label for="username">Username:</label>
+										<input type="text" class="form-control form-control-sm" th:field="*{username}" th:errorclass="has-error" required="required"/>
+										<span class="help-block">
+											<ul>
+												<li th:each="err : ${#fields.errors('username')}" th:text="${err}" />
+											</ul>
+										</span>
+									</div>
+									<div class="md-form" th:class="${#fields.hasErrors('email')} ? 'md-form has-error' : 'md-form'">
+										<label class="">Email:</label>
+										<input type="text" class="form-control form-control-sm" th:field="*{email}" th:errorclass="has-error" required="required"/>
+										<span class="help-block">
+											<ul>
+												<li th:each="err : ${#fields.errors('email')}" th:text="${err}" />
+											</ul>
+										</span>
+									</div>
+									<div class="md-form" th:class="${#fields.hasErrors('firstname')} ? 'md-form has-error' : 'md-form'">
+										<label class="">Firstname:</label>
+										<input type="text" class="form-control form-control-sm" th:field="*{firstname}" th:errorclass="has-error" required="required"/>
+										<span class="help-block">
+											<ul>
+												<li th:each="err : ${#fields.errors('firstname')}" th:text="${err}" />
+											</ul>
+										</span>
+									</div>
+									<div class="md-form" th:class="${#fields.hasErrors('lastname')} ? 'md-form has-error' : 'md-form'">
+										<label class="">Lastname:</label>
+										<input type="text" class="form-control form-control-sm" th:field="*{lastname}" th:errorclass="has-error" required="required"/>
+										<span class="help-block">
+											<ul>
+												<li th:each="err : ${#fields.errors('lastname')}" th:text="${err}" />
+											</ul>
+										</span>
+									</div>
+									<div class="md-form" th:class="${#fields.hasErrors('dateOfBirth')} ? 'md-form has-error' : 'md-form'">
+										<label class="">Date of birth: (YYYY-MM-DD)</label>
+										<input type="text" class="form-control form-control-sm" th:field="*{dateOfBirth}" th:errorclass="has-error" required="required"/>
+										<span class="help-block">
+											<ul>
+												<li th:each="err : ${#fields.errors('dateOfBirth')}" th:text="${err}" />
+											</ul>
+										</span>
+									</div>
+									<div class="md-form" th:class="${#fields.hasErrors('mobile')} ? 'md-form has-error' : 'md-form'">
+										<label class="">Mobile:</label>
+										<input type="text" class="form-control form-control-sm" th:field="*{mobile}" th:errorclass="has-error" required="required"/>
+										<span class="help-block">
+											<ul>
+												<li th:each="err : ${#fields.errors('mobile')}" th:text="${err}" />
+											</ul>
+										</span>
+									</div>
+									<div class="row" align="center">
+										<button type="submit" name="revoke" class="btn btn-outline-red waves-effect waves-light">Revoke Consent</button>
+										<button type="submit" name="deny" class="btn btn-outline-red waves-effect waves-light">Deny</button>
+										<button type="submit" name="allow" class="btn btn-outline-green waves-effect waves-light">Allow</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script th:src="@{/js/jquery-3.2.1.min.js}" type="text/javascript"></script>
+		<script th:src="@{/js/popper.min.js}" type="text/javascript"></script>
+		<script th:src="@{/js/bootstrap.min.js}" type="text/javascript"></script>
+		<script th:src="@{/js/mdb.min.js}" type="text/javascript"></script>
+		</main>
+	</body>
+</html>

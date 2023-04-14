@@ -1,0 +1,14 @@
+server.port: 9628
+
+spring:
+  application:
+    name: service-cashier-frontend-nuvei-cc
+  thymeleaf:
+    cache: false
+
+logging:
+  level:
+    lithium.service.cashier: DEBUG
+    lithium.service.cashier.processor: DEBUG
+    lithium.service.cashier.processor.http: DEBUG
+    lithium.service.cashier.processor.nuvei.cc: DEBUG

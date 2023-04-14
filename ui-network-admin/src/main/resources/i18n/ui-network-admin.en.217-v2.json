@@ -1,0 +1,114 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "BRANDCONFIG": {
+      "HEADER": {
+        "TITLE": "Brand Configuration",
+        "DESCRIPTION": "Various brand configuration options"
+      },
+      "TAB": {
+        "LOSSLIMITS": {
+          "TITLE": "Limits and Thresholds"
+        }
+      }
+    },
+    "LIMITS": {
+      "DOMAIN": {
+        "DEFAULT": "Default Loss Limits",
+        "REMOVE": {
+          "LIMIT": {
+            "SUCCESS": "Age Based Loss Limits Successfully Removed"
+          }
+        },
+        "AMOUNT": {
+          "NAME": "Amount",
+          "PLACEHOLDER": "Amount",
+          "DESCRIPTION": ""
+        },
+        "DEPOSITTHRESHOLDS": "Deposit Thresholds",
+        "DAILYDEPOSITTRIGGER": {
+          "LABEL": "Daily Deposit Trigger",
+          "DESCRIPTION": "Set the daily deposit trigger"
+        },
+        "WEEKLYDEPOSITTRIGGER": {
+          "LABEL": "Weekly Deposit Trigger",
+          "DESCRIPTION": "Set the daily deposit trigger"
+        },
+        "MONTHLYDEPOSITTRIGGER": {
+          "LABEL": "Monthly Deposit Trigger",
+          "DESCRIPTION": "Set the daily deposit trigger"
+        },
+        "CHANGE": {
+          "THRESHOLD": {
+            "DAILYTHRESH": "Change Global Daily Deposit Threshold",
+            "WEEKLYTHRESH": "Change Global Weekly Deposit Threshold",
+            "MONTHLYTHRESH": "Change Global Daily Deposit Threshold"
+          },
+          "MAXLIMIT": {
+            "DAILYLOSS": "Change Global Player Max Daily Loss Limit",
+            "MONTHLYLOSS": "Change Global Player Max Monthly Loss Limit",
+            "DAILYWIN": "Change Global Player Max Daily Win Limit",
+            "MONTHLYWIN": "Change Global Player Max Monthly Win Limit",
+            "SUCCESS": "Domain max limit set",
+            "ERROR": "Could not set max domain limit"
+          }
+        }
+      }
+    },
+    "LIMITSAGE": {
+      "ADD": {
+        "ACTION": "Add",
+        "TITLE": "Add Age Based Loss Limit"
+      },
+      "EDIT": {
+        "ACTION": "Modify",
+        "TITLE": "Modify Age Based Loss Limit"
+      },
+      "DELETE": {
+        "ACTION": "Delete",
+        "TITLE": "Delete Age Based Loss Limit"
+      },
+      "FROMAGE": {
+        "TITLE": "Age Based Loss Limit From",
+        "AGEMIN": {
+          "NAME": "From",
+          "PLACEHOLDER": "From",
+          "DESCRIPTION": ""
+        },
+        "AGEMAX": {
+          "NAME": "To",
+          "PLACEHOLDER": "To",
+          "DESCRIPTION": ""
+        }
+      },
+      "DOMAIN": {
+        "DAILYLOSSLIMIT": {
+          "NAME": "Daily Loss Limit",
+          "PLACEHOLDER": "Daily Loss Limit",
+          "DESCRIPTION": ""
+        },
+        "WEEKLYLOSSLIMIT": {
+          "NAME": "Weekly Loss Limit",
+          "PLACEHOLDER": "Weekly Loss Limit",
+          "DESCRIPTION": ""
+        },
+        "MONTHLYLOSSLIMIT": {
+          "NAME": "Monthly Loss Limit",
+          "PLACEHOLDER": "Monthly Loss Limit",
+          "DESCRIPTION": ""
+        },
+        "ADD": {
+          "SUCCESS": "Age Based Loss Limits Successfully Added",
+          "ERROR": "Unable To Add Age Based Loss Limits"
+        },
+        "DELETE": {
+          "SUCCESS": "Age Based Loss Limits Successfully Deleted",
+          "ERROR": "Unable To Delete Age Based Loss Limits"
+        },
+        "EDIT": {
+          "SUCCESS": "Age Based Loss Limits Successfully Modified",
+          "ERROR": "Unable To Modify Age Based Loss Limits"
+        }
+      }
+    }
+  }
+}

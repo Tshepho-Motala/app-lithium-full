@@ -1,0 +1,67 @@
+server:
+  port: 9718
+  
+spring:
+  datasource:
+    url: jdbc:mysql://localhost/lithium_user_mass
+    username: root
+    password: mysql
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: validate
+  cloud:
+    stream:
+      bindings:
+        uservalidationoutput:
+          binder: rabbit
+          destination: uservalidationqueue
+          producer:
+            required-groups: uservalidationgroup
+
+        uservalidationinput:
+          group: uservalidationgroup
+          binder: rabbit
+          destination: uservalidationqueue
+
+        useruploadprocessingoutput:
+          binder: rabbit
+          destination: useruploadqueue
+          producer:
+            required-groups: uservalidationgroup
+
+        useruploadprocessinginput:
+          group: uservalidationgroup
+          binder: rabbit
+          destination: useruploadqueue
+
+        massuserprocessingoutput:
+          binder: rabbit
+          destination: massuserprocessingqueue
+          producer:
+            required-groups: massuserprocessinggroup
+
+        massuserprocessinginput:
+          group: massuserprocessinggroup
+          binder: rabbit
+          destination: massuserprocessingqueue
+
+lithium:
+  services:
+    user:
+      mass:
+        action:
+          mass-player-validation:
+            cron: 0 1-59 * * * *
+            keepAlive: 60
+          mass-player-update:
+              cron: 0 1-59 * * * *
+              keepAlive: 60
+
+logging:
+  level:
+    lithium.service.user.mass.action: INFO
+    # org.hibernate.stat: INFO
+    # org.hibernate: INFO
+    # org.hibernate.type: INFO
+    # org.hibernate.type.descriptor.sql: INFO

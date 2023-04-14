@@ -1,0 +1,93 @@
+{
+	"name": "Neosurf",
+	"code": "neosurf",
+	"url": "service-cashier-processor-neosurf",
+	"methodNames": [
+		"neosurf"
+	],
+	"deposit": true,
+	"fees": {
+		"flat": 0,
+		"percentage": 0,
+		"minimum": 0
+	},
+	"withdraw": true,
+	"limits": {
+		"minAmount": 2500,
+		"maxAmount": 0,
+		"maxAmountDay": 0,
+		"maxAmountWeek": 0,
+		"maxAmountMonth": 0,
+		"maxTransactionsDay": 0,
+		"maxTransactionsWeek": 0,
+		"maxTransactionsMonth": 0
+	},
+	"properties": [
+		{
+			"name": "secretkey",
+			"defaultValue": "78cf6e73069df2206a1fc0fd150991ed",
+			"type": "string",
+			"description": "Secret key provided by neosurf"
+		},
+		{
+			"name": "merchantId",
+			"defaultValue": "24631",
+			"type": "string",
+			"description": "The processor should supply the API merchant id."
+		},
+		{
+			"name": "subMerchantId",
+			"defaultValue": "app.megavegas.com",
+			"type": "string",
+			"description": "submechant ID"
+		},
+		{
+			"name": "test",
+			"defaultValue":"yes",
+			"type": "string",
+			"description": "this is testing mode"
+		},
+		{
+			"name": "baseUrl",
+			"defaultValue": "https://pay.neosurf.com",
+			"type": "string",
+			"description": "NeoSurf base url"
+		},
+		{
+			"name": "urlOk",
+		    "defaultValue": "https://app.megavegas.com/cashier/ok",		
+			"type": "string",
+			"description": "Merchant Ok Url"
+		},	
+		{
+			"name": "urlKo",
+		    "defaultValue": "https://app.megavegas.com/cashier/error",		
+			"type": "string",
+			"description": "Merchant Ok Url"
+		},
+		{
+			"name": "urlPending",
+		    "defaultValue": "https://app.megavegas.com/cashier/pending",		
+			"type": "string",
+			"description": "Merchant Ok Url"
+		},
+		{
+			"name": "callbackurl",
+		    "defaultValue": "/service-cashier/external/callback/do/neosurf/39cb51aa8974d0ba00b945974581c812115427bf",		
+			"type": "string",
+			"description": "Internal callback URL that is provided to neosurf"
+		},
+		 {
+		 "name": "prohibitedForMinors",
+		    "defaultValue": "yes",		
+			"type": "string",
+			"description": "define if the proccessor is by default prohibiting minor"
+		 },
+		 {
+			"name": "redirecturl",
+			"defaultValue": "",
+			"type": "string",
+			"description": "The URL for neosurf to redirect to once payment has been completed on their system"
+		}
+	]
+}

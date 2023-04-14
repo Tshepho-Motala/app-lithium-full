@@ -1,0 +1,48 @@
+.Pay.nl Withdraw Flow
+[plantuml]
+----
+
+@startuml
+
+actor Player
+participant WebPortal
+participant Lithium
+actor LBOOperator
+participant Pay.nl
+
+autonumber
+
+Player -> WebPortal  : Login and request Withdraw page
+WebPortal -> Lithium : Get Player accounts
+Lithium --> WebPortal : Player accounts list
+
+Player -> WebPortal : Player chooses IBAN number & enters amount
+WebPortal -> Lithium : withdraw request
+
+Lithium -> Lithium : Check account
+
+Lithium --> WebPortal : withdraw(status=declined, error)
+Lithium --> LBOOperator : withdraw(status=wait for approval)
+
+WebPortal --> Player : withdraw result
+
+LBOOperator -> Lithium : Approve Withdraw
+Lithium -> Pay.nl : Payout
+
+Pay.nl --> Lithium : response(exchangeHttpStatus!=2xx)
+Lithium -> LBOOperator : response(status=declined)
+
+Pay.nl --> Lithium : response(exchangeHttpStatus=2xx)
+Lithium -> LBOOperator : response(status=wait for processor)
+
+Pay.nl -> Lithium : send webhook
+Lithium -> Pay.nl : verify request
+
+Pay.nl --> Lithium : transaction in progress status (pending)
+Pay.nl --> Lithium : transaction in failed status (cancel, failure, denied)
+Lithium -> LBOOperator : response(status=declined, player_cancel)
+Pay.nl --> Lithium : transaction in finished status (paid)
+Lithium -> LBOOperator : response(status=success)
+Lithium -> Lithium : Update balance
+
+@enduml

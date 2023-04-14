@@ -1,0 +1,14 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "CHANGELOGS" : {
+      "GLOBAL" : {
+        "FIELDS" : {
+          "FIELDCHANGE" : {
+            "EDITED_BY" : "Edited By",
+            "DATE_UPDATED" : "Date Updated"
+          }
+        }
+      }
+    }
+  }
+}

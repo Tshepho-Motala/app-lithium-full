@@ -1,0 +1,13 @@
+{
+  "SERVICE_LIMIT": {
+    "DEPOSITLIMIT": {
+      "COMMENT": {
+        "PENDING_TO_DEPOSIT": {
+          "DAILY": "Moving pending daily deposit limit created on {0} to currently active",
+          "WEEKLY": "Moving pending weekly deposit limit created on {0} to currently active",
+          "MONTHLY": "Moving pending monthly deposit limit created on {0} to currently active"
+        }
+      }
+    }
+  }
+}

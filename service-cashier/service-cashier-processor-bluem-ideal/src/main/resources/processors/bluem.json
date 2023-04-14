@@ -1,0 +1,105 @@
+{
+	"name": "bluem-ideal",
+	"code": "bluem-ideal",
+	"url": "service-cashier-processor-bluem-ideal",
+	"methodNames": [
+		"ideal"
+	],
+	"deposit": true,
+	"fees": {
+		"flat": 0,
+		"percentage": 0,
+		"minimum": 0
+	},
+	"withdraw": false,
+	"limits": {
+		"minAmount": 2500,
+		"maxAmount": 0,
+		"maxAmountDay": 0,
+		"maxAmountWeek": 0,
+		"maxAmountMonth": 0,
+		"maxTransactionsDay": 0,
+		"maxTransactionsWeek": 0,
+		"maxTransactionsMonth": 0
+	},
+	"properties": [
+		{
+			"name": "payments_api_url",
+			"defaultValue": "https://test.viamijnbank.net/pr",
+			"type": "url",
+			"description": "The base URL for the payment api"
+		},
+		{
+			"name": "sender_id",
+			"defaultValue": "",
+			"type": "string",
+			"description": "Bluem sender id"
+		},
+		{
+			"name": "brand_id",
+			"defaultValue": "LiveScorePayment",
+			"type": "string",
+			"description": "Bluem brand id"
+		},
+		{
+			"name": "token",
+			"defaultValue": "",
+			"type": "string",
+			"description": "Bluem token"
+		},
+		{
+			"name": "verify_iban",
+			"defaultValue": "false",
+			"type": "boolean",
+			"description": "Verify Trustly account iban."
+		},
+		{
+			"name": "skip_amount_check",
+			"defaultValue": "false",
+			"type": "boolean",
+			"description": "Skip amount check"
+		},
+		{
+			"name": "expire_after",
+			"defaultValue": "43200000",
+			"type": "Long",
+			"description": "Bluem expiration delay."
+		},
+		{
+			"name": "payment_description",
+			"defaultValue": "LiveScore payment",
+			"type": "String",
+			"description": "Payment description that will appear on Bluem page."
+		},
+		{
+			"name": "banks_available",
+			"defaultValue": "",
+			"type": "string",
+			"description": "The list of banks available for Bluem iDEAL payments"
+		},
+		{
+			"name": "handle_redirect",
+			"defaultValue": "false",
+			"type": "boolean",
+			"description": "Handle Bluem redirect on Litium side. Bluem transaction status will be taken and transaction state parameters added to the client return_url."
+		},
+		{
+			"name": "bluem_auto_redirect",
+			"defaultValue": "true",
+			"type": "boolean",
+			"description": "If TRUE, Bluem auto redirect will be performed skipping Bluem result page."
+		},
+		{
+			"name": "certificate",
+			"defaultValue": "",
+			"type": "string",
+			"description": "Bluem certificate."
+		},
+		{
+			"name": "skip_amount_check",
+			"defaultValue": "false",
+			"type": "boolean",
+			"description": "Skip amount check."
+		}
+	]
+}

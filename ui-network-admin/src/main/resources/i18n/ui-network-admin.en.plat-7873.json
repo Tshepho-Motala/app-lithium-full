@@ -1,0 +1,13 @@
+{
+  "UI_NETWORK_ADMIN":{
+    "DOMAIN": {
+      "PLAYER_DOMAIN": {
+        "FIRST_DEPOSIT_RULE": {
+          "LABEL": "First Deposit Access Rule",
+          "DESCRIPTION": "Access rule to be run after player first deposit",
+          "PLACEHOLDER": "Select Access Rule"
+        }
+      }
+    }
+  }
+}

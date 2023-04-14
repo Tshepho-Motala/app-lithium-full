@@ -1,0 +1,19 @@
+<div class="row v-reset-row ">
+	<div class="row v-reset-row ">
+		<div class="col-xs-12">
+			<div class="nav-tabs-custom">
+				<ul class="nav nav-tabs">
+					<li role="presentation" ng-class="{ active: controller.tab == tab }" ng-repeat="tab in controller.tabs">
+						<a ng-click="controller.setTab(tab)">{{ tab.title | translate }}</a>
+					</li>
+				</ul>
+				<div class="tab-content">
+					<div class="well" style="margin-bottom: 0px">
+					<div ui-view></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+</div>

@@ -1,0 +1,31 @@
+server:
+  port: 9626
+spring:
+  datasource:
+    url: jdbc:mysql://localhost/lithium_cashier_mock_hexopay
+    username: root
+    password: mysql
+  jpa:
+    hibernate:
+      ddl-auto: validate
+      naming:
+        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+        implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+    show-sql: false
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+
+logging:
+  level:
+    lithium.service.cashier.mock.hexopay: INFO
+
+lithium:
+  service:
+    cashier:
+      mock:
+        hexopay:
+          expire-scheduling-time: 2000L
+          private_key: "MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC9j4ydXEcqRCqMHxDOgpAUhD7Nhd49IUcOZxmg3FnYDszGm2ZpcGtdrSC9XEJ+TsTkirmVMR5ZacPxmmRc1IUbeQjW+DVu1U6fb8fNT0Es6QmqoV9gXreoqGnwzy6q1gJP0S9cerEbvR1Vn/nmxgYUJRZdPtILVvL5kSz5nXer1J99zUq9b28S7dMu8LApPPrBjSL2iFDN1C0uWLFN1aHNMfmjF7kAMVW/GFmfedTNyCSZIk72xqrdrFrFuu7hL6Gm5bPbZSL6SYctfz2bl8dlJpqK56I7kozJwKVTfYkSr9IpnkqIAO2h642BT6OqTQBl/AE5+FCSdqFH1gP0bLF/AgMBAAECggEBAKROlw2W/MBwEYkfLEwz83s1HdK7ZGUMQTEEwLwkA2Q5f9nuvRhLr2SlOimonKIq2JNYg4AD8VCDUqpKrw+fzjh/8t+SiY4mKl4cX81gExhAbnaOJcO8lekFAb8Pdl3x3lMc+LZqSrXGeHTNk6kqn/46H2Z3m0zk8vrLkXZTvXUb+2w4z+LYMEFg1jppUqTjGLKNwti7KIV7q9uyKPwYBp0058qbK9xk0uvf4yxOkHwYzNIWYDlugIXxBmmKUeQbGuFsKtLkrfJ80+R61NIqwLc8tUkXrcCPi1oFpQAoIKv6FewRHNJ1mquKyY8SIXXgfMpj6g8eildAiRwxIcaJ2IECgYEA5RP3rnHATZa9OP+4VGPh6VGKiQWExTIsEcNzufeGHRUX5csHuBi7UIHKK0YJHJXm21FEWqHrUmA6wgfJ9v2kN7NxYyypugcTsvoTfOjJGn1IdHAPHFL1EjLJOoEAAMWr7FKwI/K1rObBRxvURinFUn4DrUkfuKB4TR5qNhnwMKECgYEA09aqvAzqk5NGzau9FMO3bXRFdFYh1TTVgA1R6fFHIg5L7wS+ywjcUEeYQVkiknoxX3ClYvfyOKBoX+cQnbFIajEk/50YecyhbQx2f+FqiRi7BbZqyM2UNGpY05wb6p2ZJY/NkHHA1UV5XojCvONVCmB9jtiSLSZNPwE0E3juDh8CgYEAocVFDtrjq6c8v2jO+kGDAuqDg5nzFfMFbhHxwq1K93Sy6KNFMzu74/GUHJUb0CUH3293bu2TqhuswuMPPC4IbxF4jEm5HlbrEWRKqNYXVm6M4TVVZnIrAQv+USNSJjlx3LTUEL7Qj2ZxrU64zEepQkUdQZ03GoGwEv3ckZIlraECgYAXtMAqhy+BEEwuG/fu6PAP+aEEIddrapwx1kvCaFPThdINj3RieD1fZoOtXHI3/iCkU5DOgHzExX6orMz5OKun5pQDXussRjASagCg0vL/IJtdSkqs6gSZ0QTbuW6OVNCcmXkhnvk7ZKjuYVOZm78aiC3E3IuPLegbEuFnBHNvdQKBgA0V7mfO3QVRxzSBCgF1Ykh2+Ol1D82BYjoxqP4wekbq/r+TZxOVM1pkxTdrzQpJ3SXzOExfs1cfVOoHC3kua28GSxLg1dyZzE/ZqspAGWj4UoTCHiN4mDsB0yFz4qp3idi87X2Vlc5jHpOtrwEC7dYPQR5PEZH2BzEI3FYVgrqK"
+          notification_delay: 2000L
+

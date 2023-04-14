@@ -1,0 +1,17 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "PLAYER": {
+      "TAB": {
+        "NOTIFICATIONSINBOX": "Notifications: Inbox",
+        "MISSIONS": "Missions",
+        "REFERRALS": "Referrals",
+        "INCENTIVEGAMES": "Incentive Games",
+        "ACCOUNTINGHISTORY": "Accounting History",
+        "ACCOUNTINGSPORTSBOOKHISTORY": "Accounting Sportsbook History"
+      },
+      "ACCOUNTINGHISTORY": {
+        "VIEWINGTRANSACTIONS": "Viewing transactions"
+      }
+    }
+  }
+}

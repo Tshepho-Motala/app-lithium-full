@@ -1,0 +1,1 @@
+ALTER TABLE `transaction_workflow_history` ADD COLUMN `billing_descriptor` varchar(255) DEFAULT NULL;

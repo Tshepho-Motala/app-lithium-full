@@ -1,0 +1,37 @@
+{
+  "name": "VESPay",
+  "code": "vespay",
+  "url": "service-cashier-processor-vespay",
+  "methodNames": ["vespay"],
+  "deposit": true,
+  "withdraw": false,
+  "fees": {
+    "flat": 0,
+    "percentage": 0,
+    "minimum": 0
+  },
+  "limits": {
+    "minAmount": 2500,
+    "maxAmount": 0,
+    "maxAmountDay": 0,
+    "maxAmountWeek": 0,
+    "maxAmountMonth": 0,
+    "maxTransactionsDay": 0,
+    "maxTransactionsWeek": 0,
+    "maxTransactionsMonth": 0
+  },
+  "properties": [
+    { 
+      "name": "apiKey",
+      "defaultValue": "uD5snB",
+      "type": "string",
+      "description": "Unique merchant API Key provided by VESPay"
+    },
+    {
+      "name": "baseUrl",
+      "defaultValue": "http://localhost:9002/service-cashier-mock-vespay",
+      "type": "string",
+      "description": "VESPay base url for target endpoints"
+    }
+  ]
+}

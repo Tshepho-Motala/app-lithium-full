@@ -1,0 +1,31 @@
+{
+	"UI_NETWORK_ADMIN": {
+		"PLAYER": {
+			"BONUS": {
+				"REGISTER": {
+					"FIELDS": {
+						"TYPE": {
+							"LABEL": "Bonus Type",
+							"DESC": "Choose the bonus type"
+						},
+						"CODE": {
+							"LABEL": "Bonus Code",
+							"DESC": "Enter the bonus code"
+						},
+						"DEPOSITAMOUNT": {
+							"LABEL": "Deposit Amount",
+							"DESC": "Enter the deposit amount"
+						}
+					},
+					"ERROR" : "Could not register bonus",
+					"SIGNUP": {
+						"SUCCESS": "Signup bonus registered successfully"
+					},
+					"DEPOSIT": {
+						"SUCCESS": "Deposit bonus registered successfully"
+					}
+				}
+			}
+		}
+	}
+}

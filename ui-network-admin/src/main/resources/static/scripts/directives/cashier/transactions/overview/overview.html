@@ -1,0 +1,90 @@
+<div class="row v-reset-row mt-5">
+    <div class="box box-solid box-default">
+        <div class="box-header with-border">{{'UI_NETWORK_ADMIN.CASHIER.PAYMENT_METHOD.TITLE_MANY' | translate}}</div>
+        <div class="box-body table-responsive">
+            <div class="table-responsive mailbox-messages">
+                <table class="table table-bordered table-striped">
+                    <tbody>
+                    <tr>
+                        <th></th>
+                        <th>{{'UI_NETWORK_ADMIN.CASHIER.PAYMENT_METHOD.METHOD' | translate}}</th>
+                        <th>{{'UI_NETWORK_ADMIN.CASHIER.PAYMENT_METHOD.PAYNAME' | translate}}</th>
+	                    <th>{{'UI_NETWORK_ADMIN.CASHIER.PAYMENT_METHOD.CREATED_ON' | translate}}</th>
+                        <th>{{'UI_NETWORK_ADMIN.CASHIER.PAYMENT_METHOD.EXPIRY_DATE' | translate}}</th>
+                        <th ng-show="showVerification">{{'UI_NETWORK_ADMIN.CASHIER.PAYMENT_METHOD.VERIFIED' | translate}}
+                        </th>
+                        <th ng-show="showVerification">
+                            {{'UI_NETWORK_ADMIN.CASHIER.PAYMENT_METHOD.CONTRA_ACCOUNT' | translate}}
+                        </th>
+                        <th>{{'UI_NETWORK_ADMIN.CASHIER.PAYMENT_METHOD.DEPOSIT' | translate}}</th>
+                        <th>{{'UI_NETWORK_ADMIN.CASHIER.PAYMENT_METHOD.WITHDRAWAL' | translate}}</th>
+                        <th>{{'UI_NETWORK_ADMIN.CASHIER.PAYMENT_METHOD.NET_DEPOSIT' | translate}}</th>
+                        <th>{{'UI_NETWORK_ADMIN.CASHIER.PAYMENT_METHOD.STATUS' | translate}}</th>
+                        <th ng-show="showVerification">{{'UI_NETWORK_ADMIN.CASHIER.PAYMENT_METHOD.VERIFICATION_ERROR' | translate}}
+                        </th>
+                        <th lit-if-permission="CASHIER_PAYMENT_METHOD_STATUS_EDIT" lit-permission-domain="{{domain}}">
+                            {{'UI_NETWORK_ADMIN.CASHIER.PAYMENT_METHOD.ACTION' | translate}}
+                        </th>
+                    </tr>
+                    <tr ng-repeat="pm in paymentMethods" ng-if="paymentMethods.length > 0">
+                        <td>
+                            <img style="height:32px;transform-origin: left;transform: scale(1);" height="32" src="//:0"
+                                 ng-src="data:{{pm.processorIcon.filetype}};base64,{{pm.processorIcon.base64}}" alt="">
+                        </td>
+                        <td>{{pm.name}}</td>
+                        <td>{{pm.nameOnPayEntry}}</td>
+                        <td >
+                            <span style="width: 130px; display: block">{{pm.createdOn}}</span>
+                        </td>
+                        <td>{{pm.expiryDate}}</td>
+                        <td ng-show="showVerification">{{pm.verified ? "Success" : (pm.verified === false ? "Fail" : "Unverified")}}</td>
+                        <td ng-show="showVerification">{{pm.contraAccount ? "Yes" : "No" }}</td>
+                        <td>{{pm.depositSum | currency: pm.currencyCode}}</td>
+                        <td>{{pm.withdrawSum | currency: pm.currencyCode}}</td>
+                        <td>{{pm.netDeposit | currency: pm.currencyCode}}</td>
+                        <td>
+                                <span ng-switch="pm.status.name">
+					                <span ng-switch-when="ACTIVE"
+                                          class="badge badge-wrap bg-grey">{{pm.status.name}}</span>
+                                    <span ng-switch-when="BLOCKED"
+                                          class="badge badge-wrap bg-red">{{pm.status.name}}</span>
+                                    <span ng-switch-when="DISABLED"
+                                          class="badge badge-wrap bg-yellow">{{pm.status.name}}</span>
+                                    <span ng-switch-when="DEPOSIT_ONLY"
+                                          class="badge badge-wrap bg-yellow">{{pm.status.name}}</span>
+                                    <span ng-switch-when="WITHDRAWAL_ONLY"
+                                          class="badge badge-wrap bg-yellow">{{pm.status.name}}</span>
+                                    <span ng-switch-when="EXPIRED"
+                                          class="badge badge-wrap bg-blue">{{pm.status.name}}</span>
+                                </span>
+                        </td>
+                        <td ng-show="showVerification" title="{{pm.verificationError}}">{{pm.verificationError.substring(0, 50) + (data.length > 50 ? '...' : '')}}</td>
+                        <td lit-if-permission="CASHIER_PAYMENT_METHOD_STATUS_EDIT" lit-permission-domain="{{domain}}">
+                            <a style="cursor: pointer;" ng-click="editStatus(pm) "
+                               ng-if="pm.status.name !== 'HISTORIC'">
+                                <span class="fa fa-pencil-square-o">Edit</span>
+                            </a>
+                        </td>
+                    </tr>
+                    <tr bgcolor="#dcdcdc" ng-if="paymentMethods.length > 0 ">
+                        <td></td>
+                        <td><b>{{'UI_NETWORK_ADMIN.CASHIER.PAYMENT_METHOD.GRAND_TOTAL' | translate}}</b></td>
+                        <td></td>
+                        <td ng-show="showVerification"></td>
+                        <td ng-show="showVerification"></td>
+                        <td><b>{{depositTotal | currency: currencyCode}}</b></td>
+                        <td><b>{{withdrawalTotal | currency: currencyCode}}</b></td>
+                        <td><b>{{netTotal | currency: currencyCode}}</b></td>
+                        <td></td>
+                        <td lit-if-permission="CASHIER_PAYMENT_METHOD_STATUS_EDIT"
+                            lit-permission-domain="{{domain}}"></td>
+                    </tr>
+                    <tr ng-if="paymentMethods.length === 0 ">
+                        <td colspan="7" class="text-center">{{'GLOBAL.DATATABLE.EMPTYTABLE' | translate}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

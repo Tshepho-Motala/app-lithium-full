@@ -1,0 +1,13 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "GAME": {
+      "FIELDS": {
+        "SUPPLIER_GAME_REWARD_GUID": {
+          "NAME": "Supplier Game Reward Guid",
+          "PLACEHOLDER": "BP_Ted",
+          "DESCRIPTION": "This will be used to grant rewards to games"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,66 @@
+<div class="modal-content">
+	<div class="modal-header primary-blue darken-4 white-text">
+		<h3 class="modal-title" id="modal-title">
+			<i class="fa fa-pencil"></i>
+			{{ 'UI_NETWORK_ADMIN.CASHIER.PROCESSORS.PROPERTIES.TITLE' | translate }}
+			<span class="description white-text">({{ controller.model.name }})</span>
+			<button-close-window ng-click="controller.cancel()"></button-close-window>
+		</h3>
+	</div>
+
+	<form ng-submit="controller.onSubmit()" name="controller.form" novalidate>
+		<div class="modal-body" id="modal-body">
+			<div class="row v-reset-row ">
+				<div class="col-xs-12">
+					<div class="pull-right">
+						<div class="input-group input-group-sm" style="width: 150px;">
+							<input type="text" ng-model="filterValue" class="form-control pull-right" placeholder="Search">
+							<div class="input-group-btn">
+								<button type="submit" class="btn btn-default">
+									<i class="fa fa-search"></i>
+								</button>
+							</div>
+						</div>
+					</div><br/><br/>
+				</div>
+			</div>
+			<div class="row v-reset-row ">
+				<div class="col-xs-12">
+					<table class="table table-sm table-responsive">
+					<thead>
+						<tr>
+							<th>{{ 'UI_NETWORK_ADMIN.CASHIER.PROCESSORS.PROPERTIES.TABLE.OVERRIDE' | translate }}</th>
+							<th>{{ 'UI_NETWORK_ADMIN.CASHIER.PROCESSORS.PROPERTIES.TABLE.NAME' | translate }}</th>
+							<th width="75%">{{ 'UI_NETWORK_ADMIN.CASHIER.PROCESSORS.PROPERTIES.TABLE.VALUE' | translate }}</th>
+<!-- 							<th>{{ 'UI_NETWORK_ADMIN.CASHIER.PROCESSORS.PROPERTIES.TABLE.DESC' | translate }}</th> -->
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="p in controller.properties | filter:filterValue">
+							<td align="center">
+								<checkbox large ng-model="p.override" ng-click="controller.override(p, !p.override)"></checkbox>&nbsp;
+							</td>
+							<td>{{p.processorProperty.name}}</td>
+							<td>
+								<input type="text" class="form-control" ng-model="p.value" ng-value="(p.override)?p.value:p.processorProperty.defaultValue" ng-readonly="!p.override"/>
+								<input type="text" class="form-control" ng-value="p.processorProperty.defaultValue" ng-show="p.override" readonly="readonly"/>
+<!-- 							</td> -->
+<!-- 							<td> -->
+								<br/>
+								<span class="description">{{p.processorProperty.description}}</span>
+							</td>
+						</tr>
+					</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		
+		<div class="modal-footer" id="modal-body">
+			<buttonbar>
+				<button-submit class="pull-left"></button-submit>
+				<button-cancel ng-click="controller.cancel()"></button-cancel>
+			</buttonbar>
+		</div>
+	</form>
+</div>

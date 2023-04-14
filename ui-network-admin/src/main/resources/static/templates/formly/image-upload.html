@@ -1,0 +1,36 @@
+<div class="form-group" ng-class="{'has-error': showError}">
+    <label for="{{id}}" class="control-label" ng-if="to.label">
+        {{to.label}} {{to.required ? '*' : ''}}
+    </label>
+    <div class="input-group col-xs-12">
+		<span class="input-group-btn">
+			<span class="btn btn-primary btn-file">{{'GLOBAL.ACTION.BROWSE' | translate}} &hellip;
+				<input type="file" ng-model="model[options.key]"
+                       base-sixty-four-input
+                       accept="{{to.accept}}"
+                       maxsize="{{to.maxsize?to.maxsize:500}}"
+                       minsize="{{to.minsize?to.minsize:1}}"
+                       onerror="errorHandler"
+                       {{to.required ? 'required' : ''}}
+					/>
+                <!-- 					do-not-parse-if-oversize -->
+                <!-- 					on-change="{{to.onchange}}" -->
+			</span>
+		</span>
+        <input type="text" value="{{model.image.filename}}" class="form-control"/>
+    </div>
+    <div class="col-xs-12" ng-if="to.preview" style="margin-top: 10px;">
+        <div class="col-xs-2">
+            &nbsp;
+        </div>
+        <div class="col-xs-8" align="center" ng-if="model.image.base64">
+                <img style="max-width: 35%;max-height: 45%;" class="img-thumbnail img-responsive" src="//:0"
+                     ng-src="data:{{ (model.image.filetype) ? model.image.filetype : 'image/PNG' }};base64,{{ model.image.base64 }}"
+                     alt=""/>
+        </div>
+        <div class="col-xs-2">
+            &nbsp;
+        </div>
+    </div>
+    <span class="description">{{'GLOBAL.FILE_UPLOAD.NOTE' | translate}} {{(to.maxsize ? (to.maxsize / 1000) : 1).toFixed()}} MB</span>
+</div>

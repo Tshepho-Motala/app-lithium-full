@@ -1,0 +1,51 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "CASHIER": {
+      "AUTOWITHDRAWALS":{
+        "RULESETS": {
+          "EXPORT": {
+            "BUTTONS": {
+              "LABEL": "Export",
+              "ENABLED": "Enabled",
+              "DISABLED": "Disabled",
+              "CANCEL": "Cancel"
+            },
+            "TITLE": "Auto-WD ruleset export panel"
+          },
+          "IMPORT": {
+            "TITLE": "Auto-WD ruleset import panel",
+            "EDIT_TITLE": "Editing Auto-Withdrawal Ruleset",
+            "CLONE_TITLE": "Clone ruleset",
+            "TITLE_TABLE": "Rules",
+            "TITLE_LOADED": "Loaded Auto-Withdrawal Ruleset",
+            "TITLE_RULE": "Editing Rule",
+            "NEW_RULE_TITLE": "Add new rule",
+            "HINT": "Should this rule be enabled?",
+            "BUTTONS": {
+              "LABEL": "Import",
+              "ENABLED": "Enabled",
+              "DISABLED": "Disabled",
+              "CANCEL": "Cancel",
+              "DELETE": "Delete",
+              "EDIT": "Edit",
+              "SAVE": "Save"
+            },
+            "FORM": {
+              "FILE": "File input",
+              "NAME": "Name",
+              "DOMAIN": "Domain",
+              "ENABLED": "Enabled",
+              "DELAY": "Delay",
+              "DELAYED": "Delayed start",
+              "FIELD": "Field",
+              "OPERATOR": "Operator",
+              "VALUE": "Value",
+              "NAME_REQUIRED": "Name is required",
+              "FIELD_REQUIRED": "Field is required"
+            }
+          }
+        }
+      }
+    }
+  }
+}

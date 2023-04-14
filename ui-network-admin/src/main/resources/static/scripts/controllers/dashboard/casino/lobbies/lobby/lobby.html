@@ -1,0 +1,21 @@
+<buttonbar>
+	<button-back ui-sref="^."></button-back>
+	<button-edit lit-if-permission="CASINO_LOBBIES_EDIT" lit-permission-domain="{{controller.lobby.domain.name}}" ui-sref="dashboard.casino.lobbies.edit({domainName: controller.lobby.domain.name, lobbyId: controller.lobby.id, lobbyRevisionId: controller.lobby.current.id})"></button-edit>
+</buttonbar>
+
+<br/><br/>
+
+<div class="row v-reset-row ">
+	<div class="col-xs-12">
+		<div class="nav-tabs-custom" style="margin-bottom: 5px;">
+			<ul class="nav nav-tabs">
+				<li role="presentation" ng-class="{ active: ($state.current.name.toLowerCase().indexOf(tab.name) === 0) }" ng-repeat="tab in controller.tabs" lit-if-permission="{{tab.roles}}" class="{{tab.tclass}}">
+					<a ng-click="controller.setTab(tab)">{{ tab.title | translate }}</a>
+				</li>
+			</ul>
+			<div class="tab-content" style="padding: 0px;padding-top: 1px;">
+				<div ui-view></div>
+			</div>
+		</div>
+	</div>
+</div>

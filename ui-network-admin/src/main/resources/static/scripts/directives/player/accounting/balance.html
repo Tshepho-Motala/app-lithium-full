@@ -1,0 +1,38 @@
+<div class="box box-{{data.box}} box-solid bs-loading-container" bs-loading-overlay bs-loading-overlay-reference-id="{{referenceId}}">
+	<div class="box-header with-border">
+		{{data.title | translate}} <span ng-if="data.isDefault" class="label label-warning">DEFAULT</span>
+		<div class="box-tools pull-right">
+			<button type="button" class="btn btn-box-tool" ng-click="refresh()">
+				<i class="fa fa-refresh"></i> refresh
+			</button>
+			<button type="button" class="btn btn-box-tool" ng-click="adjust()" ng-if="!data.displayOnly" lit-if-permission="PLAYER_BALANCE_ADJUST" lit-permission-domain="{{data.domainName}}">
+				<i class="fa fa-adjust"></i> adjust
+			</button>
+			<button type="button" class="btn btn-box-tool" ng-click="writeoff(balance)" ng-if="!data.displayOnly" lit-if-permission="PLAYER_BALANCE_ADJUST_WRITE_OFF" lit-permission-domain="{{data.domainName}}">
+				<i class="fa fa-warning"></i> write-off
+			</button>
+		</div>
+	</div>
+	<div class="box-body">
+		<table class="table table-striped">
+		<tbody>
+		<tr>
+			<th>{{'GLOBAL.FIELDS.BALANCE' | translate}}</th>
+			<td class="pull-right">{{balance | cents : symbol : franctionSize}}</td>
+		</tr>
+		</tbody>
+		</table>
+<!-- 		<br/> -->
+<!-- 		<div class="row v-reset-row "> -->
+<!-- 			<accountinggraph data="balanceAdjustGraph" granularity="granularity" ranges="ranges"></accountinggraph> -->
+<!-- 		</div> -->
+<!-- 		<div class="row v-reset-row "> -->
+<!-- 			<div class="btn-group"> -->
+<!-- 				<button ng-click="setGranularity(3)" type="button" ng-class="{'active': granularity == 3}" class="btn btn-default">Daily</button> -->
+<!-- 				<button ng-click="setGranularity(4)" type="button" ng-class="{'active': granularity == 4}" class="btn btn-default">Weekly</button> -->
+<!-- 				<button ng-click="setGranularity(2)" type="button" ng-class="{'active': granularity == 2}" class="btn btn-default">Monthly</button> -->
+<!-- 				<button ng-click="setGranularity(1)" type="button" ng-class="{'active': granularity == 1}" class="btn btn-default">Yearly</button> -->
+<!-- 			</div> -->
+<!-- 		</div> -->
+	</div>
+</div>

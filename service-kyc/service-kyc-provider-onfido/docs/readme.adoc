@@ -1,0 +1,20 @@
+= User verification flow with Onfido
+:sectnums:
+:toc: left
+:toclevels: 4
+:toc-title: Comps Restrictions
+:icons: font
+:url-quickref: https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/
+
+//:stylesheet: css/asciidoctor.css
+//:stylesheet: css/material-blue.css
+
+//This is done tto keep formatting aligned with gitlab
+****
+[verse,,]
+____
+link:readme.adoc[back]
+____
+****
+
+include::plantuml/user-verification-flow.puml[User Verification Flow with Onfido]

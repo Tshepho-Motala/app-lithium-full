@@ -1,0 +1,31 @@
+server:
+  port: 9500
+
+eureka:
+  instance:
+    appname: service-shards
+
+spring:
+ application:
+   name: service-shards
+ datasource:
+   url: jdbc:mysql://localhost/lithium_shards?useSSL=false
+   username: root
+   password: mysql
+ jpa:
+   show-sql: false
+   hibernate:
+     ddl-auto: validate
+     properties:
+       hibernate:
+        format_sql: true
+lithium:
+ services:
+   shards:
+     cleanup-job-enabled: true
+     cleanup-job-delay-ms: 120000
+     cleanup-ms: 3600000
+     keep-alive-ms: 600000
+logging:
+  level:
+    lithium.service.shards: INFO

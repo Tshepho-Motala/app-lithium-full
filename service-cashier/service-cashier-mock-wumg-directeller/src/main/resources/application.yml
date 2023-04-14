@@ -1,0 +1,13 @@
+server.port: 9760
+
+lithium:
+  service:
+    cashier:
+      mock:
+        wumg:
+          directeller:
+            api-user: 9844
+            api-password: Hsdf3234fsdfaf234ef23e2
+logging:
+  level:
+    lithium.service.cashier: INFO

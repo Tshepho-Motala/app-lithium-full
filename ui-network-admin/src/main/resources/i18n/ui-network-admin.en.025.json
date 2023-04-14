@@ -1,0 +1,32 @@
+{
+	"UI_NETWORK_ADMIN": {
+		"ACCESSCONTROL": {
+			"RULES": {
+				"LIST": {
+					"TITLE": "Access Control Rules",
+					"DESCRIPTION": "List of Access Control Rules"
+				},
+				"VIEW": {
+					"TITLE": "Access Control Rule",
+					"DESCRIPTION": "Review the access rule, and if you have the access to do so, add/remove an ACL or modify an existing ACLs properties",
+					"HELP": "Use the control's below to setup the access rule. Make use of the test interface to test your configuration for each scenario."
+				},
+				"ADD": {
+					"BASIC": {
+						"DOMAIN": {
+							"LABEL": "Domain",
+							"PLACEHOLDER": "Select Access Rule Domain",
+							"DESCRIPTION": "The domain for which this access rule will be created"
+						},
+						"NAME": {
+							"LABEL": "Name",
+							"PLACEHOLDER": "Enter Name of Access Rule",
+							"DESCRIPTION": "The unique name for this access rule",
+							"UNIQUE": "The access rule name is not unique for this domain"
+						}
+					}
+				}
+			}
+		}
+	}
+}

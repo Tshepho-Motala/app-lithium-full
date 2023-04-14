@@ -1,0 +1,88 @@
+.Access Control Rulesets (Basic Flow)
+[plantuml]
+----
+
+
+@startuml
+'https://plantuml.com/sequence-diagram
+
+actor internal
+participant  "svc-access" as sa
+database access_rule
+database access_rule_transaction
+database access_control_list
+database external_list
+
+autonumber
+
+  internal -> sa: Check Authorization Flow
+  activate sa
+  sa <-- access_rule: Find accessRule by domain name and access rule name
+
+  note over sa: Sanity Checks, if the access rule does not exist or is not enabled, the access rule is not processed.
+  group Sanity Checks
+    sa -> sa: sanityCheck
+    alt Access Rule does not exist on domain
+      sa --> internal: Access rule does not exist
+
+    ||10||
+    else Access Rule not enabled
+       sa --> internal: Access rule exist on domain, but is not enabled
+
+    ||10||
+    end
+  end
+
+    sa --> access_rule_transaction: Initialize access rule transaction.
+  note over sa: The transaction will be bound to rule execution steps to provide a detailed breakdown of the rule workflow.
+  group Build Rules
+    sa -> sa: Build authorizationRules to be processed from accessRule
+    access_control_list --> sa: Get accessControlList from accessRule
+    external_list --> sa: Get externalList from accessRule
+
+    note over sa: Access control lists can be setup on LBO and then added onto a ruleset for processing.
+    sa -> sa: Add all enabled accessControlLists to authorizationRules to be processed later
+
+    note over sa: External access providers can be configured on LBO and then added onto a ruleset for processing.
+    sa -> sa: Add all enabled externalLists to authorizationRules to be processed later
+
+    note over sa: Default rule, always there, always last. (Max Priority)
+    sa -> sa: Add a default access rule to be processes last
+
+    note over sa: Access rules will be process in order of lowest priority to maximum priority
+    sa -> sa: Sort access rules by priority
+    ||10||
+  end
+  ||10||
+  loop For all authorizationRules
+
+    alt authorizationRule is an accessControlList rule
+      ||10||
+      ref over sa: Do internal Authorization Flow (Internal List Rules)
+      ||10||
+    else authorizationRule is a externalList rule execution (External Provider Rules)
+      ||10||
+      alt External Rule isValidateOnce=true
+        ||10||
+        ref over sa: Check External Access Rule has been executed before
+        ||10||
+        ref over sa: Do External Authorization Flow
+        ||10||
+        ref over sa: Store External Access Rule results
+        ||10||
+      else External Rule isValidateOnce=false
+        ||10||
+        ref over sa: Do External Authorization Flow
+        ||10||
+      end
+      ||10||
+    else final authorizationRule is a default rule execution (Default rule, always last)
+      ||10||
+      ref over sa: Do default action
+      ||10||
+    end
+  end
+  sa --> internal: return authorizationResult
+deactivate sa
+@enduml
+----

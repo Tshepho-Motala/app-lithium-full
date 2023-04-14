@@ -1,0 +1,2212 @@
+{
+	"info": {
+		"_postman_id": "7c0887a0-7b05-44ea-9d92-eb27c2069a29",
+		"name": "Lithium Slot API Documentation",
+		"description": "The following document describes the APIs that will allow a Slot game provider to register transactions\nwithin Lithium.\n---\nSome requests require a sha256 checksum that accompanies the payload. To calculate the checksum, concatenate \nthe fields identified in the description of the respective sha256 field, using a colon as separator. \nThereafter pass it to your preferred hmac sha256 function together with the pre-shared key supplied by \nLithium. \n\nSee https://www.freeformatter.com/hmac-generator.html to test (ensure to select SHA256)\n\n    hmac_sha256(\"TESTDATA\", PRESHAREDKEY\") = cd322232cde0f9f6f8c3c0c7833ee8931af66677f1bf4c85691e0d777c9c567d\n    \n",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "service-casino-provider-slotapi",
+			"item": [
+				{
+					"name": "round",
+					"item": [
+						{
+							"name": "bet",
+							"item": [
+								{
+									"name": "/service-casino-provider-slotapi/bet",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{USERTOKEN}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"roundId\": \"{{slotapi_round_id}}\",\n    \"betTransactionId\": \"{{slotapi_bet_id}}\",\n    \"transactionTimestamp\": {{slotapi_timestamp}},\n    \"gameId\": \"GAME1\",\n    \"kind\": \"BET\",\n    \"amount\": 100.44,\n    \"currencyCode\": \"NGN\",\n    \"sequenceNumber\": 1,\n    \"sha256\": \"{{slotapi_bet_sha}}\"\n}"
+										},
+										"url": {
+											"raw": "{{gateway}}/service-casino-provider-slotapi/bet",
+											"host": [
+												"{{gateway}}"
+											],
+											"path": [
+												"service-casino-provider-slotapi",
+												"bet"
+											]
+										},
+										"description": "Register a bet transaction with Lithium. \n\nCalling this will deduct the amount from the player balance with reference \"roundId:betTransactionId\". \n\n* If the kind is BET, the transaction type will be CASINO_BET.\n* If the kind is FREE_BET, the transaction type will be CASINO_FREE_BET.\n\nIf the amount is 0, the transaction type will be registered as CASINO_BET_FREE.\n\nIf the same request is resubmitted, the API will respond with the same exact result.\nThis means that the caller may repeat the call indefinitely until a repeatable code \n(see notes on error codes) is received.\n\nThis API will require a bearer token in the Authorisation header,\nwhich will be used to identify the player that should have his/her wallet adjusted.\n"
+									},
+									"response": [
+										{
+											"name": "The supplied hash is incorrect. You may resubmit the same transaction with a new hash. The transaction will not be stored.",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"roundId\": \"<string>\",\n    \"betTransactionId\": \"<string>\",\n    \"transactionTimestamp\": \"<long>\",\n    \"gameId\": \"american-roulette\",\n    \"kind\": \"<string>\",\n    \"amount\": \"10.05\",\n    \"currencyCode\": \"USD\",\n    \"sha256\": \"<string>\"\n}"
+												},
+												"url": {
+													"raw": "{{baseUrl}}/service-casino-provider-slotapi/bet",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"service-casino-provider-slotapi",
+														"bet"
+													]
+												}
+											},
+											"code": 470,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "text/plain"
+												}
+											],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "The user has soft self-excluded. The request should not be repeated.",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"roundId\": \"<string>\",\n    \"betTransactionId\": \"<string>\",\n    \"transactionTimestamp\": \"<long>\",\n    \"gameId\": \"american-roulette\",\n    \"kind\": \"<string>\",\n    \"amount\": \"10.05\",\n    \"currencyCode\": \"USD\",\n    \"sha256\": \"<string>\"\n}"
+												},
+												"url": {
+													"raw": "{{baseUrl}}/service-casino-provider-slotapi/bet",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"service-casino-provider-slotapi",
+														"bet"
+													]
+												}
+											},
+											"code": 490,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "text/plain"
+												}
+											],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "Access token is missing or invalid. Please supply a new bearer token and resubmit the same request.",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"roundId\": \"<string>\",\n    \"betTransactionId\": \"<string>\",\n    \"transactionTimestamp\": \"<long>\",\n    \"gameId\": \"american-roulette\",\n    \"kind\": \"<string>\",\n    \"amount\": \"10.05\",\n    \"currencyCode\": \"USD\",\n    \"sha256\": \"<string>\"\n}"
+												},
+												"url": {
+													"raw": "{{baseUrl}}/service-casino-provider-slotapi/bet",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"service-casino-provider-slotapi",
+														"bet"
+													]
+												}
+											},
+											"status": "Unauthorized",
+											"code": 401,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "text/plain"
+												}
+											],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "The input data failed to validate. Please fix the request and submit a new one. The same transaction ID may be used.",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"roundId\": \"<string>\",\n    \"betTransactionId\": \"<string>\",\n    \"transactionTimestamp\": \"<long>\",\n    \"gameId\": \"american-roulette\",\n    \"kind\": \"<string>\",\n    \"amount\": \"10.05\",\n    \"currencyCode\": \"USD\",\n    \"sha256\": \"<string>\"\n}"
+												},
+												"url": {
+													"raw": "{{baseUrl}}/service-casino-provider-slotapi/bet",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"service-casino-provider-slotapi",
+														"bet"
+													]
+												}
+											},
+											"status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+											"code": 422,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "text/plain"
+												}
+											],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "Insufficient funds for this adjustment. Please resubmit the same request later. Repeatable.",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"roundId\": \"<string>\",\n    \"betTransactionId\": \"<string>\",\n    \"transactionTimestamp\": \"<long>\",\n    \"gameId\": \"american-roulette\",\n    \"kind\": \"<string>\",\n    \"amount\": \"10.05\",\n    \"currencyCode\": \"USD\",\n    \"sha256\": \"<string>\"\n}"
+												},
+												"url": {
+													"raw": "{{baseUrl}}/service-casino-provider-slotapi/bet",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"service-casino-provider-slotapi",
+														"bet"
+													]
+												}
+											},
+											"code": 471,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "text/plain"
+												}
+											],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "The user has permanent self-excluded. The request should not be repeated.",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"roundId\": \"<string>\",\n    \"betTransactionId\": \"<string>\",\n    \"transactionTimestamp\": \"<long>\",\n    \"gameId\": \"american-roulette\",\n    \"kind\": \"<string>\",\n    \"amount\": \"10.05\",\n    \"currencyCode\": \"USD\",\n    \"sha256\": \"<string>\"\n}"
+												},
+												"url": {
+													"raw": "{{baseUrl}}/service-casino-provider-slotapi/bet",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"service-casino-provider-slotapi",
+														"bet"
+													]
+												}
+											},
+											"code": 491,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "text/plain"
+												}
+											],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "The server is experiencing technical problems and is unavailable. Please resubmit the same request later. Repeatable.",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"roundId\": \"<string>\",\n    \"betTransactionId\": \"<string>\",\n    \"transactionTimestamp\": \"<long>\",\n    \"gameId\": \"american-roulette\",\n    \"kind\": \"<string>\",\n    \"amount\": \"10.05\",\n    \"currencyCode\": \"USD\",\n    \"sha256\": \"<string>\"\n}"
+												},
+												"url": {
+													"raw": "{{baseUrl}}/service-casino-provider-slotapi/bet",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"service-casino-provider-slotapi",
+														"bet"
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "text/plain"
+												}
+											],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "The service is unavailabe (is it running?). Please resubmit the same request later. Repeatable.",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"roundId\": \"<string>\",\n    \"betTransactionId\": \"<string>\",\n    \"transactionTimestamp\": \"<long>\",\n    \"gameId\": \"american-roulette\",\n    \"kind\": \"<string>\",\n    \"amount\": \"10.05\",\n    \"currencyCode\": \"USD\",\n    \"sha256\": \"<string>\"\n}"
+												},
+												"url": {
+													"raw": "{{baseUrl}}/service-casino-provider-slotapi/bet",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"service-casino-provider-slotapi",
+														"bet"
+													]
+												}
+											},
+											"status": "Gateway Timeout",
+											"code": 504,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "text/plain"
+												}
+											],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "The request contained a document that could not be parsed due to a syntax error. Please do not resubmit before changing the content.",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"roundId\": \"<string>\",\n    \"betTransactionId\": \"<string>\",\n    \"transactionTimestamp\": \"<long>\",\n    \"gameId\": \"american-roulette\",\n    \"kind\": \"<string>\",\n    \"amount\": \"10.05\",\n    \"currencyCode\": \"USD\",\n    \"sha256\": \"<string>\"\n}"
+												},
+												"url": {
+													"raw": "{{baseUrl}}/service-casino-provider-slotapi/bet",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"service-casino-provider-slotapi",
+														"bet"
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "text/plain"
+												}
+											],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"roundId\": \"<string>\",\n    \"betTransactionId\": \"<string>\",\n    \"transactionTimestamp\": \"<long>\",\n    \"gameId\": \"american-roulette\",\n    \"kind\": \"<string>\",\n    \"amount\": \"10.05\",\n    \"currencyCode\": \"USD\",\n    \"sha256\": \"<string>\"\n}"
+												},
+												"url": {
+													"raw": "{{baseUrl}}/service-casino-provider-slotapi/bet",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"service-casino-provider-slotapi",
+														"bet"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n \"balance\": \"<double>\",\n \"lithiumBetId\": \"<integer>\"\n}"
+										}
+									]
+								},
+								{
+									"name": "/service-casino-provider-slotapi/bet (duplicate)",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{USERTOKEN}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"roundId\": \"1\",\n    \"betTransactionId\": \"1\",\n    \"transactionTimestamp\": 1,\n    \"gameId\": \"GAME1\",\n    \"kind\": \"BET\",\n    \"amount\": 100.44,\n    \"currencyCode\": \"NGN\",\n    \"sequenceNumber\": 1,\n    \"sha256\": \"256461f3b1719272675ea79a01e1313a7b447ff5e69d667d57d1909fac27fe80\"\n}"
+										},
+										"url": {
+											"raw": "{{gateway}}/service-casino-provider-slotapi/bet",
+											"host": [
+												"{{gateway}}"
+											],
+											"path": [
+												"service-casino-provider-slotapi",
+												"bet"
+											]
+										},
+										"description": "Register a bet transaction with Lithium. \n\nCalling this will deduct the amount from the player balance with reference \"roundId:betTransactionId\". \n\n* If the kind is BET, the transaction type will be CASINO_BET.\n* If the kind is FREE_BET, the transaction type will be CASINO_FREE_BET.\n\nIf the amount is 0, the transaction type will be registered as CASINO_BET_FREE.\n\nIf the same request is resubmitted, the API will respond with the same exact result.\nThis means that the caller may repeat the call indefinitely until a repeatable code \n(see notes on error codes) is received.\n\nThis API will require a bearer token in the Authorisation header,\nwhich will be used to identify the player that should have his/her wallet adjusted.\n"
+									},
+									"response": [
+										{
+											"name": "The request contained a document that could not be parsed due to a syntax error. Please do not resubmit before changing the content.",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"roundId\": \"<string>\",\n    \"betTransactionId\": \"<string>\",\n    \"transactionTimestamp\": \"<long>\",\n    \"gameId\": \"american-roulette\",\n    \"kind\": \"<string>\",\n    \"amount\": \"10.05\",\n    \"currencyCode\": \"USD\",\n    \"sha256\": \"<string>\"\n}"
+												},
+												"url": {
+													"raw": "{{baseUrl}}/service-casino-provider-slotapi/bet",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"service-casino-provider-slotapi",
+														"bet"
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "text/plain"
+												}
+											],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "The input data failed to validate. Please fix the request and submit a new one. The same transaction ID may be used.",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"roundId\": \"<string>\",\n    \"betTransactionId\": \"<string>\",\n    \"transactionTimestamp\": \"<long>\",\n    \"gameId\": \"american-roulette\",\n    \"kind\": \"<string>\",\n    \"amount\": \"10.05\",\n    \"currencyCode\": \"USD\",\n    \"sha256\": \"<string>\"\n}"
+												},
+												"url": {
+													"raw": "{{baseUrl}}/service-casino-provider-slotapi/bet",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"service-casino-provider-slotapi",
+														"bet"
+													]
+												}
+											},
+											"status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+											"code": 422,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "text/plain"
+												}
+											],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "The user has permanent self-excluded. The request should not be repeated.",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"roundId\": \"<string>\",\n    \"betTransactionId\": \"<string>\",\n    \"transactionTimestamp\": \"<long>\",\n    \"gameId\": \"american-roulette\",\n    \"kind\": \"<string>\",\n    \"amount\": \"10.05\",\n    \"currencyCode\": \"USD\",\n    \"sha256\": \"<string>\"\n}"
+												},
+												"url": {
+													"raw": "{{baseUrl}}/service-casino-provider-slotapi/bet",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"service-casino-provider-slotapi",
+														"bet"
+													]
+												}
+											},
+											"code": 491,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "text/plain"
+												}
+											],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "The supplied hash is incorrect. You may resubmit the same transaction with a new hash. The transaction will not be stored.",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"roundId\": \"<string>\",\n    \"betTransactionId\": \"<string>\",\n    \"transactionTimestamp\": \"<long>\",\n    \"gameId\": \"american-roulette\",\n    \"kind\": \"<string>\",\n    \"amount\": \"10.05\",\n    \"currencyCode\": \"USD\",\n    \"sha256\": \"<string>\"\n}"
+												},
+												"url": {
+													"raw": "{{baseUrl}}/service-casino-provider-slotapi/bet",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"service-casino-provider-slotapi",
+														"bet"
+													]
+												}
+											},
+											"code": 470,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "text/plain"
+												}
+											],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "Access token is missing or invalid. Please supply a new bearer token and resubmit the same request.",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"roundId\": \"<string>\",\n    \"betTransactionId\": \"<string>\",\n    \"transactionTimestamp\": \"<long>\",\n    \"gameId\": \"american-roulette\",\n    \"kind\": \"<string>\",\n    \"amount\": \"10.05\",\n    \"currencyCode\": \"USD\",\n    \"sha256\": \"<string>\"\n}"
+												},
+												"url": {
+													"raw": "{{baseUrl}}/service-casino-provider-slotapi/bet",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"service-casino-provider-slotapi",
+														"bet"
+													]
+												}
+											},
+											"status": "Unauthorized",
+											"code": 401,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "text/plain"
+												}
+											],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "Insufficient funds for this adjustment. Please resubmit the same request later. Repeatable.",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"roundId\": \"<string>\",\n    \"betTransactionId\": \"<string>\",\n    \"transactionTimestamp\": \"<long>\",\n    \"gameId\": \"american-roulette\",\n    \"kind\": \"<string>\",\n    \"amount\": \"10.05\",\n    \"currencyCode\": \"USD\",\n    \"sha256\": \"<string>\"\n}"
+												},
+												"url": {
+													"raw": "{{baseUrl}}/service-casino-provider-slotapi/bet",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"service-casino-provider-slotapi",
+														"bet"
+													]
+												}
+											},
+											"code": 471,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "text/plain"
+												}
+											],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "The server is experiencing technical problems and is unavailable. Please resubmit the same request later. Repeatable.",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"roundId\": \"<string>\",\n    \"betTransactionId\": \"<string>\",\n    \"transactionTimestamp\": \"<long>\",\n    \"gameId\": \"american-roulette\",\n    \"kind\": \"<string>\",\n    \"amount\": \"10.05\",\n    \"currencyCode\": \"USD\",\n    \"sha256\": \"<string>\"\n}"
+												},
+												"url": {
+													"raw": "{{baseUrl}}/service-casino-provider-slotapi/bet",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"service-casino-provider-slotapi",
+														"bet"
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "text/plain"
+												}
+											],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "The user has soft self-excluded. The request should not be repeated.",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"roundId\": \"<string>\",\n    \"betTransactionId\": \"<string>\",\n    \"transactionTimestamp\": \"<long>\",\n    \"gameId\": \"american-roulette\",\n    \"kind\": \"<string>\",\n    \"amount\": \"10.05\",\n    \"currencyCode\": \"USD\",\n    \"sha256\": \"<string>\"\n}"
+												},
+												"url": {
+													"raw": "{{baseUrl}}/service-casino-provider-slotapi/bet",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"service-casino-provider-slotapi",
+														"bet"
+													]
+												}
+											},
+											"code": 490,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "text/plain"
+												}
+											],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"roundId\": \"<string>\",\n    \"betTransactionId\": \"<string>\",\n    \"transactionTimestamp\": \"<long>\",\n    \"gameId\": \"american-roulette\",\n    \"kind\": \"<string>\",\n    \"amount\": \"10.05\",\n    \"currencyCode\": \"USD\",\n    \"sha256\": \"<string>\"\n}"
+												},
+												"url": {
+													"raw": "{{baseUrl}}/service-casino-provider-slotapi/bet",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"service-casino-provider-slotapi",
+														"bet"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n \"balance\": \"<double>\",\n \"lithiumBetId\": \"<integer>\"\n}"
+										},
+										{
+											"name": "The service is unavailabe (is it running?). Please resubmit the same request later. Repeatable.",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"roundId\": \"<string>\",\n    \"betTransactionId\": \"<string>\",\n    \"transactionTimestamp\": \"<long>\",\n    \"gameId\": \"american-roulette\",\n    \"kind\": \"<string>\",\n    \"amount\": \"10.05\",\n    \"currencyCode\": \"USD\",\n    \"sha256\": \"<string>\"\n}"
+												},
+												"url": {
+													"raw": "{{baseUrl}}/service-casino-provider-slotapi/bet",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"service-casino-provider-slotapi",
+														"bet"
+													]
+												}
+											},
+											"status": "Gateway Timeout",
+											"code": 504,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "text/plain"
+												}
+											],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								},
+								{
+									"name": "/service-casino-provider-slotapi/bet (free)",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{USERTOKEN}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"roundId\": \"{{slotapi_round_id}}\",\n    \"betTransactionId\": \"{{slotapi_bet_id}}\",\n    \"transactionTimestamp\": {{slotapi_timestamp}},\n    \"gameId\": \"GAME1\",\n    \"kind\": \"FREE_BET\",\n    \"amount\": 100.44,\n    \"currencyCode\": \"NGN\",\n    \"sequenceNumber\": 1,\n    \"sha256\": \"{{slotapi_bet_sha}}\"\n}"
+										},
+										"url": {
+											"raw": "{{gateway}}/service-casino-provider-slotapi/bet",
+											"host": [
+												"{{gateway}}"
+											],
+											"path": [
+												"service-casino-provider-slotapi",
+												"bet"
+											]
+										},
+										"description": "Register a bet transaction with Lithium. \n\nCalling this will deduct the amount from the player balance with reference \"roundId:betTransactionId\". \n\n* If the kind is BET, the transaction type will be CASINO_BET.\n* If the kind is FREE_BET, the transaction type will be CASINO_FREE_BET.\n\nIf the amount is 0, the transaction type will be registered as CASINO_BET_FREE.\n\nIf the same request is resubmitted, the API will respond with the same exact result.\nThis means that the caller may repeat the call indefinitely until a repeatable code \n(see notes on error codes) is received.\n\nThis API will require a bearer token in the Authorisation header,\nwhich will be used to identify the player that should have his/her wallet adjusted.\n"
+									},
+									"response": [
+										{
+											"name": "The user has soft self-excluded. The request should not be repeated.",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"roundId\": \"<string>\",\n    \"betTransactionId\": \"<string>\",\n    \"transactionTimestamp\": \"<long>\",\n    \"gameId\": \"american-roulette\",\n    \"kind\": \"<string>\",\n    \"amount\": \"10.05\",\n    \"currencyCode\": \"USD\",\n    \"sha256\": \"<string>\"\n}"
+												},
+												"url": {
+													"raw": "{{baseUrl}}/service-casino-provider-slotapi/bet",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"service-casino-provider-slotapi",
+														"bet"
+													]
+												}
+											},
+											"code": 490,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "text/plain"
+												}
+											],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "The supplied hash is incorrect. You may resubmit the same transaction with a new hash. The transaction will not be stored.",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"roundId\": \"<string>\",\n    \"betTransactionId\": \"<string>\",\n    \"transactionTimestamp\": \"<long>\",\n    \"gameId\": \"american-roulette\",\n    \"kind\": \"<string>\",\n    \"amount\": \"10.05\",\n    \"currencyCode\": \"USD\",\n    \"sha256\": \"<string>\"\n}"
+												},
+												"url": {
+													"raw": "{{baseUrl}}/service-casino-provider-slotapi/bet",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"service-casino-provider-slotapi",
+														"bet"
+													]
+												}
+											},
+											"code": 470,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "text/plain"
+												}
+											],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "The request contained a document that could not be parsed due to a syntax error. Please do not resubmit before changing the content.",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"roundId\": \"<string>\",\n    \"betTransactionId\": \"<string>\",\n    \"transactionTimestamp\": \"<long>\",\n    \"gameId\": \"american-roulette\",\n    \"kind\": \"<string>\",\n    \"amount\": \"10.05\",\n    \"currencyCode\": \"USD\",\n    \"sha256\": \"<string>\"\n}"
+												},
+												"url": {
+													"raw": "{{baseUrl}}/service-casino-provider-slotapi/bet",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"service-casino-provider-slotapi",
+														"bet"
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "text/plain"
+												}
+											],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "The input data failed to validate. Please fix the request and submit a new one. The same transaction ID may be used.",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"roundId\": \"<string>\",\n    \"betTransactionId\": \"<string>\",\n    \"transactionTimestamp\": \"<long>\",\n    \"gameId\": \"american-roulette\",\n    \"kind\": \"<string>\",\n    \"amount\": \"10.05\",\n    \"currencyCode\": \"USD\",\n    \"sha256\": \"<string>\"\n}"
+												},
+												"url": {
+													"raw": "{{baseUrl}}/service-casino-provider-slotapi/bet",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"service-casino-provider-slotapi",
+														"bet"
+													]
+												}
+											},
+											"status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+											"code": 422,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "text/plain"
+												}
+											],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "The server is experiencing technical problems and is unavailable. Please resubmit the same request later. Repeatable.",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"roundId\": \"<string>\",\n    \"betTransactionId\": \"<string>\",\n    \"transactionTimestamp\": \"<long>\",\n    \"gameId\": \"american-roulette\",\n    \"kind\": \"<string>\",\n    \"amount\": \"10.05\",\n    \"currencyCode\": \"USD\",\n    \"sha256\": \"<string>\"\n}"
+												},
+												"url": {
+													"raw": "{{baseUrl}}/service-casino-provider-slotapi/bet",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"service-casino-provider-slotapi",
+														"bet"
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "text/plain"
+												}
+											],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "The service is unavailabe (is it running?). Please resubmit the same request later. Repeatable.",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"roundId\": \"<string>\",\n    \"betTransactionId\": \"<string>\",\n    \"transactionTimestamp\": \"<long>\",\n    \"gameId\": \"american-roulette\",\n    \"kind\": \"<string>\",\n    \"amount\": \"10.05\",\n    \"currencyCode\": \"USD\",\n    \"sha256\": \"<string>\"\n}"
+												},
+												"url": {
+													"raw": "{{baseUrl}}/service-casino-provider-slotapi/bet",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"service-casino-provider-slotapi",
+														"bet"
+													]
+												}
+											},
+											"status": "Gateway Timeout",
+											"code": 504,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "text/plain"
+												}
+											],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "Insufficient funds for this adjustment. Please resubmit the same request later. Repeatable.",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"roundId\": \"<string>\",\n    \"betTransactionId\": \"<string>\",\n    \"transactionTimestamp\": \"<long>\",\n    \"gameId\": \"american-roulette\",\n    \"kind\": \"<string>\",\n    \"amount\": \"10.05\",\n    \"currencyCode\": \"USD\",\n    \"sha256\": \"<string>\"\n}"
+												},
+												"url": {
+													"raw": "{{baseUrl}}/service-casino-provider-slotapi/bet",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"service-casino-provider-slotapi",
+														"bet"
+													]
+												}
+											},
+											"code": 471,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "text/plain"
+												}
+											],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "The user has permanent self-excluded. The request should not be repeated.",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"roundId\": \"<string>\",\n    \"betTransactionId\": \"<string>\",\n    \"transactionTimestamp\": \"<long>\",\n    \"gameId\": \"american-roulette\",\n    \"kind\": \"<string>\",\n    \"amount\": \"10.05\",\n    \"currencyCode\": \"USD\",\n    \"sha256\": \"<string>\"\n}"
+												},
+												"url": {
+													"raw": "{{baseUrl}}/service-casino-provider-slotapi/bet",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"service-casino-provider-slotapi",
+														"bet"
+													]
+												}
+											},
+											"code": 491,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "text/plain"
+												}
+											],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"roundId\": \"<string>\",\n    \"betTransactionId\": \"<string>\",\n    \"transactionTimestamp\": \"<long>\",\n    \"gameId\": \"american-roulette\",\n    \"kind\": \"<string>\",\n    \"amount\": \"10.05\",\n    \"currencyCode\": \"USD\",\n    \"sha256\": \"<string>\"\n}"
+												},
+												"url": {
+													"raw": "{{baseUrl}}/service-casino-provider-slotapi/bet",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"service-casino-provider-slotapi",
+														"bet"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n \"balance\": \"<double>\",\n \"lithiumBetId\": \"<integer>\"\n}"
+										},
+										{
+											"name": "Access token is missing or invalid. Please supply a new bearer token and resubmit the same request.",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"roundId\": \"<string>\",\n    \"betTransactionId\": \"<string>\",\n    \"transactionTimestamp\": \"<long>\",\n    \"gameId\": \"american-roulette\",\n    \"kind\": \"<string>\",\n    \"amount\": \"10.05\",\n    \"currencyCode\": \"USD\",\n    \"sha256\": \"<string>\"\n}"
+												},
+												"url": {
+													"raw": "{{baseUrl}}/service-casino-provider-slotapi/bet",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"service-casino-provider-slotapi",
+														"bet"
+													]
+												}
+											},
+											"status": "Unauthorized",
+											"code": 401,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "text/plain"
+												}
+											],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							],
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"var CryptoJS = require(\"crypto-js\");",
+											"",
+											"var timestamp = new Date().getTime();",
+											"var bet_id = \"\" + (parseInt(pm.environment.get(\"slotapi_bet_id\")) + 1);",
+											"var round_id = \"\" + (parseInt(pm.environment.get(\"slotapi_round_id\")) + 1);",
+											"var psk = pm.environment.get(\"slotapi_psk\");",
+											"",
+											"pm.environment.set(\"slotapi_timestamp\", timestamp);",
+											"pm.environment.set(\"slotapi_bet_id\", bet_id);",
+											"pm.environment.set(\"slotapi_round_id\", round_id);",
+											"",
+											"pm.environment.set(\"slotapi_bet_sha\", ",
+											"    CryptoJS.HmacSHA256(timestamp + \":\" + bet_id + \":\" + round_id, psk) + \"\");",
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							]
+						},
+						{
+							"name": "betresult",
+							"item": [
+								{
+									"name": "/service-casino-provider-slotapi/betresult",
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"exec": [
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"roundId\": \"{{slotapi_round_id}}\",\n    \"betResultTransactionId\": \"{{slotapi_bet_result_id}}\",\n    \"transactionTimestamp\": {{slotapi_timestamp}},\n    \"kind\": \"WIN\",\n    \"returns\": 2000.66,\n    \"currencyCode\": \"NGN\",\n    \"sequenceNumber\": 2,\n    \"sha256\": \"{{slotapi_bet_result_sha}}\"\n}"
+										},
+										"url": {
+											"raw": "{{gateway}}/service-casino-provider-slotapi/betresult",
+											"host": [
+												"{{gateway}}"
+											],
+											"path": [
+												"service-casino-provider-slotapi",
+												"betresult"
+											]
+										},
+										"description": "Register a result related to a round of betting. There may be more than one result per bet.\n\nCalling this will add the amount to the player balance with reference \"roundId:betResultTransactionId\". \n\n* If the kind is WIN, the transaction type will be CASINO_WIN.\n* If the kind is LOSS, the transaction type will be CASINO_LOSS.\n* If the kind is VOID, the transaction type will be CASINO_VOID.\n* If the kind is FREE_WIN, the transaction type will be CASINO_FREE_WIN.\n* If the kind is FREE_LOSS, the transaction type will be CASINO_FREE_LOSS.\n\nIf the same request is resubmitted, the API will respond with the same exact result.\nThis means that the caller may repeat the call indefinitely until a repeatable code \n(see notes on error codes) is received.\n\nThis API does not require a bearer token since a result might happen while a player is logged out. To secure the endpoint,\nthe caller has to supply the unique reference to the bet, and generate a hash of the data utilising the pre-shared key \nthat is never transmitted.\n"
+									},
+									"response": [
+										{
+											"name": "The server is experiencing technical problems and is unavailable. Please resubmit the same request later. Repeatable.",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"betResultTransactionId\": \"<string>\",\n    \"roundId\": \"<string>\",\n    \"kind\": \"<string>\",\n    \"returns\": \"<float>\",\n    \"currencyCode\": \"USD\",\n    \"transactionTimestamp\": \"<long>\",\n    \"sha256\": \"<string>\"\n}"
+												},
+												"url": {
+													"raw": "{{baseUrl}}/service-casino-provider-slotapi/betresult",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"service-casino-provider-slotapi",
+														"betresult"
+													]
+												}
+											},
+											"status": "Internal Server Error",
+											"code": 500,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "text/plain"
+												}
+											],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "OK",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"betResultTransactionId\": \"<string>\",\n    \"roundId\": \"<string>\",\n    \"kind\": \"<string>\",\n    \"returns\": \"<float>\",\n    \"currencyCode\": \"USD\",\n    \"transactionTimestamp\": \"<long>\",\n    \"sha256\": \"<string>\"\n}"
+												},
+												"url": {
+													"raw": "{{baseUrl}}/service-casino-provider-slotapi/betresult",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"service-casino-provider-slotapi",
+														"betresult"
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n \"balance\": \"<double>\",\n \"lithiumSettlementId\": \"<long>\"\n}"
+										},
+										{
+											"name": "The input data failed to validate. Please fix the request and submit a new one. The same transaction ID may be used.",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"betResultTransactionId\": \"<string>\",\n    \"roundId\": \"<string>\",\n    \"kind\": \"<string>\",\n    \"returns\": \"<float>\",\n    \"currencyCode\": \"USD\",\n    \"transactionTimestamp\": \"<long>\",\n    \"sha256\": \"<string>\"\n}"
+												},
+												"url": {
+													"raw": "{{baseUrl}}/service-casino-provider-slotapi/betresult",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"service-casino-provider-slotapi",
+														"betresult"
+													]
+												}
+											},
+											"status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+											"code": 422,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "text/plain"
+												}
+											],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "The service is unavailabe (is it running?). Please resubmit the same request later. Repeatable.",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"betResultTransactionId\": \"<string>\",\n    \"roundId\": \"<string>\",\n    \"kind\": \"<string>\",\n    \"returns\": \"<float>\",\n    \"currencyCode\": \"USD\",\n    \"transactionTimestamp\": \"<long>\",\n    \"sha256\": \"<string>\"\n}"
+												},
+												"url": {
+													"raw": "{{baseUrl}}/service-casino-provider-slotapi/betresult",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"service-casino-provider-slotapi",
+														"betresult"
+													]
+												}
+											},
+											"status": "Gateway Timeout",
+											"code": 504,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "text/plain"
+												}
+											],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "The request contained a document that could not be parsed due to a syntax error. Please do not resubmit before changing the content.",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"betResultTransactionId\": \"<string>\",\n    \"roundId\": \"<string>\",\n    \"kind\": \"<string>\",\n    \"returns\": \"<float>\",\n    \"currencyCode\": \"USD\",\n    \"transactionTimestamp\": \"<long>\",\n    \"sha256\": \"<string>\"\n}"
+												},
+												"url": {
+													"raw": "{{baseUrl}}/service-casino-provider-slotapi/betresult",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"service-casino-provider-slotapi",
+														"betresult"
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "text/plain"
+												}
+											],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "Access token is missing or invalid. Please supply a new bearer token and resubmit the same request.",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"betResultTransactionId\": \"<string>\",\n    \"roundId\": \"<string>\",\n    \"kind\": \"<string>\",\n    \"returns\": \"<float>\",\n    \"currencyCode\": \"USD\",\n    \"transactionTimestamp\": \"<long>\",\n    \"sha256\": \"<string>\"\n}"
+												},
+												"url": {
+													"raw": "{{baseUrl}}/service-casino-provider-slotapi/betresult",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"service-casino-provider-slotapi",
+														"betresult"
+													]
+												}
+											},
+											"status": "Unauthorized",
+											"code": 401,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "text/plain"
+												}
+											],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "The referenced transaction was not found. Perhaps the original transaction was lost in transit. Resubmit the original transaction and then resubmit this transaction.",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"betResultTransactionId\": \"<string>\",\n    \"roundId\": \"<string>\",\n    \"kind\": \"<string>\",\n    \"returns\": \"<float>\",\n    \"currencyCode\": \"USD\",\n    \"transactionTimestamp\": \"<long>\",\n    \"sha256\": \"<string>\"\n}"
+												},
+												"url": {
+													"raw": "{{baseUrl}}/service-casino-provider-slotapi/betresult",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"service-casino-provider-slotapi",
+														"betresult"
+													]
+												}
+											},
+											"status": "Not Found",
+											"code": 404,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "text/plain"
+												}
+											],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "The supplied hash is incorrect. You may resubmit the same transaction with a new hash. The transaction will not be stored.",
+											"originalRequest": {
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"betResultTransactionId\": \"<string>\",\n    \"roundId\": \"<string>\",\n    \"kind\": \"<string>\",\n    \"returns\": \"<float>\",\n    \"currencyCode\": \"USD\",\n    \"transactionTimestamp\": \"<long>\",\n    \"sha256\": \"<string>\"\n}"
+												},
+												"url": {
+													"raw": "{{baseUrl}}/service-casino-provider-slotapi/betresult",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"service-casino-provider-slotapi",
+														"betresult"
+													]
+												}
+											},
+											"code": 470,
+											"_postman_previewlanguage": "text",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "text/plain"
+												}
+											],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							],
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											"var CryptoJS = require(\"crypto-js\");",
+											"",
+											"var timestamp = new Date().getTime();",
+											"var bet_result_id = \"\" + (parseInt(pm.environment.get(\"slotapi_bet_result_id\")) + 1);",
+											"var round_id = \"\" + (parseInt(pm.environment.get(\"slotapi_round_id\")));",
+											"var psk = pm.environment.get(\"slotapi_psk\");",
+											"",
+											"pm.environment.set(\"slotapi_timestamp\", timestamp);",
+											"pm.environment.set(\"slotapi_bet_result_id\", bet_result_id);",
+											"",
+											"console.log(\"Hash calculated with \" + timestamp + \":\" + bet_result_id + \":\" + round_id);",
+											"",
+											"pm.environment.set(\"slotapi_bet_result_sha\", ",
+											"    CryptoJS.HmacSHA256(timestamp + \":\" + bet_result_id + \":\" + round_id, psk) + \"\");",
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							]
+						}
+					],
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "/service-casino-provider-slotapi/validatesession",
+					"request": {
+						"auth": {
+							"type": "bearer"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/service-casino-provider-slotapi/validatesession",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"service-casino-provider-slotapi",
+								"validatesession"
+							]
+						},
+						"description": "This API will require a bearer token in the Authorisation header, which will be used to retrieve the player details from the Lithium system."
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/service-casino-provider-slotapi/validatesession",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"service-casino-provider-slotapi",
+										"validatesession"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"cellphoneNumber\": \"<string>\",\n \"guid\": \"<string>\",\n \"username\": \"<string>\",\n \"balance\": \"<double>\",\n \"currencyCode\": \"<string>\"\n}"
+						},
+						{
+							"name": "The user has permanent self-excluded. The request should not be repeated.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/service-casino-provider-slotapi/validatesession",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"service-casino-provider-slotapi",
+										"validatesession"
+									]
+								}
+							},
+							"code": 491,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "The user has soft self-excluded. The request should not be repeated.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/service-casino-provider-slotapi/validatesession",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"service-casino-provider-slotapi",
+										"validatesession"
+									]
+								}
+							},
+							"code": 490,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "The server is experiencing technical problems and is unavailable. Please resubmit the same request later. Repeatable.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/service-casino-provider-slotapi/validatesession",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"service-casino-provider-slotapi",
+										"validatesession"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "The service is unavailabe (is it running?). Please resubmit the same request later. Repeatable.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/service-casino-provider-slotapi/validatesession",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"service-casino-provider-slotapi",
+										"validatesession"
+									]
+								}
+							},
+							"status": "Gateway Timeout",
+							"code": 504,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "The token belongs to a user that does not exist in this environment. Do not resubmit.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/service-casino-provider-slotapi/validatesession",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"service-casino-provider-slotapi",
+										"validatesession"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Access token is missing or invalid. Please supply a new bearer token and resubmit the same request.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/service-casino-provider-slotapi/validatesession",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"service-casino-provider-slotapi",
+										"validatesession"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "/service-casino-provider-slotapi/bonus/trigger",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// You will need slotapi_pass variable with shared secret to run this\r",
+									"\r",
+									"var index = parseInt(pm.variables.get(\"index\"));\r",
+									"\r",
+									"var requestId = '49385';\r",
+									"var bonusCode = 'FIVES';\r",
+									"var playerGuid = 'livescore_uk/test10';\r",
+									"var customAmountDecimal = '89.26';\r",
+									"var description = 'Will this work or not for fives again';\r",
+									"\r",
+									"\r",
+									"console.log(\"sportsbook_bet_reserve (\"+requestId+\") - numberOfBets: \"+playerGuid);\r",
+									"\r",
+									"pm.collectionVariables.set(\"requestId\", requestId);\r",
+									"pm.collectionVariables.set(\"bonusCode\", bonusCode);\r",
+									"pm.collectionVariables.set(\"playerGuid\", playerGuid);\r",
+									"pm.collectionVariables.set(\"customAmountDecimal\", customAmountDecimal);\r",
+									"pm.collectionVariables.set(\"description\", description);\r",
+									"\r",
+									"\r",
+									"var CryptoJS = require(\"crypto-js\");\r",
+									"\r",
+									"// var playerguid = pm.variables.get(\"playerGuid\");\r",
+									"\r",
+									"var key = requestId + \":\" +\r",
+									"    customAmountDecimal;\r",
+									"var secret = pm.variables.get(\"slotapi_pass\");\r",
+									"\r",
+									"var hash = CryptoJS.HmacSHA256(key, secret).toString(CryptoJS.digest);\r",
+									"\r",
+									"var body = {\r",
+									"    \"requestId\": requestId,\r",
+									"    \"bonusCode\": bonusCode,\r",
+									"    \"playerGuid\": playerGuid,\r",
+									"    \"customAmountDecimal\": customAmountDecimal,\r",
+									"    \"description\": description,\r",
+									"    \"sha256\": hash\r",
+									"}; \r",
+									"\r",
+									"pm.environment.set('req_body_bonus_trigger', JSON.stringify(body));"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJsYXN0TmFtZSI6IlRFU1QiLCJsYXN0TG9naW4iOjE2MTI5NjkwMTk4MjEsImp3dFVzZXIiOiJINHNJQUFBQUFBQUFBRzFQUVE2Q01CRDhDdGt6S0Jhb3dzbUQzanlZeU0wWVU5cUZOQlpxS0dpVThIZVhBekV4bm5ZeU16czdPNENHTFBHaGh3dzZkRjBFUHBTRTgvMHBKMmkrRUdmSDlta2JoYTBSeFhzaGJVMlNvb3lJUmtNV294L29wRzN4MnQ4bXlVRjJIdUNmTW5HSG1mT09Scnl3OVhhMkZyb2grYTRnNjlvZXg0c1BncHd5eG1TVk1oNmtpZGdFOGJwa2dRaGpFY2lRNDBZVm5MT29vRFZYVFkybnZ0WFB5ZVg4bnRNVXpkajRBZGNHU24vN0FBQUEiLCJzZXNzaW9uS2V5IjoiMzE3YWI0ZjktODE1MC00NTYyLWE1ODktMjAzMWYzMmM0OTlhIiwibGFzdElQIjoiMDowOjA6MDowOjA6MDoxIiwidXNlcl9uYW1lIjoidGVzdDMiLCJzZXNzaW9uSWQiOjIyLCJ1c2VyR3VpZCI6ImxpdmVzY29yZV91ay90ZXN0MyIsInVzZXJJZCI6NSwiYXV0aG9yaXRpZXMiOlsiUk9MRV9VU0VSIl0sImNsaWVudF9pZCI6ImFjbWUiLCJmaXJzdE5hbWUiOiJURVNUIiwiYXVkIjpbIm9hdXRoMi1yZXNvdXJjZSJdLCJzY29wZSI6WyJvcGVuaWQiXSwiZG9tYWluTmFtZSI6ImxpdmVzY29yZV91ayIsInJlZ2lzdHJhdGlvbkRhdGUiOjE2MTI5NTYyNjYwMDAsImV4cCI6MTYxNTY1NDYyMywic2hvcnRHdWlkIjoiVFQiLCJqdGkiOiIwNTFmMjdkNy00ZjRkLTRmZWEtYjc3NS0zZjAwZGJiMmJkMWIiLCJlbWFpbCI6InRlc3QzQHdvbmRlcmxhYnouY29tIiwidXNlcm5hbWUiOiJ0ZXN0MyJ9.YWfs_dI0QfHKq06gvKmoZSnWORP7a6Mzze99r4xdByrHlm2-PK5tWNRcc9c87TrB8XbdQojD8Yfs1S3tN8brCQHjNKY9RsQKWthK79R0kd7DH1VfL-BttaUHsyuiGfjLmE1wHYVixFo2prwLvF_eh6ZWB5J_i09Z5LD09cPirn7Lm05R2eFGUAlmY7LZMn9ZpnyzG5lpsEpuh5TMmxMDNKW0lOlwR5w7md01zdsae89DpVniDsL-qSbc6Qx1xZZ4VdSdhTnHudqtpvaQ-veGk6LmsbVAeAngDafu-ce5Ub-0GIaALvC1JtYz-4muX4ujJH7AdI2IaqklkstpPZYFCzi4fx7BHjcFiR2BxFnQpmyK26uiZc5KbqaBz-TH-ezgBcH1b1-hPqXnOP8VxBIIQZCtjpoC9K5jAvxtjxiNAnihkP6J1lnLIm2MtEZ1Sgedfnz8MEHDNZMw9gXW8aqe7Boonye4w1dmJFk16lPyutQmL6baZy6tYS6fWPPh9aOo9to00deIL34sQYB0HXT5dyE1JIRXkhheBT_EVOfzqtiFCO8ukTL-_i4JuEMnPS-TMufzTVP9lVPNL3HTxHRuIZShCtINEGqPtMi_e22rhZar8WdgdhqOMxXumMqbbeNwhQH4_LU4KCq7LczgFb_lvjYbnq8uXms9Mwxskc55EQs",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic YWNtZTphY21lc2VjcmV0",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{{req_body_bonus_trigger}}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{gateway}}/service-casino-provider-slotapi/bonus/trigger",
+							"host": [
+								"{{gateway}}"
+							],
+							"path": [
+								"service-casino-provider-slotapi",
+								"bonus",
+								"trigger"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/service-casino-provider-slotapi/balance",
+					"request": {
+						"auth": {
+							"type": "bearer"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{baseUrl}}/service-casino-provider-slotapi/balance",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"service-casino-provider-slotapi",
+								"balance"
+							]
+						},
+						"description": "This API will require a bearer token in the Authorisation header, which will be used to retrieve the player balance from the Lithium system."
+					},
+					"response": [
+						{
+							"name": "The user has soft self-excluded. The request should not be repeated.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/service-casino-provider-slotapi/balance",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"service-casino-provider-slotapi",
+										"balance"
+									]
+								}
+							},
+							"code": 490,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "The server is experiencing technical problems and is unavailable. Please resubmit the same request later. Repeatable.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/service-casino-provider-slotapi/balance",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"service-casino-provider-slotapi",
+										"balance"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/service-casino-provider-slotapi/balance",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"service-casino-provider-slotapi",
+										"balance"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"balance\": \"<double>\",\n \"currencyCode\": \"<string>\"\n}"
+						},
+						{
+							"name": "The service is unavailabe (is it running?). Please resubmit the same request later. Repeatable.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/service-casino-provider-slotapi/balance",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"service-casino-provider-slotapi",
+										"balance"
+									]
+								}
+							},
+							"status": "Gateway Timeout",
+							"code": 504,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Access token is missing or invalid. Please supply a new bearer token and resubmit the same request.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/service-casino-provider-slotapi/balance",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"service-casino-provider-slotapi",
+										"balance"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "The user has permanent self-excluded. The request should not be repeated.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/service-casino-provider-slotapi/balance",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"service-casino-provider-slotapi",
+										"balance"
+									]
+								}
+							},
+							"code": 491,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "The token belongs to a user that does not exist in this environment. Do not resubmit.",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/service-casino-provider-slotapi/balance",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"service-casino-provider-slotapi",
+										"balance"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "/service-casino/frontend/bonus/history",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{USERTOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJsYXN0TmFtZSI6IlRFU1QiLCJsYXN0TG9naW4iOjE2MTI5NjkwMTk4MjEsImp3dFVzZXIiOiJINHNJQUFBQUFBQUFBRzFQUVE2Q01CRDhDdGt6S0Jhb3dzbUQzanlZeU0wWVU5cUZOQlpxS0dpVThIZVhBekV4bm5ZeU16czdPNENHTFBHaGh3dzZkRjBFUHBTRTgvMHBKMmkrRUdmSDlta2JoYTBSeFhzaGJVMlNvb3lJUmtNV294L29wRzN4MnQ4bXlVRjJIdUNmTW5HSG1mT09Scnl3OVhhMkZyb2grYTRnNjlvZXg0c1BncHd5eG1TVk1oNmtpZGdFOGJwa2dRaGpFY2lRNDBZVm5MT29vRFZYVFkybnZ0WFB5ZVg4bnRNVXpkajRBZGNHU24vN0FBQUEiLCJzZXNzaW9uS2V5IjoiMzE3YWI0ZjktODE1MC00NTYyLWE1ODktMjAzMWYzMmM0OTlhIiwibGFzdElQIjoiMDowOjA6MDowOjA6MDoxIiwidXNlcl9uYW1lIjoidGVzdDMiLCJzZXNzaW9uSWQiOjIyLCJ1c2VyR3VpZCI6ImxpdmVzY29yZV91ay90ZXN0MyIsInVzZXJJZCI6NSwiYXV0aG9yaXRpZXMiOlsiUk9MRV9VU0VSIl0sImNsaWVudF9pZCI6ImFjbWUiLCJmaXJzdE5hbWUiOiJURVNUIiwiYXVkIjpbIm9hdXRoMi1yZXNvdXJjZSJdLCJzY29wZSI6WyJvcGVuaWQiXSwiZG9tYWluTmFtZSI6ImxpdmVzY29yZV91ayIsInJlZ2lzdHJhdGlvbkRhdGUiOjE2MTI5NTYyNjYwMDAsImV4cCI6MTYxNTY1NDYyMywic2hvcnRHdWlkIjoiVFQiLCJqdGkiOiIwNTFmMjdkNy00ZjRkLTRmZWEtYjc3NS0zZjAwZGJiMmJkMWIiLCJlbWFpbCI6InRlc3QzQHdvbmRlcmxhYnouY29tIiwidXNlcm5hbWUiOiJ0ZXN0MyJ9.YWfs_dI0QfHKq06gvKmoZSnWORP7a6Mzze99r4xdByrHlm2-PK5tWNRcc9c87TrB8XbdQojD8Yfs1S3tN8brCQHjNKY9RsQKWthK79R0kd7DH1VfL-BttaUHsyuiGfjLmE1wHYVixFo2prwLvF_eh6ZWB5J_i09Z5LD09cPirn7Lm05R2eFGUAlmY7LZMn9ZpnyzG5lpsEpuh5TMmxMDNKW0lOlwR5w7md01zdsae89DpVniDsL-qSbc6Qx1xZZ4VdSdhTnHudqtpvaQ-veGk6LmsbVAeAngDafu-ce5Ub-0GIaALvC1JtYz-4muX4ujJH7AdI2IaqklkstpPZYFCzi4fx7BHjcFiR2BxFnQpmyK26uiZc5KbqaBz-TH-ezgBcH1b1-hPqXnOP8VxBIIQZCtjpoC9K5jAvxtjxiNAnihkP6J1lnLIm2MtEZ1Sgedfnz8MEHDNZMw9gXW8aqe7Boonye4w1dmJFk16lPyutQmL6baZy6tYS6fWPPh9aOo9to00deIL34sQYB0HXT5dyE1JIRXkhheBT_EVOfzqtiFCO8ukTL-_i4JuEMnPS-TMufzTVP9lVPNL3HTxHRuIZShCtINEGqPtMi_e22rhZar8WdgdhqOMxXumMqbbeNwhQH4_LU4KCq7LczgFb_lvjYbnq8uXms9Mwxskc55EQs",
+								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Basic YWNtZTphY21lc2VjcmV0",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/service-casino/frontend/bonus/history?page=0&pageSize=100",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"service-casino",
+								"frontend",
+								"bonus",
+								"history"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "0"
+								},
+								{
+									"key": "order",
+									"value": "ASC",
+									"disabled": true
+								},
+								{
+									"key": "pageSize",
+									"value": "100"
+								},
+								{
+									"key": "sortBy",
+									"value": "customFreeMoneyAmountCents",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/service-casino-provider-slotapi/bonus/:bonusType/find/active",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"// You will need slotapi_pass variable with shared secret to run this",
+									"let domainName = pm.variables.get(\"domainName\");",
+									"",
+									"",
+									"var CryptoJS = require(\"crypto-js\");",
+									"",
+									"var key = domainName;",
+									"var secret = pm.variables.get(\"slotapi_pass\");",
+									"",
+									"var hash = CryptoJS.HmacSHA256(key, secret).toString(CryptoJS.digest);",
+									"pm.environment.set(\"sha256\", hash);",
+									"",
+									"console.log(hash);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic YWNtZTphY21lc2VjcmV0",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{gateway}}/service-casino-provider-slotapi/bonus/:bonusType/find/active?domainName={{domainName}}&sha256={{sha256}}",
+							"host": [
+								"{{gateway}}"
+							],
+							"path": [
+								"service-casino-provider-slotapi",
+								"bonus",
+								":bonusType",
+								"find",
+								"active"
+							],
+							"query": [
+								{
+									"key": "domainName",
+									"value": "{{domainName}}"
+								},
+								{
+									"key": "sha256",
+									"value": "{{sha256}}"
+								}
+							],
+							"variable": [
+								{
+									"key": "bonusType",
+									"value": "cash-bonus"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"exec": [
+							""
+						]
+					}
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://gateway.lithium-develop.ls-g.net"
+		},
+		{
+			"key": "bonusCode",
+			"value": ""
+		},
+		{
+			"key": "customAmountDecimal",
+			"value": ""
+		},
+		{
+			"key": "description",
+			"value": ""
+		},
+		{
+			"key": "playerGuid",
+			"value": ""
+		},
+		{
+			"key": "requestId",
+			"value": ""
+		}
+	]
+}

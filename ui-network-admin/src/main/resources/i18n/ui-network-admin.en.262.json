@@ -1,0 +1,15 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "BONUS": {
+      "EDIT": {
+        "FREESPINS": {
+          "SELECTPROVIDER": "Select game provider: ",
+          "SELECTPROVIDEROPTION": "--Please choose--"
+        },
+        "UNLOCKGAME": {
+          "SELECTPROVIDEROPTION": "--Please choose--"
+        }
+      }
+    }
+  }
+}

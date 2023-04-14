@@ -1,0 +1,9 @@
+{
+  "ERROR_DICTIONARY": {
+    "REGISTRATION": {
+      "INVALID_DOB_YEAR": "Invalid dob year.",
+      "INVALID_DOB_MONTH": "Invalid dob month.",
+      "INVALID_DOB_DAY": "Invalid dob day."
+    }
+  }
+}

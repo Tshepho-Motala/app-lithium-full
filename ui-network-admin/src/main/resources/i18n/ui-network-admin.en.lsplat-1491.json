@@ -1,0 +1,15 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "CASHIER": {
+      "BANK_ACCOUNT_LOOK_UP_TABLE": {
+        "BANK_ACCOUNT_LOOK_UP": "Bank Account Look Up",
+        "STATUS": "Status",
+        "FAILED_STATUS_REASON": "Reason of Failed Status",
+        "ACCOUNT_NAME": "Account Name",
+        "ACCOUNT_NUMBER": "Account Number",
+        "BANK_CODE": "Bank Code",
+        "BANK_NAME": "Bank Name"
+      }
+    }
+  }
+}

@@ -1,0 +1,84 @@
+{
+  "name": "PayPal Web",
+  "code": "paypal",
+  "image": {
+    "filename": "/methods/paypal.png",
+    "filetype": "image/png"
+  },
+  "depositStages": [
+    {
+      "number": 1,
+      "title": "Enter Amount",
+      "description": "Specify the amount you wish to deposit.",
+      "inputFields": [
+        {
+          "code": "cardReference",
+          "name": "Active paypal billing token",
+          "description": "Billing token",
+          "type": "string",
+          "required": false
+        },
+        {
+          "code": "processorAccountId",
+          "name": "Lithium processor account",
+          "description": "Lithium processor account contain details about PayPal payer account",
+          "type": "long",
+          "required": false
+        },
+        {
+          "code": "correlationId",
+          "name": "PayPal Client MetaData ID to the FraudNet Session",
+          "description": "Required for enable Fraudnet",
+          "type": "String",
+          "required": false
+        }
+      ],
+      "outputFields": []
+    },
+    {
+      "number": 2,
+      "title": "Your transaction is awaiting approval.",
+      "description": "We have submitted your transaction and we are awaiting approval. Please check back later.",
+      "inputFields": [],
+      "outputFields": []
+    }
+  ],
+  "withdrawalStages": [
+    {
+      "number": 1,
+      "title": "Enter Amount",
+      "description": "Specify the amount you wish to withdraw.",
+      "inputFields": [
+        {
+          "code": "cardReference",
+          "name": "Active paypal wallet ID",
+          "description": "account ID that the user chose to withdraw funds",
+          "type": "string",
+          "required": false
+        },
+        {
+          "code": "processorAccountId",
+          "name": "Lithium processor account",
+          "description": "Lithium processor account contain details about PayPal payer account",
+          "type": "long",
+          "required": false
+        },
+        {
+          "code": "correlationId",
+          "name": "PayPal Client MetaData ID to the FraudNet Session",
+          "description": "Required for enable Fraudnet",
+          "type": "String",
+          "required": false
+        }
+      ],
+      "outputFields": []
+    },
+    {
+      "number": 2,
+      "title": "Your transaction is awaiting approval.",
+      "description": "We have submitted your transaction and we are awaiting approval. Please check back later.",
+      "inputFields": [],
+      "outputFields": []
+    }
+  ]
+}

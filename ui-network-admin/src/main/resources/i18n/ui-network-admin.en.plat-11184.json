@@ -1,0 +1,12 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "CSV": {
+      "TOOLTIP": {
+        "COMPLETED": "Generation completed. Download file",
+        "START": "The number of documents generated at the same time is limited. if the queue is full, the document will be generated later",
+        "CANCEL": "Click the button to cancel generation",
+        "FAILED": "Generation failed, Click to reset. Reason: "
+      }
+    }
+  }
+}

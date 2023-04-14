@@ -1,0 +1,24 @@
+{
+  "name": "Cheque Overnight",
+  "code": "cheque-overnight",
+  "url": "service-cashier-processor-cheque-overnight",
+  "methodNames": ["cheque"],
+  "deposit": false,
+  "withdraw": true,
+  "fees": {
+    "flat": 0,
+    "percentage": 0,
+    "minimum": 0
+  },
+  "limits": {
+    "minAmount": 2500,
+    "maxAmount": 0,
+    "maxAmountDay": 0,
+    "maxAmountWeek": 0,
+    "maxAmountMonth": 0,
+    "maxTransactionsDay": 0,
+    "maxTransactionsWeek": 0,
+    "maxTransactionsMonth": 0
+  },
+  "properties": []
+}

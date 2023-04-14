@@ -1,0 +1,35 @@
+<div class="box box-default box-solid">
+    <div class="box-header with-border">
+        {{'UI_NETWORK_ADMIN.PLAYER.SELFEXCLUSION.TITLE'|translate}}
+        <div class="box-tools pull-right">
+            <button lit-if-permission="EXCLUSION_ADD" lit-permission-domain="{{user.domain.name}}" ng-if="exclusion === undefined || exclusion === null" type="button" class="btn btn-box-tool" ng-click="excludePlayer()">
+                <span><i class="fa fa-plus"></i> {{'GLOBAL.ACTION.ADD'|translate}}</span>
+            </button>
+            <button lit-if-permission="EXCLUSION_REVOKE" lit-permission-domain="{{user.domain.name}}" ng-if="exclusion !== undefined && exclusion !== null" type="button" class="btn btn-box-tool" ng-click="clearSelfExclusion()">
+                <span><i class="fa fa-trash"></i> {{'GLOBAL.ACTION.DELETE'|translate}}</span>
+            </button>
+        </div>
+    </div>
+    <div class="box-body table-responsive">
+        <div ng-if="exclusion === undefined || exclusion === null" class="box box-danger">
+            <div class="box-body">
+                {{'UI_NETWORK_ADMIN.PLAYER.EXCLUSION.NOTEXCLUDED'|translate}}
+            </div>
+        </div>
+        <table ng-if="exclusion !== undefined && exclusion !== null" class="table table-bordered">
+            <tr>
+                <th width="40%">{{'UI_NETWORK_ADMIN.PLAYER.SELFEXCLUSION.FIELDS.CREATEDDATE.NAME'|translate}}</th>
+                <td>{{exclusion.createdDateDisplay}}</td>
+            </tr><tr>
+            <th>{{'UI_NETWORK_ADMIN.PLAYER.SELFEXCLUSION.FIELDS.EXPIRYDATE.NAME'|translate}}</th>
+            <td>{{(exclusion.expiryDateDisplay)}}</td>
+        </tr><tr>
+            <th>{{'UI_NETWORK_ADMIN.PLAYER.EXCLUSION.FIELDS.PERIODINMONTHS'|translate}}</th>
+            <td>{{exclusion.periodInMonths}}</td>
+        </tr><tr>
+            <th>{{'UI_NETWORK_ADMIN.PLAYER.SELFEXCLUSION.FIELDS.PERMANENT.NAME'|translate}}</th>
+            <td>{{exclusion.permanent}}</td>
+        </tr>
+        </table>
+    </div>
+</div>

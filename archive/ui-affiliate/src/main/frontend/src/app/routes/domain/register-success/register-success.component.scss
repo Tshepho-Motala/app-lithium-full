@@ -1,0 +1,64 @@
+:host {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-height: calc(100vh - 2px);
+  max-height: calc(100vh - 2px);
+  min-width: calc(100vw - 2px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+  overflow: scroll;
+}
+
+.error-container {
+  md-icon {
+    margin-right: 1em;
+  }
+  margin: 1em 0 1em 0;
+}
+
+.register-success {
+  margin: 20px;
+  max-width: 1020px;
+
+  .register-success-header {
+    padding: 24px;
+    color: #eee;
+  }
+
+  .register-success-content {
+    padding: 24px 42px 42px;
+
+    .error-card {
+      .error-icon {
+        padding-right: 12px;
+      }
+    }
+
+    md-input-container {
+      width: 100%;
+      margin: 6px 0;
+    }
+
+    .extra-options {
+      margin: 16px 0 32px;
+    }
+
+    a {
+      text-decoration: none;
+      color: #2196F3;
+
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    .note {
+      color: #777;
+      margin: 24px 0 0;
+      text-align: center;
+    }
+  }
+}

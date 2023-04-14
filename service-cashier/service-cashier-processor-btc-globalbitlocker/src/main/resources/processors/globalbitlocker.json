@@ -1,0 +1,43 @@
+{
+  "name": "Global Bitcoin Locker",
+  "code": "globalbitlockerbtc",
+  "url": "service-cashier-processor-btc-globalbitlocker",
+  "methodNames": ["btc"],
+  "deposit": true,
+  "withdraw": true,
+  "fees": {
+    "flat": 0,
+    "percentage": 0,
+    "minimum": 0
+  },
+  "limits": {
+    "minAmount": 2500,
+    "maxAmount": 0,
+    "maxAmountDay": 0,
+    "maxAmountWeek": 0,
+    "maxAmountMonth": 0,
+    "maxTransactionsDay": 0,
+    "maxTransactionsWeek": 0,
+    "maxTransactionsMonth": 0
+  },
+  "properties": [
+    {
+      "name": "apiurl",
+      "defaultValue": "https://www.globalbitlocker.com/partners/?api=",
+      "type": "url",
+      "description": "Global Bitcoin Locker API URL"
+    },
+    {
+      "name": "apikey",
+      "defaultValue": "a5f698058f812febc76b8d8ee0ec3e75",
+      "type": "string",
+      "description": "Your Receive and Send Payments API key. In order to use the Receive and Send Payments API, please apply for an API key with your representative."
+    },
+    {
+      "name": "callback.url",
+      "defaultValue": "/service-cashier/external/callback/do/globalbitlockerbtc/b44e61ff251fe5ba8cea269c8122631894a44a48/",
+      "type": "string",
+      "description": "This is the url that should be called from the processor side. Called Shopper Result Url. /service-cashier/external/callback/do/globalbitlockerbtc/b44e61ff251fe5ba8cea269c8122631894a44a48/ or /service-cashier-processor-btc-globalbitlocker/callback/Y2FsbGJhY2tmb3JzZXJ2aWNlLWNhc2hpZXItcHJvY2Vzc29yLWJ0Yy1ibG9ja2NoYWlu"
+    }
+  ]
+}

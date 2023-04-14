@@ -1,0 +1,21 @@
+.Service Document Generation
+[plantuml]
+----
+@startuml
+participant LBOUSER as lbo
+actor       Actor       as Foo1
+collections    ServiceDocumentGeneration  as Foo2
+control     Control     as Foo3
+entity      Entity      as Foo4
+database    Database    as Foo5
+collections Collections as Foo6
+queue       csvjobs       as Foo7
+lbo -> Foo1 : To LBO
+lbo -> Foo2 : POST: /document/generate
+lbo -> Foo3 : To control
+lbo -> Foo4 : To entity
+lbo -> Foo5 : To database
+lbo -> Foo6 : To csv collections
+lbo -> Foo7: To queue
+@enduml
+----

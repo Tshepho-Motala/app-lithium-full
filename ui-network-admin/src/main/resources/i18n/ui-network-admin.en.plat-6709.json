@@ -1,0 +1,17 @@
+{
+	"UI_NETWORK_ADMIN": {
+		"MAIL": {
+			"TEMPLATES": {
+				"TEST": {
+					"TITLE": "E-mail template quick test",
+					"FIELDS": {
+						"TRANSACTION_ID": {
+							"NAME": "Cashier Transaction ID",
+							"DESCRIPTION": "Specify existing cashier transaction to lookup specific placeholders"
+						}
+					}
+				}
+			}
+		}
+	}
+}

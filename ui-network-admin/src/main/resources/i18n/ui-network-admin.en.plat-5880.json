@@ -1,0 +1,23 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "RESTRICTIONS": {
+      "CHANGE_TEMPLATE": {
+        "TITLE": "Change mail template",
+        "SUCCESS": "Template name was changed succesfully",
+        "ERROR": "Error during change template name"
+      },
+      "FIELDS": {
+        "LIFT_MAIL_TEMPLATE": {
+          "NAME": "Lift mail template",
+          "DESCRIPTION": "Choose lift mail template",
+          "ERROR": "Got error during getting email templates"
+        },
+        "PLACE_MAIL_TEMPLATE": {
+          "NAME": "Place mail template",
+          "DESCRIPTION": "Choose place mail template",
+          "ERROR": "Got error during getting email templates"
+        }
+      }
+    }
+  }
+}

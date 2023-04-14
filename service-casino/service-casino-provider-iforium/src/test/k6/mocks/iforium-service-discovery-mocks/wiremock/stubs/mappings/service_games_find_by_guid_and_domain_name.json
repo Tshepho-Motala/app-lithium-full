@@ -1,0 +1,13 @@
+{
+  "request": {
+    "method": "GET",
+    "urlPath": "/games/default/find/guid/service-casino-provider-iforium_11588/no-labels"
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "service_games_find_by_guid_and_domain_name.json",
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}

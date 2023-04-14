@@ -1,0 +1,15 @@
+<div class="row v-reset-row " lit-permission-domain="{{controller.domain.name}}">
+	<div class="col-xs-12" style="margin-bottom: 10px"  lit-if-permission="PLAYER_COMMENT_ADD">
+		<button-add ng-click="controller.addModal()"></button-add>
+	</div>
+</div>
+
+<div class="row v-reset-row ">
+	<div class="col-xs-12" lit-if-permission="PLAYER_COMMENT_LIST,PLAYER_LAST_COMMENT_LIST">
+		<div class="box">
+			<div class="box-body no-padding table-responsive">
+				<dt table="controller.commentsTable"/>
+			</div>
+		</div>
+	</div>
+</div>

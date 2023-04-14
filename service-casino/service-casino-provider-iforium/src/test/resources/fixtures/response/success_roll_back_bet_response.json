@@ -1,0 +1,12 @@
+{
+  "ErrorCode": 0,
+  "Balance": {
+    "CurrencyCode": "GBP",
+    "CashFunds": "%s",
+    "BonusFunds": "0.00",
+    "FundsPriority": "Unknown"
+  },
+  "Result": {
+    "OperatorTransactionReference": "123456Y"
+  }
+}

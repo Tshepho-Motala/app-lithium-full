@@ -1,0 +1,13 @@
+{
+  "SERVICE-CASHIER": {
+    "AUTOWITHDRAWALS": {
+      "RULESETS": {
+        "RULE": {
+          "FIELD": {
+            "WITHDRAWING_TO_LAST_USER_CARD": "Withdrawing to last used card"
+          }
+        }
+      }
+    }
+  }
+}

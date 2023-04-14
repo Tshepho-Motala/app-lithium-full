@@ -1,0 +1,38 @@
+= Loss Limit Visibility Flag
+Riaan Schoeman <riaan.schoeman@wonderlabz.com>
+1.0, January 17, 2023: Service User Threshold - Loss Limit Visibility Flag
+:sectnums:
+:doctype: book
+:toc: left
+:toclevels: 4
+:toc-title: Loss Limit Visibility Flag
+:icons: font
+:url-quickref: https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/
+:revnumber: {project-version}
+:example-caption!:
+ifndef::imagesdir[:imagesdir: images]
+ifndef::sourcedir[:sourcedir: ../../main/java]
+
+[sidebar]
+****
+xref:index.adoc[Home] |
+xref:loss-limit-threshold.adoc[Loss Limit Threshold] |
+xref:deposit-threshold-trigger.adoc[Deposit Threshold Trigger]
+****
+
+== Introduction
+
+This feature adds the ability to make Loss Limit information available to selected players via the frontend. When the flag is enabled in LBO, a boolean flag on the player profile endpoint called by frontend/gateway will be updated. When set to true, a section within Responsible Gambling tools in the frontend (web & native apps) will be visible.
+
+* Visibility can be enabled/disabled manually within LBO at the Player Account level (Responsible Gambling tab)
+** Three possible states:
+*** DISABLED - Nothing displayed to player (can and will be enabled upon next event/manually)
+*** ENABLED - Display loss limits to player.
+*** OFF - No notifications to player. No Visibility of limits on frontend. Can only be enabled manually from LBO. (If enabled manually, normal flow continues.)
+* Visibility will be automatically enabled when a Player hits the configured Loss Limit Threshold. (Unless switched off, see available states above)
+* Visibility will be set automatically when a Player hits their Loss Limit. (ie they receive the Spending Control error when attempting to place a bet/wager).
+
+
+
+
+

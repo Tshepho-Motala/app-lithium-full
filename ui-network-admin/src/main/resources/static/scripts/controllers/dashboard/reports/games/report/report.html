@@ -1,0 +1,126 @@
+<div class="container-fluid">
+	<lit-header
+		title="UI_NETWORK_ADMIN.REPORTS.GAMES.REPORT.TITLE" 
+		description="UI_NETWORK_ADMIN.REPORTS.GAMES.REPORT.DESCRIPTION">
+	</lit-header>
+	
+ 	<button-bar>
+		<button-back ui-sref="^.list"></button-back>
+		<button-edit ui-sref="dashboard.reports.games.edit({ reportId: report.id })"></button-edit>
+		<button-refresh ng-click="controller.refresh()"></button-refresh>
+	</button-bar>
+	
+	<div class="callout callout-info" ng-if="report.edit != null">
+		<span>{{'UI_NETWORK_ADMIN.REPORTS.PLAYERS.EDIT.INFO_FIRST' | translate}} {{ report.edit.updateDate | datetimedefault }} by {{ report.edit.updateBy }}. {{'UI_NETWORK_ADMIN.REPORTS.PLAYERS.EDIT.INFO_SECOND' | translate}}</span>
+	</div>
+	
+ 	<div class="row v-reset-row ">
+		<div class="col-xs-12">
+			<div class="box box-primary" bs-loading-overlay bs-loading-overlay-reference-id="game-report">
+				<div class="box-header with-border">
+					<h3 class="box-title">{{'UI_NETWORK_ADMIN.REPORTS.PLAYERS.GENERAL.REPORTDETAILS' | translate}}</h3>
+				</div>
+				<div class="box-body">
+					<div class="row v-reset-row ">
+						<div class="col-xs-12 col-md-6">
+							<p>{{'UI_NETWORK_ADMIN.ACCESSRULES.VIEW.ACCESSCONTROLLISTS.BASIC.NAME' | translate}}: {{report.current.name}}</p>
+							<p>{{'GLOBAL.FIELDS.DESCRIPTION' | translate}}: {{report.current.description}}</p>
+							<p>{{'UI_NETWORK_ADMIN.ACCESSRULES.VIEW.ACCESSCONTROLLISTS.BASIC.ENABLED' | translate}}: {{report.enabled}}</p>
+							<p>{{'GLOBAL.SCHEDULER.TITLE' | translate}}: {{report.prettyCron}}</p>
+						</div>
+						<div class="col-xs-12 col-md-6">
+							<p>{{'UI_NETWORK_ADMIN.REPORTS.PLAYERS.REPORTRUN.NEXT_RUN' | translate}}: {{report.scheduledDate | datetimedefault}}
+							<p>{{'UI_NETWORK_ADMIN.REPORTS.PLAYERS.REPORTRUN.LAST_COMPLETED' | translate}}: {{report.lastCompleted.completedOn | datetimedefault}}</p>
+							<p>{{'UI_NETWORK_ADMIN.REPORTS.PLAYERS.REPORTRUN.LAST_FAILED' | translate}}: {{report.lastFailed.completedOn | datetimedefault}}</p>
+							<p>{{'UI_NETWORK_ADMIN.REPORTS.PLAYERS.REPORTRUN.RUNNING_SINCE' | translate}}: {{report.running.startedOn | datetimedefault}}</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="row v-reset-row ">
+		<div class="col-xs-12">
+			<div class="box box-primary" bs-loading-overlay bs-loading-overlay-reference-id="game-report-filters">
+				<div class="box-header with-border">
+					<h3 class="box-title">{{'UI_NETWORK_ADMIN.REPORTS.PLAYERS.GENERAL.FILTERS.TITLE'}} | translate</h3>
+				</div>
+				<div class="box-body table-responsive">
+					<table class="table table-hover table-striped nowrap" cellspacing="0" width="100%">
+						<thead>
+							<tr>
+								<th>{{'UI_NETWORK_ADMIN.CASHIER.TRANS.VIEW.IO.FIELD' | translate}}</th>
+								<th>{{'UI_NETWORK_ADMIN.REPORTS.PLAYERS.FIELDS.FILTER.OPERATOR.NAME' | translate}}</th>
+								<th>{{'UI_NETWORK_ADMIN.CASHIER.TRANS.VIEW.IO.VALUE' | translate}}</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="filter in reportFilters">
+								<td>{{ filter.field }}</td>
+								<td>{{ filter.operator }}</td>
+								<td>{{ filter.value }}</td>
+							</tr>
+							<tr ng-if="reportFilters.length === 0">
+								<td colspan="3">{{'UI_NETWORK_ADMIN.REPORTS.PLAYERS.FIELDS.PLAYER_FILTERS.NO_FILTERS_FOUND' | translate}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row v-reset-row ">
+		<div class="col-xs-12">
+			<div class="box box-primary" bs-loading-overlay bs-loading-overlay-reference-id="game-report-actions">
+				<div class="box-header with-border">
+					<h3 class="box-title">{{'UI_NETWORK_ADMIN.REPORTS.PLAYERS.ACTIONS.TITLE' | translate}}</h3>
+				</div>
+				<div class="box-body table-responsive">
+					<table class="table table-hover table-striped" cellspacing="0" width="100%">
+						<thead>
+							<tr>
+								<th>{{'UI_NETWORK_ADMIN.BONUS.LIST.TITLE.TYPE' | translate}}</th>
+								<th>{{'UI_NETWORK_ADMIN.REPORTS.PLAYERS.FIELDS.PLAYER_FILTERS.RECIPIENTS' | translate}}</th>
+								<th>{{'UI_NETWORK_ADMIN.REPORTS.PLAYERS.ACTIONS.TABLE.EMAILTEMPLATE' | translate}}</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr ng-repeat="action in reportActions">
+								<td>{{ action.actionType }}</td>
+								<td>
+									<span ng-if="action.actionType === 'sendFullReportViaEmail'">{{ controller.getReportActionLabelValuesByLabelCommaSepString(action, 'reportFullRecipientEmail') }}</span>
+									<span ng-if="action.actionType === 'sendReportStatsViaEmail'">{{ controller.getReportActionLabelValuesByLabelCommaSepString(action, 'reportStatsRecipientEmail') }}</span>
+								</td>
+								<td>
+									<span ng-if="action.actionType === 'sendFullReportViaEmail'">{{ controller.getReportActionLabelValuesByLabelCommaSepString(action, 'reportFullEmailTemplate') }}</span>
+									<span ng-if="action.actionType === 'sendReportStatsViaEmail'">{{ controller.getReportActionLabelValuesByLabelCommaSepString(action, 'reportStatsEmailTemplate') }}</span>
+								</td>
+							</tr>
+							<tr ng-if="reportActions.length === 0">
+								<td colspan="5">{{'UI_NETWORK_ADMIN.REPORTS.PLAYERS.FIELDS.PLAYER_FILTERS.NO_ACTIONS_FOUND' | translate}}</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+ 	<div class="row v-reset-row ">
+		<div class="col-xs-12">
+			<div class="box box-info">
+				<div class="box-header with-border">
+					<h3 class="box-title">{{'UI_NETWORK_ADMIN.REPORTS.PLAYERS.REPORTRUN.RUNHISTORY' | translate}}</h3>
+				</div>
+				<div class="box-body table-responsive no-padding">
+					<dt table="controller.table"/>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div ui-view></div>
+
+</div>

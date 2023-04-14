@@ -1,0 +1,15 @@
+.List Banner
+[plantuml]
+----
+@startuml
+start
+:Open lbo;
+:Click casino on menu to expand menu;
+:Click Banner Management to display page;
+if (Domain selected) then (no)
+    :Select domain;
+endif
+:Show banner list;
+end
+@enduml
+----

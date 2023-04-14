@@ -1,0 +1,115 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "CMS": {
+      "GLOBAL": {
+        "BUTTONS": {
+          "SAVE": "Save",
+          "CANCEL": "Cancel",
+          "MODIFY": "Modify",
+          "UPDATE": "Update"
+        }
+      },
+      "BANNER_ITEM_EDITOR": {
+        "OUTPUT": {
+          "HEADER": {
+            "TITLE": "Edit Game"
+          }
+        },
+        "FIELDS":{
+          "NAME": {
+            "LABEL": "Name"
+          },
+          "GAME_GUID": {
+            "LABEL": "Game Guid"
+          },
+          "IMAGE": {
+            "LABEL": "Image"
+          },
+          "ID": {
+            "LABEL": "Id"
+          },
+          "DISPLAY_TEXT": {
+            "LABEL": "Display Text"
+          },
+          "TERMS_URL": {
+            "LABEL": "Terms Url"
+          },
+          "URL": {
+            "LABEL": "Url"
+          },
+          "FROM": {
+            "LABEL": "From"
+          },
+          "TO": {
+            "LABEL": "To"
+          },
+          "RUN_COUNT": {
+            "LABEL": "Run Count"
+          }
+        }
+      },
+      "GAME_ENTRY_LAYOUT_SELECTOR": {
+        "OUTPUT": {
+          "HEADER": {
+            "TITLE": "Create Widget"
+          }
+        },
+        "FIELDS": {
+          "SELECT_LAYOUT":{
+            "LABEL": "Select a Layout"
+          },
+          "TITLE": {
+            "LABEL": "Title"
+          },
+          "SELECT_TILE_SIZE": {
+            "LABEL": "Select Tile Size"
+          }
+        }
+      },
+      "GAME_ITEM_EDITOR": {
+        "OUTPUT": {
+          "HEADER": {
+            "TITLE": "Edit Game"
+          }
+        },
+        "FIELDS":{
+          "NAME": {
+            "LABEL": "Name"
+          },
+          "GAME_GUID": {
+            "LABEL": "Game Guid"
+          },
+          "IMAGE": {
+            "LABEL": "Image"
+          },
+          "TYPE": {
+            "LABEL": "Type"
+          },
+          "BADGE": {
+            "LABEL": "Badge"
+          }
+        }
+      },
+      "LAYOUT_SELECTOR": {
+        "FIELDS": {
+          "SELECT_LAYOUT": {
+            "LABEL": "Select a Layout"
+          },
+          "SELECT_SUB_NAV": {
+            "LABEL": "Select Sub Navigation"
+          }
+        }
+      },
+      "LAYOUT_BUILDER_WIDGET": {
+        "OUTPUT": {
+          "CREATE_LOBBY_DIALOG": {
+            "TITLE": "Create Lobby"
+          },
+          "BANNER_ENTRY": {
+            "TITLE": "Banners"
+          }
+        }
+      }
+    }
+  }
+}

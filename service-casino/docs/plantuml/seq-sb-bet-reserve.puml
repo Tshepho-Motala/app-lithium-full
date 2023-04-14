@@ -1,0 +1,62 @@
+.Bonus Flows
+[plantuml]
+----
+
+@startuml
+
+actor player as p
+
+participant "scp-sportsbook" as scpsb
+
+
+participant "svc-limit" as limit
+participant "svc-domain" as domain
+participant "svc-casino" as sc
+participant "svc-accounting-pr-int" as sa
+'participant "kafka" as kafka
+
+p->scpsb: /bet/reserve
+activate scpsb
+
+'group Proposal [async flow with CompletableFuture]
+'scpsb-> domain ++: async : CompletableFuture : bettingEnabled
+'deactivate domain
+'scpsb-> limit ++: async : CompletableFuture : playerRestrictions
+'deactivate limit
+'scpsb-> limit ++: async : CompletableFuture : playerBetPlacementAllowed
+'deactivate limit
+'scpsb-> limit ++: async : CompletableFuture : checkPlayerLimits
+'deactivate limit
+'scpsb->scpsb: Wait for above queries before proceeding
+'note right of scpsb
+'<code>
+'  CompletableFuture.allOf(
+'    bettingEnabled,
+'    playerRestrictions,
+'    playerBetPlacementAllowed,
+'    checkPlayerLimits
+'  )
+'</code>
+'* Call asynchronous methods and aggregate results
+'* betreserve can call these three methods asynchronously. betreserve flow continues after methods responsed.
+'* CompletableFuture.allOf() method is used to gather all and synchronize methods responses.
+'end note
+'end
+group Actual [sync flow]
+  scpsb-> domain ++: bettingEnabled
+  domain->scpsb --: response
+  scpsb-> limit ++: playerRestrictions
+  limit->scpsb --: response
+  scpsb-> limit ++: playerBetPlacementAllowed
+  limit->scpsb --: response
+  scpsb-> limit ++: checkPlayerLimits
+  limit->scpsb --: response
+end
+scpsb->sa ++: /system/adjust/v1
+sa->scpsb --: AdjustmentResponse
+scpsb->sc ++: /casino/getBalance
+sc->scpsb --: playerBalanceCents
+scpsb->p: BetReserveResponse
+
+@enduml
+----

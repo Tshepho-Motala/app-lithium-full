@@ -1,0 +1,1 @@
+CREATE INDEX `idx_short_guid_user` ON `user_api_token` (`short_guid`, `user_id`) ALGORITHM INPLACE LOCK NONE;

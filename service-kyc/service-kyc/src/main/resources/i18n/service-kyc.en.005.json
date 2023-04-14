@@ -1,0 +1,7 @@
+{
+  "SERVICE_KYC": {
+    "KYC_METHOD_NAMES": {
+      "METHOD_NIN": "NIN"
+    }
+  }
+}

@@ -1,0 +1,17 @@
+server:
+  port: 9594
+
+spring:
+ application:
+   name: service-access-provider-kycgbg
+   
+eureka:
+  instance:
+    appname: service-access-provider-kycgbg
+    
+lithium:
+  services:
+    access:
+      kycgbg:
+        connection-timeout: 0
+        read-timeout:  0

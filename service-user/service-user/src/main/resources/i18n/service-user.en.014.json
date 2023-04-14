@@ -1,0 +1,9 @@
+{
+  "SERVICE_USER": {
+    "ACCOUNT_FROZEN": {
+      "GAMSTOP_SELF_EXCLUSION": {
+        "MESSAGE": "Account is frozen. Gamstop self excluded."
+      }
+    }
+  }
+}

@@ -1,0 +1,20 @@
+<div class="container-fluid">
+	<lit-header
+		title="GoGame Math Models"
+		description="A searchable list of GoGame Math Models">
+	</lit-header>
+	
+	<button-bar>
+		<button-add lit-if-permission="GOGAMEGAMES_MATH_MODELS_EDIT" ui-sref="^.add"></button-add>
+	</button-bar>
+	
+	<div class="row v-reset-row ">
+		<div class="col-xs-12">
+			<div class="box">
+				<div class="box-body no-padding table-responsive">
+					<dt table="controller.gogameMathModelsTable"/>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

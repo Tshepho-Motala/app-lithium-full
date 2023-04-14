@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"/>
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"/>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css"/>
+	<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
+
+	<style type="text/css">
+		label {
+			width: 100%;
+		}
+		.input-field label {
+			font-size: 0.8rem;
+			-webkit-transform: translateY(-140%);
+			-moz-transform: translateY(-140%);
+			-ms-transform: translateY(-140%);
+			-o-transform: translateY(-140%);
+			transform: translateY(-140%);
+		}
+		input[type='number'] {
+			-moz-appearance:textfield;
+		}
+
+		input::-webkit-outer-spin-button,
+		input::-webkit-inner-spin-button {
+			-webkit-appearance: none;
+		}
+	</style>
+</head>
+
+<body style="font-family: 'Roboto', sans-serif;" class="grey lighten-3">
+<div id="main" style="width: 100vw; height: 100vh; display: flex; flex-direction: column; justify-content: space-between; align-items: center;">
+
+	<div></div>
+
+	<div class="container">
+
+		<div class="hide" id="viewIframe" style="display: flex; flex-direction: column; align-items: center;">
+			<div id="loading" style="display: flex; flex-direction: column; align-items: center">
+				<span><i class="fa fa-circle-o-notch fa-spin" style="font-size:72px"></i></span>
+			</div>
+		</div>
+
+		<div class="card" id="viewInput">
+			<div class="card-content">
+				<span class="card-title">Hexopay deposit</span>
+				<form id="form" action="/service-cashier-mock-hexopay/widget/deposit" method="GET">
+					<br/>
+					<div class="row">
+
+						<div class="col s6">
+							<input type="radio" id="option3ds" name="3d_secure" value="true" checked="checked"/>
+							<label for="option3ds">3D Secure</label>
+
+							<input type="radio" id="options2s" name="3d_secure" value="false"/>
+							<label for="options2s">Direct</label>
+						</div>
+						<div class="col s6 m5">
+							<label for="scenario">Scenario</label>
+							<select id="scenario" name="scenario" style="display: block;">
+								<option th:each="scenario : ${T(lithium.service.cashier.mock.hexopay.data.Scenario).values()}"
+										th:value="${scenario}"
+										th:text="${scenario.getDescription()}"
+										th:selected="${scenario==T(lithium.service.cashier.mock.hexopay.data.Scenario).SUCCESS}">
+								</option>
+							</select>
+						</div>
+					</div>
+
+					<br/>
+					<p>Card details</p>
+					<br/>
+					<div class="row">
+						<div class="input-field col s10 m5">
+							<input placeholder="amount" id="amount" name="amount" disabled="true" class="validate" th:value="${model.amount}" />
+							<label for="amount">Amount</label>
+						</div>
+						<div class="input-field col s10 m5">
+							<input placeholder="cardNum" id="cardNum" name="cardNum" type="number" value="4012000000003010" class="validate" required="true"/>
+							<label for="cardNum">Card Number</label>
+						</div>
+						<div class="input-field col s2 m1">
+							<input placeholder="cvv" id="cvv" name="cvv" type="number" class="validate" value="123" required="true"/>
+							<label for="cvv">CVV</label>
+						</div>
+						<div class="input-field col s6 m3">
+							<input placeholder="month" id="month" name="month" type="number" class="validate" value="12" required="true"/>
+							<label for="month">Expiry Month</label>
+						</div>
+						<div class="input-field col s6 m3">
+							<input placeholder="year" id="year" name="year" type="number" class="validate" value="2018" required="true"/>
+							<label for="year">Expiry Year</label>
+						</div>
+						<div class="input-field col s10 m5">
+							<input placeholder="name" id="name" name="name" type="text" class="validate" value="JOHN DOE" required="true"/>
+							<label for="amount">Name on your card</label>
+						</div>
+						<div class="input-field col s12">
+							<button class="btn waves-effect waves-light" type="submit" name="action">Submit</button>
+						</div>
+
+						<input id="token" name="token" th:value="${model.token}" type="hidden"/>
+					</div>
+				</form>
+			</div>
+		</div>
+
+	</div>
+
+	<div></div>
+
+</div>
+
+<script>
+	$(function() {
+
+		var form = $('#form');
+		var viewInput = $('#viewInput');
+		var viewIframe = $('#viewIframe');
+
+		$.validator.setDefaults({
+			errorClass: 'invalid',
+			validClass: "valid",
+			errorPlacement: function (error, element) {
+				$(element)
+						.closest("form")
+						.find("label[for='" + element.attr("id") + "']")
+						.attr('data-error', error.text());
+			},
+			submitHandler: function (form) {
+				if ($("#form").valid()) {
+					viewInput.addClass('hide');
+					viewIframe.removeClass('hide');
+					form.submit();
+				} else {
+					return false;
+				}
+			}
+		});
+
+		$("#form").validate({
+			rules: {
+				month: {
+					max : 12,
+					min: 1
+				},
+				year: {
+					max : 2021,
+					min: 1900
+				},
+				cvv : {
+					digits : true,
+					minlength : 3,
+					maxlength : 3
+				},
+				cardNum: {
+					creditcard : true
+				}
+			}
+		});
+	});
+</script>
+
+</body>
+</html>

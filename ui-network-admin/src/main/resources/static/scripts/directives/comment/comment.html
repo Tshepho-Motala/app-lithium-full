@@ -1,0 +1,31 @@
+<div class="box box-{{data.box}} box-solid" bs-loading-overlay bs-loading-overlay-reference-id="{{referenceId}}">
+	<div class="box-header with-border">
+		{{data.title | translate}}
+		<div class="box-tools pull-right">
+			<button lit-if-permission="PLAYER_COMMENT_ADD" lit-permission-domain="{{user.domain.name}}"
+					type="button" class="btn btn-box-tool" ng-click="addComment()">
+				<span><i class="fa fa-plus"></i> {{ "GLOBAL.ACTION.ADD" | translate }} </span>
+			</button>
+		</div>
+	</div>
+	<div class="box-body table-responsive">
+		<div ng-if="!lastComment" class="box box-danger ng-scope">
+			<div class="box-body ng-binding">
+				{{ "UI_NETWORK_ADMIN.COMMENTS.NO_COMMENTS" | translate }}
+			</div>
+		</div>
+		<table ng-if="data.lastComment" class="table table-bordered">
+			<tr>
+				<th width="40%">{{ "UI_NETWORK_ADMIN.COMMENTS.LAST_COMMENTED" | translate }}</th>
+				<td>{{ data.lastComment.changeDate | date: datetimedefault }}</td>
+			</tr>
+			<tr>
+				<th width="40%">{{ "UI_NETWORK_ADMIN.COMMENTS.COMMENT" | translate }}</th>
+				<td>{{ data.lastComment.comments }}</td>
+			</tr><tr>
+				<th width="40%">{{ "UI_NETWORK_ADMIN.COMMENTS.COMMENT_BY" | translate }}</th>
+				<td>{{ data.lastComment.authorGuid }}</td>
+			</tr>
+		</table>
+	</div>
+</div>

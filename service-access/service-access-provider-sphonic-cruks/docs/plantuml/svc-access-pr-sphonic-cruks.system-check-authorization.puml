@@ -1,0 +1,119 @@
+.CRUKS System Check Authorization
+[plantuml]
+----
+@startuml
+'https://plantuml.com/sequence-diagram
+
+participant "svc-access" as sa
+participant "svc-access-pr-sphonic-cruks" as sapsc
+database failed_attempt
+participant "svc-changelog" as sc
+participant "svc-limit" as sl
+participant "svc-user" as su
+boundary sphonic
+
+autonumber
+
+sa -> sapsc: /system/checkAuthorization
+activate sapsc
+    sapsc -> sapsc: validate required fields
+    sapsc -> sapsc: get provider settings
+    sapsc -> sphonic: get access token
+    activate sphonic
+        sphonic -->> sapsc: accessToken
+    deactivate sphonic
+
+    alt Registration Flow
+    ||10||
+        sapsc -> sapsc: build request for RegisterConnection
+        sapsc -> sphonic: call RegisterConnection API
+        activate sphonic
+            sphonic -->> sapsc: cruksRegistrationResponse
+        deactivate sphonic
+
+        alt cruksResult = PASS
+            sapsc -> sapsc: result.setAuthorisationOutcome(EAuthorizationOutcome.ACCEPT);
+            sapsc ->> sc: Add player note (CRUKS ID is valid and player is not excluded)
+        ||10||
+        else cruksResult = FAIL
+            sapsc -> sapsc: result.setAuthorisationOutcome(EAuthorizationOutcome.REJECT);
+            sapsc ->> sc: Add player note (CRUKS ID is valid and player is excluded)
+            sapsc -> sl: add player exclusion
+            activate sl
+                ref over sl: Do CRUKS Self-Exclusion
+                sl -->> sapsc: add player exclusion
+            deactivate sl
+            sapsc -> su: log player out
+            activate su
+                ref over su: Do player logout
+                su -->> sapsc: add player exclusion
+            deactivate su
+        ||10||
+        else cruksResult = NONE
+            sapsc -> sapsc: result.setAuthorisationOutcome(EAuthorizationOutcome.TIMEOUT);
+            sapsc -->> failed_attempt: add player to failed attempt retry job
+        ||10||
+        else cruksResult = ERROR
+            sapsc -> sapsc: result.setAuthorisationOutcome(EAuthorizationOutcome.TIMEOUT);
+            sapsc -->> failed_attempt: add player to failed attempt retry job
+        ||10||
+        else cruksResult = REVIEW
+            sapsc -> sapsc: result.setAuthorisationOutcome(EAuthorizationOutcome.REVIEW);
+        ||10||
+        else cruksResult = INVALID
+            sapsc -> sapsc: result.setAuthorisationOutcome(EAuthorizationOutcome.REJECT);
+        ||10||
+        else Unable to connect to Sphonic
+            sapsc -> sapsc: result.setAuthorisationOutcome(EAuthorizationOutcome.TIMEOUT);
+        ||10||
+        end
+
+    else Login Flow
+    ||10||
+        sapsc -> sapsc: build request for LoginConnection
+        sapsc -> sphonic: call LoginConnection API
+        activate sphonic
+            sphonic ->> sapsc: cruksLoginResponse
+        deactivate sphonic
+
+        alt cruksResult = PASS
+            sapsc -> sapsc: result.setAuthorisationOutcome(EAuthorizationOutcome.ACCEPT);
+            sapsc ->> sc: Add player note (CRUKS ID is valid and player is not excluded)
+        ||10||
+        else cruksResult = FAIL
+            sapsc -> sapsc: result.setAuthorisationOutcome(EAuthorizationOutcome.REJECT);
+            sapsc ->> sc: Add player note (CRUKS ID is valid and player is excluded)
+            sapsc -> sl: add player exclusion
+            activate sl
+                ref over sl: Do CRUKS Self-Exclusion
+                sl -->> sapsc: add player exclusion
+            deactivate sl
+            sapsc -> su: log player out
+            activate su
+                ref over su: Do player logout
+                su -->> sapsc: add player exclusion
+            deactivate su
+        ||10||
+        else cruksResult = NONE
+            sapsc -> sapsc: result.setAuthorisationOutcome(EAuthorizationOutcome.TIMEOUT);
+            sapsc -->> failed_attempt: add player to failed attempt retry job
+        ||10||
+        else cruksResult = ERROR
+            sapsc -> sapsc: result.setAuthorisationOutcome(EAuthorizationOutcome.TIMEOUT);
+            sapsc -->> failed_attempt: add player to failed attempt retry job
+        ||10||
+        else cruksResult = INVALID
+            sapsc -> sapsc: result.setAuthorisationOutcome(EAuthorizationOutcome.REJECT);
+        ||10||
+        else Unable to connect to Sphonic
+            sapsc -> sapsc: result.setAuthorisationOutcome(EAuthorizationOutcome.TIMEOUT);
+            sapsc -->> failed_attempt: add player to failed attempt retry job
+        ||10||
+        end
+    end
+    sapsc -> sapsc: build response
+    sapsc --> sa: Response<ProviderAuthorizationResult>
+deactivate sapsc
+
+@enduml
+----

@@ -1,0 +1,11 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "CMS": {
+      "GLOBAL": {
+        "BUTTONS": {
+            "DELETE" : "Delete"
+        }
+      }
+    }
+  }
+}

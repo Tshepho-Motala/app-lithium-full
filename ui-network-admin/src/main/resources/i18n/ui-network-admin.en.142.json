@@ -1,0 +1,18 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "CASHIER": {
+      "AUTOWITHDRAWALS": {
+        "RULESET": {
+          "PROCESS": {
+            "NAME": "Process Ruleset",
+            "DESC": "Run this ruleset on currently pending withdrawals",
+            "CONFIRM": "Are you sure you want to run this ruleset on currently pending withdrawals?",
+            "SUCCESS": "Successfully queued ruleset process. Processing will begin shortly.",
+            "ERROR": "Failed to queue ruleset process.",
+            "ONEDIT": "A modification has been made to this ruleset. Do you want to run this ruleset on currently pending withdrawals?"
+          }
+        }
+      }
+    }
+  }
+}

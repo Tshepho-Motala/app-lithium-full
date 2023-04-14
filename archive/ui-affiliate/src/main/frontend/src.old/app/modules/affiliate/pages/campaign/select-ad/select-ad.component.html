@@ -1,0 +1,26 @@
+<h2>Link Ads</h2>
+<perfect-scrollbar>
+<div fxLayout="column" style="max-height: calc(100vh - 400px); position: relative">
+<p>Select ads that you would like to link to this campaign. You may link the same ad many times; each link will contain a unique identifier in the embed code, and will track its statistics separately.</p>
+<div>{{ selected.length }} ad(s) selected.</div>
+  <!--<md-dialog-content style="max-height: calc(100vh - 200px);">-->
+  <md-card *ngFor="let ad of ads" class="hover margin" (click)="onSelect(ad)" style="cursor: pointer;">
+    <md-card-content>
+      <div fxLayout="row" fxLayoutAlign="center center">
+        <md-checkbox [ngModel]="isSelected(ad)" (change)="onSelect(ad)"></md-checkbox>
+        <div fxLayout="column" fxFlex>
+          <h3 md-line>{{ ad.name }}</h3>
+          <p md-line>{{ ad.type }}</p>
+        </div>
+      </div>
+    </md-card-content>
+  </md-card>
+  <!--</md-dialog-content>-->
+</div>
+</perfect-scrollbar>
+<md-dialog-actions>
+  <mdex-pager (currentPageChanged)="load()" [state]="pagerState"></mdex-pager>
+  <span fxFlex></span>
+  <button md-button color="primary" (click)="onSelectClicked()">Select</button>
+  <button md-button md-dialog-close>Cancel</button>
+</md-dialog-actions>

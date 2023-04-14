@@ -1,0 +1,37 @@
+<div class="container-fluid">
+	<div id="vueMountPageHeader"/>
+	<div class="row v-reset-row " ng-if="controller.selectedDomain" lit-if-permission="DASHBOARD" lit-permission-domain="{{controller.selectedDomain}}">
+		<div class="col-xs-12">
+			<div class="btn-group">
+				<button ng-click="setGranularity(3)" ng-disabled="controller.disableGranularitySwitch" type="button" ng-class="{'active': granularity == 3}" class="btn btn-default">Daily</button>
+				<button ng-click="setGranularity(4)" ng-disabled="controller.disableGranularitySwitch" type="button" ng-class="{'active': granularity == 4}" class="btn btn-default">Weekly</button>
+				<button ng-click="setGranularity(2)" ng-disabled="controller.disableGranularitySwitch" type="button" ng-class="{'active': granularity == 2}" class="btn btn-default">Monthly</button>
+				<button ng-click="setGranularity(1)" ng-disabled="controller.disableGranularitySwitch" type="button" ng-class="{'active': granularity == 1}" class="btn btn-default">Yearly</button>
+			</div>
+			<br/><br/>
+			<div class="row v-reset-row ">
+				<span ng-repeat="data in dashboardData">
+					<div ng-if="data.type === 'row'" class="row v-reset-row "></div>
+					<stats ng-if="data.type === 'stats'" data="data" granularity="{{granularity}}" selected-domains="controller.selectedDomains"/>
+					<balancesummary ng-if="data.type === 'balancesummary'" data="data" granularity="5" selected-domains="controller.selectedDomains"/>
+					<netsummary ng-if="data.type === 'netsummary'" data="data" granularity="granularity" selected-domains="controller.selectedDomains"/>
+					<trantypesummary ng-if="data.type === 'trantypesummary'" data="data" granularity="{{granularity}}" selected-domains="controller.selectedDomains"/>
+				</span>
+			</div>
+		</div>
+<!--		<div class="col-xs-12">-->
+<!--			<div class="row v-reset-row ">-->
+<!--				<accountinggraph ng-if="cashGraph" data="cashGraph" granularity="granularity" ranges="ranges" selected-domains="controller.selectedDomains"></accountinggraph>-->
+<!--			</div>-->
+<!--			<div class="row v-reset-row ">-->
+<!--				<accountinggraph ng-if="casinoGraph" data="casinoGraph" granularity="granularity" ranges="ranges" selected-domains="controller.selectedDomains"></accountinggraph>-->
+<!--			</div>-->
+<!--			<div class="row v-reset-row ">-->
+<!--				<accountinggraph ng-if="bonusGraph" data="bonusGraph" granularity="granularity" ranges="ranges" selected-domains="controller.selectedDomains"></accountinggraph>-->
+<!--			</div>-->
+<!--			<div class="row v-reset-row ">-->
+<!--				<accountinggraph ng-if="casinoBonusGraph" data="casinoBonusGraph" granularity="granularity" ranges="ranges" selected-domains="controller.selectedDomains"></accountinggraph>-->
+<!--			</div>-->
+<!--		</div>-->
+	</div>
+</div>

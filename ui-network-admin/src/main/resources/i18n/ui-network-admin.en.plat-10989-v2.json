@@ -1,0 +1,45 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "PLAYER": {
+      "TAB": {
+        "LOSS_LIMIT": "Players Threshold History Report",
+        "DEPOSIT_LIMIT": "Deposit Threshold Trigger Report"
+      }
+    },
+    "LOSS_LIMIT": {
+      "LIST": {
+        "TITLE": "Players Threshold Report",
+        "DESCRIPTION": "A list of player threshold history",
+        "EXPORT": "Export",
+        "DEPOSIT_LIMIT_TITLE": "This report reflects the amounts as they were captured at the point in time that the trigger was hit"
+      }
+    },
+    "THRESHOLD_HEADERS": {
+      "PLAYER_NAME":"Player Name",
+      "ACCOUNT_ID": "Account ID",
+      "DAILY_LOSS_LIMIT": "Daily Loss Limit",
+      "WEEKLY_LOSS_LIMIT": "Weekly Loss Limit",
+      "MONTHLY_LOSS_LIMIT": "Monthly Loss Limit",
+      "THRESHOLD_HIT": "Threshold Hit",
+      "PERIOD": "Date Time % Hit",
+      "LOSS_LIMIT_USED_WEEKLY":"Weekly Loss Limit Used",
+      "LOSS_LIMIT_USED_DAILY":"Daily Loss Limit Used",
+      "LOSS_LIMIT_USED_MONTHLY": "Monthly Loss Limit Used",
+      "START_DATE": "Start Date",
+      "START_DESCRIPTION": "Start Date to search",
+      "END_DATE": "End Date",
+      "END_DESCRIPTION": "End Date to search",
+      "DAILY_THRESHOLD": "Daily Threshold",
+      "WEEKLY_THRESHOLD": "Weekly Threshold",
+      "MONTHLY_THRESHOLD": "Monthly Threshold",
+      "TRIGGER_TYPE": "Trigger Type",
+      "DEPOSIT_AMOUNT": "Deposit Amount",
+      "WITHDRAWAL_AMOUNT": "Withdrawal Amount",
+      "NET_LIFE_DEPOSIT_AMOUNT": "Net Life Deposit Amount",
+      "ACCOUNT_CREATION_DATE": "Account Creation Date"
+    },
+    "THRESHOLD_REPORT_FILTER": {
+      "PLAYER_GUID": "Player Guid"
+    }
+  }
+}

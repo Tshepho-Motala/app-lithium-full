@@ -1,0 +1,13 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "GAME": {
+      "FIELDS": {
+        "GAME_DATETIME_INTRODUCTION": {
+          "NAME": "Introduction Date",
+          "PLACEHOLDER": "e.g. YYYY-MM-DD",
+          "DESCRIPTION": "The date the game was first introduced"
+        }
+      }
+    }
+  }
+}

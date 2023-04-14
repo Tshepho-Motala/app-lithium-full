@@ -1,0 +1,16 @@
+{
+  "SERVICE-CASHIER": {
+    "AUTOWITHDRAWALS": {
+      "RULESETS": {
+        "RULE": {
+          "FIELD": {
+            "USER_STATUS_REASON": "User Status Reason"
+          },
+          "OPERATOR": {
+            "IN": "Contains at least one of the following"
+          }
+        }
+      }
+    }
+  }
+}

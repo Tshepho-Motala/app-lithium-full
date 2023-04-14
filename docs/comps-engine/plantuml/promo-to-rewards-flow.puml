@@ -1,0 +1,20 @@
+.current bonus trigger flow
+[plantuml]
+----
+
+@startuml
+
+actor player as p
+
+participant "svc-promo" as promo
+participant "svc-reward" as reward
+queue "rabbitmq" as rabbit
+
+p --> promo: completes mission requirements
+promo --> rabbit : triggerBonusStream
+rabbit <-- reward : processTriggerBonus
+reward --> reward ++ : activatePlayerBonus
+
+@enduml
+
+----

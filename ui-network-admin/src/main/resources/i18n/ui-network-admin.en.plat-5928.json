@@ -1,0 +1,23 @@
+{
+  "UI_NETWORK_ADMIN":{
+    "DOMAIN": {
+      "PLAYER_DOMAIN": {
+        "PRE_SIGNUP": {
+          "LABEL": "Pre Signup Access Rule",
+          "DESCRIPTION": "",
+          "PLACEHOLDER": "Select Access Rule"
+        },
+        "USER_DETAILS_UPDATE": {
+          "LABEL": "User Details Update Access Rule",
+          "DESCRIPTION": "",
+          "PLACEHOLDER": "Select Access Rule"
+        },
+        "POST_SIGNUP": {
+          "LABEL": "Post Signup Access Rule",
+          "DESCRIPTION": "",
+          "PLACEHOLDER": "Select Access Rule"
+       }
+      }
+    }
+  }
+}

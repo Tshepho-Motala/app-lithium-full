@@ -1,0 +1,364 @@
+{
+	"info": {
+		"_postman_id": "011f323a-4efe-4e90-8bfd-a12a3170c519",
+		"name": "Lithium User Mass Action API Documentation",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "backoffice",
+			"item": [
+				{
+					"name": "/service-user-mass-action/backoffice/{domainName}/bonus/cashbonus/upload/csv",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJsYXN0TmFtZSI6IkFkbWluaXN0cmF0b3IiLCJsYXN0TG9naW4iOjE2MTQ5Mzk3MDczMzMsImp3dFVzZXIiOiJINHNJQUFBQUFBQUFBSVdSelU3RE1CQ0VYeVhhc3dPMFNTSE5pVWpoZ1BoUlZkUUxWWVcyc1YxWk9IVmtKNVdneXJ1ekpna1VJc0Z0ZDhiK2R0WStnb0owd3FDQkZKQ1hhZzhNSk5WUFRTVXMxWnJxek92SzFSWnI0elZCbXZQK05SY1NHMTJmRmFZa25YY292aWUvZDd6cUlGMGY0WmZvMjZVeGRaQ2JFaituVmh4U2lkb0pCdmJyUnBZLzNENlNTWXphTm1UeHJtZzNMZXRPYUhVUXJqQldETlQ3UVFoeWNSRGFWRUhXNzNVeW9UcEpNeUs5Tks5ajJFTGptN0I5M0NBTVZuYzlzY3RWL1lneVJyN2ovOGpuN0Mva2hnSDYxTnNZTVJGRk9KVnpER09KUE53bU9BK2pxempDaEUvazdDTHlEN2J6bjdoYTNDeXAyWDF2ZXo1OHNsTTBhSFk1YlQ4QUFWV1hVQUlDQUFBPSIsInNlc3Npb25LZXkiOiJlODNlMTM2YS0yMmYwLTQyMTgtOTEyYS0xZjFhNTUwYTJhZDIiLCJsYXN0SVAiOiIwOjA6MDowOjA6MDowOjEiLCJ1c2VyX25hbWUiOiJhZG1pbiIsInNlc3Npb25JZCI6NTYyLCJ1c2VyR3VpZCI6ImRlZmF1bHQvYWRtaW4iLCJ1c2VySWQiOjEsImF1dGhvcml0aWVzIjpbIlJPTEVfVVNFUiJdLCJjbGllbnRfaWQiOiJhY21lIiwiZmlyc3ROYW1lIjoiU3VwZXIiLCJhdWQiOlsib2F1dGgyLXJlc291cmNlIl0sInNjb3BlIjpbIm9wZW5pZCJdLCJkb21haW5OYW1lIjoiZGVmYXVsdCIsInJlZ2lzdHJhdGlvbkRhdGUiOjE2MTQ4NTM0NTYwMDAsImV4cCI6MTYxNzY0MTQ4Miwic2hvcnRHdWlkIjoiU1VQRVIiLCJqdGkiOiIyMGIxMjE3OC03OWVlLTQyMzItYmQ1Ny0yMzdmYzhhZGUyZjgiLCJlbWFpbCI6InN1cGVyQGRlZmF1bHQuY29tIiwidXNlcm5hbWUiOiJhZG1pbiJ9.xUDYXZl3TvFv70FsThP3NMcXsgI49Jc6QyeyqcNM1lekwgHQQ6-B0thUKK-eXIDSeMjQvqLaljLP-UtbvG4TmprOjeox9L_rn4C-WDD4w6y-ME90Uyj68-0XfYb2FMOuIvy86jP9gV3BESV2ZnObFXy7sGY-pRgCmvuj5IfxfCQzpzAeZarxccquLOEQLIohKheyHgOufPAEO8cprLQKovsyL6YVi6ZwDW8OvZebMaq01KC3AjaxFfAxXBaT3TAzbSDqw8TnF15PUB4QwopA6vYljgYJuhVBC_s3YncPt5JYgO-3wbE4nojpJUhN0rjg9OAkJmaPUpWm1p7BYDW8dIFZgTeotJI4CTcO93SDxfa6TYnAo0yENQ4Fh7B9EvJALerhF0ibSgyIOIeFIA61NF2qjQuFP52GWtNitg3MF0e_RT9Yi9c9PjpOTfMIfkYXdzRMA3UfYsrGs0fQDOdIxncSrL1aJl_UB0GXCJ49wao_BEQnOPANoNoCseIlqfE8-lNJeKjdKH46XPEN1iSxSl-DJ0IJLwxbt5OOyxFD-zOY6GZsUDx1wQUNpx0_75p9xJvTtzIgje2vv3o-nhlXYJ-YZBU97fdK4G9UMA8koozLo3u5QXn3oD15NDkU2UG6P94NM6IeVccJo5RVAa0_oOh_ZgM7qGHPeMs7GU7LyX4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/Users/irwinherridge/Documents/work/LSPLAT-409 - Grant Mass Bonuses/testStatuses.csv"
+								},
+								{
+									"key": "defaultAmount",
+									"value": "1.10",
+									"type": "text"
+								},
+								{
+									"key": "bonusCode",
+									"value": "FIVES",
+									"type": "text"
+								},
+								{
+									"key": "allowDuplicates",
+									"value": "true",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{lbo-local}}/service-user-mass-action/backoffice/livescore_uk/bonus/cash-bonus/upload/csv",
+							"host": [
+								"{{lbo-local}}"
+							],
+							"path": [
+								"service-user-mass-action",
+								"backoffice",
+								"livescore_uk",
+								"bonus",
+								"cash-bonus",
+								"upload",
+								"csv"
+							],
+							"query": [
+								{
+									"key": "domainName",
+									"value": null,
+									"disabled": true
+								}
+							]
+						},
+						"description": "This request will upload a csv file, extract information from it that will later be used by jobs to execute each record and grant bonuses to them."
+					},
+					"response": []
+				},
+				{
+					"name": "/service-user-mass-action/backoffice/livescore_uk/bonus/cashbonus/upload/progress/user-verification",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJsYXN0TmFtZSI6IkFkbWluaXN0cmF0b3IiLCJsYXN0TG9naW4iOjE2MTQ5Mzk3MDczMzMsImp3dFVzZXIiOiJINHNJQUFBQUFBQUFBSVdSelU3RE1CQ0VYeVhhc3dPMFNTSE5pVWpoZ1BoUlZkUUxWWVcyc1YxWk9IVmtKNVdneXJ1ekpna1VJc0Z0ZDhiK2R0WStnb0owd3FDQkZKQ1hhZzhNSk5WUFRTVXMxWnJxek92SzFSWnI0elZCbXZQK05SY1NHMTJmRmFZa25YY292aWUvZDd6cUlGMGY0WmZvMjZVeGRaQ2JFaituVmh4U2lkb0pCdmJyUnBZLzNENlNTWXphTm1UeHJtZzNMZXRPYUhVUXJqQldETlQ3UVFoeWNSRGFWRUhXNzNVeW9UcEpNeUs5Tks5ajJFTGptN0I5M0NBTVZuYzlzY3RWL1lneVJyN2ovOGpuN0Mva2hnSDYxTnNZTVJGRk9KVnpER09KUE53bU9BK2pxempDaEUvazdDTHlEN2J6bjdoYTNDeXAyWDF2ZXo1OHNsTTBhSFk1YlQ4QUFWV1hVQUlDQUFBPSIsInNlc3Npb25LZXkiOiJlODNlMTM2YS0yMmYwLTQyMTgtOTEyYS0xZjFhNTUwYTJhZDIiLCJsYXN0SVAiOiIwOjA6MDowOjA6MDowOjEiLCJ1c2VyX25hbWUiOiJhZG1pbiIsInNlc3Npb25JZCI6NTYyLCJ1c2VyR3VpZCI6ImRlZmF1bHQvYWRtaW4iLCJ1c2VySWQiOjEsImF1dGhvcml0aWVzIjpbIlJPTEVfVVNFUiJdLCJjbGllbnRfaWQiOiJhY21lIiwiZmlyc3ROYW1lIjoiU3VwZXIiLCJhdWQiOlsib2F1dGgyLXJlc291cmNlIl0sInNjb3BlIjpbIm9wZW5pZCJdLCJkb21haW5OYW1lIjoiZGVmYXVsdCIsInJlZ2lzdHJhdGlvbkRhdGUiOjE2MTQ4NTM0NTYwMDAsImV4cCI6MTYxNzY0MTQ4Miwic2hvcnRHdWlkIjoiU1VQRVIiLCJqdGkiOiIyMGIxMjE3OC03OWVlLTQyMzItYmQ1Ny0yMzdmYzhhZGUyZjgiLCJlbWFpbCI6InN1cGVyQGRlZmF1bHQuY29tIiwidXNlcm5hbWUiOiJhZG1pbiJ9.xUDYXZl3TvFv70FsThP3NMcXsgI49Jc6QyeyqcNM1lekwgHQQ6-B0thUKK-eXIDSeMjQvqLaljLP-UtbvG4TmprOjeox9L_rn4C-WDD4w6y-ME90Uyj68-0XfYb2FMOuIvy86jP9gV3BESV2ZnObFXy7sGY-pRgCmvuj5IfxfCQzpzAeZarxccquLOEQLIohKheyHgOufPAEO8cprLQKovsyL6YVi6ZwDW8OvZebMaq01KC3AjaxFfAxXBaT3TAzbSDqw8TnF15PUB4QwopA6vYljgYJuhVBC_s3YncPt5JYgO-3wbE4nojpJUhN0rjg9OAkJmaPUpWm1p7BYDW8dIFZgTeotJI4CTcO93SDxfa6TYnAo0yENQ4Fh7B9EvJALerhF0ibSgyIOIeFIA61NF2qjQuFP52GWtNitg3MF0e_RT9Yi9c9PjpOTfMIfkYXdzRMA3UfYsrGs0fQDOdIxncSrL1aJl_UB0GXCJ49wao_BEQnOPANoNoCseIlqfE8-lNJeKjdKH46XPEN1iSxSl-DJ0IJLwxbt5OOyxFD-zOY6GZsUDx1wQUNpx0_75p9xJvTtzIgje2vv3o-nhlXYJ-YZBU97fdK4G9UMA8koozLo3u5QXn3oD15NDkU2UG6P94NM6IeVccJo5RVAa0_oOh_ZgM7qGHPeMs7GU7LyX4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{lbo-local}}/service-user-mass-action/backoffice/livescore_uk/bonus/cashbonus/upload/progress/user-verification",
+							"host": [
+								"{{lbo-local}}"
+							],
+							"path": [
+								"service-user-mass-action",
+								"backoffice",
+								"livescore_uk",
+								"bonus",
+								"cashbonus",
+								"upload",
+								"progress",
+								"user-verification"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/service-user-mass-action/backoffice/livescore_uk/bonus/cashbonus/upload/progress/bonus-grant",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJsYXN0TmFtZSI6IkFkbWluaXN0cmF0b3IiLCJsYXN0TG9naW4iOjE2MTQ5Mzk3MDczMzMsImp3dFVzZXIiOiJINHNJQUFBQUFBQUFBSVdSelU3RE1CQ0VYeVhhc3dPMFNTSE5pVWpoZ1BoUlZkUUxWWVcyc1YxWk9IVmtKNVdneXJ1ekpna1VJc0Z0ZDhiK2R0WStnb0owd3FDQkZKQ1hhZzhNSk5WUFRTVXMxWnJxek92SzFSWnI0elZCbXZQK05SY1NHMTJmRmFZa25YY292aWUvZDd6cUlGMGY0WmZvMjZVeGRaQ2JFaituVmh4U2lkb0pCdmJyUnBZLzNENlNTWXphTm1UeHJtZzNMZXRPYUhVUXJqQldETlQ3UVFoeWNSRGFWRUhXNzNVeW9UcEpNeUs5Tks5ajJFTGptN0I5M0NBTVZuYzlzY3RWL1lneVJyN2ovOGpuN0Mva2hnSDYxTnNZTVJGRk9KVnpER09KUE53bU9BK2pxempDaEUvazdDTHlEN2J6bjdoYTNDeXAyWDF2ZXo1OHNsTTBhSFk1YlQ4QUFWV1hVQUlDQUFBPSIsInNlc3Npb25LZXkiOiJlODNlMTM2YS0yMmYwLTQyMTgtOTEyYS0xZjFhNTUwYTJhZDIiLCJsYXN0SVAiOiIwOjA6MDowOjA6MDowOjEiLCJ1c2VyX25hbWUiOiJhZG1pbiIsInNlc3Npb25JZCI6NTYyLCJ1c2VyR3VpZCI6ImRlZmF1bHQvYWRtaW4iLCJ1c2VySWQiOjEsImF1dGhvcml0aWVzIjpbIlJPTEVfVVNFUiJdLCJjbGllbnRfaWQiOiJhY21lIiwiZmlyc3ROYW1lIjoiU3VwZXIiLCJhdWQiOlsib2F1dGgyLXJlc291cmNlIl0sInNjb3BlIjpbIm9wZW5pZCJdLCJkb21haW5OYW1lIjoiZGVmYXVsdCIsInJlZ2lzdHJhdGlvbkRhdGUiOjE2MTQ4NTM0NTYwMDAsImV4cCI6MTYxNzY0MTQ4Miwic2hvcnRHdWlkIjoiU1VQRVIiLCJqdGkiOiIyMGIxMjE3OC03OWVlLTQyMzItYmQ1Ny0yMzdmYzhhZGUyZjgiLCJlbWFpbCI6InN1cGVyQGRlZmF1bHQuY29tIiwidXNlcm5hbWUiOiJhZG1pbiJ9.xUDYXZl3TvFv70FsThP3NMcXsgI49Jc6QyeyqcNM1lekwgHQQ6-B0thUKK-eXIDSeMjQvqLaljLP-UtbvG4TmprOjeox9L_rn4C-WDD4w6y-ME90Uyj68-0XfYb2FMOuIvy86jP9gV3BESV2ZnObFXy7sGY-pRgCmvuj5IfxfCQzpzAeZarxccquLOEQLIohKheyHgOufPAEO8cprLQKovsyL6YVi6ZwDW8OvZebMaq01KC3AjaxFfAxXBaT3TAzbSDqw8TnF15PUB4QwopA6vYljgYJuhVBC_s3YncPt5JYgO-3wbE4nojpJUhN0rjg9OAkJmaPUpWm1p7BYDW8dIFZgTeotJI4CTcO93SDxfa6TYnAo0yENQ4Fh7B9EvJALerhF0ibSgyIOIeFIA61NF2qjQuFP52GWtNitg3MF0e_RT9Yi9c9PjpOTfMIfkYXdzRMA3UfYsrGs0fQDOdIxncSrL1aJl_UB0GXCJ49wao_BEQnOPANoNoCseIlqfE8-lNJeKjdKH46XPEN1iSxSl-DJ0IJLwxbt5OOyxFD-zOY6GZsUDx1wQUNpx0_75p9xJvTtzIgje2vv3o-nhlXYJ-YZBU97fdK4G9UMA8koozLo3u5QXn3oD15NDkU2UG6P94NM6IeVccJo5RVAa0_oOh_ZgM7qGHPeMs7GU7LyX4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{lbo-local}}/service-user-mass-action/backoffice/livescore_uk/bonus/cashbonus/upload/progress/bonus-grants",
+							"host": [
+								"{{lbo-local}}"
+							],
+							"path": [
+								"service-user-mass-action",
+								"backoffice",
+								"livescore_uk",
+								"bonus",
+								"cashbonus",
+								"upload",
+								"progress",
+								"bonus-grants"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/service-user-mass-action/backoffice/livescore_uk/bonus/cashbonus/upload/table",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJsYXN0TmFtZSI6IkFkbWluaXN0cmF0b3IiLCJsYXN0TG9naW4iOjE2MTQ5Mzk3MDczMzMsImp3dFVzZXIiOiJINHNJQUFBQUFBQUFBSVdSelU3RE1CQ0VYeVhhc3dPMFNTSE5pVWpoZ1BoUlZkUUxWWVcyc1YxWk9IVmtKNVdneXJ1ekpna1VJc0Z0ZDhiK2R0WStnb0owd3FDQkZKQ1hhZzhNSk5WUFRTVXMxWnJxek92SzFSWnI0elZCbXZQK05SY1NHMTJmRmFZa25YY292aWUvZDd6cUlGMGY0WmZvMjZVeGRaQ2JFaituVmh4U2lkb0pCdmJyUnBZLzNENlNTWXphTm1UeHJtZzNMZXRPYUhVUXJqQldETlQ3UVFoeWNSRGFWRUhXNzNVeW9UcEpNeUs5Tks5ajJFTGptN0I5M0NBTVZuYzlzY3RWL1lneVJyN2ovOGpuN0Mva2hnSDYxTnNZTVJGRk9KVnpER09KUE53bU9BK2pxempDaEUvazdDTHlEN2J6bjdoYTNDeXAyWDF2ZXo1OHNsTTBhSFk1YlQ4QUFWV1hVQUlDQUFBPSIsInNlc3Npb25LZXkiOiJlODNlMTM2YS0yMmYwLTQyMTgtOTEyYS0xZjFhNTUwYTJhZDIiLCJsYXN0SVAiOiIwOjA6MDowOjA6MDowOjEiLCJ1c2VyX25hbWUiOiJhZG1pbiIsInNlc3Npb25JZCI6NTYyLCJ1c2VyR3VpZCI6ImRlZmF1bHQvYWRtaW4iLCJ1c2VySWQiOjEsImF1dGhvcml0aWVzIjpbIlJPTEVfVVNFUiJdLCJjbGllbnRfaWQiOiJhY21lIiwiZmlyc3ROYW1lIjoiU3VwZXIiLCJhdWQiOlsib2F1dGgyLXJlc291cmNlIl0sInNjb3BlIjpbIm9wZW5pZCJdLCJkb21haW5OYW1lIjoiZGVmYXVsdCIsInJlZ2lzdHJhdGlvbkRhdGUiOjE2MTQ4NTM0NTYwMDAsImV4cCI6MTYxNzY0MTQ4Miwic2hvcnRHdWlkIjoiU1VQRVIiLCJqdGkiOiIyMGIxMjE3OC03OWVlLTQyMzItYmQ1Ny0yMzdmYzhhZGUyZjgiLCJlbWFpbCI6InN1cGVyQGRlZmF1bHQuY29tIiwidXNlcm5hbWUiOiJhZG1pbiJ9.xUDYXZl3TvFv70FsThP3NMcXsgI49Jc6QyeyqcNM1lekwgHQQ6-B0thUKK-eXIDSeMjQvqLaljLP-UtbvG4TmprOjeox9L_rn4C-WDD4w6y-ME90Uyj68-0XfYb2FMOuIvy86jP9gV3BESV2ZnObFXy7sGY-pRgCmvuj5IfxfCQzpzAeZarxccquLOEQLIohKheyHgOufPAEO8cprLQKovsyL6YVi6ZwDW8OvZebMaq01KC3AjaxFfAxXBaT3TAzbSDqw8TnF15PUB4QwopA6vYljgYJuhVBC_s3YncPt5JYgO-3wbE4nojpJUhN0rjg9OAkJmaPUpWm1p7BYDW8dIFZgTeotJI4CTcO93SDxfa6TYnAo0yENQ4Fh7B9EvJALerhF0ibSgyIOIeFIA61NF2qjQuFP52GWtNitg3MF0e_RT9Yi9c9PjpOTfMIfkYXdzRMA3UfYsrGs0fQDOdIxncSrL1aJl_UB0GXCJ49wao_BEQnOPANoNoCseIlqfE8-lNJeKjdKH46XPEN1iSxSl-DJ0IJLwxbt5OOyxFD-zOY6GZsUDx1wQUNpx0_75p9xJvTtzIgje2vv3o-nhlXYJ-YZBU97fdK4G9UMA8koozLo3u5QXn3oD15NDkU2UG6P94NM6IeVccJo5RVAa0_oOh_ZgM7qGHPeMs7GU7LyX4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "page",
+									"value": "2",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{lbo-local}}/service-user-mass-action/backoffice/livescore_uk/bonus/cashbonus/upload/table",
+							"host": [
+								"{{lbo-local}}"
+							],
+							"path": [
+								"service-user-mass-action",
+								"backoffice",
+								"livescore_uk",
+								"bonus",
+								"cashbonus",
+								"upload",
+								"table"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "2",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/service-user-mass-action/backoffice/livescore_uk/bonus/cashbonus/process",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJsYXN0TmFtZSI6IkFkbWluaXN0cmF0b3IiLCJsYXN0TG9naW4iOjE2MTQ5Mzk3MDczMzMsImp3dFVzZXIiOiJINHNJQUFBQUFBQUFBSVdSelU3RE1CQ0VYeVhhc3dPMFNTSE5pVWpoZ1BoUlZkUUxWWVcyc1YxWk9IVmtKNVdneXJ1ekpna1VJc0Z0ZDhiK2R0WStnb0owd3FDQkZKQ1hhZzhNSk5WUFRTVXMxWnJxek92SzFSWnI0elZCbXZQK05SY1NHMTJmRmFZa25YY292aWUvZDd6cUlGMGY0WmZvMjZVeGRaQ2JFaituVmh4U2lkb0pCdmJyUnBZLzNENlNTWXphTm1UeHJtZzNMZXRPYUhVUXJqQldETlQ3UVFoeWNSRGFWRUhXNzNVeW9UcEpNeUs5Tks5ajJFTGptN0I5M0NBTVZuYzlzY3RWL1lneVJyN2ovOGpuN0Mva2hnSDYxTnNZTVJGRk9KVnpER09KUE53bU9BK2pxempDaEUvazdDTHlEN2J6bjdoYTNDeXAyWDF2ZXo1OHNsTTBhSFk1YlQ4QUFWV1hVQUlDQUFBPSIsInNlc3Npb25LZXkiOiJlODNlMTM2YS0yMmYwLTQyMTgtOTEyYS0xZjFhNTUwYTJhZDIiLCJsYXN0SVAiOiIwOjA6MDowOjA6MDowOjEiLCJ1c2VyX25hbWUiOiJhZG1pbiIsInNlc3Npb25JZCI6NTYyLCJ1c2VyR3VpZCI6ImRlZmF1bHQvYWRtaW4iLCJ1c2VySWQiOjEsImF1dGhvcml0aWVzIjpbIlJPTEVfVVNFUiJdLCJjbGllbnRfaWQiOiJhY21lIiwiZmlyc3ROYW1lIjoiU3VwZXIiLCJhdWQiOlsib2F1dGgyLXJlc291cmNlIl0sInNjb3BlIjpbIm9wZW5pZCJdLCJkb21haW5OYW1lIjoiZGVmYXVsdCIsInJlZ2lzdHJhdGlvbkRhdGUiOjE2MTQ4NTM0NTYwMDAsImV4cCI6MTYxNzY0MTQ4Miwic2hvcnRHdWlkIjoiU1VQRVIiLCJqdGkiOiIyMGIxMjE3OC03OWVlLTQyMzItYmQ1Ny0yMzdmYzhhZGUyZjgiLCJlbWFpbCI6InN1cGVyQGRlZmF1bHQuY29tIiwidXNlcm5hbWUiOiJhZG1pbiJ9.xUDYXZl3TvFv70FsThP3NMcXsgI49Jc6QyeyqcNM1lekwgHQQ6-B0thUKK-eXIDSeMjQvqLaljLP-UtbvG4TmprOjeox9L_rn4C-WDD4w6y-ME90Uyj68-0XfYb2FMOuIvy86jP9gV3BESV2ZnObFXy7sGY-pRgCmvuj5IfxfCQzpzAeZarxccquLOEQLIohKheyHgOufPAEO8cprLQKovsyL6YVi6ZwDW8OvZebMaq01KC3AjaxFfAxXBaT3TAzbSDqw8TnF15PUB4QwopA6vYljgYJuhVBC_s3YncPt5JYgO-3wbE4nojpJUhN0rjg9OAkJmaPUpWm1p7BYDW8dIFZgTeotJI4CTcO93SDxfa6TYnAo0yENQ4Fh7B9EvJALerhF0ibSgyIOIeFIA61NF2qjQuFP52GWtNitg3MF0e_RT9Yi9c9PjpOTfMIfkYXdzRMA3UfYsrGs0fQDOdIxncSrL1aJl_UB0GXCJ49wao_BEQnOPANoNoCseIlqfE8-lNJeKjdKH46XPEN1iSxSl-DJ0IJLwxbt5OOyxFD-zOY6GZsUDx1wQUNpx0_75p9xJvTtzIgje2vv3o-nhlXYJ-YZBU97fdK4G9UMA8koozLo3u5QXn3oD15NDkU2UG6P94NM6IeVccJo5RVAa0_oOh_ZgM7qGHPeMs7GU7LyX4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"bonusCode\": \"FIVES\",\n    \"defaultAmount\": 15.15,\n    \"description\": \"Testing grant mass bonus job\",\n    \"allowDuplicates\": false\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{lbo-local}}/service-user-mass-action/backoffice/livescore_uk/bonus/cashbonus/process",
+							"host": [
+								"{{lbo-local}}"
+							],
+							"path": [
+								"service-user-mass-action",
+								"backoffice",
+								"livescore_uk",
+								"bonus",
+								"cashbonus",
+								"process"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/service-user-mass-action/backoffice/livescore_uk/bonus/cash-bonus/upload/summary",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJsYXN0TmFtZSI6IkFkbWluaXN0cmF0b3IiLCJsYXN0TG9naW4iOjE2MTQ5Mzk3MDczMzMsImp3dFVzZXIiOiJINHNJQUFBQUFBQUFBSVdSelU3RE1CQ0VYeVhhc3dPMFNTSE5pVWpoZ1BoUlZkUUxWWVcyc1YxWk9IVmtKNVdneXJ1ekpna1VJc0Z0ZDhiK2R0WStnb0owd3FDQkZKQ1hhZzhNSk5WUFRTVXMxWnJxek92SzFSWnI0elZCbXZQK05SY1NHMTJmRmFZa25YY292aWUvZDd6cUlGMGY0WmZvMjZVeGRaQ2JFaituVmh4U2lkb0pCdmJyUnBZLzNENlNTWXphTm1UeHJtZzNMZXRPYUhVUXJqQldETlQ3UVFoeWNSRGFWRUhXNzNVeW9UcEpNeUs5Tks5ajJFTGptN0I5M0NBTVZuYzlzY3RWL1lneVJyN2ovOGpuN0Mva2hnSDYxTnNZTVJGRk9KVnpER09KUE53bU9BK2pxempDaEUvazdDTHlEN2J6bjdoYTNDeXAyWDF2ZXo1OHNsTTBhSFk1YlQ4QUFWV1hVQUlDQUFBPSIsInNlc3Npb25LZXkiOiJlODNlMTM2YS0yMmYwLTQyMTgtOTEyYS0xZjFhNTUwYTJhZDIiLCJsYXN0SVAiOiIwOjA6MDowOjA6MDowOjEiLCJ1c2VyX25hbWUiOiJhZG1pbiIsInNlc3Npb25JZCI6NTYyLCJ1c2VyR3VpZCI6ImRlZmF1bHQvYWRtaW4iLCJ1c2VySWQiOjEsImF1dGhvcml0aWVzIjpbIlJPTEVfVVNFUiJdLCJjbGllbnRfaWQiOiJhY21lIiwiZmlyc3ROYW1lIjoiU3VwZXIiLCJhdWQiOlsib2F1dGgyLXJlc291cmNlIl0sInNjb3BlIjpbIm9wZW5pZCJdLCJkb21haW5OYW1lIjoiZGVmYXVsdCIsInJlZ2lzdHJhdGlvbkRhdGUiOjE2MTQ4NTM0NTYwMDAsImV4cCI6MTYxNzY0MTQ4Miwic2hvcnRHdWlkIjoiU1VQRVIiLCJqdGkiOiIyMGIxMjE3OC03OWVlLTQyMzItYmQ1Ny0yMzdmYzhhZGUyZjgiLCJlbWFpbCI6InN1cGVyQGRlZmF1bHQuY29tIiwidXNlcm5hbWUiOiJhZG1pbiJ9.xUDYXZl3TvFv70FsThP3NMcXsgI49Jc6QyeyqcNM1lekwgHQQ6-B0thUKK-eXIDSeMjQvqLaljLP-UtbvG4TmprOjeox9L_rn4C-WDD4w6y-ME90Uyj68-0XfYb2FMOuIvy86jP9gV3BESV2ZnObFXy7sGY-pRgCmvuj5IfxfCQzpzAeZarxccquLOEQLIohKheyHgOufPAEO8cprLQKovsyL6YVi6ZwDW8OvZebMaq01KC3AjaxFfAxXBaT3TAzbSDqw8TnF15PUB4QwopA6vYljgYJuhVBC_s3YncPt5JYgO-3wbE4nojpJUhN0rjg9OAkJmaPUpWm1p7BYDW8dIFZgTeotJI4CTcO93SDxfa6TYnAo0yENQ4Fh7B9EvJALerhF0ibSgyIOIeFIA61NF2qjQuFP52GWtNitg3MF0e_RT9Yi9c9PjpOTfMIfkYXdzRMA3UfYsrGs0fQDOdIxncSrL1aJl_UB0GXCJ49wao_BEQnOPANoNoCseIlqfE8-lNJeKjdKH46XPEN1iSxSl-DJ0IJLwxbt5OOyxFD-zOY6GZsUDx1wQUNpx0_75p9xJvTtzIgje2vv3o-nhlXYJ-YZBU97fdK4G9UMA8koozLo3u5QXn3oD15NDkU2UG6P94NM6IeVccJo5RVAa0_oOh_ZgM7qGHPeMs7GU7LyX4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{lbo-local}}/service-user-mass-action/backoffice/livescore_uk/bonus/cash-bonus/upload/summary",
+							"host": [
+								"{{lbo-local}}"
+							],
+							"path": [
+								"service-user-mass-action",
+								"backoffice",
+								"livescore_uk",
+								"bonus",
+								"cash-bonus",
+								"upload",
+								"summary"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/service-user-mass-action/backoffice/livescore_uk/bonus/cash-bonus/upload/table/{rowNumber}",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJsYXN0TmFtZSI6IkFkbWluaXN0cmF0b3IiLCJsYXN0TG9naW4iOjE2MTQ5Mzk3MDczMzMsImp3dFVzZXIiOiJINHNJQUFBQUFBQUFBSVdSelU3RE1CQ0VYeVhhc3dPMFNTSE5pVWpoZ1BoUlZkUUxWWVcyc1YxWk9IVmtKNVdneXJ1ekpna1VJc0Z0ZDhiK2R0WStnb0owd3FDQkZKQ1hhZzhNSk5WUFRTVXMxWnJxek92SzFSWnI0elZCbXZQK05SY1NHMTJmRmFZa25YY292aWUvZDd6cUlGMGY0WmZvMjZVeGRaQ2JFaituVmh4U2lkb0pCdmJyUnBZLzNENlNTWXphTm1UeHJtZzNMZXRPYUhVUXJqQldETlQ3UVFoeWNSRGFWRUhXNzNVeW9UcEpNeUs5Tks5ajJFTGptN0I5M0NBTVZuYzlzY3RWL1lneVJyN2ovOGpuN0Mva2hnSDYxTnNZTVJGRk9KVnpER09KUE53bU9BK2pxempDaEUvazdDTHlEN2J6bjdoYTNDeXAyWDF2ZXo1OHNsTTBhSFk1YlQ4QUFWV1hVQUlDQUFBPSIsInNlc3Npb25LZXkiOiJlODNlMTM2YS0yMmYwLTQyMTgtOTEyYS0xZjFhNTUwYTJhZDIiLCJsYXN0SVAiOiIwOjA6MDowOjA6MDowOjEiLCJ1c2VyX25hbWUiOiJhZG1pbiIsInNlc3Npb25JZCI6NTYyLCJ1c2VyR3VpZCI6ImRlZmF1bHQvYWRtaW4iLCJ1c2VySWQiOjEsImF1dGhvcml0aWVzIjpbIlJPTEVfVVNFUiJdLCJjbGllbnRfaWQiOiJhY21lIiwiZmlyc3ROYW1lIjoiU3VwZXIiLCJhdWQiOlsib2F1dGgyLXJlc291cmNlIl0sInNjb3BlIjpbIm9wZW5pZCJdLCJkb21haW5OYW1lIjoiZGVmYXVsdCIsInJlZ2lzdHJhdGlvbkRhdGUiOjE2MTQ4NTM0NTYwMDAsImV4cCI6MTYxNzY0MTQ4Miwic2hvcnRHdWlkIjoiU1VQRVIiLCJqdGkiOiIyMGIxMjE3OC03OWVlLTQyMzItYmQ1Ny0yMzdmYzhhZGUyZjgiLCJlbWFpbCI6InN1cGVyQGRlZmF1bHQuY29tIiwidXNlcm5hbWUiOiJhZG1pbiJ9.xUDYXZl3TvFv70FsThP3NMcXsgI49Jc6QyeyqcNM1lekwgHQQ6-B0thUKK-eXIDSeMjQvqLaljLP-UtbvG4TmprOjeox9L_rn4C-WDD4w6y-ME90Uyj68-0XfYb2FMOuIvy86jP9gV3BESV2ZnObFXy7sGY-pRgCmvuj5IfxfCQzpzAeZarxccquLOEQLIohKheyHgOufPAEO8cprLQKovsyL6YVi6ZwDW8OvZebMaq01KC3AjaxFfAxXBaT3TAzbSDqw8TnF15PUB4QwopA6vYljgYJuhVBC_s3YncPt5JYgO-3wbE4nojpJUhN0rjg9OAkJmaPUpWm1p7BYDW8dIFZgTeotJI4CTcO93SDxfa6TYnAo0yENQ4Fh7B9EvJALerhF0ibSgyIOIeFIA61NF2qjQuFP52GWtNitg3MF0e_RT9Yi9c9PjpOTfMIfkYXdzRMA3UfYsrGs0fQDOdIxncSrL1aJl_UB0GXCJ49wao_BEQnOPANoNoCseIlqfE8-lNJeKjdKH46XPEN1iSxSl-DJ0IJLwxbt5OOyxFD-zOY6GZsUDx1wQUNpx0_75p9xJvTtzIgje2vv3o-nhlXYJ-YZBU97fdK4G9UMA8koozLo3u5QXn3oD15NDkU2UG6P94NM6IeVccJo5RVAa0_oOh_ZgM7qGHPeMs7GU7LyX4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{lbo-local}}/service-user-mass-action/backoffice/livescore_uk/bonus/cash-bonus/upload/table/3",
+							"host": [
+								"{{lbo-local}}"
+							],
+							"path": [
+								"service-user-mass-action",
+								"backoffice",
+								"livescore_uk",
+								"bonus",
+								"cash-bonus",
+								"upload",
+								"table",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJsYXN0TmFtZSI6IkFkbWluaXN0cmF0b3IiLCJsYXN0TG9naW4iOjE2MTQ5Mzk3MDczMzMsImp3dFVzZXIiOiJINHNJQUFBQUFBQUFBSVdSelU3RE1CQ0VYeVhhc3dPMFNTSE5pVWpoZ1BoUlZkUUxWWVcyc1YxWk9IVmtKNVdneXJ1ekpna1VJc0Z0ZDhiK2R0WStnb0owd3FDQkZKQ1hhZzhNSk5WUFRTVXMxWnJxek92SzFSWnI0elZCbXZQK05SY1NHMTJmRmFZa25YY292aWUvZDd6cUlGMGY0WmZvMjZVeGRaQ2JFaituVmh4U2lkb0pCdmJyUnBZLzNENlNTWXphTm1UeHJtZzNMZXRPYUhVUXJqQldETlQ3UVFoeWNSRGFWRUhXNzNVeW9UcEpNeUs5Tks5ajJFTGptN0I5M0NBTVZuYzlzY3RWL1lneVJyN2ovOGpuN0Mva2hnSDYxTnNZTVJGRk9KVnpER09KUE53bU9BK2pxempDaEUvazdDTHlEN2J6bjdoYTNDeXAyWDF2ZXo1OHNsTTBhSFk1YlQ4QUFWV1hVQUlDQUFBPSIsInNlc3Npb25LZXkiOiJlODNlMTM2YS0yMmYwLTQyMTgtOTEyYS0xZjFhNTUwYTJhZDIiLCJsYXN0SVAiOiIwOjA6MDowOjA6MDowOjEiLCJ1c2VyX25hbWUiOiJhZG1pbiIsInNlc3Npb25JZCI6NTYyLCJ1c2VyR3VpZCI6ImRlZmF1bHQvYWRtaW4iLCJ1c2VySWQiOjEsImF1dGhvcml0aWVzIjpbIlJPTEVfVVNFUiJdLCJjbGllbnRfaWQiOiJhY21lIiwiZmlyc3ROYW1lIjoiU3VwZXIiLCJhdWQiOlsib2F1dGgyLXJlc291cmNlIl0sInNjb3BlIjpbIm9wZW5pZCJdLCJkb21haW5OYW1lIjoiZGVmYXVsdCIsInJlZ2lzdHJhdGlvbkRhdGUiOjE2MTQ4NTM0NTYwMDAsImV4cCI6MTYxNzY0MTQ4Miwic2hvcnRHdWlkIjoiU1VQRVIiLCJqdGkiOiIyMGIxMjE3OC03OWVlLTQyMzItYmQ1Ny0yMzdmYzhhZGUyZjgiLCJlbWFpbCI6InN1cGVyQGRlZmF1bHQuY29tIiwidXNlcm5hbWUiOiJhZG1pbiJ9.xUDYXZl3TvFv70FsThP3NMcXsgI49Jc6QyeyqcNM1lekwgHQQ6-B0thUKK-eXIDSeMjQvqLaljLP-UtbvG4TmprOjeox9L_rn4C-WDD4w6y-ME90Uyj68-0XfYb2FMOuIvy86jP9gV3BESV2ZnObFXy7sGY-pRgCmvuj5IfxfCQzpzAeZarxccquLOEQLIohKheyHgOufPAEO8cprLQKovsyL6YVi6ZwDW8OvZebMaq01KC3AjaxFfAxXBaT3TAzbSDqw8TnF15PUB4QwopA6vYljgYJuhVBC_s3YncPt5JYgO-3wbE4nojpJUhN0rjg9OAkJmaPUpWm1p7BYDW8dIFZgTeotJI4CTcO93SDxfa6TYnAo0yENQ4Fh7B9EvJALerhF0ibSgyIOIeFIA61NF2qjQuFP52GWtNitg3MF0e_RT9Yi9c9PjpOTfMIfkYXdzRMA3UfYsrGs0fQDOdIxncSrL1aJl_UB0GXCJ49wao_BEQnOPANoNoCseIlqfE8-lNJeKjdKH46XPEN1iSxSl-DJ0IJLwxbt5OOyxFD-zOY6GZsUDx1wQUNpx0_75p9xJvTtzIgje2vv3o-nhlXYJ-YZBU97fdK4G9UMA8koozLo3u5QXn3oD15NDkU2UG6P94NM6IeVccJo5RVAa0_oOh_ZgM7qGHPeMs7GU7LyX4",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}

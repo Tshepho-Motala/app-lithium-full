@@ -1,0 +1,244 @@
+= LSPLAT-7054 PLAT-7736 ⁃ Provide FE endpoint from Lithium to store favourites in LOB storage
+Irwin Herridge <irwin.herridge@wonderlabz.com>
+1.0, September 2, 2022:: TA - LSPLAT-7054 PLAT-7736 ⁃ Provide FE endpoint from Lithium to store favourites in LOB storage
+:sectnums:
+:toc: left
+:toclevels: 4
+:toc-title: LSPLAT-7054 PLAT-7736
+:icons: font
+:url-quickref: https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/
+
+== Information
+=== Tickets
+* https://jira.livescore.com/browse/PLAT-7736
+* https://playsafe.atlassian.net/browse/LSPLAT-7054
+
+=== Dependencies
+* N/A
+
+=== MR
+* https://gitlab.com/playsafe/lithium/app-lithium-full/-/merge_requests/5563
+* This MR contains the branch that should be used to complete this task!
+
+=== External Dependencies
+IMPORTANT: To be completed *before* development starts
+
+TIP: TL to facilitate timeline and communication to external parties for the changes.
+
+==== Swagger
+* Two new `{gateway}/service-user/frontend/profile/favourites` endpoints
+** See 3.2.1 for more info
+
+==== DWH
+* ERD update on `lithium_user`
+* DWH would be able to see changes via clients side tracking on favourite changes, current quick
+solution only catering for storing json as a large object.
+
+==== Other
+* Any other external providers that might need consideration. e.g. eXtremePush/Roxor
+
+== Description
+
+* Lithium to provide an endpoint to FE which will be used to add/update a JSON string containing all the events favourited by a player either from betting/media (shared)
+** FE requires a mechanism, for storing players' favourite events and compititions coming up
+** Favourites need to be shared between media and betting account
+** Lithium to make use of LOB storage to store the events and compitition favourites as a large json string per ecosystem user (new table)
+
+=== Acceptance criteria
+
+* Ecosystem sync enabled between favourites
+* When a player adds favourites to LSB, then they should be able to retrieve the same stored favourites from LSM and vice versa
+* Both events and competitions are can be stored and retrieved via the new frontend favourites endpoints
+
+== Architecture
+
+=== ERD
+
+.lithium_user ERD (!full schema)
+[plantuml]
+----
+@startuml
+'https://plantuml.com/class-diagram
+
+skinparam linetype ortho
+!define T(name,desc) class name as "desc" << (T,#FFAAAA) >>
+
+!define pk(x) <b>x</b>
+!define fk(x) <color:purple><i>x</i></color>
+!define unique(x) <color:green>x</color>
+!define nn(x) <u>x</u>
+
+T(user, "user\n Contains some users") {
+  pk(id) bigint <<generated>>
+  --
+  fk(current_id): bigint
+  fk(domain_id): bigint
+  fk(user_favourites_id): bigint
+  fk(postal_address_id): bigint
+  fk(residential_address_id):  bigint
+  fk(status_id): bigint
+  fk(status_reason_id): bigint
+  fk(last_login_id): bigint
+  fk(user_api_token_id): bigint
+  fk(verification_status): bigint
+  --
+  nn(unique(guid)): varchar(100)
+  nn(created_date): datetime
+  nn(updated_date): datetime
+  nn(username): varchar(35)
+  nn(test_account): bit default b'0'
+  nn(deleted): bit
+  external_username: varchar(35)
+  email: varchar(255)
+  deleted_email: varchar(255)
+  cellphone_number: varchar(255)
+  deleted_cellphone_number: varchar(255)
+  telephone_number: varchar(255)
+  deleted_telephone_number: varchar(255)
+  first_name: varchar(35)
+  last_name_prefix: varchar(255)
+  last_name: varchar(35)
+  gender: varchar(10)
+  dob_year: int
+  dob_month: int
+  dob_day: int
+  country_code: varchar(255)
+  place_of_birth: varchar(255)
+  social_security_number: varchar(15)
+  timezone: varchar(255)
+  comments: longtext
+  password_plaintext: varchar(255)
+  password_hash: varchar(255)
+  password_updated: datetime
+  password_updated_by: varchar(255)
+  referrer_guid: varchar(255)
+  age_verified: bit default b'0'
+  address_verified: bit default b'0'
+  email_validated: bit default b'0'
+  cellphone_validated: bit default b'0'
+  email_opt_out: bit default b'0'
+  sms_opt_out: bit default b'0'
+  call_opt_out: bit default b'0'
+  post_opt_out: bit default b'0'
+  promotions_opt_out: bit default b'0'
+  push_opt_out: bit default b'0'
+  leaderboard_opt_out: bit default b'0'
+  comms_opt_in_complete: bit default b'0'
+  excessive_failed_login_block: bit
+  auto_withdrawal_allowed: bit
+  failed_reset_count: int
+  welcome_email_sent: bit default b'0'
+  welcome_sms_sent: bit default b'0'
+  has_self_excluded: bit
+  bonus_code: varchar(20)
+  protection_of_customer_funds_version: varchar(35)
+  terms_and_conditions_version: varchar(35)
+  version: int
+}
+
+T(domain, "domain\n Domains registered in the system") {
+  pk(id) bigint <<generated>>
+  --
+  nn(unique(name)): varchar(255)
+  version: int
+}
+
+T(user_favourites, "user_favourites\n User favourites") #lightBlue {
+  pk(id): bigint <<generated>>
+  --
+  events: longtext
+  competitions: longtext
+  last_updated: datetime
+}
+
+user }o--|| domain
+user }|--o| user_favourites
+
+@enduml
+----
+
+=== Frontend Endpoints
+
+. Create two new `/frontend/profile/favourites` endpoints that may be used to retrieve or add/update a players' favourites added from the FE (shared between all linked ecosystem users)
+* Create a new `FrontendUserProfileFavouritesController`
+
+[cols="a,a]
+|===
+|Endpoint path |Description
+
+|GET `{gateway}/service-user/frontend/profile/favourites`
+
+Response body: `{ "events": "json_string", "competitions": "json_string" }`
+
+|Returns the user_favourites linked(`lithium_user.user.user_favourites_id`) against the players profile
+
+|POST `{gateway}/service-user/frontend/profile/favourites`
+
+Request body: `{ "events": "json_string", "competitions": "json_string" }`
+
+|Used to store favourites against a players profile, saved as LOB storage containing the entire favourites list as a json string.
+
+Status 200 on success
+|===
+
+* Request and response body:
+[source, java]
+----
+package lithium.service.user.client.objects;
+
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class UserFavourites {
+    private String events;
+    private String competitions;
+}
+----
+
+=== Ecosystem Sync
+
+. Ensure that `lithium_user.user.user_favourites_id` is not excluded from ecosystem sync `UserLinkService#synchroniseUserData` (only mentioning it here for reference as this should be default behaviour unless explicitly excluded)
+* This will allow for all linked domain users retrieval to the last updated favourites json string. (i.e. 1 user_favourites row shared between all ecosystem users)
+* On UserLinkService#synchroniseUserData, exclude user_favourites_id from sync when it is null (NB! to avoid backwards syncing to null)
+
+=== Example Data model
+
+.lithium_user.user (only showing relevant columns)
+
+|===
+|id |guid |user_favourites_id
+
+|1234 |"livescore_nl/1234" |1
+|1235 |"livescore_media/1235" |1
+|1236 |"livescore_nl/1236" |2
+|1237 |"livescore_media/1237" |2
+|1238 |"livescore_nigeria/1238" |3
+|===
+
+* Reading from the above table, users within an ecosystem shares the same user_favourites record
+
+.lithium_user.user_favourites
+|===
+|id |events |compititions| last_updated
+
+|1
+|"[{"sportId": 12, "eventName": "Sharks vs Bulls", "startTime": "12:00", "eventId":"23"}]"
+|"[{"sportId": 12, "compName": "Curry Cup", "startTime": "10:00", "compId": "23"}]}"
+|2022-09-01 08:19:12
+
+|2
+|"[{"sportId": 12, "eventName": "Sharks vs Bulls", "startTime": "12:00", "eventId":"23"}, {"sportId": 13, "eventName": "Lions vs Cheetas", "startTime": "14:00", "eventId":"25"}]"
+|"[{"sportId": 12, "compName": "Curry Cup", "startTime": "10:00", "compId": "23"}]}"
+|2022-09-02 12:57:23
+
+|3
+|"[{"sportId": 13, "eventName": "Lions vs Cheetas", "startTime": "14:00", "eventId":"25"}]"
+|"[{"sportId": 12, "compName": "Curry Cup", "startTime": "10:00", "compId": "23"}]}"
+|2022-09-05 11:45:25
+|===

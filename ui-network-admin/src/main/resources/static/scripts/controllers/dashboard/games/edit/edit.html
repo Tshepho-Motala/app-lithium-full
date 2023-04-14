@@ -1,0 +1,79 @@
+<form ng-submit="controller.onSubmit()" name="controller.form" novalidate>
+<div class="row v-reset-row " bs-loading-overlay bs-loading-overlay-reference-id="{{controller.referenceId}}_SAVE">
+	<div class="col-md-12">
+		<div class="nav-tabs-custom" style="margin-bottom: 0px;">
+			<div class="tab-content" style="padding: 5px;">
+				<div class="well" style="margin-bottom: 1px;" ng-class="{ 'processor-order-changed': controller.hasFormChanged() }">
+					<div class="row v-reset-row ">
+						<div class="col-xs-12">
+							<button-save></button-save>
+							<button-reset ng-click="controller.resetModel()"></button-reset>
+							<button-cancel ng-click="controller.cancel()"></button-cancel>
+							<br/><br/>
+						</div>
+						<div class="col-md-6 col-xs-12">
+							<div class="box box-default box-solid">
+								<div class="box-header with-border">
+									{{ 'UI_NETWORK_ADMIN.GAME.SUMMARY' | translate }}
+								</div>
+								<div class="box-body table-responsive">
+									<formly-form model="controller.model" fields="controller.fields" options="controller.options" form="controller.form">
+									</formly-form>
+								</div>
+							</div>
+						</div>
+						<div class="col-md-6 col-xs-12">
+							<div class="box box-default box-solid">
+								<div class="box-header with-border">
+									{{ 'UI_NETWORK_ADMIN.GAME.CHANNEL.HEADER' | translate }}
+								</div>
+								<div class="box-body table-responsive">
+									<formly-form model="controller.model" fields="controller.channelFields" options="controller.options" form="controller.form">
+									</formly-form>
+								</div>
+							</div>
+							<div class="box box-default box-solid">
+								<div class="box-header with-border">
+									{{ 'UI_NETWORK_ADMIN.GAME.LABELS' | translate }}
+								</div>
+								<div class="box-body table-responsive">
+									<formly-form model="controller.model" fields="controller.labelFields" options="controller.options" form="controller.form">
+									</formly-form>
+								</div>
+							</div>
+							<div class="box box-default box-solid">
+								<div class="box-header with-border">
+									{{'UI_NETWORK_ADMIN.GAME.CURRENCY.TITLE'|translate}}
+								</div>
+								<div class="box-body table-responsive">
+									<formly-form model="controller.model" fields="controller.fieldsGameCurrency" options="controller.options" form="controller.form">
+									</formly-form>
+								</div>
+							</div>
+							<div ng-if="controller.model.locked === true" class="box box-default box-solid">
+								<div class="box-header with-border">
+									{{ 'UI_NETWORK_ADMIN.GAME.LOCK.TITLE' | translate }}
+								</div>
+								<div class="box-body table-responsive">
+									<formly-form model="controller.model" fields="controller.fieldsLockMsg" options="controller.options" form="controller.form">
+									</formly-form>
+<!-- 									<p class="help-block">{{ 'UI_NETWORK_ADMIN.GAME.FIELDS.LOCKMSG.DESCRIPTION' | translate }}</p> -->
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="col-xs-12" style="margin-top: 15px;margin-bottom: 15px;" ng-if="controller.hasFormChanged()">
+		<div class="card-danger-shadow">
+			<div class="card card-block">
+				<span class="description" align="center">
+					{{'UI_NETWORK_ADMIN.GAME.UNSAVED'|translate}}
+				</span>
+			</div>
+		</div>
+	</div>
+</div>
+</form>

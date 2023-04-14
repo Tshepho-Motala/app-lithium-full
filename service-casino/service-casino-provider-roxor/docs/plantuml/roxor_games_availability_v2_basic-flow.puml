@@ -1,0 +1,34 @@
+.Basic Flow
+[plantuml]
+----
+
+@startuml
+
+participant "svc-accounting-pr-int" as sa
+
+participant "rabbitmq" as r
+participant "svc-games" as g
+participant "scp-roxor" as rx
+participant "external-roxor-api" as erx
+
+actor player as p
+
+sa->r: Completed Transaction Event published
+g->r: Implements Consumer for Completed Transaction Events
+alt check property=lithium.queue.free-game-metadata-enabled=true
+    g->r: Pushes new msg, for bets performed on freegames
+end
+rx->r: Implements Consumer for new msg's published from svc-games
+alt first bet for the day
+    rx->erx++: retrieve meta data from roxor api
+    erx->rx--: meta data returned and saved on new table created
+else for every subsequent winning bet
+    rx->erx++: retrieve meta data from roxor api
+    erx->rx--: meta data returned and saved on new table created
+end
+
+p->rx++: Request for freegame meta data
+rx->p--: Response for freegame meta data
+
+@enduml
+----

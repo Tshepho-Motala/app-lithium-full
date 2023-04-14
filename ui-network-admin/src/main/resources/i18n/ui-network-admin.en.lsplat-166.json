@@ -1,0 +1,38 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "SIGNUPEVENTS": {
+      "DOMAINS": {
+        "TOGGLE_DROPDOWN": {
+          "LABEL": "Toggle Dropdown"
+        },
+        "DOMAIN_SELECT_ALL": {
+          "LABEL": "All Domains"
+        }
+      },
+      "USER": {
+        "EMAIL": "Email"
+      },
+      "FILTERS": {
+        "SUCCESSFUL": {
+          "LABEL": "Successful"
+        },
+        "SIGNUP_DATE_RANGE_START": {
+          "LABEL": "Signup Date: Range Start"
+        },
+        "SIGNUP_DATE_RANGE_END": {
+          "LABEL": "Signup Date: Range End"
+        },
+        "USER": {
+          "LABEL": "User",
+          "PLACEHOLDER": "search player username",
+          "NO_RESULTS": "No User Results Found"
+        },
+        "EMAIL": {
+          "LABEL": "Email",
+          "PLACEHOLDER": "search player email",
+          "NO_RESULTS": "No Email Results Found"
+        }
+      }
+    }
+  }
+}

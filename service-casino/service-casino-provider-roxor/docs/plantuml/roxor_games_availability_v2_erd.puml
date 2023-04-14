@@ -1,0 +1,74 @@
+[plantuml]
+----
+
+@startuml
+
+'hide the spot
+hide circle
+
+' avoid problems with angled crows feet
+skinparam linetype ortho
+
+entity "Domain" as d {
+  *id : number <<generated>>
+  --
+  name : text
+}
+
+entity "User" as user {
+  *id : number <<generated>>
+  --
+  guid : text
+  apiToken : text
+  domain_id : number <<FK>>
+}
+
+entity "Game" as g {
+  *id : number <<generated>>
+  --
+  guid : text
+}
+
+entity "GamesAvailability" as ga {
+  *id : number <<generated>>
+  --
+  *user_id : number <<FK>>
+  *game_id : number <<FK>>
+  *status: text
+  summary_id: number <<FK>>
+}
+
+entity "Summary" as s {
+  *id : number <<generated>>
+  --
+  currentDay: text
+  daysPlayed: text
+  mfgEarnedPicks: number
+  mfgStatus: text
+  dfgPicksRemaining: boolean
+  win_id: number <<FK>
+}
+
+entity "Win" as w {
+  *id : number <<generated>>
+  --
+  timestamp : timestamp
+  prize_id: number <<FK>>
+}
+
+entity "Prize" as p {
+  *id : number <<generated>>
+  --
+  prizeType : text
+  amount: number
+}
+
+user }o..|| d
+user ||..o{ ga
+g ||..o{ ga
+ga ||..|| s
+s ||..o{ w
+w ||..|| p
+
+@enduml
+----

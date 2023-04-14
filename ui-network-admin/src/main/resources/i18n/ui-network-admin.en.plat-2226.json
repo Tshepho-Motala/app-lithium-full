@@ -1,0 +1,22 @@
+{
+  "GLOBAL": {
+    "PLACE_OF_BIRTH": {
+      "NAME": "Place Of Birth",
+      "PLACEHOLDER": "Place Of Birth"
+    },
+    "FIELDS": {
+      "PLACE_OF_BIRTH": "Place Of Birth"
+    }
+  },
+  "UI_NETWORK_ADMIN": {
+    "PLAYER": {
+      "QUICK_ACTIONS": {
+        "FIELDS": {
+          "CHANGE_PLACE_OF_BIRTH": {
+            "NAME": "Change Place Of Birth"
+          }
+        }
+      }
+    }
+  }
+}

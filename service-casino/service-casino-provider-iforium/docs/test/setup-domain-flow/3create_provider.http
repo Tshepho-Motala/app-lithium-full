@@ -1,0 +1,20 @@
+POST http://localhost:9800/services/service-domain/domain/livescore_uk/providers/add
+Authorization: Bearer {{USERTOKEN_UK}}
+Content-Type: application/json;charset=UTF-8
+
+{
+  "type": "CASINO",
+  "url": "service-casino-provider-iforium",
+  "name": "Iforium"
+}
+
+###
+POST http://localhost:9800/services/service-domain/domain/livescore_ua/providers/add
+Authorization: Bearer {{USERTOKEN_UA}}
+Content-Type: application/json;charset=UTF-8
+
+{
+  "type": "CASINO",
+  "url": "service-casino-provider-iforium",
+  "name": "Iforium"
+}

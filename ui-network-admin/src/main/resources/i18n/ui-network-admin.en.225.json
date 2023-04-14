@@ -1,0 +1,59 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "CASINO": {
+      "LOBBIES": {
+        "HEADER": {
+          "TITLE": "Casino Lobbies",
+          "DESCRIPTION": "To manage game and promotional content within the Casino Lobby pages"
+        },
+        "INVALID_JSON": "Invalid JSON. Please fix the formatting and submit again.",
+        "ADD": {
+          "TITLE": "Adding a Casino Lobby Configuration",
+          "LOBBY_EXISTS_CHECK_FAIL": "Failed to check for an existing lobby configuration.",
+          "LOBBY_EXISTS": "A lobby configuration for this domain already exists. Please modify the existing configuration.",
+          "SUCCESS": "Lobby configuration saved successfully.",
+          "ERROR": "An error occurred while trying to save the lobby configuration.",
+          "FIELDS": {
+            "DESCRIPTION": {
+              "NAME": "Description",
+              "DESCRIPTION": "Add a description for the lobby configuration"
+            },
+            "JSON": {
+              "NAME": "JSON",
+              "DESCRIPTION": "Raw lobby configuration in JSON format"
+            }
+          }
+        },
+        "EDIT": {
+          "TITLE": "Editing Lobby Configuration",
+          "SAVE_SUCCESS": "Lobby saved successfully.",
+          "SAVE_FAIL": "Lobby could not be saved.",
+          "MODIFY_SUCCESS": "Lobby modified successfully.",
+          "MODIFY_FAIL": "Lobby could not be modified."
+        },
+        "VIEW": {
+          "OLD_REVISION": "You are viewing an older revision of this lobby configuration.",
+          "EDIT_STARTED": "Lobby configuration edit started by {{createdBy}}. Click modify to continue editing the lobby configuration."
+        },
+        "FIELDS": {
+          "ID": "ID",
+          "DESCRIPTION": "Description",
+          "CREATED_BY": "Created By",
+          "CREATED_DATE": "Created Date",
+          "MODIFIED_DATE": "Modified Date",
+          "MODIFIED_BY": "Modified By"
+        }
+      },
+      "LOBBY": {
+        "TAB": {
+          "VIEW": "Viewing Casino Lobby Configuration",
+          "REVISIONS": "Viewing Casino Lobby Revisions"
+        },
+        "REVISIONS": {
+          "TITLE": "Casino Lobby Revisions ({{lobbyId}})",
+          "DESCRIPTION": "A history of changes on the casino lobby"
+        }
+      }
+    }
+  }
+}

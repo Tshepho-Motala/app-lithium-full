@@ -1,0 +1,3 @@
+= External DWH Restrictions Controller - /lookup
+
+include::plantuml//sequence/external/lookup-dwh-restrictions.puml[]

@@ -1,0 +1,35 @@
+server:
+  port: 1996
+  
+spring:
+  application:
+    name: service-casino-provider-cataboom
+  cloud:
+    stream:
+      bindings:
+        consumer:
+          group: triggerbonusgroup
+          binder: rabbit
+          destination: triggerbonusqueue
+  datasource:
+    url: jdbc:mysql://localhost/lithium_provider_cataboom_campaign
+    username: root
+    password: mysql
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: validate
+  flyway:
+    enabled: true
+    
+eureka:
+  instance:
+    appname: service-casino-provider-cataboom
+  
+logging:
+  level:
+    service.casino.provider.cataboom: INFO
+    
+lithium:
+  services:
+    db.load-test-data: false

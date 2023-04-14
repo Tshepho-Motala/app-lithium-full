@@ -1,0 +1,83 @@
+{	
+	"GLOBAL": {
+		"ADDRESS": {
+			"PHYSICALADDRESS": "Physical Address",
+			"BILLINGADDRESS": "Billing Address"
+		}
+	},
+	"UI_NETWORK_ADMIN": {
+		"SERVICE_ENTITY": {
+			"ENTITIES": {
+				"LIST": {
+					"TITLE": "Entities List",
+					"DESCRIPTION": "A searchable list of all entities",
+					"ALLTYPES": "All Types",
+					"NAME": "Name",
+					"TYPE": "Type",
+					"STATUS": "Status"
+				},
+				"FIELDS": {
+					"STATUS": {
+						"NAME": "Status",
+						"DESCRIPTION": "Select the entity status"
+					},
+					"NAME": {
+						"NAME": "Name",
+						"DESCRIPTION": "Enter the entity name"
+					},
+					"TYPE": {
+						"NAME": "Type",
+						"DESCRIPTION": "Select the entity type"
+					},
+					"EMAIL": {
+						"NAME": "Email",
+						"DESCRIPTION": "Enter the e-mail address of the machine operator"
+					},
+					"BANKDETAILS": {
+						"NAME": {
+							"NAME": "Bank Name",
+							"DESCRIPTION": "Enter the bank name"
+						},
+						"BRANCHCODE": {
+							"NAME": "Branch Code",
+							"DESCRIPTION": "Enter the branch code"
+						},
+						"ACCOUNTNUMBER": {
+							"NAME": "Account Number",
+							"DESCRIPTION": "Enter the account number"
+						},
+						"ACCOUNTTYPE": {
+							"NAME": "Account Type",
+							"DESCRIPTION": "Enter the account type"
+						},
+						"ACCOUNTHOLDER": {
+							"NAME": "Account Holder",
+							"DESCRIPTION": "Enter the account holder"
+						}
+					}
+				},
+				"ADD": {
+					"SUCCESS": "Entity has been created"
+				},
+				"VIEW": {
+					"ADDRESSCHANGED": {
+						"SUCCESS": "Address changed"
+					},
+					"ENTITYBANKDETAILSCHANGED": {
+						"SUCCESS": "Entity bank details updated"
+					},
+					"ENTITYDETAILSCHANGED": {
+						"SUCCESS": "Entity details updated"
+					}
+				},
+				"TITLES": {
+					"STATUS": "Status",
+					"DETAILS": "Details",
+					"BANKDETAILS": "Bank Details",
+					"CHANGEENTITYBANKDETAILS": "Change Entity Bank Details",
+					"CHANGEENTITYDETAILS": "Change Entity Details"
+				}
+			}
+		}
+	}
+}

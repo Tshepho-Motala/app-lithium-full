@@ -1,0 +1,62 @@
+# LBO-SDK Documentation
+
+This SDK is used to create modular, standalone components in order to generate valid UMD modules for dynamic website injection.
+
+Please familiarise yourself will all the documentation around the SDK. There will be changes and alterations as the project matures so please expect this to be a continuously living document.  
+
+> **Documentation Warriors** - If you find the documentation lacking any points, information, or references, please feel free to add and update where necessary. Make sure to fully word the updates and ensure proper grammar and spelling.
+
+---
+
+## Project Setup
+
+*Quick start* describes how to quickly setup your local environment and get the SDK working.
+
+*Local SDK* provides more details into the SDK and how it functions.
+
+## Coding Documentation
+
+Overview provides insight into definitions and understandings behind the SDK.  
+
+*Naming Conventions* guides how to name classes, folders, etc.
+
+*DOM Test Reference* shows how to add specific data elements to various DOM objects for automated testing.
+
+## Project Documentation
+
+*Plugin Registration and Routing* describes how to register a new plugin and include it in the routing system.
+
+*State Management* describes using VueX as a single state machine to decouple data and UI elements.
+
+*API Communications* describe how to communicate to the Lithium API from within the Vue framework.
+
+*Logging* describes how to correctly log output.
+
+*Packages* describes when and when not to install 3rd party NPM packages.
+
+*Mixins* describes mixing functionality and usage.
+
+---
+
+### FAQ
+
+Q: Where do I place new Plugins?  
+A:  See [Routing](#routing)  
+
+Q: Where do I register my plugin?  
+A:  See [Routing](#routing)  
+
+Q: What is the `core` folder for?  
+A: To house functionality and components required for the SDK to function correctly  
+
+Q: Where do I setup mock data and mock functions?  
+A: `./src/mock/RootScopeMock.ts`  
+
+Q: Are there naming conventions for DOM ID's?  
+A: `[page]-[control]-[reference]` - eg: `id="login-button-signin`, `playerprofile-label-fullname`, etc  
+
+Q: How can I build with only the custom CSS I generated?  
+A: The Vue ecosystem does not handle this use-case currently, a ticket for this is here: <https://github.com/vuejs/vue-cli/issues/6675>  
+
+Q: But I really need custom CSS  
+A: Any custom CSS you add to a Vue control **MUST NOT BE** scoped, and you'll need to copy/paste the custom CSS classes into an existing CSS file on LBO side.

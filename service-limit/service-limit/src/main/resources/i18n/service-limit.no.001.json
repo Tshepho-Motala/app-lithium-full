@@ -1,0 +1,10 @@
+{
+	"SERVICE-LIMIT": {
+		"DAILY_LOSS_LIMIT_REACHED": "Beklager! Din dagsgrense for tap, kr {0}, er oppnådd.",
+		"MONTHLY_LOSS_LIMIT_REACHED": "Beklager! Din månedsgrense for tap, kr {0}, er oppnådd.",
+		"DAILY_WIN_LIMIT_REACHED": "Beklager! Din dagsgrense for gevinster, kr {0}, er oppnådd.",
+		"MONTHLY_WIN_LIMIT_REACHED": "Beklager! Din månedsgrense for gevinster, kr {0}, er oppnådd.",
+		"SELF_EXCLUSION_PERMANENT" : "Beklager! Du har ekskludert deg permanent fra å spille. Kontakt vår kundeservice om du mener dette er feil.",
+		"SELF_EXCLUSION_DATE" : "Beklager! Du har ekskludert deg selv fra å spille frem til {0}."
+	}
+}

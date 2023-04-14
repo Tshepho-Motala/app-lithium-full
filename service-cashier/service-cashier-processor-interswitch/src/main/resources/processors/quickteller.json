@@ -1,0 +1,43 @@
+{
+  "name": "Quickteller",
+  "code": "quickteller",
+  "url": "service-cashier-processor-interswitch",
+  "methodNames": ["quickteller"],
+  "deposit": true,
+  "withdraw": false,
+  "fees": {
+    "flat": 0,
+    "percentage": 0,
+    "minimum": 0
+  },
+  "limits": {
+    "minAmount": 2500,
+    "maxAmount": 100000000,
+    "maxAmountDay": 1000000000,
+    "maxAmountWeek": 1000000000,
+    "maxAmountMonth": 1000000000,
+    "maxTransactionsDay": 1000000000,
+    "maxTransactionsWeek": 1000000000,
+    "maxTransactionsMonth": 1000000000
+  },
+  "properties": [
+    {
+      "name": "merchant_reference",
+      "defaultValue": "",
+      "type": "string",
+      "description": "Unique ID given by Interswitch to the client using the bill payment solution"
+    },
+    {
+      "name": "currency_code_str",
+      "defaultValue": "NGN",
+      "type": "string",
+      "description": "ISO 4217 standard string currency code, currency code for Naira is 'NGN'"
+    },
+    {
+      "name": "block_unverified_users",
+      "defaultValue": "false",
+      "type": "boolean",
+      "description": "Block deposits for unverified users"
+    }
+  ]
+}

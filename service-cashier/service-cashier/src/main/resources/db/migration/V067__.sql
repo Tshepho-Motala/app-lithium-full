@@ -1,0 +1,1 @@
+CREATE INDEX `idx_twh_timestamp` ON `transaction_workflow_history` (`timestamp`) ALGORITHM INPLACE LOCK NONE;

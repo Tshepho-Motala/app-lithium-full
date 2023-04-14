@@ -1,0 +1,95 @@
+$ k6 run --env VUS=100 --env DURATION=10m main.js
+
+          /\      |‾‾| /‾‾/   /‾‾/
+     /\  /  \     |  |/  /   /  /
+    /  \/    \    |     (   /   ‾‾\
+   /          \   |  |\  \ |  (‾)  |
+  / __________ \  |__| \__\ \_____/ .io
+
+  execution: local
+     script: main.js
+     output: -
+
+  scenarios: (100.00%) 1 scenario, 100 max VUs, 10m30s max duration (incl. graceful stop):
+           * perf_test: 100 looping VUs for 10m0s (exec: perfTest, gracefulStop: 30s)
+
+WARN[0052] Request Failed                                error="Post \"http://localhost:9816/v1.0/balance\": dial tcp 127.0.0.1:9816: connect: can't assign requested address"
+WARN[0052] Request Failed                                error="Post \"http://localhost:9816/v1.0/balance\": dial tcp 127.0.0.1:9816: connect: can't assign requested address"
+WARN[0052] Request Failed                                error="Post \"http://localhost:9816/v1.0/balance\": dial tcp 127.0.0.1:9816: connect: can't assign requested address"
+WARN[0053] Request Failed                                error="Post \"http://localhost:9816/v1.0/balance\": dial tcp 127.0.0.1:9816: connect: can't assign requested address"
+WARN[0053] Request Failed                                error="Post \"http://localhost:9816/v1.0/balance\": dial tcp 127.0.0.1:9816: connect: can't assign requested address"
+WARN[0053] Request Failed                                error="Post \"http://localhost:9816/v1.0/balance\": dial tcp 127.0.0.1:9816: connect: can't assign requested address"
+WARN[0054] Request Failed                                error="Post \"http://localhost:9816/v1.0/balance\": dial tcp 127.0.0.1:9816: connect: can't assign requested address"
+WARN[0054] Request Failed                                error="Post \"http://localhost:9816/v1.0/balance\": dial tcp 127.0.0.1:9816: connect: can't assign requested address"
+WARN[0054] Request Failed                                error="Post \"http://localhost:9816/v1.0/balance\": dial tcp 127.0.0.1:9816: connect: can't assign requested address"
+WARN[0081] Request Failed                                error="Post \"http://localhost:9816/v1.0/balance\": dial tcp 127.0.0.1:9816: connect: operation timed out"
+WARN[0082] Request Failed                                error="Post \"http://localhost:9816/v1.0/balance\": dial tcp 127.0.0.1:9816: connect: operation timed out"
+WARN[0082] Request Failed                                error="Post \"http://localhost:9816/v1.0/balance\": dial tcp 127.0.0.1:9816: connect: operation timed out"
+WARN[0082] Request Failed                                error="Post \"http://localhost:9816/v1.0/balance\": dial tcp 127.0.0.1:9816: connect: operation timed out"
+WARN[0082] Request Failed                                error="Post \"http://localhost:9816/v1.0/balance\": dial tcp 127.0.0.1:9816: connect: operation timed out"
+WARN[0082] Request Failed                                error="Post \"http://localhost:9816/v1.0/balance\": dial tcp 127.0.0.1:9816: connect: operation timed out"
+WARN[0082] Request Failed                                error="Post \"http://localhost:9816/v1.0/balance\": dial tcp 127.0.0.1:9816: connect: operation timed out"
+WARN[0083] Request Failed                                error="Post \"http://localhost:9816/v1.0/balance\": dial tcp 127.0.0.1:9816: connect: operation timed out"
+WARN[0083] Request Failed                                error="Post \"http://localhost:9816/v1.0/balance\": dial tcp 127.0.0.1:9816: connect: operation timed out"
+WARN[0083] Request Failed                                error="Post \"http://localhost:9816/v1.0/balance\": dial tcp 127.0.0.1:9816: connect: operation timed out"
+WARN[0083] Request Failed                                error="Post \"http://localhost:9816/v1.0/balance\": dial tcp 127.0.0.1:9816: connect: operation timed out"
+WARN[0083] Request Failed                                error="Post \"http://localhost:9816/v1.0/balance\": dial tcp 127.0.0.1:9816: connect: operation timed out"
+WARN[0127] Request Failed                                error="Post \"http://localhost:9816/v1.0/balance\": dial tcp 127.0.0.1:9816: connect: operation timed out"
+WARN[0128] Request Failed                                error="Post \"http://localhost:9816/v1.0/balance\": dial tcp 127.0.0.1:9816: connect: operation timed out"
+WARN[0146] Request Failed                                error="Post \"http://localhost:9816/v1.0/balance\": dial tcp 127.0.0.1:9816: connect: operation timed out"
+WARN[0148] Request Failed                                error="Post \"http://localhost:9816/v1.0/balance\": dial tcp 127.0.0.1:9816: connect: operation timed out"
+WARN[0153] Request Failed                                error="Post \"http://localhost:9816/v1.0/balance\": dial tcp 127.0.0.1:9816: connect: operation timed out"
+WARN[0197] Request Failed                                error="Post \"http://localhost:9816/v1.0/balance\": dial tcp 127.0.0.1:9816: connect: operation timed out"
+WARN[0202] Request Failed                                error="Post \"http://localhost:9816/v1.0/balance\": dial tcp 127.0.0.1:9816: connect: operation timed out"
+WARN[0216] Request Failed                                error="Post \"http://localhost:9816/v1.0/balance\": dial tcp 127.0.0.1:9816: connect: operation timed out"
+WARN[0220] Request Failed                                error="Post \"http://localhost:9816/v1.0/balance\": dial tcp 127.0.0.1:9816: connect: operation timed out"
+WARN[0225] Request Failed                                error="Post \"http://localhost:9816/v1.0/balance\": dial tcp 127.0.0.1:9816: connect: operation timed out"
+WARN[0248] Request Failed                                error="Post \"http://localhost:9816/v1.0/balance\": dial tcp 127.0.0.1:9816: connect: operation timed out"
+WARN[0268] Request Failed                                error="Post \"http://localhost:9816/v1.0/balance\": dial tcp 127.0.0.1:9816: connect: operation timed out"
+WARN[0274] Request Failed                                error="Post \"http://localhost:9816/v1.0/balance\": dial tcp 127.0.0.1:9816: connect: operation timed out"
+WARN[0291] Request Failed                                error="Post \"http://localhost:9816/v1.0/balance\": dial tcp 127.0.0.1:9816: connect: operation timed out"
+WARN[0293] Request Failed                                error="Post \"http://localhost:9816/v1.0/balance\": dial tcp 127.0.0.1:9816: connect: operation timed out"
+WARN[0303] Request Failed                                error="Post \"http://localhost:9816/v1.0/balance\": dial tcp 127.0.0.1:9816: connect: operation timed out"
+WARN[0362] Request Failed                                error="Post \"http://localhost:9816/v1.0/balance\": dial tcp 127.0.0.1:9816: connect: operation timed out"
+WARN[0414] Request Failed                                error="Post \"http://localhost:9816/v1.0/balance\": dial tcp 127.0.0.1:9816: connect: operation timed out"
+WARN[0429] Request Failed                                error="Post \"http://localhost:9816/v1.0/balance\": dial tcp 127.0.0.1:9816: connect: operation timed out"
+WARN[0463] Request Failed                                error="Post \"http://localhost:9816/v1.0/balance\": dial tcp 127.0.0.1:9816: connect: operation timed out"
+WARN[0465] Request Failed                                error="Post \"http://localhost:9816/v1.0/balance\": dial tcp 127.0.0.1:9816: connect: operation timed out"
+WARN[0475] Request Failed                                error="Post \"http://localhost:9816/v1.0/balance\": dial tcp 127.0.0.1:9816: connect: operation timed out"
+WARN[0481] Request Failed                                error="Post \"http://localhost:9816/v1.0/balance\": dial tcp 127.0.0.1:9816: connect: operation timed out"
+WARN[0498] Request Failed                                error="Post \"http://localhost:9816/v1.0/balance\": dial tcp 127.0.0.1:9816: connect: operation timed out"
+WARN[0503] Request Failed                                error="Post \"http://localhost:9816/v1.0/balance\": dial tcp 127.0.0.1:9816: connect: operation timed out"
+WARN[0558] Request Failed                                error="Post \"http://localhost:9816/v1.0/balance\": dial tcp 127.0.0.1:9816: connect: operation timed out"
+WARN[0566] Request Failed                                error="Post \"http://localhost:9816/v1.0/balance\": dial tcp 127.0.0.1:9816: connect: operation timed out"
+
+running (10m04.6s), 000/100 VUs, 419843 complete and 0 interrupted iterations
+perf_test ✓ [======================================] 100 VUs  10m0s
+
+     █ balance
+
+       █ balance
+
+         ✗ is status 200
+          ↳  99% — ✓ 419795 / ✗ 48
+         ✗ is body errorCode 0
+          ↳  99% — ✓ 419793 / ✗ 50
+
+     checks.........................: 99.98% ✓ 839588 ✗ 98
+     data_received..................: 213 MB 353 kB/s
+     data_sent......................: 123 MB 203 kB/s
+     group_duration.................: avg=142.91ms min=2.25ms med=118.81ms max=30.71s   p(90)=248.79ms p(95)=306.09ms
+     http_req_blocked...............: avg=836.56µs min=0s     med=2µs      max=22.22s   p(90)=3µs      p(95)=3µs
+     http_req_connecting............: avg=833.21µs min=0s     med=0s       max=22.22s   p(90)=0s       p(95)=0s
+     http_req_duration..............: avg=139.13ms min=0s     med=118.6ms  max=1.95s    p(90)=248.49ms p(95)=305.6ms
+       { expected_response:true }...: avg=139.15ms min=5.79ms med=118.61ms max=1.95s    p(90)=248.49ms p(95)=305.61ms
+       { requestType:balance }......: avg=139.13ms min=0s     med=118.6ms  max=1.95s    p(90)=248.49ms p(95)=305.6ms
+     http_req_failed................: 0.01%  ✓ 48     ✗ 419795
+     http_req_receiving.............: avg=102.19µs min=0s     med=45µs     max=347.88ms p(90)=102µs    p(95)=115µs
+     http_req_sending...............: avg=14.64µs  min=0s     med=12µs     max=17.28ms  p(90)=16µs     p(95)=17µs
+     http_req_tls_handshaking.......: avg=0s       min=0s     med=0s       max=0s       p(90)=0s       p(95)=0s
+     http_req_waiting...............: avg=139.02ms min=0s     med=118.5ms  max=1.95s    p(90)=248.37ms p(95)=305.5ms
+     http_reqs......................: 419843 694.39512/s
+     iteration_duration.............: avg=142.92ms min=2.26ms med=118.83ms max=30.71s   p(90)=248.8ms  p(95)=306.11ms
+     iterations.....................: 419843 694.39512/s
+     vus............................: 1      min=1    max=100
+     vus_max........................: 100    min=100  max=100

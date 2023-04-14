@@ -1,0 +1,10 @@
+server:
+  port: 7072
+
+spring:
+  application:
+    name: service-user
+
+sidecar:
+  port: 8080
+  health-uri: http://localhost:8080/health

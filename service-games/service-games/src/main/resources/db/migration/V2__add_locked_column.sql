@@ -1,0 +1,1 @@
+ALTER TABLE `game` ADD COLUMN `locked` BIT(1) DEFAULT 0;

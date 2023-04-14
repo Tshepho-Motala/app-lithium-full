@@ -1,0 +1,74 @@
+{
+  "properties": [
+    {
+      "name": "api.iforium.base-path",
+      "type": "java.lang.String",
+      "description": "Base API path for IForium endpoint."
+    },
+    {
+      "name": "api.iforium.balance",
+      "type": "java.lang.String",
+      "description": "IForium API path for get balance."
+    },
+    {
+      "name": "api.iforium.session.base-path",
+      "type": "java.lang.String",
+      "description": "Base API path for session endpoint."
+    },
+    {
+      "name": "api.iforium.session.wrap-token",
+      "type": "java.lang.String",
+      "description": "IForium API path for get wrap token."
+    },
+    {
+      "name": "api.iforium.session.redeem-token.path",
+      "type": "java.lang.String",
+      "description": "IForium API path for redeem token."
+    },
+    {
+      "name": "api.iforium.session.redeem-token.ttl",
+      "type": "java.lang.Long",
+      "description": "TTL for sessionToken in milliseconds."
+    },
+    {
+      "name": "api.iforium.session.create-token.path",
+      "type": "java.lang.String",
+      "description": "IForium API path for create token."
+    },
+    {
+      "name": "api.iforium.game-round.base-path",
+      "type": "java.lang.String",
+      "description": "IForium base API path for game round endpoints."
+    },
+    {
+      "name": "api.iforium.game-round.place-bet.path",
+      "type": "java.lang.String",
+      "description": "IForium API path for place bet."
+    },
+    {
+      "name": "api.iforium.game-round.end.path",
+      "type": "java.lang.String",
+      "description": "IForium API path for end game round."
+    },
+    {
+      "name": "api.iforium.game-round.award-winnings.path",
+      "type": "java.lang.String",
+      "description": "IForium API path for award winnings round."
+    },
+    {
+      "name": "api.iforium.game-round.roll-back-bet.path",
+      "type": "java.lang.String",
+      "description": "IForium API path for roll back bet game round."
+    },
+    {
+      "name": "api.iforium.game-round.void-bet.path",
+      "type": "java.lang.String",
+      "description": "IForium API path for void bet game round."
+    },
+    {
+      "name": "api.iforium.account-transaction.credit.path",
+      "type": "java.lang.String",
+      "description": "IForium API path for credit account transaction."
+    }
+  ]
+}

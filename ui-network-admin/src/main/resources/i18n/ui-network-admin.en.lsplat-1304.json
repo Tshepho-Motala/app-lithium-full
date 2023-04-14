@@ -1,0 +1,19 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "PLAYER": {
+      "QUICK_ACTIONS" : {
+        "FIELDS": {
+          "CHANGE_COUNTRY_OF_BIRTH": {
+            "NAME": "Change Country Of Birth",
+            "PLACEHOLDER": "Change Country Of Birth",
+            "DESCRIPTION": "Change Country Of Birth"
+          }
+        },
+        "UPDATE" : {
+          "SUCCESS" : "Country of Birth Updated Successfully",
+          "ERROR" : "Error Country of Birth Failed To Update"
+        }
+      }
+    }
+  }
+}

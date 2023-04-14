@@ -1,0 +1,62 @@
+.Manual Activate Bonus Flow (proposed implementation incl. sportsbook bonuses)
+[plantuml]
+----
+
+@startuml
+
+participant "LBO" as lbo
+participant "svc-bonus" as svcbonus
+participant "svc-bonus-pr-casino-roxor" as sbprx
+participant "svc-bonus-pr-sportsbook-1" as sbpsb1
+participant "svc-bonus-pr-sportsbook-2" as sbpsb2
+participant "svc-casino" as svccasino
+participant "svc-accounting" as svcacct
+participant "svc-accounting-pr-internal" as svcacctint
+
+participant "RX RGP Rewards" as rxrgp
+participant "Sportsbook Rewards 1 (External)" as sbrewards1
+participant "Sportsbook Rewards 2 (External)" as sbrewards2
+
+lbo -> svcbonus: /backoffice/bonus/player/trigger/manual
+' casino bonus flow
+activate svcbonus
+svcbonus -> sbprx: /bonus/frb/awardbonus
+activate sbprx
+sbprx -> rxrgp: Grant Reward
+activate rxrgp
+rxrgp -> sbprx: Result
+deactivate rxrgp
+sbprx -> svcbonus: Result
+deactivate sbprx
+' sportsbook 1 bonus flow
+svcbonus -> sbpsb1: /bonus/frb/awardbonus
+activate sbpsb1
+sbpsb1 -> sbrewards1: Grant Reward
+activate sbrewards1
+sbrewards1 -> sbpsb1: Result
+deactivate sbrewards1
+sbpsb1 -> svcbonus: Result
+deactivate sbpsb1
+' sportsbook 2 bonus flow
+svcbonus -> sbpsb2: /bonus/frb/awardbonus
+activate sbpsb2
+sbpsb2 -> sbrewards2: Grant Reward
+activate sbrewards2
+sbrewards2 -> sbpsb2: Result
+deactivate sbrewards2
+sbpsb2 -> svcbonus: Result
+deactivate sbpsb2
+' accounting money flow
+svcbonus -> svcacct: /system/adjust-multi/v1
+activate svcacct
+svcacct -> svcacctint
+activate svcacctint
+svcacctint -> svcacct
+deactivate svcacctint
+svcacct -> svcbonus: Result
+deactivate svcacct
+svcbonus -> lbo: Result
+deactivate svcbonus
+
+@enduml
+----

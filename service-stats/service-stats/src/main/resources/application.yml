@@ -1,0 +1,48 @@
+server.port: ${PORT:9103}
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost/lithium_stats
+    username: root
+    password: mysql
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: validate
+  cloud:
+    stream:
+      bindings:
+        statsinput:
+          group: statsgroup
+          binder: rabbit
+          destination: statsqueue
+        statsinputv2:
+          group: statsgroupv2
+          binder: rabbit
+          destination: statsqueuev2
+        statsloginoutput:
+          group: statsgroup
+          binder: rabbit
+          destination: statsloginqueue
+          producer:
+            required-groups: statsgroup
+        gatewayexchange:
+          binder: rabbit
+          destination: gateway
+          producer:
+            should-declare: false
+
+        domain-stats-output:
+          binder: rabbit
+          destination: domain-stats-queue
+          producer:
+            required-groups: domain-stats-trigger-group
+
+        domain-stats-input:
+          group: domain-stats-trigger-group
+          binder: rabbit
+          destination: domain-stats-queue
+
+logging:
+  level:
+    lithium.service.stats: INFO

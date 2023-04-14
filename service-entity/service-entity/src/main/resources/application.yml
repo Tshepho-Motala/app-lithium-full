@@ -1,0 +1,21 @@
+server:
+  port: 9911
+  
+spring:
+  datasource:
+    url: jdbc:mysql://localhost/lithium_entity
+    username: root
+    password: mysql
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: validate
+    
+lithium:
+  services:
+    db:
+      load-test-data: true
+        
+logging:
+  level:
+    lithium.service.entity: INFO

@@ -1,0 +1,14 @@
+= ExternalValidationResponse
+
+|====
+| Field | Type
+
+| result
+| Boolean
+
+| data
+| Map<String, String>
+
+| message
+| String
+|====

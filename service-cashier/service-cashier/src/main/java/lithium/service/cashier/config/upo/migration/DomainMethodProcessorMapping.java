@@ -1,0 +1,15 @@
+package lithium.service.cashier.config.upo.migration;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
+@Data
+@ToString
+@AllArgsConstructor
+@NoArgsConstructor
+public class DomainMethodProcessorMapping {
+    private String methodCode;
+    private String processorCode;
+}

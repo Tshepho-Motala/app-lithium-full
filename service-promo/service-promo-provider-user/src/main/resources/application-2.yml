@@ -1,0 +1,20 @@
+server:
+  port: 9922
+
+spring:
+  application:
+    name: service-promo-provider-user
+
+test: win
+
+lithium:
+  services:
+    db:
+      load-test-data: true
+        
+logging:
+  level:
+    lithium.leader: WARN
+    org.springframework.cloud.netflix.feign.LithiumFeignClientFactoryBean: INFO
+    lithium.services.WebRequestInterceptorConfiguration: INFO
+

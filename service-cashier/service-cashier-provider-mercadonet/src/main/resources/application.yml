@@ -1,0 +1,9 @@
+server.port: 9792
+
+spring:
+  application:
+    name: service-cashier-provider-mercadonet
+    
+eureka:
+  instance:
+    appname: service-cashier-provider-mercadonet

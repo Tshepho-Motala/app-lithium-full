@@ -1,0 +1,13 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "SPORTSBOOK": {
+      "BETS": {
+        "LABEL": {
+          "MARKET_TYPE": "Market Type",
+          "MARKET_NAME": "Market Name"
+        }
+      }
+    }
+  }
+}
+

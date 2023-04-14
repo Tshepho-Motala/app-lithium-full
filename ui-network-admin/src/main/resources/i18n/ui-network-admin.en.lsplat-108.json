@@ -1,0 +1,13 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "DOMAIN": {
+      "PROVIDERS": {
+          "ERRORS": {
+            "NOT_CONFIGURED": "Provider for domain is not configured",
+            "NOT_ENABLED": "Provider is not enabled",
+            "ERROR_ON_LOAD": "Failed to fetch provider data"
+          }
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+== Automation Testing
+
+=== Evolution Test Cases
+
+The following pdf describes the integration test to verify the integration functionality.
+
+IMPORTANT: The integration is treated INCOMPLETE and NOT ready for LIVE before all REST API tests has passed.
+
+==== SID API
+
+The /sid API is a utility API that is used for to run test scripts from Evolution.
+
+The /sid API would be called as pre-step on all test steps performed from Evoluton to retrieve a SID value.
+
+After calling the /sid API, the /check API would be called to authenticate the user with Evolution

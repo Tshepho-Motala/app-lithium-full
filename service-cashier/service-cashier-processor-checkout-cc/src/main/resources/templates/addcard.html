@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+
+    <title>Add payment method</title>
+
+    <style>*,*::after,*::before{box-sizing:border-box}html{padding:1rem;background-color:#FFF;font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif}#payment-form{width:31.5rem;margin:0 auto}iframe{width:100%}.one-liner{display:flex;flex-direction:column}#pay-button{border:none;border-radius:3px;color:#FFF;font-weight:500;height:40px;width:100%;background-color:#13395E;box-shadow:0 1px 3px 0 rgba(19,57,94,0.4)}#pay-button:active{background-color:#0B2A49;box-shadow:0 1px 3px 0 rgba(19,57,94,0.4)}#pay-button:hover{background-color:#15406B;box-shadow:0 2px 5px 0 rgba(19,57,94,0.4)}#pay-button:disabled{background-color:#697887;box-shadow:none}#pay-button:not(:disabled){cursor:pointer}.card-frame{border:solid 1px #13395E;border-radius:3px;width:100%;margin-bottom:8px;height:40px;box-shadow:0 1px 3px 0 rgba(19,57,94,0.2)}.card-frame.frame--rendered{opacity:1}.card-frame.frame--rendered.frame--focus{border:solid 1px #13395E;box-shadow:0 2px 5px 0 rgba(19,57,94,0.15)}.card-frame.frame--rendered.frame--invalid{border:solid 1px #D96830;box-shadow:0 2px 5px 0 rgba(217,104,48,0.15)}.success-payment-message{color:#13395E;line-height:1.4}.token{color:#b35e14;font-size:0.9rem;font-family:monospace}@media screen and (min-width: 31rem){.one-liner{flex-direction:row}.card-frame{width:318px;margin-bottom:0}#pay-button{width:175px;margin-left:8px}}</style>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+
+    <style>
+        body { margin-top:20px; }
+        .credit-card-box .panel-title {
+            display: inline;
+            font-weight: bold;
+        }
+        .credit-card-box .form-control.error {
+            border-color: red;
+            outline: 0;
+            box-shadow: inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(255,0,0,0.6);
+        }
+        .credit-card-box label.error {
+            font-weight: bold;
+            color: red;
+            padding: 2px 8px;
+            margin-top: 2px;
+        }
+        .credit-card-box .payment-errors {
+            font-weight: bold;
+            color: red;
+            padding: 2px 8px;
+            margin-top: 12px;
+        }
+        .credit-card-box label {
+            display: block;
+        }
+        .credit-card-box .display-tr {
+            display: table-row;
+        }
+        .credit-card-box .display-td {
+            display: table-cell;
+            vertical-align: middle;
+            width: 100%;
+        }
+        .credit-card-box .panel-heading img {
+            min-width: 180px;
+        }
+        input[type='radio'] {
+            transform: scale(1.2);
+        }
+    </style>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+</head>
+<body>
+<!-- add frames script -->
+<script src="https://cdn.checkout.com/js/framesv2.min.js"></script>
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-md-12">
+            <div class="panel panel-default credit-card-box">
+                <div class="panel-heading display-table">
+                    <div class="row display-tr">
+                        <h3 class="panel-title display-td">Add payment method</h3>
+                        <div class="display-td">
+                            <img class="img-responsive pull-right" th:src="@{cards.png}"></img>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <form role="form" id="payment-form" method="POST" action="addcard/do" th:action="@{addcard/do}" th:object="${cardData}">
+                        <input id="token" name="token" type="hidden"/>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label for="nameoncard">Name on your card</label>
+                                        <input class="form-control" th:value="${cardData.userFullName}" id="nameoncard" name="nameoncard"></input>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <div class="form-group">
+                                    <label for="cardNumber">CARD NUMBER</label>
+                                    <div class="input-group">
+                                        <div class="card-number-frame form-control" id="cardNumber"> </div>
+                                        <span class="input-group-addon"><i id="cardNumberIcon" class="fa fa-credit-card"></i></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-7 col-md-7">
+                                <div class="form-group">
+                                    <label for="cardExpiry"><span class="hidden-xs">EXPIRATION</span><span class="visible-xs-inline">EXP</span> DATE</label>
+                                    <div class="expiry-date-frame form-control" id="cardExpiry"
+                                    ></div>
+                                </div>
+                            </div>
+                            <div class="col-xs-5 col-md-5 pull-right">
+                                <div class="form-group">
+                                    <label for="cardCVC">CVV</label>
+                                    <div class="cvv-frame form-control" id="cardCVC"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <button id="pay-button" disabled="true" class="pay btn btn-success btn-lg btn-block" type="button">Add card</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script th:inline="javascript">
+//<![CDATA[
+    var $form = $('#payment-form');
+    var payButton = $('#pay-button');
+    var publicKey = [[${cardData.publicKey}]];
+    var nameSelector = $("#payment-form input[name='nameoncard']");
+
+    Frames.init(publicKey);
+
+    Frames.addEventHandler(
+        Frames.Events.CARD_VALIDATION_CHANGED,
+        function (event) {
+            console.log("CARD_VALIDATION_CHANGED: %o", event);
+            validateForm();
+        }
+    );
+
+    Frames.addEventHandler(
+        Frames.Events.CARD_TOKENIZED,
+        function (event) {
+            $form.find('#token').val(event.token);
+            $form.submit();
+        }
+    );
+
+    Frames.addEventHandler(
+        Frames.Events.PAYMENT_METHOD_CHANGED,
+        function (event) {
+            var pm = event.paymentMethod;
+            if (pm) {
+                showPaymentMethodIcon(pm);
+            } else {
+                clearPaymentMethodIcon();
+            }
+        }
+    );
+
+    validateForm();
+
+    nameSelector.change(validateForm);
+
+    function validateForm() {
+        var disabled = true;
+        disabled &= !Frames.isCardValid();
+        disabled &= nameSelector.val() && nameSelector.val().length >=1;
+        payButton.prop('disabled', disabled);
+    };
+
+    function showPaymentMethodIcon(pm) {
+        if (pm) {
+            console.log(pm);
+            switch (pm.toLowerCase()) {
+                case "mastercard":
+                    $form.find($("#cardNumberIcon")).removeClass('fa-credit-card').addClass('fa-cc-mastercard');
+                    break;
+                case "visa":
+                    $form.find($("#cardNumberIcon")).removeClass('fa-credit-card').addClass('fa-cc-visa');
+                    break;
+            }
+        }
+    }
+
+    function clearPaymentMethodIcon(parent) {
+        $form.find($("#cardNumberIcon")).removeClass().addClass('fa fa-credit-card');
+    }
+
+
+    Frames.addEventHandler(Frames.Events.FRAME_VALIDATION_CHANGED, onValidationChanged );
+
+    function onValidationChanged(event) {
+        var e = event.element;
+        if (event.isValid || event.isEmpty) {
+            if (e === "card-number" && !event.isEmpty) {
+                showPaymentMethodIcon();
+            }
+            //clearErrorMessage(e);
+        } else {
+            if (e === "card-number") {
+                clearPaymentMethodIcon();
+            }
+            //setErrorMessage(e);
+        }
+    }
+
+    function clearErrorMessage(el) {
+        var selector = ".error-message__" + el;
+        $(selector).hide();
+    }
+    function setErrorMessage(el) {
+        var selector = ".error-message__" + el;
+        $(selector).show();
+    }
+
+    payButton.bind("click", function (event) {
+        event.preventDefault();
+        Frames.cardholder.name = nameSelector.val();
+        Frames.submitCard();
+    });
+//]]>
+</script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "CASINO": {
+      "PROGRESSIVE_BALANCES": {
+        "HEADER": {
+          "TITLE": "Progressive Jackpot Balances",
+          "DESCRIPTION": "To manage progressive jackpot balances",
+          "SELECT_DOMAIN": "Select a domain to get started"
+        },
+        "FIELDS": {
+          "SUPPLIER": {
+            "LABEL": "Supplier"
+          },
+          "GAME_NAME": {
+            "LABEL": "Game Name"
+          },
+          "PROGRESSIVE_ID": {
+            "LABEL": "Progressive ID"
+          },
+          "CURRENCY": {
+            "LABEL": "Currency"
+          },
+          "AMOUNT": {
+            "LABEL": "Amount"
+          },
+          "PROVIDER": {
+            "LABEL": "Provider"
+          }
+        }
+      }
+    }
+  }
+}

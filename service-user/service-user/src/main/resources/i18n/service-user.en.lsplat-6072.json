@@ -1,0 +1,12 @@
+{
+  "ERROR_DICTIONARY": {
+    "REGISTRATION": {
+      "INCOMPLETE_USER_REGISTRATION": "Player did not complete iDin registration."
+    }
+  },
+  "UI_NETWORK_ADMIN": {
+    "CHANGELOGS": {
+      "IDIN_REG_MESSAGE": "Player residential address was verified using idin."
+    }
+  }
+}

@@ -1,0 +1,43 @@
+<div class="container-fluid" bs-loading-overlay bs-loading-overlay-reference-id="{{controller.referenceId}}">
+	<div class="card card-block" style="margin-bottom: 10px;" ng-init="">
+		<div class="d-flex justify-content-start">
+			<div class="p-2 mr-auto">
+				<span class="title">{{ 'UI_NETWORK_ADMIN.CATALOG.ADD.TITLE' | translate }}</span>
+				<span class="description">{{ 'UI_NETWORK_ADMIN.CATALOG.ADD.DESCRIPTION' | translate }}</span>
+			</div>
+			<div ng-if="controller.model.domain.name" class="ml-auto p-2 text-right" style="width: 50%;">
+				<span style="padding:5px; margin-right: 3px;" class="label label-primary">&nbsp;{{ controller.model.domain.name | uppercase }}&nbsp;</span>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row v-reset-row ">
+		<div class="col-xs-12">
+			<div class="box box-default box-solid">
+				<div class="box-header bold-text with-border bg-gray-lighter">
+					{{ 'UI_NETWORK_ADMIN.CATALOG.ADD.DETAILS' | translate }}
+				</div>
+				<div class="box-body">
+					<div class="row v-reset-row ">
+						<div class="col-xs-12">
+							<div class="box box-default box-solid">
+<!-- 								<div class="box-header bold-text with-border bg-gray-lighter">&nbsp;</div> -->
+								<div class="box-body">
+									<form ng-submit="controller.onSubmit()" name="controller.form" novalidate>
+										<formly-form model="controller.model" fields="controller.fields" options="controller.options" form="controller.form">
+										</formly-form>
+										
+										<buttonbar>
+											<button-save class="pull-left"></button-save>
+											<button-cancel ng-click="controller.cancel()"></button-cancel>
+										</buttonbar>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

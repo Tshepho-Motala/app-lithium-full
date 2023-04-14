@@ -1,0 +1,16 @@
+{
+	"UI_NETWORK_ADMIN": {
+		"USER": {
+			"ERRORS": {
+				"PROMOOPTOUT": "An error occurred while trying to process the opt-out request"
+			},
+			"PROMOOPTOUT": {
+				"EMAIL": "Email Opt-Out",
+				"SMS": "SMS Opt-Out",
+				"CALL": "Call Opt-Out",
+				"OPTIN": "Opt-In",
+				"OPTOUT": "Opt-Out"
+			}
+		}
+	}
+}

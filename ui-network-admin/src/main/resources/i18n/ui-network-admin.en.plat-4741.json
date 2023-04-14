@@ -1,0 +1,11 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "SERVICE_CASHIER": {
+      "TRANSACTION": {
+        "STATUS": {
+          "PLAYER_CANCEL": "PLAYER CANCEL"
+        }
+      }
+    }
+  }
+}

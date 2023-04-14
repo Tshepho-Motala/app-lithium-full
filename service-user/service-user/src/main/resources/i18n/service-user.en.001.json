@@ -1,0 +1,9 @@
+{
+	"SERVICE_USER": {
+		"INVALID_USERNAME_MESSAGE": "Your username or password is incorrect.",
+		"INVALID_PASSWORD_MESSAGE": "Your username or password is incorrect.",
+		"ACCOUNT_DISABLED_MESSAGE" : "Your account is currently disabled. Please contact customer support.",
+		"ACCESS_RULECHECK_REJECT_MESSAGE" : "Your account is currently disabled. Please contact customer support.",
+		"UNEXPECTED_ERROR_MESSAGE" : "Please contact customer support. We are unable to process your login."
+    }
+}

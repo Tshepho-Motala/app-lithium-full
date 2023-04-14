@@ -1,0 +1,35 @@
+= Leaderboard Framework
+Riaan Schoeman <riaan.schoeman@wonderlabz.com>
+1.0, November 17, 2021: Missions Framework
+:sectnums:
+:toc: left
+:toclevels: 4
+:toc-title: svc-leaderboard
+:icons: font
+:url-quickref: https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/
+
+//:stylesheet: css/asciidoctor.css
+//:stylesheet: css/material-blue.css
+
+//This is done tto keep formatting aligned with gitlab
+****
+[verse,,]
+____
+xref:../../readme.adoc[Home] | xref:../../docs/comps-engine/readme.adoc[Comps Engine] | xref:../../service-promo/docs/readme.adoc[Promos] | xref:../../service-reward/docs/readme.adoc[Rewards] | xref:../../service-xp/docs/readme.adoc[XP]
+____
+****
+
+This document will describe the leaderboard framework, and how it all fits together and communicates to other services within lithium.
+
+This service works by receiving messages from other services, which it uses to calculate percentages for promotion setups.
+To participate in a promotion, a certain XP level is required. To learn more about XP, look at the link:../../service-xp/docs/readme.adoc[documentation] for XP.
+
+== Basic Flow
+
+include::plantuml/basic-flow.puml[Basic Flow]
+
+== Basic Configuration
+
+* date / sequenced
+* per domain/brand
+* xp level required

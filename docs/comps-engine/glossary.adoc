@@ -1,0 +1,30 @@
+= Promotions Glossary
+Riaan Schoeman <riaan.schoeman@wonderlabz.com>
+1.0, November 17, 2021: Missions Framework
+:sectnums:
+:icons: font
+:url-quickref: https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/
+
+//This is done tto keep formatting aligned with gitlab
+****
+[verse,,]
+____
+link:readme.adoc[Home]
+____
+****
+
+.Glossary
+[options="header"]
+|=======================
+|Term|Definition      |Example
+|Comps    |Comps (Complementary) is the overall term used to describe the various types of customer promotions where we incentivise . The system we deploy to manage and orchestrate these promotions is referred to as the Comps Engine.     |
+|Comps Engine    |The part of our platform product solution which manages and orchestrates promotions     |
+|Promotion    |A defined offer of a complimentary reward to a selected group of customers based on a set of criteria     |
+|Promotion Type    |There are multiple different types of promotions. The promotion type determines how a reward is earned and released|Bet-and-Get, Prize Draw, Tournament, Mission, Refer-a-Friend, Collaborative, etc
+|Promotion Group | Promotions can be grouped together when players are only eligible for one of multiple promotions | “Welcome bonus” type promotion, etc
+|Audience | A defined set of customers who are eligible for participation in a promotion. Always suppressed to exclude self-excluded, at risk, opt-out, fraud suspects, etc. | HVC, New joiners, Churn risk, etc.
+Can be everyone
+|Recognition Event | A system event which is recognised as part of the criteria for a customer to progress a promotion and receive a reward | Deposit, a settled bet, a sports result, a casino wager placed, etc
+|Reward | A complimentary item of value given to a customer | Free bet, free spin, cash, price boost, gifts, DFG bonus, etc
+|Trigger Criteria | Once the criteria for recognition events have been met the reward is triggered and released. The criteria will be different for different promotion types |
+|=======================

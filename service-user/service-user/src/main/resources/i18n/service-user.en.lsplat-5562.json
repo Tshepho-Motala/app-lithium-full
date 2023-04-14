@@ -1,0 +1,7 @@
+{
+  "ERROR_DICTIONARY": {
+    "MY_ACCOUNT": {
+      "PROFILE_UPDATE_INVALID_GUID_STRATEGY": "Username changes is not permitted due to username {0} Strategy being configured on your lithium instance, please contact your system administrator"
+    }
+  }
+}

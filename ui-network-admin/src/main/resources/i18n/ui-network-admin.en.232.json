@@ -1,0 +1,18 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "CHANGELOGS": {
+      "BONUSES": {
+        "TRIGGER_DEPOSIT": "Deposit bonus granted.",
+        "TRIGGER_LOGIN": "Login bonus granted.",
+        "TRIGGER_RAF": "RAF bonus granted.",
+        "TRIGGER_XP": "XP bonus granted.",
+        "TRIGGER_REWARD": "Reward bonus granted.",
+        "TRIGGER_CONSECUTIVE": "Consecutive bonus granted.",
+        "TRIGGER_PRODUCT": "Product bonus granted.",
+        "TRIGGER_LEADERBOARD": "Leaderboard bonus granted.",
+        "TRIGGER_HOURLY": "Hourly bonus granted.",
+        "TRIGGER_FRONTEND": "Frontend bonus granted."
+      }
+    }
+  }
+}

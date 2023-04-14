@@ -1,0 +1,58 @@
+<div class="container-fluid">
+	<lit-header
+		title="UI_NETWORK_ADMIN.REPORTS.PLAYERS.REPORTRUN.TITLE"
+		description="UI_NETWORK_ADMIN.REPORTS.PLAYERS.REPORT.DESCRIPTION">
+	</lit-header>
+	
+ 	<button-bar>
+		<button-back ui-sref="^.list"></button-back>
+		<button-edit lit-if-domains-permission="GAMSTOP_EDIT" ui-sref="dashboard.responsiblegaming.players.edit({ reportId: report.id })"></button-edit>
+		<button-refresh ng-click="controller.refresh()"></button-refresh>
+	</button-bar>
+	
+	<div class="callout callout-info" ng-if="report.edit != null">
+		<span>{{'UI_NETWORK_ADMIN.REPORTS.PLAYERS.EDIT.INFO_FIRST' | translate}} {{ report.edit.updateDate | datetimedefault }} by {{ report.edit.updateBy }}. {{'UI_NETWORK_ADMIN.REPORTS.PLAYERS.EDIT.INFO_SECOND' | translate}}</span>
+	</div>
+	
+ 	<div class="row">
+		<div class="col-xs-12">
+			<div class="box box-primary" bs-loading-overlay bs-loading-overlay-reference-id="player-report">
+				<div class="box-header with-border">
+					<h3 class="box-title">{{'UI_NETWORK_ADMIN.REPORTS.PLAYERS.GENERAL.REPORTDETAILS' | translate}}</h3>
+				</div>
+				<div class="box-body">
+					<div class="row">
+						<div class="col-xs-12 col-md-6">
+							<p>{{'UI_NETWORK_ADMIN.ACCESSRULES.VIEW.ACCESSCONTROLLISTS.BASIC.NAME' | translate}}: {{report.current.name}}</p>
+							<p>{{'GLOBAL.FIELDS.DESCRIPTION' | translate}}: {{report.current.description}}</p>
+							<p>{{'UI_NETWORK_ADMIN.ACCESSRULES.VIEW.ACCESSCONTROLLISTS.BASIC.ENABLED' | translate}}: {{report.enabled}}</p>
+							<p>{{'GLOBAL.SCHEDULER.TITLE' | translate}}: {{report.prettyCron}}</p>
+						</div>
+						<div class="col-xs-12 col-md-6">
+							<p>{{'UI_NETWORK_ADMIN.REPORTS.PLAYERS.REPORTRUN.NEXT_RUN' | translate}}: {{report.scheduledDate | datetimedefault}}
+							<p>{{'UI_NETWORK_ADMIN.REPORTS.PLAYERS.REPORTRUN.LAST_COMPLETED' | translate}}: {{report.lastCompleted.completedOn | datetimedefault}}</p>
+							<p>{{'UI_NETWORK_ADMIN.REPORTS.PLAYERS.REPORTRUN.LAST_FAILED' | translate}}: {{report.lastFailed.completedOn | datetimedefault}}</p>
+							<p>{{'UI_NETWORK_ADMIN.REPORTS.PLAYERS.REPORTRUN.RUNNING_SINCE' | translate}}: {{report.running.startedOn | datetimedefault}}</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+ 	<div class="row">
+		<div class="col-xs-12">
+			<div class="box box-info">
+				<div class="box-header with-border">
+					<h3 class="box-title">{{'UI_NETWORK_ADMIN.REPORTS.PLAYERS.REPORTRUN.RUNHISTORY' | translate}}</h3>
+				</div>
+				<div class="box-body table-responsive no-padding">
+					<dt table="controller.table"/>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div ui-view></div>
+
+</div>

@@ -1,0 +1,507 @@
+<div class="container-fluid">
+	<lit-header
+		title="GoGame Math Model Add" 
+		description="Use the controls below to set up a Math Model">
+	</lit-header>
+	
+	<form ng-submit="controller.onSubmit()" name="controller.form" autocomplete="off" novalidate>
+		<buttonbar>
+			<button-submit></button-submit>
+		</buttonbar>
+		
+		<br/><br/>
+		
+		<div class="row v-reset-row ">
+			<div class="col-xs-5">
+				<div class="box box-primary">
+					<div class="box-header with-border">
+						<h3 class="box-title">General</h3>
+					</div>
+					<div class="box-body"> 
+						<formly-form model="controller.model" fields="controller.fieldsGeneral" options="controller.options" form="controller.form">
+						</formly-form>
+					</div>
+				</div>
+			</div>
+			<div ng-if="controller.model.engine.id !== 5" class="col-xs-7">
+				<div class="box box-primary">
+					<div class="box-header with-border">
+						<h3 class="box-title">Stops</h3>
+						<div class="box-tools pull-right">
+							<button type="button" class="btn btn-box-tool" ng-click="controller.addStop()">
+								<span><i class="fa fa-plus"></i> {{'GLOBAL.ACTION.ADD'|translate}}</span>
+							</button>
+						</div>
+					</div>
+					<div class="box-body table-responsive">
+						<table class="table table-hover table-striped nowrap" cellspacing="0" width="100%">
+							<tbody>
+								<tr ng-repeat="stop in controller.model.current.stops track by $index">
+									<td>{{stop}}</td>
+									<td>
+										<a class="pull-right" ng-click="controller.removeStop(stop, $index)">
+											<span class="badge bg-red"><i class="fa fa-times"></i></span>
+										</a>
+									</td>
+								</tr>
+								<tr ng-if="controller.model.current.stops.length === 0">
+									<td>No stops configured yet.</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="box box-primary">
+					<div class="box-header with-border">
+						<h3 class="box-title">Lines</h3>
+						<div class="box-tools pull-right">
+							<button type="button" class="btn btn-box-tool" ng-click="controller.addLine()">
+								<span><i class="fa fa-plus"></i> {{'GLOBAL.ACTION.ADD'|translate}}</span>
+							</button>
+						</div>
+					</div>
+					<div class="box-body table-responsive">
+						<table class="table table-hover table-striped nowrap" cellspacing="0" width="100%">
+							<tbody>
+								<tr ng-repeat="line in controller.model.current.lines track by $index">
+									<th style="width: 20%;">Positions:</th>
+									<td>{{line.positions}} <a ng-click="controller.addLinePosition(line)">Add position</a></td>
+									<td>
+										<a class="pull-right" ng-click="controller.removeLine(line, $index)">
+											<span class="badge bg-red"><i class="fa fa-times"></i></span>
+										</a>
+									</td>
+								</tr>
+								<tr ng-if="controller.model.current.lines.length === 0">
+									<td>No lines configured yet.</td>
+								</tr>
+							</tbody>
+						</table>
+<!-- 						<pre>{{controller.model.current.lines|json}}</pre> -->
+					</div>
+				</div>
+				<div class="box box-primary">
+					<div class="box-header with-border">
+						<h3 class="box-title">Paytables</h3>
+						<div class="box-tools pull-right">
+							<button type="button" class="btn btn-box-tool" ng-click="controller.addPaytable()">
+								<span><i class="fa fa-plus"></i> {{'GLOBAL.ACTION.ADD'|translate}}</span>
+							</button>
+						</div>
+					</div>
+					<div class="box-body table-responsive">
+						<table class="table table-hover table-striped nowrap" cellspacing="0" width="100%">
+							<thead ng-if="controller.model.current.paytables.length > 0">
+								<tr>
+									<th style="width: 20%;">Symbol</th>
+									<th>Payout Cents</th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="paytable in controller.model.current.paytables track by $index">
+									<td>{{paytable.symbol}}</td>
+									<td>{{paytable.payoutCents}} <a ng-click="controller.addPaytablePayoutCents(paytable)">Add payout cents</a></td>
+									<td>
+										<a class="pull-right" ng-click="controller.removePaytable(paytable, $index)">
+											<span class="badge bg-red"><i class="fa fa-times"></i></span>
+										</a>
+									</td>
+								</tr>
+								<tr ng-if="controller.model.current.paytables.length === 0">
+									<td colspan="3">No paytables configured yet.</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="box box-primary">
+					<div class="box-header with-border">
+						<h3 class="box-title">Feature Configurations</h3>
+						<div class="box-tools pull-right">
+							<button type="button" class="btn btn-box-tool" ng-click="controller.addFeatureConfig()">
+								<span><i class="fa fa-plus"></i> {{'GLOBAL.ACTION.ADD'|translate}}</span>
+							</button>
+						</div>
+					</div>
+					<div class="box-body table-responsive">
+						<table class="table table-hover table-striped nowrap" cellspacing="0" width="100%">
+							<tbody>
+								<tr ng-if="controller.model.current.featureConfigs.multiplierWild !== undefined">
+									<td>
+										baseMultiplierWildOptions: {{controller.model.current.featureConfigs.multiplierWild.baseMultiplierWildOptions}} <a ng-click="controller.featureConfigAddOption(controller.model.current.featureConfigs.multiplierWild.baseMultiplierWildOptions)">Add</a>
+										<br/>
+										baseMultiplierWildProbabilities: {{controller.model.current.featureConfigs.multiplierWild.baseMultiplierWildProbabilities}} <a ng-click="controller.featureConfigAddOption(controller.model.current.featureConfigs.multiplierWild.baseMultiplierWildProbabilities)">Add</a>
+										<br/>
+										freespinMultiplierWildOptions: {{controller.model.current.featureConfigs.multiplierWild.freespinMultiplierWildOptions}} <a ng-click="controller.featureConfigAddOption(controller.model.current.featureConfigs.multiplierWild.freespinMultiplierWildOptions)">Add</a>
+										<br/>
+										freespinMultiplierWildProbabilities: {{controller.model.current.featureConfigs.multiplierWild.freespinMultiplierWildProbabilities}} <a ng-click="controller.featureConfigAddOption(controller.model.current.featureConfigs.multiplierWild.freespinMultiplierWildProbabilities)">Add</a>
+									</td>
+									<td>
+										<a class="pull-right" ng-click="controller.removeFeatureConfig('multiplierWild')">
+											<span class="badge bg-red"><i class="fa fa-times"></i></span>
+										</a>
+									</td>
+								</tr>
+								<tr ng-if="controller.model.current.featureConfigs.freespinWheel !== undefined">
+									<td>
+										freespinWheel results: {{controller.model.current.featureConfigs.freespinWheel.results}} <a ng-click="controller.featureConfigAddOption(controller.model.current.featureConfigs.freespinWheel.results, true)">Add</a>
+										<br/>
+										freespinWheel results probabilities: {{controller.model.current.featureConfigs.freespinWheel.resultsProbabilities}} <a ng-click="controller.featureConfigAddOption(controller.model.current.featureConfigs.freespinWheel.resultsProbabilities)">Add</a>
+									</td>
+									<td>
+										<a class="pull-right" ng-click="controller.removeFeatureConfig('freespinWheel')">
+											<span class="badge bg-red"><i class="fa fa-times"></i></span>
+										</a>
+									</td>
+								</tr>
+								<tr ng-if="controller.model.current.featureConfigs.freespins !== undefined">
+									<td>
+										freespins amounts: {{controller.model.current.featureConfigs.freespins.numFreespins}} <a ng-click="controller.featureConfigAddOption(controller.model.current.featureConfigs.freespins.numFreespins)">Add</a>
+									</td>
+									<td>
+										<a class="pull-right" ng-click="controller.removeFeatureConfig('freespin')">
+											<span class="badge bg-red"><i class="fa fa-times"></i></span>
+										</a>
+									</td>
+								</tr>
+								<tr ng-if="controller.model.current.featureConfigs.retrigger !== undefined">
+									<td>
+										retrigger limit: {{(controller.model.current.featureConfigs.retrigger.retriggerLimit != null)? controller.model.current.featureConfigs.retrigger.retriggerLimit: 1}} <a ng-click="controller.featureConfigChangeOption(controller.model.current.featureConfigs.retrigger, 'retriggerLimit')">Change</a>
+										<br/>
+										retrigger freespins amounts: {{controller.model.current.featureConfigs.retrigger.numFreespins}} <a ng-click="controller.featureConfigAddOption(controller.model.current.featureConfigs.retrigger.numFreespins)">Add</a>
+									</td>
+									<td>
+										<a class="pull-right" ng-click="controller.removeFeatureConfig('retrigger')">
+											<span class="badge bg-red"><i class="fa fa-times"></i></span>
+										</a>
+									</td>
+								</tr>
+								<tr ng-if="controller.model.current.featureConfigs.anySymbol !== undefined">
+									<td>
+										symbol ids: {{controller.model.current.featureConfigs.anySymbol.symbolIds}} <a ng-click="controller.featureConfigAddOption(controller.model.current.featureConfigs.anySymbol.symbolIds)">Add</a>
+										<br/>
+										paytable symbol id: {{controller.model.current.featureConfigs.anySymbol.paytableSymId}} <a ng-click="controller.featureConfigChangeOption(controller.model.current.featureConfigs.anySymbol, 'paytableSymId')">Change</a>
+									</td>
+									<td>
+										<a class="pull-right" ng-click="controller.removeFeatureConfig('anySymbol')">
+											<span class="badge bg-red"><i class="fa fa-times"></i></span>
+										</a>
+									</td>
+								</tr>
+								<tr ng-if="controller.model.current.featureConfigs.megaLinkBonus !== undefined">
+									<td>
+										noOfTriggersForBonus: {{controller.model.current.featureConfigs.megaLinkBonus.noOfTriggersForBonus}} <a ng-click="controller.featureConfigChangeOption(controller.model.current.featureConfigs.megaLinkBonus, 'noOfTriggersForBonus')">Change</a>
+										<br/>
+										noOfSpins: {{controller.model.current.featureConfigs.megaLinkBonus.noOfSpins}} <a ng-click="controller.featureConfigChangeOption(controller.model.current.featureConfigs.megaLinkBonus, 'noOfSpins')">Change</a>
+										<br/>
+										triggers: <a ng-click="controller.featureConfigChangeOption(controller.model.current.featureConfigs.megaLinkBonus, 'triggers', true)">Change</a>
+										<pre>{{controller.model.current.featureConfigs.megaLinkBonus.triggers|json}}</pre>
+									</td>
+									<td>
+										<a class="pull-right" ng-click="controller.removeFeatureConfig('megaLinkBonus')">
+											<span class="badge bg-red"><i class="fa fa-times"></i></span>
+										</a>
+									</td>
+								</tr>
+								<tr ng-if="controller.model.current.featureConfigs.freespins === undefined && controller.model.current.featureConfigs.retrigger === undefined && controller.model.current.featureConfigs.multiplierWild === undefined && controller.model.current.featureConfigs.freespinWheel === undefined && controller.model.current.featureConfigs.anySymbol === undefined && controller.model.current.featureConfigs.megaLinkBonus === undefined">
+									<td>No feature configurations configured yet.</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				
+				<div class="box box-primary" ng-repeat="reelSet in controller.model.current.reels track by $index" ng-init="parentIndex = $index">
+					<div class="box-header with-border">
+						<h3 class="box-title">Reels (Base Game)</h3>
+						<div class="box-tools pull-right">
+							<button type="button" class="btn btn-box-tool" ng-click="controller.addReelBS(false, $index)">
+								<span><i class="fa fa-gear"></i> {{'GLOBAL.ACTION.CHANGE'|translate}}</span>
+							</button>
+							<button type="button" class="btn btn-box-tool" ng-click="controller.addReelsManual(false, 'bs', $index)">
+								<span><i class="fa fa-plus"></i> Change Manual</span>
+							</button>
+							<button type="button" class="btn btn-box-tool" ng-click="controller.removeReelBS($index)">
+								<span><i class="fa fa-trash-o"></i> {{'GLOBAL.ACTION.DELETE'|translate}}</span>
+							</button>
+						</div>
+					</div>
+					<div class="box-body table-responsive">
+						<table class="table table-hover table-striped nowrap" cellspacing="0" width="100%">
+							<thead>
+								<tr>
+									<th></th>
+									<th ng-repeat="reelPos in controller.reelPositionsBG[parentIndex]"><span class="label label-default" style="font-size: 10pt;">{{reelPos}}</span></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="reel in reelSet track by $index">
+									<td><span class="label label-default" style="font-size: 10pt;"><b>{{$index + 1}}</b></span></td>
+									<td ng-repeat="symbol in reel.symbols track by $index" style="padding-left: 7pt;">{{symbol}}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="box box-primary">
+					<div class="box-header with-border">
+						<h3 class="box-title">Reels (Base Game)</h3>
+						<div class="box-tools pull-right">
+							<button type="button" class="btn btn-box-tool" ng-click="controller.addReelBS(true)">
+								<span><i class="fa fa-plus"></i> {{'GLOBAL.ACTION.ADD'|translate}}</span>
+							</button>
+							<button type="button" class="btn btn-box-tool" ng-click="controller.addReelsManual(true, 'bs')">
+								<span><i class="fa fa-plus"></i> Add Manual</span>
+							</button>
+						</div>
+					</div>
+					<div class="box-body table-responsive">
+						<table class="table table-hover table-striped nowrap" cellspacing="0" width="100%">
+							<tbody>
+								<tr>
+									<td>
+										{{controller.model.current.reels.length}} reel set(s) for base game set up.<br/>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										base game reel sets probabilities: {{controller.model.current.reelsProbabilities}} 
+										<a ng-click="controller.featureConfigAddOption(controller.model.current.reelsProbabilities)">Add</a>
+										&nbsp;
+										<a ng-click="controller.clearArray(controller.model.current.reelsProbabilities)">Clear</a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				
+				<div class="box box-primary" ng-repeat="reelSet in controller.model.current.fsReels track by $index" ng-init="parentIndex = $index">
+					<div class="box-header with-border">
+						<h3 class="box-title">Reels (Freespin)</h3>
+						<div class="box-tools pull-right">
+							<button type="button" class="btn btn-box-tool" ng-click="controller.addReelFS(false, $index)">
+								<span><i class="fa fa-gear"></i> {{'GLOBAL.ACTION.CHANGE'|translate}}</span>
+							</button>
+							<button type="button" class="btn btn-box-tool" ng-click="controller.addReelsManual(false, 'fs', $index)">
+								<span><i class="fa fa-plus"></i> Change Manual</span>
+							</button>
+							<button type="button" class="btn btn-box-tool" ng-click="controller.removeReelFS($index)">
+								<span><i class="fa fa-trash-o"></i> {{'GLOBAL.ACTION.DELETE'|translate}}</span>
+							</button>
+						</div>
+					</div>
+					<div class="box-body table-responsive">
+						<table class="table table-hover table-striped nowrap" cellspacing="0" width="100%">
+							<thead>
+								<tr>
+									<th></th>
+									<th ng-repeat="reelPos in controller.reelPositionsFS[parentIndex]"><span class="label label-default" style="font-size: 10pt;">{{reelPos}}</span></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="reel in reelSet track by $index">
+									<td><span class="label label-default" style="font-size: 10pt;"><b>{{$index + 1}}</b></span></td>
+									<td ng-repeat="symbol in reel.symbols track by $index" style="padding-left: 7pt;">{{symbol}}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="box box-primary">
+					<div class="box-header with-border">
+						<h3 class="box-title">Reels (Freespin)</h3>
+						<div class="box-tools pull-right">
+							<button type="button" class="btn btn-box-tool" ng-click="controller.addReelFS(true)">
+								<span><i class="fa fa-plus"></i> {{'GLOBAL.ACTION.ADD'|translate}}</span>
+							</button>
+							<button type="button" class="btn btn-box-tool" ng-click="controller.addReelsManual(true, 'fs')">
+								<span><i class="fa fa-plus"></i> Add Manual</span>
+							</button>
+						</div>
+					</div>
+					<div class="box-body table-responsive">
+						<table class="table table-hover table-striped nowrap" cellspacing="0" width="100%">
+							<tbody>
+								<tr>
+									<td>
+										{{controller.model.current.fsReels.length}} reel set(s) for freespin(s) set up.<br/>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										freespin reel sets probabilities: {{controller.model.current.fsReelsProbabilities}} 
+										<a ng-click="controller.featureConfigAddOption(controller.model.current.fsReelsProbabilities)">Add</a>
+										&nbsp;
+										<a ng-click="controller.clearArray(controller.model.current.fsReelsProbabilities)">Clear</a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				
+				<div class="box box-primary" ng-repeat="reelSet in controller.model.current.rtReels track by $index" ng-init="parentIndex = $index">
+					<div class="box-header with-border">
+						<h3 class="box-title">Reels (Retrigger)</h3>
+						<div class="box-tools pull-right">
+							<button type="button" class="btn btn-box-tool" ng-click="controller.addReelRT(false, $index)">
+								<span><i class="fa fa-gear"></i> {{'GLOBAL.ACTION.CHANGE'|translate}}</span>
+							</button>
+							<button type="button" class="btn btn-box-tool" ng-click="controller.addReelsManual(false, 'rt', $index)">
+								<span><i class="fa fa-plus"></i> Change Manual</span>
+							</button>
+							<button type="button" class="btn btn-box-tool" ng-click="controller.removeReelRT($index)">
+								<span><i class="fa fa-trash-o"></i> {{'GLOBAL.ACTION.DELETE'|translate}}</span>
+							</button>
+						</div>
+					</div>
+					<div class="box-body table-responsive">
+						<table class="table table-hover table-striped nowrap" cellspacing="0" width="100%">
+							<thead>
+								<tr>
+									<th></th>
+									<th ng-repeat="reelPos in controller.reelPositionsRT[parentIndex]"><span class="label label-default" style="font-size: 10pt;">{{reelPos}}</span></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="reel in reelSet track by $index">
+									<td><span class="label label-default" style="font-size: 10pt;"><b>{{$index + 1}}</b></span></td>
+									<td ng-repeat="symbol in reel.symbols track by $index" style="padding-left: 7pt;">{{symbol}}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="box box-primary">
+					<div class="box-header with-border">
+						<h3 class="box-title">Reels (Retrigger)</h3>
+						<div class="box-tools pull-right">
+							<button type="button" class="btn btn-box-tool" ng-click="controller.addReelRT(true)">
+								<span><i class="fa fa-plus"></i> {{'GLOBAL.ACTION.ADD'|translate}}</span>
+							</button>
+							<button type="button" class="btn btn-box-tool" ng-click="controller.addReelsManual(true, 'rt')">
+								<span><i class="fa fa-plus"></i> Add Manual</span>
+							</button>
+						</div>
+					</div>
+					<div class="box-body table-responsive">
+						<table class="table table-hover table-striped nowrap" cellspacing="0" width="100%">
+							<tbody>
+								<tr>
+									<td>
+										{{controller.model.current.rtReels.length}} reel set(s) for retrigger(s) set up.<br/>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										retrigger reel sets probabilities: {{controller.model.current.rtReelsProbabilities}} 
+										<a ng-click="controller.featureConfigAddOption(controller.model.current.rtReelsProbabilities)">Add</a>
+										&nbsp;
+										<a ng-click="controller.clearArray(controller.model.current.rtReelsProbabilities)">Clear</a>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+
+				<div class="box box-primary" ng-repeat="reelSet in controller.model.current.mlReels track by $index" ng-init="parentIndex = $index">
+					<div class="box-header with-border">
+						<h3 class="box-title">Reels (Megalink)</h3>
+						<div class="box-tools pull-right">
+							<button type="button" class="btn btn-box-tool" ng-click="controller.addReelML(false, $index)">
+								<span><i class="fa fa-gear"></i> {{'GLOBAL.ACTION.CHANGE'|translate}}</span>
+							</button>
+							<button type="button" class="btn btn-box-tool" ng-click="controller.addReelsManual(false, 'ml', $index)">
+								<span><i class="fa fa-plus"></i> Change Manual</span>
+							</button>
+							<button type="button" class="btn btn-box-tool" ng-click="controller.removeReelML($index)">
+								<span><i class="fa fa-trash-o"></i> {{'GLOBAL.ACTION.DELETE'|translate}}</span>
+							</button>
+						</div>
+					</div>
+					<div class="box-body table-responsive">
+						<table class="table table-hover table-striped nowrap" cellspacing="0" width="100%">
+							<thead>
+							<tr>
+								<th></th>
+								<th ng-repeat="reelPos in controller.reelPositionsML[parentIndex]"><span class="label label-default" style="font-size: 10pt;">{{reelPos}}</span></th>
+							</tr>
+							</thead>
+							<tbody>
+							<tr ng-repeat="reel in reelSet track by $index">
+								<td><span class="label label-default" style="font-size: 10pt;"><b>{{$index + 1}}</b></span></td>
+								<td ng-repeat="symbol in reel.symbols track by $index" style="padding-left: 7pt;">{{symbol}}</td>
+							</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="box box-primary">
+					<div class="box-header with-border">
+						<h3 class="box-title">Reels (Megalink)</h3>
+						<div class="box-tools pull-right">
+							<button type="button" class="btn btn-box-tool" ng-click="controller.addReelML(true)">
+								<span><i class="fa fa-plus"></i> {{'GLOBAL.ACTION.ADD'|translate}}</span>
+							</button>
+							<button type="button" class="btn btn-box-tool" ng-click="controller.addReelsManual(true, 'ml')">
+								<span><i class="fa fa-plus"></i> Add Manual</span>
+							</button>
+						</div>
+					</div>
+					<div class="box-body table-responsive">
+						<table class="table table-hover table-striped nowrap" cellspacing="0" width="100%">
+							<tbody>
+							<tr>
+								<td>
+									{{controller.model.current.mlReels.length}} reel set(s) for megalink set up.<br/>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									megalink reel sets probabilities: {{controller.model.current.mlReelsProbabilities}}
+									<a ng-click="controller.featureConfigAddOption(controller.model.current.mlReelsProbabilities)">Add</a>
+									&nbsp;
+									<a ng-click="controller.clearArray(controller.model.current.mlReelsProbabilities)">Clear</a>
+								</td>
+							</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				
+			</div>
+			
+			<div ng-if="controller.model.engine.id === 5" class="col-xs-7">
+				<div class="box box-primary">
+					<div class="box-header with-border">
+						<h3 class="box-title">Game Configuration</h3>
+					</div>
+					<div class="box-body table-responsive">
+						<formly-form model="controller.engineFiveData" fields="controller.fieldsEngineFive" options="controller.options" form="controller.form">
+						</formly-form>
+					</div>
+				</div>
+				
+				<div class="box box-primary">
+					<div class="box-header with-border">
+						<h3 class="box-title">Paytables</h3>
+						<div class="box-tools pull-right">
+							<button type="button" class="btn btn-box-tool" ng-click="controller.addPaytablesManual()">
+								<span ng-if="controller.model.current.paytables.length > 0"><i class="fa fa-cog"></i> Modify</span>
+								<span ng-if="controller.model.current.paytables.length === 0"><i class="fa fa-plus"></i> Add</span>
+							</button>
+						</div>
+					</div>
+					<div class="box-body table-responsive">
+						<pre>{{controller.model.current.paytables|json}}</pre>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+<!--  		<pre>{{controller.model|json}}</pre> -->
+	</form>
+</div>

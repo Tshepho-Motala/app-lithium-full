@@ -1,0 +1,18 @@
+<div class="modal-body" bs-loading-overlay bs-loading-overlay-reference-id="{{controller.referenceId}}">
+    <h3 class="text-center">
+        {{'UI_NETWORK_ADMIN.PLAY_TIME_LIMITS.CONFIRMATION_POP_UP_DIALOG.PLAY_TIME_LIMIT' | translate}}
+    </h3>
+</div>
+<modal-body>
+    <div>
+        <div><p class="text-center">{{controller.message}}</p></div>
+    </div>
+</modal-body>
+<div class="modal-footer">
+    <button-custom icon="edit" text="UI_NETWORK_ADMIN.PLAY_TIME_LIMITS.CONFIRMATION_POP_UP_DIALOG.CONFIRM"
+                   bclass="default"
+                   ng-click="controller.submit()"></button-custom>
+    <button-custom icon="ban" text="UI_NETWORK_ADMIN.PLAY_TIME_LIMITS.CONFIRMATION_POP_UP_DIALOG.CANCEL"
+                   bclass="default"
+                   ng-click="controller.cancel()"></button-custom>
+</div>

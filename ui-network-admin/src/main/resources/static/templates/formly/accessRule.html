@@ -1,0 +1,22 @@
+<div class="form-group" ng-class="{'has-error': showError}">
+	<label for="accessRule" class="control-label">
+		{{'GLOBAL.ACCESSRULE.LABEL'|translate}} {{to.required ? '*' : ''}}
+	</label>
+	<span class="description">{{to.labelExtra ? to.labelExtra : ''}}</span>
+	<ui-select
+		theme="bootstrap"
+		ng-model="model[options.key]"
+		ng-required="{{to.required}}"
+		search-enabled="true">
+		<ui-select-match
+			placeholder="{{'GLOBAL.ACCESSRULE.PLACEHOLDER'|translate}}"
+			data-allow-clear="true">
+			{{model[options.key]}}
+		</ui-select-match>
+		<ui-select-choices
+			data-repeat="option['name'] as option in to.options | filter: $select.search | limitTo: ($select.search.length <= 2) ? 20 : undefined">
+		<div ng-bind-html="option['name'] | highlight: $select.search"></div>
+		</ui-select-choices>
+	</ui-select>
+	<span class="description">{{'GLOBAL.ACCESSRULE.DESCRIPTION'|translate}}</span>
+</div>

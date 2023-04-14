@@ -1,0 +1,29 @@
+<div class="wrapper">
+	<main-header></main-header>
+	<sidebar></sidebar>
+	
+	<div class="content-wrapper">
+		<div ui-view class="fadein"></div>
+	</div>
+	
+	<!-- Main Footer -->
+	<footer class="main-footer">
+		<!-- To the right -->
+		<div class="pull-right hidden-xs">
+			Version {{ version }}
+		</div>
+		<!-- Default to the left -->
+		<strong>Copyright &copy; {{ currentdate | date:'yyyy':'GMT' }}</strong> All rights reserved.
+	</footer>
+
+	<div id="vueUtilDialogGeneric"></div>
+	<div id="vueUtilDialogConfirm"></div>
+
+	<script>
+		setTimeout(function() { $.AdminLTE.layout.fix(); }, 500);
+		setTimeout(function() { $.AdminLTE.layout.fix(); }, 1500);
+		setTimeout(function() { $.AdminLTE.layout.fix(); }, 2500);
+
+		window.VuePluginRegistry.loadByPage("main")
+	</script>
+</div>

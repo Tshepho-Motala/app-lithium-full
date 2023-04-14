@@ -1,0 +1,42 @@
+<div class="box box-info box-solid bs-loading-container" bs-loading-overlay
+     bs-loading-overlay-reference-id="{{referenceId}}">
+    <div class="box-header with-border">
+        {{'UI_NETWORK_ADMIN.TIME_SLOT.TITLE'|translate}}
+    </div>
+    <div class="box-body table-responsive" style="padding: 4px;">
+        <table class="table table-hover table-striped nowrap" cellspacing="0" width="100%" ng-if="!domain.playerTimeSlotLimits">
+            <tr>
+                <td>
+                    <span>{{'UI_NETWORK_ADMIN.TIME_SLOT.DISABLE.MESSAGE'|translate}}</span>
+                </td>
+            </tr>
+        </table>
+        <table class="table table-hover table-striped nowrap" cellspacing="0" width="100%" ng-if="domain.playerTimeSlotLimits">
+            <tr style="background-color: #d2d6de;">
+                <th>&nbsp</th>
+                <th>{{'UI_NETWORK_ADMIN.TIME_SLOT.FROM'|translate}}</th>
+                <th>{{'UI_NETWORK_ADMIN.TIME_SLOT.TO'|translate}}</th>
+                <th>&nbsp</th>
+            </tr>
+            <tr>
+                <th>{{'UI_NETWORK_ADMIN.TIME_SLOT.SUBTITLE'|translate}}</th>
+                <td>
+                    <span ng-if="hasTimeLimit">{{limitFromDisplay}}</span>
+                    <span ng-if="!hasTimeLimit">{{'UI_NETWORK_ADMIN.TIME_SLOT.NOT_SET'|translate}}</span>
+                </td>
+                <td>
+                    <span ng-if="hasTimeLimit">{{limitToDisplay}}</span>
+                    <span ng-if="!hasTimeLimit">{{'UI_NETWORK_ADMIN.TIME_SLOT.NOT_SET'|translate}}</span>
+                </td>
+                <td>
+                    <a lit-if-permission="PLAYER_TIME_SLOT_EDIT" style="cursor:pointer;" ng-click="changeLimit()">
+                        <span><i class="fa fa-pencil-square-o"></i></span>
+                    </a>
+                    <a lit-if-permission="PLAYER_TIME_SLOT_REMOVE" ng-if="hasTimeLimit" style="cursor:pointer;" ng-click="removeLimit()">
+                        <span><i class="fa fa-trash"></i></span>
+                    </a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

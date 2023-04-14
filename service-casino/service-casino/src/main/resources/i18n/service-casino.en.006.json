@@ -1,0 +1,10 @@
+{
+  "SERVICE_CASINO": {
+    "BETHISTORY": {
+      "TRAN_TYPE": {
+        "FREE_WIN": "Casino free win",
+        "FREE_LOSS": "Casino free loss"
+      }
+    }
+  }
+}

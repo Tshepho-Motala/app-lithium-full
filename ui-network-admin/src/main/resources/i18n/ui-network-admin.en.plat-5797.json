@@ -1,0 +1,10 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "GAME_TYPES": {
+      "HEADER": {
+        "TITLE": "Game Types",
+        "DESCRIPTION": "To manage game types"
+      }
+    }
+  }
+}

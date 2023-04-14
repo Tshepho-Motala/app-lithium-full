@@ -1,0 +1,15 @@
+= Games List [[_challenge_games_list]]
+
+Iforium does not have a back office API for retrieving a list of configured games. Rather, they allow for export of data from their back office:
+
+[quote, William Wallace]
+--
+Our current strategy is to provide a games list extract, both initially at time of project and then on demand via a web portal, usually accessible by your Am/Sales team, post project.
+--
+
+[TIP]
+--
+We will add a configuration parameter to accommodate the URL of the exported data. The final location of this can be anywhere that is accessible to the deployed Casino Provider.
+--
+
+The sample .xlsx document can be seen in link:gameflex/Games%20List%20example.xlsx[here]. For ease of parsing, we will use a link:gameflex/gameslist-sample.csv[CSV formatted version].

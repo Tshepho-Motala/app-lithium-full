@@ -1,0 +1,87 @@
+{
+	"name": "paysafe-gateway",
+	"code": "paysafe-gateway",
+	"url": "service-cashier-processor-paysafegateway",
+	"methodNames": [
+		"paysafe-gateway"
+	],
+	"deposit": true,
+	"fees": {
+		"flat": 0,
+		"percentage": 0,
+		"minimum": 0
+	},
+	"withdraw": false,
+	"limits": {
+		"minAmount": 2500,
+		"maxAmount": 0,
+		"maxAmountDay": 0,
+		"maxAmountWeek": 0,
+		"maxAmountMonth": 0,
+		"maxTransactionsDay": 0,
+		"maxTransactionsWeek": 0,
+		"maxTransactionsMonth": 0
+	},
+	"properties": [
+		{
+			"name": "paymentFormUrl",
+			"defaultValue": "http://localhost:9000/service-cashier-frontend-paysafegateway/payment",
+			"type": "url",
+			"description": "Payment Form URL."
+		},
+		{
+			"name": "cardPaymentApiBaseUrl",
+			"defaultValue": "https://api.test.paysafe.com",
+			"type": "url",
+			"description": "The base URL for the card payment api"
+		},
+		{
+			"name": "environment",
+			"defaultValue": "TEST",
+			"type": "string",
+			"description": "TEST or LIVE"
+		},
+		{
+			"name": "apiKeyUn",
+			"defaultValue": "test_rezakhan",
+			"type": "string",
+			"description": "API key username found in the merchant back-office under settings"
+		},
+		{
+			"name": "apiKeyPswd",
+			"defaultValue": "B-qa2-0-5ea03ded-0-302d021479e92d8bd1a0ee12cbd725711adff97557b07a44021500894004cdc197e0ba1573751e120bf4999d0a813d",
+			"type": "string",
+			"description": "API key password found in the merchant back-office under settings"
+		},
+		{
+			"name": "suTokenApiUn",
+			"defaultValue": "OT-451460",
+			"type": "string",
+			"description": "Single-Use token API username found in the merchant back-office under settings"
+		},
+		{
+			"name": "suTokenApiPswd",
+			"defaultValue": "B-qa2-0-5ea287a7-0-302c0214626378327888f7203301afa481992310061860d3021439262458552218273466bed0b69ab68102540196",
+			"type": "string",
+			"description": "Single-Use token API password found in the merchant back-office under settings"
+		},
+		{
+			"name": "accountId",
+			"defaultValue": "1001688240",
+			"type": "string",
+			"description": "Account ID found in the merchant back-office under accounts"
+		},
+		{
+			"name": "useThreeDSecure",
+			"defaultValue": "true",
+			"type": "boolean",
+			"description": "Choose whether to use 3DS"
+		},
+		{
+			"name": "useThreeDSecureVersion2",
+			"defaultValue": "true",
+			"type": "boolean",
+			"description": "Choose whether to use 3DS version 2, given 'useThreeDSecure' is set to true"
+		}
+	]
+}

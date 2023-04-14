@@ -1,0 +1,55 @@
+{
+  "name": "PremierPay - E-Transfer",
+  "code": "pp-etransfer",
+  "url": "service-cashier-processor-pp-etransfer",
+  "methodNames": ["premierpay"],
+  "deposit": true,
+  "withdraw": true,
+  "fees": {
+    "flat": 0,
+    "percentage": 0,
+    "minimum": 0
+  },
+  "limits": {
+    "minAmount": 5000,
+    "maxAmount": 0,
+    "maxAmountDay": 0,
+    "maxAmountWeek": 0,
+    "maxAmountMonth": 0,
+    "maxTransactionsDay": 0,
+    "maxTransactionsWeek": 0,
+    "maxTransactionsMonth": 0
+  },
+  "properties": [
+    { 
+      "name": "baseUrl",
+      "defaultValue": "https://secure.premierpay.ca/",
+      "type": "url",
+      "description": "The API base URL.."
+    },
+    { 
+      "name": "sid",
+      "defaultValue": "45",
+      "type": "string",
+      "description": "The processor should supply the API SID."
+    },
+    { 
+      "name": "rcode",
+      "defaultValue": "c2b7f9",
+      "type": "string",
+      "description": "The processor should supply the API R-CODE."
+    },
+    { 
+      "name": "test",
+      "defaultValue": "DEV",
+      "type": "string",
+      "description": "Possible values: DEV / PROD"
+    },
+    {
+      "name": "callbackUrl",
+      "defaultValue": "/service-cashier/external/callback/do/pp-etransfer/3f169e9c6e1a17357220312fc9face065d8be544/",
+      "type": "string",
+      "description": "This is the url that should be called from the processor side. The hash is the processor service name sha1."
+    }
+  ]
+}

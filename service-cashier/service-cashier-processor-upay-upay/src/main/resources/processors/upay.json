@@ -1,0 +1,49 @@
+{
+  "name": "UPayCard",
+  "code": "upay",
+  "url": "service-cashier-processor-upay-upay",
+  "methodNames": ["upay"],
+  "deposit": true,
+  "withdraw": true,
+  "fees": {
+    "flat": 0,
+    "percentage": 0,
+    "minimum": 0
+  },
+  "limits": {
+    "minAmount": 2500,
+    "maxAmount": 0,
+    "maxAmountDay": 0,
+    "maxAmountWeek": 0,
+    "maxAmountMonth": 0,
+    "maxTransactionsDay": 0,
+    "maxTransactionsWeek": 0,
+    "maxTransactionsMonth": 0
+  },
+  "properties": [
+    { 
+      "name": "receiver_account",
+      "defaultValue": "",
+      "type": "string",
+      "description": "Your account ID for receive transfer"
+    },
+    { 
+      "name": "apiurl",
+      "defaultValue": "https://sandboxapi.upaycard.com",
+      "type": "url",
+      "description": "The API URL. This is normally https://sandboxapi.upaycard.com for testing and https://api.upaycard.com for live"
+    },
+    { 
+      "name": "apikey",
+      "defaultValue": "c3411bb0a4f7fd3b",
+      "type": "string",
+      "description": "UPayCard should supply the API key."
+    },
+    { 
+      "name": "apisecret",
+      "defaultValue": "3bac8271a332b777",
+      "type": "string",
+      "description": "UPayCard should supply the API secret."
+    }
+  ]
+}

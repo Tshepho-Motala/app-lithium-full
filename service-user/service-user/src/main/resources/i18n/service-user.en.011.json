@@ -1,0 +1,9 @@
+{
+  "SERVICE_USER": {
+    "ACCOUNT": {
+      "TC_ACCEPTANCE": {
+        "MSG": "User has accepted T&C version {0}."
+      }
+    }
+  }
+}

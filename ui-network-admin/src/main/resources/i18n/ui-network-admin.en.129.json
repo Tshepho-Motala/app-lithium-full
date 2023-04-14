@@ -1,0 +1,9 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "DASHBOARD": {
+      "SPORT_STAKE": "Sport Stake",
+      "SPORT_RETURN": "Sport Return",
+      "SPORT_MARGIN": "Sport Margin"
+    }
+  }
+}

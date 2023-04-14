@@ -1,0 +1,8 @@
+{
+	"CASHIER-METHOD-NETAXEPT": {
+		"DEPOSIT_AMOUNT_FIELD_TITLE": "Tast inn beløp",
+		"DEPOSIT_AMOUNT_FIELD_DESCRIPTION": "Angi et beløp du ønsker å sette inn",
+		"DEPOSIT_WAIT_FOR_PR_RESPONSE_TITLE": "Venter på bekreftelse",
+		"DEPOSIT_WAIT_FOR_PR_RESPONSE_DESCRIPTION": "Takk! Vi har mottatt all informasjon for ditt innskudd og venter nå på at pengen kommer fram til oss."
+	}
+}

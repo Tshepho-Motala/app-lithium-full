@@ -1,0 +1,47 @@
+<div class="tab-content" style="padding: 5px;">
+	<div class="well-clear" style="margin-bottom: 0px;">
+		<div class="row v-reset-row ">
+			<div class="col-xs-12 col-md-6 pull-left">
+				<button-back ui-sref="^.list"></button-back>
+				<button-delete lit-if-permission="TEMPLATES_DELETE" lit-permission-domain="{{controller.model.domain.name}}" ng-click="controller.onDelete()" ng-if="!loading && showDeleteButton"></button-delete>
+			</div>
+		</div>
+		<hr/>
+		
+		<div class="row v-reset-row ">
+			<div class="col-xs-12">
+				<div class="box box-primary">
+					<div class="box-header with-border">
+						<h3 class="box-title">{{'UI_NETWORK_ADMIN.CMS.IMAGES.VIEW.TITLE'|translate}}</h3>
+					</div>
+					<div class="box-body table-responsive">
+						<table class="table table-hover table-striped nowrap" cellspacing="0" width="100%">
+							<tr>
+								<th class="form-label">{{'UI_NETWORK_ADMIN.CMS.IMAGES.FIELDS.NAME.NAME'|translate}}</th>
+								<td>{{controller.model.name}}</td>
+							</tr>
+							<tr>
+								<th class="form-label">{{'UI_NETWORK_ADMIN.CMS.IMAGES.FIELDS.LANG.NAME'|translate}}</th>
+								<td>{{controller.model.lang}}</td>
+							</tr>
+							<tr>
+								<th class="form-label">{{'UI_NETWORK_ADMIN.CMS.IMAGES.FIELDS.DESCRIPTION.NAME'|translate}}</th>
+								<td>{{controller.model.description}}</td>
+							</tr>
+						
+							<tr ng-if="cdnEnabled">
+								<th class="form-label">{{'UI_NETWORK_ADMIN.CMS.IMAGES.FIELDS.CDN.NAME'|translate}}</th>
+								<td><a href="{{cdnUrl}}" target="_blank">{{cdnUrl}} </a></td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div style="padding: 19px;">
+			<div class="row v-reset-row  well">
+				<changelog options="controller.changelogs" model="controller.model"></changelog>
+			</div>
+		</div>
+	</div>
+</div>

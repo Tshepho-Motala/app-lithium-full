@@ -1,0 +1,48 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "CMS": {
+      "IMAGES": {
+        "CONFIRM": {
+          "DELETE": "Are you sure you want to delete this image?"
+        },
+        "SUCCESS": {
+          "ADD": "Image uploaded successfully.",
+          "DELETE": "Image deleted successfully."
+        },
+        "ERROR": {
+          "ADD": "Failed to upload image.",
+          "DELETE": "Failed to delete image."
+        },
+        "ADD": {
+          "TITLE": "Upload an Image"
+        },
+        "VIEW": {
+          "TITLE": "Image Details"
+        },
+        "HEADER": {
+          "TITLE": "Images",
+          "DESCRIPTION": "A searchable list of all image templates"
+        },
+        "FIELDS": {
+          "NAME": {
+            "NAME": "Name",
+            "DESCRIPTION": "The name of the image"
+          },
+          "LANG": {
+            "NAME": "Language"
+          },
+          "DESCRIPTION": {
+            "NAME": "Description"
+          },
+          "FILE": {
+            "NAME": "Choose a file"
+          },
+          "CDN": {
+            "NAME": "Image Url",
+            "UNIQUE": "The name field must be unique"
+          }
+        }
+      }
+    }
+  }
+}

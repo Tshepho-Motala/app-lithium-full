@@ -1,0 +1,15 @@
+server:
+  port: 9712
+
+logging:
+  level:
+    lithium.service.cashier.mock.quickbit: INFO
+    
+lithium:
+  gateway-public-url: http://localhost:9000
+  
+  service:
+    cashier:
+      mock:
+        quickbit:
+          secret-key: f09dfece239c4a1b6978c16c7b16a00b

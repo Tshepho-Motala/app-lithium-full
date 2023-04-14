@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"/>
+	<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+
+</head>
+<body>
+<form th:action="${model.getAcsUrl()}" method="POST" id="threeD">
+	<input type="hidden" id="creq" name="creq" th:value="${model.getCreq()}"></input>
+</form>
+<script th:inline="javascript">
+	//<![CDATA[
+	var $form = $('#threeD');
+	$(function() { $form.submit(); });
+	//]]>
+</script>
+</body>
+</html>

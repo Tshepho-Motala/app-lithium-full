@@ -1,0 +1,43 @@
+{
+	"name": "affiliate.reg.success",
+	"subject": "Your account at %domain.name% has been registered successfully",
+	"body": "<html><body><p>Hi %user.firstName% %user.lastName%,</p><p>Your account at %domain.name% has been registered successfully.</p></body></html>",
+	"placeholders": [
+		{
+			"name": "%domain.name%",
+			"description": "The domain's display name"
+		},
+		{
+			"name": "%domain.url%",
+			"description": "The domain's URL"
+		},
+		{
+			"name": "%domain.supportEmail%",
+			"description": "The domain's support email address"
+		},
+		{
+			"name": "%user.firstName%",
+			"description": "The player's first name"
+		},
+    {
+      "name": "%user.lastNamePrefix%",
+      "description": "The player's last name prefix"
+    },
+		{
+			"name": "%user.lastName%",
+			"description": "The player's last name"
+		},
+		{
+			"name": "%user.userName%",
+			"description": "The player's username"
+		},
+		{
+			"name": "%user.emailAddress%",
+			"description": "The player's email address"
+		},
+		{
+			"name": "%user.cellphoneNumber%",
+			"description": "The player's mobile phone number"
+		}
+	]
+}

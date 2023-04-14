@@ -1,0 +1,13 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "PLAYER": {
+      "CASINOHISTORY": {
+        "TABLE": {
+          "BETROUNDGUID": {
+            "LABEL": "Bet Round GUID"
+          }
+        }
+      }
+    }
+  }
+}

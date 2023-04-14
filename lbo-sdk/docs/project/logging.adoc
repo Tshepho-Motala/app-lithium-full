@@ -1,0 +1,11 @@
+# Logging
+
+Logging is provided as a service and should be used in all plugins instead of `console.log`. This is to give us a configurable way of allowing console logs, as well as the ability to extend to other logging services if need be.
+
+To inject the logging service into a plugin file, simply add the following injector:  
+
+```
+@Inject('logService') readonly logService!: LogServiceInterface
+```
+
+This will allow you to use `logService.*` in place of `console.*log`.

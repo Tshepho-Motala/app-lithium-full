@@ -1,0 +1,14 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "ACTIVE_BONUSES" : {
+      "GLOBAL" : {
+        "FIELDS" : {
+          "CASH_BONUSES" : "Cash Bonuses",
+          "FREE_BETS" : "Free Bets",
+          "FREE_SPINS" : "Free Spins",
+          "WAGERING_BONUSES" : "Wagering Bonuses"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,24 @@
+<div class="row v-reset-row ">
+	<div class="col-md-12">
+		<div class="nav-tabs-custom" style="margin-bottom: 0px;">
+			<div class="tab-content" style="padding: 5px;">
+				<div class="well" style="margin-bottom: 1px;">
+					<button unlockgameusersearch game="controller.game" type="button" class="btn btn-default" ng-click="controller.openUnlockGame()">
+						<i class="fa fa-plus"></i>
+						{{ 'UI_NETWORK_ADMIN.BONUS.ACTIVATION.REGISTER_PLAYER' | translate }}
+					</button>
+					<button-refresh ng-click="controller.refresh()"></button-refresh>
+					<br/><br/>
+					<div class="box box-default box-solid">
+						<div class="box-header with-border">
+							{{ 'UI_NETWORK_ADMIN.GAME.PLAYERS' | translate }}
+						</div>
+						<div class="box-body table-responsive">
+							<dt table="controller.playersTable" dtReady="controller.refresh()"/>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

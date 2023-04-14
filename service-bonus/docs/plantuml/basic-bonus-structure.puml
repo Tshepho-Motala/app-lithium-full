@@ -1,0 +1,48 @@
+.basic structure
+[plantuml]
+----
+
+@startuml
+left to right direction
+actor Bonus as b
+package Triggers {
+  actor cashier as c
+  actor "sportsbook" as sb
+  actor "casino" as cas
+}
+package Rewards {
+  usecase "Cash" as R1
+  usecase "Freespins" as R2
+  usecase "Freebets (casino)" as R3
+  usecase "Freebets (sportsbook)" as R4
+  usecase "Instant Rewards (RGP)" as R5
+  usecase "Unlock Games" as R6
+}
+
+package Restrictions {
+  usecase startdate
+  usecase enddate
+  usecase "redeemable (granularity)"
+  usecase "active days"
+  usecase "active times"
+}
+
+package Notifications {
+  usecase sms
+  usecase email
+  usecase push
+}
+
+Triggers --> b
+b --> Rewards
+b --> Notifications
+b --> Restrictions
+'g --> R1
+'g --> R2
+'g --> R3
+'g --> R4
+'g --> R5
+'g --> R6
+@enduml
+
+----

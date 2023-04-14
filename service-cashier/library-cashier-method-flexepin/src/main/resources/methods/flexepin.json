@@ -1,0 +1,103 @@
+{
+  "name": "Flexepin",
+  "code": "flexepin",
+  "image": {
+    "filename": "/methods/flexepin.png",
+    "filetype": "image/png"   
+  },
+   "depositStages": [
+    {
+      "number": 0,
+      "title": "Required Player Information",
+      "description": "Please fill in the missing details below before we proceed.",
+      "inputFields": [
+        {
+          "code": "firstName",
+          "name": "Firstname"
+        },
+        {
+          "code": "lastName",
+          "name": "Lastname"
+        },
+        {
+          "code": "residentialAddress.addressLine1",
+          "name": "Address Line 1",
+          "displayOrder": "5"
+        },
+        {
+          "code": "residentialAddress.addressLine2",
+          "name": "Address Line 2",
+          "displayOrder": "6",
+          "required": false
+        },
+        {
+          "code": "residentialAddress.city",
+          "name": "City",
+          "displayOrder": "4"
+        },
+        {
+          "code": "residentialAddress.adminLevel1",
+          "name": "Province/State",
+          "displayOrder": "2"
+        },
+        {
+          "code": "residentialAddress.country",
+          "name": "Country",
+          "displayOrder": "1"
+        },
+        {
+          "code": "residentialAddress.adminLevel1Code",
+          "name": "Province/State",
+          "type": "hidden"
+        },
+        {
+          "code": "residentialAddress.countryCode",
+          "name": "Country",
+          "type": "hidden"
+        },
+        {
+          "code": "residentialAddress.postalCode",
+          "name": "Postal Code",
+          "displayOrder": "3"
+        },
+        {
+          "code": "dobDay",
+          "name": "Birthday",
+          "type": "dob"
+        },
+        {
+          "code": "dobMonth",
+          "name": "Birthday",
+          "type": "dob"
+        },
+        {
+          "code": "dobYear",
+          "name": "Birthday",
+          "type": "dob"
+        }
+      ]
+    },
+    {
+      "number": 1,
+      "title": "CASHIER-METHOD-FLEXEPIN.DEPOSIT_PIN_FIELD_TITLE",
+      "description": "CASHIER-METHOD-FLEXEPIN.DEPOSIT_PIN_FIELD_DESCRIPTION.",
+      "inputFields": [
+        {
+          "code": "pin",
+          "name": "16-Didgit Pin",
+          "type": "string"
+        },
+          {
+          "code": "noamount",
+          "name": "noamount",
+          "type": "noamount"
+        }
+      ]
+     },
+    {
+      "number": 2,
+      "title": "CASHIER-METHOD-FLEXEPIN.DEPOSIT_WAIT_FOR_PR_RESPONSE_TITLE",
+      "description": "CASHIER-METHOD-FLEXEPIN.DEPOSIT_WAIT_FOR_PR_RESPONSE_DESCRIPTION"
+    }
+  ]
+}

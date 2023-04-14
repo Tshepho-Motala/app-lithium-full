@@ -1,0 +1,10 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "CASHIER": {
+      "PAYMENT_METHOD": {
+        "VERIFIED": "Verified",
+        "CONTRA_ACCOUNT": "Contra Account"
+      }
+    }
+  }
+}

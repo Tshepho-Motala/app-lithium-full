@@ -1,0 +1,16 @@
+<div class="row v-reset-row ">
+	<div class="col-xs-12">
+		<div class="nav-tabs-custom" style="margin-bottom: 0px;">
+			<ul class="nav nav-tabs">
+				<li role="presentation" ng-class="{ active: ($state.current.name.toLowerCase().indexOf(tab.name) === 0) }" ng-repeat="tab in controller.tabsCurrent" lit-if-permission="{{tab.roles}}" class="{{tab.tclass}}">
+					<a ng-click="controller.setTab(tab)">{{ tab.title | translate }}</a>
+				</li>
+			</ul>
+			<div class="tab-content" style="padding: 5px;">
+				<div class="well" style="margin-bottom: 1px; color: red;">
+					{{ "UI_NETWORK_ADMIN.BONUS.EDIT.NOCURRENT" | translate }}
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

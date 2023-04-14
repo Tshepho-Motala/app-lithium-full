@@ -1,0 +1,11 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "PLAYER": {
+      "BONUS": {
+        "TYPE": {
+          "TRIGGER": "Trigger"
+        }
+      }
+    }
+  }
+}

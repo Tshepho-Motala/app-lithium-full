@@ -1,0 +1,29 @@
+{
+	"name": "Checkout PayPal",
+	"code": "checkout-paypal",
+	"image": {
+		"filename": "/methods/checkout-paypal.png",
+		"filetype": "image/png"
+	},
+	"depositStages": [
+		{
+			"number": 1,
+			"title": "Enter Amount",
+			"description": null,
+			"inputFields": [
+				{
+					"code": "return_url",
+					"name": "Return URL",
+					"description": "Return URL once transaction is complete. Will be appended with a status",
+					"type": "return_url",
+					"required": true
+				}
+			]
+		},
+		{
+			"number": 2,
+			"title": "Validate payment",
+			"description": null
+		}
+	]
+}

@@ -1,0 +1,28 @@
+{
+	"status": 200,
+	"message": null,
+	"data2": null,
+	"data": {
+		"gameStartUrl": "/startgame?token={TOKEN}&gameguid={GAMEGUID}&lang={LANG}&currency={CURRENCY}",
+		"imageUrl": "/image?type={TYPE}&gameguid={GAMEGUID}",
+		"demoUrl": "/demo?&gameguid={GAMEGUID}&lang={LANG}",
+		"list": 
+			[
+				{ 
+					"id":512, "guid":"betsoft-512", "provider":"betsoft", "name":"Fruit Zen", 
+					"description":"This is a very long description of the game that will be available in all cases to explain exactly what the game is about and tease you a little bit so that you really want to play the game.", 
+					"labels": ["vp","desktop"]
+				},
+				{ 
+					"id":513, "guid":"betsoft-513", "provider":"betsoft", "name":"Fruit Zen Mobile", 
+					"description":"This is a very long description of the game that will be available in all cases to explain exactly what the game is about and tease you a little bit so that you really want to play the game.", 
+					"labels": ["vp","mobile"]
+				},
+				{ 
+					"id":514, "guid":"betsoft-514", "provider":"betsoft", "name":"Fruit Zen Android", 
+					"description":"This is a very long description of the game that will be available in all cases to explain exactly what the game is about and tease you a little bit so that you really want to play the game.", 
+					"labels": ["vp","android"]
+				}
+			]
+	}
+}

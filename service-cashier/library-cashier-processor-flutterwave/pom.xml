@@ -1,0 +1,23 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>library-cashier-processor-flutterwave</artifactId>
+    <parent>
+        <groupId>lithium</groupId>
+		<artifactId>common-parent-library</artifactId>
+		<version>1.12-SNAPSHOT</version>
+		<relativePath>../../common-parent-library</relativePath>
+    </parent>
+    <dependencies>
+        <dependency>
+            <groupId>lithium</groupId>
+            <artifactId>library-cashier</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-core-asl</artifactId>
+            <version>1.9.2</version>
+            <scope>compile</scope>
+        </dependency>
+    </dependencies>
+</project>

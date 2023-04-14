@@ -1,0 +1,10 @@
+{
+	"SERVICE-LIMIT": {
+		"DAILY_LOSS_LIMIT_REACHED": "Your daily loss limit of {0} has been reached.",
+		"MONTHLY_LOSS_LIMIT_REACHED": "Your monthly loss limit of {0} has been reached.",
+		"DAILY_WIN_LIMIT_REACHED": "Your daily win limit of {0} has been reached.",
+		"MONTHLY_WIN_LIMIT_REACHED": "Your monthly win limit of {0} has been reached.",
+		"SELF_EXCLUSION_PERMANENT" : "You have excluded yourself permanently from playing.",
+		"SELF_EXCLUSION_DATE" : "You have excluded yourself from playing until {0}."
+	}
+}

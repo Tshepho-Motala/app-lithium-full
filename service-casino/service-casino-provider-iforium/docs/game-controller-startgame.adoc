@@ -1,0 +1,127 @@
+= Start / Demo Game
+
+include::plantuml/game-controller-startgame-sequence.puml[]
+
+== The GUL Launch URL
+
+The response from `/startGame` and `/demoGame` is a URL that can be used to launch an Iforium game via the Gameflex Universal Launcher (GUL). The table below lists the parameters that are included and their provenance:
+
+[options="header", cols="<.20m,.<30,.<10,.<20m,.<20e"]
+|===
+|GUL Parameter|Description|Type|Source|Comments
+
+5+^s| Configurable Parameters
+
+| casinoid
+| Identifier supplied by Iforium to represent a single brand within the Operator Website
+| String
+| Config : `CasinoId`
+| Should be `L018-LVS-142` for LiveScoreBet UK
+
+| lobbyurl
+| URL Gameflex will redirect the player to when leaving the Game.
+| URL
+| Config : `LobbyUrl`
+| Should be set to `https://www.livescorebet.com/uk/casino`
+
+5+^s| Configurable Regulatory Parameters
+
+| regulationsenabled
+| The "master" switch that enables or disables all regulatory behaviour. Other regulatory parameters will only be processed if this is set to `true`.
+| Boolean
+| Config : `RegulationsEnabled`
+| Should be set to `true`
+
+| reg_sessionduration
+| Duration, in seconds, since the Player logged in to their session.
+| Integer
+| Config : `RegulationSessionDuration`
+| Should be set to `0`.
+
+| reg_interval
+| Interval, in seconds, Player has requested for each reality check.
+| Integer
+| Config : `RegulationInterval`
+| Should be set to `86400` (24h)
+
+| reg_gamehistoryurl
+| Url to the players game history or account area located on the Operator Website.
+| URL
+| Config : `RegulationGameHistoryUrl`
+| Should not be empty, but the actual URL is irrelevant, since it will not be used. Can use `https://www.livescorebet.com/uk/history`
+
+| reg_bonusurl
+| URL to the bonus terms and conditions.
+| URL
+| Config : `RegulationBonusUrl`
+| Should not be empty, but the actual URL is irrelevant, since it will not be used. Can use `https://www.livescorebet.com/uk/promotions`
+
+| reg_override_cmamode
+| A custom override that turns *off* the standard CMA regulatory processing.
+| String
+| Config : `RegulationOverrideCmaMode`
+| Should be set to `disabled`
+
+| reg_override_rts13mode
+| A poorly-named, custom override that turns *on* the standard RTS widgets (Session Timer and Net Position).
+| String
+| Config : `RegulationOverrideRts13Mode`
+| Should be set to `disabled`
+
+5+^s| Dynamic Parameters
+
+| sessiontoken
+| This token is redeemed on the wallet to identify the player.
+| String
+| `sessionToken`
+|
+
+| gameid
+| The Iforium Id of the game to be launched
+| String
+| `gameId`
+|
+
+| languagecode
+| ISO Standard Identifier for Language
+| String
+| `languageCode`
+|
+
+| playmode
+| When using real/fun require sessiontoken to handshake player account whilst launching the game.
+When using demo an anonymous launch occurs where no Player data is transferred.
+| String
+| `isDemo` ? `demo` : `real`
+|
+
+| currencycode
+| ISO Standard Identifier for Currency
+| String
+| `domain.currency`
+|
+
+5+^s| Hard-coded Parameters
+
+| channelid
+|
+| String
+| Hard-coded to `desktop`
+|
+
+| devicechannel
+|
+| String
+| Hard-coded to `web`
+|
+
+|===
+
+== Comments
+
+See link:endpoint-mappings-session.adoc[Session Endpoints] for a broader context on launching games.
+
+[NOTE]
+--
+Support for RTS (link:https://www.gamblingcommission.gov.uk/licensees-and-businesses/guide/remote-gambling-and-software-technical-standards[Remote Gambling and Software Technical Standards]) elements within games is provided by the injection of a number of parameters to the launch URL provided by Iforium. See the table above for details.
+--

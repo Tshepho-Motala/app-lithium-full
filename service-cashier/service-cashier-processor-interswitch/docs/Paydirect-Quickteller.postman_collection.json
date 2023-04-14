@@ -1,0 +1,472 @@
+{
+	"info": {
+		"_postman_id": "2062f582-3c70-42a5-a98e-c279055deca5",
+		"name": "Paydirect/Quickteller",
+		"description": "Customer Validation and Payment Notification",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Customer Validation",
+			"item": [
+				{
+					"name": "Success",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "X-Forwarded-For",
+								"value": "127.0.0.1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<CustomerInformationRequest>\n    <MerchantReference>{{MerchantReference}}</MerchantReference>\n   <CustReference>{{CustReference}}</CustReference>\n   <PaymentItemCode>{{PaymentItemCode}}</PaymentItemCode>\n   <ServiceUsername>{{ServiceUsername}}</ServiceUsername>\n   <ServicePassword>{{ServicePassword}}</ServicePassword>\n   <ThirdPartyCode>{{ThirdPartyCode}}</ThirdPartyCode>\n  </CustomerInformationRequest>"
+						},
+						"url": {
+							"raw": "{{ServiceUrl}}",
+							"host": [
+								"{{ServiceUrl}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "NameSpace validation",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "X-Forwarded-For",
+								"value": "127.0.0.1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<CustomerInformationRequest xmlns:ns2=\"http://techquest.interswitchng.com/\" xmlns:ns3=\"http://www.w3.org/2003/05/soap-envelope\">\n    <MerchantReference>{{MerchantReference}}</MerchantReference>\n   <CustReference>{{CustReference}}</CustReference>\n   <PaymentItemCode>{{PaymentItemCode}}</PaymentItemCode>\n   <ServiceUsername>{{ServiceUsername}}</ServiceUsername>\n   <ServicePassword>{{ServicePassword}}</ServicePassword>\n   <ThirdPartyCode>{{ThirdPartyCode}}</ThirdPartyCode>\n  </CustomerInformationRequest>"
+						},
+						"url": {
+							"raw": "{{ServiceUrl}}",
+							"host": [
+								"{{ServiceUrl}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Empty Customer Reference",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "X-Forwarded-For",
+								"value": "127.0.0.1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<CustomerInformationRequest>\n    <MerchantReference>{{MerchantReference}}</MerchantReference>\n   <CustReference></CustReference>\n   <PaymentItemCode>{{PaymentItemCode}}</PaymentItemCode>\n   <ServiceUsername>{{ServiceUsername}}</ServiceUsername>\n   <ServicePassword>{{ServicePassword}}</ServicePassword>\n   <ThirdPartyCode>{{ThirdPartyCode}}</ThirdPartyCode>\n   <FtpUsername/>\n   <FtpPassword/>\n</CustomerInformationRequest>"
+						},
+						"url": {
+							"raw": "{{ServiceUrl}}",
+							"host": [
+								"{{ServiceUrl}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Wrong Merchant Reference",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "X-Forwarded-For",
+								"value": "127.0.0.1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<CustomerInformationRequest>\r\n    <MerchantReference>727213</MerchantReference>\r\n   <CustReference>{{CustReference}}</CustReference>\r\n   <PaymentItemCode>{{PaymentItemCode}}</PaymentItemCode>\r\n   <ServiceUsername>{{ServiceUsername}}</ServiceUsername>\r\n   <ServicePassword>{{ServicePassword}}</ServicePassword>\r\n   <ThirdPartyCode>{{ThirdPartyCode}}</ThirdPartyCode>\r\n</CustomerInformationRequest>"
+						},
+						"url": {
+							"raw": "{{ServiceUrl}}",
+							"host": [
+								"{{ServiceUrl}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Rejected",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "X-Forwarded-For",
+								"value": "127.0.0.1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<CustomerInformationRequest>\r\n    <MerchantReference>{{MerchantReference}}</MerchantReference>\r\n   <CustReference>{{InvalidCustReference}}</CustReference>\r\n   <PaymentItemCode>{{PaymentItemCode}}</PaymentItemCode>\r\n   <ServiceUsername>{{ServiceUsername}}</ServiceUsername>\r\n   <ServicePassword>{{ServicePassword}}</ServicePassword>\r\n   <ThirdPartyCode>{{ThirdPartyCode}}</ThirdPartyCode>\r\n</CustomerInformationRequest>"
+						},
+						"url": {
+							"raw": "{{ServiceUrl}}",
+							"host": [
+								"{{ServiceUrl}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Expired",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<CustomerInformationRequest>\r\n    <MerchantReference>{{MerchantReference}}</MerchantReference>\r\n   <CustReference>{{ExpiredCustReference}}</CustReference>\r\n   <PaymentItemCode>{{PaymentItemCode}}</PaymentItemCode>\r\n   <ServiceUsername>{{ServiceUsername}}</ServiceUsername>\r\n   <ServicePassword>{{ServicePassword}}</ServicePassword>\r\n   <ThirdPartyCode>{{ThirdPartyCode}}</ThirdPartyCode>\r\n</CustomerInformationRequest>"
+						},
+						"url": {
+							"raw": "{{ServiceUrl}}",
+							"host": [
+								"{{ServiceUrl}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Extra Tag",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "X-Forwarded-For",
+								"value": "127.0.0.1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<CustomerInformationRequest>\n    <MerchantReference>{{MerchantReference}}</MerchantReference>\n   <CustReference>{{CustReference}}</CustReference>\n   <PaymentItemCode>{{PaymentItemCode}}</PaymentItemCode>\n   <ServiceUsername>{{ServiceUsername}}</ServiceUsername>\n   <ServicePassword>{{ServicePassword}}</ServicePassword>\n   <ThirdPartyCode>{{ThirdPartyCode}}</ThirdPartyCode>\n   <Extratag1/>\n   <Extratag2>34</Extratag2>\n</CustomerInformationRequest>"
+						},
+						"url": {
+							"raw": "{{ServiceUrl}}",
+							"host": [
+								"{{ServiceUrl}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Payment Notification",
+			"item": [
+				{
+					"name": "Invalid Amount",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "X-Forwarded-For",
+								"value": "127.0.0.1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<PaymentNotificationRequest xmlns:ns2=\"http://techquest.interswitchng.com/\" xmlns:ns3=\"http://www.w3.org/2003/05/soap-envelope\">\r\n<ServiceUrl>{{ServiceUrl}}</ServiceUrl>\r\n<ServiceUsername>{{ServiceUsername}}</ServiceUsername>\r\n<ServicePassword>{{ServicePassword}}</ServicePassword>\r\n<FtpUrl></FtpUrl>\r\n<FtpUsername>\r\n</FtpUsername>\r\n<FtpPassword>\r\n</FtpPassword>\r\n<Payments>\r\n<Payment>\r\n<PaymentLogId>{{PaymentLogId}}</PaymentLogId>\r\n<CustReference>{{CustReference}}</CustReference>\r\n<AlternateCustReference>{{AlternateCustReference}}</AlternateCustReference>\r\n<Amount>0.00</Amount>\r\n<PaymentMethod>{{PaymentMethod}}</PaymentMethod>\r\n<PaymentReference>{{PaymentReference}}</PaymentReference>\r\n<TerminalId>\r\n</TerminalId>\r\n<ChannelName>{{ChannelName}}</ChannelName>\r\n<Location>\r\n</Location>\r\n<PaymentDate>{{PaymentDate}}</PaymentDate>\r\n<InstitutionId>{{InstitutionCode}}</InstitutionId>\r\n<InstitutionName>{{InstitutionName}}</InstitutionName>\r\n<BranchName>{{BranchName}}</BranchName>\r\n<BankName>{{BankName}}</BankName>\r\n<CustomerName>{{CustomerName}}</CustomerName>\r\n<OtherCustomerInfo>{{OtherCustomerInfo}}</OtherCustomerInfo>\r\n<ReceiptNo>{{ReceiptNo}}</ReceiptNo>\r\n<CollectionsAccount>{{CollectionsAccount}}</CollectionsAccount>\r\n<BankCode>{{BankCode}}</BankCode>\r\n<CustomerAddress></CustomerAddress>\r\n<CustomerPhoneNumber>{{CustomerPhoneNumber}}</CustomerPhoneNumber>\r\n<DepositorName>${CustomerName}</DepositorName>\r\n<DepositSlipNumber>${DepositSlipNo}</DepositSlipNumber>\r\n<PaymentCurrency>{{PaymentCurrency}}</PaymentCurrency>\r\n<PaymentItems>\r\n<PaymentItem>\r\n<ItemName>{{InstitutionName}}</ItemName>\r\n<ItemCode>${ItemCode}</ItemCode>\r\n<ItemAmount>0.00</ItemAmount>\r\n <LeadBankCode>{{LeadBankCode}}</LeadBankCode>\r\n <LeadBankCbnCode>{{LeadBankCbnCode}}</LeadBankCbnCode>\r\n <LeadBankName>{{LeadBankName}}</LeadBankName>\r\n <CategoryCode>{{CategoryCode}}</CategoryCode>\r\n <CategoryName>{{CategoryName}}</CategoryName>\r\n</PaymentItem>\r\n</PaymentItems>\r\n<ProductGroupCode>{{ProductGroupCode}}</ProductGroupCode>\r\n<PaymentStatus>0</PaymentStatus>\r\n<IsReversal>False</IsReversal>\r\n<SettlementDate>{{SettlementDate}}</SettlementDate>\r\n<FeeName>\r\n</FeeName>\r\n<ThirdPartyCode>{{ThirdPartyCode}}</ThirdPartyCode>\r\n<OriginalPaymentLogId></OriginalPaymentLogId>\r\n<OriginalPaymentReference></OriginalPaymentReference>\r\n<Teller>{{Teller}}</Teller>\r\n</Payment>\r\n</Payments>\r\n</PaymentNotificationRequest>"
+						},
+						"url": {
+							"raw": "{{ServiceUrl}}",
+							"host": [
+								"{{ServiceUrl}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Invalid Customer",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "X-Forwarded-For",
+								"value": "127.0.0.1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<PaymentNotificationRequest xmlns:ns2=\"http://techquest.interswitchng.com/\" xmlns:ns3=\"http://www.w3.org/2003/05/soap-envelope\">\r\n<ServiceUrl>{{ServiceUrl}}</ServiceUrl>\r\n<ServiceUsername>{{ServiceUsername}}</ServiceUsername>\r\n<ServicePassword>{{ServicePassword}}</ServicePassword>\r\n<FtpUrl></FtpUrl>\r\n<FtpUsername>\r\n</FtpUsername>\r\n<FtpPassword>\r\n</FtpPassword>\r\n<Payments>\r\n<Payment>\r\n<PaymentLogId>{{PaymentLogId}}</PaymentLogId>\r\n<CustReference>{{InvalidCustReference}}</CustReference>\r\n<AlternateCustReference>{{AlternateCustReference}}</AlternateCustReference>\r\n<Amount>{{Amount}}</Amount>\r\n<PaymentMethod>{{PaymentMethod}}</PaymentMethod>\r\n<PaymentReference>{{PaymentReference}}2</PaymentReference>\r\n<TerminalId>\r\n</TerminalId>\r\n<ChannelName>{{ChannelName}}</ChannelName>\r\n<Location>\r\n</Location>\r\n<PaymentDate>{{PaymentDate}}</PaymentDate>\r\n<InstitutionId>{{InstitutionCode}}</InstitutionId>\r\n<InstitutionName>{{InstitutionName}}</InstitutionName>\r\n<BranchName>{{BranchName}}</BranchName>\r\n<BankName>{{BankName}}</BankName>\r\n<CustomerName>{{CustomerName}}</CustomerName>\r\n<OtherCustomerInfo>{{OtherCustomerInfo}}</OtherCustomerInfo>\r\n<ReceiptNo>{{ReceiptNo}}</ReceiptNo>\r\n<CollectionsAccount>{{CollectionsAccount}}</CollectionsAccount>\r\n<BankCode>{{BankCode}}</BankCode>\r\n<CustomerAddress></CustomerAddress>\r\n<CustomerPhoneNumber>{{CustomerPhoneNumber}}</CustomerPhoneNumber>\r\n<DepositorName>${CustomerName}</DepositorName>\r\n<DepositSlipNumber>${DepositSlipNo}</DepositSlipNumber>\r\n<PaymentCurrency>{{PaymentCurrency}}</PaymentCurrency>\r\n<PaymentItems>\r\n<PaymentItem>\r\n<ItemName>{{InstitutionName}}</ItemName>\r\n<ItemCode>{{ItemCode}}</ItemCode>\r\n<ItemAmount>{{ItemAmount}}</ItemAmount>\r\n <LeadBankCode>{{LeadBankCode}}</LeadBankCode>\r\n <LeadBankCbnCode>{{LeadBankCbnCode}}</LeadBankCbnCode>\r\n <LeadBankName>{{LeadBankName}}</LeadBankName>\r\n <CategoryCode>{{CategoryCode}}</CategoryCode>\r\n <CategoryName>{{CategoryName}}</CategoryName>\r\n</PaymentItem>\r\n</PaymentItems>\r\n<ProductGroupCode>{{ProductGroupCode}}</ProductGroupCode>\r\n<PaymentStatus>0</PaymentStatus>\r\n<IsReversal>False</IsReversal>\r\n<SettlementDate>{{SettlementDate}}</SettlementDate>\r\n<FeeName>\r\n</FeeName>\r\n<ThirdPartyCode>{{ThirdPartyCode}}</ThirdPartyCode>\r\n<OriginalPaymentLogId></OriginalPaymentLogId>\r\n<OriginalPaymentReference></OriginalPaymentReference>\r\n<Teller>{{Teller}}</Teller>\r\n</Payment>\r\n</Payments>\r\n</PaymentNotificationRequest>"
+						},
+						"url": {
+							"raw": "{{ServiceUrl}}",
+							"host": [
+								"{{ServiceUrl}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Name Space Validation",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "X-Forwarded-For",
+								"value": "127.0.0.1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<PaymentNotificationRequest>\r\n<ServiceUrl>{{ServiceUrl}}</ServiceUrl>\r\n<ServiceUsername>{{ServiceUsername}}</ServiceUsername>\r\n<ServicePassword>{{ServicePassword}}</ServicePassword>\r\n<FtpUrl></FtpUrl>\r\n<FtpUsername>\r\n</FtpUsername>\r\n<FtpPassword>\r\n</FtpPassword>\r\n<Payments>\r\n<Payment>\r\n<PaymentLogId>{{PaymentLogId}}</PaymentLogId>\r\n<CustReference>{{CustReference}}</CustReference>\r\n<AlternateCustReference>{{AlternateCustReference}}</AlternateCustReference>\r\n<Amount>{{Amount}}</Amount>\r\n<PaymentMethod>{{PaymentMethod}}</PaymentMethod>\r\n<PaymentReference>{{PaymentReference}}</PaymentReference>\r\n<TerminalId>\r\n</TerminalId>\r\n<ChannelName>{{ChannelName}}</ChannelName>\r\n<Location>\r\n</Location>\r\n<PaymentDate>{{PaymentDate}}</PaymentDate>\r\n<InstitutionId>{{InstitutionCode}}</InstitutionId>\r\n<InstitutionName>{{InstitutionName}}</InstitutionName>\r\n<BranchName>{{BranchName}}</BranchName>\r\n<BankName>{{BankName}}</BankName>\r\n<CustomerName>{{CustomerName}}</CustomerName>\r\n<OtherCustomerInfo>{{OtherCustomerInfo}}</OtherCustomerInfo>\r\n<ReceiptNo>{{ReceiptNo}}</ReceiptNo>\r\n<CollectionsAccount>{{CollectionsAccount}}</CollectionsAccount>\r\n<BankCode>{{BankCode}}</BankCode>\r\n<CustomerAddress></CustomerAddress>\r\n<CustomerPhoneNumber>{{CustomerPhoneNumber}}</CustomerPhoneNumber>\r\n<DepositorName>${CustomerName}</DepositorName>\r\n<DepositSlipNumber>${DepositSlipNo}</DepositSlipNumber>\r\n<PaymentCurrency>{{PaymentCurrency}}</PaymentCurrency>\r\n<PaymentItems>\r\n<PaymentItem>\r\n<ItemName>{{InstitutionName}}</ItemName>\r\n<ItemCode>{{ItemCode}}</ItemCode>\r\n<ItemAmount>{{ItemAmount}}</ItemAmount>\r\n <LeadBankCode>{{LeadBankCode}}</LeadBankCode>\r\n <LeadBankCbnCode>{{LeadBankCbnCode}}</LeadBankCbnCode>\r\n <LeadBankName>{{LeadBankName}}</LeadBankName>\r\n <CategoryCode>{{CategoryCode}}</CategoryCode>\r\n <CategoryName>{{CategoryName}}</CategoryName>\r\n</PaymentItem>\r\n</PaymentItems>\r\n<ProductGroupCode>{{ProductGroupCode}}</ProductGroupCode>\r\n<PaymentStatus>0</PaymentStatus>\r\n<IsReversal>False</IsReversal>\r\n<SettlementDate>{{SettlementDate}}</SettlementDate>\r\n<FeeName>\r\n</FeeName>\r\n<ThirdPartyCode>{{ThirdPartyCode}}</ThirdPartyCode>\r\n<OriginalPaymentLogId></OriginalPaymentLogId>\r\n<OriginalPaymentReference></OriginalPaymentReference>\r\n<Teller>{{Teller}}</Teller>\r\n</Payment>\r\n</Payments>\r\n</PaymentNotificationRequest>"
+						},
+						"url": {
+							"raw": "{{ServiceUrl}}",
+							"host": [
+								"{{ServiceUrl}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Success",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "X-Forwarded-For",
+								"value": "127.0.0.1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<PaymentNotificationRequest xmlns:ns2=\"http://techquest.interswitchng.com/\" xmlns:ns3=\"http://www.w3.org/2003/05/soap-envelope\">\r\n<ServiceUrl>{{ServiceUrl}}</ServiceUrl>\r\n<ServiceUsername>{{ServiceUsername}}</ServiceUsername>\r\n<ServicePassword>{{ServicePassword}}</ServicePassword>\r\n<FtpUrl></FtpUrl>\r\n<FtpUsername>\r\n</FtpUsername>\r\n<FtpPassword>\r\n</FtpPassword>\r\n<Payments>\r\n<Payment>\r\n<PaymentLogId>{{PaymentLogId}}</PaymentLogId>\r\n<CustReference>{{CustReference}}</CustReference>\r\n<AlternateCustReference>{{AlternateCustReference}}</AlternateCustReference>\r\n<Amount>{{Amount}}</Amount>\r\n<PaymentMethod>{{PaymentMethod}}</PaymentMethod>\r\n<PaymentReference>{{PaymentReference}}3</PaymentReference>\r\n<TerminalId>\r\n</TerminalId>\r\n<ChannelName>{{ChannelName}}</ChannelName>\r\n<Location>\r\n</Location>\r\n<PaymentDate>{{PaymentDate}}</PaymentDate>\r\n<InstitutionId>{{InstitutionCode}}</InstitutionId>\r\n<InstitutionName>{{InstitutionName}}</InstitutionName>\r\n<BranchName>{{BranchName}}</BranchName>\r\n<BankName>{{BankName}}</BankName>\r\n<CustomerName>{{CustomerName}}</CustomerName>\r\n<OtherCustomerInfo>{{OtherCustomerInfo}}</OtherCustomerInfo>\r\n<ReceiptNo>{{ReceiptNo}}</ReceiptNo>\r\n<CollectionsAccount>{{CollectionsAccount}}</CollectionsAccount>\r\n<BankCode>{{BankCode}}</BankCode>\r\n<CustomerAddress></CustomerAddress>\r\n<CustomerPhoneNumber>{{CustomerPhoneNumber}}</CustomerPhoneNumber>\r\n<DepositorName>${CustomerName}</DepositorName>\r\n<DepositSlipNumber>${DepositSlipNo}</DepositSlipNumber>\r\n<PaymentCurrency>{{PaymentCurrency}}</PaymentCurrency>\r\n<PaymentItems>\r\n<PaymentItem>\r\n<ItemName>{{InstitutionName}}</ItemName>\r\n<ItemCode>{{ItemCode}}</ItemCode>\r\n<ItemAmount>{{ItemAmount}}</ItemAmount>\r\n <LeadBankCode>{{LeadBankCode}}</LeadBankCode>\r\n <LeadBankCbnCode>{{LeadBankCbnCode}}</LeadBankCbnCode>\r\n <LeadBankName>{{LeadBankName}}</LeadBankName>\r\n <CategoryCode>{{CategoryCode}}</CategoryCode>\r\n <CategoryName>{{CategoryName}}</CategoryName>\r\n</PaymentItem>\r\n</PaymentItems>\r\n<ProductGroupCode>{{ProductGroupCode}}</ProductGroupCode>\r\n<PaymentStatus>0</PaymentStatus>\r\n<IsReversal>False</IsReversal>\r\n<SettlementDate>{{SettlementDate}}</SettlementDate>\r\n<FeeName>\r\n</FeeName>\r\n<ThirdPartyCode>{{ThirdPartyCode}}</ThirdPartyCode>\r\n<OriginalPaymentLogId></OriginalPaymentLogId>\r\n<OriginalPaymentReference></OriginalPaymentReference>\r\n<Teller>{{Teller}}</Teller>\r\n</Payment>\r\n</Payments>\r\n</PaymentNotificationRequest>"
+						},
+						"url": {
+							"raw": "{{ServiceUrl}}",
+							"host": [
+								"{{ServiceUrl}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Success Duplicate",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "X-Forwarded-For",
+								"value": "127.0.0.1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<PaymentNotificationRequest xmlns:ns2=\"http://techquest.interswitchng.com/\" xmlns:ns3=\"http://www.w3.org/2003/05/soap-envelope\">\r\n<ServiceUrl>{{ServiceUrl}}</ServiceUrl>\r\n<ServiceUsername>{{ServiceUsername}}</ServiceUsername>\r\n<ServicePassword>{{ServicePassword}}</ServicePassword>\r\n<FtpUrl></FtpUrl>\r\n<FtpUsername>\r\n</FtpUsername>\r\n<FtpPassword>\r\n</FtpPassword>\r\n<Payments>\r\n<Payment>\r\n<PaymentLogId>{{PaymentLogId}}</PaymentLogId>\r\n<CustReference>{{CustReference}}</CustReference>\r\n<AlternateCustReference>{{AlternateCustReference}}</AlternateCustReference>\r\n<Amount>{{Amount}}</Amount>\r\n<PaymentMethod>{{PaymentMethod}}</PaymentMethod>\r\n<PaymentReference>{{PaymentReference}}3</PaymentReference>\r\n<TerminalId>\r\n</TerminalId>\r\n<ChannelName>{{ChannelName}}</ChannelName>\r\n<Location>\r\n</Location>\r\n<PaymentDate>{{PaymentDate}}</PaymentDate>\r\n<InstitutionId>{{InstitutionCode}}</InstitutionId>\r\n<InstitutionName>{{InstitutionName}}</InstitutionName>\r\n<BranchName>{{BranchName}}</BranchName>\r\n<BankName>{{BankName}}</BankName>\r\n<CustomerName>{{CustomerName}}</CustomerName>\r\n<OtherCustomerInfo>{{OtherCustomerInfo}}</OtherCustomerInfo>\r\n<ReceiptNo>{{ReceiptNo}}</ReceiptNo>\r\n<CollectionsAccount>{{CollectionsAccount}}</CollectionsAccount>\r\n<BankCode>{{BankCode}}</BankCode>\r\n<CustomerAddress></CustomerAddress>\r\n<CustomerPhoneNumber>{{CustomerPhoneNumber}}</CustomerPhoneNumber>\r\n<DepositorName>${CustomerName}</DepositorName>\r\n<DepositSlipNumber>${DepositSlipNo}</DepositSlipNumber>\r\n<PaymentCurrency>{{PaymentCurrency}}</PaymentCurrency>\r\n<PaymentItems>\r\n<PaymentItem>\r\n<ItemName>{{InstitutionName}}</ItemName>\r\n<ItemCode>{{ItemCode}}</ItemCode>\r\n<ItemAmount>{{ItemAmount}}</ItemAmount>\r\n <LeadBankCode>{{LeadBankCode}}</LeadBankCode>\r\n <LeadBankCbnCode>{{LeadBankCbnCode}}</LeadBankCbnCode>\r\n <LeadBankName>{{LeadBankName}}</LeadBankName>\r\n <CategoryCode>{{CategoryCode}}</CategoryCode>\r\n <CategoryName>{{CategoryName}}</CategoryName>\r\n</PaymentItem>\r\n</PaymentItems>\r\n<ProductGroupCode>{{ProductGroupCode}}</ProductGroupCode>\r\n<PaymentStatus>0</PaymentStatus>\r\n<IsReversal>False</IsReversal>\r\n<SettlementDate>{{SettlementDate}}</SettlementDate>\r\n<FeeName>\r\n</FeeName>\r\n<ThirdPartyCode>{{ThirdPartyCode}}</ThirdPartyCode>\r\n<OriginalPaymentLogId></OriginalPaymentLogId>\r\n<OriginalPaymentReference></OriginalPaymentReference>\r\n<Teller>{{Teller}}</Teller>\r\n</Payment>\r\n</Payments>\r\n</PaymentNotificationRequest>"
+						},
+						"url": {
+							"raw": "{{ServiceUrl}}",
+							"host": [
+								"{{ServiceUrl}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reversal",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<PaymentNotificationRequest xmlns:ns2=\"http://techquest.interswitchng.com/\" xmlns:ns3=\"http://www.w3.org/2003/05/soap-envelope\">\r\n<ServiceUrl>{{ServiceUrl}}</ServiceUrl>\r\n<ServiceUsername>{{ServiceUsername}}</ServiceUsername>\r\n<ServicePassword>{{ServicePassword}}</ServicePassword>\r\n<FtpUrl></FtpUrl>\r\n<FtpUsername>\r\n</FtpUsername>\r\n<FtpPassword>\r\n</FtpPassword>\r\n<Payments>\r\n<Payment>\r\n<PaymentLogId>{{PaymentLogId}}</PaymentLogId>\r\n<CustReference>{{CustReference}}</CustReference>\r\n<AlternateCustReference>{{AlternateCustReference}}</AlternateCustReference>\r\n<Amount>{{Amount}}</Amount>\r\n<PaymentMethod>{{PaymentMethod}}</PaymentMethod>\r\n<PaymentReference>{{PaymentReference}}5</PaymentReference>\r\n<TerminalId>\r\n</TerminalId>\r\n<ChannelName>{{ChannelName}}</ChannelName>\r\n<Location>\r\n</Location>\r\n<PaymentDate>{{PaymentDate}}</PaymentDate>\r\n<InstitutionId>{{InstitutionCode}}</InstitutionId>\r\n<InstitutionName>{{InstitutionName}}</InstitutionName>\r\n<BranchName>{{BranchName}}</BranchName>\r\n<BankName>{{BankName}}</BankName>\r\n<CustomerName>{{CustomerName}}</CustomerName>\r\n<OtherCustomerInfo>{{OtherCustomerInfo}}</OtherCustomerInfo>\r\n<ReceiptNo>{{ReceiptNo}}</ReceiptNo>\r\n<CollectionsAccount>{{CollectionsAccount}}</CollectionsAccount>\r\n<BankCode>{{BankCode}}</BankCode>\r\n<CustomerAddress></CustomerAddress>\r\n<CustomerPhoneNumber>{{CustomerPhoneNumber}}</CustomerPhoneNumber>\r\n<DepositorName>${CustomerName}</DepositorName>\r\n<DepositSlipNumber>${DepositSlipNo}</DepositSlipNumber>\r\n<PaymentCurrency>{{PaymentCurrency}}</PaymentCurrency>\r\n<PaymentItems>\r\n<PaymentItem>\r\n<ItemName>{{InstitutionName}}</ItemName>\r\n<ItemCode>{{ItemCode}}</ItemCode>\r\n<ItemAmount>{{ItemAmount}}</ItemAmount>\r\n <LeadBankCode>{{LeadBankCode}}</LeadBankCode>\r\n <LeadBankCbnCode>{{LeadBankCbnCode}}</LeadBankCbnCode>\r\n <LeadBankName>{{LeadBankName}}</LeadBankName>\r\n <CategoryCode>{{CategoryCode}}</CategoryCode>\r\n <CategoryName>{{CategoryName}}</CategoryName>\r\n</PaymentItem>\r\n</PaymentItems>\r\n<ProductGroupCode>{{ProductGroupCode}}</ProductGroupCode>\r\n<PaymentStatus>0</PaymentStatus>\r\n<IsReversal>True</IsReversal>\r\n<SettlementDate>{{SettlementDate}}</SettlementDate>\r\n<FeeName>\r\n</FeeName>\r\n<ThirdPartyCode>{{ThirdPartyCode}}</ThirdPartyCode>\r\n<OriginalPaymentLogId></OriginalPaymentLogId>\r\n<OriginalPaymentReference>{{PaymentReference}}3</OriginalPaymentReference>\r\n<Teller>{{Teller}}</Teller>\r\n</Payment>\r\n</Payments>\r\n</PaymentNotificationRequest>"
+						},
+						"url": {
+							"raw": "{{ServiceUrl}}",
+							"host": [
+								"{{ServiceUrl}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reversal Duplicate",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {
+							"content-type": true
+						}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "text/xml"
+							},
+							{
+								"key": "X-Forwarded-For",
+								"value": "127.0.0.1",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<PaymentNotificationRequest xmlns:ns2=\"http://techquest.interswitchng.com/\" xmlns:ns3=\"http://www.w3.org/2003/05/soap-envelope\">\r\n<ServiceUrl>{{ServiceUrl}}</ServiceUrl>\r\n<ServiceUsername>{{ServiceUsername}}</ServiceUsername>\r\n<ServicePassword>{{ServicePassword}}</ServicePassword>\r\n<FtpUrl></FtpUrl>\r\n<FtpUsername>\r\n</FtpUsername>\r\n<FtpPassword>\r\n</FtpPassword>\r\n<Payments>\r\n<Payment>\r\n<PaymentLogId>{{PaymentLogId}}</PaymentLogId>\r\n<CustReference>{{CustReference}}</CustReference>\r\n<AlternateCustReference>{{AlternateCustReference}}</AlternateCustReference>\r\n<Amount>{{Amount}}</Amount>\r\n<PaymentMethod>{{PaymentMethod}}</PaymentMethod>\r\n<PaymentReference>{{PaymentReference}}5</PaymentReference>\r\n<TerminalId>\r\n</TerminalId>\r\n<ChannelName>{{ChannelName}}</ChannelName>\r\n<Location>\r\n</Location>\r\n<PaymentDate>{{PaymentDate}}</PaymentDate>\r\n<InstitutionId>{{InstitutionCode}}</InstitutionId>\r\n<InstitutionName>{{InstitutionName}}</InstitutionName>\r\n<BranchName>{{BranchName}}</BranchName>\r\n<BankName>{{BankName}}</BankName>\r\n<CustomerName>{{CustomerName}}</CustomerName>\r\n<OtherCustomerInfo>{{OtherCustomerInfo}}</OtherCustomerInfo>\r\n<ReceiptNo>{{ReceiptNo}}</ReceiptNo>\r\n<CollectionsAccount>{{CollectionsAccount}}</CollectionsAccount>\r\n<BankCode>{{BankCode}}</BankCode>\r\n<CustomerAddress></CustomerAddress>\r\n<CustomerPhoneNumber>{{CustomerPhoneNumber}}</CustomerPhoneNumber>\r\n<DepositorName>${CustomerName}</DepositorName>\r\n<DepositSlipNumber>${DepositSlipNo}</DepositSlipNumber>\r\n<PaymentCurrency>{{PaymentCurrency}}</PaymentCurrency>\r\n<PaymentItems>\r\n<PaymentItem>\r\n<ItemName>{{InstitutionName}}</ItemName>\r\n<ItemCode>{{ItemCode}}</ItemCode>\r\n<ItemAmount>{{ItemAmount}}</ItemAmount>\r\n <LeadBankCode>{{LeadBankCode}}</LeadBankCode>\r\n <LeadBankCbnCode>{{LeadBankCbnCode}}</LeadBankCbnCode>\r\n <LeadBankName>{{LeadBankName}}</LeadBankName>\r\n <CategoryCode>{{CategoryCode}}</CategoryCode>\r\n <CategoryName>{{CategoryName}}</CategoryName>\r\n</PaymentItem>\r\n</PaymentItems>\r\n<ProductGroupCode>{{ProductGroupCode}}</ProductGroupCode>\r\n<PaymentStatus>0</PaymentStatus>\r\n<IsReversal>True</IsReversal>\r\n<SettlementDate>{{SettlementDate}}</SettlementDate>\r\n<FeeName>\r\n</FeeName>\r\n<ThirdPartyCode>{{ThirdPartyCode}}</ThirdPartyCode>\r\n<OriginalPaymentLogId></OriginalPaymentLogId>\r\n<OriginalPaymentReference>{{PaymentReference}}3</OriginalPaymentReference>\r\n<Teller>{{Teller}}</Teller>\r\n</Payment>\r\n</Payments>\r\n</PaymentNotificationRequest>"
+						},
+						"url": {
+							"raw": "{{ServiceUrl}}",
+							"host": [
+								"{{ServiceUrl}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

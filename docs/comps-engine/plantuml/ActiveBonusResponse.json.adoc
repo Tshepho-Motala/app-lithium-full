@@ -1,0 +1,16 @@
+.ActiveBonusResponse
+[source.try-it,js,linenums,indent=0]
+----
+{
+  "playerBonusHistoryId": "", // <1>
+  "bonusCode" : "", // <2>
+  "bonusName" : "", // <3>
+}
+----
+//  "provider" : "", // <4>
+//  "campaignId" : "" // <5>
+<1> playerBonusHistoryId - Must be returned in the 'complete' call below to finish this bonus.
+<2> BonusCode - Bonus Name
+<3> bonusName - Bonus Code
+//<4> provider - If there is an external game config setup, return the provider.
+//<5> campaignId - If there is an external game config setup, return the campaignId.

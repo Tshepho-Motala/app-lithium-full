@@ -1,0 +1,77 @@
+{
+  "name": "Hexopay Web",
+  "code": "hexopay",
+  "image": {
+    "filename": "/methods/hexopay.png",
+    "filetype": "image/png"
+  },
+  "depositStages": [
+    {
+      "number": 1,
+      "title": "Enter Amount",
+      "description": "Specify the amount you wish to deposit.",
+      "inputFields": [
+        {
+          "code": "return_url",
+          "name": "Return URL",
+          "description": "Return URL once transaction is complete. Will be appended with a status",
+          "type": "return_url",
+          "required": true
+        },
+        {
+          "code": "processorAccountId",
+          "name": "Lithium processor account",
+          "description": "Lithium processor account contain details about Hexopay payer account",
+          "type": "long",
+          "required": false
+        },
+        {
+          "code": "cvv",
+          "name": "CVV",
+          "description": "Enter the last three digits of the CVV code on the back of your card.",
+          "type": "cvv",
+          "required": false
+        },
+        {
+          "code": "nameoncard",
+          "name": "Name on card",
+          "description": "Enter your full name as it appears on the front of your card",
+          "type": "string",
+          "required": false
+        }
+      ],
+      "outputFields": []
+    },
+    {
+      "number": 2,
+      "title": "Validate payment.",
+      "description": "",
+      "inputFields": [],
+      "outputFields": []
+    }
+  ],
+  "withdrawalStages": [
+    {
+      "number": 1,
+      "title": "Enter Amount",
+      "description": "Specify the amount you wish to withdraw.",
+      "inputFields": [
+        {
+          "code": "processorAccountId",
+          "name": "Lithium processor account",
+          "description": "Lithium processor account contain details about Hexopay payer account",
+          "type": "long",
+          "required": true
+        }
+      ],
+      "outputFields": []
+    },
+    {
+      "number": 2,
+      "title": "Validate payment.",
+      "description": "",
+      "inputFields": [],
+      "outputFields": []
+    }
+  ]
+}

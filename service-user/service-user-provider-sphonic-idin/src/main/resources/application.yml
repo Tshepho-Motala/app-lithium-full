@@ -1,0 +1,26 @@
+server:
+  port: 9720
+
+spring:
+  application:
+    name: service-user-provider-sphonic-idin
+  datasource:
+    url: jdbc:mysql://localhost/lithium_user_pr_sphonic_idin
+    username: root
+    password: mysql
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: validate
+      properties:
+        hibernate:
+          format_sql: true
+
+eureka:
+  instance:
+    appname: service-user-provider-sphonic-idin
+
+logging:
+  level:
+    lithium.service.user.provider.sphonic.idin: INFO
+#    lithium.rest: DEBUG

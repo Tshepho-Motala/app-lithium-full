@@ -1,0 +1,13 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "CATALOG": {
+      "IMAGE": {
+        "TITLE": "Product Image",
+        "REMOVE": "Remove",
+        "CHOOSE": "Choose Image",
+        "GRAPHICUPLOADED": "Product image saved!",
+        "GRAPHIC_REMOVED_SUCCESS": "Product image removed."
+      }
+    }
+  }
+}

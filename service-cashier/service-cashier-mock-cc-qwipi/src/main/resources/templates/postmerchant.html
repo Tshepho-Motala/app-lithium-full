@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"/>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css"/>
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+</head>
+
+<body style="font-family: 'Roboto', sans-serif;">
+
+	<div id="main" style="width: 100vw; height: 100vh; display: flex; justify-content: space-between; align-items: center;">
+	
+		<div></div>
+
+		<div>
+		
+			<div id="loading" style="display: flex; flex-direction: column; align-items: center">
+				<p>Please wait</p>
+				<span><i class="fa fa-spinner fa-spin" style="font-size:24px"></i></span>
+				<p>Returning to Merchant</p>
+			</div>
+			
+		</div>
+
+		<div></div>
+	
+	</div>
+	
+	<form id="form" th:action="${response.returnUrl}" method="POST" th:object="${response}">
+		<input type="hidden" th:field="*{operation}"/>
+		<input type="hidden" th:field="*{resultCode}"/>
+		<input type="hidden" th:field="*{errorCode}"/>
+		<input type="hidden" th:field="*{merNo}"/>
+		<input type="hidden" th:field="*{billNo}"/>
+		<input type="hidden" th:field="*{amount}"/>
+		<input type="hidden" th:field="*{currency}"/>
+		<input type="hidden" th:field="*{dateTime}"/>
+		<input type="hidden" th:field="*{orderId}"/>
+		<input type="hidden" th:field="*{remark}"/>
+		<input type="hidden" th:field="*{md5Info}"/>
+		<input type="hidden" th:field="*{billingDescriptor}"/>
+	</form>
+	
+	<script>
+		$(function() {
+			$('#form').submit();
+		});
+	</script>
+	
+</body>
+
+</html>

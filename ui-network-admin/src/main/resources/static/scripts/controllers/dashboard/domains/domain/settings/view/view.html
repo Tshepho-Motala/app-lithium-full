@@ -1,0 +1,34 @@
+<div class="container-fluid">
+	<div class="row v-reset-row ">
+		<div class="col-xs-12" style="margin-top: 10px;margin-bottom: 10px">
+			<div ng-if="controller.domain.current.id !== controller.domainRevision.id" class="panel box box-warning">
+				<div class="box-header with-border">
+					<h4 class="box-title">You are viewing an older revision of the domain settings. Be careful when modifying, you might override some important settings.</h4>
+				</div>
+			</div>
+			<button-add ng-if="controller.domainRevision === undefined || controller.domainRevision === null" lit-if-permission="DOMAIN_SETTINGS_EDIT" ng-click="controller.add()"></button-add>
+			<button-edit ng-if="controller.domainRevision" lit-if-permission="DOMAIN_SETTINGS_EDIT" ng-click="controller.add()"></button-add>
+		</div>
+		<div class="col-xs-12">
+			<div class="box">
+				<table class="table table-hover table-striped nowrap" cellspacing="0" width="100%">
+					<thead ng-if="controller.domainRevision !== undefined && controller.domainRevision !== null && controller.domainRevision.labelValueList.length > 0">
+						<tr>
+							<th style="width: 20%">Label</th>
+							<th>Value</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="lbv in controller.domainRevision.labelValueList track by $index">
+							<td ng-if="lbv.labelValue.viewable || lbv.labelValue.viewable == null">{{lbv.labelValue.label.name}}</td>
+							<td ng-if="lbv.labelValue.viewable || lbv.labelValue.viewable == null">{{lbv.labelValue.value}}</td>
+						</tr>
+						<tr ng-if="controller.domainRevision === undefined || controller.domainRevision === null || controller.domainRevision.labelValueList.length === 0">
+							<td>No settings configured yet.</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

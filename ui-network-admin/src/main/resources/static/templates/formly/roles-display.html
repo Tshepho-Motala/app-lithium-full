@@ -1,0 +1,78 @@
+<!-- <div>sada|{{roles}}|dasd</div> -->
+<hr/><br/>
+<div class="row v-reset-row " ng-repeat="role in roles">
+	||{{role.role}}||
+</div>
+
+<!-- domain row -->
+<div class="row v-reset-row " ng-repeat="domain in to.options | filter:filterValue">
+	<div class="col-md-12">
+		<!-- domain box -->
+		<div class="box box-solid box-default">
+			<!-- domain box-header -->
+			<div class="box-header no-border">
+				<i class="fa fa-cloud"></i>
+				<h3 class="box-title">
+					<div ng-if="domain.name === domainName">{{ 'UI_NETWORK_ADMIN.GROUPS.ROLES.HEADERS.THISDOMAIN' | translate }} ({{domain.name}})</div>
+					<div ng-if="domain.name != domainName">{{ 'UI_NETWORK_ADMIN.GROUPS.ROLES.HEADERS.CHILDDOMAIN' | translate }} ({{domain.name}})</div>
+				</h3>
+			</div>
+			<!-- domain box-header end-->
+			<!-- domain box-body -->
+			<div class="box-body no-padding" ng-repeat="category in domain.categories | filter:filterValue" style="margin-bottom: 10px;margin-top: 10px;margin-right: 20px;margin-left: 20px;>
+				<!-- domain.category box -->
+				<div class="box box-solid">
+					<!-- domain.category box-header -->
+					<div class="box-header with-border">
+						<i class="fa fa-tag"></i>
+						<h3 class="box-title">
+							{{category.name}}
+							<small>{{category.description}}</small>
+						</h3>
+					</div>
+					<!-- domain.category box-header end-->
+					<!-- domain.category box-body -->
+					<div class="box-body no-padding">
+						<!-- category.grd table -->
+						<table class="table table-condensed table-hover" style="border-bottom-width: 5px;border-bottom-color: #777;">
+						<tbody>
+						<tr ng-repeat="grd in category.grds | filter:filterValue" style="background-color: #f4f4f4;vertical-align: middle;margin-bottom: 3px;">
+							<td width="60%">{{grd.name}}&nbsp;({{grd.role}})<br/>{{grd.description}}</td>
+							<td valign="middle">
+								<div tooltip title="This role applies to this domain">
+									<label style="font-weight: normal;">Self&nbsp;
+										<checkbox class="btn" ng-change="controller.changeSelfApplied(grd.id, grd.selfApplied)" ng-model="grd.selfApplied"></checkbox>
+									</label>
+									<i class="fa fa-question" aria-hidden="true"></i>
+								</div>
+							</td>
+							<td valign="middle">
+								<div tooltip title="This role applies to all the subdomains">
+									<label style="font-weight: normal;">Child&nbsp;
+										<checkbox class="" ng-change="controller.changeDescending(grd.id, grd.descending)" ng-model="grd.descending"></checkbox>
+									</label>
+									<i class="fa fa-question" aria-hidden="true"></i>
+								</div>
+							</td>
+							<td>
+								<div tooltip title="Remove this role from this group/domain">
+									<button type="button" class="btn btn-danger" ng-click="controller.removeRole(grd.id)">
+										<span class="fa fa-times"></span>
+									</button>
+								</div>
+							</td>
+						</tr>
+						</tbody>
+						</table>
+						<!-- category.grd table end -->
+					</div>
+					<!-- domain.category box-body end -->
+				</div>
+				<!-- domain.category box end -->
+			</div>
+			<!-- domain box-body -->
+		</div>
+		<!-- domain box end -->
+	</div>
+</div>
+<!-- domain row end -->

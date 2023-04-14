@@ -1,0 +1,119 @@
+.PayPal deposit Flow
+[plantuml]
+----
+
+@startuml
+header PayPal deposit Flow
+footer Page %page% of %lastpage%
+skinparam sequenceMessageAlign center
+actor Player
+box "Frontend" #LightBlue
+participant Portal
+participant IFrame
+end box
+participant Lithium
+participant PayPal
+autonumber
+
+Player -> Portal  : Choose PayPal deposit
+activate Portal #Black
+Portal -> PayPal : render PayPal Button(client_id, createOrder(), onApprove(), onCancel(), onError())
+activate PayPal
+PayPal -> Portal : PayPal button
+deactivate PayPal
+activate Portal #Yellow
+note left
+    Paypal button is rendered on Portal page.
+    Lithium APIs are signed to PayPal events.
+    createOrder = deposit, onApprove = callback(action=return),
+    onCansel = callback(action=cancel), onError = callback(action=decline)
+end note
+
+Portal --> Player : Show payment page
+Player -> Portal  : Player enters amount
+Player -> Portal  : Pay button is pressed
+Portal -> Portal : createOrder()
+Portal -> Lithium : deposit(token, amount)
+activate Lithium
+Lithium -> PayPal : createOrder(amount, notificationUrl)
+activate PayPal
+PayPal --> Lithium : createOrder(status="CREATED", paymentUrl, orderId)
+deactivate PayPal
+Lithium --> Portal : deposit(status="WAITFORPROCESSOR", paymentUrl, orderId)
+deactivate Lithium
+Portal -> IFrame: open(paymentUrl)
+activate IFrame
+IFrame -> Player: Show PayPal login page
+Player -> IFrame: Player enters paypal credentials
+IFrame -> PayPal: Authenticate(email, password)
+activate PayPal
+PayPal --> IFrame: Ok
+deactivate PayPal
+IFrame -> Player: Show PayPal payment page
+Player -> IFrame: Player finalize payment on Paypal page
+IFrame -> PayPal: Pay
+activate PayPal
+deactivate IFrame
+PayPal -> Portal: result notification(onApprove/onCancel/onError)
+activate Lithium
+alt#Gold  #Pink notification=onError
+    Portal -> Lithium: callback(orderId, playerId, action=decline)
+    Lithium -> Lithium: Decline transaction
+    Lithium --> Portal: callback(status = DECLINED, errorMessage)
+    Portal --> Player: Show error
+else #Pink notification=onCancel
+    Portal -> Lithium: callback(orderId, playerId, action=cancel)
+    Lithium -> Lithium: Cancel transaction
+    Lithium --> Portal: callback(status = PLAYER_CANCEL, errorMessage)
+    Portal --> Player: Show player cancel message
+else #LightGreen notification=onApprove
+    Portal -> Lithium: callback(orderId, playerId, action=return)
+    ref over Lithium: Capture Order
+    Lithium --> Portal: callback(status = Capture result(SUCCESS,FAILED,CANCELED,PENDING), errorMessage)
+    Portal --> Player: Show deposit result
+end
+PayPal -> Lithium: webhook(CHECKOUT.ORDER.APPROVED, orderId)
+ref over Lithium: Capture Order
+ == Capture Order ==
+Lithium -> PayPal: getOrder(orderId)
+PayPal --> Lithium: getOrder(status=APPROVED,accountDetails)
+Lithium -> Lithium: verifyProcessorAccount()
+note right
+    Verify processor account
+    according to the account_verifications processor property
+    (ONE_ACCOUNT_PER_USER,DUPLICATE_ACCOUNT)
+    Set transaction status=DECLINED in case failed
+end note
+Lithium -> PayPal: captureOrder(orderId, agreement_id)
+PayPal --> Lithium: captureOrder(status=COMPLETED/CREATED/SAVED/APPROVED/PAYER_ACTION_REQUIRED/VOIDED, orderId)
+alt#Gold  #LightBlue status=CREATED/SAVED/APPROVED/PAYER_ACTION_REQUIRED
+ref over Lithium: CAPTURE.COMPLETED Webhook
+else #Pink status = VOIDED
+Lithium -> Lithium: Decline transaction
+else #LightGreen status = COMPLETED
+Lithium -> Lithium: Update transaction status
+note right
+    Move transaction to final SUCCESS state
+    Update player balance
+    Save processor account
+end note
+end
+ == CAPTURE.COMPLETED Webhook ==
+ PayPal -> Lithium: webhook(PAYMENT.CAPTURE.COMPLETED)
+ note left
+     Do nothing in case transaction
+     is already in final state
+ end note
+ Lithium -> PayPal: getOrder(orderId)
+ PayPal --> Lithium: getOrder(status=COMPLETED,accountDetails)
+ Lithium -> Lithium: Update transaction status
+ note right
+     Move transaction to final SUCCESS state
+     Update player balance
+     Save processor account
+ end note
+Lithium --> PayPal: HTTP_OK
+deactivate Lithium
+deactivate PayPal
+deactivate Portal
+@enduml

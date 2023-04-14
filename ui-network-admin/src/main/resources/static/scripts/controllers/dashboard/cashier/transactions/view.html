@@ -1,0 +1,523 @@
+
+<div ng-if="controller.experimentalFeatures" id="vueMountTransactionsDetailPage"></div>
+<div ng-if="!controller.experimentalFeatures">
+	<div class="row v-reset-row top-space-10">
+		<div class="col-xs-12">
+			<div class="row v-reset-row ">
+				<div class="col-xs-6">
+				<span ng-switch="controller.tran.current.status.code">
+					<span ng-switch-when="SUCCESS" class="badge badge-wrap card-success">{{ 'UI_NETWORK_ADMIN.SERVICE_CASHIER.TRANSACTION.STATUS.' + controller.tran.current.status.code | translate }}</span>
+					<span ng-switch-when="APPROVED" class="badge badge-wrap card-success">{{'UI_NETWORK_ADMIN.SERVICE_CASHIER.TRANSACTION.STATUS.' + controller.tran.current.status.code | translate }}</span>
+					<span ng-switch-when="AUTO_APPROVED" class="badge badge-wrap card-success">{{'UI_NETWORK_ADMIN.SERVICE_CASHIER.TRANSACTION.STATUS.' + controller.tran.current.status.code | translate }}</span>
+					<span ng-switch-when="DECLINED" class="badge badge-wrap card-danger">{{'UI_NETWORK_ADMIN.SERVICE_CASHIER.TRANSACTION.STATUS.' + controller.tran.current.status.code | translate }}</span>
+					<span ng-switch-when="FATALERROR" class="badge badge-wrap card-danger">{{'UI_NETWORK_ADMIN.SERVICE_CASHIER.TRANSACTION.STATUS.' + controller.tran.current.status.code | translate }}</span>
+					<span ng-switch-when="CANCEL" class="badge badge-wrap card-danger">{{'UI_NETWORK_ADMIN.SERVICE_CASHIER.TRANSACTION.STATUS.' + controller.tran.current.status.code | translate }}</span>
+					<span ng-switch-when="PLAYER_CANCEL" class="badge badge-wrap card-danger">{{'UI_NETWORK_ADMIN.SERVICE_CASHIER.TRANSACTION.STATUS.' + controller.tran.current.status.code | translate }}</span>
+					<span ng-switch-when="WAITFORAPPROVAL" class="badge badge-wrap card-info">{{ 'UI_NETWORK_ADMIN.SERVICE_CASHIER.TRANSACTION.STATUS.' + controller.tran.current.status.code | translate}}</span>
+					<span ng-switch-when="ON_HOLD" class="badge badge-wrap card-default">{{'UI_NETWORK_ADMIN.SERVICE_CASHIER.TRANSACTION.STATUS.' + controller.tran.current.status.code | translate }}</span>
+					<span ng-switch-when="EXPIRED" class="badge badge-wrap">{{'UI_NETWORK_ADMIN.SERVICE_CASHIER.TRANSACTION.STATUS.' + controller.tran.current.status.code | translate }}</span>
+
+					<span ng-switch-default class="badge badge-wrap">{{'UI_NETWORK_ADMIN.SERVICE_CASHIER.TRANSACTION.STATUS.' + controller.tran.current.status.code | translate }}</span>
+					<span ng-if="controller.tran.forcedSuccess" class="badge badge-wrap card-info">{{'UI_NETWORK_ADMIN.CASHIER.TRANSACTION.FORCEDSUCCESS'|translate}}</span>
+				</span>
+					<span ng-switch="controller.tran.transactionType">
+					<span ng-switch-when="DEPOSIT" class="badge badge-wrap card-success">{{'UI_NETWORK_ADMIN.SERVICE_CASHIER.TRANSACTION.STATUS.' + controller.tran.transactionType | translate}}</span>
+					<span ng-switch-when="WITHDRAWAL" class="badge badge-wrap card-danger">{{'UI_NETWORK_ADMIN.SERVICE_CASHIER.TRANSACTION.STATUS.' + controller.tran.transactionType | translate}}</span>
+					<span ng-switch-when="REVERSAL" class="badge badge-wrap card-warning">{{'UI_NETWORK_ADMIN.SERVICE_CASHIER.TRANSACTION.STATUS.' + controller.tran.transactionType | translate}}</span>
+					<span ng-if="controller.tran.manual" class="badge badge-wrap card-info">{{'UI_NETWORK_ADMIN.CASHIER.TRANSACTION.ISMANUAL'|translate}}</span>
+					<span ng-if="controller.tran.autoApproved" class="badge badge-wrap card-primary" style="text-transform:uppercase;">{{'UI_NETWORK_ADMIN.CASHIER.TRANS.VIEW.INFO.AUTO_APPROVED'|translate}}</span>
+				</span>
+				</div>
+				<div class="col-xs-6">
+					<div class="pull-right">
+						<!-- Put the image here -->
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-6 col-lg-6 top-space-10">
+			<div class="card card-block">
+				<table class="table table-condensed table-hover nowrap" cellspacing="0" width="100%">
+					<tr>
+						<th style="width: 40%;">{{'UI_NETWORK_ADMIN.CASHIER.TRANS.VIEW.INFO.TRANID'|translate}}</th>
+						<td>{{controller.tran.id}}</td>
+					</tr><tr>
+					<th>{{'UI_NETWORK_ADMIN.CASHIER.TRANS.VIEW.INFO.STATUS'|translate}}</th>
+					<td ng-switch="controller.tran.current.status.code">
+						<span ng-switch-when="SUCCESS" class="badge badge-wrap card-success">{{'UI_NETWORK_ADMIN.SERVICE_CASHIER.TRANSACTION.STATUS.' + controller.tran.current.status.code | translate }}</span>
+						<span ng-switch-when="APPROVED" class="badge badge-wrap card-success">{{'UI_NETWORK_ADMIN.SERVICE_CASHIER.TRANSACTION.STATUS.' + controller.tran.current.status.code | translate }}</span>
+						<span ng-switch-when="AUTO_APPROVED" class="badge badge-wrap card-success">{{'UI_NETWORK_ADMIN.SERVICE_CASHIER.TRANSACTION.STATUS.' + controller.tran.current.status.code | translate }}</span>
+						<span ng-switch-when="DECLINED" class="badge badge-wrap card-danger">{{'UI_NETWORK_ADMIN.SERVICE_CASHIER.TRANSACTION.STATUS.' + controller.tran.current.status.code | translate }}</span>
+						<span ng-switch-when="FATALERROR" class="badge badge-wrap card-danger">{{'UI_NETWORK_ADMIN.SERVICE_CASHIER.TRANSACTION.STATUS.' + controller.tran.current.status.code | translate }}</span>
+						<span ng-switch-when="CANCEL" class="badge badge-wrap card-danger">{{'UI_NETWORK_ADMIN.SERVICE_CASHIER.TRANSACTION.STATUS.' + controller.tran.current.status.code | translate }}</span>
+						<span ng-switch-when="PLAYER_CANCEL" class="badge badge-wrap card-danger">{{'UI_NETWORK_ADMIN.SERVICE_CASHIER.TRANSACTION.STATUS.' + controller.tran.current.status.code | translate }}</span>
+						<span ng-switch-when="WAITFORAPPROVAL" class="badge badge-wrap card-info">{{'UI_NETWORK_ADMIN.SERVICE_CASHIER.TRANSACTION.STATUS.' + controller.tran.current.status.code | translate }}</span>
+						<span ng-switch-when="ON_HOLD" class="badge badge-wrap card-default">{{'UI_NETWORK_ADMIN.SERVICE_CASHIER.TRANSACTION.STATUS.' + controller.tran.current.status.code | translate }}</span>
+						<span ng-switch-when="EXPIRED" class="badge badge-wrap">{{'UI_NETWORK_ADMIN.SERVICE_CASHIER.TRANSACTION.STATUS.' + controller.tran.current.status.code | translate }}</span>
+
+						<span ng-switch-default class="badge badge-wrap">{{'UI_NETWORK_ADMIN.SERVICE_CASHIER.TRANSACTION.STATUS.' + controller.tran.current.status.code | translate }}</span>
+						<span ng-if="controller.tran.forcedSuccess" class="badge badge-wrap card-info">{{'UI_NETWORK_ADMIN.CASHIER.TRANSACTION.FORCEDSUCCESS'|translate}}</span>
+					</td>
+				</tr><tr>
+					<th>{{'UI_NETWORK_ADMIN.CASHIER.TRANS.VIEW.INFO.AUTO_APPROVED'|translate}}</th>
+					<td>{{controller.tran.autoApproved}}</td>
+				</tr><tr>
+					<th>{{'UI_NETWORK_ADMIN.CASHIER.TRANS.VIEW.INFO.REVIEWED_BY'|translate}}</th>
+					<td>{{controller.tran.reviewedByFullName}}</td>
+				</tr><tr>
+					<th>{{'UI_NETWORK_ADMIN.CASHIER.TRANS.VIEW.INFO.DIRECT_WITHDRAWAL'|translate}}</th>
+					<td>{{controller.tran.directWithdrawal}}</td>
+				</tr><tr>
+				</tr><tr>
+					<th>{{'UI_NETWORK_ADMIN.CASHIER.TRANS.VIEW.INFO.INITIATED_BY'|translate}}</th>
+					<td>{{controller.tran.initiationAuthorFullName}}</td>
+				</tr><tr>
+					<th>{{'UI_NETWORK_ADMIN.CASHIER.TRANS.TABLE.DECLINE_REASON'|translate}}</th>
+					<td>{{controller.tran.declineReason}}</td>
+				</tr><tr>
+					<th>{{'UI_NETWORK_ADMIN.CASHIER.TRANS.VIEW.INFO.CREATED'|translate}}</th>
+					<td>{{controller.tran.createdOn|datetimedefault}}</td>
+				</tr><tr>
+					<th>{{'UI_NETWORK_ADMIN.CASHIER.TRANS.VIEW.INFO.AMOUNT'|translate}}</th>
+					<td>{{controller.fees.depositAmount | currency: controller.tran.currencyCode}}</td>
+				</tr><tr ng-if="controller.tran.current.status.code === 'SUCCESS'">
+					<th>Player Amount (After Fees)</th>
+					<td>{{controller.fees.playerAmount | currency: controller.tran.currencyCode}}</td>
+				</tr><tr ng-if="controller.tran.current.status.code === 'SUCCESS'">
+					<th>Fee</th>
+					<td>{{controller.fees.feeAmount | currency: controller.tran.currencyCode}} <div ng-if="controller.fees.minimumUsed === true">(minimum fee used)</div></td>
+				</tr><tr>
+					<th>{{'UI_NETWORK_ADMIN.CASHIER.TRANS.VIEW.INFO.CURRENCY'|translate}}</th>
+					<td>{{controller.tran.currencyCode}}</td>
+				</tr><tr>
+					<th>{{'UI_NETWORK_ADMIN.CASHIER.TRANS.VIEW.INFO.METHOD'|translate}}</th>
+					<td>{{controller.tran.domainMethod.name}}</td>
+				</tr><tr>
+					<th>Last Processor</th>
+					<td>{{controller.processor}}</td>
+				</tr><tr>
+					<th>Payment Type</th>
+					<td>{{controller.tran.transactionPaymentType.paymentType}}</td>
+				</tr><tr>
+					<th>Processor Reference</th>
+					<td>{{controller.tran.processorReference}}</td>
+				</tr><tr>
+					<th>Additional Reference</th>
+					<td>{{controller.tran.additionalReference}}</td>
+				</tr><tr>
+					<th>{{'UI_NETWORK_ADMIN.CASHIER.TRANS.VIEW.INFO.PROFILE'|translate}}</th>
+					<td>{{controller.tran.user.profile.name}}</td>
+				</tr><tr>
+					<th>Bonus Code</th>
+					<td>{{controller.tran.bonusCode}}</td>
+				</tr><tr>
+					<th>Bonus ID</th>
+					<td>{{controller.tran.bonusId}}</td>
+				</tr><tr>
+					<th>Account Info</th>
+					<td>{{controller.tran.accountInfo}}</td>
+				</tr>
+					<tr ng-if="controller.tran.linkedTransaction !== null">
+						<th>Linked Transaction</th>
+						<td>
+							<a ui-sref="dashboard.cashier.transaction({ 'tranId' : controller.tran.linkedTransaction.id, 'domainName' : $stateParams.domainName })">{{ controller.tran.linkedTransaction.id }}</a>
+						</td>
+					</tr><tr>
+					<th>Transaction runtime (sec)</th>
+					<td>{{controller.tran.runtime}}</td>
+				</tr>
+				<tr>
+					<th>Manual Cashier Adjustment</th>
+					<td>{{controller.tran.manualCashierAdjustmentId}}</td>
+				</tr>
+				</table>
+			</div>
+			<div class="box box-default box-solid" style="border-top: none; margin-top: 20px;">
+				<div class="box-header with-border">
+					Player Details
+				</div>
+				<div class="box-body d-flex flex-column flex-lg-row">
+					<table style="width: 55%; margin-right: 2%" class="table table-condensed table-hover nowrap" cellspacing="0" width="60%">
+						<tr>
+							<th>{{'UI_NETWORK_ADMIN.CASHIER.TRANS.VIEW.INFO.PLAYER'|translate}}</th>
+							<td style="width: 60%"><a target="_blank" ui-sref="dashboard.players.guidredirect({domainName:controller.tran.user.guid.split('/')[0], usernameOrId:controller.tran.user.guid.split('/')[1]})">{{controller.tran.user.guid}}</a></td>
+						</tr>
+						<tr>
+							<th>{{ "UI_NETWORK_ADMIN.ECOSYSTEMS.FIELDS.ECOSYSTEM_STATUS" | translate }}</th>
+							<td style="width: 60%">
+								<span style="line-height:inherit; margin-right: 5px;" class="label" ng-class="{'label-success': controller.model.user.status.userEnabled === true, 'label-danger': controller.model.user.status.userEnabled === false }">{{controller.model.user.status.name}}</span>
+								<span ng-if="controller.model.user.statusReason" class="label label-default"> {{controller.model.user.statusReason.description | uppercase}}</span>
+								<span ng-if="controller.model.user.testAccount" class="label label-danger">TEST</span>
+							</td>
+						</tr>
+						<tr>
+							<th>{{ "UI_NETWORK_ADMIN.LIST.PLAYERS.FIELDS.FILTER.VERIFICATIONSTATUS.LABEL" | translate }}</th>
+							<td style="width: 60%">
+								<span ng-if="controller.model.user.verificationStatus === 1 && !controller.model.user.emailValidated && controller.data.domainSettings['validate_email_on_registration'] === 'true'" class="label label-lg label-warning">{{ "UI_NETWORK_ADMIN.USER.FIELDS.VERIFICATIONSTATUS.CODES.TEMPORARY_ID" | translate }}</span>
+								<span ng-if="controller.model.user.verificationStatus === 1 && controller.model.user.emailValidated && controller.data.domainSettings['validate_email_on_registration'] === 'true'" class="label label-lg label-warning">{{ "UI_NETWORK_ADMIN.USER.FIELDS.VERIFICATIONSTATUS.CODES.UNVERIFIED" | translate }}</span>
+								<span ng-if="controller.model.user.verificationStatus === 1 && controller.data.domainSettings['validate_email_on_registration'] !== 'true'" class="label label-lg label-warning">{{ "UI_NETWORK_ADMIN.USER.FIELDS.VERIFICATIONSTATUS.CODES.UNVERIFIED" | translate }}</span>
+								<span ng-if="controller.model.user.verificationStatus === 2" class="label label-lg label-info">{{ "UI_NETWORK_ADMIN.USER.FIELDS.VERIFICATIONSTATUS.CODES.MANUALLY_VERIFIED" | translate }}</span>
+								<span ng-if="controller.model.user.verificationStatus === 3" class="label label-lg label-info">{{ "UI_NETWORK_ADMIN.USER.FIELDS.VERIFICATIONSTATUS.CODES.EXTERNALLY_VERIFIED" | translate }}</span>
+								<span ng-if="controller.model.user.verificationStatus === 4" class="label label-lg label-info">{{ "UI_NETWORK_ADMIN.USER.FIELDS.VERIFICATIONSTATUS.CODES.SOF_VERIFIED" | translate }}</span>
+								<span ng-if="controller.model.user.verificationStatus === 5" class="label label-lg label-info">{{ "UI_NETWORK_ADMIN.USER.FIELDS.VERIFICATIONSTATUS.CODES.UNDERAGED" | translate }}</span>
+								<span ng-if="controller.model.user.verificationStatus === 6" class="label label-lg label-info">{{ "UI_NETWORK_ADMIN.USER.FIELDS.VERIFICATIONSTATUS.CODES.AGE_ONLY_VERIFIED" | translate }}</span>
+								<span ng-if="!controller.model.user.verificationStatus" class="label label-lg label-danger">{{"UI_NETWORK_ADMIN.USER.FIELDS.VERIFICATIONSTATUS.CODES.NOT_SETUP" | translate }}</span>
+							</td>
+						</tr>
+						<tr>
+							<th>{{ "GLOBAL.FIELDS.FULLNAME" | translate }}</th>
+							<td style="width: 60%">{{controller.model.user.firstName}} {{controller.model.user.lastName}}</td>
+						</tr>
+						<tr>
+							<th>Registration Date</th>
+							<td style="width: 60%">{{controller.model.user.createdDate|datetimedefault}}</td>
+						</tr>
+						<tr>
+							<th>{{ 'UI_NETWORK_ADMIN.LIST.PLAYERS.FIELDS.FILTER.TAGS.LABEL' | translate }}</th>
+							<td style="width: 60%">
+							<span class="username">
+								<span ng-repeat="uc in controller.model.user.userCategories"><span style="line-height:inherit; margin-right: 3px; padding:5px;" class="label label-primary">&nbsp;{{ uc.name }}&nbsp;</span></span></span>
+								<span ng-if="controller.model.user.userCategories.length === 0">No tags specified</span>
+							</td>
+						</tr>
+						<tr>
+							<th>{{ 'UI_NETWORK_ADMIN.PLAYER.RESTRICTIONS.TITLE' | translate }}</th>
+							<td style="width: 60%">
+								<div class="top-space-5" style="overflow-x: auto; white-space: nowrap" ng-if="controller.model.restrictions.length > 0">
+								<span ng-repeat="userRestriction in controller.model.restrictions">
+									<span class="label" ng-class="{'label-danger': userRestriction.active === true, 'label-warning': userRestriction.active === false }">{{userRestriction.set.name|uppercase}}<br/></span>
+								</span>
+								</div>
+								<span ng-if="controller.model.restrictions.length === 0">No restrictions specified</span>
+							</td>
+						</tr>
+					</table>
+					<table style="width: 43%" class="table table-condensed table-hover nowrap" cellspacing="0" width="40%">
+
+						<tr>
+							<th>{{'UI_NETWORK_ADMIN.PLAYER.ACCOUNTING.BALANCEADJUST.FIELDS.CURRENT.LABEL'|translate}}</th>
+							<td style="width: 40%">{{controller.playerBalance | cents: controller.tran.currencyCode}}</td>
+						</tr>
+						<tr>
+							<th>{{'UI_NETWORK_ADMIN.PLAYER.INFO-HEADER.LT-DEPOSITS'|translate}}</th>
+							<td style="width: 40%"><span style="color: green;">{{controller.model.ltDeposits|cents:controller.tran.currencyCode}}</span></td>
+						</tr>
+						<tr>
+							<th>{{'UI_NETWORK_ADMIN.PLAYER.INFO-HEADER.LT-WITHDRAWALS'|translate}}</th>
+							<td style="width: 40%"><span style="color: red;">{{controller.ltWithdrawals|cents:controller.tran.currencyCode}}</span></td>
+						</tr>
+						<tr>
+							<th>{{'UI_NETWORK_ADMIN.PLAYER.INFO-HEADER.PENDING-WITHDRAWALS'|translate}}</th>
+							<td style="width: 40%"><span style="color: red;">{{controller.pendingWithdrawals|cents:controller.tran.currencyCode}}</span></td>
+						</tr>
+						<tr>
+							<th>{{'UI_NETWORK_ADMIN.PLAYER.INFO-HEADER.ESCROW_BALANCE'|translate}}</th>
+							<td style="width: 40%"><span style="color: red;">{{controller.escrowBalance|cents:controller.tran.currencyCode}}</span></td>
+						</tr>
+						<tr>
+							<th>{{'UI_NETWORK_ADMIN.PLAYER.INFO-HEADER.LT_DEPOSIT_ATTEMPTS'|translate}}</th>
+							<td style="width: 40%"><span style="color: red;">{{controller.ltDepositsAttempts}}</span></td>
+						</tr>
+						<tr>
+							<th>{{'UI_NETWORK_ADMIN.PLAYER.INFO-HEADER.LT_DEPOSIT_SUCCESS'|translate}}</th>
+							<td style="width: 40%"><span style="color: red;">{{controller.ltDepositsSuccess}}</span></td>
+						</tr>
+						<tr>
+							<th>{{'UI_NETWORK_ADMIN.PLAYER.INFO-HEADER.LT_PLACED_TO'|translate}}</th>
+							<td style="width: 40%"><span style="color: red;">{{controller.ltPlacedTo|cents:controller.tran.currencyCode}}</span></td>
+						</tr>
+						<tr style="visibility: hidden">
+							<th>Hidden crutch for table symmetry</th>
+							<td></td>
+						</tr>
+						<tr style="visibility: hidden">
+							<th>Hidden crutch for table symmetry</th>
+							<td></td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<cashier-bank-account-lookup ng-if="controller.ngBankAccountSettingsActive && controller.isWithdrawal"
+										 domain-data="controller.domainData" transaction-data="controller.transactionData">
+			</cashier-bank-account-lookup>
+		</div>
+		<div class="col-xs-12 col-md-6 col-lg-6 top-space-10">
+			<div class="card card-block">
+				<div class="button-bar">
+					<button-custom ng-click="controller.refreshTransaction()" bclass="default btn-sm" icon="refresh" text="GLOBAL.ACTION.REFRESH"></button-custom>
+					<span  ng-if="controller.isWithdrawal">
+						<button-custom ng-if="!controller.rfiEnabled" lit-if-permission="CASHIER_APPROVE" ng-click="controller.setRFIFlag()" bclass="default btn-sm"  text="UI_NETWORK_ADMIN.CASHIER.TRANSACTION.RFI.ENABLE"  ></button-custom>
+						<button-custom ng-if="controller.rfiEnabled" lit-if-permission="CASHIER_APPROVE" ng-click="controller.removeRFIFlag()" bclass="default btn-sm"  text="UI_NETWORK_ADMIN.CASHIER.TRANSACTION.RFI.DISABLE"  ></button-custom>
+					</span>
+					<span lit-if-permission="MANUAL_CASHIER_ADJUSTMENT" ng-if="controller.tran && controller.tran.manualCashierAdjustmentAccountCodes">
+						<div  class=" pull-right" align="right">
+							<div id="vueBalanceAdjustmentsTransaction" class="pull-right"></div>
+						</div>
+					</span>
+					<span ng-switch="controller.tran.current.status.code">
+					<span ng-switch-when="SUCCESS">
+						<!-- success has no buttons to display -->
+					</span>
+					<span ng-switch-when="CANCEL">
+						<!--  cancel has no buttons to display -->
+						<br/><br/>
+					</span>
+					<span ng-switch-when="VALIDATEINPUT">
+						<button-custom lit-if-permission="CASHIER_APPROVE" bclass="warning btn-sm" icon="repeat" text="GLOBAL.ACTION.RETRY" click-confirm="{{'UI_NETWORK_ADMIN.CASHIER.TRANSACTION.RETRY.CONFIRM'|translate}}"  click-confirmed="controller.retryTransaction()" tooltip-placement="bottom" uib-tooltip="{{'UI_NETWORK_ADMIN.CASHIER.TRANSACTION.RETRY.EXPLANATION'|translate}}"></button-custom>
+						<button-custom lit-if-permission="CASHIER_APPROVE" bclass="danger btn-sm" icon="eraser" text="GLOBAL.ACTION.CLEAR" click-confirm="{{'UI_NETWORK_ADMIN.CASHIER.TRANSACTION.CLEAR.CONFIRM'|translate}}" click-confirmed="controller.transactionClearProvider()" tooltip-placement="bottom" uib-tooltip="{{'UI_NETWORK_ADMIN.CASHIER.TRANSACTION.CLEAR.EXPLANATION'|translate}}"></button-custom>
+                        <button-custom lit-if-permission="CASHIER_CANCEL" bclass="danger btn-sm" icon="ban" text="GLOBAL.ACTION.CANCEL" ng-click="controller.transactionCancel()" tooltip-placement="bottom" uib-tooltip="{{'UI_NETWORK_ADMIN.CASHIER.TRANSACTION.CANCEL.EXPLANATION'|translate}}"></button-custom>
+						<br/><br/>
+					</span>
+					<span ng-switch-when="WAITFORPROCESSOR">
+						<button-custom lit-if-permission="CASHIER_APPROVE" bclass="warning btn-sm" icon="repeat" text="GLOBAL.ACTION.RETRY" click-confirm="{{'UI_NETWORK_ADMIN.CASHIER.TRANSACTION.RETRY.CONFIRM'|translate}}"  click-confirmed="controller.retryTransaction()" tooltip-placement="bottom" uib-tooltip="{{'UI_NETWORK_ADMIN.CASHIER.TRANSACTION.RETRY.EXPLANATION'|translate}}"></button-custom>
+						<button-custom lit-if-permission="CASHIER_APPROVE" bclass="danger btn-sm" icon="eraser" text="GLOBAL.ACTION.CLEAR" click-confirm="{{'UI_NETWORK_ADMIN.CASHIER.TRANSACTION.CLEAR.CONFIRM'|translate}}" click-confirmed="controller.transactionClearProvider()" tooltip-placement="bottom" uib-tooltip="{{'UI_NETWORK_ADMIN.CASHIER.TRANSACTION.CLEAR.EXPLANATION'|translate}}"></button-custom>
+						<button-custom lit-if-permission="CASHIER_CANCEL_AFTER_APPROVE" bclass="danger btn-sm" icon="ban" text="GLOBAL.ACTION.CANCEL" ng-click="controller.transactionCancel()" tooltip-placement="bottom" uib-tooltip="{{'UI_NETWORK_ADMIN.CASHIER.TRANSACTION.CANCEL_AFTER_APPROVE.EXPLANATION'|translate}}"></button-custom>
+						<br/><br/>
+					</span>
+					<span lit-if-permission="CASHIER_APPROVE" ng-switch-when="FATALERROR">
+						<button-custom bclass="warning btn-sm" icon="repeat" text="GLOBAL.ACTION.RETRY" click-confirm="{{'UI_NETWORK_ADMIN.CASHIER.TRANSACTION.RETRY.CONFIRM'|translate}}"  click-confirmed="controller.retryTransaction()" tooltip-placement="bottom" uib-tooltip="{{'UI_NETWORK_ADMIN.CASHIER.TRANSACTION.RETRY.EXPLANATION'|translate}}"></button-custom>
+						<button-custom bclass="danger btn-sm" icon="eraser" text="GLOBAL.ACTION.CLEAR" click-confirm="{{'UI_NETWORK_ADMIN.CASHIER.TRANSACTION.CLEAR.CONFIRM'|translate}}" click-confirmed="controller.transactionClearProvider()" tooltip-placement="bottom" uib-tooltip="{{'UI_NETWORK_ADMIN.CASHIER.TRANSACTION.CLEAR.EXPLANATION'|translate}}"></button-custom>
+						<br/><br/>
+					</span>
+					<span lit-if-permission="CASHIER_APPROVE" ng-switch-when="DECLINED">
+						<button-custom bclass="warning btn-sm" icon="repeat" text="GLOBAL.ACTION.RETRY" click-confirm="{{'UI_NETWORK_ADMIN.CASHIER.TRANSACTION.RETRY.CONFIRM'|translate}}"  click-confirmed="controller.retryTransaction()" tooltip-placement="bottom" uib-tooltip="{{'UI_NETWORK_ADMIN.CASHIER.TRANSACTION.RETRY.EXPLANATION'|translate}}"></button-custom>
+						<button-custom bclass="danger btn-sm" icon="eraser" text="GLOBAL.ACTION.CLEAR" click-confirm="{{'UI_NETWORK_ADMIN.CASHIER.TRANSACTION.CLEAR.CONFIRM'|translate}}" click-confirmed="controller.transactionClearProvider()" tooltip-placement="bottom" uib-tooltip="{{'UI_NETWORK_ADMIN.CASHIER.TRANSACTION.CLEAR.EXPLANATION'|translate}}"></button-custom>
+						<br/><br/>
+					</span>
+					<span ng-switch-when="WAITFORAPPROVAL">
+						<button-custom lit-if-permission="CASHIER_CANCEL" bclass="danger btn-sm" icon="ban" text="GLOBAL.ACTION.CANCEL" ng-click="controller.transactionCancel()" tooltip-placement="bottom" uib-tooltip="{{'UI_NETWORK_ADMIN.CASHIER.TRANSACTION.CANCEL.EXPLANATION'|translate}}"></button-custom>
+						<button-custom lit-if-permission="CASHIER_APPROVE" bclass="success btn-sm" icon="check" text="GLOBAL.ACTION.APPROVE" ng-disabled="controller.approveDisabled" click-confirm="{{'UI_NETWORK_ADMIN.CASHIER.TRANSACTION.APPROVE.CONFIRM'|translate}}" click-confirmed="controller.markApproved()" tooltip-placement="bottom" uib-tooltip="{{'UI_NETWORK_ADMIN.CASHIER.TRANSACTION.APPROVE.EXPLANATION'|translate}}"></button-custom>
+						<button-custom bclass="default btn-sm" icon="clock-o" text="{{'GLOBAL.ACTION.ON_HOLD'|translate}}" ng-click="controller.setOnHold()" tooltip-placement="bottom" uib-tooltip="{{'UI_NETWORK_ADMIN.CASHIER.TRANSACTION.ON_HOLD.EXPLANATION'|translate}}"></button-custom>
+						<div  lit-if-permission="CASHIER_APPROVE" class=" pull-right" align="right">
+							<div id="vueMountWithdrawalBulk" class="pull-right"></div>
+						</div>
+						<div ng-if="controller.approveDisabled"><p class="danger-text" style="padding-top: 5px; margin-top: 10px; ">{{controller.approveMessage}}</p></div>
+						<div ng-if="!controller.approveDisabled"><br/></div>
+
+					</span>
+					<span ng-switch-when="ON_HOLD">
+						<button-custom lit-if-permission="CASHIER_CANCEL" bclass="danger btn-sm" icon="ban" text="GLOBAL.ACTION.CANCEL" ng-click="controller.transactionCancel()" tooltip-placement="bottom" uib-tooltip="{{'UI_NETWORK_ADMIN.CASHIER.TRANSACTION.CANCEL.EXPLANATION'|translate}}"></button-custom>
+						<button-custom lit-if-permission="CASHIER_APPROVE" bclass="success btn-sm" icon="check" text="GLOBAL.ACTION.APPROVE" ng-disabled="controller.approveDisabled" click-confirm="{{'UI_NETWORK_ADMIN.CASHIER.TRANSACTION.APPROVE.CONFIRM'|translate}}" click-confirmed="controller.markApproved()" tooltip-placement="bottom" uib-tooltip="{{'UI_NETWORK_ADMIN.CASHIER.TRANSACTION.APPROVE.EXPLANATION'|translate}}"></button-custom>
+						<div ng-if="controller.approveDisabled"><p class="danger-text" style="padding-top: 5px; margin-top: 10px; ">{{controller.approveMessage}}</p></div>
+						<div ng-if="!controller.approveDisabled"><br/></div>
+					</span>
+					<span ng-switch-when="AUTO_APPROVED_DELAYED">
+						<button-custom lit-if-permission="CASHIER_CANCEL" bclass="danger btn-sm" icon="ban" text="GLOBAL.ACTION.CANCEL" ng-click="controller.transactionCancel()" tooltip-placement="bottom" uib-tooltip="{{'UI_NETWORK_ADMIN.CASHIER.TRANSACTION.CANCEL.EXPLANATION'|translate}}"></button-custom>
+						<button-custom lit-if-permission="CASHIER_APPROVE" bclass="success btn-sm" icon="check" text="GLOBAL.ACTION.APPROVE" ng-disabled="controller.approveDisabled" click-confirm="{{'UI_NETWORK_ADMIN.CASHIER.TRANSACTION.APPROVE.CONFIRM'|translate}}" click-confirmed="controller.markApproved()" tooltip-placement="bottom" uib-tooltip="{{'UI_NETWORK_ADMIN.CASHIER.TRANSACTION.APPROVE.EXPLANATION'|translate}}"></button-custom>
+						<button-custom bclass="default btn-sm" icon="clock-o" text="{{'GLOBAL.ACTION.ON_HOLD'|translate}}" ng-click="controller.setOnHold()" tooltip-placement="bottom" uib-tooltip="{{'UI_NETWORK_ADMIN.CASHIER.TRANSACTION.ON_HOLD.EXPLANATION'|translate}}"></button-custom>
+						<div ng-if="controller.approveDisabled"><p class="danger-text" style="padding-top: 5px; margin-top: 10px; ">{{controller.approveMessage}}</p></div>
+						<div ng-if="!controller.approveDisabled"><br/></div>
+					</span>
+					<span ng-switch-when="APPROVED" ng-if="controller.showRertyButtonInApprovedState">
+						<button-custom lit-if-permission="CASHIER_CANCEL" bclass="danger btn-sm" icon="ban" text="GLOBAL.ACTION.CANCEL" ng-click="controller.transactionCancel()" tooltip-placement="bottom" uib-tooltip="{{'UI_NETWORK_ADMIN.CASHIER.TRANSACTION.CANCEL.EXPLANATION'|translate}}"></button-custom>
+						<button-custom lit-if-permission="CASHIER_APPROVE" bclass="warning btn-sm" icon="repeat" text="GLOBAL.ACTION.RETRY" click-confirm="{{'UI_NETWORK_ADMIN.CASHIER.TRANSACTION.RETRY.CONFIRM'|translate}}"  click-confirmed="controller.retryTransaction()" tooltip-placement="bottom" uib-tooltip="{{'UI_NETWORK_ADMIN.CASHIER.TRANSACTION.RETRY.EXPLANATION'|translate}}"></button-custom>
+						<br/><br/>
+					</span>
+					<span ng-switch-when="PENDING_CANCEL">
+						<button-custom lit-if-permission="CASHIER_CANCEL" bclass="danger btn-sm" icon="ban" text="GLOBAL.ACTION.CANCEL" ng-click="controller.transactionCancel()" tooltip-placement="bottom" uib-tooltip="{{'UI_NETWORK_ADMIN.CASHIER.TRANSACTION.CANCEL.EXPLANATION'|translate}}"></button-custom>
+					</span>
+					<span ng-if="controller.tran.current.status.code != 'SUCCESS'">
+						<table class="table table-bordered" style="word-wrap:break-word; table-layout: fixed; margin-bottom: 0px;">
+							<tr>
+								<td>
+									<formly-form model="controller.model" fields="controller.fields" options="controller.options" form="controller.form">
+									</formly-form>
+									<br/>
+									<button-custom lit-if-permission="CASHIER_STATUS_UPDATE" bclass="success btn-sm" icon="check" text="GLOBAL.ACTION.MARKSUCCESS" click-confirm="{{'UI_NETWORK_ADMIN.CASHIER.TRANSACTION.SUCCESS.CONFIRM'|translate}}" click-confirmed="controller.markSuccess()"></button-custom>
+								</td>
+								<td ng-if="controller.tran.transactionType === 'DEPOSIT'">{{'UI_NETWORK_ADMIN.CASHIER.TRANSACTION.SUCCESS.EXPLANATION'|translate}}</td>
+								<td ng-if="controller.tran.transactionType === 'WITHDRAWAL'">{{'UI_NETWORK_ADMIN.CASHIER.TRANSACTION.SUCCESS.WITHDRAWAL.EXPLANATION'|translate}}</td>
+							</tr>
+						</table>
+					</span>
+				</span>
+
+
+
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-6 col-lg-6 top-space-10">
+			<div class="box box-default box-solid" style="border-top: none; margin-bottom: 0px">
+				<div class="box-header with-border">
+					{{'UI_NETWORK_ADMIN.CASHIER.REMARKS.TITLE'|translate}}
+				</div>
+				<div class="box-body">
+					<div class="chat" style="max-height: 190px; overflow: scroll">
+						<div class="item" ng-repeat="remark in controller.remarks">
+							<p class="message" style="margin-left: 0; margin-top: 0;">
+								<a class="name">
+									<small class="text-muted pull-right"><i class="fa fa-clock-o"></i> {{remark.timestamp|datetimedefault}}</small>
+									{{remark.authorName}}
+								</a>
+								{{remark.message}}
+							</p>
+						</div>
+						<div class="item" ng-if="controller.remarks === undefined || controller.remarks.length === 0">
+							<p class="message" style="margin-left: 0; margin-top: 0;">
+								{{'UI_NETWORK_ADMIN.CASHIER.REMARKS.NOREMARKS'|translate}}
+							</p>
+						</div>
+					</div>
+					<div class="box-footer">
+						<div class="input-group">
+							<input ng-model="controller.model.remark" class="form-control" placeholder="Type message...">
+
+							<div class="input-group-btn">
+								<button ng-disabled="!controller.model.remark" ng-click="controller.addRemark()" type="button" class="btn btn-success"><i class="fa fa-plus"></i></button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<cashiertranoverview data="controller.data"></cashiertranoverview>
+			<div id="vueMountLastXCashierTransactions"></div>
+			<div class="d-flex justify-content-start">
+				<div class="ml-auto mt-2">
+					<div style="background-color: #efefef; box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); padding: 20px;">
+						<a ng-click="controller.openLightBox('data:'+controller.image.filetype+';base64,'+controller.image.base64);$event.stopPropagation();">
+							<img class="img-responsive" height="95" width="115" src="//:0" ng-src="data:{{controller.image.filetype}};base64,{{controller.image.base64}}" alt="">
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-12 top-space-15">
+			<div class="card">
+				<div class="card-header bold-text" ng-click="controller.workflowCollapse = !controller.workflowCollapse">
+					<i class="fa fa-chevron-up" ng-show="!controller.workflowCollapse"></i>
+					<i class="fa fa-chevron-down" ng-show="controller.workflowCollapse"></i>
+					{{'UI_NETWORK_ADMIN.CASHIER.TRANS.VIEW.WORKFLOW.TITLE'|translate}}
+					<span class="badge badge-wrap card-danger" ng-show="controller.truncatedMessage !== undefined">{{controller.truncatedMessage}}</span>
+				</div>
+				<div class="card-body card-block" uib-collapse="controller.workflowCollapse">
+					<ul class="cbp_tmtimeline">
+						<li ng-repeat="w in controller.workflow">
+							<time class="cbp_tmtime" datetime="{{w.timestamp|date:'yyyy-MM-dd HH:mm:ss.sss Z':'GMT'}}">
+								<span>{{w.timestamp|date:'yyyy-MM-dd':'GMT'}}</span>
+								<span>{{w.timestamp|date:'HH:mm:ss.sss':'GMT'}}</span>
+							</time>
+							<div class="cbp_tmlabel card card-block">
+								<div colspan="col-xs-12">
+									<div class="d-flex justify-content-start">
+										<div class="p-2" ng-switch="w.status.code">
+											<div ng-switch-when="START" class="cbp_tmicon fa fa-play"></div>
+											<div ng-switch-when="VALIDATEINPUT" class="cbp_tmicon fa fa-check-square-o"></div>
+											<div ng-switch-when="WAITFORPROCESSOR" class="cbp_tmicon fa fa-hourglass-start"></div>
+											<div ng-switch-when="FATALERROR" class="cbp_tmicon fa fa-exclamation-circle bg-red"></div>
+											<div ng-switch-when="DECLINED" class="cbp_tmicon fa fa-ban bg-red"></div>
+											<div ng-switch-when="CANCEL" class="cbp_tmicon fa fa-exclamation-circle bg-red"></div>
+											<div ng-switch-when="SUCCESS" class="cbp_tmicon fa fa-check bg-green"></div>
+											<div ng-switch-when="REVERSALAPPROVED" class="cbp_tmicon fa fa-check bg-green"></div>
+											<div ng-switch-when="REVERSALDECLINED" class="cbp_tmicon fa fa-ban bg-red"></div>
+											<div ng-switch-when="RESERVED_FUNDS_REVERSAL_FAILURE" class="cbp_tmicon fa fa-ban bg-red"></div>
+
+											<div ng-switch-default class="cbp_tmicon fa fa-clock-o"></div>
+										</div>
+										<div class="p-2 mr-auto">
+											<span class="title">{{'UI_NETWORK_ADMIN.SERVICE_CASHIER.TRANSACTION.STATUS.' + w.status.code |translate}}</span>
+											<span ng-if="w.attempt.workflowFrom.status.code" class="description">Previous State: {{w.attempt.workflowFrom.status.code}}</span><br/>
+											<span ng-if="w.authorName" class="description">Author: {{w.authorName}}</span>
+										</div>
+										<div class="p-2 ml-auto text-right">
+											<div class="badge small-text teal pull-right">{{'UI_NETWORK_ADMIN.CASHIER.TRANS.VIEW.WORKFLOW.STAGE'|translate|uppercase}}:{{w.stage}}</div>
+											<div ng-if="w.processor" class="badge small-text blue pull-right">{{w.processor.description}}</div>
+										</div>
+									</div>
+								</div>
+								<div class="nav-tabs-custom top-space-15">
+									<ul class="nav nav-tabs nav-justified">
+										<li role="presentation"
+											class="nav-item active card-header bold-text"
+											ng-class="{active: controller.tab[w.id] === 'info'}"
+											ng-click="controller.tab[w.id] = 'info'">{{'UI_NETWORK_ADMIN.CASHIER.TRANS.VIEW.INFO.TITLE'|translate}}</li>
+										<li role="presentation"
+											class="nav-item card-header bold-text"
+											ng-if="w.attempt.iodata.length > 0"
+											ng-class="{active: controller.tab[w.id] === 'io'}"
+											ng-click="controller.tab[w.id] = 'io'">Input/Output</li>
+										<li role="presentation"
+											class="nav-item card-header bold-text"
+											ng-if="w.attempt.processorRawRequest"
+											ng-class="{active: controller.tab[w.id] === 'req'}"
+											ng-click="controller.tab[w.id] = 'req'">Request</li>
+										<li role="presentation"
+											class="nav-item card-header bold-text"
+											ng-if="w.attempt.processorRawResponse"
+											ng-class="{active: controller.tab[w.id] === 'res'}"
+											ng-click="controller.tab[w.id] = 'res'">Response</li>
+									</ul>
+									<div class="tab-content card" style="padding: 5px;">
+										<div class="well" style="margin-bottom: 1px; padding: 0px;">
+											<div ng-show="controller.tab[w.id] === 'info'">
+												<table class="table table-sm table-responsive table-striped table-bordered" style="word-wrap:break-word; table-layout: fixed; margin-bottom: 0px;">
+													<tr ng-if="w.comments !== undefined && w.comments !== null && w.comments.length > 0">
+														<th>Comments</th>
+														<td>
+															<div ng-repeat="comment in w.comments track by $index">
+																by <b>{{comment.author.guid}}</b> on <b>{{comment.timestamp|datetimedefault}}</b><br/><br/>
+																<p style="white-space: pre-wrap;">&quot;{{comment.comment}}&quot;</p>
+																<hr ng-if="$index !== (w.comments.length-1)">
+															</div>
+														</td>
+													</tr>
+													<tr ng-if="w.accountingReference">
+														<th>Accounting Reference</th>
+														<td>{{w.accountingReference}}</td>
+													</tr>
+													<tr ng-if="w.billingDescriptor !== undefined && w.billingDescriptor !== null && w.billingDescriptor !== ''">
+														<th>Billing Descriptor</th>
+														<td>{{w.billingDescriptor}}</td>
+													</tr>
+													<tr ng-if="w.attempt.processorReference">
+														<th>Processor Reference</th>
+														<td>{{w.attempt.processorReference}}</td>
+													</tr><tr ng-if="w.attempt.processorMessages">
+													<th>Processor Message</th>
+													<td>{{w.attempt.processorMessages}}</td>
+												</tr><tr ng-if="w.source" style="background-color: #f0ad4e;">
+													<th>Source</th>
+													<td>{{w.source}}</td>
+												</tr><tr ng-if="!w.source" style="background-color: #f0ad4e;">
+													<th>Source</th>
+													<td>Customer</td>
+												</tr>
+												</table>
+											</div>
+											<div ng-show="controller.tab[w.id] === 'io'">
+												<table ng-if="w.attempt.iodata.length > 0" class="table table-sm table-responsive table-striped table-bordered" style="word-wrap:break-word; table-layout: fixed; margin-bottom: 0px;">
+													<tr>
+														<th>{{'UI_NETWORK_ADMIN.CASHIER.TRANS.VIEW.IO.FIELD'|translate}}</th>
+														<th>{{'UI_NETWORK_ADMIN.CASHIER.TRANS.VIEW.IO.VALUE'|translate}}</th>
+													</tr>
+													<tr ng-repeat="io in w.attempt.iodata">
+														<th>
+															{{io.field}}
+															<!-- 																<div class="badge small-text pull-right teal">{{io.stage}}</div> -->
+															<div ng-if="io.output === true" class="badge small-text pull-right">{{'UI_NETWORK_ADMIN.CASHIER.TRANS.VIEW.OUTPUT'|translate}}</div>
+															<div ng-if="io.output === false" class="badge small-text pull-right indigo">{{'UI_NETWORK_ADMIN.CASHIER.TRANS.VIEW.INPUT'|translate}}</div>
+														</th>
+														<td>{{io.value}}</td>
+													</tr>
+												</table>
+											</div>
+											<div ng-show="controller.tab[w.id] === 'req'">
+												<pre id="processorRawRequest" class="attempt-data">{{w.attempt.processorRawRequest}}</pre>
+											</div>
+											<div ng-show="controller.tab[w.id] === 'res'">
+												<pre id="processorRawResponse" class="attempt-data">{{w.attempt.processorRawResponse}}</pre>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="col-xs-12">&nbsp;</div>
+		</div>
+	</div>
+</div>
+
+

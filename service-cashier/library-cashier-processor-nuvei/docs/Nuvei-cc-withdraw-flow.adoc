@@ -1,0 +1,11 @@
+= Nuvei Withdraw Flow
+1.0, May 27, 2022: VB-UK
+:sectnums:
+:toc: left
+:toclevels: 2
+:toc-title: VB-UK
+:icons: font
+:url-quickref: https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/
+
+.Nuvei Deposit Flow
+include::plantuml/nuvei-cc-withdraw-flow.puml[Flow Diagram]

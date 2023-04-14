@@ -1,0 +1,1 @@
+ALTER TABLE `user` ADD COLUMN `sms_validated` BIT(1) DEFAULT 0;

@@ -1,0 +1,12 @@
+{
+	"UI_NETWORK_ADMIN": {
+		"DOMAIN": {
+			"FIELDS": {
+				"LOCALE": {
+					"NAME": "Domain Locale",
+					"DESCRIPTION": "Default locale for users of this domain."
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,5 @@
+{
+	"SERVICE_USER": {
+		"FAILED_LOGIN_BLOCK": "Your account has been blocked due to excessive failed logins. Please reset your password to log in."
+    }
+}

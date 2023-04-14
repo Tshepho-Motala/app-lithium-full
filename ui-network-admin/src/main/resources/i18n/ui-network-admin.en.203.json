@@ -1,0 +1,12 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "SPORTSBOOK": {
+      "BETS": {
+        "FILTER": {
+          "BETIDLABEL": "Bet ID",
+          "BETIDPLACEHOLDER": "Enter Bet ID"
+        }
+      }
+    }
+  }
+}

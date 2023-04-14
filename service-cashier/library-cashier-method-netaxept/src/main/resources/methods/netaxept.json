@@ -1,0 +1,27 @@
+{
+  "name": "Netaxept",
+  "code": "netaxept",
+  "image": {
+    "filename": "/methods/nets.jpg",
+    "filetype": "image/jpeg"
+  },
+  "depositStages": [
+    {
+      "number": 1,
+      "title": "CASHIER-METHOD-NETAXEPT.DEPOSIT_AMOUNT_FIELD_TITLE",
+      "description": "DEPOSIT_AMOUNT_FIELD_DESCRIPTION",
+      "inputFields": [
+        {
+          "code": "iframeDepositCallbackUrl",
+          "name": "iframeDepositCallbackUrl",
+          "type": "hidden"
+        }
+       ]
+    },
+    {
+      "number": 2,
+      "title": "CASHIER-METHOD-NETAXEPT.DEPOSIT_WAIT_FOR_PR_RESPONSE_TITLE",
+      "description": "CASHIER-METHOD-NETAXEPT.DEPOSIT_WAIT_FOR_PR_RESPONSE_DESCRIPTION"
+    }
+  ]
+}

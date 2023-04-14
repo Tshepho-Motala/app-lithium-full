@@ -1,0 +1,50 @@
+<div class="row v-reset-row ">
+	<div class="col-md-12">
+		<div ng-if="controller.bonus.current.id == controller.bonusRevision.id" class="panel box box-success">
+			<div class="box-header with-border">
+				<h4 class="box-title">{{ 'UI_NETWORK_ADMIN.BONUS.VIEW.VIEWCURRENT' | translate }}</h4>
+			</div>
+		</div>
+		<div ng-if="controller.bonus.current.id != controller.bonusRevision.id" class="panel box box-warning">
+			<div class="box-header with-border">
+				<h4 class="box-title">{{ 'UI_NETWORK_ADMIN.BONUS.VIEW.VIEWOLDREVISION' | translate: {bonusRevisionId: controller.bonusRevision.id} }}</h4>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-10">
+		<div class="box box-default box-solid">
+			<div class="box-header with-border">
+				{{ 'UI_NETWORK_ADMIN.BONUS.TITLE.GAMES' | translate }}
+			</div>
+			<div class="box-body table-responsive">
+				<table class="table table-bordered">
+				<tr>
+					<th>{{ 'UI_NETWORK_ADMIN.BONUS.GAMES.GAME' | translate }}</th>
+					<th>{{ 'UI_NETWORK_ADMIN.BONUS.GAMES.PERCENTAGE' | translate }}</th>
+				</tr>
+				<tr ng-repeat="g in controller.games">
+					<td>
+						<div class="user-block">
+							<img class="img-circle img-bordered-sm" src="//:0" ng-src="{{controller.imageUrl}}gameguid={{g._gameGuid}}&function=thumb" alt="">
+							<span class="username">
+								<a ng-href="{{controller.demoUrl}}gameguid={{g._gameGuid}}&lang=en" target="_blank">{{ g.gameInfo.name }}</a>
+							</span>
+							<span class="description">
+								<b>Platform: </b>{{(g.gameInfo.labels.os.value)}}
+							</span>
+							<span class="description">
+								<b>Category: </b>{{(g.gameInfo.labels.category.value)}}
+							</span>
+							<span class="description">
+								<b>Provider: </b>{{g.gameInfo.providerGuid.replace("service-casino-provider-","") || g.gameGuid}}
+							</span>
+						</div>
+					</td><td>
+						{{ g.percentage }}%
+					</td>
+				</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

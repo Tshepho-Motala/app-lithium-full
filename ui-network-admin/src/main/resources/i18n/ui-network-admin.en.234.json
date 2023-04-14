@@ -1,0 +1,15 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "LIST": {
+      "PLAYERS": {
+        "FIELDS": {
+          "FILTER": {
+            "POSTAL_CODE": {
+              "LABEL": "Postal Code"
+            }
+          }
+        }
+      }
+    }
+  }
+}

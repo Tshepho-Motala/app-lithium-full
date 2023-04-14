@@ -1,0 +1,16 @@
+<div class="modal-header">
+	<h3 class="modal-title" id="modal-title">{{ title | translate }}</h3>
+</div>
+
+<div class="modal-body" id="dialog-confirm">
+	<div class="row v-reset-row ">
+		<div class="col-xs-12">
+			<p>{{ message | translate }}</p>
+		</div>
+	</div>
+</div>
+
+<div class="modal-footer">
+    <button-custom icon="{{ icon }}" bclass="{{confirmType}}" text="{{ confirmButtonText }}" ng-click="controller.onConfirm()"></button-custom />
+	 <button-custom text="{{ cancelButtonText }}" ng-click="controller.onCancel()"></button-custom />
+</div>

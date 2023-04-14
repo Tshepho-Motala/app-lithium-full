@@ -1,0 +1,68 @@
+{
+  "ERROR_DICTIONARY": {
+    "REGISTRATION": {
+      "ACCESS_DENIED": "Access denied from access rules.",
+      "NO_SUCH_DOMAIN": "No such domain.",
+      "DOMAIN_IS_DISABLED": "Domain is disabled.",
+      "DOMAIN_NON_EXISTING": "Domain does not exist.",
+      "NOT_PLAYER_DOMAIN": "Not a player domain.",
+      "INVALID_PARAMETER": "Invalid parameter provided.",
+      "INVALID_EMAIL": "Invalid email provided.",
+      "USERNAME_NOT_UNIQUE": "The supplied username is not unique.",
+      "EMAIL_NOT_UNIQUE": "The supplied email is not unique.",
+      "CELLPHONE_NOT_UNIQUE": "The supplied cellphone is not unique.",
+      "INVALID_DOB": "Invalid date of birth specified.",
+      "PASSWORD_HASHING": "Password hashing failed.",
+      "INVALID_CELLPHONE": "Invalid cellphone provided.",
+      "POST_SIGNUP_ACCESS_RULE": "User registered, but post signup access rules failed.",
+      "INVALID_CLIENT_AUTH": "Invalidated client auth.",
+      "USER_EXIST_IN_ECOSYSTEM_NOT_IN_DOMAIN": "The user already exists within the ecosystem but not on the specific domain.",
+      "USER_EXIST_IN_ECOSYSTEM_IN_OTHER_DOMAIN": "The user already exists within the ecosystem and has an account on another mutually exclusive domain.",
+      "USER_NOT_UNIQUE": "FirstName + LastName + Dob not unique exception",
+      "USER_UNDERAGE": "User is below the legal age"
+    },
+    "PASSWORD": {
+      "INVALID_DOB": "Invalid date of birth specified.",
+      "NOT_FOUND": "Could not find player data.",
+      "PASSWORD_HASHING": "Password hashing failed.",
+      "INVALID_PASSWORD": "Password entered incorrectly.",
+      "CURRENT_MATCH_NEW": "New password cannot be the same as current password.",
+      "PASSWORD_MISMATCH": "New passwords do not match.",
+      "USER_NOT_FOUND": "User not found or invalid user guid."
+    },
+    "LOGIN": {
+      "UNAUTHORIZED_USER": "UNAUTHORIZED REQUEST",
+      "EXCESSIVE_FAILED_LOGIN_BLOCK": "Excessive failed logins.",
+      "ACCESS_DENIED": "Your username or password is incorrect.",
+      "USER_DISABLED": "Your account is disabled.",
+      "UNAUTHORIZED": "User is unauthorised.",
+      "IP_BLOCKED": "IP Blocked.",
+      "ACCOUNT_FROZEN_GAMESTOP_SELF_EXCLUDED": "Account Frozen - Gamstop Self Excluded.",
+      "ADDITIONAL_INFORMATION": "You need to provide additional information to complete registration.",
+      "ACCOUNT_BLOCKED": "Account Blocked.",
+      "ACCOUNT_BLOCKED_PLAYER_REQUEST": "Account Blocked - Player Request.",
+      "ACCOUNT_BLOCKED_RESPONSIBLE_GAMING": "Account Blocked - Responsible Gaming.",
+      "ACCOUNT_BLOCKED_AML": "Account Blocked - AML.",
+      "ACCOUNT_BLOCKED_DUPLICATE_ACCOUNT": "Account Blocked - Duplicated Account.",
+      "ACCOUNT_BLOCKED_FRAUD": "Account Blocked - Fraud.",
+      "ACCOUNT_BLOCKED_OTHER": "Account Blocked - Other.",
+      "ACCOUNT_FROZEN": "Account Frozen.",
+      "ACCOUNT_FROZEN_COOLING_OFF": "Account Frozen - Cooling Off.",
+      "ACCOUNT_FROZEN_SELF_EXCLUDED": "Account Frozen - Self Excluded.",
+      "RESTRICTED": "Login Restricted.",
+      "DOMAIN_UNKNOWN_COUNTRY": "You can't login from an unknown country. Please contact customer support.",
+      "SOFT_SELF_EXCLUSION": "Soft self exclusion.",
+      "PERMANENT_SELF_EXCLUSION": "Permanent self exclusion.",
+      "FLAGGED_AS_COOLING_OFF": "Player account is flagged as cooling off.",
+      "INTERNAL_SERVER_ERROR": "Internal server error."
+    },
+    "MY_ACCOUNT": {
+      "CANNOT_REDEEM_OWN_CODE": "Cannot redeem own code {0}.",
+      "INVALID_REFERRER_CODE": "Invalid referrer code.",
+      "USER_NOT_FOUND": "User not found or invalid user guid.",
+      "USER_ID_NOT_FOUND": "User with id={0} not found.",
+      "ACCOUNT_NOT_FOUND": "Player account could not be found.",
+      "INVALID_TOKEN_SUPPLIED": "Invalid validation token supplied."
+    }
+  }
+}

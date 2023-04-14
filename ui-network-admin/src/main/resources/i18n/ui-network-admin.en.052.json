@@ -1,0 +1,13 @@
+{
+	"UI_NETWORK_ADMIN": {
+		"DOMAIN": {
+			"FIELDS": {
+				"IPBLOCK": {
+					"LABEL": "Signup IP Block List",
+					"PLACEHOLDER": "Select IP List",
+					"DESC": "If an access control list has been selected, all new signup ip's will be added to the list specified, to ensure that no new signups happen from these ip addresses, please add this list to the Signup Access Rule selected above."
+				}
+			}
+		}
+	}
+}

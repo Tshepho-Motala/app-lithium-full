@@ -1,0 +1,20 @@
+<div class="modal-header">
+	<h3 class="modal-title" id="modal-title">Add or Change Reel Set Manually</h3>
+</div>
+
+<form ng-submit="controller.save()" name="controller.form" autocomplete="off" novalidate>
+	<div class="modal-body" id="modal-body">
+		<div class="row v-reset-row ">
+			<div class="col-xs-12">
+				<formly-form model="controller.model" fields="controller.fields" options="controller.options" form="controller.form">
+				</formly-form>
+				
+<!-- 				<pre>{{controller.model|json}}</pre> -->
+			</div>
+		</div>
+	</div>
+	<div class="modal-footer">
+		<button-submit></button-submit>
+		<button-cancel ng-click="controller.cancel()"></button-cancel>
+	</div>
+</form>

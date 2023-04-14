@@ -1,0 +1,536 @@
+<div class="container-fluid">
+	<div class="row v-reset-row ">
+		<div class="col-xs-12 col-md-6 pull-left">
+			<button-add lit-if-permission="CASHIER_CONFIG_ADD" lit-permission-domain="{{controller.domain}}" ng-if="(controller.viewas === 'domain')" ng-click="controller.addMethod()"></button-add>
+			<button-refresh ng-click="controller.resetFilter(false)"></button-refresh>
+			<button-filter ng-click="controller.toggleLegendCollapse()" ng-if="controller.domainMethods.length > 0"></button-filter>
+			<button-clear ng-if="(controller.viewas !== 'domain')" ng-click="controller.resetFilter(false)"></button-clear>
+			<button-save-order lit-if-permission="CASHIER_CONFIG_ADD,CASHIER_CONFIG_EDIT" lit-permission-domain="{{controller.domain}}" ng-if="controller.methodOrderChanged" ng-click="controller.saveMethodOrder()"></button-save-order>
+		</div>
+		<div class="col-xs-12 col-md-6 pull-right" style="padding-top:3px;" ng-if="controller.domainMethods.length > 0">
+			<div class="form-group has-feedback clearfix">
+				<label for="search" class="sr-only">{{ 'GLOBAL.INPUT.SEARCHDYNAMIC' | translate }}</label>
+				<input ng-model="controller.filterValue.name" type="text" class="form-control" placeholder="{{ 'GLOBAL.INPUT.SEARCHDYNAMIC' | translate }}">
+				<span class="glyphicon glyphicon-search form-control-feedback"></span>
+			</div>
+		</div>
+	</div>
+	
+<!-- 	<div class="row v-reset-row "> -->
+<!-- 		<div class="card card-block card-warning"> -->
+<!-- 			&nbsp; -->
+<!-- 			{{controller.selectedUser}} -->
+<!-- 		</div> -->
+<!-- 	</div> -->
+	
+	<div class="row v-reset-row " ng-if="controller.domainMethods.length > 0">
+		<div class="col-xs-12">
+		<div class="card card-block">
+			<div uib-collapse="controller.legendCollapsed">
+				<div class="form-group card-content">
+					<label>Profile</label>
+					<ui-select
+						theme="bootstrap"
+						ng-model="controller.selectedProfile"
+						data-required="true"
+						ng-disabled="false"
+						on-select="controller.selectedUser = null; controller.selectedProfile = $item; controller.viewasdesc = $item.name+' - '+$item.description;"
+						search-enabled="true">
+						<ui-select-match
+							placeholder="search profile"
+							data-allow-clear="true">
+							{{controller.selectedProfile.name}} - {{controller.selectedProfile.description}}
+						</ui-select-match>
+						<ui-select-choices
+							group-by="controller.profileGroupFn"
+							data-repeat="profile in controller.profiles | filter: $select.search">
+							<div ng-bind-html="profile.name | highlight: $select.search"></div>
+						</ui-select-choices>
+					</ui-select>
+				</div>
+				<div class="divider-new text-light-blue">or</div>
+				<div class="form-group card-content">
+					<label>User</label>
+					<fieldset ng-disabled="{{to.disabled}}">
+						<div class="input-group">
+							<input type="text"
+								ng-model="controller.selectedUser"
+								placeholder="search player"
+								uib-typeahead="user.username for user in controller.searchUsers($viewValue)"
+								typeahead-loading="loadingLocations"
+								typeahead-no-results="noResults"
+								typeahead-min-length="2"
+								typeahead-show-hint="true"
+								typeahead-wait-ms="500"
+								typeahead-editable="false"
+								typeahead-on-select="controller.selectedProfile = null; controller.selectedUser = $item; controller.viewasdesc = $item.firstName+' '+$item.lastName+' ('+$item.username+')';"
+								class="form-control"/>
+							<div class="input-group-btn">
+								<button type="button" class="btn btn-default" ng-click="controller.resetUser()"><i class="fa fa-remove"></i></button>
+							</div>
+						</div>
+						<div ng-show="loadingLocations" class="overlay">
+							<i class="fa fa-refresh fa-spin"></i>
+						</div>
+						<div ng-show="noResults" class="form-group has-error">
+							<span class="help-block"><i class="fa fa-remove"></i>&nbsp;No Results Found</span>
+						</div>
+					</fieldset>
+				</div>
+				<div class="flex-row pull-right">
+					<button-clear ng-click="controller.resetFilter(true)"></button-clear>
+					<button-filter ng-click="controller.applyFilter()"></button-filter>
+				</div>
+			</div>
+			<div class="collapse" uib-collapse="!controller.legendCollapsed" ng-click="controller.toggleLegendCollapse(true)">
+				<div ng-if="controller.viewas === 'domain'" align="center">
+					<span class="legend-domain">{{'UI_NETWORK_ADMIN.CASHIER.LEGEND.NOFILTER'|translate}}</span><br/>
+					<span class="description">{{'UI_NETWORK_ADMIN.CASHIER.LEGEND.NOFILTERDESC'|translate}}</span>
+				</div>
+				<div ng-if="controller.viewas === 'profile'" align="center">
+					<span class="legend-profile">
+						<i class="pull-left fa fa-2x fa-users"></i>
+						<button-clear class="pull-right" ng-click="controller.resetFilter(false); $event.stopPropagation();"></button-clear>
+						{{controller.viewasdesc}}<br/>
+						<span class="description">{{'UI_NETWORK_ADMIN.CASHIER.LEGEND.PROFILEFILTERDESC'|translate}}</span>
+					</span><br/>
+					<span class="description">({{'UI_NETWORK_ADMIN.CASHIER.LEGEND.NOTE'|translate}})</span>
+				</div>
+				<div ng-if="controller.viewas === 'user'" align="center">
+					<span class="legend-user">
+						<i class="pull-left fa fa-2x fa-user"></i>
+						<button-clear class="pull-right" ng-click="controller.resetFilter(false); $event.stopPropagation();"></button-clear>
+						{{controller.viewasdesc}}<br/>
+						<span class="description" ng-if="controller.userProfile">{{'UI_NETWORK_ADMIN.CASHIER.LEGEND.USERPROFILE'|translate}}&nbsp;:&nbsp;</span>
+						<span class="legend-profile" ng-if="controller.userProfile" style="font-size: 12px;">{{controller.userProfile.code}} - {{controller.userProfile.name}}<br/></span>
+						<span class="description">{{'UI_NETWORK_ADMIN.CASHIER.LEGEND.USERFILTERDESC'|translate}}</span>
+					</span><br/>
+					<span class="description">({{'UI_NETWORK_ADMIN.CASHIER.LEGEND.NOTE'|translate}})</span>
+				</div>
+			</div>
+		</div>
+		</div>
+	</div>
+	<br/>
+	
+	<div class="">
+		<div ng-if="controller.domainMethods.length === 0">
+			<div class="card-danger-shadow">
+				<div class="card card-block">
+					<span class="description" align="center">
+						{{'UI_NETWORK_ADMIN.CASHIER.METHODS.EMPTY'|translate}}
+					</span>
+				</div>
+			</div>
+		</div>
+		
+		<div ng-if="controller.filteredDomainMethods.length === 0 && controller.domainMethods.length > 0">
+			<br/>
+			<div class="card-danger-shadow">
+				<div class="card card-block">
+					<span class="description" align="center">
+						{{'UI_NETWORK_ADMIN.CASHIER.METHODS.SEARCHEMPTY'|translate}}
+					</span>
+				</div>
+			</div>
+		</div>
+		
+		<div ui-tree="controller.treeOptions" ng-if="controller.domainMethods.length > 0" data-max-depth="1">
+			<ol ui-tree-nodes ng-model="controller.domainMethods" class="">
+				<li ui-tree-node ng-repeat="dm in controller.filteredDomainMethods = (controller.domainMethods | filter:controller.filterValue)" style="padding-bottom: 4px;">
+					<div class="row v-reset-row " ng-class="{ 'card-danger-shadow': ((controller.viewas === 'domain' && dm.enabled === false) || (controller.viewas === 'profile' && (dm.domainMethodProfile.enabled === false || ((dm.domainMethodProfile.enabled === undefined || dm.domainMethodProfile.enabled === null) && dm.enabled === false))) || (controller.viewas === 'user' && (dm.domainMethodUser.enabled === false || (((dm.domainMethodUser.enabled === undefined || dm.domainMethodUser.enabled === null) && dm.domainMethodProfile.enabled === false) || ((dm.domainMethodUser.enabled === undefined || dm.domainMethodUser.enabled === null) && (dm.domainMethodProfile.enabled === undefined || dm.domainMethodProfile.enabled === null) && dm.enabled === false))))) }" style="margin-bottom: 5px;">
+					<div class="card card-block">
+						<div class="d-flex justify-content-start" ng-click="controller.collapseDM(dm.id)" >
+							<div ui-tree-handle class="p-2" ng-show="controller.filteredDomainMethods.length > 1">
+								<i class="fa fa-arrows-v"></i>
+<!-- 								<i class="fa fa-ellipsis-v"></i> -->
+							</div>
+							<div class="p-2">
+								<i class="fa fa-chevron-up" ng-show="!controller.dmCollapsed[dm.id]"></i>
+								<i class="fa fa-chevron-down" ng-show="controller.dmCollapsed[dm.id]"></i>
+							</div>
+							<div class="divider"></div>
+							<div class="p-2">
+								<a ng-click="controller.openLightBox('data:'+dm.image.filetype+';base64,'+dm.image.base64);$event.stopPropagation();">
+									<img class="img-thumbnail img-responsive img-circle" src="//:0" ng-src="data:{{dm.image.filetype}};base64,{{dm.image.base64}}" alt="">
+								</a>
+							</div>
+							<div class="p-2">
+								<span class="title">
+									{{dm.name}}
+								</span>
+								<span class="description">
+									{{dm.method.name}}
+<!-- 									 - ({{dm.priority}})/({{dm.domainMethodProfile.priority}})/({{dm.domainMethodUser.priority}}) -->
+								</span>
+							</div>
+							<div class="p-2">
+								<span class="badge-wrap access-rule" ng-if="dm.accessRule">{{dm.accessRule}}</span>
+								<span class="badge-wrap card-danger"
+								      ng-if="((controller.viewas === 'domain' && dm.enabled === false) || (controller.viewas === 'profile' && (dm.domainMethodProfile.enabled === false || ((dm.domainMethodProfile.enabled === undefined || dm.domainMethodProfile.enabled === null) && dm.enabled === false))) || (controller.viewas === 'user' && (dm.domainMethodUser.enabled === false || (((dm.domainMethodUser.enabled === undefined || dm.domainMethodUser.enabled === null) && dm.domainMethodProfile.enabled === false) || ((dm.domainMethodUser.enabled === undefined || dm.domainMethodUser.enabled === null) && (dm.domainMethodProfile.enabled === undefined || dm.domainMethodProfile.enabled === null) && dm.enabled === false)))))">{{'GLOBAL.FIELDS.DISABLED' | translate}}</span>
+								<span class="badge-wrap card-success"
+								      ng-if="((controller.viewas === 'domain' && dm.feDefault === true && dm.deposit === true))">{{'GLOBAL.FIELDS.DEFAULT' | translate}}</span>
+								<div class="btn domain-limits btn-xs" ng-if="dm.hasDMPFees || dm.hasDMPLimits"><i
+										class="fa fa-tags"></i></div>
+								<div class="btn gpl-limits btn-xs" ng-if="dm.hasDMPLimits"><i class="fa fa-tags"></i>
+								</div>
+								<div class="btn profile-limits btn-xs" ng-if="dm.hasDMPPFees || dm.hasDMPPLimits"><i
+										class="fa fa-tags"></i></div>
+								<div class="btn user-limits btn-xs" ng-if="dm.hasDMPUFees || dm.hasDMPULimits"><i
+										class="fa fa-tags"></i></div>
+							</div>
+							<div class="ml-auto p-2">
+								<table class="table table-sm description-sm" ng-if="dm.accountingDay || dm.accountingWeek || dm.accountingMonth || dm.accountingLastMonth">
+								<tbody>
+								<tr>
+									<td class="domain">
+										<div class="bold-text">domain {{$stateParams.type}} totals</div>
+										<span ng-if="dm.accountingDay">
+											today ({{dm.accountingDay.tranCount}}):
+											{{(($stateParams.type === 'deposit')?dm.accountingDay.debitCents:dm.accountingDay.creditCents)|cents}}
+											<br/>
+										</span>
+										<span ng-if="dm.accountingWeek">
+											week ({{dm.accountingWeek.tranCount}}):
+											{{(($stateParams.type === 'deposit')?dm.accountingWeek.debitCents:dm.accountingWeek.creditCents)|cents}}
+											<br/>
+										</span>
+										<span ng-if="dm.accountingMonth">
+											month ({{dm.accountingMonth.tranCount}}):
+											{{(($stateParams.type === 'deposit')?dm.accountingMonth.debitCents:dm.accountingMonth.creditCents)|cents}}
+											<br/>
+										</span>
+										<span ng-if="dm.accountingLastMonth">
+											last month ({{dm.accountingLastMonth.tranCount}}):
+											{{(($stateParams.type === 'deposit')?dm.accountingLastMonth.debitCents:dm.accountingLastMonth.creditCents)|cents}}
+										</span>
+									</td><td class="user" ng-if="(controller.viewas === 'user')">
+										<div class="bold-text">user {{$stateParams.type}} totals</div>
+										<span ng-if="dm.accountingUserDay">
+											today ({{dm.accountingUserDay.tranCount}}):
+											{{(($stateParams.type === 'deposit')?dm.accountingUserDay.debitCents:dm.accountingUserDay.creditCents)|cents}}
+											<br/>
+										</span>
+										<span ng-if="dm.accountingUserWeek">
+											week ({{dm.accountingUserWeek.tranCount}}):
+											{{(($stateParams.type === 'deposit')?dm.accountingUserWeek.debitCents:dm.accountingUserWeek.creditCents)|cents}}
+											<br/>
+										</span>
+										<span ng-if="dm.accountingUserMonth">
+											month ({{dm.accountingUserMonth.tranCount}}):
+											{{(($stateParams.type === 'deposit')?dm.accountingUserMonth.debitCents:dm.accountingUserMonth.creditCents)|cents}}
+											<br/>
+										</span>
+										<span ng-if="dm.accountingUserLastMonth">
+											last month ({{dm.accountingUserLastMonth.tranCount}}):
+											{{(($stateParams.type === 'deposit')?dm.accountingUserLastMonth.debitCents:dm.accountingUserLastMonth.creditCents)|cents}}
+										</span>
+									</td>
+								</tr>
+								</tbody>
+								</table>
+							</div>
+							<div class="p-2">
+								<span uib-dropdown keyboard-nav>
+									<div id="menu-dropdown" uib-dropdown-toggle ng-click="$event.stopPropagation();" class="dropdown-ellipsis-center">
+										<i class="fa fa-ellipsis-v menu-blue-grey" ng-class="{ 'processor-order-changed': controller.processorOrderChanged[dm.id] }"></i>
+									</div>
+									<ul class="dropdown-menu dropdown-menu-right" uib-dropdown-menu dropdown-menu-right
+									    aria-labelledby="menu-dropdown">
+										<li class="dropdown-item" lit-if-permission="CASHIER_CONFIG_EDIT"
+										    lit-permission-domain="{{controller.domain}}"
+										    ng-if="(controller.viewas === 'domain')"><a href
+										                                                ng-click="controller.editMethod(dm); $event.stopPropagation();">{{'UI_NETWORK_ADMIN.CASHIER.METHODS.MENU.EDITMETHOD' | translate}}</a></li>
+										<li class="dropdown-item" lit-if-permission="CASHIER_CONFIG_EDIT"
+										    lit-permission-domain="{{controller.domain}}"
+										    ng-if="((controller.viewas === 'domain' && dm.enabled === false) || (controller.viewas === 'profile' && (dm.domainMethodProfile.enabled === false || ((dm.domainMethodProfile.enabled === undefined || dm.domainMethodProfile.enabled === null) && dm.enabled === false))) || (controller.viewas === 'user' && (dm.domainMethodUser.enabled === false || (((dm.domainMethodUser.enabled === undefined || dm.domainMethodUser.enabled === null) && dm.domainMethodProfile.enabled === false) || ((dm.domainMethodUser.enabled === undefined || dm.domainMethodUser.enabled === null) && (dm.domainMethodProfile.enabled === undefined || dm.domainMethodProfile.enabled === null) && dm.enabled === false)))))"><a
+												href ng-click="controller.toggleMethod(dm); $event.stopPropagation();">{{'UI_NETWORK_ADMIN.CASHIER.METHODS.MENU.ENABLEMETHOD' | translate}}</a></li>
+										<li class="dropdown-item" lit-if-permission="CASHIER_CONFIG_EDIT"
+										    lit-permission-domain="{{controller.domain}}"
+										    ng-if="((controller.viewas === 'domain' && dm.enabled === true) || (controller.viewas === 'profile' && (dm.domainMethodProfile.enabled === true || ((dm.domainMethodProfile.enabled === undefined || dm.domainMethodProfile.enabled === null) && dm.enabled === true))) || (controller.viewas === 'user' && (dm.domainMethodUser.enabled === true || (((dm.domainMethodUser.enabled === undefined || dm.domainMethodUser.enabled === null) && dm.domainMethodProfile.enabled === true) || ((dm.domainMethodUser.enabled === undefined || dm.domainMethodUser.enabled === null) && (dm.domainMethodProfile.enabled === undefined || dm.domainMethodProfile.enabled === null) && dm.enabled === true)))))"><a
+												class="warning" href
+												ng-click="controller.toggleMethod(dm); $event.stopPropagation();">{{'UI_NETWORK_ADMIN.CASHIER.METHODS.MENU.DISABLEMETHOD' | translate}}</a></li>
+										<li class="dropdown-item" lit-if-permission="CASHIER_CONFIG_EDIT"
+										    lit-permission-domain="{{controller.domain}}"
+										    ng-if="((controller.viewas === 'domain' && (dm.feDefault === false || dm.feDefault === null) && dm.deposit === true))"><a
+												class="warning" href
+												ng-click="controller.setDefaultMethod(dm); $event.stopPropagation();">{{'UI_NETWORK_ADMIN.CASHIER.METHODS.MENU.SET_AS_DEFAULT_METHOD' | translate}}</a></li>
+										<li class="dropdown-item" lit-if-permission="CASHIER_CONFIG_EDIT"
+										    lit-permission-domain="{{controller.domain}}"
+										    ng-if="((controller.viewas === 'domain' && dm.feDefault === true && dm.deposit === true))"><a
+												class="warning" href
+												ng-click="controller.unSetDefaultMethod(dm); $event.stopPropagation();">{{'UI_NETWORK_ADMIN.CASHIER.METHODS.MENU.REMOVE_DEFAULT_METHOD' | translate}}</a></li>
+										<li class="dropdown-item" lit-if-permission="CASHIER_CONFIG_ADD"
+										    lit-permission-domain="{{controller.domain}}"
+										    ng-if="(controller.viewas === 'domain')"><a href
+										                                                ng-click="controller.addProcessor(dm); $event.stopPropagation();">{{'UI_NETWORK_ADMIN.CASHIER.METHODS.MENU.ADDPROCESSOR' | translate}}</a></li>
+										<li class="dropdown-item processor-order-changed"
+										    lit-if-permission="CASHIER_CONFIG_EDIT"
+										    lit-permission-domain="{{controller.domain}}"
+										    ng-if="controller.processorOrderChanged[dm.id]"><a href
+										                                                       ng-click="controller.saveProcessorOrder(dm); $event.stopPropagation();">{{'UI_NETWORK_ADMIN.CASHIER.METHODS.MENU.SAVEPROCESSORORDER' | translate}}</a></li>
+										<li class="dropdown-divider" lit-if-permission="CASHIER_CONFIG_DELETE"
+										    lit-permission-domain="{{controller.domain}}"
+										    ng-if="(controller.viewas === 'domain')">&nbsp;</li>
+										<li class="dropdown-item" lit-if-permission="CASHIER_CONFIG_DELETE"
+										    lit-permission-domain="{{controller.domain}}"
+										    ng-if="(controller.viewas === 'domain')"><a class="danger" href
+										                                                ng-click="controller.deleteMethod(dm); $event.stopPropagation();">{{'GLOBAL.ACTION.DELETE' | translate}}</a></li>
+									</ul>
+								</span>
+<!-- 								dm:{{dm.enabled}}<br/>dmprofile:{{dm.domainMethodProfile.enabled}}<br/>dmuser:{{dm.domainMethodUser.enabled}}  -->
+							</div>
+						</div>
+						<div uib-collapse="controller.dmCollapsed[dm.id]" class="panel-collapse collapse">
+							<div class="card-content">
+								<hr/>
+								<div style="text-align: center;" class="card-outline-warning" ng-if="dm.domainMethodProcessors.length === 0">No processors setup</div>
+<!-- 							<div ui-tree ng-if="dm.domainMethodProcessors.length > 0"> -->
+								<div ui-tree="controller.treeOptions2" data-max-depth="1" ng-if="dm.domainMethodProcessors.length > 0">
+<!-- 									<div ng-model="dm.domainMethodProcessors" style="padding-left: 0px;"> -->
+									<div ui-tree-nodes ng-model="dm.domainMethodProcessors" style="padding-left: 0px;" ng-class="{ 'processor-order-changed': controller.processorOrderChanged[dm.id] }">
+<!-- 										<div class="row v-reset-row  card card-block" style="margin-bottom: 5px;" ng-repeat="dmp in dm.domainMethodProcessors"> -->
+										<div ui-tree-node class="row v-reset-row " style="margin-bottom: 5px;" ng-repeat="dmp in dm.domainMethodProcessors" ng-class="{ 'card-danger-shadow': (
+											(controller.viewas === 'domain' && dmp.enabled === false) || 
+											(controller.viewas === 'profile' && (dmp.dmpp.enabled === false || ((dmp.dmpp.enabled === undefined || dmp.dmpp.enabled === null) && dmp.enabled === false))) || 
+											(controller.viewas === 'user' && (dmp.dmpu.enabled === false || (((dmp.dmpu.enabled === undefined || dmp.dmpu.enabled === null) && dmp.dmpp.enabled === false) || ((dmp.dmpu.enabled === undefined || dmp.dmpu.enabled === null) && (dmp.dmpp.enabled === undefined || dmp.dmpp.enabled === null) && dmp.enabled === false))))
+										) }" >
+										<div class="card card-block">
+											<div class="d-flex justify-content-start" ng-click="controller.collapseDMP(dmp.id)">
+												<div class="p-2" ui-tree-handle ng-show="dm.domainMethodProcessors.length > 1">
+													<i class="fa fa-arrows-v"></i>
+<!-- 													<i class="fa fa-arrows-v"></i> -->
+												</div>
+												<div class="p-2">
+													<i class="fa fa-chevron-up" ng-show="!controller.dmpCollapsed[dmp.id]"></i>
+													<i class="fa fa-chevron-down" ng-show="controller.dmpCollapsed[dmp.id]"></i>
+												</div>
+												<div class="divider"></div>
+												<div class="p-2">
+													<span class="title">
+														{{dmp.description}}
+													</span>
+													<span class="description">
+														{{dmp.processor.name}}
+<!-- 														 - ({{dmp.weight}}/{{dmp.dmpp.weight}}/{{dmp.dmpu.weight}}) -->
+													</span>
+												</div>
+												<div class="p-2" style="clear:left;">
+													<div class="badge-wrap access-rule" ng-if="dmp.accessRule">{{dmp.accessRule}}</div>
+													<div class="badge-wrap card-danger" ng-if="((controller.viewas === 'domain' && dmp.enabled === false) || (controller.viewas === 'profile' && (dmp.dmpp.enabled === false || ((dmp.dmpp.enabled === undefined || dmp.dmpp.enabled === null) && dmp.enabled === false))) || (controller.viewas === 'user' && (dmp.dmpu.enabled === false || (((dmp.dmpu.enabled === undefined || dmp.dmpu.enabled === null) && dmp.dmpp.enabled === false) || ((dmp.dmpu.enabled === undefined || dmp.dmpu.enabled === null) && (dmp.dmpp.enabled === undefined || dmp.dmpp.enabled === null) && dmp.enabled === false)))))">{{'GLOBAL.FIELDS.DISABLED'|translate}}</div>
+													<div class="badge-wrap card-danger" ng-if="!dmp.limits">{{'UI_NETWORK_ADMIN.CASHIER.NODEF_LIMITS'|translate}}</div>
+													<div class="btn domain-limits btn-xs" ng-if="dmp.fees || dmp.limits"><i class="fa fa-tags"></i></div>
+													<div class="btn gpl-limits btn-xs" ng-if="dmp.limits"><i class="fa fa-tags"></i></div>
+													<div class="btn profile-limits btn-xs" ng-if="dmp.dmpp.fees || dmp.dmpp.limits"><i class="fa fa-tags"></i></div>
+													<div class="btn user-limits btn-xs" ng-if="dmp.dmpu.fees || dmp.dmpu.limits"><i class="fa fa-tags"></i></div>
+													<span class="badge-wrap card-success" ng-if="dmp.domainMethod.deposit === false && dmp.enabled === true && dmp.active === true">{{'UI_NETWORK_ADMIN.CASHIER.PROCESSORS.MENU.DISPLAY_ACTIVE' | translate}}</span>
+													<span class="badge-wrap card-danger" ng-if="dmp.domainMethod.deposit === false && dmp.active === false">{{'UI_NETWORK_ADMIN.CASHIER.PROCESSORS.MENU.DISPLAY_INACTIVE' | translate}}</span>
+												</div>
+												<div class="ml-auto p-2">
+													<table class="table table-sm description-sm" ng-if="dmp.accountingDay || dmp.accountingWeek || dmp.accountingMonth || dmp.accountingLastMonth">
+													<tbody>
+													<tr>
+														<td class="domain">
+															<div class="bold-text">domain {{$stateParams.type}} totals</div>
+															<span class="description-sm" ng-if="dmp.accountingDay">
+																Today ({{dmp.accountingDay.tranCount}}):
+																{{(($stateParams.type === 'deposit')?dmp.accountingDay.debitCents:dmp.accountingDay.creditCents)|cents}}
+																<br/>
+															</span>
+															<span class="description-sm" ng-if="dmp.accountingWeek">
+																Week ({{dmp.accountingWeek.tranCount}}):
+																{{(($stateParams.type === 'deposit')?dmp.accountingWeek.debitCents:dmp.accountingWeek.creditCents)|cents}}
+																<br/>
+															</span>
+															<span class="description-sm" ng-if="dmp.accountingMonth">
+																Month ({{dmp.accountingMonth.tranCount}}):
+																{{(($stateParams.type === 'deposit')?dmp.accountingMonth.debitCents:dmp.accountingMonth.creditCents)|cents}}
+																<br/>
+															</span>
+															<span class="description-sm" ng-if="dmp.accountingLastMonth">
+																Last Month ({{dmp.accountingLastMonth.tranCount}}):
+																{{(($stateParams.type === 'deposit')?dmp.accountingLastMonth.debitCents:dmp.accountingLastMonth.creditCents)|cents}}
+															</span>
+														</td><td class="user" ng-if="(controller.viewas === 'user')">
+															<div class="bold-text">user {{$stateParams.type}} totals</div>
+															<span ng-if="dmp.accountingUserDay">
+																today ({{dmp.accountingUserDay.tranCount}}):
+																{{(($stateParams.type === 'deposit')?dmp.accountingUserDay.debitCents:dmp.accountingUserDay.creditCents)|cents}}
+																<br/>
+															</span>
+															<span ng-if="dmp.accountingUserWeek">
+																week ({{dmp.accountingUserWeek.tranCount}}):
+																{{(($stateParams.type === 'deposit')?dmp.accountingUserWeek.debitCents:dmp.accountingUserWeek.creditCents)|cents}}
+																<br/>
+															</span>
+															<span ng-if="dmp.accountingUserMonth">
+																month ({{dmp.accountingUserMonth.tranCount}}):
+																{{(($stateParams.type === 'deposit')?dmp.accountingUserMonth.debitCents:dmp.accountingUserMonth.creditCents)|cents}}
+																<br/>
+															</span>
+															<span ng-if="dmp.accountingUserLastMonth">
+																last month ({{dmp.accountingUserLastMonth.tranCount}}):
+																{{(($stateParams.type === 'deposit')?dmp.accountingUserLastMonth.debitCents:dmp.accountingUserLastMonth.creditCents)|cents}}
+															</span>
+														</td>
+													</tr>
+													</tbody>
+													</table>
+												</div>
+												<div class="p-2">
+													<span uib-dropdown keyboard-nav>
+														<div id="menu-dropdown" uib-dropdown-toggle ng-click="$event.stopPropagation();" class="dropdown-ellipsis-center">
+															<i class="fa fa-ellipsis-v menu-blue-grey"></i>
+														</div>
+														<ul class="dropdown-menu dropdown-menu-right" uib-dropdown-menu dropdown-menu-right aria-labelledby="menu-dropdown">
+															<li class="dropdown-item" lit-if-permission="CASHIER_CONFIG_EDIT" lit-permission-domain="{{controller.domain}}" ng-if="controller.viewas === 'domain'"><a href ng-click="controller.editProcessor(dmp); $event.stopPropagation();">{{'UI_NETWORK_ADMIN.CASHIER.PROCESSORS.MENU.EDITPROCESSOR' | translate}}</a></li>
+															<li class="dropdown-item" lit-if-permission="CASHIER_CONFIG_EDIT" lit-permission-domain="{{controller.domain}}" ng-if="((controller.viewas === 'domain' && dmp.enabled === false) || (controller.viewas === 'profile' && (dmp.dmpp.enabled === false || ((dmp.dmpp.enabled === undefined || dmp.dmpp.enabled === null) && dmp.enabled === false))) || (controller.viewas === 'user' && (dmp.dmpu.enabled === false || (((dmp.dmpu.enabled === undefined || dmp.dmpu.enabled === null) && dmp.dmpp.enabled === false) || ((dmp.dmpu.enabled === undefined || dmp.dmpu.enabled === null) && (dmp.dmpp.enabled === undefined || dmp.dmpp.enabled === null) && dmp.enabled === false)))))"><a href ng-click="controller.toggleProcessor(dm, dmp); $event.stopPropagation();">{{'UI_NETWORK_ADMIN.CASHIER.PROCESSORS.MENU.ENABLEPROCESSOR' | translate}}</a></li>
+															<li class="dropdown-item" lit-if-permission="CASHIER_CONFIG_EDIT" lit-permission-domain="{{controller.domain}}" ng-if="((controller.viewas === 'domain' && dmp.enabled === true) || (controller.viewas === 'profile' && (dmp.dmpp.enabled === true || ((dmp.dmpp.enabled === undefined || dmp.dmpp.enabled === null) && dmp.enabled === true))) || (controller.viewas === 'user' && (dmp.dmpu.enabled === true || (((dmp.dmpu.enabled === undefined || dmp.dmpu.enabled === null) && dmp.dmpp.enabled === true) || ((dmp.dmpu.enabled === undefined || dmp.dmpu.enabled === null) && (dmp.dmpp.enabled === undefined || dmp.dmpp.enabled === null) && dmp.enabled === true)))))"><a class="warning" href ng-click="controller.toggleProcessor(dm, dmp); $event.stopPropagation();">{{'UI_NETWORK_ADMIN.CASHIER.PROCESSORS.MENU.DISABLEPROCESSOR' | translate}}</a></li>
+															<li class="dropdown-item" lit-if-permission="CASHIER_CONFIG_EDIT" lit-permission-domain="{{controller.domain}}" ng-if="controller.viewas === 'domain'"><a href ng-click="controller.editProperties(dm, dmp.id); $event.stopPropagation();">{{'UI_NETWORK_ADMIN.CASHIER.PROCESSORS.BUTTONS.PROP' | translate}}</a></li>
+															<li class="dropdown-item" lit-if-permission="CASHIER_CONFIG_EDIT" lit-permission-domain="{{controller.domain}}" ng-if="controller.viewas === 'domain' && dmp.domainMethod.deposit === false && dmp.enabled === true && (dmp.active === false || dmp.active === null)"><a href ng-click="controller.toggleProcessorDisplay(dmp); $event.stopPropagation();">{{'UI_NETWORK_ADMIN.CASHIER.PROCESSORS.MENU.DISPLAY_ACTIVE' | translate}}</a></li>
+															<li class="dropdown-item" lit-if-permission="CASHIER_CONFIG_EDIT" lit-permission-domain="{{controller.domain}}" ng-if="controller.viewas === 'domain' && dmp.domainMethod.deposit === false && dmp.active === true"><a href ng-click="controller.toggleProcessorDisplay(dmp); $event.stopPropagation();">{{'UI_NETWORK_ADMIN.CASHIER.PROCESSORS.MENU.DISPLAY_INACTIVE' | translate}}</a></li>
+															<li class="dropdown-item" lit-if-permission="CASHIER_CONFIG_VIEW" lit-permission-domain="{{controller.domain}}" ng-if="dmp.showHelp"><a href ng-click="dmp.showHelp = !dmp.showHelp; $event.stopPropagation();">{{'UI_NETWORK_ADMIN.CASHIER.HIDE_HELP'|translate}}</a></li>
+															<li class="dropdown-item" lit-if-permission="CASHIER_CONFIG_VIEW" lit-permission-domain="{{controller.domain}}" ng-if="!dmp.showHelp"><a href ng-click="dmp.showHelp = !dmp.showHelp; $event.stopPropagation();">{{'UI_NETWORK_ADMIN.CASHIER.SHOW_HELP'|translate}}</a></li>
+															<li class="dropdown-divider" lit-if-permission="CASHIER_CONFIG_DELETE" lit-permission-domain="{{controller.domain}}" ng-if="controller.viewas === 'domain'">&nbsp;</li>
+															<li class="dropdown-item" lit-if-permission="CASHIER_CONFIG_DELETE" lit-permission-domain="{{controller.domain}}" ng-if="controller.viewas === 'domain'"><a class="danger" href ng-click="controller.deleteProcessor(dmp); $event.stopPropagation();">{{'GLOBAL.ACTION.DELETE' | translate}}</a></li>
+														</ul>
+													</span>
+<!-- 													dmp:{{dmp.enabled}}<br/>dmpp:{{dmp.dmpp.enabled}}<br/>dmpu:{{dmp.dmpu.enabled}} -->
+												</div>
+											</div>
+											<div uib-collapse="controller.dmpCollapsed[dmp.id]" class="panel-collapse collapse">
+												<div class="card-content">
+													<hr/>
+													<div class="row v-reset-row  card-block" style="padding-top: 0px; padding-bottom: 0px;">
+														<div class="nav-tabs-custom" style="margin-bottom: 0px;">
+															<ul class="nav nav-tabs nav-justified cursor-pointer">
+																<li class="text-center nav-link" ng-click="controller.setTab(tab, dmp.id)" ng-class="{ active: (controller.tab[dmp.id] == tab) }" ng-repeat="tab in controller.tabs" lit-if-permission="{{tab.roles}}" lit-permission-domain="{{controller.domain}}">
+																	<span class="bold-text">{{ tab.title | translate }}</span>
+																	
+																	<div class="btn gpl-limits btn-xs" ng-if="dmp[tab.type]"><i class="fa fa-tags"></i></div>
+																	<div class="btn domain-limits btn-xs" ng-if="dmp[tab.type] && dmp.domainLimits"><i class="fa fa-tags"></i></div>
+																	<div class="btn profile-limits btn-xs" ng-if="dmp.dmpp[tab.type]"><i class="fa fa-tags"></i></div>
+																	<div class="btn user-limits btn-xs" ng-if="dmp.dmpu[tab.type]"><i class="fa fa-tags"></i></div>
+													
+																	<span class="pull-right" uib-dropdown keyboard-nav>
+																		<div id="menu-dropdown" uib-dropdown-toggle ng-click="$event.stopPropagation();" class="dropdown-ellipsis-center">
+																			<i class="fa fa-ellipsis-v menu-blue-grey"></i>
+																		</div>
+																		<ul class="dropdown-menu dropdown-menu-right" uib-dropdown-menu dropdown-menu-right aria-labelledby="menu-dropdown">
+																			<li class="dropdown-item" lit-if-permission="CASHIER_CONFIG_ADD,CASHIER_CONFIG_EDIT" lit-permission-domain="{{controller.domain}}" ng-if="(controller.viewas === 'domain' && !dmp[tab.type]) || (controller.viewas === 'profile' && !dmp.dmpp[tab.type]) || (controller.viewas === 'user' && !dmp.dmpu[tab.type])"><a href ng-click="controller.override(tab.type, dmp, dm); $event.stopPropagation();">Override</a></li>
+																			<li class="dropdown-item" lit-if-permission="CASHIER_CONFIG_ADD,CASHIER_CONFIG_EDIT" lit-permission-domain="{{controller.domain}}" ng-if="(controller.viewas === 'domain' && dmp[tab.type]) || (controller.viewas === 'profile' && dmp.dmpp[tab.type]) || (controller.viewas === 'user' && dmp.dmpu[tab.type])"><a href ng-click="controller.overrideSave(tab.type, dmp, dm); $event.stopPropagation();">Save Overrides</a></li>
+																			<li class="dropdown-divider" lit-if-permission="CASHIER_CONFIG_DELETE" lit-permission-domain="{{controller.domain}}" ng-if="(controller.viewas === 'domain' && dmp[tab.type]) || (controller.viewas === 'profile' && dmp.dmpp[tab.type]) || (controller.viewas === 'user' && dmp.dmpu[tab.type])">&nbsp;</li>
+																			<li class="dropdown-item" lit-if-permission="CASHIER_CONFIG_DELETE" lit-permission-domain="{{controller.domain}}" ng-if="(controller.viewas === 'domain' && dmp[tab.type]) || (controller.viewas === 'profile' && dmp.dmpp[tab.type]) || (controller.viewas === 'user' && dmp.dmpu[tab.type])"><a class="danger" href ng-click="controller.overrideDelete(tab.type, dmp, dm); $event.stopPropagation();">{{'GLOBAL.ACTION.DELETE' | translate}}</a></li>
+																		</ul>
+																	</span>
+																</li>
+															</ul>
+															<div class="tab-content">
+																<hr style="margin-top: 2px;"/>
+																<div ng-include="controller.tab[dmp.id].templateUrl"></div>
+															</div>
+														</div>
+													</div>
+												</div>
+												<div class="card card-block">
+													<div class="d-flex justify-content-start" ng-click="controller.collapseDmpChangeLog(dmp)">
+														<div class="p-2">
+															<i class="fa fa-chevron-up" ng-show="dmp.changelog.collapsed"></i>
+															<i class="fa fa-chevron-down" ng-show="!dmp.changelog.collapsed"></i>
+														</div>
+														<div class="divider"></div>
+														<div class="p-2">
+															<span class="title">Changelog</span>
+															<span class="description">View the change history for this processor</span>
+														</div>
+													</div>
+													<div uib-collapse="!dmp.changelog.collapsed" class="panel-collapse collapse">
+														<div class="card-content">
+															<hr/>
+															<div class="row v-reset-row  card-block" style="padding-top: 0px; padding-bottom: 0px;">
+																<changelog options="dmp.changelog" model="dmp"></changelog>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					</div>
+				</li>
+			</ol>
+		</div>
+	</div>
+	<br/>
+	<div class="row v-reset-row ">
+		<div class="col-xs-6">
+			<div class="card card-block">
+				<div class="form-group card-content">
+					<div style="padding-bottom: 10px;"><b>{{'UI_NETWORK_ADMIN.CASHIER.BADGES.TITLE'|translate}}:</b><br/></div>
+					<div><div class="btn domain-limits btn-xs"><i class="fa fa-tags"></i></div> - {{'UI_NETWORK_ADMIN.CASHIER.BADGES.DOMAINOVERRIDES'|translate}}</div>
+					<div><div class="btn gpl-limits btn-xs"><i class="fa fa-tags"></i></div> - {{'UI_NETWORK_ADMIN.CASHIER.BADGES.GPLIMITSOVERRIDES'|translate}}</div>
+					<div><div class="btn profile-limits btn-xs"><i class="fa fa-tags"></i></div> - {{'UI_NETWORK_ADMIN.CASHIER.BADGES.PROFILEOVERRIDES'|translate}}</div>
+					<div><div class="btn user-limits btn-xs"><i class="fa fa-tags"></i></div> - {{'UI_NETWORK_ADMIN.CASHIER.BADGES.USEROVERRIDES'|translate}}</div>
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-6">
+			<div class="card card-block">
+				<div class="form-group card-content" ng-if="controller.viewas === 'user'">
+					<div class="legend-user" style="font-size: medium;padding-bottom: 10px;"><b>{{'UI_NETWORK_ADMIN.CASHIER.PLAYER.TITLE'|translate:{ player: controller.viewasdesc } }}</b></div>
+					<div class="card card-block" style="margin-bottom: 5px;" ng-repeat="cm in controller.cashierMethods">
+						<div class="form-text text-muted bold-text">{{cm.name}}</div>
+						<small class="mt-auto p-2 form-text text-muted">
+							<b>{{'UI_NETWORK_ADMIN.CASHIER.PLAYER.MIN'|translate}}:</b> {{cm.limits.minAmount|cents}}&nbsp;
+							<b>{{'UI_NETWORK_ADMIN.CASHIER.PLAYER.MAX'|translate}}:</b> {{cm.limits.maxAmount|cents}}&nbsp;
+							<b ng-if="cm.userBalanceCents">{{'UI_NETWORK_ADMIN.CASHIER.PLAYER.BAL'|translate}}:</b> {{cm.userBalanceCents|cents}}&nbsp;
+						</small>
+						<small class="mt-auto p-2 form-text text-muted"><b>{{'UI_NETWORK_ADMIN.CASHIER.PLAYER.PROCESSOR'|translate}}:</b> {{cm.processor.description}}</small>
+						<div class="ml-auto p-2">
+							<table class="table table-sm">
+							<thead>
+							<tr class="description bold-text">
+								<th>&nbsp;</th>
+								<th>{{'UI_NETWORK_ADMIN.CASHIER.PLAYER.MAX_AMT'|translate}}</th>
+								<th>{{'UI_NETWORK_ADMIN.CASHIER.PLAYER.MAX_TRN'|translate}}</th>
+							</tr>
+							</thead>
+							<tbody>
+							<tr class="description-sm">
+								<td>
+									<div>{{'UI_NETWORK_ADMIN.CASHIER.PLAYER.PD'|translate}}</div>
+									<div>{{'UI_NETWORK_ADMIN.CASHIER.PLAYER.PW'|translate}}</div>
+									<div>{{'UI_NETWORK_ADMIN.CASHIER.PLAYER.PM'|translate}}</div>
+								</td><td>
+									<div>{{cm.limits.maxAmountDay|cents}}</div>
+									<div>{{cm.limits.maxAmountWeek|cents}}</div>
+									<div>{{cm.limits.maxAmountMonth|cents}}</div>
+								</td><td>
+									<div>{{cm.limits.maxTransactionsDay}}</div>
+									<div>{{cm.limits.maxTransactionsWeek}}</div>
+									<div>{{cm.limits.maxTransactionsMonth}}</div>
+								</td>
+							</tr>
+							</tbody>
+							</table>
+						</div>
+					</div>
+					<button-refresh ng-click="controller.findDomainMethodUser()"/>
+				</div>
+				<div class="form-group card-content" ng-if="controller.viewas !== 'user'">
+					<div class="description">{{'UI_NETWORK_ADMIN.CASHIER.PLAYER.NOSELECTED'|translate}}</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div style="padding: 19px;"	>
+		<div class="row v-reset-row well">
+				<changelog options="controller.changelogs" model="controller.domainMethods"></changelog>
+		</div>
+	</div>
+</div>

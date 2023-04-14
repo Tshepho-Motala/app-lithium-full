@@ -1,0 +1,9 @@
+{
+  "SERVICE-CASHIER": {
+    "TRAN": {
+      "ON_HOLD": {
+        "LABEL": "Pending"
+      }
+    }
+  }
+}

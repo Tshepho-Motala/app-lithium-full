@@ -1,0 +1,22 @@
+= SCP Evolution Documentation
+Irwin Herridge <irwin.herridge@wonderlabz.com>
+1.0, Feb 23, 2023: SCP Evolution Documentation
+:sectnums:
+:toc: left
+:toclevels: 4
+:toc-title: Table of Contents
+:icons: font
+:url-quickref: https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/
+:table-caption!:
+
+
+The following documentation has been created in support of the Evolution Casino integration.
+
+
+include::plantuml/high-level-flow.puml[]
+
+include::session-management.adoc[]
+
+include::error-codes.adoc[]
+
+include::automation-testing.adoc[]

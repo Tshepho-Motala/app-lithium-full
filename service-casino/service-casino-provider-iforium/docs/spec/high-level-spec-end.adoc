@@ -1,0 +1,5 @@
+.End Game Round
+[source,gherkin]
+----
+include::../../src/docs/gherkin/high-level-spec/end.feature[]
+----

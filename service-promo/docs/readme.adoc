@@ -1,0 +1,552 @@
+= Promo Framework
+Riaan Schoeman <riaan.schoeman@wonderlabz.com>
+1.0, November 17, 2021: Promo Framework
+:sectnums:
+:doctype: book
+:toc: left
+:toclevels: 4
+:toc-title: svc-promo
+:icons: font
+:url-quickref: https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/
+
+:promo-sourcedir: ../service-promo/src/main/java
+:client-promo-sourcedir: ../client-service-promo/src/main/java
+:client-reward-sourcedir: ../../service-reward/client-service-reward/src/main/java
+:comps-sourcedir: ../../docs/comps-engine
+//:stylesheet: css/asciidoctor.css
+//:stylesheet: css/material-blue.css
+
+//This is done tto keep formatting aligned with gitlab
+****
+[verse,,]
+____
+xref:../../readme.adoc[Home] | xref:../../docs/comps-engine/readme.adoc[Comps Engine] | xref:../../service-reward/docs/readme.adoc[Rewards] | xref:../../service-leaderboard/docs/readme.adoc[Leaderboards] | xref:../../service-xp/docs/readme.adoc[XP]
+____
+****
+
+This document will describe the promo framework, and how it all fits together and communicates to other services within lithium.
+
+This service will form the hart of the comps-engine.
+
+== Architecture
+****
+TIP: Registering stats is what drives the promo engine.
+
+Providers register themselves with svc-promo to enable setting up of different promo types.
+
+Providers then consume specific events. After consuming these events, a provider will produce a 'stat' object to be sent to svc-promo to record this activity against a specific promo for a specific player.
+****
+=== Basic Information
+
+* This service already receives events (see #2 historic flow below) for most actions in system, but will be expanded upon, and broken up to be more modular, and bring in the provider concept:
+** Official naming convention for providers examples below:
+*** *service-promo-provider-sportsbook-sbt* - This service has already been created as an example implementation.
+*** *service-promo-provider-casino-roxor* - This service has already been created as an example implementation.
+*** service-promo-provider-casino-iforium
+*** service-promo-provider-cashier
+*** *service-promo-provider-user* - This service has already been created as an example implementation.
+*** service-promo-provider-xp
+** Overview of final structure:
++
+[plantuml, format="png", id="promo1"]
+----
+class p as "svc-promo"
+class prc as "svc-promo-pr-casino-*"
+class c as "svc-casino/accounting"
+class prsb as "svc-promo-pr-sportsbook-*"
+class sb as "svc-sportsbook/accounting"
+class prcash as "svc-promo-pr-cashier"
+class ca as "svc-cashier/accounting"
+class pru as "svc-promo-pr-user"
+class u as "svc-user"
+class prxp as "svc-promo-pr-xp"
+class xp as "svc-xp"
+
+note as N
+  sportsbook currently part of svc-casino,
+  might be separated out at later stage.
+end note
+
+sb .. N
+
+p <|--|> prc
+prc <|--|> c
+p <|--|> prsb
+prsb <|--|> sb
+p <|--|> prcash
+prcash <|--|> ca
+p <|--|> pru
+pru <|--|> u
+p <|--|> prxp
+prxp <|--|> xp
+----
+
+** Building a promo provider consists of two parts:
+*** registering the provider with svc-promo, to enable setting up promo's within LBO.
+*** consuming specific events, compiling and sending to svc-promo to record when needed.
+
+=== Provider Registration
+** Providers will register with svc-promo, which would enable certain categories/activities to be available to configure a promotion.
+*** Registration to include:
+**** *Category*: "sport" / "casino" / "virtual" / "user" / "xp" (Currently named `type`)
+**** *Activity*: "bet" / "wager" / "win" / "register" / "login" / "level" / "points" (Currently named `action`)
+
+**** Extra fields that can be configured for the category. E.g. for casino, this would be games, for sports this would be league+sport+event+market+odds for most providers registering though, this would be empty.
+**** Registration Object:
++
+[source,java,linenums,indent=0]
+----
+@Data
+@Builder
+@ToString
+@EqualsAndHashCode
+@NoArgsConstructor
+@AllArgsConstructor
+public class PromoProviderExtraField implements Serializable {
+  private String name; // e.g. league / odds
+  private String type; // e.g. string / number
+}
+
+@Data
+@Builder
+@ToString
+@EqualsAndHashCode
+@NoArgsConstructor
+@AllArgsConstructor
+public class PromoProviderRegistration implements Serializable {
+  private String url;
+  private String category;
+  @Singular
+  private String[] activities;
+  @Singular
+  private PromoProviderExtraField[] extraFields;
+}
+----
+*** Example provider startups:
++
+[source,java,linenums,indent=0]
+----
+// This creates the PromoProviderService used to register promo providers, and enforces IPromoProvider to be implemented.
+@EnablePromoProvider
+public class ServicePromoProviderSportsbookSBT extends LithiumServiceApplication {
+    @Value("${spring.application.name}")
+    private String applicationName;
+    @Autowired
+    private PromoProviderService promoProviderService;
+
+    @EventListener
+    public void startup(ApplicationStartedEvent e) throws Exception {
+        log.info("svc-promo-pr-sportsbook context started. Registering provider activities.");
+        super.startup(e);
+        registerPromoProvider();
+    }
+
+    private void registerPromoProvider() {
+        if (!leaderCandidate.iAmTheLeader()) {
+            log.debug("I am not the leader.");
+            return;
+        }
+        promoProviderService.registerPromoProvider(
+            PromoProviderRegistration
+            .builder()
+            .url(applicationName)
+            .category("sport")
+            .activity("bet")
+            .activity("win")
+            .extraField(PromoProviderExtraField.builder().name("league").type("list").build())
+            .extraField(PromoProviderExtraField.builder().name("sport").type("list").build())
+            .extraField(PromoProviderExtraField.builder().name("event").type("list").build())
+            .extraField(PromoProviderExtraField.builder().name("market").type("list").build())
+            .extraField(PromoProviderExtraField.builder().name("odds").type("number").build())
+            .build()
+        );
+    }
+}
+----
++
+[source,java,linenums,indent=0]
+----
+// This creates the PromoProviderService used to register promo providers, and enforces IPromoProvider to be implemented.
+@EnablePromoProvider
+public class ServicePromoProviderCasinoRoxor extends LithiumServiceApplication {
+    @Value("${spring.application.name}")
+    private String applicationName;
+@Autowired
+    private PromoProviderService promoProviderService;
+
+    @EventListener
+    public void startup(ApplicationStartedEvent e) throws Exception {
+        log.info("svc-promo-pr-sportsbook context started. Registering provider activities.");
+        super.startup(e);
+        registerPromoProvider();
+    }
+
+    private void registerPromoProvider() {
+        if (!leaderCandidate.iAmTheLeader()) {
+          log.debug("I am not the leader.");
+          return;
+        }
+        promoProviderService.registerPromoProvider(
+            PromoProviderRegistration
+            .builder()
+            .url(applicationName)
+            .category("casino")
+            .activity("wager")
+            .activity("win")
+            .extraField(PromoProviderExtraField.builder().name("game").type("list").build())
+            .extraField(PromoProviderExtraField.builder().name("gameType").type("list").build())
+            .build()
+        );
+    }
+}
+----
+
+*** Providers should always be annotated with `@EnablePromoProvider`:
++
+This creates the PromoProviderService used to register promo providers, and enforces `lithium.service.promotions.client.stream.provider.IPromoProvider` to be implemented
++
+//TODO: Needs to be expanded on.
++
+[source,java,linenums,indent=0]
+----
+@RequestMapping("/system/promo/provider")
+public interface IPromoProvider {
+  @GetMapping("/details/{field}")
+  Optional<List<?>> fieldDetails(@PathVariable String field);
+}
+----
++
+**** See `lithium.service.promo.controller.system.PromoProviderController` for an example implementation.
+**** Controller needs to be added to svc-promo that will query these endpoints on the various providers. Will be used to obtain more info regarding the field that was registered.
++
+Given the provider that was registered: (see example above)(ServicePromoProviderCasinoRoxor)
++
+e.g. 'game' would return a list of games available for this provider.
++
+e.g. 'gameType' would return a list of all the configured game types.
+
+
+=== Consuming Events
+==== CompletedTransactionEvents
+****
+* Needs to be expanded to add a parameter for game data enhancement.
+** If true, events go to a separate queue to first be consumed by svc-games, to add game data to the event to be consumed by the provider.
+** Otherwise, go directly to provider to be consumed.
+* Possibly change the listener associated for the provider to only startup/listen when a promo has been configured?
+****
+** `CompletedTransactionEvents` have been changed to accept a parameter to specify the transaction types that you would like to receive.
+*** e.g. to enable the service to only receive events for sports related wins, add this to the service:
++
+`@EnableAccountingTransactionCompletedEvent( transactionTypeCodes = {"SPORTS_WIN"} )`
+*** multiple transaction types accepted:
++
+`@EnableAccountingTransactionCompletedEvent( transactionTypeCodes = {"SPORTS_WIN", "SPORTS_RESERVE"} )`
+*** wildcards are accepted:
++
+`@EnableAccountingTransactionCompletedEvent( transactionTypeCodes = {"SPORTS_*"} )`
+
+** The general flow of how the queues are set up to receive these events:
++
+[plantuml, format="png", id="promo1"]
+----
+participant "service-casino-provider-roxor" as rgp
+participant "service-promo-provider-casino-roxor" as rx
+participant "service-promo" as prom
+participant "service-accounting-pr-internal" as ac
+queue "RabbitMQ" as r
+
+rx --> r: Service startup
+note right
+  service.accounting.completed.transactions : fanout exchange created if it doesn't exist.
+  routing key: transaction.type.casino_win
+  completed.transactions.casino_win : topic exchange created if it doesn't exist.
+  routing key: transaction.type.casino_win
+  acc.tran.complete.service.promo.provider.casino.roxor : queue created if it doesn't exist.
+end note
+rgp -> ac++: register successful casino win
+ac --> r: completed transaction message published
+note right
+  routing key: transaction.type.casino_win
+end note
+rgp <- ac--: response for casino win
+
+rx <-- r: consume completed transaction message (casino_win)
+rx -> prom++: register promo stats
+rx <- prom--:
+----
+
+** Processing completed transaction events is done by implementing `ICompletedTransactionProcessor`
+*** e.g. `lithium.service.promo.pr.sportsbook.sbt.service.TransactionCompletedEventService`
+*** All providers with this annotation will be forced to implement this interface.
+*** Once consumed, it will be sent to svc-promo using:
+**** `lithium.service.promotions.client.stream.MissionStatsStream.registerActivity`
+**** `lithium.service.promotions.client.objects.PromoActivityBasic`
+
+==== CompletedStatsEvent
+****
+* E.g. @EnableStatsCompletedEvent(events = {"login-success"})
+* Can/should be expanded on in the future, for now will serve its purpose.
+****
+* Adding the above annotation will create a queue to the service for receiving granular login stats.
+** A count for each granularity (Year/Month/Day/Week/Total/Hour)
+** For the DAY granularity an extra label value is added for consecutive logins
+* Processing completed stats events is done by implementing `ICompletedStatsProcessor`
+** e.g. `lithium.service.promo.pr.user.service.StatsCompletedEventService`
+*** All providers with this annotation will be forced to implement this interface.
+*** Once consumed, it will be sent to svc-promo using:
+**** `lithium.service.promotions.client.stream.MissionStatsStream.registerActivity`
+**** `lithium.service.promotions.client.objects.PromoActivityBasic`
+
+//TODO: CompletedRoundEvents
+==== CompletedRoundEvents
+****
+* Still needs to be implemented.
+* Still needs more details. Below info not complete.
+* Similar to `CompletedTransactionEvents` but will originate from svc-casino with round data. (See BetRound.java)
+****
+* These events are needed where individual transactions will not be enough.
+* Can be consumed by promo casino providers.
+** e.g. Tracking wins on casino play, where the win amount needs to be percentage of bet amount.
+* Needs to follow the same pattern as the completed transaction events explained above.
+* Will be produced from svc-casino where BetRounds are saved.
+* Will be registered as:
++
+Category: "casino" (Currently named type)
++
+Activity: "win_variable" (Currently named action) //TODO: review
++
+Extra fields: game / gameType
+* Rule saved as:
++
+Category: "casino" (Currently named type)
++
+Activity: "win_variable" (Currently named action)
++
+Value: 10x
+
+//TODO: CompletedCashierEvents
+==== CompletedCashierEvents?
+****
+* separate events for cashier / cashier moved to use adjustment endpoints in accounting to produce completed transaction events?
+* E-payments team?
+****
+
+==== Provider Examples:
+
+* `svc-promo-pr-casino-iforium` will process Completed Transaction events for CASINO_BET/CASINO_WIN and use this to send to svc-promo to process stats. If svc-promo-pr-casino-iforium is not started, no casino events will be processed. If it's never been started, the actions/types for this will not be available in the frontend to configure promotions.
+* `svc-promo-pr-casino-roxor` will process Completed Transaction events for CASINO_BET/CASINO_WIN or choose to consume specific roxor based events published from scp-roxor and use this to send to svc-promo to process stats. If svc-promo-pr-casino-roxor is not started, no events will be processed. If it's never been started, the actions/types for this will not be available in the frontend to configure promotions.
+* `svc-promo-pr-sportsbook` will currently process Completed Transaction events for SPORTS_BET/SPORTS_WIN, but after the import of sports data project, will process a newly created event that will contain only sports data, with more details about the bet. (More details link:../../docs/comps-engine/sportsbook-data-retrieval.adoc[here])
+
+=== Register Stats
+
+* Each provider will consume events, and then build up an object of: `PromoActivityBasic`:
++
+[source,java,linenumsscript,indent=0,highlight='']
+----
+include::{client-promo-sourcedir}/lithium/service/promo/client/objects/PromoActivityBasic.java[lines=17..27]
+----
+* Once consumed by svc-promo, we check to find any currently user promo's, or create if appropriate: (This flow below was implemented in the Squads TA)
++
+.promo-engine-activity
+[plantuml,puml,svg,align="right"]
+----
+include::{comps-sourcedir}/plantuml/promo-engine-activity.puml[]
+----
+* For every user promo returned, we check all the challenges/rules against the received 'stat'/activity object, and record progress/award any rewards for completed stages in the promo.
+
+=== Operations
+** Operations will be predefined in svc-promo, and not needed on provider registration.
++
+Current available operations:
++
+*** "counter"
+*** "accumulator"
+*** "last value"
++
+i.e. if a sport/bet is received, should the operation be to keep a counter (5 bets) or accumulate (value from bet counted onto last stored value, $50 in total from 5x $10 bets) or last value (The value of current bet is stored, overwriting last stored value.)
+
+=== Promo Setup
+* Basic structure of a promo:
++
+[plantuml, format="png", id="flows1"]
+----
+left to right direction
+skinparam linetype ortho
+
+!define T(name,desc) class name as "name desc" << (T,#FFAAAA) >>
+
+T(Promo,"")
+T(PromoRevision,"")
+T(Challenge, "")
+T(Reward, "")
+T(Rule, "")
+T(PromoProvider, "")
+
+Promo ||--|{ PromoRevision
+PromoRevision ||--|{ Challenge
+PromoRevision ||--o| Reward
+Challenge ||--o| Reward
+Challenge ||--|{ Rule
+Rule ||--|{ PromoProvider
+----
+This excludes some of the providers and provider fields tables/structures.
+Providers are configured per rule.
+* a promo can have one or more revisions.
+* a revision can have one or more challenges.
+* a challenge can have one or more rules.
+* a reward can be attached to a revision/challenge.
+** once a challenge is completed, and has a reward configured, it will be triggered.
+** once a promo is completed, and has a reward configured, it will be triggered.
+* Basic structure of a promo fields per provider:
++
+[plantuml, format="png", id="flows1"]
+----
+left to right direction
+skinparam linetype ortho
+
+!define T(name,desc) class name as "name desc" << (T,#FFAAAA) >>
+
+T(promo_provider,"") {
+e.g. casino
+}
+
+T(promo_provider_extra_field,"") {
+e.g. game_guid
+e.g. gameType
+}
+
+T(rule, ) {
+e.g. Rule id=1 == win €30
+}
+T(promo_provider_extra_field_rule_value, "") {
+e.g. rule with id=1 and game_guid=service-casino-provider-roxor_play-banghai
+}
+
+promo_provider ||--|{ promo_provider_extra_field
+promo_provider_extra_field_rule_value }|--|| rule
+promo_provider_extra_field_rule_value ||--|| promo_provider_extra_field
+----
+** promo_provider has one or more promo_provider_extra_field registered. Any of which is available when setting up the promo.
+** In the example above a promo with one rule that says win €30.
+*** This rule has one promo_provider_extra_field configured as per promo_provider_extra_field_rule_value. Saying game_guid needs to be service-casino-provider-roxor_play-banghai. Any event coming in that does not have this game_guid will be discarded for this rule.
+** For an example of how this is checked, have a look at:
+`lithium.service.promotions.services.MissionStatsService.shouldRegisterStat`
++
+[source,java,linenumsscript,indent=0,highlight='']
+----
+include::{promo-sourcedir}/lithium/service/promo/services/MissionStatsService.java[lines=318..347]
+----
+
+=== Rewards
+* Configured rewards will be triggered from svc-promo to svc-reward using a queue.
++
+[plantuml, format="png", id="promo1"]
+----
+queue "RabbitMQ" as r
+participant "service-promo" as pr
+participant "service-reward" as rw
+participant "service-reward-pr-*" as rwpr
+boundary "External Provider" as ext
+
+pr --> r++: GiveRewardRequest
+rw <-- r--: GiveRewardRequest
+rw -> rwpr:
+rwpr -> ext--:
+----
+* svc-promo has been annotated with `@EnableGiveRewardStream`
+* An example of sending a reward to svc-reward:
++
+[source,java,linenumsscript,indent=0,highlight='']
+----
+include::{promo-sourcedir}/lithium/service/promo/services/RewardService.java[lines=18..30]
+----
+
+* `lithium.service.promotions.controllers.MissionStreamTestController.testRewards` also contains an example of making this call. (to be removed after completion of TA.)
++
+[source,java,linenumsscript,indent=0,highlight='']
+----
+include::{promo-sourcedir}/lithium/service/promo/controllers/MissionStreamTestController.java[lines=48..59]
+----
+
+=== Examples
+==== Casino (Roxor)
+[example]
+====
+Provider Startup Registration: (Available for rule setup in promo)
+[source,groovy,linenums,indent=0]
+----
+PromoProviderRegistration(
+  url=service-promo-provider-casino-roxor,
+  category=casino,
+  activities=[wager, win],
+  extraFields=[
+    PromoProviderExtraField(name=game, type=multiselect),
+    PromoProviderExtraField(name=gameType, type=multiselect)
+  ]
+)
+----
+====
+
+.Win (Roxor)
+[example]
+====
+Rule 1:
+(WIN €100 on any roxor casino game) (Configured when setting up promo)
+[source,mysql,linenums,indent=0]
+----
+INSERT INTO lithium_missions.rule
+    (`action`,identifier,`type`,value,version,challenge_id)
+VALUES
+    ('win','','casino',10000,0,1);
+----
+Stat: (Processed event sent from provider to svc-promo) (Player won €1 playing 'banghai' on roxor casino)
+[source,groovy,linenums,indent=0]
+----
+PromoActivityBasic(
+    ownerGuid=livescore_uk/424,
+    domainName=livescore_uk,
+    category=casino,
+    activity=win,
+    value=100,
+    timezone=null,
+    labelValues={game_guid=service-casino-provider-roxor_play-banghai}
+)
+----
+* Result from above is that a record is written for this player having completed 1% of this rule for this promo.
+====
+
+.Wager (Roxor)
+[example]
+====
+Rule 1:
+(WAGER €250 on 'banghai' roxor casino game) (Configured when setting up promo)
+[source,mysql,linenums,indent=0]
+----
+INSERT INTO lithium_missions.rule
+    (`action`,identifier,`type`,value,version,challenge_id)
+VALUES
+    ('wager','','casino',25000,0,1);
+----
+Stat: (Processed event sent from provider to svc-promo) (Player wagered €25 playing 'banghai' on roxor casino)
+[source,groovy,linenums,indent=0]
+----
+PromoActivityBasic(
+    ownerGuid=livescore_uk/424,
+    domainName=livescore_uk,
+    category=casino,
+    activity=wager,
+    value=2500,
+    timezone=null,
+    labelValues={game_guid=service-casino-provider-roxor_play-banghai}
+)
+----
+* Result from above is that a record is written for this player having completed 10% of this rule for this promo.
+====
+
+=== Database Layout
+include::plantuml/full-er-diagram.puml[Database Layout]
+
+== Historic Flow
+* to be phased out, only here for reference.
+
+include::plantuml/historic-flow.puml[Historic Flow]

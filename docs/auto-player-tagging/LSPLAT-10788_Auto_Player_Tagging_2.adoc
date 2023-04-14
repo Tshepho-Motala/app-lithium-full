@@ -1,0 +1,353 @@
+= Auto Tagging accounts by Affiliate Ref
+Riaan Schoeman <riaan.schoeman@wonderlabz.com>
+1.0, January 26, 2023: Auto Player Tagging
+:sectnums:
+:toc: left
+:toclevels: 4
+:toc-title: Auto Player Tagging
+:icons: font
+:url-quickref: https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/
+:table-caption!:
+
+:erd-include: ../includes/erd.puml
+:seq-include: ../includes/sequence.puml
+
+:svc-user-sourcedir: ../../service-user/service-user/src/main/java
+
+
+[IMPORTANT]
+====
+This TA is a second DRAFT and has not been completed.
+
+It was decided after a meeting
+with the product owner (Stefan), that we will implement a 'quick win' for Cheltenham 2023
+
+Current implementation injects the affiliateGuid label value as a user_category/tag on the player profile endpoint.
+====
+
+
+//This is done to keep formatting aligned with gitlab
+****
+[verse,,]
+____
+link:../../readme.adoc[Home]
+____
+****
+
+== Description
+=== Jira
+* link:https://playsafe.atlassian.net/browse/LSPLAT-10788[LSPLAT-10788]
+* link:https://livescoregroup.atlassian.net/browse/PLAT-11818[PLAT-11818]
+
+=== Gitlab
+* Branch: origin/architect/LSPLAT-10788_PLAT-11818_auto_tagging
+* MR: link:https://gitlab.com/playsafe/lithium/app-lithium-full/-/merge_requests/0000[]
+
+=== External Dependencies
+* TL to facilitate all relevant communication.
+
+==== Swagger (To be completed *before* development starts)
+* n/a
+
+==== DWH
+* Mapping table data needs to be communicated to DWH.
+
+==== Other
+* n/a
+
+=== Business
+
+==== Ticket Description
+
+We are looking to add an auto tagging feature to be used alongside promotions, so we can grant/deny access to promotions via the relevant tag.
+
+example:
+
+users that registers via LiveScore Media on convergence journey would have an affiliate ref attached to the acc, a tag that corresponds to the Affiliate Ref needs to be added automatically on registration.
+
+If this feature is added we can then grant access to promotions on the Promotions Page by tag allowing new users to claim relevant bonuses without any manual intervention.
+
+Approx 200 extra P2P’s over Cheltenham with average Value of £90 - 180K est. on UK alone
+
+== Architecture
+
+* The `affiliate%Guid` fields are used to pass in the relevant affiliate data.
+** affiliateGuid - Main Affiliate Guid
+** affiliateSecondaryGuid1 - B - Banner
+** affiliateSecondaryGuid2 - C - Campaign
+** affiliateSecondaryGuid3 - D - Data/Other
+* Player Registration Example: (Note: Lines 23-26)
+** Request:
++
+[source,http,linenums,highlight=23-26]
+----
+POST /service-user/frontend/livescore_uk/register/v3 HTTP/1.1
+Host: localhost:9000
+Authorization: Basic YWNtZTphY21lc2VjcmV0
+Content-Type: application/json
+Content-Length: 550
+
+{
+  "username": "Kenyon81",
+  "password": "123123",
+  "email": "testKiera3@hotmail.com",
+  "firstName": "Andy",
+  "lastName": "Nienow",
+  "countryCode": "GB",
+  "dobYear": 1982,
+  "dobMonth": 6,
+  "dobDay": 16,
+  "domainName": "livescore_uk",
+  "emailOptOut": true,
+  "smsOptOut": true,
+  "callOptOut": true,
+  "pushOptOut": true,
+  "leaderboardOptOut": true,
+  "affiliateGuid": "c_announcement_banner_web_UKEO40WED_20230124_20230125",
+  "affiliateSecondaryGuid1": "B",
+  "affiliateSecondaryGuid2": "C",
+  "affiliateSecondaryGuid3": "D"
+}
+----
+
+* There needs to be a conversation with GW to agree on how the affiliate data is passed in during registration.
+** e.g. c_announcement_banner_web_UKEO40WED_20230124_20230125 - does not make it very clear what the affiliate guid is, or what the banner/campaign is.
+** Once the data is submitted in the correct broken up parts, we can save this data in structured tables.
+* Currently the affiliate data is stored in label values tables linked to user revisions. This needs to be changed.
+** Proposed Table Structure:
+*** Changes to user_category/tags still debatable..
++
+.Affiliate Data
+["plantuml"]
+----
+include::../includes/erd.puml[]
+
+T(d, "domain\n (existing domain table)") {
+  pk(id) bigint(20) <<generated>>
+  --
+  nn(unique(name)): varchar(255)
+}
+
+T(u, "user\n (existing user table)") {
+  pk(id) bigint(20) <<generated>>
+  --
+  nn(unique(guid)): varchar(255)
+}
+
+T(uc, "user_category\n (existing user_category table)") {
+  pk(id) bigint(20) <<generated>>
+  --
+  nn(unique(name)): varchar(255)
+  fk(affiliate_id): bigint(20)
+  fk(type_id): bigint(20)
+}
+
+uc - d
+
+TN(uct, "user_category_type\n (new table, to define types of categories/tags)") {
+  pk(id) bigint(20) <<generated>>
+  --
+  nn(unique(name)): varchar(255)
+}
+
+uc - uct
+
+TN(ua, "user_affiliate\n Link between player and affiliate data") {
+  pk(id) bigint(20) <<generated>>
+  --
+  fk(user_id): bigint(20)
+  fk(affiliate_id): bigint(20)
+}
+
+TN(a, "affiliate\n Contains main affiliate guid, with \nlinks to secondary affiliate guid data") {
+  pk(id) bigint(20) <<generated>>
+  --
+  version: int(11)
+  nn(unique(guid)): varchar(255) {***A**}
+  name varchar(255)
+  fk(domain_id): bigint(20)
+}
+note right of a
+    **A** - This will be the 'affiliateGuid'
+    passed in during registration
+end note
+
+TN(ac, "affiliate_campaign\n Contains affiliate campaign information") {
+  pk(id) bigint(20) <<generated>>
+  --
+  version: int(11)
+  nn(unique(guid)): varchar(255) {***A**}
+  start_date: DATE
+  end_date: DATE
+  fk(affiliate_id): bigint(20) {***B**}
+}
+note right of ac
+    **A** - This will be the 'affiliateSecondaryGuid2'
+    passed in during registration.
+    **B** - This is the link back to the 'affiliateGuid' record.
+end note
+
+TN(ab, "affiliate_banner\n Contains affiliate banner information") {
+  pk(id) bigint(20) <<generated>>
+  --
+  version: int(11)
+  nn(unique(guid)): varchar(255) {***A**}
+  image_url varchar(255)
+  fk(campaign_id): bigint(20) {***B**}
+}
+note bottom of ab
+  **A** - This will be the 'affiliateSecondaryGuid1
+    passed in during registration
+  **B** - This is the link back to the relevant campaign record.
+end note
+
+TN(ad, "affiliate_datafield\n Contains affiliate DataField information") {
+  pk(id) bigint(20) <<generated>>
+  --
+  version: int(11)
+  nn(unique(guid)): varchar(255) {***A**}
+  name varchar(255)
+  type varchar(255)
+  value varchar(255)
+  fk(banner_id): bigint(20) {***B**}
+}
+note bottom of ad
+  **A** - This will be the 'affiliateSecondaryGuid3
+    passed in during registration
+  **B** - This is the link back to the relevant banner record.
+end note
+
+a --{ ac #line:red;line.bold;text:red : .
+ac --{ ab #line:red;line.bold;text:red : .
+ab --{ ad #line:red;line.bold;text:red : .
+
+a -- d : Linked to domain
+a -- ua #line:red;line.bold;text:red : Linking table for player to affiliate data
+ua -- u: *
+
+skinparam frame {
+  FontSize 14
+  BorderColor #00008B
+  BackgroundColor #E0FFFF
+}
+
+frame Legend as l {
+    T(aa, "Existing Table Color") {
+        <color:green>unique</color>
+        <color:purple><i>foreign key</i></color>
+    }
+    TN(bb, "New Table Color") {
+        <color:green>unique</color>
+        <color:purple><i>foreign key</i></color>
+    }
+}
+----
++
+.Sample data:
+["plantuml"]
+----
+@startjson
+{
+    "datafield": {
+        "id": 1,
+        "version": 0,
+        "guid": "20230124_20230125",
+        "banner": {
+            "id": 1,
+            "version": 0,
+            "guid": "web",
+            "campaign": {
+                "id": 1,
+                "version": 0,
+                "guid": "announcement",
+                "affiliate_id": 1
+            }
+        }
+    },
+    "domain": {
+        "id": 1,
+        "name": "uk"
+    },
+    "user": {
+        "id": 1,
+        "guid": "uk/1234565"
+    },
+    "user_affiliate": {
+        "id": 1,
+        "user_id": 1,
+        "affiliate_id": 1
+    },
+    "affiliate": {
+        "id": 1,
+        "version": 0,
+        "guid": "UKEO40WED",
+        "name": "UK Affiliate #40",
+        "domain_id": 1
+    }
+}
+@endjson
+----
+
+* Registration as shown above, needs to be adapted to make use of the new table structure above.
+** Inside `lithium.service.user.services.SignupService.postRegisterPlayer`:
++
+[source,java]
+----
+affiliateService.registerAffiliatePlayer(pb, user);
+----
++
+linking to:
++
+[source,java]
+----
+lithium.service.user.services.AffiliateService.registerAffiliatePlayer
+----
++
+*** Affiliate data will not be saved using label values anymore.
+*** Will instead use table structure above.
+
+[CAUTION]
+====
+*** Should affiliates be linked to tags/user_categories?
+**** We can return affiliate data in the profile endpoint, as we do for tags right now, which can be used by FE for necessary filtering, without the need for 'tagging' players?
+**** Possibly create 'virtual' tags from affiliate guids?
+====
+
+
+* Information received from PO (Stefan) is that a migration job is *NOT* required. (Could possibly consider creating a query/job for removing old data, see below)
+** There is alot of records on production:
++
+[source,sql]
+----
+select count(lv.value) as 'count', d.name as 'domain' from user_revision_label_value urlv
+left outer join label_value lv on urlv.label_value_id = lv.id
+    left outer join label l on lv.label_id = l.id
+left outer join user_revision ur on urlv.user_revision_id = ur.id
+left outer join user u on ur.user_id = u.id and ur.id = u.current_id
+    left outer join domain d on u.domain_id = d.id
+where l.name = 'affiliateGuid'
+group by d.name;
+----
++
+["plantuml"]
+----
+@startjson
+#highlight "Domain Counts" / "livescore_media"
+#highlight "Domain Counts" / "livescore_nl"
+{
+    "Domain Counts": {
+        "livescore_ie" : 23423,
+        "livescore_media": 310782,
+        "livescore_nigeria": 620591,
+        "livescore_nl": 24564,
+        "livescore_uk": 214212
+    }
+}
+@endjson
+----
+
+[CAUTION]
+====
+* Should create a management screen within LBO for viewing affiliate data.
+* Comps engine should be expanded to include whitelisting on affiliate data.
+====

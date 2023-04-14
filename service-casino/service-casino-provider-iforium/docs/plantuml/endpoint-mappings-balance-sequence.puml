@@ -1,0 +1,62 @@
+.Balance Sequence
+[plantuml]
+----
+@startuml
+
+    box "iForium" #LightGreen
+       participant "Generic Operator Wallet API" as ggo
+    end box
+
+    box "Lithium" #LightBlue
+        participant "iForium Casino Provider" as provider
+        participant "iForium Balance Service" as balance
+'        participant "Config Service" as config
+        participant "Domain Service" as domain
+'        participant "User Repository" as user
+        participant "CasinoClientService" as casino
+    end box
+
+    skinparam handwritten false
+    skinparam backgroundColor transparent
+    skinparam roundcorner 10
+    skinparam BoxPadding 20
+
+    skinparam sequence {
+
+        ArrowColor 3292b4
+        ArrowThickness 2
+
+        LifeLineBorderColor 3292b4
+        LifeLineBackgroundColor #3292b4
+
+        ParticipantBorderColor 3292b4
+        ParticipantBackgroundColor 3292b4
+        ParticipantFontName Arial
+        ParticipantFontSize 17
+        ParticipantFontColor white
+
+        ActorBorderColor 3292b4
+        ActorBackgroundColor aqua
+        ActorFontColor 3292b4
+        ActorFontSize 17
+        ActorFontName Arial
+    }
+
+    ggo ->> provider ++: /v1.0/balance (OperatorAccountID)
+    note right of provider
+        We can split the OperatorAccountID to get the domain name
+            (.*)/(.*) --> $1
+    end note
+    provider ->> provider : getDomainNameFromPlayerGuid(OperatorAccountID)
+    provider ->> domain ++ : findByName(domainName)
+    domain -->> provider --: Domain
+
+    provider ->> balance ++: getPlayerBalance(Domain.name, OperatorAccountID, Domain.currency)
+
+    balance ->> casino ++ : getPlayerBalance(Domain.name, OperatorAccountID, Domain.currency)
+    casino -->> balance --: Balance
+    balance -->> provider --: Balance
+    provider -->> ggo --: CashFunds
+
+@enduml
+----

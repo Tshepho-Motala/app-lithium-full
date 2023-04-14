@@ -1,0 +1,28 @@
+{
+  "UI_NETWORK_ADMIN": {
+      "INCENTIVEGAMES": {
+        "BETS": {
+          "FILTER": {
+            "SETTLED": "Settled",
+            "RESULT": "Result",
+            "BETIDLABEL": "Bet ID",
+            "BETIDPLACEHOLDER": "Enter Bet ID",
+            "SETTLEMENTIDLABEL": "Settlement ID",
+            "SETTLEMENTIDPLACEHOLDER": "Enter Settlement ID",
+            "COMPETITIONLABEL": "Competition",
+            "COMPETITIONPLACEHOLDER": "Enter Competition Code or Name",
+            "SPORTLABEL": "Sport",
+            "SPORTPLACEHOLDER": "Enter Sport Code or Name",
+            "EVENTNAMELABEL": "Event Name",
+            "EVENTNAMEPLACEHOLDER": "Enter Event Name",
+            "MARKETLABEL": "Market",
+            "MARKETPLACEHOLDER": "Enter Market Code or Name",
+            "BETTIMERANGESTART": "Bet Time: Range Start",
+            "BETTIMERANGEEND": "Bet Time: Range End",
+            "SETTLEMENTTIMERANGESTART": "Settlement Time: Range Start",
+            "SETTLEMENTTIMERANGEEND": "Settlement Time: Range End"
+          }
+        }
+      }
+  }
+}

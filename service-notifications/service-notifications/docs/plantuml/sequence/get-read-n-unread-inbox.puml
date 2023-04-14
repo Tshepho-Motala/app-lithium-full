@@ -1,0 +1,44 @@
+@startuml
+'https://plantuml.com/sequence-diagram
+
+actor "GW" as gw
+participant "SVC-NOTIFICATIONS" as svcnotifications
+participant "SVC-TRANSLATE" as svctranslate
+
+autonumber
+
+alt GET unread
+    gw -> svcnotifications: /service-notifications/frontend/inbox/unread
+else GET read
+    gw -> svcnotifications: /service-notifications/frontend/inbox/read
+end
+note right svcnotifications
+    Request parameters:
+    * channel = comma separated channel list
+    * locale = locale2
+end note
+activate svcnotifications
+    alt /unread
+        svcnotifications -> svcnotifications: find all UNREAD player inbox items based on provided request params and user guid from player token
+    else /read
+        svcnotifications -> svcnotifications: find all READ player inbox items based on provided request params and user guid from player token
+    end
+    alt translate
+        svcnotifications -> svctranslate: translate any %translationKey%.value inbox arguments found on notification.message
+    end
+
+    svcnotifications --> gw: return: List<InboxItem>
+    note right of svcnotifications
+        inboxItem: {
+            Long inboxId,
+            String message,
+            Date createdDate,
+            Date sentDate,
+            Boolean read,
+            Date readDate,
+            Date lastReadDate
+        }
+    end note
+deactivate svcnotifications
+
+@enduml

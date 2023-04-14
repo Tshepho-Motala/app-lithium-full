@@ -1,0 +1,20 @@
+server.port: 9894
+
+spring:
+  application:
+    name: service-sms-provider-clickatell
+  cloud:
+    stream:
+      bindings:
+        smsprovidersregisteroutput:
+          group: smsprovidersregistergroup
+          binder: rabbit
+          destination: smsprovidersregisterqueue
+          producer:
+            required-groups: smsprovidersregistergroup
+
+logging:
+  level:
+    lithium.service.sms: INFO
+    lithium.service.sms.provider.http: INFO
+    lithium.service.sms.provider.clickatell: INFO

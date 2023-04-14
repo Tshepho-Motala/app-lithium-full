@@ -1,0 +1,32 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "GAME": {
+      "FIELDS": {
+        "FREE_SPIN_ENABLED": {
+          "NAME": "Free Spin Enabled",
+          "DESCRIPTION": "Is the game enabled for Free Spin Rewards"
+        },
+        "FREE_SPIN_VALUE_REQUIRED": {
+          "NAME": "Free Spin Value Required",
+          "DESCRIPTION": "Does the game require a Free Spin Value for Free Spin Rewards"
+        },
+        "FREE_SPIN_PLAY_THROUGH_ENABLED": {
+          "NAME": "Free Spin Play Through Enabled",
+          "DESCRIPTION": "Does the game allow a Play Through associated to Free Spin Rewards"
+        }
+      }
+    },
+    "BONUS": {
+      "EDIT": {
+        "FREESPINS": {
+          "FREE_SPIN_VALUE": "Free Spin Value In Cents",
+          "FREE_SPIN_VALUE_EXAMPLE": "Description",
+          "FREE_SPIN_VALUE_ENABLED_EXPLAIN": "Game requires a value in cents to be assigned to each free spin e.g. 25 would indicate each spin is worth 25 cents",
+          "FREE_SPIN_VALUE_DISABLED_EXPLAIN": "Game does not require a value in cents to be assigned to each free spin",
+          "FREE_SPIN_PLAY_THROUGH_DISABLED_EXPLAIN": "Game does not support play through abilities.",
+          "FREE_SPIN_VALUE_MISSING": "Please specify free spin value in cents."
+        }
+      }
+    }
+  }
+}

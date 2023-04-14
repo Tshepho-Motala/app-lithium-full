@@ -1,0 +1,12 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "BONUS": {
+      "BONUSFREEMONEY": {
+        "IMMEDIATERELEASE": {
+          "NAME": "Immediate Release",
+          "DESCRIPTION": "Immediately release the funds on bonus activation even if there is playthrough requirements attached to this bonus. Funds remain with the player even if the bonus is cancelled."
+        }
+      }
+    }
+  }
+}

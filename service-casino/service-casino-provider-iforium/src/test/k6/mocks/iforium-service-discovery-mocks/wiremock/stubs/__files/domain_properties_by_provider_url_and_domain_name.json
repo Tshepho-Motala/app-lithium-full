@@ -1,0 +1,33 @@
+{
+  "data": [
+    {
+      "name": "whitelistIPs",
+      "value": "127.0.0.1"
+    },
+    {
+      "name": "secureUserName",
+      "value": "lJK54OlrtNExopB9Aclx7w=="
+    },
+    {
+      "name": "secureUserPassword",
+      "value": "lJK54OlrtNExopB9Aclx7w=="
+    },
+    {
+      "name": "lobbyurl",
+      "value": "https://www.operator.com/lobby"
+    },
+    {
+      "name": "casinoid",
+      "value": "S0009"
+    },
+    {
+      "name": "startGameUrl",
+      "value": "google.com"
+    },
+    {
+      "name": "listgame",
+      "value": "https://drive.google.com/u/2/uc?id=1hwvTXiYCcl-pG6UmA8-Da-YnKM6NW2KX&export=download"
+    }
+  ],
+  "successful": true
+}

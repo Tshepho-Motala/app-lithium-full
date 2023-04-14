@@ -1,0 +1,52 @@
+.Deposit Bonus Flow (Current)
+[plantuml]
+----
+
+@startuml
+
+actor player as p
+
+participant "svc-cashier" as cash
+
+participant "scp-sportsbook" as scpsb
+
+
+participant "svc-limit" as limit
+participant "svc-domain" as domain
+participant "svc-casino" as sc
+participant "svc-accounting-pr-int" as sa
+'participant "kafka" as kafka
+
+group Bonus Activate [Deposit process initiates bonus activate]
+p->cash ++: initiates deposit
+cash->sc ++: /casino/bonus/register/depositbyid
+sc->sc: check UserEvent
+note right
+UserEvent of type:
+CASHIER_DEPOSIT / MANUAL_DEPOSIT_BONUS_DEP
+end note
+sc->sc: check bonus rules
+note right
+if all rules succeed, activate Player Bonus
+end note
+sc->sa ++: /balance/adjustMulti
+sa->sc --: Response<AdjustmentTransaction>
+note right
+TRANSFER_TO_CASINO_BONUS -> PLAYER_BALANCE_CASINO_BONUS
+end note
+sc->cash --:
+cash->p --: deposit response
+end
+group Bonus Wagering [Casino bets processed to determine play through]
+p->sc ++: /casino/bet
+sc->sc: BonusRoundTrack & Freespin checks & Bonus rules check
+sc->sa ++: /balance/adjustMulti
+sa->sc --: Response<AdjustmentTransaction>
+sc->p --: bet response
+end
+note right
+This flow only shows bonus related flows,
+and not the normal betting flow.
+end note
+@enduml
+----

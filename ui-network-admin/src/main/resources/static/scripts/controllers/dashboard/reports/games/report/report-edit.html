@@ -1,0 +1,171 @@
+<div class="container-fluid">
+	<lit-header
+		title="UI_NETWORK_ADMIN.REPORTS.GAMES.EDIT.TITLE" 
+		description="UI_NETWORK_ADMIN.REPORTS.GAMES.REPORT.DESCRIPTION">
+	</lit-header>
+	
+	<form ng-submit="controller.onSubmit()" name="controller.form" novalidate>
+		<buttonbar>
+			<button-back ui-sref="^.report({ reportId: controller.report.id })"></button-back>
+			<button-custom btype="submit" bclass="primary submit-button" icon="floppy-o" text="Commit all changes"></button-custom>
+			<button-custom btype="button" ng-click="controller.onContinue()" bclass="default" icon="clock-o" text="Continue later with this edit"></button-custom>
+			<button-custom btype="button" ng-click="controller.onCancel()" bclass="default" icon="ban" text="Cancel edit"></button-custom>
+		</buttonbar>
+		<br/><br/>
+		<div class="row v-reset-row ">
+			<div class="col-xs-6">
+				<div class="box box-primary">
+					<div class="box-header with-border">
+						<h3 class="box-title">{{ 'UI_NETWORK_ADMIN.REPORTS.GAMES.GENERAL.REPORTDETAILS' | translate }}</h3>
+					</div>
+					<div class="box-body">
+						<formly-form model="controller.model" fields="controller.fields" options="controller.options" form="controller.form">
+						</formly-form>
+						<div class="callout callout-info" ng-if="controller.model.prettyCron">
+							<span>{{ 'UI_NETWORK_ADMIN.REPORTS.GAMES.GENERAL.REPORTRUNAT' | translate: { prettyCron: controller.model.prettyCron } }}</span>
+						</div>
+					</div>
+				</div>
+								<div class="box box-primary">
+					<div class="box-header with-border">
+						<h3 class="box-title">{{ 'UI_NETWORK_ADMIN.REPORTS.GAMES.FILTERS.TITLE' | translate }}</h3>
+						<div class="box-tools pull-right">
+							<button type="button" class="btn btn-box-tool" ng-click="controller.addFilterModal()">
+								<span><i class="fa fa-plus"></i> {{ 'UI_NETWORK_ADMIN.REPORTS.GAMES.FILTERS.ADD' | translate }} </span>
+							</button>
+						</div>
+					</div>
+					<div class="box-body table-responsive">
+						<table class="table table-hover table-striped nowrap" cellspacing="0" width="100%">
+							<thead>
+								<tr>
+									<th>{{ 'UI_NETWORK_ADMIN.REPORTS.GAMES.FILTERS.TABLE.FIELD' | translate }}</th>
+									<th>{{ 'UI_NETWORK_ADMIN.REPORTS.GAMES.FILTERS.TABLE.OPERATOR' | translate }}</th>
+									<th>{{ 'UI_NETWORK_ADMIN.REPORTS.GAMES.FILTERS.TABLE.VALUE' | translate }}</th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="filter in controller.model.filters">
+									<td>{{ filter.field }}</td>
+									<td>{{ filter.operator }}</td>
+									<td>{{ filter.value }}</td>
+									<td>
+										<a ng-click="controller.removeFilter(filter)">
+											<span class="pull-right badge bg-red"><i class="fa fa-times"></i></span>
+										</a>
+									</td>
+								</tr>
+								<tr ng-if="controller.model.filters.length === 0">
+									<td colspan="4">{{ 'UI_NETWORK_ADMIN.REPORTS.GAMES.FILTERS.TABLE.NOFILTERSADDED' | translate }}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="box box-primary">
+					<div class="box-header with-border">
+						<h3 class="box-title">{{ 'UI_NETWORK_ADMIN.REPORTS.GAMES.ACTIONS.TITLE' | translate }}</h3>
+						<div class="box-tools pull-right">
+							<button type="button" class="btn btn-box-tool" ng-click="controller.addActionModal()">
+								<span><i class="fa fa-plus"></i> {{ 'UI_NETWORK_ADMIN.REPORTS.GAMES.ACTIONS.ADD' | translate }} </span>
+							</button>
+						</div>
+					</div>
+					<div class="box-body table-responsive">
+						<table class="table table-hover table-striped nowrap" cellspacing="0" width="100%">
+							<thead>
+								<tr>
+									<th>{{ 'UI_NETWORK_ADMIN.REPORTS.GAMES.ACTIONS.TABLE.ACTIONTYPE' | translate }}</th>
+									<th></th>
+									<th>{{ 'UI_NETWORK_ADMIN.REPORTS.GAMES.ACTIONS.TABLE.EMAILTEMPLATE' | translate }}</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="action in controller.model.actions">
+									<td>{{ action.actionType }}</td>
+									<td>
+										<a ng-if="action.actionType === 'sendFullReportViaEmail' || action.actionType === 'sendReportStatsViaEmail'" ng-click="controller.reportRecipientAddModal(action.actionType)">{{ 'UI_NETWORK_ADMIN.REPORTS.GAMES.ACTIONS.TABLE.MODIFYRECIPIENTS' | translate }}</a>
+									</td>
+									<td>
+										<a ng-click="controller.reportActionEmailTemplateModal(action.actionType)">{{ 'UI_NETWORK_ADMIN.REPORTS.GAMES.ACTIONS.TABLE.MODIFYEMAILTEMPLATE' | translate }}</a>
+									</td>
+									<td>
+										<a ng-click="controller.removeAction(action)">
+											<span class="pull-right badge bg-red"><i class="fa fa-times"></i></span>
+										</a>
+									</td>
+								</tr>
+								<tr ng-if="controller.model.actions.length === 0">
+									<td colspan="4">{{ 'UI_NETWORK_ADMIN.REPORTS.GAMES.ACTIONS.TABLE.NOACTIONSADDED' | translate }}</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-6">
+				<div class="box box-info">
+					<div class="box-header with-border">
+						<h3 class="box-title">{{ 'UI_NETWORK_ADMIN.REPORTS.GAMES.EMAILTEMPLATE.PLACEHOLDER.REPORT.TITLE' | translate }}</h3>
+					</div>
+					<div class="box-body table-responsive">
+						<table class="table table-hover table-striped nowrap" cellspacing="0" width="100%">
+							<thead>
+								<tr>
+									<th>{{ 'UI_NETWORK_ADMIN.REPORTS.GAMES.EMAILTEMPLATE.PLACEHOLDER.HEADER.FIELD' | translate }}</th>
+									<th>{{ 'UI_NETWORK_ADMIN.REPORTS.GAMES.EMAILTEMPLATE.PLACEHOLDER.HEADER.PLACEHOLDER' | translate }}</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>{{ 'UI_NETWORK_ADMIN.REPORTS.GAMES.EMAILTEMPLATE.PLACEHOLDER.REPORT.NAME' | translate }}</td>
+									<td>%report.name%</td>
+								</tr>
+								<tr>
+									<td>{{ 'UI_NETWORK_ADMIN.REPORTS.GAMES.EMAILTEMPLATE.PLACEHOLDER.REPORT.STARTEDON' | translate }}</td>
+									<td>%report.startedOn%</td>
+								</tr>
+								<tr>
+									<td>{{ 'UI_NETWORK_ADMIN.REPORTS.GAMES.EMAILTEMPLATE.PLACEHOLDER.REPORT.COMPLETEDON' | translate }}</td>
+									<td>%report.completedOn%</td>
+								</tr>
+								<tr>
+									<td>{{ 'UI_NETWORK_ADMIN.REPORTS.GAMES.EMAILTEMPLATE.PLACEHOLDER.REPORT.STARTEDBY' | translate }}</td>
+									<td>%report.startedBy%</td>
+								</tr>
+								<tr>
+									<td>{{ 'UI_NETWORK_ADMIN.REPORTS.GAMES.EMAILTEMPLATE.PLACEHOLDER.REPORT.TOTALRECORDS' | translate }}</td>
+									<td>%report.totalRecords%</td>
+								</tr>
+								<tr>
+									<td>{{ 'UI_NETWORK_ADMIN.REPORTS.GAMES.EMAILTEMPLATE.PLACEHOLDER.REPORT.PROCESSEDRECORDS' | translate }}</td>
+									<td>%report.processedRecords%</td>
+								</tr>
+								<tr>
+									<td>{{ 'UI_NETWORK_ADMIN.REPORTS.GAMES.EMAILTEMPLATE.PLACEHOLDER.REPORT.DOMAINNAME' | translate }}</td>
+									<td>%domain.name%</td>
+								</tr>
+								<tr>
+									<td>{{ 'UI_NETWORK_ADMIN.REPORTS.GAMES.EMAILTEMPLATE.PLACEHOLDER.REPORT.DOMAINURL' | translate }}</td>
+									<td>%domain.url%</td>
+								</tr>
+								<tr>
+									<td>{{ 'UI_NETWORK_ADMIN.REPORTS.GAMES.EMAILTEMPLATE.PLACEHOLDER.REPORT.DOMAINSUPPORTEMAIL' | translate }}</td>
+									<td>%domain.supportEmail%</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+		<buttonbar>
+			<button-back ui-sref="^.report({ reportId: controller.report.id })"></button-back>
+			<button-custom btype="submit" bclass="primary submit-button" icon="floppy-o" text="Commit all changes"></button-custom>
+			<button-custom btype="button" ng-click="controller.onContinue()" bclass="default" icon="clock-o" text="Continue later with this edit"></button-custom>
+			<button-custom btype="button" ng-click="controller.onCancel()" bclass="default" icon="ban" text="Cancel edit"></button-custom>
+		</buttonbar>
+	</form>
+	<br/><br/>
+</div>

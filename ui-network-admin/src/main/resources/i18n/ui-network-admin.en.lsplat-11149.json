@@ -1,0 +1,15 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "ACCOUNTING": {
+      "TRANSACTIONS": {
+        "FIELDS": {
+          "CANCEL": {
+            "REASON": {
+              "WELCOME_BONUS" : "Welcome bonus criteria not met"
+            }
+          }
+        }
+      }
+    }
+  }
+}

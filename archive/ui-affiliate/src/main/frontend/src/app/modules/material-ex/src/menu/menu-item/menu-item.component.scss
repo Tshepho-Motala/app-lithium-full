@@ -1,0 +1,15 @@
+md-icon {
+  transition: all 0.5s ease-in-out;
+}
+
+.md-icon-open {
+  transform: rotateZ(180deg);
+}
+
+.subs {
+  display: block;
+}
+
+.subs-closed {
+  display: none;
+}

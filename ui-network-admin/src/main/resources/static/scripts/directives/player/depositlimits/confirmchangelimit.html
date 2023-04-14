@@ -1,0 +1,14 @@
+<div class="modal-body" bs-loading-overlay bs-loading-overlay-reference-id="{{controller.referenceId}}">
+    <h3 class="text-center">{{'UI_NETWORK_ADMIN.DEPOSITLIMITS.TITLE' | translate}}</h3>
+</div>
+<modal-body>
+    <div>
+        <div>
+            <p class="text-center">{{'UI_NETWORK_ADMIN.DEPOSITLIMITS.CONFIRMATION_MESSAGE' | translate}} <strong>{{controller.oldValue}}</strong> to <strong>{{controller.newValue}}</strong>?</p>
+        </div>
+    </div>
+</modal-body>
+<div class="modal-footer">
+    <button-custom icon="edit" text="UI_NETWORK_ADMIN.DEPOSITLIMITS.TEXT" bclass="default" ng-click="controller.submit()"></button-custom>
+    <button-custom icon="ban" text="GLOBAL.ACTION.CANCEL" bclass="default" ng-click="controller.cancel()"></button-custom>
+</div>

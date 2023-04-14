@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>service-user-provider-vipps</artifactId>
+	<packaging>jar</packaging>
+	<name>service-user-provider-vipps</name>
+	<description>User Provider - Vipps</description>
+	<parent>
+		<groupId>lithium</groupId>
+		<artifactId>common-parent-service</artifactId>
+		<version>1.12-SNAPSHOT</version>
+		<relativePath>../../common-parent-service</relativePath>
+	</parent>
+	<dependencies>
+		<dependency>
+			<groupId>lithium</groupId>
+			<artifactId>library-user-provider-vipps</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.flywaydb</groupId>
+			<artifactId>flyway-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>lithium</groupId>
+			<artifactId>library-common-jpa</artifactId>
+		</dependency>
+	</dependencies>
+</project>

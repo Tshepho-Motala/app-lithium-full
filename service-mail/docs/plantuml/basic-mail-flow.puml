@@ -1,0 +1,23 @@
+.Basic Mail Flow
+[plantuml]
+----
+@startuml
+'https://plantuml.com/sequence-diagram
+
+actor player as p
+
+participant "svc-limit" as limit
+participant "svc-user" as user
+participant "svc-mail" as mail
+participant "Rabbit" as r
+
+limit->r ++: EmailData Request (cooloff / exclusion email to player)
+r->mail --: Process email request sent
+mail->p: Processed mail sent to player
+
+user->r ++: EmailData Request (email to player)
+r->mail --: Process email request sent
+mail->p: Processed mail sent to player
+
+@enduml
+----

@@ -1,0 +1,1 @@
+ALTER TABLE `lithium_games`.`game` ADD COLUMN `introduction_date` TIMESTAMP NULL DEFAULT NULL;

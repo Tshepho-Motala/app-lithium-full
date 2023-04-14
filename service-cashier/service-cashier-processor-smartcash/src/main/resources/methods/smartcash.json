@@ -1,0 +1,40 @@
+{
+	"name": "SmartCash",
+	"code": "smartcash",
+	"image": {
+		"filename": "/methods/smartcash.png",
+		"filetype": "image/png"
+	},
+	"depositStages": [
+		{
+			"number": 1,
+			"title": "Initiate payment",
+			"description": null,
+			"inputFields": [],
+			"outputFields": []
+		},
+		{
+			"number": 2,
+			"title": "Validate payment",
+			"description": null,
+			"inputFields": [],
+			"outputFields": []
+		}
+	],
+	"withdrawalStages": [
+		{
+			"number": 1,
+			"title": "Initiate payout",
+			"description": null,
+			"inputFields": [],
+			"outputFields": []
+		},
+		{
+			"number": 2,
+			"title": "Validate payout",
+			"description": null,
+			"inputFields": [],
+			"outputFields": []
+		}
+	]
+}

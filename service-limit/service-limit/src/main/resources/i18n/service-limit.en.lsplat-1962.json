@@ -1,0 +1,9 @@
+{
+  "ERROR_DICTIONARY": {
+    "MY_ACCOUNT": {
+      "SOFT_SELF_EXCLUSION_SET": "Player is soft excluded. Cooling off cannot be applied.",
+      "PERMANENT_SELF_EXCLUSION_APPLY_COOL_OFF": "Player is permanently excluded. Cooling off cannot be applied.",
+      "PERMANENT_SELF_EXCLUSION_SET": "Player is permanently self excluded"
+    }
+  }
+}

@@ -1,0 +1,1 @@
+ALTER TABLE `report_run_results` ADD COLUMN `referral_code_id` bigint(20) DEFAULT NULL;

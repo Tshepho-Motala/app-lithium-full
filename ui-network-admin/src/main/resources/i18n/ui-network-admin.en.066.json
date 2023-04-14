@@ -1,0 +1,124 @@
+{
+	"UI_NETWORK_ADMIN": {
+		"NOTIFICATIONS": {
+			"ADD": {
+				"TITLE": "Notifications",
+				"DESCRIPTION": "Add a notification",
+				"SUCCESS": "Notification created successfully",
+				"ERROR": "Unable to create notification",
+				"CHANNELREQUIRED": "You must add at least one channel"
+			},
+			"EDIT": {
+				"TITLE": "Notifications",
+				"DESCRIPTION": "Edit notification",
+				"SUCCESS": "Notification edited successfully",
+				"ERROR": "Could not edit notification"
+			},
+			"LIST": {
+				"TITLE": "Notifications",
+				"DESCRIPTION": "A searchable list of notifications"
+			},
+			"VIEW": {
+				"TITLE": "Notifications",
+				"DESCRIPTION": "Viewing notification"
+			},
+			"FIELDS": {
+				"DOMAIN": {
+					"NAME": "Domain",
+					"DESCRIPTION": "Choose the domain that you are creating the notification for"
+				},
+				"NAME": {
+					"NAME": "Name",
+					"DESCRIPTION": "A unique name for the notification",
+					"UNIQUE": "A notification with this name already exists"
+				},
+				"DESCRIPTION": {
+					"NAME": "Description",
+					"DESCRIPTION": "A short description to remember the purpose of the notification"
+				},
+				"MESSAGE": {
+					"NAME": "Message",
+					"DESCRIPTION": "The notification content"
+				},
+				"CHANNEL": {
+					"CHANNEL": {
+						"NAME": "Channel",
+						"DESCRIPTION": "Select the channel"
+					},
+					"TEMPLATE": {
+						"NAME": "Template Name",
+						"DESCRIPTION": "The template name for the chosen channel"
+					},
+					"TEMPLATELANG": {
+						"NAME": "Template Lang",
+						"DESCRIPTION": "The template lang"
+					},
+					"FORCED": {
+						"NAME": "Forced",
+						"DESCRIPTION": "Send the notification even if the player has opted out"
+					}
+				}
+			},
+			"BOXES": {
+				"DETAILS": "Details",
+				"CHANNELS": "Channels"
+			},
+			"CHANNEL": {
+				"ADD": {
+					"TITLE": "Add a Channel",
+					"SUCCESS": "The channel was successfully added",
+					"ERROR": "The channel could not be added"
+				},
+				"MODIFY": {
+					"SUCCESS": "The channel was successfully modified",
+					"ERROR": "The channel could not be modified"
+				},
+				"REMOVE": {
+					"SUCCESS": "Successfully removed channel",
+					"ERROR": "Could not remove channel"
+				}
+			},
+			"INBOX": {
+				"LIST": {
+					"TITLE": "Notifications: Inbox",
+					"DESCRIPTION": "A searchable list of inbox items"
+				},
+				"VIEW": {
+					"TITLE": "Notification: Inbox",
+					"DESCRIPTION": "View Notification Details"
+				},
+				"BOXES": {
+					"USER": "User",
+					"MESSAGE": "Message",
+					"NOTIFICATION": "Notification"
+				},
+				"FIELDS": {
+					"DOMAIN": {
+						"NAME": "Domain"
+					},
+					"NOTIFICATION": {
+						"NAME": "Notification"
+					},
+					"USER": {
+						"NAME": "User"
+					},
+					"CREATEDDATE": {
+						"NAME": "Created Date"
+					},
+					"SENTDATE": {
+						"NAME": "Sent Date"
+					},
+					"READ": {
+						"NAME": "Read"
+					},
+					"READDATE": {
+						"NAME": "Read Date"
+					},
+					"LASTREADDATE": {
+						"NAME": "Last Read Date"
+					}
+				}
+			}
+		}
+	}
+}

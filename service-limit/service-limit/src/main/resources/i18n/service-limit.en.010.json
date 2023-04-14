@@ -1,0 +1,16 @@
+{
+  "SERVICE_LIMIT": {
+    "DOMAINAGELIMIT": {
+      "ERROR": {
+        "STORED_AGE": "Age range has already been stored",
+        "INVALID_AGE_INPUT": "Age inputted is invalid",
+        "LIST_SAVE_ERROR": "Domain Age limit save failure",
+        "INVALID_DOMAIN_INPUT": "Domain is invalid",
+        "LIST_DELETE_ERROR": "Failed to delete age limits",
+        "EMPTY_AGE_LIMITS": "No limits stored",
+        "FAILED_UPDATE": "Failed to update age limit",
+        "DATA_ERROR": "Request does not meet requirements"
+      }
+    }
+  }
+}

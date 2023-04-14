@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: service-document-provider-hellosoda
+  datasource:
+    url: jdbc:mysql://localhost/lithium_document_hellosoda
+    username: root
+    password: mysql
+  jpa:
+    hibernate:
+      ddl-auto: validate
+  servlet:
+    multipart:
+        maxFileSize: 20MB
+        maxRequestSize: 20MB
+        file-size-threshold: 1MB
+  flyway:
+    baseline-on-migrate: true
+
+server:
+  port: 8596

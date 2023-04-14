@@ -1,0 +1,41 @@
+{
+	"SERVICE-LIMIT": {
+		"SELF_EXCLUSION_NO_DATE": "You have excluded yourself from playing.",
+		"DEPOSITLIMIT": {
+			"ERROR": {
+				"486": "Daily deposit limit has been reached",
+				"487": "Weekly deposit limit has been reached",
+				"488": "Monthly deposit limit has been reached",
+				"DOMAIN_DEPOSIT_LIMIT_DISABLED": "Player Deposit Limits for this domain is disabled.",
+				"INVALIDPLAYERGUID": "You may only change deposit limits for your own player.",
+				"INVALIDINPUT": "Required parameters missing.",
+				"PENDING_DEP_LIMIT_DAILY": "Pending daily deposit limit set, cannot save new limit until pending comes into effect on {0}",
+				"PENDING_DEP_LIMIT_WEEKLY": "Pending weekly deposit limit set, cannot save new limit until pending comes into effect on {0}",
+				"PENDING_DEP_LIMIT_MONTHLY": "Pending monthly deposit limit set, cannot save new limit until pending comes into effect on {0}"
+			},
+			"GRANULARITY": {
+				"DAILY": "Daily",
+				"WEEKLY": "Weekly",
+				"MONTHLY": "Monthly"
+			},
+			"COMMENT": {
+				"PENDING_TO_CURRENT": {
+					"DAILY": "Moving pending daily deposit limit created on {0} to current",
+					"WEEKLY": "Moving pending weekly deposit limit created on {0} to current",
+					"MONTHLY": "Moving pending monthly deposit limit created on {0} to current"
+				},
+				"UPDATE_AND_SAVE": {
+					"DAILY": "Updating daily deposit limit from {0} to {1}.",
+					"WEEKLY": "Updating weekly deposit limit from {0} to {1}.",
+					"MONTHLY": "Updating monthly deposit limit from {0} to {1}."
+				},
+				"BUILD_AND_SAVE": {
+					"DAILY": "Saving daily deposit limit with amount {0}",
+					"WEEKLY": "Saving weekly deposit limit with amount {0}",
+					"MONTHLY": "Saving monthly deposit limit with amount {0}",
+					"PENDING": "Marked as pending for 24 hours."
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,8 @@
+{
+  "ERROR_DICTIONARY": {
+    "LOGIN": {
+      "BACKOFFICE_ORIGIN_LOGIN_BLOCK": "User not allowed to log into a backoffice account using a player login, please contact your system administrator.",
+      "PLAYER_ORIGIN_LOGIN_BLOCK": "User not allowed to log into a player account using a backoffice login, please contact your system administrator."
+    }
+  }
+}

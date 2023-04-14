@@ -1,0 +1,11 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "LIMITS": {
+      "PLAYER": {
+        "CHANGE": {
+          "WEEKLYLOSS": "Change Weekly Loss Limit"
+        }
+      }
+    }
+  }
+}

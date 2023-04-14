@@ -1,0 +1,134 @@
+<div class="container-fluid">
+	<lit-header
+		title="UI_NETWORK_ADMIN.XP.EDIT.TITLE" 
+		description="UI_NETWORK_ADMIN.XP.EDIT.DESCRIPTION">
+	</lit-header>
+	
+	<form ng-submit="controller.onSubmit()" name="controller.form" novalidate>
+		<div ng-if="controller.activeScheme && controller.activeScheme.length !== 0 && controller.activeScheme.id !== controller.model.id" class="alert alert-warning">
+			{{'UI_NETWORK_ADMIN.XP.ACTIVESCHEME'|translate: { name:controller.activeScheme.name } }}
+		</div>
+		
+		<buttonbar>
+			<button-back ui-sref="dashboard.xp.schemes.view({id: controller.model.id})"></button-back>
+			<button-submit></button-submit>
+		</buttonbar>
+		
+		<br/><br/>
+		
+		<div class="row v-reset-row ">
+			<div class="col-xs-6">
+				<div class="box box-primary">
+					<div class="box-header with-border">
+						<h3 class="box-title">{{'UI_NETWORK_ADMIN.XP.BOX.DETAILS'|translate}}</h3>
+					</div>
+					<div class="box-body">
+						<formly-form model="controller.model" fields="controller.schemeDetails" options="controller.options" form="controller.form">
+						</formly-form>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-6">
+				<div class="box box-primary">
+					<div class="box-header with-border">
+						<h3 class="box-title">{{'UI_NETWORK_ADMIN.XP.BOX.WAGERINGREQUIREMENTS'|translate}}</h3>
+					</div>
+					<div class="box-body">
+						<formly-form model="controller.model" fields="controller.wageringRequirements" options="controller.options" form="controller.form">
+						</formly-form>
+						
+						<uib-progressbar type="info" value="(controller.model.wagerPercentage === undefined || controller.model.wagerPercentage === null || controller.model.wagerPercentage === '')? 100: controller.model.wagerPercentage|number:2"><span style="color: black;">{{(controller.model.wagerPercentage === undefined || controller.model.wagerPercentage === null || controller.model.wagerPercentage === '')? 100: controller.model.wagerPercentage|number:2}}%</span></uib-progressbar>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row v-reset-row ">
+			<div class="col-xs-12">
+				<div class="box box-primary">
+					<div class="box-header with-border">
+						<h3 class="box-title">{{'UI_NETWORK_ADMIN.XP.BOX.LEVELS'|translate}}</h3>
+						<div class="box-tools pull-right">
+							<button type="button" class="btn btn-box-tool" ng-click="controller.addLevel()">
+								<span><i class="fa fa-plus"></i>{{'GLOBAL.ACTION.ADD'|translate}}</span>
+							</button>
+						</div>
+					</div>
+					<div class="box-body table-responsive">
+						<table class="table table-hover table-striped nowrap" cellspacing="0" width="100%">
+							<thead>
+							<tr>
+								<th>{{'UI_NETWORK_ADMIN.XP.LEVELS.TBL.HEADERS.NUMBER'|translate}}</th>
+								<th>{{'UI_NETWORK_ADMIN.XP.LEVELS.TBL.HEADERS.DESCRIPTION'|translate}}</th>
+								<th>{{'UI_NETWORK_ADMIN.XP.LEVELS.TBL.HEADERS.MILESTONE'|translate}}</th>
+								<th>{{'UI_NETWORK_ADMIN.XP.LEVELS.TBL.HEADERS.REQUIREDXP'|translate}}</th>
+								<th>{{'UI_NETWORK_ADMIN.XP.LEVELS.TBL.HEADERS.BONUS'|translate}}</th>
+								<th>Notifications</th>
+								<th>
+							</tr>
+							</thead>
+							<tbody>
+							<tr ng-repeat="level in controller.model.levels | orderBy: 'number'" track by $index>
+								<td>{{level.number}}</td>
+								<td>{{level.description}}</td>
+								<td>{{level.milestone}}</td>
+								<td>{{level.requiredXp}}</td>
+								<td>{{level.bonus.bonusCode}}</td>
+								<td>
+									<table class="table table-hover table-striped nowrap" cellspacing="0" width="100%">
+										<thead>
+										<tr>
+											<th>Trigger Percentage</th>
+											<th>Notification Name</th>
+											<th>
+												<div class="box-tools">
+													<button type="button" class="btn btn-box-tool" ng-click="controller.addNotification(level)">
+														<span><i class="fa fa-plus"></i>{{'GLOBAL.ACTION.ADD'|translate}}</span>
+													</button>
+												</div>
+											</th>
+										</tr>
+										</thead>
+										<tbody>
+										<tr ng-repeat="notification in level.notifications | orderBy: 'triggerPercentage' track by $index">
+											<td>{{notification.triggerPercentage}}</td>
+											<td>{{notification.notificationName}}</td>
+											<td>
+												<a ng-click="controller.modifyNotification(level, notification, $index)">
+													<span class="badge bg-blue"><i class="fa fa-cog"></i></span>
+												</a>
+												&nbsp;
+												<a ng-click="controller.removeNotification(level, $index)">
+													<span class="badge bg-red"><i class="fa fa-times"></i></span>
+												</a>
+											</td>
+										</tr>
+										<tr ng-if="level.notifications === undefined || level.notifications.length === 0">
+											<td colspan="3">No notifications added yet.</td>
+										</tr>
+										</tbody>
+									</table>
+								</td>
+								<td>
+									<a ng-click="controller.modifyLevel(level, $index)">
+										<span class="badge bg-blue"><i class="fa fa-cog"></i></span>
+									</a>
+									&nbsp;
+									<a ng-click="controller.removeLevel(level, $index)">
+										<span class="badge bg-red"><i class="fa fa-times"></i></span>
+									</a>
+								</td>
+							</tr>
+							<tr ng-if="controller.model.levels.length === 0">
+								<td colspan="7">{{'UI_NETWORK_ADMIN.XP.LEVELS.TBL.EMPTY'|translate}}</td>
+							</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+<!-- 		<pre>{{controller.model|json}}</pre> -->
+	</form>
+</div>

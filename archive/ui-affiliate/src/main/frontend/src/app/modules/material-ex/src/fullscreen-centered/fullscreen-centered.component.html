@@ -1,0 +1,11 @@
+<!-- 
+  Since we are using flexbox justify-content: space-between on a column-based layout, we
+  need an empty div above and below the content. This will ensure that when the content
+  is too big for the screen, normal scrolling will prevail.
+-->
+<div></div>
+<div>
+  <ng-content></ng-content>
+</div>
+<div>
+</div>

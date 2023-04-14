@@ -1,0 +1,31 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "GAME": {
+      "FIELDS": {
+        "PRIMARY-GAME-TYPE": {
+          "NAME": "Primary Game Type",
+          "DESCRIPTION": "The type of game"
+        },
+        "PRIMARY-GAME-TYPE-CURRENT": {
+          "NAME": "Primary Game Type (Current)",
+          "DELETED_WARN": "NB. The Primary Game Type has been Deleted!"
+        },
+        "SECONDARY-GAME-TYPE": {
+          "NAME": "Secondary Game Type",
+          "DESCRIPTION": "The sub-type of the game"
+        },
+        "SECONDARY-GAME-TYPE-CURRENT": {
+          "NAME": "Secondary Game Type (Current)",
+          "DELETED_WARN": "NB. The Secondary Game Type has been Deleted!"
+        }
+      }
+    },
+    "GAME-TYPES": {
+      "FIELDS": {
+        "TYPE": {
+          "LABEL": "Type"
+        }
+      }
+    }
+  }
+}

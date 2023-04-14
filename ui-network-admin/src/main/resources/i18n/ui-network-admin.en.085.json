@@ -1,0 +1,269 @@
+{
+  "GLOBAL": {
+    "ICAL": {
+      "FREQ": {
+        "DAILY": "Daily",
+        "WEEKLY": "Weekly",
+        "MONTHLY_BY_DAY": "Monthly by day",
+        "MONTHLY_BY_DATE": "Monthly by date",
+        "YEARLY_BY_DAY": "Yearly by day",
+        "YEARLY_BY_DATE": "Yearly by date"
+      },
+      "INTERVAL": {
+        "DAY": {
+          "1": "Every day",
+          "2": "Every other day",
+          "3": "Every 3rd day",
+          "4": "Every 4th day",
+          "5": "Every 5th day",
+          "6": "Every 6th day",
+          "7": "Every 7th day",
+          "8": "Every 8th day",
+          "9": "Every 9th day",
+          "10": "Every 10th day",
+          "11": "Every 11th day",
+          "12": "Every 12th day",
+          "13": "Every 13th day",
+          "14": "Every 14th day",
+          "15": "Every 15th day",
+          "16": "Every 16th day",
+          "17": "Every 17th day",
+          "18": "Every 18th day",
+          "19": "Every 19th day",
+          "20": "Every 20th day",
+          "21": "Every 21th day",
+          "22": "Every 22th day",
+          "23": "Every 23th day",
+          "24": "Every 24th day",
+          "25": "Every 25th day",
+          "26": "Every 26th day",
+          "27": "Every 27th day",
+          "28": "Every 28th day",
+          "29": "Every 29th day",
+          "30": "Every 30th day"
+        },
+        "BYDAY": {
+          "0": "Sunday",
+          "1": "Monday",
+          "2": "Tuesday",
+          "3": "Wednesday",
+          "4": "Thursday",
+          "5": "Friday",
+          "6": "Saturday"
+        },
+        "BYMONTH": {
+          "1": "January",
+          "2": "February",
+          "3": "March",
+          "4": "April",
+          "5": "May",
+          "6": "June",
+          "7": "July",
+          "8": "August",
+          "9": "September",
+          "10": "October",
+          "11": "November",
+          "12": "December"
+        },
+        "WEEKLY": {
+          "1": "Every week",
+          "2": "Every other week",
+          "3": "Every 3rd week",
+          "4": "Every 4th week",
+          "5": "Every 5th week",
+          "6": "Every 6th week",
+          "7": "Every 7th week",
+          "8": "Every 8th week",
+          "9": "Every 9th week",
+          "10": "Every 10th week",
+          "11": "Every 11th week",
+          "12": "Every 12th week",
+          "13": "Every 13th week",
+          "14": "Every 14th week",
+          "15": "Every 15th week",
+          "16": "Every 16th week",
+          "17": "Every 17th week",
+          "18": "Every 18th week",
+          "19": "Every 19th week",
+          "20": "Every 20th week",
+          "21": "Every 21th week",
+          "22": "Every 22th week",
+          "23": "Every 23th week",
+          "24": "Every 24th week",
+          "25": "Every 25th week",
+          "26": "Every 26th week"
+        },
+        "MONTHDAY": {
+          "1": "1st day",
+          "2": "2nd day",
+          "3": "3rd day",
+          "4": "4th day",
+          "5": "5th day",
+          "6": "6th day",
+          "7": "7th day",
+          "8": "8th day",
+          "9": "9th day",
+          "10": "10th day",
+          "11": "11th day",
+          "12": "12th day",
+          "13": "13th day",
+          "14": "14th day",
+          "15": "15th day",
+          "16": "16th day",
+          "17": "17th day",
+          "18": "18th day",
+          "19": "19th day",
+          "20": "20th day",
+          "21": "21th day",
+          "22": "22th day",
+          "23": "23th day",
+          "24": "24th day",
+          "25": "25th day",
+          "26": "26th day",
+          "27": "27th day",
+          "28": "28th day",
+          "29": "29th day",
+          "30": "30th day",
+          "31": "31st day"
+        },
+        "MONTHLYDAY": {
+          "0": "First Sunday",
+          "1": "First Monday",
+          "2": "First Tuesday",
+          "3": "First Wednesday",
+          "4": "First Thursday",
+          "5": "First Friday",
+          "6": "First Saturday",
+          "7": "Second Sunday",
+          "8": "Second Monday",
+          "9": "Second Tuesday",
+          "10": "Second Wednesday",
+          "11": "Second Thursday",
+          "12": "Second Friday",
+          "13": "Second Saturday",
+          "14": "Third Sunday",
+          "15": "Third Monday",
+          "16": "Third Tuesday",
+          "17": "Third Wednesday",
+          "18": "Third Thursday",
+          "19": "Third Friday",
+          "20": "Third Saturday",
+          "21": "Fourth Sunday",
+          "22": "Fourth Monday",
+          "23": "Fourth Tuesday",
+          "24": "Fourth Wednesday",
+          "25": "Fourth Thursday",
+          "26": "Fourth Friday",
+          "27": "Fourth Saturday",
+          "28": "Fifth Sunday",
+          "29": "Fifth Monday",
+          "30": "Fifth Tuesday",
+          "31": "Fifth Wednesday",
+          "32": "Fifth Thursday",
+          "33": "Fifth Friday",
+          "34": "Fifth Saturday",
+          "35": "Last Sunday",
+          "36": "Last Monday",
+          "37": "Last Tuesday",
+          "38": "Last Wednesday",
+          "39": "Last Thursday",
+          "40": "Last Friday",
+          "41": "Last Saturday"
+        },
+        "MONTHLY": {
+          "1": "Every month",
+          "2": "Every other month",
+          "3": "Every 3rd month",
+          "4": "Every 4th month",
+          "5": "Every 5th month",
+          "6": "Every 6th month",
+          "7": "Every 7th month",
+          "8": "Every 8th month",
+          "9": "Every 9th month",
+          "10": "Every 10th month",
+          "11": "Every 11th month",
+          "12": "Every 12th month",
+          "13": "Every 18th month",
+          "14": "Every 24th month",
+          "15": "Every 36th month",
+          "16": "Every 48th month"
+        },
+        "YEARLY": {
+          "1": "Every year",
+          "2": "Every other year",
+          "3": "Every 3rd year",
+          "4": "Every 4th year",
+          "5": "Every 5th year",
+          "6": "Every 6th year",
+          "7": "Every 7th year",
+          "8": "Every 8th year",
+          "9": "Every 9th year",
+          "10": "Every 10th year"
+        }
+      },
+      "REPEAT": {
+        "0": "Repeat Forever",
+        "1": "Until",
+        "2": "Occurrence(s)"
+      }
+    }
+  },
+  "UI_NETWORK_ADMIN": {
+    "LEADERBOARD": {
+      "FIELDS": {
+        "STARTDATE": {
+        	"TITLE": "Start Date",
+        	"DESC": "The date on which this leaderboard should start."
+        },
+        "BYMONTH": {
+          "TITLE": "Month",
+          "PLACE": "E.g. January or June",
+          "DESC": "Select the month(s) that the leaderboard should run, if only certain month(s) are required."
+        },
+        "BYDAY": {
+          "TITLE": "Days",
+          "PLACE": "E.g. Sundays and Mondays",
+          "DESC": "Select the weekdays that the leaderboard should run, if only certain days are required."
+        },
+        "DURATIONPERIOD": {
+          "TITLE": "Duration",
+          "PLACE": "E.g. 2"
+        },
+        "DURATIONGRANULARITY": {
+          "TITLE": "Duration Period"
+        },
+        "FREQ": {
+          "TITLE": "Frequency",
+          "PLACE": "E.g. Daily",
+          "DESC": "The frequency at which this leaderboard should run. Can be further customized once this field is defined."
+        },
+        "INTERVAL": {
+          "TITLE": "Interval",
+          "PLACE": "E.g. Every other day",
+          "DESC": "The interval at which this leaderboard should run. E.g. if 'Daily' is chosen in frequency, then this field can be used to select every 2nd/3rd day."
+        },
+        "RECURRENCEPATTERN": {
+          "TITLE": "RRule",
+          "PLACE": "E.g. FREQ=WEEKLY;INTERVAL=2;BYDAY=MO,FR;COUNT=5",
+          "DESC": "Edit options will be enabled soon, for now, please visit https://icalendar.org/rrule-tool.html to build your rule.",
+          "EXAMPLE": "every {{interval}} {{freq}} for {{count}} time(s)"
+        },
+        "OCCURRENCE": {
+          "TITLE": "Occurrence",
+          "PLACE": "E.g. Repeat forever",
+          "DESC": "Until when should this leaderboard configuration be active.",
+          "UNTIL": {
+            "TITLE": "Until",
+            "PLACE": "E.g. 2019/09/10",
+            "DESC": "The date until when this leaderboard should run."
+          },
+          "NR": {
+            "TITLE": "Number",
+            "PLACE": "E.g. 5",
+            "DESC": "The amount of times this leaderboard should run." 
+          }
+        }
+      }
+    }
+  }
+}

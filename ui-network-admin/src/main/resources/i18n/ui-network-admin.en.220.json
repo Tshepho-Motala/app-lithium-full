@@ -1,0 +1,34 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "CHANGELOGS": {
+      "GLOBAL": {
+        "FIELDS": {
+          "COMMENTS": "Text"
+        }
+      }
+    },
+    "USER": {
+      "FIELDS": {
+        "STATUS": {
+          "COMMENT": {
+            "NAME": "Text"
+          }
+        }
+      }
+    },
+    "PLAYER": {
+      "ACCOUNTING": {
+        "BALANCEADJUST": {
+          "FIELDS": {
+            "COMMENT": {
+              "LABEL": "Text"
+            }
+          }
+        }
+      }
+    },
+    "COMMENTS": {
+      "COMMENT": "Text"
+    }
+  }
+}

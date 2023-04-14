@@ -1,0 +1,17 @@
+server.port: 9799
+
+ribbon:
+  ReadTimeout: 30000
+  ConnectTimeout: 30000
+  
+spring:
+  thymeleaf:
+    cache: false
+
+lithium:
+  service:
+    cashier:
+      mock:
+        cc:
+          qwipi:
+            md5-key: A28AKL29172KJ

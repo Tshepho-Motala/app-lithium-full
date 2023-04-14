@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"/>
+
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet"/>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css"/>
+	<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/additional-methods.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
+	<script src="https://cdn.safecharge.com/safecharge_resources/v1/websdk/safecharge.js"></script>
+
+
+	<style type="text/css">
+		label {
+			width: 100%;
+		}
+		.input-field label {
+			font-size: 0.8rem;
+			-webkit-transform: translateY(-140%);
+			-moz-transform: translateY(-140%);
+			-ms-transform: translateY(-140%);
+			-o-transform: translateY(-140%);
+			transform: translateY(-140%);
+		}
+		input[type='number'] {
+			-moz-appearance:textfield;
+		}
+
+		input::-webkit-outer-spin-button,
+		input::-webkit-inner-spin-button {
+			-webkit-appearance: none;
+		}
+	</style>
+</head>
+
+<body style="font-family: 'Roboto', sans-serif;" class="grey lighten-3">
+<div id="main" style="width: 100vw; height: 100vh; display: flex; flex-direction: column; justify-content: space-between; align-items: center;">
+
+	<div></div>
+
+	<div class="container">
+
+		<div class="hide" id="viewIframe" style="display: flex; flex-direction: column; align-items: center;">
+			<div id="loading" style="display: flex; flex-direction: column; align-items: center">
+				<span><i class="fa fa-circle-o-notch fa-spin" style="font-size:72px"></i></span>
+			</div>
+		</div>
+
+		<div class="card" id="viewInput">
+			<div class="card-content">
+				<span class="card-title">Nuvei deposit</span>
+				<br/>
+				<div class="row">
+					<div class="col s10 m5">
+						<label for="scenario">Scenario. You have to type in card number.</label>
+						<select id="scenario" onchange="setScenario(this);" style="display: block;">
+							<option value="5333300989521936;John Doe;100">non 3D Success(5333300989521936)</option>
+							<option value="4000023104662535;John Doe;100">non 3D Success(4000023104662535)</option>
+							<option value="5333305783303555;John Doe;100">non 3D Success(5333305783303555)</option>
+							<option value="2221008123677736;CL-BRW2;151">3D v2 Challenge(2221008123677736)</option>
+							<option value="4000020951595032;CL-BRW1;500">3D v2 Challenge(4000020951595032)</option>
+							<option value="4407106439671112;john smith;152">3D v1 Fallback(4407106439671112)</option>
+							<option value="4000027891380961;FL-BRW1;500">3D v2 Frictionless(4000027891380961)</option>
+							<option value="4008370896662369;John Doe;100">Declined(4008370896662369)</option>
+							<option value="4008384424370890;John Doe;100">Insufficient Funds(4008384424370890)</option>
+							<option value="4021937195658141;CL-BRW1;500">Challenge Soft Decline(4021937195658141)</option>
+						</select>
+					</div>
+				</div>
+				<span id="card-selected">5333300989521936</span>
+				<form id="payment-form" action="/service-cashier-frontend-nuvei-cc/deposit/do" method="POST">
+					<br/>
+					<p>Card details</p>
+					<br/>
+					<div class="row">
+						<div class="input-field col s10 m5">
+							<input placeholder="amount" id="amount" name="amount" class="validate" value="100"/>
+							<label for="amount">Amount</label>
+						</div>
+					</div>
+					<div class="row">
+						<div class="input-field col s10 m5">
+							<div id="card-number" class="input"></div>
+							<label for="card-number" data-tid="scwsdk.form.card_number_label">
+								Card number
+							</label>
+						</div>
+						<div class="input-field col s2 m1">
+							<div id="card-cvc" class="input empty"></div>
+							<label for="card-cvc" data-tid="scwsdk.form.card_cvc_label">
+								CVC
+							</label>
+						</div>
+						<div class="input-field col s6 m2">
+							<div id="card-expiry" class="input empty"></div>
+							<label for="card-expiry" data-tid="scwsdk.form.card_expiry_label">
+								Expiration
+							</label>
+						</div>
+						<div class="input-field col s10 m5">
+							<input placeholder="name" id="nameoncard" name="nameoncard" type="text" value="John Doe" required="true"/>
+							<label for="nameoncard">Name on your card</label>
+						</div>
+						<input id="sessionToken" name="sessionToken" th:value="${model.sessionToken}" type="hidden"/>
+						<input id="ccTempToken" name="ccTempToken" type="hidden"/>
+						<input id="javaEnabled" name="javaEnabled" type="hidden"/>
+						<input id="javaScriptEnabled" name="javaScriptEnabled" type="hidden"/>
+						<input id="colorDepth" name="colorDepth" type="hidden"/>
+						<input id="screenHeight" name="screenHeight" type="hidden"/>
+						<input id="screenWidth" name="screenWidth" type="hidden"/>
+						<input id="timeZone" name="timeZone" type="hidden"/>
+					</div>
+				</form>
+				<div class="input-field col s12">
+					<button onclick="main()">Submit</button>
+					<!--button class="btn waves-effect waves-light" type="submit" id="pay-button" name="action">Submit</button-->
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<div></div>
+
+</div>
+
+<script th:inline="javascript">
+	//<![CDATA[
+	var merchantId = [[${model.merchantId}]];
+	var merchantSiteId = [[${model.merchantSiteId}]];
+	var sessionToken = [[${model.sessionToken}]];
+	var environment = [[${model.env}]];
+
+	var sfc = SafeCharge({
+		env: environment, // Nuvei API environment - 'int' (integration) or 'prod' (production - default if omitted)
+		merchantId: merchantId, // your Merchant ID provided by Nuvei
+		merchantSiteId: merchantSiteId, // your Merchant Site ID provided by Nuvei
+		sessionToken: sessionToken
+	});
+
+	var ScFields = sfc.fields({
+		fonts: [
+			{cssUrl: 'https://fonts.googleapis.com/css?family=Roboto'}, // include your custom fonts
+		]
+	});
+
+	var ScFieldStyles = {
+		base: {
+			color: '#32325D',
+			fontWeight: 500,
+			fontFamily: 'Roboto, Consolas, Menlo, monospace',
+			fontSize: '16px',
+			fontSmoothing: 'antialiased',
+			'::placeholder': {
+				color: '#CFD7DF',
+			},
+			':-webkit-autofill': {
+				color: '#e39f48',
+			},
+		},
+		invalid: {
+			color: '#E25950',
+			'::placeholder': {
+				color: '#FFCCA5',
+			},
+		},
+	};
+	var ScFieldClasses = {
+		focus: 'focused',
+		empty: 'empty',
+		invalid: 'invalid',
+		complete: 'complete',
+	};
+
+	var scard = ScFields.create('ccNumber', {
+		style: ScFieldStyles,
+		classes: ScFieldClasses,
+	});
+	scard.attach('#card-number');
+
+	var cardExpiry = ScFields.create('ccExpiration', {
+		style: ScFieldStyles,
+		classes: ScFieldClasses,
+	});
+	cardExpiry.attach('#card-expiry');
+
+	var cardCvc = ScFields.create('ccCvc', {
+		style: ScFieldStyles,
+		classes: ScFieldClasses,
+	});
+	cardCvc.attach('#card-cvc');
+
+	this.setScenario = function(obj) {
+		var scenarioData = obj.value.split(';');
+		$('#card-selected').text(scenarioData[0]);
+		$('#nameoncard').val(scenarioData[1]);
+		$form.find('#amount').val(scenarioData[2]);
+	}
+
+	var $form = $('#payment-form');
+
+	this.main = function() {
+		sfc.getToken(scard).then(function(result) {
+			if (result.status === 'SUCCESS') {
+				console.log("Card token: ", result.ccTempToken);
+				$form.find('#ccTempToken').val(result.ccTempToken);
+				$form.find('#javaEnabled').val(window.navigator.javaEnabled());
+				$form.find('#javaScriptEnabled').val("true");
+				$form.find('#colorDepth').val(screen.colorDepth);
+				$form.find('#screenHeight').val(screen.height);
+				$form.find('#screenWidth').val(screen.width);
+				var date = new Date();
+				$form.find('#timeZone').val(date.getTimezoneOffset());
+				$form.submit();
+			} else {
+				console.log("getToken result: ", result)
+			}
+		});
+	}
+	//]]>
+</script>
+
+</body>
+</html>

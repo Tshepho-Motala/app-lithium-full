@@ -1,0 +1,68 @@
+{
+  "name": "eMerchant-wpf",
+  "code": "emerchant-wpf",
+  "url": "service-cashier-processor-emerchant",
+  "methodNames": ["emerchant-wpf"],
+  "deposit": true,
+  "withdraw": false,
+  "fees": {
+    "flat": 0,
+    "percentage": 0,
+    "minimum": 0
+  },
+  "limits": {
+    "minAmount": 5000,
+    "maxAmount": 0,
+    "maxAmountDay": 0,
+    "maxAmountWeek": 0,
+    "maxAmountMonth": 0,
+    "maxTransactionsDay": 0,
+    "maxTransactionsWeek": 0,
+    "maxTransactionsMonth": 0
+  },
+  "properties": [
+    { 
+      "name": "environment",
+      "defaultValue": "STAGING",
+      "type": "string",
+      "description": "STAGING / PRODUCTION"
+    },
+    {
+      "name": "transactiontypes",
+      "defaultValue": "sale,sale3d",
+      "type": "string",
+      "description": "WPF transaction types (csv for multiple types) https://emerchantpay.github.io/gateway-api-docs/#wpf-transaction-types"
+    },
+    {
+      "name": "username",
+      "defaultValue": "9e9181eb920cefe5324cfc610266b40bb975328b",
+      "type": "string",
+      "description": "The processor supplied username."
+    },
+    { 
+      "name": "password",
+      "defaultValue": "08b517274dc77195e5b881ae3e6461e51d13691a",
+      "type": "string",
+      "description": "The processor supplied password."
+    },
+    { 
+      "name": "token",
+      "defaultValue": "",
+      "type": "string",
+      "description": "Terminal token and login credentials can be found in your admin panel."
+    },
+    {
+      "name": "callbackUrl",
+      "defaultValue": "/service-cashier/external/callback/do/emerchant-wpf/b8067069fe8cca546f641eee67581cb9810a3f84/",
+      "type": "string",
+      "description": "This is the url that should be called from the processor side. The hash is the processor service name sha1."
+    },
+    {
+      "name": "iframelocation",
+      "defaultValue": "cashier_iframe_content",
+      "type": "string",
+      "description": "The cashier html document element name where the iframe should open. (_blank or cashier_iframe_content usually)"
+    }
+
+  ]
+}

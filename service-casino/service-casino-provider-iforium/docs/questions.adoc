@@ -1,0 +1,32 @@
+= Questions / Issues
+
+== General
+
+//* *[LITHIUM]* - is IP whitelisting the most appropriate means of controlling access?
+
+== Balance Retrieval
+
+* *[LITHIUM]* - Does Lithium support game-specific balances?
+
+* *[LITHIUM]* - Does Lithium support bonus balances? Funds priority?
+
+* *[LITHIUM]* - There's a very odd line of code in https://gitlab.com/playsafe/lithium/app-lithium-full/-/blob/develop/service-casino/service-casino/src/main/java/lithium/service/casino/service/CasinoService.java#L122[CasinoService] that returns a zero balance when a use is not found - why??
+
+== Temp Session Token
+
+//* *[IFORIUM]* - Can iForium handle a temp token longer than `String[50]` ?
+//** _If so, we can use a JWT_
+
+//* *[IFORIUM]* - Does iForium support forward slashes in `OperatorAccountId`?
+
+//* *[LITHIUM]* - Does Lithium support direct access to Hazelcast?
+//** _If so, we can generate a UUID and store a mappinng in a short-TTL cache_
+
+* *[IFORIUM]* - Are the Result or SessionToken elements required for a non-zero ErrorCode?
+
+//* *[LITHIUM]* - Is it possible to _force_ the value of the player portion of the `uid`? i.e. `input` -> domain/`input`
+//** It _may_ be possibly to leverage the GUID Strategy...
+
+== Session Redemption
+
+* *[LITHIUM]* - There is no obvious scenario where we would return an ErrorCode of `-4` (Account Frozen The account has been suspended / frozen by the Operator Wallet). Need to understand if this will be available at redemption or surfaced during transactions.

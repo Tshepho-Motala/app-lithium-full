@@ -1,0 +1,21 @@
+<div class="container-fluid">
+    <lit-header
+            title="GoGame Game Win Distributions"
+            description="A searchable list of GoGame Win Distribution Tests">
+    </lit-header>
+
+    <button-bar>
+        <button-add lit-if-permission="GOGAMEGAMES_WINDISTRIBUTIONS_EDIT" ui-sref="^.add""></button-add>
+        <button-refresh ng-click="controller.refresh()"></button-refresh>
+    </button-bar>
+
+    <div class="row v-reset-row ">
+        <div class="col-xs-12">
+            <div class="box">
+                <div class="box-body no-padding table-responsive">
+                    <dt table="controller.gogameWinDistributionsTable"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

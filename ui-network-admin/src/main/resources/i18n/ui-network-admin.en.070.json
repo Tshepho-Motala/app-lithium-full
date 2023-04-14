@@ -1,0 +1,176 @@
+{
+	"GLOBAL": {
+		"BONUS": {
+			"TYPE": {
+				"TRIGGER": {
+					"5": "Reward"
+				}
+			}
+		}
+	},
+	"UI_NETWORK_ADMIN": {
+		"BONUS": {
+			"TRIGGER": {
+				"TYPE": {
+					"4": "XP",
+					"5": "Reward"
+				}
+			}
+		},
+		"MISSIONS": {
+			"CHALLENGE": {
+				"MODIFY": {
+					"SUCCESS": "Successfully modified challenge",
+					"ERROR": "Could not modify challenge"
+				},
+				"ADD": {
+					"SUCCESS": "Successfully added challenge",
+					"ERROR": "Could not add challenge"
+				},
+				"REMOVE": {
+					"SUCCESS": "Successfully removed challenge",
+					"ERROR": "Could not remove challenge"
+				}
+			},
+			"CHALLENGERULE": {
+				"ADDRULE": "Add Rule",
+				"MODIFY": {
+					"SUCCESS": "Successfully modified challenge rule",
+					"ERROR": "Could not modify challenge rule"
+				},
+				"ADD": {
+					"SUCCESS": "Successfully added challenge rule",
+					"ERROR": "Could not add challenge rule"
+				},
+				"REMOVE": {
+					"SUCCESS": "Successfully removed challenge rule",
+					"ERROR": "Could not remove challenge rule"
+				}
+			},
+			"BOXES": {
+				"MISSIONDETAILS": "Mission Details",
+				"MISSIONREWARD": "Mission Reward",
+				"MISSIONCHALLENGES": "Mission Challenges"
+			},
+			"LIST": {
+				"TITLE": "Missions",
+				"DESCRIPTION": "A searchable list of missions"
+			},
+			"ADD": {
+				"TITLE": "Add a Mission",
+				"DESCRIPTION": "Use the controls below to configure a mission",
+				"SUCCESS": "The mission was created successfully",
+				"ERROR": "The mission could not be created"
+			},
+			"ADDCHALLENGE": {
+				"TITLE": "Add a Challenge",
+				"DESCRIPTION": "An individual based competition within this mission that the player must accomplish"
+			},
+			"ADDCHALLENGERULE": {
+				"TITLE": "Add a Challenge Rule"
+			},
+			"VIEW": {
+				"TITLE": "View Mission",
+				"DESCRIPTION": "Viewing a Mission"
+			},
+			"EDIT": {
+				"TITLE": "Edit Mission",
+				"DESCRIPTION": "Editing a Mission",
+				"SUCCESS": "The mission was edited successfully",
+				"ERROR": "The mission could not be updated"
+			},
+			"FIELDS": {
+				"DOMAIN": {
+					"NAME": "Domain",
+					"DESCRIPTION": "The domain that you are creating the mission for",
+					"CHANGED": "Domain change detected. If set, mission and challenge rewards, as well as challenge rules will be removed as they were set for the previous domain"
+				},
+				"TYPE": {
+					"NAME": "Type",
+					"DESCRIPTION": "Select the type of mission you are creating, a sequential, or date driven mission"
+				},
+				"SEQUENCENUMBER": {
+					"NAME": "Sequence Number",
+					"DESCRIPTION": "The mission sequence number"
+				},
+				"STARTDATE": {
+					"NAME": "Start Date",
+					"DESCRIPTION": "Choose the mission start date"
+				},
+				"ENDDATE": {
+					"NAME": "End Date",
+					"DESCRIPTION": "Choose the mission end date"
+				},
+				"PRIORITY": {
+					"NAME": "Priority"
+				},
+				"MISSIONREWARD": {
+					"NAME": "Mission Reward",
+					"DESCRIPTION": "The overall mystery reward for accomplishing all challenges within this Mission"
+				},
+				"CHALLENGE": {
+					"NOTSETUP": "No challenges set up yet.",
+					"DESCRIPTION": {
+						"NAME": "Description",
+						"DESCRIPTION": "A short description of the challenge"
+					},
+					"ICON": {
+						"NAME": "Icon",
+						"DESCRIPTION": "Title icon of the challenge"
+					},
+					"CHALLENGEREWARD": {
+						"NAME": "Challenge Reward",
+						"DESCRIPTION": "The reward for completing this challenge",
+						"REWARDLABEL": "REWARD: {{challengeReward}}",
+						"NOTSETUPLABEL": "NO REWARD SET UP"
+					},
+					"CHALLENGERULES": {
+						"NAME": "Challenge Rules",
+						"DESCRIPTION": "The set of rules for achieving the challenge",
+						"RULESLABEL": "RULES: {{rules}}",
+						"NOTSETUPLABEL": "NO RULES SET UP",
+						"NOTSETUP": "No challenge rules set up yet",
+						"RULE": {
+							"TYPE": "Type",
+							"ACTION": "Action",
+							"IDENTIFIER": "Identifier",
+							"VALUE": "Value",
+							"EXPLANATION": "Explanation",
+							"EXPLAIN": {
+								"CASINO": {
+									"SPIN": {
+										"GAME": "{{val}} spin(s) on {{gameName}}",
+										"ANY": "Spin any slot {{val}} time(s)"
+									},
+									"WIN": {
+										"GAME": "Win on {{val}} spin(s) on {{gameName}}",
+										"ANY": "Win on {{val}} spin(s) on any slot"
+									},
+									"PLAY": {
+										"GAME": "Play {{gameName}} at least {{val}} time(s)",
+										"ANY": "Play {{val}} games at least 1 time"
+									},
+									"BONUSROUND": {
+										"GAME": "Hit {{val}} bonus round(s) on {{gameName}}",
+										"ANY": "Hit {{val}} bonus round(s) on any slot"
+									}
+								},
+								"XP": {
+									"LEVEL": "Achieve {{val}} new XP level(s)",
+									"POINTS": "Earn {{val}} XP point(s)"
+								},
+								"USER": {
+									"LOGIN": "Log in {{val}} time(s) in one day"
+								},
+								"RAF": {
+									"REFERRAL": "Refer {{val}} friends",
+									"CONVERSION": "{{val}} referred friend conversion(s)"
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

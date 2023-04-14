@@ -1,0 +1,54 @@
+{
+	"GLOBAL": {
+		"GRANULARITIES": {
+			"1": "Years",
+			"2": "Months",
+			"3": "Days",
+			"4": "Weeks",
+			"5": "Total"
+		},
+		"BONUS": {
+			"TYPE": {
+				"TRIGGER": {
+					"9": "Hourly"
+				}
+			}
+		}
+	},
+	"UI_NETWORK_ADMIN": {
+		"LEADERBOARD": {
+			"CONVERSION": {
+				"EXPLAIN": {
+					"1": "For each hand played, using the current conversion rate chosen ({{conversion}}), {{score}} will be counted towards the score.",
+					"2": "If a win of $100 is received, using the current conversion rate chosen ({{conversion}}), {{score}} will be counted towards the score.",
+					"3": "If total play is $1, using the current conversion rate chosen ({{conversion}}), {{score}} will be counted towards the score."
+				}
+			},
+			"FIELDS": {
+				"RUNNING": {
+					"TITLE": "Running"
+				},
+				"REQUIREMENTS": {
+					"XPLEVEL": "XP Group",
+					"XPHISTORY": "Lookback Period"
+				},
+				"XPPOINTSMIN": {
+					"TITLE": "XP Points Min",
+					"PLACE": "E.g. 100"
+				},
+				"XPPOINTSMAX": {
+					"TITLE": "XP Points Max",
+					"PLACE": "E.g. 249"
+				},
+				"XPPOINTSPERIOD": {
+					"TITLE": "In the last",
+					"PLACE": "E.g. 2"
+				},
+				"XPPOINTSGRANULARITY": {
+					"TITLE": "XP Points Gained Period"
+				}
+			},
+			"XPPOINTSREQUIREDEXPLAIN": "E.g. To be eligible for this leaderboard, player needed to have earned between {{min}} and {{max}} xp points in the last {{last}} {{period | lowercase}}"
+		}
+	}
+}

@@ -1,0 +1,21 @@
+Nuvei Backoffice:
+url: https://sandbox.safecharge.com/
+user: rahul.das@livescore.com
+
+Documentation:
+https://docs.safecharge.com/documentation/accept-payment/web-sdk/quick-start/nuvei-fields-stylizing/
+https://docs.safecharge.com/documentation/guides/testing/testing-apis-with-postman/    (postman collections)
+
+Use "Nuvei API" {{gateway}}/service-cashier-frontend-nuvei-cc/deposit page to make initial Nuvei deposit entering card detailes
+Use {{gateway}}/service-cashier-frontend-nuvei-cc/quickdeposit page to make deposit using stored processor account
+Use test cards for the different scenarios from https://docs.safecharge.com/documentation/guides/testing/testing-cards/
+Note: Authorization header should be provided to access nuvei test frontend page. Use ModHeader chrome plugin with filter {{gateway}}/service-cashier-frontend-nuvei-cc/*
+
+
+//Withdraw
+Get the processor account stored after successful initial deposit.
+Use "LITIUM Withdraw" api from the postman collection with returned processorAccountId to make payout. Note not all of the test cards support successful payout.
+
+
+
+

@@ -1,0 +1,13 @@
+package lithium.service.user.threshold.service;
+
+import lithium.exceptions.Status500InternalServerErrorException;
+import lithium.service.accounting.objects.CompleteSummaryAccountTransactionTypeDetail;
+
+public interface LimitService {
+
+  void processCashierEvent(CompleteSummaryAccountTransactionTypeDetail completeSummaryAccountTransactionTypeDetail)
+  throws Status500InternalServerErrorException;
+
+  void processLossLimitEvent(CompleteSummaryAccountTransactionTypeDetail completeSummaryAccountTransactionTypeDetail)
+  throws Status500InternalServerErrorException;
+}

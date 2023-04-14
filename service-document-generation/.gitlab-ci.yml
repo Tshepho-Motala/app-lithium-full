@@ -1,0 +1,203 @@
+.job_template: &createdockerimages
+  stage: createdockerimages
+  image: registry.gitlab.com/playsafe/docker/maven-docker-builder:openjdk17
+  cache:
+    key: app-lithium-full-maven-cache-no-lithium
+    paths:
+      - repository
+  except:
+    - develop
+    - schedules
+  services:
+    - docker:dind
+
+.job_template: &createdockerimages_all
+  stage: createdockerimages
+  image: registry.gitlab.com/playsafe/docker/maven-docker-builder:openjdk17
+  when: manual
+  cache:
+    key: app-lithium-full-maven-cache-no-lithium
+    paths:
+      - repository
+  except:
+    - develop
+    - schedules
+  services:
+    - docker:dind
+  only:
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /\[all\]/
+
+.job_template: &deploy
+  stage: deploy
+  image: registry.gitlab.com/playsafe/docker/lithium-deployer:latest
+  environment:
+    name: $CI_COMMIT_REF_NAME
+  except:
+    - develop
+    - schedules
+  # only:
+  #   refs:
+  #     - /^environment/.*$/
+
+.job_template: &deploy_all
+  stage: deploy
+  image: registry.gitlab.com/playsafe/docker/lithium-deployer:latest
+  when: manual
+  environment:
+    name: $CI_COMMIT_REF_NAME
+  # except:
+  #   - develop
+  #   - schedules
+  only:
+    refs:
+      - /^environment/.*$/
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /\[all\]/
+
+svc-document-generation:createdockerimage:
+  <<: *createdockerimages
+  script: "sh build/gitlab/build-image.sh svc-document-generation service-document-generation/service-document-generation"
+  only:
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /\[service-document-generation\]/
+
+svc-document-generation:createdockerimage_all:
+  <<: *createdockerimages_all
+  script: "sh build/gitlab/build-image.sh svc-document-generation service-document-generation/service-document-generation"
+
+svc-document-generation:deploy:
+  <<: *deploy
+  script: "bash build/gitlab/deploy.sh svc-document-generation"
+  only:
+    refs:
+      - /^environment/.*$/
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /\[service-document-generation\]/
+
+svc-document-generation:deploy_all:
+  <<: *deploy_all
+  script: "bash build/gitlab/deploy.sh svc-document-generation"
+
+svc-csv-pr-mail:createdockerimage:
+  <<: *createdockerimages
+  script: "sh build/gitlab/build-image.sh svc-csv-pr-mail service-document-generation/service-csv-provider-mail"
+  only:
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /\[service-csv-provider-mail\]/
+
+svc-csv-pr-mail:createdockerimage_all:
+  <<: *createdockerimages_all
+  script: "sh build/gitlab/build-image.sh svc-csv-pr-mail service-document-generation/service-csv-provider-mail"
+
+svc-csv-pr-mail:deploy:
+  <<: *deploy
+  script: "bash build/gitlab/deploy.sh svc-csv-pr-mail"
+  only:
+    refs:
+      - /^environment/.*$/
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /\[service-csv-provider-mail\]/
+
+svc-csv-pr-mail:deploy_all:
+  <<: *deploy_all
+  script: "bash build/gitlab/deploy.sh svc-csv-pr-mail"
+  
+svc-csv-pr-cashier-transactions:createdockerimage:
+  <<: *createdockerimages
+  script: "sh build/gitlab/build-image.sh svc-csv-pr-cashier-transactions service-document-generation/service-csv-provider-cashier-transactions"
+  only:
+    variables:
+    - $CI_COMMIT_MESSAGE =~ /\[service-csv-provider-cashier-transactions\]/
+
+svc-csv-pr-cashier-transactions:createdockerimage_all:
+  <<: *createdockerimages_all
+  script: "sh build/gitlab/build-image.sh svc-csv-pr-cashier-transactions service-document-generation/service-csv-provider-cashier-transactions"
+
+svc-csv-pr-cashier-transactions:deploy:
+  <<: *deploy
+  script: "bash build/gitlab/deploy.sh svc-csv-pr-cashier-transactions"
+  only:
+    refs:
+    - /^environment/.*$/
+    variables:
+    - $CI_COMMIT_MESSAGE =~ /\[service-csv-provider-cashier-transactions\]/
+
+svc-csv-pr-cashier-transactions:deploy_all:
+  <<: *deploy_all
+  script: "bash build/gitlab/deploy.sh svc-csv-pr-cashier-transactions"
+
+#### service-csv-provider-threshold
+svc-csv-pr-threshold:createdockerimage:
+  <<: *createdockerimages
+  script: "sh build/gitlab/build-image.sh svc-csv-pr-threshold service-document-generation/service-csv-provider-threshold"
+  only:
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /\[service-csv-provider-threshold\]/
+
+svc-csv-pr-threshold:createdockerimage_all:
+  <<: *createdockerimages_all
+  script: "sh build/gitlab/build-image.sh svc-csv-pr-threshold service-document-generation/service-csv-provider-threshold"
+
+svc-csv-pr-threshold:deploy:
+  <<: *deploy
+  script: "bash build/gitlab/deploy.sh svc-csv-pr-threshold"
+  only:
+    refs:
+      - /^environment/.*$/
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /\[service-csv-provider-threshold\]/
+
+svc-csv-pr-threshold:deploy_all:
+  <<: *deploy_all
+  script: "bash build/gitlab/deploy.sh svc-csv-pr-threshold"
+
+#### service-csv-provider-casino
+svc-csv-pr-casino:createdockerimage:
+  <<: *createdockerimages
+  script: "sh build/gitlab/build-image.sh svc-csv-pr-casino service-document-generation/service-csv-provider-casino"
+  only:
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /\[service-csv-provider-casino\]/
+
+svc-csv-pr-casino:createdockerimage_all:
+  <<: *createdockerimages_all
+  script: "sh build/gitlab/build-image.sh svc-csv-pr-casino service-document-generation/service-csv-provider-casino"
+
+svc-csv-pr-casino:deploy:
+  <<: *deploy
+  script: "bash build/gitlab/deploy.sh svc-csv-pr-casino"
+  only:
+    refs:
+      - /^environment/.*$/
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /\[service-csv-provider-casino\]/
+
+svc-csv-pr-casino:deploy_all:
+  <<: *deploy_all
+  script: "bash build/gitlab/deploy.sh svc-csv-pr-casino"
+
+#### service-csv-provider-user
+svc-csv-pr-user:createdockerimage:
+  <<: *createdockerimages
+  script: "sh build/gitlab/build-image.sh svc-csv-pr-user service-document-generation/service-csv-provider-user"
+  only:
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /\[service-csv-provider-user\]/
+
+svc-csv-pr-user:createdockerimage_all:
+  <<: *createdockerimages_all
+  script: "sh build/gitlab/build-image.sh svc-csv-pr-user service-document-generation/service-csv-provider-user"
+
+svc-csv-pr-user:deploy:
+  <<: *deploy
+  script: "bash build/gitlab/deploy.sh svc-csv-pr-user"
+  only:
+    refs:
+      - /^environment/.*$/
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /\[service-csv-provider-user\]/
+
+svc-csv-pr-user:deploy_all:
+  <<: *deploy_all
+  script: "bash build/gitlab/deploy.sh svc-csv-pr-user"

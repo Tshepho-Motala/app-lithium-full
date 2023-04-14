@@ -1,0 +1,74 @@
+.CRUKS Failed Attempt Retry
+[plantuml]
+----
+@startuml
+
+participant "FailedAttemptRetryJob" as job
+participant "FailedAttemptService" as svc
+database failed_attempt
+participant "svc-user" as su
+participant "svc-domain" as sd
+boundary sphonic
+boundary log
+
+autonumber
+
+job -> svc: initialize retry job
+activate svc
+    svc -> svc: get provider properties
+    svc -> failed_attempt: get jobs is less than or equal to the backoff-threshold and total of batch-attempts
+    alt Attempts were found in table
+        failed_attempt --> svc: return with list of attempts
+    else no attempts found
+        failed_attempt --> svc: return with empty list
+        svc -> svc: abandon retry process
+    end
+
+    loop iterate over found list
+        svc -> sphonic: get access token
+        activate sphonic
+            sphonic --> svc: accessToken
+        deactivate sphonic
+        svc -> su: find user by GUID
+        activate su
+            alt search for user
+                su --> svc: found user
+            else
+                su --> svc: user not found / service user unavailable
+                svc -> svc: abandon retry process
+                svc -> log: log error message
+            end
+        deactivate su
+
+        svc -> sd: get configuration by user domain
+        activate sd
+            alt request for domain provider configuration
+            sd --> svc: configuration found
+            else
+            sd --> svc: Provider not configured / service domain is unavailable
+            svc -> svc: abandon retry process
+            svc -> log: log error message
+            end
+        deactivate
+
+        svc -> svc: build request for LoginConnection
+        svc -> sphonic: call LoginConnection API
+        activate sphonic
+            alt Sphonic login response
+            sphonic --> svc: cruksResult: NONE / cruksResult: ERROR
+            svc -> svc: Update last_failure_message, last_attempted_at and total_attempts
+            svc -> failed_attempt: update attempt
+                alt check last attempt is equal or greater than error-logging-threshold
+                svc -> log: log error message
+                else
+                svc -> log: log warning message
+                end
+            else
+            sphonic --> svc: cruksResult: INVALID / cruksResult: FAIL / cruksResult: PASS
+            svc -> failed_attempt: delete attempt
+            end
+        deactivate sphonic
+
+    end
+deactivate svc
+@enduml

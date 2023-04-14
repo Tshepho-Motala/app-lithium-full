@@ -1,0 +1,2 @@
+ALTER TABLE `verification_result`
+    ADD COLUMN `bvn_uid` VARCHAR(255) NULL DEFAULT NULL AFTER `method_type_uid`, ALGORITHM=INPLACE, LOCK=NONE;

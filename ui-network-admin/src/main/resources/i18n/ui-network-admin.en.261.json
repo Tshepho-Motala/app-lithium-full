@@ -1,0 +1,22 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "GAME": {
+      "FIELDS": {
+        "CASINO_FREE_BET_ENABLED": {
+          "NAME": "Casino Free Bet Enabled",
+          "DESCRIPTION": "Is the game enabled for Casino Free Bet Rewards"
+        }
+      }
+    },
+    "BONUS": {
+      "EDIT": {
+        "CASINO_FREE_BET": {
+          "CASINO_FREE_BET_VALUE": "Casino Free Bet Value In Pounds",
+          "CASINO_FREE_BET_VALUE_EXAMPLE": "Description",
+          "CASINO_FREE_BET_VALUE_ENABLED_EXPLAIN": "Game requires a value in Pounds to be assigned to the Casino Free Bet Reward e.g. 25 would indicate the Bonus Cash Reward is worth 25 Pounds",
+          "CASINO_FREE_BET_VALUE_MISSING": "Please specify Casino Free Bet value in Pounds."
+        }
+      }
+    }
+  }
+}

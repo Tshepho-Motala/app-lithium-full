@@ -1,0 +1,20 @@
+# Naming Conventions Reference
+
+Please ensure that all folders and files are named correctly and accurately describe the work it contains. The name should not be too verbose as to cause unnecessary reading complexity, but also must not be too generic if there is a specific use-case for it.
+
+There are two sets of naming conventions to follow; Kebab-Case and PascalCase.
+
+## Kebab-Case
+
+Use `kebab-case` for any KEY reference, for example, **folder name**s, **string ID**'s, etc.
+
+## PascalCase
+Use `PascalCase`
+
+When creating an interface for a section of work, consider the possibility of other tasks needing to fall under the same section. So don't create interfaces that are named directly after the task, rather give it a more general - but descriptive - name so that there aren't any one-line interfaces.
+
+|===
+|        | Case Name  | Example                        
+| Folder | kebab-case | /src/plugin/player-profile     
+| File   | PascalCase | /src/mock/PlayerProfileMock.ts 
+|===

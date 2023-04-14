@@ -1,0 +1,14 @@
+<div class="modal-header" bs-loading-overlay bs-loading-overlay-reference-id="{{controller.referenceId}}">
+    <div style="justify-content: space-between" class="d-flex">
+        <h3 class="modal-title" id="modal-title">
+            {{'UI_NETWORK_ADMIN.PLAYER.QUICK_ACTIONS.SEND_TEMPLATE.LABEL' | translate}}
+        </h3>
+        <button-close-window ng-click="controller.cancel()"></button-close-window>
+    </div>
+
+</div>
+
+
+<div class="modal-body" id="modal-body">
+    <div id="vueMountMailSendDialog"></div>
+</div>

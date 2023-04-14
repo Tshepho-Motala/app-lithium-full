@@ -1,0 +1,45 @@
+<div class="box box-{{data.box}} box-solid" bs-loading-overlay bs-loading-overlay-reference-id="{{referenceId}}">
+	<div class="box-header with-border">
+		{{data.title | translate}}
+		<div class="box-tools pull-right">
+			<button type="button" class="btn btn-box-tool" ng-click="addPlayerLink(true)" lit-if-permission="PLAYER_LINK_ADD" lit-permission-domain="{{user.domain.name}}">
+				<span ng-if="user[data.type].id"><i class="fa fa-gear"></i> {{ "GLOBAL.ACTION.CHANGE" | translate }} </span>
+				<span ng-if="!user[data.type].id"><i class="fa fa-plus"></i> {{ "GLOBAL.ACTION.ADD" | translate }} </span>
+			</button>
+		</div>
+	</div>
+	<div class="box-body table-responsive">
+		<table datatable="ng" class="table">
+			<thead>
+			<tr>
+				<th>{{'UI_NETWORK_ADMIN.ECOSYSTEMS.TITLE.PRIMARY' | translate}}</th>
+				<th>{{'UI_NETWORK_ADMIN.ECOSYSTEMS.TITLE.SECONDARY' | translate}}</th>
+				<th>{{'UI_NETWORK_ADMIN.ECOSYSTEMS.TITLE.TYPE' | translate}}</th>
+				<th>{{'UI_NETWORK_ADMIN.ECOSYSTEMS.TITLE.COMMENT' | translate}}</th>
+				<th></th>
+				<th></th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr  ng-repeat="link in listByUserData">
+				<td>{{link.primaryUser.guid}}</td>
+				<td>{{link.secondaryUser.guid}}</td>
+				<td>{{link.userLinkType.code}}</td>
+				<td>{{link.linkNote}}</td>
+				<td>
+					<button-modify ng-hide="link.userLinkType.code === 'CROSS_DOMAIN_LINK' || link.userLinkType.code === 'DELETED_ROOT_DOMAIN_LINK'"
+												 lit-if-permission="PLAYER_LINK_EDIT"
+												 lit-permission-domain="{{user.domain.name}}" type="button"
+												 ng-click="updatePlayerLink(link, false)"></button-modify>
+				</td>
+				<td>
+					<button-delete ng-hide="link.userLinkType.code === 'CROSS_DOMAIN_LINK' || link.userLinkType.code === 'DELETED_ROOT_DOMAIN_LINK'" type="button"
+												 lit-if-permission="PLAYER_LINK_DELETE"
+												 lit-permission-domain="{{user.domain.name}}"
+												 ng-click="updatePlayerLink(link, true)"></button-delete>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+</div>

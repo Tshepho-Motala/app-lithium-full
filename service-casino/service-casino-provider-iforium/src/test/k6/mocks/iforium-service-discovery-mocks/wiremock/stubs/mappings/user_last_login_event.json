@@ -1,0 +1,13 @@
+{
+  "request": {
+    "method": "GET",
+    "urlPath": "/system/loginevents/last-login-event"
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "user_last_login_event.json",
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}

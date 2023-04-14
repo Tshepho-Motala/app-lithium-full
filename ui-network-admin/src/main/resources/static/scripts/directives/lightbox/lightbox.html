@@ -1,0 +1,33 @@
+<div class="modal-body" ng-swipe-left="Lightbox.nextImage()" ng-swipe-right="Lightbox.prevImage()">
+	<!-- navigation -->
+	<div class="lightbox-nav" style="margin-bottom: 40px;">
+		<!-- close button -->
+		<button-close-window aria-hidden="true" ng-click="$dismiss()"></button-close-window>
+		<div class="btn-group" ng-if="Lightbox.images.length > 1">
+			<a class="btn btn-xs btn-default" ng-click="Lightbox.prevImage()">‹ Previous </a>
+			<a ng-href="{{Lightbox.imageUrl}}" target="_blank" class="btn btn-xs btn-default" title="Open in new tab"> Open image in new tab </a>
+			<a class="btn btn-xs btn-default" ng-click="Lightbox.nextImage()"> Next › </a>
+		</div>
+	</div>
+	
+	<div class="lightbox-image-container">
+		<div class="lightbox-image-caption">
+			<span>{{Lightbox.imageCaption}}</span>
+		</div>
+		<!-- image -->
+		<div style="background-color: #efefef; box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.16), 0 2px 10px 0 rgba(0, 0, 0, 0.12); padding: 20px;">
+			<img ng-if="!Lightbox.isVideo(Lightbox.image)" lightbox-src="{{Lightbox.imageUrl}}">
+		</div>
+		<!-- video -->
+		<div ng-if="Lightbox.isVideo(Lightbox.image)" class="embed-responsive embed-responsive-16by9">
+			<!-- video file embedded directly -->
+			<video ng-if="!Lightbox.isSharedVideo(Lightbox.image)" lightbox-src="{{Lightbox.imageUrl}}" controls autoplay="true"></video>
+			<!-- video embedded with an external service using `ng-videosharing-embed` -->
+			<embed-video ng-if="Lightbox.isSharedVideo(Lightbox.image)"
+				lightbox-src="{{Lightbox.imageUrl}}" ng-href="{{Lightbox.imageUrl}}"
+				iframe-id="lightbox-video" class="embed-responsive-item">
+				<a ng-href="{{Lightbox.imageUrl}}">Watch video</a>
+			</embed-video>
+		</div>
+	</div>
+</div>

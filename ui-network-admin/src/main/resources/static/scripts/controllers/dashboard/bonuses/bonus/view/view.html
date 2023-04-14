@@ -1,0 +1,413 @@
+<div class="row v-reset-row ">
+	<div class="col-md-12">
+		<div ng-if="controller.bonus.current.id == controller.bonusRevision.id" class="panel box box-success">
+			<div class="box-header with-border">
+				<h4 class="box-title">{{ 'UI_NETWORK_ADMIN.BONUS.VIEW.VIEWCURRENT' | translate }}</h4>
+			</div>
+		</div>
+		<div ng-if="controller.bonus.current.id != controller.bonusRevision.id" class="panel box box-warning">
+			<div class="box-header with-border">
+				<h4 class="box-title">{{ 'UI_NETWORK_ADMIN.BONUS.VIEW.VIEWOLDREVISION' | translate: {bonusRevisionId: controller.bonusRevision.id} }}</h4>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-6">
+		<div class="box box-default box-solid">
+			<div class="box-header with-border">
+				{{ 'UI_NETWORK_ADMIN.BONUS.TITLE.INFO' | translate }}
+			</div>
+			<div class="box-body table-responsive">
+				<table class="table table-bordered">
+				<tr>
+					<th width="40%">{{ "GLOBAL.FIELDS.BONUSID" | translate }}</th>
+					<td>{{ controller.bonus.id }}</td>
+				</tr><tr>
+					<th>{{ "GLOBAL.FIELDS.BONUSCODE" | translate }}</th>
+					<td ng-if="controller.bonusRevision.bonusCode">{{ controller.bonusRevision.bonusCode }}</td>
+					<td ng-if="!controller.bonusRevision.bonusCode"><span class="label label-warning">{{ 'UI_NETWORK_ADMIN.BONUS.NOCODE' | translate | uppercase }}</span></td>
+				</tr><tr>
+					<th>{{ "GLOBAL.FIELDS.BONUSNAME" | translate }}</th>
+					<td>{{ controller.bonusRevision.bonusName }}</td>
+				</tr><tr>
+					<th>{{ "GLOBAL.FIELDS.BONUSTYPE" | translate }}
+						{{controller.bonusRevision.bonusType}}
+					</th>
+					<td>
+						<span ng-if="controller.bonusRevision.bonusType === 0" style="line-height:inherit;" class="label label-warning">{{ 'GLOBAL.BONUS.TYPE.0' | translate | uppercase }}</span>
+						<span ng-if="controller.bonusRevision.bonusType === 1" style="line-height:inherit;" class="label label-success">{{ 'GLOBAL.BONUS.TYPE.1' | translate | uppercase }}</span>
+						<span ng-if="controller.bonusRevision.bonusType === 2" style="line-height:inherit;" class="label label-primary">{{ 'GLOBAL.BONUS.TYPE.2' | translate | uppercase }}</span>
+						<span ng-if="controller.bonusRevision.bonusType === 3" style="line-height:inherit;" class="label label-info">{{ 'GLOBAL.BONUS.TYPE.3' | translate | uppercase }}</span>
+						<span ng-if="controller.bonusRevision.bonusType === 2 && controller.bonusRevision.bonusTriggerType === 0" style="line-height:inherit;" class="label label-default">&nbsp;{{ 'GLOBAL.BONUS.TYPE.TRIGGER.0' | translate | uppercase }}&nbsp;</span>
+						<span ng-if="controller.bonusRevision.bonusType === 2 && controller.bonusRevision.bonusTriggerType === 1" style="line-height:inherit;" class="label label-default">&nbsp;{{ 'GLOBAL.BONUS.TYPE.TRIGGER.1' | translate | uppercase }}&nbsp;</span>
+						<span ng-if="controller.bonusRevision.bonusType === 2 && controller.bonusRevision.bonusTriggerType === 2" style="line-height:inherit;" class="label label-default">&nbsp;{{ 'GLOBAL.BONUS.TYPE.TRIGGER.2' | translate | uppercase }}&nbsp;</span>
+						<span ng-if="controller.bonusRevision.bonusType === 2 && controller.bonusRevision.bonusTriggerType === 3" style="line-height:inherit;" class="label label-default">&nbsp;{{ 'GLOBAL.BONUS.TYPE.TRIGGER.3' | translate | uppercase }}&nbsp;</span>
+						<span ng-if="controller.bonusRevision.bonusType === 2 && controller.bonusRevision.bonusTriggerType === 4" style="line-height:inherit;" class="label label-default">&nbsp;{{ 'GLOBAL.BONUS.TYPE.TRIGGER.4' | translate | uppercase }}&nbsp;</span>
+						<span ng-if="controller.bonusRevision.bonusType === 2 && controller.bonusRevision.bonusTriggerType === 5" style="line-height:inherit;" class="label label-default">&nbsp;{{ 'GLOBAL.BONUS.TYPE.TRIGGER.5' | translate | uppercase }}&nbsp;</span>
+						<span ng-if="controller.bonusRevision.bonusType === 2 && controller.bonusRevision.bonusTriggerType === 6" style="line-height:inherit;" class="label label-default">&nbsp;{{ 'GLOBAL.BONUS.TYPE.TRIGGER.6' | translate | uppercase }}&nbsp;</span>
+						<span ng-if="controller.bonusRevision.bonusType === 2 && controller.bonusRevision.bonusTriggerType === 7" style="line-height:inherit;" class="label label-default">&nbsp;{{ 'GLOBAL.BONUS.TYPE.TRIGGER.7' | translate | uppercase }}&nbsp;</span>
+						<span ng-if="controller.bonusRevision.bonusType === 2 && controller.bonusRevision.bonusTriggerType === 8" style="line-height:inherit;" class="label label-default">&nbsp;{{ 'GLOBAL.BONUS.TYPE.TRIGGER.8' | translate | uppercase }}&nbsp;</span>
+						<span ng-if="controller.bonusRevision.bonusType === 2 && controller.bonusRevision.bonusTriggerType === 9" style="line-height:inherit;" class="label label-default">&nbsp;{{ 'GLOBAL.BONUS.TYPE.TRIGGER.9' | translate | uppercase }}&nbsp;</span>
+						<span ng-if="controller.bonusRevision.bonusType === 2 && controller.bonusRevision.bonusTriggerType === 10" style="line-height:inherit;" class="label label-default">&nbsp;{{ 'GLOBAL.BONUS.TYPE.TRIGGER.10' | translate | uppercase }}&nbsp;</span>
+					</td>
+				</tr><tr>
+					<th>{{ "GLOBAL.FIELDS.STATUS" | translate }}</th>
+					<td>
+						<span ng-if="controller.bonusRevision.enabled" class="label label-lg label-success">{{ 'GLOBAL.FIELDS.ENABLED' | translate | uppercase }}</span>
+						<span ng-if="!controller.bonusRevision.enabled" class="label label-lg label-danger">{{ 'GLOBAL.FIELDS.DISABLED' | translate | uppercase }}</span>
+					</td>
+				</tr><tr ng-if="controller.bonusRevision.forDepositNumber">
+					<th>{{ "UI_NETWORK_ADMIN.BONUS.FORDEPOSIT" | translate }}</th>
+					<td>{{ controller.bonusRevision.forDepositNumber }}</td>
+				</tr><tr>
+					<th>{{ "UI_NETWORK_ADMIN.BONUS.DOMAIN" | translate }}</th>
+					<td>{{ controller.bonusRevision.domain.name }}</td>
+				</tr><tr>
+					<th>{{ "UI_NETWORK_ADMIN.BONUS.EDIT.DESCRIPTION.NAME" | translate }}</th>
+					<td colspan="2">
+						<p class="help-block">{{ controller.bonusRevision.bonusDescription }}</p>
+					</td>
+				</tr><tr ng-if="!(controller.bonus.current.bonusType === 3)">
+					<th>{{ 'UI_NETWORK_ADMIN.BONUS.EDIT.VISIBLETOPUBLIC' | translate }}</th>
+					<td align="center" ng-if="controller.bonusRevision.publicView == true">
+						<span class="glyphicon glyphicon-ok" style="color:#3c8dbc !important"></span>
+					</td>
+					<td align="center" ng-if="controller.bonusRevision.publicView == false">
+						<span class="glyphicon glyphicon-remove" style="color:#dd4b39 !important"></span>
+					</td>
+				</tr><tr ng-if="!(controller.bonus.current.bonusType === 3)">
+					<td colspan="2">
+						<p class="help-block">{{ 'UI_NETWORK_ADMIN.BONUS.EDIT.VISIBLETOPUBLICEXPLAIN' | translate }}</p>
+					</td>
+				</tr><tr ng-if="controller.bonusRevision.graphic">
+					<th>{{ "UI_NETWORK_ADMIN.BONUS.EDIT.GRAPHIC.NAME" | translate }}</th>
+					<td>
+						<img style="max-width: 35%;max-height: 45%;" class="img-thumbnail img-responsive" data-ng-src="data:{{ (controller.bonusRevision.graphic.fileType)?controller.bonusRevision.graphic.fileType:'image/PNG' }};base64,{{ controller.bonusRevision.graphic.image }}" alt=""/>
+					</td>
+				</tr>
+				</table>
+			</div>
+		</div>
+		<div class="box box-default box-solid">
+			<div class="box-header with-border">
+				{{ 'UI_NETWORK_ADMIN.BONUS.TITLE.NOTIFICATIONS' | translate }}
+			</div>
+			<div class="box-body table-responsive">
+				<table class="table table-bordered">
+				<tr>
+					<th>{{ 'UI_NETWORK_ADMIN.BONUS.NOTIFICATIONS.ACTIVATION.NAME' | translate }}</th>
+					<td>{{controller.bonusRevision.activationNotificationName}}</td>
+				</tr>
+				</table>
+			</div>
+		</div>
+		<div class="box box-default box-solid" ng-if="!(controller.bonus.current.bonusType === 3)">
+			<div class="box-header with-border">
+				{{ 'UI_NETWORK_ADMIN.BONUS.TITLE.CANCEL' | translate }}
+			</div>
+			<div class="box-body table-responsive">
+				<table class="table table-bordered">
+				<tr>
+					<th>{{ 'UI_NETWORK_ADMIN.BONUS.CANCEL.PLAYERMAYCANCEL' | translate }}</th>
+					<td align="center" width="20%" ng-if="controller.bonusRevision.playerMayCancel == true">
+						<span class="glyphicon glyphicon-ok" style="color:#3c8dbc !important"></span>
+					</td>
+					<td align="center" width="20%" ng-if="controller.bonusRevision.playerMayCancel == false">
+						<span class="glyphicon glyphicon-remove" style="color:#dd4b39 !important"></span>
+					</td>
+				</tr><tr>
+					<td colspan="2">
+						<p class="help-block">{{ 'UI_NETWORK_ADMIN.BONUS.CANCEL.PLAYERMAYCANCELEXPLAIN' | translate }}</p>
+					</td>
+				</tr><tr ng-if="controller.bonusRevision.cancelOnDepositMinimumAmount">
+					<th>{{ 'UI_NETWORK_ADMIN.BONUS.CANCEL.MINAMOUNT' | translate }}</th>
+					<td align="center">{{ (controller.bonusRevision.cancelOnDepositMinimumAmount / 100) | cents:controller.domainInfo.currencySymbol }}</td>
+				</tr><tr ng-if="controller.bonusRevision.cancelOnDepositMinimumAmount">
+					<td colspan="2">
+						<p class="help-block">{{ 'UI_NETWORK_ADMIN.BONUS.CANCEL.MINAMOUNTEXPLAIN' | translate }}</p>
+					</td>
+				</tr><tr>
+					<th>{{ 'UI_NETWORK_ADMIN.BONUS.CANCEL.CANCELONBETBIGGERTHANBALANCE' | translate }}</th>
+					<td align="center" ng-if="controller.bonusRevision.cancelOnBetBiggerThanBalance == true">
+						<span class="glyphicon glyphicon-ok" style="color:#3c8dbc !important"></span>
+					</td>
+					<td align="center" ng-if="controller.bonusRevision.cancelOnBetBiggerThanBalance == false">
+						<span class="glyphicon glyphicon-remove" style="color:#dd4b39 !important"></span>
+					</td>
+				</tr><tr>
+					<td colspan="2">
+						<p class="help-block">{{ 'UI_NETWORK_ADMIN.BONUS.CANCEL.CANCELONBETBIGGERTHANBALANCEEXPLAIN' | translate }}</p>
+					</td>
+				</tr>
+				</table>
+			</div>
+		</div>
+		<div class="box box-default box-solid" ng-if="controller.bonusRevision.freeMoneyAmount">
+			<div class="box-header with-border">
+				{{ 'UI_NETWORK_ADMIN.BONUS.TITLE.FREEMONEY' | translate }}
+			</div>
+			<div class="box-body table-responsive">
+				<table class="table table-bordered">
+				<tr>
+					<th width="35%">{{ 'UI_NETWORK_ADMIN.BONUS.FREEMONEY.AMOUNT' | translate }}</th>
+					<td>{{(controller.bonusRevision.freeMoneyAmount / 100) | cents:controller.domainInfo.currencySymbol}}</td>
+				</tr><tr>
+					<th width="35%">{{ 'UI_NETWORK_ADMIN.BONUS.FREEMONEY.WAGER' | translate }}</th>
+					<td>{{controller.bonusRevision.freeMoneyWagerRequirement}}x</td>
+				</tr><tr>
+					<th width="35%">{{ 'UI_NETWORK_ADMIN.BONUS.FREEMONEY.EXAMPLE' | translate }}</th>
+					<td>{{ 'UI_NETWORK_ADMIN.BONUS.FREEMONEY.EXPLAIN' | translate}}</td>
+				</tr>
+				</table>
+			</div>
+		</div>
+		<div class="box box-default box-solid" ng-if="controller.bonusRevision.bonusFreeMoney.length > 0">
+			<div class="box-header with-border">
+				{{'UI_NETWORK_ADMIN.BONUS.BONUSFREEMONEY.BOX.TITLE'|translate}}
+			</div>
+			<div class="box-body table-responsive">
+				<table class="table table-hover table-striped nowrap" cellspacing="0" width="100%">
+					<thead>
+						<tr>
+							<th>{{'UI_NETWORK_ADMIN.BONUS.BONUSFREEMONEY.CURRENCY.NAME'|translate}}</th>
+							<th>{{'UI_NETWORK_ADMIN.BONUS.BONUSFREEMONEY.AMOUNT.NAME'|translate}}</th>
+							<th>{{'UI_NETWORK_ADMIN.BONUS.BONUSFREEMONEY.IMMEDIATERELEASE.NAME'|translate}}</th>
+<!-- 							<th>{{'UI_NETWORK_ADMIN.BONUS.BONUSFREEMONEY.WAGERREQUIREMENT.NAME'|translate}}</th> -->
+<!-- 							<th>{{'UI_NETWORK_ADMIN.BONUS.FREEMONEY.EXAMPLE'|translate}}</th> -->
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="freeMoney in controller.bonusRevision.bonusFreeMoney">
+							<td>{{freeMoney.currency}}</td>
+							<td>{{freeMoney.amount|currency:freeMoney.currency}}</td>
+							<td>
+								<span ng-if="freeMoney.immediateRelease === undefined || freeMoney.immediateRelease === null || !freeMoney.immediateRelease">No</span>
+								<span ng-if="freeMoney.immediateRelease !== undefined && freeMoney.immediateRelease !== null && freeMoney.immediateRelease">Yes</span>
+							</td>
+<!-- 							<td>{{freeMoney.wagerRequirement}}x</td> -->
+<!-- 							<td>{{'UI_NETWORK_ADMIN.BONUS.FREEMONEY.ADDITIONAL.EXPLAIN'|translate: {amount:(freeMoney.amount*100), wager:((freeMoney.amount*100)*freeMoney.wagerRequirement), currency:freeMoney.currency } }}</td> -->
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="box box-default box-solid" ng-if="controller.depositRequirements.length > 0"> <!-- || controller.signupRequirements.length > 0">  -->
+			<div class="box-header with-border">
+				{{ 'UI_NETWORK_ADMIN.BONUS.TITLE.REQUIREMENTS' | translate }}
+			</div>
+			<div class="box-body table-responsive">
+				<table class="table table-bordered" ng-if="controller.depositRequirements" ng-repeat="dr in controller.depositRequirements">
+				<tr>
+					<th width="35%">{{ 'UI_NETWORK_ADMIN.BONUS.REQUIREMENTS.MINDEPOSIT' | translate }}</th>
+					<td>{{(dr.minDeposit / 100) | cents:controller.domainInfo.currencySymbol}}</td>
+				</tr><tr ng-if="dr.maxDeposit">
+					<th>{{ 'UI_NETWORK_ADMIN.BONUS.REQUIREMENTS.MAXDEPOSIT' | translate }}</th>
+					<td>{{(dr.maxDeposit / 100) | cents:controller.domainInfo.currencySymbol}}</td>
+				</tr><tr ng-if="dr.bonusPercentage">
+					<th>{{ 'UI_NETWORK_ADMIN.BONUS.REQUIREMENTS.PERCENTAGE' | translate }}</th>
+					<td>{{dr.bonusPercentage}}%</td>
+				</tr><tr>
+					<th>{{ 'UI_NETWORK_ADMIN.BONUS.REQUIREMENTS.WAGER' | translate }}</th>
+					<td>{{dr.wagerRequirements}}x</td>
+				</tr><tr>
+					<th>{{ 'UI_NETWORK_ADMIN.BONUS.REQUIREMENTS.EXAMPLE' | translate }}</th>
+					<td ng-if="dr.bonusPercentage" class="help-block">{{ 'UI_NETWORK_ADMIN.BONUS.REQUIREMENTS.EXPLAIN' | translate: {amount:dr.minDeposit, bonus:dr.bonusPercentage, wager:dr.wagerRequirements, wagerTotal:((dr.minDeposit+((dr.bonusPercentage/100)*dr.minDeposit))*dr.wagerRequirements)} }}</td>
+					<td ng-if="!dr.bonusPercentage" class="help-block">{{ 'UI_NETWORK_ADMIN.BONUS.REQUIREMENTS.EXPLAIN2' | translate: {amount:dr.minDeposit, wager:dr.wagerRequirements, wagerTotal:(dr.minDeposit*dr.wagerRequirements)} }}</td>
+				</tr>
+				</table>
+<!-- 				<table class="table table-bordered" ng-if="controller.signupRequirements" ng-repeat="sr in controller.signupRequirements"> -->
+<!-- 				<tr> -->
+<!-- 					<th width="35%"></th> -->
+<!-- 					<td></td> -->
+<!-- 				</tr> -->
+<!-- 				</table> -->
+			</div>
+		</div>
+	</div>
+	<div class="col-md-6">
+		<div class="box box-default box-solid" ng-if="(controller.bonusRevision.bonusType === 2)">
+			<div class="box-header with-border">
+				{{ 'UI_NETWORK_ADMIN.BONUS.TITLE.TRIGGERS' | translate }}
+			</div>
+			<div class="box-body table-responsive">
+				<table class="table table-bordered">
+				<tr>
+					<th>{{ 'UI_NETWORK_ADMIN.BONUS.TRIGGER.TYPE.TITLE' | translate }}</th>
+					<td>{{ 'GLOBAL.BONUS.TYPE.TRIGGER.'+controller.bonusRevision.bonusTriggerType | translate }}</td>
+				</tr>
+				<tr ng-if="controller.bonusRevision.bonusTriggerType === 1 || controller.bonusRevision.bonusTriggerType === 2">
+					<th>{{ 'UI_NETWORK_ADMIN.BONUS.TRIGGER.GRANULARITY.TITLE' | translate }}</th>
+					<td>{{ controller.bonusRevision.triggerAmount }}&nbsp;{{ 'UI_NETWORK_ADMIN.BONUS.TRIGGER.GRANULARITY.'+controller.bonusRevision.triggerGranularity | translate }}</td>
+				</tr>
+				<tr ng-if="controller.bonusRevision.bonusTriggerType === 6">
+					<th>{{ 'UI_NETWORK_ADMIN.BONUS.TRIGGER.GRANULARITY.TITLE' | translate }}</th>
+					<td>{{ controller.bonusRevision.triggerAmount }}&nbsp;{{ 'UI_NETWORK_ADMIN.BONUS.TRIGGER.CONSECUTIVE' | translate }}</td>
+				</tr>
+				<tr ng-if="controller.bonusRevision.bonusTriggerType === 9">
+					<th>{{ 'UI_NETWORK_ADMIN.BONUS.HOURLY.TIMEOUT' | translate }}</th>
+					<td>{{ controller.bonusRevision.triggerAmount }}&nbsp;{{ 'UI_NETWORK_ADMIN.BONUS.HOURLY.MINUTES' | translate }}</td>
+				</tr>
+				</table>
+			</div>
+		</div>
+		<div class="box box-default box-solid" ng-if="controller.bonusRevision.bonusType === 1">
+			<div class="box-header with-border">
+				{{ 'UI_NETWORK_ADMIN.BONUS.TITLE.DEPENDSON' | translate }}
+			</div>
+			<div class="box-body table-responsive">
+				<div class="table table-condensed table-striped" ng-if="!controller.bonusRevision.dependsOnBonus.current.id">
+					{{ 'UI_NETWORK_ADMIN.BONUS.NODEPENDENCY' | translate }}
+				</div>
+				<table class="table table-bordered" ng-if="controller.bonusRevision.dependsOnBonus.current.id">
+				<tr>
+					<th width="40%">{{ "GLOBAL.FIELDS.BONUSCODE" | translate }}</th>
+					<td>
+						<a ui-sref="^({bonusId: controller.bonusRevision.dependsOnBonus.current.id})">
+						{{ controller.bonusRevision.dependsOnBonus.current.bonusCode }}
+						</a>
+					</td>
+				</tr><tr>
+					<th>{{ "GLOBAL.FIELDS.BONUSNAME" | translate }}</th>
+					<td>{{ controller.bonusRevision.dependsOnBonus.current.bonusName }}</td>
+				</tr><tr>
+					<th>{{ "GLOBAL.FIELDS.BONUSTYPE" | translate }}</th>
+					<td>
+						<span ng-if="controller.bonusRevision.dependsOnBonus.current.bonusType == 0" class="label label-lg label-primary">{{ 'GLOBAL.BONUS.TYPE.0' | translate | uppercase }}</span>
+						<span ng-if="controller.bonusRevision.dependsOnBonus.current.bonusType == 1" class="label label-lg label-primary">{{ 'GLOBAL.BONUS.TYPE.1' | translate | uppercase }}</span>
+					</td>
+				</tr><tr>
+					<th>{{ "GLOBAL.FIELDS.STATUS" | translate }}</th>
+					<td>
+						<span ng-if="controller.bonusRevision.dependsOnBonus.current.enabled" class="label label-lg label-primary">{{ 'GLOBAL.FIELDS.ENABLED' | translate | uppercase }}</span>
+						<span ng-if="!controller.bonusRevision.dependsOnBonus.current.enabled" class="label label-lg label-danger">{{ 'GLOBAL.FIELDS.DISABLED' | translate | uppercase }}</span>
+					</td>
+				</tr>
+				</table>
+			</div>
+		</div>
+		<div class="box box-default box-solid"  ng-if="!(controller.bonusRevision.bonusType === 3 && controller.bonusRevision.validDays === null)">
+			<div class="box-header with-border">
+				{{ 'UI_NETWORK_ADMIN.BONUS.TITLE.RESTRICTIONS' | translate }}
+			</div>
+			<div class="box-body table-responsive">
+				<table class="table table-bordered">
+				<tr>
+					<th>{{ "UI_NETWORK_ADMIN.BONUS.STARTINGDATE" | translate }}</th>
+					<td ng-if="controller.bonusRevision.startingDate">{{controller.bonusRevision.startingDate | date:'dd/MM/yyyy HH:mm:ss':'GMT'}} ({{controller.bonusRevision.startingDateTimezone}})</td>
+					<td ng-if="!controller.bonusRevision.startingDate">Not Set (Already active)</td>
+				</tr><tr>
+					<th>{{ "UI_NETWORK_ADMIN.BONUS.EXPIRATIONDATE" | translate }}</th>
+					<td ng-if="controller.bonusRevision.expirationDate">{{controller.bonusRevision.expirationDate | date:'dd/MM/yyyy HH:mm:ss':'GMT'}} ({{controller.bonusRevision.expirationDateTimezone}})</td>
+					<td ng-if="!controller.bonusRevision.expirationDate">Not Set (Does not expire)</td>
+				</tr><tr>
+					<th>{{ "UI_NETWORK_ADMIN.BONUS.VALIDFOR" | translate }}</th>
+					<td>{{controller.bonusRevision.validDays}} {{ "UI_NETWORK_ADMIN.BONUS.VALIDDAYS" | translate }} ({{ "UI_NETWORK_ADMIN.BONUS.VALIDDAYSDESC" | translate }})</td>
+				</tr><tr>
+					<th>{{ "UI_NETWORK_ADMIN.BONUS.MAXREDEEMABLE.TITLE" | translate }}</th>
+					<td ng-if="controller.bonusRevision.maxRedeemable > 1">{{controller.bonusRevision.maxRedeemable}}&nbsp;{{ "UI_NETWORK_ADMIN.BONUS.MAXREDEEMABLE.TIMES" | translate }}&nbsp;{{controller.maxRedeemableGranularity | translate}}</td>
+					<td ng-if="controller.bonusRevision.maxRedeemable == 1">{{ "UI_NETWORK_ADMIN.BONUS.MAXREDEEMABLE.ONCE" | translate }}&nbsp;{{controller.maxRedeemableGranularity | translate}}</td>
+				</tr><tr>
+					<th>{{ "UI_NETWORK_ADMIN.BONUS.ACTIVE.DAYS" | translate }}</th>
+					<td ng-if="controller.bonusRevision.activeDays">{{controller.activeDays}}</td>
+					<td ng-if="!controller.bonusRevision.activeDays">{{ "GLOBAL.NA" | translate }}</td>
+				</tr><tr>
+					<th>{{ "UI_NETWORK_ADMIN.BONUS.ACTIVE.TIMES" | translate }}</th>
+					<td ng-if="controller.bonusRevision.activeStartTime">{{controller.bonusRevision.activeStartTime}} - {{controller.bonusRevision.activeEndTime}} ({{controller.bonusRevision.activeTimezone}})</td>
+					<td ng-if="!controller.bonusRevision.activeStartTime">{{ "GLOBAL.NA" | translate }}</td>
+				</tr>
+				</table>
+			</div>
+		</div>
+		<div class="box box-default box-solid" ng-if="controller.bonusRevision.bonusTokens.length > 0">
+			<div class="box-header with-border">
+				{{'UI_NETWORK_ADMIN.BONUS.BONUSTOKEN.BOX.TITLE'|translate}}
+			</div>
+			<div class="box-body table-responsive">
+				<table class="table table-hover table-striped nowrap" cellspacing="0" width="100%">
+					<thead>
+					<tr>
+						<th>{{'UI_NETWORK_ADMIN.BONUS.BONUSTOKEN.CURRENCY.NAME'|translate}}</th>
+						<th>{{'UI_NETWORK_ADMIN.BONUS.BONUSTOKEN.AMOUNT.NAME'|translate}}</th>
+						<th>{{'UI_NETWORK_ADMIN.BONUS.BONUSTOKEN.MINIMUMODDS.NAME'|translate}}</th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr ng-repeat="bonusToken in controller.bonusRevision.bonusTokens">
+						<td>{{bonusToken.currency}}</td>
+						<td>{{bonusToken.amount/100 |currency:bonusToken.currency}}</td>
+						<td>{{bonusToken.minimumOdds|number:3}}</td>
+					</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="box box-default box-solid" ng-if="controller.freespinRules.length > 0 && controller.freespinRules[0].freespins > 0">
+			<div class="box-header with-border">
+				{{ 'UI_NETWORK_ADMIN.BONUS.TITLE.FREESPINS' | translate }}
+			</div>
+			<div class="box-body table-responsive">
+				<table class="table table-bordered">
+				<tr>
+					<th width="30%">{{ 'UI_NETWORK_ADMIN.BONUS.FREESPINS.NUMBER' | translate }}</th>
+					<td>{{controller.freespinRules[0].freespins}}</td>
+				</tr><tr ng-if="controller.freespinRules[0].wagerRequirements">
+					<th width="30%">{{ 'UI_NETWORK_ADMIN.BONUS.FREESPINS.WAGERREQUIREMENTS' | translate }}</th>
+					<td>{{controller.freespinRules[0].wagerRequirements}}</td>
+				</tr><tr ng-if="controller.freespinRules[0].wagerRequirements">
+					<th width="35%">{{ 'UI_NETWORK_ADMIN.BONUS.FREESPINS.EXAMPLE' | translate }}</th>
+					<td class="help-block">{{ 'UI_NETWORK_ADMIN.BONUS.FREESPINS.EXPLAIN' | translate: {wager: controller.freespinRules[0].wagerRequirements} }}</td>
+				</tr><tr>
+					<th colspan="2">{{ 'UI_NETWORK_ADMIN.BONUS.FREESPINS.GAMELIST' | translate }}</th>
+				</tr>
+				<tr ng-repeat="g in controller.freespinRules[0].bonusRulesFreespinGames">
+					<td colspan="2">
+						<div class="user-block">
+							<img class="img-circle img-bordered-sm" src="//:0" ng-src="{{controller.imageUrl}}gameguid={{g.gameInfo.guid}}&function=thumb"alt="">
+							<span class="username">
+								<a ng-href="{{controller.demoUrl}}gameguid={{g.gameInfo.guid}}&lang=en" target="_blank">{{ g.gameInfo.name }}</a>
+							</span>
+							<span class="description">
+								<b>Platform: </b>{{(g.gameInfo.labels.os.value || {})}}
+							</span>
+							<span class="description">
+								<b>Provider: </b>{{g.gameInfo.providerGuid.replace("service-casino-provider-","")}}
+							</span>
+						</div>
+					</td>
+				</tr>
+				</table>
+			</div>
+		</div>
+		<div class="box box-default box-solid" ng-if="controller.casinoChipRules.length > 0 && controller.casinoChipRules[0].casinoChipValue > 0">
+			<div class="box-header with-border">
+				{{ 'UI_NETWORK_ADMIN.BONUS.EDIT.TABS.CASINO_CHIPS' | translate }}
+			</div>
+			<div class="box-body table-responsive">
+				<table class="table table-bordered">
+					<tr>
+						<th width="30%">{{ 'UI_NETWORK_ADMIN.BONUS.EDIT.CASINO_CHIPS.CASINO_CHIP_VALUE' | translate }}</th>
+						<td>{{controller.casinoChipRules[0].casinoChipValue}}</td>
+					</tr>
+				</tr><tr>
+					<th colspan="2">{{ 'UI_NETWORK_ADMIN.BONUS.EDIT.CASINO_CHIPS.CASINO_CHIP_GAMELIST' | translate }}</th>
+				</tr>
+					<tr ng-repeat="g in controller.casinoChipRules[0].bonusRulesCasinoChipGames">
+						<td colspan="2">
+							<div class="user-block">
+								<img class="img-circle img-bordered-sm" src="//:0" ng-src="{{controller.imageUrl}}gameguid={{g.gameInfo.guid}}&function=thumb"alt="">
+								<span class="username">
+								<a ng-href="{{controller.demoUrl}}gameguid={{g.gameInfo.guid}}&lang=en" target="_blank">{{ g.gameInfo.name }}</a>
+							</span>
+								<span class="description">
+								<b>Platform: </b>{{(g.gameInfo.labels.os.value || {})}}
+							</span>
+								<span class="description">
+								<b>Provider: </b>{{g.gameInfo.providerGuid.replace("service-casino-provider-","")}}
+							</span>
+							</div>
+						</td>
+					</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>

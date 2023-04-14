@@ -1,0 +1,30 @@
+= Service Limit Microservice Documentation
+:author: Irwin Herridge <irwin.herridge@wonderlabz.com>
+:version-label: 1.0, November 13, 2021: Service Access Documentation
+:sectnums:
+:toc: left
+:toclevels: 4
+:toc-title: Service Limit Microservice Documentation
+:icons: font
+:url-quickref: https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/
+
+//:stylesheet: css/asciidoctor.css
+//:stylesheet: css/material-blue.css
+
+//This is done tto keep formatting aligned with gitlab
+****
+[verse,,]
+____
+link:../../../readme.adoc[Home]
+____
+****
+
+== Restrictions
+
+* link:external-dwh-restrictions.adoc[External DWH Restrictions API]
+
+* link:intervention-messages-n-player-initiated-comps-restrictions.adoc[Intervention Messages & Player Initiated Complementary Restrictions]
+
+
+
+

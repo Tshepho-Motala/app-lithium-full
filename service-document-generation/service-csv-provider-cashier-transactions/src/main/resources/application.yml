@@ -1,0 +1,27 @@
+server:
+  port: 9931
+
+spring:
+  application:
+    name: service-csv-provider-cashier-transactions
+  cloud:
+    stream:
+      bindings:
+        service-csv-provider-cashier-transactions-input:
+          binder: rabbit
+          group: csv-cashier-transaction-group
+          destination: csv-cashier-transaction-queue
+          consumer:
+            concurrency: 2
+
+eureka:
+  instance:
+    appname: service-csv-provider-cashier-transactions
+
+lithium:
+  service-csv-provider-cashier-transactions:
+    processing-job-page-size: 500
+
+logging:
+  level:
+    lithium.service.csv.provider.cashier.transactions: INFO

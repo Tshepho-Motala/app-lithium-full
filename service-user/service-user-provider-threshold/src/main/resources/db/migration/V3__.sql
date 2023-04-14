@@ -1,0 +1,1 @@
+ALTER TABLE `threshold_age_group` ADD COLUMN `active` BIT(1);

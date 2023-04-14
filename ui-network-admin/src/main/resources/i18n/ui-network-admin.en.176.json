@@ -1,0 +1,12 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "USER": {
+      "AFFILIATE": {
+        "PRIMARY_REFERENCE": "Primary Affiliate Reference",
+        "SECONDARY_REFERENCE_1": "Secondary Affiliate Reference 1",
+        "SECONDARY_REFERENCE_2": "Secondary Affiliate Reference 2",
+        "SECONDARY_REFERENCE_3": "Secondary Affiliate Reference 3"
+      }
+    }
+  }
+}

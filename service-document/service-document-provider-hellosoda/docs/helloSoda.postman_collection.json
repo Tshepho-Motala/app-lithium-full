@@ -1,0 +1,714 @@
+{
+  "info": {
+    "_postman_id": "c98cccfd-cdce-4a3f-a8bb-eb8dbefe033d",
+    "name": "helloSoda",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "createJob - 1",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "52a4815f-99e1-46f9-9f56-6d71ebbc27ff",
+            "exec": [
+              "tests[\"Status code is 200\"] = responseCode.code === 200;\r",
+              "\r",
+              "tests[\"Response time is less than 200ms\"] = responseTime < 200;\r",
+              "\r",
+              "var jsonData = JSON.parse(responseBody);\r",
+              "\r",
+              "postman.setEnvironmentVariable(\"HELLO_SODA_JOB_ID\", jsonData.job_id);"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlblR5cGUiOiJTZGtUb2tlbiIsImZlYXR1cmVzIjpbXSwiaXNzdWVkIjoiMjAyMC0wNy0xNVQwOToxOToyOS43NjZaIiwiaWQiOiJlZDlhNDk4OS1kMjI3LTQyZWMtYjQzMy1kMDMyNzFlMDBhNTUiLCJjbGllbnQiOiJsaXZlc2NvcmUiLCJlbnZpcm9ubWVudCI6IlByb2QiLCJwcm9kdWN0SWQiOiI1ZjBlYzljZmIzYTFiYjAwMDEzMzVlZDIiLCJleHBpcnkiOiIyMDIzLTA2LTMwVDA5OjE5OjI5Ljc2NloifQ.C0dmhvBo2PPlK9er0DErL447Hi4ADrGa2RP1X3KDCYM",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://profile-v2.hellosoda.com/api/v1/jobs",
+          "protocol": "https",
+          "host": [
+            "profile-v2",
+            "hellosoda",
+            "com"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "jobs"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "getApiToken - 2",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "bb978bc2-8ae9-45c0-a8ef-0b3cb0d1cef8",
+            "exec": [
+              "tests[\"Status code is 200\"] = responseCode.code === 200;\r",
+              "\r",
+              "tests[\"Response time is less than 200ms\"] = responseTime < 200;\r",
+              "\r",
+              "var jsonData = JSON.parse(responseBody);\r",
+              "\r",
+              "postman.setEnvironmentVariable(\"HELLO_SODA_BEARER\", jsonData.data.token);"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlblR5cGUiOiJTZGtUb2tlbiIsImZlYXR1cmVzIjpbXSwiaXNzdWVkIjoiMjAyMC0wNy0xNVQwOToxOToyOS43NjZaIiwiaWQiOiJlZDlhNDk4OS1kMjI3LTQyZWMtYjQzMy1kMDMyNzFlMDBhNTUiLCJjbGllbnQiOiJsaXZlc2NvcmUiLCJlbnZpcm9ubWVudCI6IlByb2QiLCJwcm9kdWN0SWQiOiI1ZjBlYzljZmIzYTFiYjAwMDEzMzVlZDIiLCJleHBpcnkiOiIyMDIzLTA2LTMwVDA5OjE5OjI5Ljc2NloifQ.C0dmhvBo2PPlK9er0DErL447Hi4ADrGa2RP1X3KDCYM",
+            "type": "text",
+            "disabled": true
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"productId\" : \"5f0ec9cfb3a1bb0001335ed2\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://idcheck-v2-api.hellosoda.com/api/v2/auth",
+          "protocol": "https",
+          "host": [
+            "idcheck-v2-api",
+            "hellosoda",
+            "com"
+          ],
+          "path": [
+            "api",
+            "v2",
+            "auth"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "getSessionToken - 3",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "50364876-a90a-4687-ab54-fffe441b5d27",
+            "exec": [
+              "tests[\"Status code is 200\"] = responseCode.code === 200;\r",
+              "\r",
+              "tests[\"Response time is less than 200ms\"] = responseTime < 200;\r",
+              "\r",
+              "var jsonData = JSON.parse(responseBody);\r",
+              "\r",
+              "postman.setEnvironmentVariable(\"HELLO_SODA_SESSION_ID\", jsonData.data.session._id);"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "type": "text",
+            "value": "Bearer {{HELLO_SODA_BEARER}}"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"productId\" : \"5f0ec9cfb3a1bb0001335ed2\",\r\n    \"jobId\" : \"{{HELLO_SODA_JOB_ID}}\",\r\n    \"mode\" : \"authentication\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://idcheck-v2-api.hellosoda.com/api/v2/sessions",
+          "protocol": "https",
+          "host": [
+            "idcheck-v2-api",
+            "hellosoda",
+            "com"
+          ],
+          "path": [
+            "api",
+            "v2",
+            "sessions"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "sendFrontImage - 4",
+      "protocolProfileBehavior": {
+        "disabledSystemHeaders": {}
+      },
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "type": "text",
+            "value": "Bearer {{HELLO_SODA_BEARER}}"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "image",
+              "type": "file",
+              "src": "/C:/Users/ssviripa/Pictures/IMG_5614 (2).JPG"
+            },
+            {
+              "key": "side",
+              "value": "front",
+              "type": "text"
+            }
+          ],
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://idcheck-v2-api.hellosoda.com/api/v2/sessions/{{HELLO_SODA_SESSION_ID}}/document",
+          "protocol": "https",
+          "host": [
+            "idcheck-v2-api",
+            "hellosoda",
+            "com"
+          ],
+          "path": [
+            "api",
+            "v2",
+            "sessions",
+            "{{HELLO_SODA_SESSION_ID}}",
+            "document"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "metrics - 5",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "type": "text",
+            "value": "Bearer {{HELLO_SODA_BEARER}}"
+          }
+        ],
+        "url": {
+          "raw": "https://idcheck-v2-api.hellosoda.com/api/v2/sessions/{{HELLO_SODA_SESSION_ID}}/metrics/front",
+          "protocol": "https",
+          "host": [
+            "idcheck-v2-api",
+            "hellosoda",
+            "com"
+          ],
+          "path": [
+            "api",
+            "v2",
+            "sessions",
+            "{{HELLO_SODA_SESSION_ID}}",
+            "metrics",
+            "front"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "classification - 6",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "type": "text",
+            "value": "Bearer {{HELLO_SODA_BEARER}}"
+          }
+        ],
+        "url": {
+          "raw": "https://idcheck-v2-api.hellosoda.com/api/v2/sessions/{{HELLO_SODA_SESSION_ID}}/classification",
+          "protocol": "https",
+          "host": [
+            "idcheck-v2-api",
+            "hellosoda",
+            "com"
+          ],
+          "path": [
+            "api",
+            "v2",
+            "sessions",
+            "{{HELLO_SODA_SESSION_ID}}",
+            "classification"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "face - 7(optional)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "type": "text",
+            "value": "Bearer {{HELLO_SODA_BEARER}}"
+          }
+        ],
+        "body": {
+          "mode": "file",
+          "file": {
+            "src": ""
+          },
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://idcheck-v2-api.hellosoda.com/api/v2/sessions/{{HELLO_SODA_SESSION_ID}}/face",
+          "protocol": "https",
+          "host": [
+            "idcheck-v2-api",
+            "hellosoda",
+            "com"
+          ],
+          "path": [
+            "api",
+            "v2",
+            "sessions",
+            "{{HELLO_SODA_SESSION_ID}}",
+            "face"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "end - 8",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "type": "text",
+            "value": "Bearer {{HELLO_SODA_BEARER}}"
+          }
+        ],
+        "url": {
+          "raw": "https://idcheck-v2-api.hellosoda.com/api/v2/sessions/{{HELLO_SODA_SESSION_ID}}/end",
+          "protocol": "https",
+          "host": [
+            "idcheck-v2-api",
+            "hellosoda",
+            "com"
+          ],
+          "path": [
+            "api",
+            "v2",
+            "sessions",
+            "{{HELLO_SODA_SESSION_ID}}",
+            "end"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "submitJobInLithium - 9",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "value": "Bearer {{USERTOKEN}}",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "localhost:8596/frontend/api/submitJob/{{HELLO_SODA_JOB_ID}}/{{HELLO_SODA_SESSION_ID}}",
+          "host": [
+            "localhost"
+          ],
+          "port": "8596",
+          "path": [
+            "frontend",
+            "api",
+            "submitJob",
+            "{{HELLO_SODA_JOB_ID}}",
+            "{{HELLO_SODA_SESSION_ID}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "sendBackImage",
+      "protocolProfileBehavior": {
+        "disabledSystemHeaders": {}
+      },
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Authorization",
+            "type": "text",
+            "value": "Bearer {{HELLO_SODA_BEARER}}"
+          }
+        ],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "image",
+              "type": "file",
+              "src": "/C:/Users/ssviripa/Pictures/IMG_5632.JPG"
+            },
+            {
+              "key": "side",
+              "value": "back",
+              "type": "text"
+            }
+          ],
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://idcheck-v2-api.hellosoda.com/api/v2/sessions/{{HELLO_SODA_SESSION_ID}}/document",
+          "protocol": "https",
+          "host": [
+            "idcheck-v2-api",
+            "hellosoda",
+            "com"
+          ],
+          "path": [
+            "api",
+            "v2",
+            "sessions",
+            "{{HELLO_SODA_SESSION_ID}}",
+            "document"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "getDetails",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "be0e6e52-dfaf-4bbc-b5c7-813a3ab4ee33",
+            "exec": [
+              "tests[\"Status code is 200\"] = responseCode.code === 200;\r",
+              "\r",
+              "tests[\"Response time is less than 200ms\"] = responseTime < 200;\r",
+              "\r",
+              "var jsonData = JSON.parse(responseBody);\r",
+              "\r",
+              "postman.setEnvironmentVariable(\"HELLO_SODA_JOB_ID\", jsonData.job_id);"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "type": "text",
+            "value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlblR5cGUiOiJTZGtUb2tlbiIsImZlYXR1cmVzIjpbXSwiaXNzdWVkIjoiMjAyMC0wNy0xNVQwOToxOToyOS43NjZaIiwiaWQiOiJlZDlhNDk4OS1kMjI3LTQyZWMtYjQzMy1kMDMyNzFlMDBhNTUiLCJjbGllbnQiOiJsaXZlc2NvcmUiLCJlbnZpcm9ubWVudCI6IlByb2QiLCJwcm9kdWN0SWQiOiI1ZjBlYzljZmIzYTFiYjAwMDEzMzVlZDIiLCJleHBpcnkiOiIyMDIzLTA2LTMwVDA5OjE5OjI5Ljc2NloifQ.C0dmhvBo2PPlK9er0DErL447Hi4ADrGa2RP1X3KDCYM"
+          }
+        ],
+        "url": {
+          "raw": "https://profile-v2.hellosoda.com/api/v1/jobs/{{HELLO_SODA_JOB_ID}}",
+          "protocol": "https",
+          "host": [
+            "profile-v2",
+            "hellosoda",
+            "com"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "jobs",
+            "{{HELLO_SODA_JOB_ID}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "editJob",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "ce823b16-f7bc-40d6-9a88-7a9e9738fac7",
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Authorization",
+            "type": "text",
+            "value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlblR5cGUiOiJTZGtUb2tlbiIsImZlYXR1cmVzIjpbXSwiaXNzdWVkIjoiMjAyMC0wNy0xNVQwOToxOToyOS43NjZaIiwiaWQiOiJlZDlhNDk4OS1kMjI3LTQyZWMtYjQzMy1kMDMyNzFlMDBhNTUiLCJjbGllbnQiOiJsaXZlc2NvcmUiLCJlbnZpcm9ubWVudCI6IlByb2QiLCJwcm9kdWN0SWQiOiI1ZjBlYzljZmIzYTFiYjAwMDEzMzVlZDIiLCJleHBpcnkiOiIyMDIzLTA2LTMwVDA5OjE5OjI5Ljc2NloifQ.C0dmhvBo2PPlK9er0DErL447Hi4ADrGa2RP1X3KDCYM"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"data\": {\r\n        \"first_name\": \"Volodymyr\",\r\n        \"last_name\": \"Kozhevnikov\",\r\n        \"email\": \"sviripa1234@gmail.com\",\r\n        \"birthdate\": \"1986-04-05\"\r\n    },\r\n    \"notify_url\": \"http://http://c11e09a0971b.ngrok.io/webhook/notify\",\r\n    \"commit\": false\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://profile-v2.hellosoda.com/api/v1/jobs/{{HELLO_SODA_JOB_ID}}",
+          "protocol": "https",
+          "host": [
+            "profile-v2",
+            "hellosoda",
+            "com"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "jobs",
+            "{{HELLO_SODA_JOB_ID}}"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "getReport",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "a2f3810f-13d7-4ec9-9d05-b167220afae7",
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "type": "text",
+            "value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlblR5cGUiOiJTZGtUb2tlbiIsImZlYXR1cmVzIjpbXSwiaXNzdWVkIjoiMjAyMC0wNy0xNVQwOToxOToyOS43NjZaIiwiaWQiOiJlZDlhNDk4OS1kMjI3LTQyZWMtYjQzMy1kMDMyNzFlMDBhNTUiLCJjbGllbnQiOiJsaXZlc2NvcmUiLCJlbnZpcm9ubWVudCI6IlByb2QiLCJwcm9kdWN0SWQiOiI1ZjBlYzljZmIzYTFiYjAwMDEzMzVlZDIiLCJleHBpcnkiOiIyMDIzLTA2LTMwVDA5OjE5OjI5Ljc2NloifQ.C0dmhvBo2PPlK9er0DErL447Hi4ADrGa2RP1X3KDCYM"
+          }
+        ],
+        "url": {
+          "raw": "https://profile-v2.hellosoda.com/api/v1/jobs/{{HELLO_SODA_JOB_ID}}/report",
+          "protocol": "https",
+          "host": [
+            "profile-v2",
+            "hellosoda",
+            "com"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "jobs",
+            "{{HELLO_SODA_JOB_ID}}",
+            "report"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "getReport Copy",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "id": "bbcaad3f-5a5d-412c-ac3f-1cc58c2b6307",
+            "exec": [
+              ""
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "type": "text",
+            "value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlblR5cGUiOiJTZGtUb2tlbiIsImZlYXR1cmVzIjpbXSwiaXNzdWVkIjoiMjAyMC0wNy0xNVQwOToxOToyOS43NjZaIiwiaWQiOiJlZDlhNDk4OS1kMjI3LTQyZWMtYjQzMy1kMDMyNzFlMDBhNTUiLCJjbGllbnQiOiJsaXZlc2NvcmUiLCJlbnZpcm9ubWVudCI6IlByb2QiLCJwcm9kdWN0SWQiOiI1ZjBlYzljZmIzYTFiYjAwMDEzMzVlZDIiLCJleHBpcnkiOiIyMDIzLTA2LTMwVDA5OjE5OjI5Ljc2NloifQ.C0dmhvBo2PPlK9er0DErL447Hi4ADrGa2RP1X3KDCYM"
+          }
+        ],
+        "url": {
+          "raw": "https://profile.hellosoda.com/api/v1/jobs?period_to=2021-02-02&period_from=2020-08-11&limit=500",
+          "protocol": "https",
+          "host": [
+            "profile",
+            "hellosoda",
+            "com"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "jobs"
+          ],
+          "query": [
+            {
+              "key": "status",
+              "value": "completed",
+              "disabled": true
+            },
+            {
+              "key": "period_to",
+              "value": "2021-02-02"
+            },
+            {
+              "key": null,
+              "value": "",
+              "disabled": true
+            },
+            {
+              "key": "period_from",
+              "value": "2020-08-11"
+            },
+            {
+              "key": "limit",
+              "value": "500"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "getImage",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Authorization",
+            "type": "text",
+            "value": "Bearer {{HELLO_SODA_BEARER}}"
+          }
+        ],
+        "url": {
+          "raw": "https://idcheck-v2-api.hellosoda.com/api/v2/sessions/{{HELLO_SODA_SESSION_ID}}/images/front",
+          "protocol": "https",
+          "host": [
+            "idcheck-v2-api",
+            "hellosoda",
+            "com"
+          ],
+          "path": [
+            "api",
+            "v2",
+            "sessions",
+            "{{HELLO_SODA_SESSION_ID}}",
+            "images",
+            "front"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "commit",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Authorization",
+            "type": "text",
+            "value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ0b2tlblR5cGUiOiJTZGtUb2tlbiIsImZlYXR1cmVzIjpbXSwiaXNzdWVkIjoiMjAyMC0wNy0xNVQwOToxOToyOS43NjZaIiwiaWQiOiJlZDlhNDk4OS1kMjI3LTQyZWMtYjQzMy1kMDMyNzFlMDBhNTUiLCJjbGllbnQiOiJsaXZlc2NvcmUiLCJlbnZpcm9ubWVudCI6IlByb2QiLCJwcm9kdWN0SWQiOiI1ZjBlYzljZmIzYTFiYjAwMDEzMzVlZDIiLCJleHBpcnkiOiIyMDIzLTA2LTMwVDA5OjE5OjI5Ljc2NloifQ.C0dmhvBo2PPlK9er0DErL447Hi4ADrGa2RP1X3KDCYM"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"commit\": true\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://profile-v2.hellosoda.com/api/v1/jobs/{{HELLO_SODA_JOB_ID}}",
+          "protocol": "https",
+          "host": [
+            "profile-v2",
+            "hellosoda",
+            "com"
+          ],
+          "path": [
+            "api",
+            "v1",
+            "jobs",
+            "{{HELLO_SODA_JOB_ID}}"
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "protocolProfileBehavior": {}
+}

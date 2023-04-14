@@ -1,0 +1,51 @@
+<div class="container-fluid">
+	<div class="card card-block" style="margin-bottom: 10px;" ng-init="">
+		<div class="d-flex justify-content-start">
+			<div class="p-2 mr-auto" style="width: 50%;">
+				<span class="title">{{ 'UI_NETWORK_ADMIN.BONUSES.LIST.TITLE' | translate }}</span>
+				<span class="description">{{ 'UI_NETWORK_ADMIN.BONUSES.LIST.DESCRIPTION' | translate }}</span>
+			</div>
+			<div class="ml-auto p-2 text-right" style="width: 50%;">
+				<div style="margin-bottom:5px;">
+					<span ng-repeat="domain in controller.selectedDomains">
+						<span style="padding:5px; margin-right: 2px;" class="label label-primary">&nbsp;{{ domain | uppercase }}&nbsp;</span>
+					</span>
+				</div>
+				<div style="margin-bottom:5px;">
+					<span ng-repeat="s in controller.statuses">
+						<span ng-if="s.selected && s.name == 'Enabled'" style="padding:5px; margin-right: 3px;" class="label label-default">&nbsp;{{ s.name | uppercase }}&nbsp;</span>
+						<span ng-if="s.selected && s.name == 'Disabled'" style="padding:5px; margin-right: 3px;" class="label label-danger">&nbsp;{{ s.name | uppercase }}&nbsp;</span>
+					</span>
+				</div>
+				<div style="margin-bottom:5px;">
+					<span ng-repeat="s in controller.types">
+						<span ng-if="s.selected && s.name == 'Deposit'" style="padding:5px; margin-right: 3px;" class="label label-success">&nbsp;{{ s.name | uppercase }}&nbsp;</span>
+						<span ng-if="s.selected && s.name == 'Signup'" style="padding:5px; margin-right: 3px;" class="label label-warning">&nbsp;{{ s.name | uppercase }}&nbsp;</span>
+						<span ng-if="s.selected && s.name == 'Trigger'" style="padding:5px; margin-right: 3px;" class="label label-primary">&nbsp;{{ s.name | uppercase }}&nbsp;</span>
+						<span ng-if="s.selected && s.name == 'Virtual Coin'" style="padding:5px; margin-right: 3px;" class="label label-info">&nbsp;{{ s.name | uppercase }}&nbsp;</span>
+					</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+<!-- 	 lit-permission-domain="{{domainName}}"> -->
+	<div class="row v-reset-row ">
+		<div class="col-xs-12" style="margin-bottom: 10px">
+			<button-add ui-sref="^.add" lit-if-domains-permission="BONUS_ADD"></button-add>
+			<div class="pull-right" lit-if-domains-permission="BONUS_VIEW">
+				<div id="vueMountBonusSearchTopBar"></div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row v-reset-row ">
+		<div class="col-xs-12">
+			<div class="box">
+				<div class="box-body no-padding table-responsive">
+					<dt table="controller.bonusTable"/>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

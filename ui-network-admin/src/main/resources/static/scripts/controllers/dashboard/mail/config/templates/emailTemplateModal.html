@@ -1,0 +1,16 @@
+<div class="modal-content">
+    <div class="modal-header bg-green darken-4 white-text">
+        <h3 class="modal-title" id="modal-title">
+            <i class="fa fa-pencil"></i>
+            {{'UI_NETWORK_ADMIN.MAIL.TEMPLATES.FIELDS.MODAL_TITLE' | translate}}
+            <button-close-window ng-click="controller.cancel()"></button-close-window>
+        </h3>
+    </div>
+    <div class="modal-footer">
+        <div class="text-left">
+            <p>{{ 'UI_NETWORK_ADMIN.MAIL.TEMPLATES.FIELDS.POPUP_TITLE' | translate }}</p>
+        </div>
+        <button-submit ng-click="controller.onSubmit()">{{ 'UI_NETWORK_ADMIN.MAIL.TEMPLATES.FIELDS.SAVE' | translate }}</button-submit>
+        <button-cancel ng-click="controller.cancel()">{{ 'UI_NETWORK_ADMIN.MAIL.TEMPLATES.FIELDS.CANCEL' | translate }}</button-cancel>
+    </div>
+</div>

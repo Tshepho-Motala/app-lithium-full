@@ -1,0 +1,97 @@
+{
+  "name": "Google In App Purchase",
+  "code": "GoogleInAppPurchase",
+  "url": "service-cashier-processor-giap",
+  "methodNames": ["giap"],
+  "deposit": true,
+  "withdraw": false,
+  "fees": {
+    "flat": 0,
+    "percentage": 0,
+    "minimum": 0
+  },
+  "limits": {
+    "minAmount": 2500,
+    "maxAmount": 0,
+    "maxAmountDay": 0,
+    "maxAmountWeek": 0,
+    "maxAmountMonth": 0,
+    "maxTransactionsDay": 0,
+    "maxTransactionsWeek": 0,
+    "maxTransactionsMonth": 0
+  },
+  "properties": [
+    { 
+      "name": "appName",
+      "defaultValue": "",
+      "type": "string",
+      "description": ""
+    },
+    { 
+      "name": "packageName",
+      "defaultValue": "com.playsafesa.megavegas.app.social",
+      "type": "string",
+      "description": ""
+    },
+    { 
+      "name": "type",
+      "defaultValue": "service_account",
+      "type": "string",
+      "description": ""
+    },
+    { 
+      "name": "project_id",
+      "defaultValue": "",
+      "type": "string",
+      "description": ""
+    },
+    { 
+      "name": "private_key_id",
+      "defaultValue": "",
+      "type": "string",
+      "description": ""
+    },
+    { 
+      "name": "private_key",
+      "defaultValue": "",
+      "type": "string",
+      "description": ""
+    },
+    { 
+      "name": "client_email",
+      "defaultValue": "",
+      "type": "string",
+      "description": ""
+    },
+    { 
+      "name": "client_id",
+      "defaultValue": "",
+      "type": "string",
+      "description": ""
+    },
+    { 
+      "name": "auth_uri",
+      "defaultValue": "https://accounts.google.com/o/oauth2/auth",
+      "type": "string",
+      "description": ""
+    },
+    { 
+      "name": "token_uri",
+      "defaultValue": "https://oauth2.googleapis.com/token",
+      "type": "string",
+      "description": ""
+    },
+    { 
+      "name": "auth_provider_x509_cert_url",
+      "defaultValue": "https://www.googleapis.com/oauth2/v1/certs",
+      "type": "string",
+      "description": ""
+    },
+    { 
+      "name": "client_x509_cert_url",
+      "defaultValue": "",
+      "type": "string",
+      "description": ""
+    }
+  ]
+}

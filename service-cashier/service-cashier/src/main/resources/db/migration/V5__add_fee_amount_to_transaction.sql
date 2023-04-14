@@ -1,0 +1,2 @@
+ALTER TABLE `transaction` 
+ADD COLUMN `fee_cents` BIGINT(20) DEFAULT NULL;

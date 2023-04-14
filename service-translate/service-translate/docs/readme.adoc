@@ -1,0 +1,18 @@
+= Service Translate Microservice Documentation
+:sectnums:
+:sectnumlevels: 2
+:toc: left
+:icons: font
+:url-quickref: https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/
+
+The intent for this readme is to provide technical knowledge of service translate and the services that it provides to both internal and external platform consumers.
+
+---
+
+* Error Dictionary Translations can be configured on LBO at _Brand Configuration -> Error Messages_
+
+---
+
+== External APIs
+
+include::external-translations-error-dictionary.adoc[]

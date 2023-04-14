@@ -1,0 +1,21 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "PLAYER": {
+      "HASSELFEXCLUDED": "Has self excluded?",
+      "EXCLUSION": {
+        "NOTEXCLUDED": "Not currently self excluded.",
+        "EXCLUDE": {
+          "SUCCESS": "Successfully excluded player",
+          "ERROR": "Failed to exclude player"
+        },
+        "CLEAR": {
+          "SUCCESS": "Successfully cleared player exclusion",
+          "ERROR": "Failed to clear player exclusion"
+        },
+        "FIELDS": {
+          "PERIODINMONTHS": "Period (in months)"
+        }
+      }
+    }
+  }
+}

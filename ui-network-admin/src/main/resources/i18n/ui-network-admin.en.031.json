@@ -1,0 +1,17 @@
+{
+	"UI_NETWORK_ADMIN": {
+		"REPORTS": {
+			"PLAYERS": {
+				"EMAILTEMPLATE": {
+					"PLACEHOLDER": {
+						"PLAYER": {
+							"DOMAINNAME": "Domain Name",
+							"DOMAINURL": "Domain URL",
+							"DOMAINSUPPORTEMAIL": "Domain Support Email"
+						}
+					}
+				}
+			}
+		}
+	}
+}

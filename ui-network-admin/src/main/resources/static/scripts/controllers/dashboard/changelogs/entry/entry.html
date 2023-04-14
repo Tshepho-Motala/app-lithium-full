@@ -1,0 +1,12 @@
+<div class="container-fluid">
+    <div class="card card-block" style="margin-bottom: 10px;" ng-init="">
+        <div class="d-flex justify-content-start">
+            <div class="p-2 mr-auto" style="width: 50%;">
+                <span class="title">{{'UI_NETWORK_ADMIN.CHANGELOGS.GLOBAL.ENTRY.TITLE'|translate}}</span>
+                <span class="description">{{'UI_NETWORK_ADMIN.CHANGELOGS.GLOBAL.ENTRY.DESCRIPTION'|translate}}</span>
+            </div>
+        </div>
+    </div>
+
+    <changelogentry entry="$resolve.entry" backhref="dashboard.changelogs.entries"/>
+</div>

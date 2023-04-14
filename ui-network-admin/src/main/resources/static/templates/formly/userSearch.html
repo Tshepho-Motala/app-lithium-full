@@ -1,0 +1,36 @@
+<div class="row v-reset-row ">
+	<div class="col-xs-12">
+		<div class="form-group">
+			<div ng-if="(to.displayOnly === true)">
+				<input type="text" ng-model="model[options.key].guid" class="form-control" readonly="readonly"/>
+			</div>
+			<div ng-if="(to.displayOnly === false)">
+				<label for="model[options.key]" class="control-label" ng-if="to.label">
+					{{to.label}} {{to.required ? '*' : ''}}
+				</label>
+				<div class="input-group">
+				<input
+					type="text" ng-model="model[options.key].guid"
+					required="{{to.required}}" placeholder="{{to.placeholder}}"
+					uib-typeahead="user.username for user in searchPlayer(to.domainName, $viewValue)"
+					typeahead-loading="loading"
+					typeahead-no-results="noResults"
+					typeahead-min-length="2"
+					typeahead-show-hint="true"
+					typeahead-wait-ms="500"
+					typeahead-editable="false"
+					class="form-control" />
+					<div class="input-group-btn">
+						<button type="button" class="btn btn-default" ng-click="model[options.key].guid = null"><i class="fa fa-remove"></i></button>
+					</div>
+				</div>
+				<div ng-show="loading" class="overlay">
+					<i class="fa fa-refresh fa-spin"></i>
+				</div>
+				<div ng-show="noResults" class="form-group has-error">
+					<span class="help-block"><i class="fa fa-remove"></i>&nbsp;{{ 'GLOBAL.NORESULTS' | translate }}</span>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

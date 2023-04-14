@@ -1,0 +1,8 @@
+{
+	"SERVICE_USER": {
+		"VALIDATE_EMAIL": {
+			"ERROR_404": "Player account could not be found.",
+			"ERROR_406": "Invalid validation token supplied."
+		}
+    }
+}

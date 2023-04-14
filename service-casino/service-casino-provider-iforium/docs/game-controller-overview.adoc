@@ -1,0 +1,29 @@
+= Game Controller
+
+== Overview
+
+include::plantuml/game-controller-overview.puml[]
+
+=== Implemented Endpoints
+
+* `link:game-controller-startgame.adoc[/games/{domainName}/startGame]`
+* `link:game-controller-startgame.adoc[/games/{domainName}/demoGame]`
+* `link:game-controller-listgames.adoc[/games/{domainName}/listGames]`
+
+=== Endpoints with Empty Responses
+
+* `/games/{domainName}/listDomainGamesDT`
+* `/games/{domainName}/listDomainGamesReport`
+
+=== Unimplemented Endpoints
+
+* `/games/{gameId}/unlock/toggle`
+* `/games/{domainName}/listFrbGames`
+* `/games/add`
+* `/games/{gameId}/findById`
+* `/games/{gameId}/editGraphic/{graphicFunction}`
+* `/games/edit`
+* `/games/{domainName}/listDomainGames`
+* `/games/{domainName}/find/guid/{gameGuid}`
+* `/games/{domainName}/find/guid/{gameGuid}/no-labels`
+* `/games/{domainName}/isGameLockedForPlayer`

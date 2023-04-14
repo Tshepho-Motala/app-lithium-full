@@ -1,0 +1,51 @@
+.Access Control Rulesets (Basic Flow)
+[plantuml]
+----
+
+
+@startuml
+'https://plantuml.com/sequence-diagram
+
+actor external
+participant  "svc-access" as sa
+database access_rule
+
+autonumber
+
+||10||
+external -> sa: /external/authorization/{domainName}/{accessRuleName}/check-authorization
+activate sa
+  ||10||
+  sa -> sa: Check if required fields was provided
+  ||10||
+  sa -> sa: Validate SHA
+  ||10||
+  sa <-- access_rule: Find access rule for provided accessRuleName that was provided on request
+  alt Access rule not found
+    sa --> external: Status404AccessRuleNotFoundException
+    ||10||
+  else External provider not configured
+    sa --> external: Status512ProviderNotConfiguredException
+    ||10||
+  else External provider is disabled
+    sa --> external: Status474DomainProviderDisabledException
+    ||10||
+  end
+  ||10||
+  ref over sa: Check Authorization Flow
+  ||10||
+  group build ExternalValidationResponse
+    sa -> sa: Map access rule response data to ExternalValidationResponse.data
+    ||10||
+    sa -> sa: Set the ExternalValidationResponse.result to the access rule accept(true) or reject(false) outcome
+    ||10||
+    sa -> sa: Add authorizationResult.message if not successful
+    ||10||
+    sa -> sa: Add rejectReason whenever the access rule outcome was set to REJECT, TIMEOUT or REVIEW
+  end
+  ||10||
+  sa --> external: ExternalValidationResponse
+
+deactivate sa
+@enduml
+----

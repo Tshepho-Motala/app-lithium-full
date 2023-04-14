@@ -1,0 +1,68 @@
+<div class="row v-reset-row " lit-if-permission="DOMAIN_ADD">
+    <div class="col-xs-12">
+        <lit-header
+                title="{{ title | translate }}"
+                description="{{ description | translate }}">
+        </lit-header>
+    </div>
+    <div class="col-xs-12">
+        <div class="btn-group">
+            <button-back ui-sref="dashboard.domainrelationship.list"></button-back>
+        </div>
+    </div>
+</div>
+
+<div class="row v-reset-row ">
+    <div class="col-md-8 col-md-offset-2">
+        <div class="box box-default" bs-loading-overlay bs-loading-overlay-reference-id="{{controller.referenceId}}">
+            <div class="box-body">
+                <div class="d-flex flex-column justify-content-start" style="flex-direction: column;">
+                    <div class="p-2 text-left">
+                        <div class="p-2 text-left">
+                            <span class="description">{{'UI_NETWORK_ADMIN.ECOSYSTEMS.LINK.SELECT_A_DOMAIN' | translate}}</span>
+                        </div>
+                        <ui-select
+                                theme="bootstrap"
+                                ng-model="controller.selectedDomain"
+                                search-enabled="true"
+                                on-select="controller.domainSelected($item)"
+                                style="min-width: 200px;">
+                            <ui-select-match placeholder="" data-allow-clear="false">{{controller.selectedDomain.name}}</ui-select-match>
+                            <ui-select-choices data-repeat="domain in controller.domains | filter: $select.search">
+                                <div ng-bind-html="domain.name | highlight: $select.search"></div>
+                            </ui-select-choices>
+                        </ui-select>
+                        <a class="btn btn-danger" ng-if="controller.selectedEcosystem" ng-click="controller.clearSelectedEcosystem()">
+                            <span class="fa fa-exchange"></span>
+                        </a>
+                    </div>
+                    
+                    <div class="p-2 text-right">
+                        <div class="p-2 text-left">
+                            <span class="description">{{'UI_NETWORK_ADMIN.ECOSYSTEMS.LINK.SELECT_A_REL_TYPE' | translate}}</span>
+                        </div>
+                        <ui-select
+                                theme="bootstrap"
+                                ng-model="controller.selectedRelationshipType"
+                                search-enabled="true"
+                                on-select="controller.relationshipTypeSelect($item)"
+                                style="min-width: 200px;">
+                            <ui-select-match placeholder="" data-allow-clear="false">{{controller.selectedRelationshipType.code}}</ui-select-match>
+                            <ui-select-choices data-repeat="relationshipType in controller.relationshipTypes | filter: $select.search">
+                                <div ng-bind-html="relationshipType.code | highlight: $select.search"></div>
+                            </ui-select-choices>
+                        </ui-select>
+                        <a class="btn btn-danger" ng-if="controller.selectedEcosystem" ng-click="controller.clearSelectedEcosystem()">
+                            <span class="fa fa-exchange"></span>
+                        </a>
+                    </div>
+                </div>
+                <buttonbar>
+                    <button-submit ng-click="controller.save()"></button-submit>
+                </buttonbar>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+</div>

@@ -1,0 +1,9 @@
+{
+  "ERROR_DICTIONARY": {
+    "MY_ACCOUNT": {
+      "INVALID_GRANULARITY": "Invalid granularity.",
+      "USER_GUID_NOT_FOUND": "User with guid={0} not found.",
+      "PLAYTIME_CONFIGURATION_NOT_FOUND": "Playtime Limits Configuration for player={0} not found"
+    }
+  }
+}

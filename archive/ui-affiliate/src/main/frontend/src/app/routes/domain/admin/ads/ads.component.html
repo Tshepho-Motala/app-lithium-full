@@ -1,0 +1,63 @@
+<md-card color="primary" class="mat-elevation-z12 margin nopadding">
+
+  <md-toolbar color="primary">Ads will go here</md-toolbar>
+
+  <div class="filter-primary">
+
+    <filter-brand [(brand)]="brand" [(brandId)]="brandId" (brandChange)="load()"></filter-brand>
+
+    <div class="filter-type">
+      <md-button-toggle-group #group="mdButtonToggleGroup" [(ngModel)]="adType" (ngModelChange)="load()">
+        <md-button-toggle value=0>
+          <md-icon>link</md-icon>
+          <span fxHide.xs="true">Links</span>
+        </md-button-toggle>
+        <md-button-toggle value=1>
+          <md-icon>image</md-icon>
+          <span fxHide.xs="true">Images</span>
+        </md-button-toggle>
+        <md-button-toggle value=2>
+          <md-icon>video_library</md-icon>
+          <span fxHide.xs="true">Animations</span>
+        </md-button-toggle>
+      </md-button-toggle-group>
+
+    </div>
+
+  </div>
+
+  <md-card-content style="position: relative;" class="padding">
+
+    <loading-overlay [isLoading]="isLoading"></loading-overlay>
+
+    <mtex-search (valueChanged)="search($event)"></mtex-search>
+
+    <md-card *ngFor="let ad of ads" class="margin">
+      <md-card-title>
+        <md-icon>{{ ad.icon }}</md-icon>
+        {{ ad.name }}
+      </md-card-title>
+      <md-card-content>
+        {{ad.targetUrl}}
+        <pre><code>{{ ad.code }}</code></pre>
+        <img *ngIf="ad.type == 1" [src]="ad.entryPointUrlSystem" style="height: 40px">
+        <iframe *ngIf="ad.type == 2" width="100" height="100" src="http://localhost:19801/api/affiliate/ads/3/resources/avatar.html">
+        </iframe>
+      </md-card-content>
+      <md-card-actions align="end" fxLayoutWrap="wrap">
+        <button md-raised-button color="primary">Use</button>
+        <button md-raised-button color="accent">Preview</button>
+        <button md-raised-button color="primary">Use</button>
+        <button md-raised-button color="accent">Preview</button>
+        <button md-raised-button color="primary">Use</button>
+        <button md-raised-button color="accent">Preview</button>
+      </md-card-actions>
+    </md-card>
+
+    <mdex-pager (currentPageChanged)="load()"></mdex-pager>
+  </md-card-content>
+</md-card>
+
+<div class="float-bottom-right">
+  <button md-mini-fab color="warn"><md-icon>add</md-icon></button>
+</div>

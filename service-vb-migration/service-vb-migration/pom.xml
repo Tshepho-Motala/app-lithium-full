@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <artifactId>service-vb-migration</artifactId>
+  <packaging>jar</packaging>
+  <name>service-vb-migration</name>
+  <description>A microservice that stores users, each user linked via a global domain identifier to a domain. Here you will find backoffice users and
+    players alike, the only difference being the domain that they are linked to. Players interact with this service to register accounts, update
+    profile details, reset passwords, set user preferences etc.
+  </description>
+
+  <parent>
+    <groupId>lithium</groupId>
+    <artifactId>common-parent-service</artifactId>
+    <version>1.12-SNAPSHOT</version>
+    <relativePath>../../common-parent-service</relativePath>
+  </parent>
+
+  <dependencies>
+    <dependency>
+      <groupId>lithium</groupId>
+      <artifactId>library-common-jpa</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>lithium</groupId>
+      <artifactId>client-service-limit</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>lithium</groupId>
+      <artifactId>client-service-stats</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>lithium</groupId>
+      <artifactId>client-service-changelog</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>lithium</groupId>
+      <artifactId>client-service-domain</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>lithium</groupId>
+      <artifactId>client-service-cashier</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>lithium</groupId>
+      <artifactId>client-service-user</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>lithium</groupId>
+      <artifactId>client-service-accounting</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>lithium</groupId>
+      <artifactId>client-service-datafeed-provider-google</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>lithium</groupId>
+      <artifactId>library-user-entities</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>lithium</groupId>
+      <artifactId>client-service-user</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>lithium</groupId>
+      <artifactId>client-service-access</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>lithium</groupId>
+      <artifactId>client-service-leaderboard</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>lithium</groupId>
+      <artifactId>client-service-limit</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>lithium</groupId>
+      <artifactId>client-service-changelog</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+      <version>28.1-jre</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework.cloud</groupId>
+      <artifactId>spring-cloud-gcp-starter-bigquery</artifactId>
+      <version>1.2.8.RELEASE</version>
+    </dependency>
+    <dependency>
+      <groupId>lithium</groupId>
+      <artifactId>library-vb-migration</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>lithium</groupId>
+      <artifactId>client-service-vb-migration</artifactId>
+      <version>1.12-SNAPSHOT</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter</artifactId>
+      <version>RELEASE</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-junit-jupiter</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.mockito</groupId>
+      <artifactId>mockito-core</artifactId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.flywaydb</groupId>
+      <artifactId>flyway-core</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>lithium</groupId>
+      <artifactId>library-common</artifactId>
+    </dependency>
+
+  </dependencies>
+</project>

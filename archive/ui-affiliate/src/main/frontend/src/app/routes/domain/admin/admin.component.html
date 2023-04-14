@@ -1,0 +1,35 @@
+<mtex-layout>
+
+  <div *mtexLayoutToolbarPrimaryStart>
+    <h3>{{ domainGuard.domain.displayName }}</h3>
+  </div>
+
+  <div *mtexLayoutToolbarPrimaryEnd>
+
+    <md-menu #appMenu="mdMenu">
+      <button md-menu-item (click)="authService.logout()">Logout</button>
+    </md-menu>
+
+    <button md-button [mdMenuTriggerFor]="appMenu">
+      <md-icon>person</md-icon>
+      {{ authService.authenticatedUser.firstName }}
+      {{ authService.authenticatedUser.lastName }}
+      <md-icon>keyboard_arrow_down</md-icon>
+    </button>
+
+  </div>
+
+  <div *mtexLayoutSidenav>
+    <md-toolbar>
+      <span>Menu</span>
+    </md-toolbar>
+    <mtex-menu>
+      <mtex-menu-item title="Dashboard" [link]="[ './dashboard' ]" icon="dashboard"></mtex-menu-item>
+      <mtex-menu-item title="Campaigns" [link]="[ './campaigns' ]" icon="poll"></mtex-menu-item>
+      <mtex-menu-item title="Settings" [link]="[ './administration' ]" icon="settings"></mtex-menu-item>
+    </mtex-menu>
+  </div>
+
+  <router-outlet></router-outlet>
+
+</mtex-layout>

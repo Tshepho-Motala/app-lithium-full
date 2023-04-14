@@ -1,0 +1,11 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "DEPOSIT_THRESHOLDS": {
+      "FILTERS": {
+        "GRANULARITY": {
+          "LABEL": "Threshold Hit"
+        }
+      }
+    }
+  }
+}

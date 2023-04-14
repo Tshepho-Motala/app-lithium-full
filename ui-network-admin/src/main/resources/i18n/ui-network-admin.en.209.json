@@ -1,0 +1,22 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "PLAYER": {
+      "TAB": {
+        "CASINO": "Casino"
+      },
+      "CASINO": {
+        "HISTORY": {
+          "VIEWINGBETS": "Viewing bets"
+        }
+      }
+    },
+    "CASINO": {
+      "BETS": {
+        "LIST": {
+          "TITLE": "Casino Bets",
+          "DESCRIPTION": "A searchable list of casino bets"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,25 @@
+.Squads Proposed Flow
+[plantuml]
+----
+
+@startuml
+
+actor "player" as p
+participant "IG Backend" as ig
+participant "GW" as gw
+participant "lithium" as l
+
+p -> gw++: place bet
+gw -> l++: transaction
+l -> l++: track bets, and award bonus if player qualify
+l -> ig++: call to IG to award bonus card
+ig -> l--: response if bonus was allocated successfully.
+l -> gw--:
+gw -> p--:
+ig -> p++: show bonus cards
+p -> p: player selects card
+p -> ig: bonus card selection
+ig -> l: notify card redeem (optional?)
+
+@enduml
+----

@@ -1,0 +1,25 @@
+{
+	"GLOBAL": {
+		"ACTION" : {
+			"INVALIDATE_MOBILE" : "Invalidate mobile",
+			"VALIDATE_MOBILE" : "Validate mobile"
+		}
+	},
+	"UI_NETWORK_ADMIN": {
+		"USER": {
+			"MOBILE": {
+				"VALIDATION" : {
+					"SUCCESS": "Mobile number successfully validated."
+				},
+				"INVALIDATION": {
+					"SUCCESS": "Mobile number successfully invalidated."
+				},
+				"VALIDATED" : "MOBILE VALIDATED",
+				"NOT_VALIDATED" : "MOBILE NOT VALIDATED"
+			},
+			"ERRORS": {
+				"VALIDATE_MOBILE": "Error validating mobile phone number."
+			}
+		}
+	}
+}

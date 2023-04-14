@@ -1,0 +1,43 @@
+.FE: Player toggles Promotions OptOut flag ON
+[plantuml]
+
+----
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+note: /frontend API - Toggle Promotions OptOut marketing preferences ON/OFF
+if(Toggle Promotions OptOut) then (true);
+    if (checkAccess.isCompsAllowed()) then (false)
+        :Status 409 Conflict: Promotions OptOut already enabled;
+        stop
+    else (true)
+        if (checkAccess.isCompsSystemPlaced()) then (true)
+           :Status 403 Access Denied: Player has been restricted from changing their promotions OptOut flag;
+           stop
+        else (false)
+           :Adds PLAYER_COMPS_OPTOUT Restriction Set to player;
+           :User.setPromotionsOptOut(true);
+            stop
+        endif
+    endif
+else (false)
+
+endif
+
+if (checkAccess.isCompsAllowed()) then (false)
+    :Status 409 Conflict: Promotions OptOut already disabled;
+    stop
+else (true)
+    if (checkAccess.isCompsSystemPlaced()) then (true)
+       :Status 403 Access Denied: Player has been restricted from changing their promotions OptOut flag;
+       stop
+    else (false)
+       :Removed PLAYER_COMPS_OPTOUT Restriction Set to player
+       :User.setPromotionsOptOut(false);
+       stop
+    endif
+endif
+
+@enduml
+----

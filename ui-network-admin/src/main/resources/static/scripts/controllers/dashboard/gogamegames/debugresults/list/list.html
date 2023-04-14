@@ -1,0 +1,24 @@
+<div class="container-fluid">
+	<lit-header
+		title="GoGame Game Debug Results"
+		description="A searchable list of GoGame Debug Results">
+	</lit-header>
+	
+	<button-bar>
+		<button-add lit-if-permission="GOGAMEGAMES_DEBUGRESULTS_EDIT" ui-sref="^.add"></button-add>
+		<button-custom lit-if-permission="GOGAMEGAMES_DEBUGRESULTS_EDIT" icon="trash-o" bclass="danger pull-right"
+					   text="UI_NETWORK_ADMIN.GOGAME.DEBUG_RESULTS.DELETE.ENGINE" ui-sref="^.delete">
+		</button-custom>
+		<button-refresh ng-click="controller.refresh()"></button-refresh>
+	</button-bar>
+	
+	<div class="row v-reset-row ">
+		<div class="col-xs-12">
+			<div class="box">
+				<div class="box-body no-padding table-responsive">
+					<dt table="controller.gogameDebugResultsTable"/>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,10 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "DATE": {
+      "BETWEEN": "between",
+      "AND": "and",
+      "FROM": "from",
+      "BEFORE": "before"
+    }
+  }
+}

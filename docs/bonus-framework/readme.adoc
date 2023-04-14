@@ -1,0 +1,36 @@
+= Bonus Framework (Deprecated)
+Riaan Schoeman <riaan.schoeman@wonderlabz.com>
+1.0, December 1, 2021: Bonus Framework
+:sectnums:
+:toc: left
+:toclevels: 4
+:toc-title: Bonus Framework
+:icons: font
+:url-quickref: https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/
+
+//:stylesheet: css/asciidoctor.css
+//:stylesheet: css/material-blue.css
+
+//This is done tto keep formatting aligned with gitlab
+****
+[verse,,]
+____
+link:../../readme.adoc[Home]
+____
+****
+
+This document will describe the existing bonus framework, and how it all fits together and communicates to other services within lithium.
+
+.Deprecated
+[NOTE]
+This document describes some of the old bonus framework functions that will be replaced by the new comps-engine in the future.
+
+== Deposit Bonus
+
+.NG Wishlist
+[NOTE]
+Further breakdown link:ng-wishlist/readme.adoc[here]
+
+* Can be configured for specific deposit, e.g. for deposit #3
+* Max payout configurable
+*

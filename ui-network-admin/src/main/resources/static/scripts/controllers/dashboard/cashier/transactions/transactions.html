@@ -1,0 +1,10 @@
+<div class="container-fluid">
+	<div id="vueMountPageHeader" ng-if="!$stateParams.tranId" />
+	<div class="row v-reset-row " ng-if="controller.selectedDomain">
+		<div class="col-xs-12">
+<!-- 			<div class="well-clear" style="padding: 0px;margin-bottom: 1px;"> -->
+				<div ui-view></div>
+<!-- 			</div> -->
+		</div>
+	</div>
+</div>

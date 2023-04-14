@@ -1,0 +1,34 @@
+{
+	"UI_NETWORK_ADMIN": {
+		"PLAYER": {
+			"TAB": {
+				"BONUSHISTORY": "Bonus History"
+			},
+			"BONUS": {
+				"CODE": "Code",
+				"PLAYTHROUGH": "Play Through",
+				"STARTEDDATE": "Started Date",
+				"ENDDATE": "End Date",
+				"TRIGGERAMOUNT": "Trigger Amount",
+				"BONUSAMOUNT": "Bonus Amount",
+				"BONUSPERCENTAGE": "Bonus Percentage",
+				"COMPLETED": "Completed",
+				"CANCELLED": "Cancelled",
+				"EXPIRED": "Expired",
+				"NOBONUSCODE": "No Bonus Code",
+				"TYPE": {
+					"TITLE": "Type",
+					"SIGNUP": "Signup",
+					"DEPOSIT": "Deposit"
+				},
+				"FREESPINS": {
+					"TITLE": "Freespins",
+					"WAGERREQUIREMENTS": "Wager Requirements",
+					"REMAINING": "Freespins Remaining",
+					"AWARDED": "Freespins Awarded"
+				},
+				"LOADMORE": "Load more..."
+			}
+		}
+	}
+}

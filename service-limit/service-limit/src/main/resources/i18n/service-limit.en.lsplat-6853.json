@@ -1,0 +1,11 @@
+{
+  "ERROR_DICTIONARY": {
+    "MY_ACCOUNT": {
+      "TIME_SLOT_LIMIT_RANGE_VALIDATION": "FROM time & TO time - difference must be within a 24h period '00:00 - 23:59'",
+      "TIME_SLOT_LIMIT_NOT_FOUND": "Time Slot Limit Not Found"
+    }
+  }
+}
+
+
+

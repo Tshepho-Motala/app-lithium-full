@@ -1,0 +1,44 @@
+{
+  "UI_NETWORK_ADMIN" : {
+    "PLAYER": {
+      "SPORTS_FREE_BETS" : {
+        "TABLE" : {
+          "GRAND_DATE" : "Grant Date",
+          "BONUS_ID" : "Bonus-ID",
+          "BONUS_NAME": "Bonus Name",
+          "BONUS_CODE" : "Bonus Code",
+          "AMOUNT_GIVEN" : "Amount",
+          "STATUS" : "Status"
+        },
+        "FIELDS": {
+          "LABEL" : {
+            "DATE_RANGE_START" : "From Date",
+            "DATE_RANGE_END" : "To Date",
+            "STATUS": "Status"
+          }
+        },
+        "ERRORS" : {
+          "DATE_FILTER": "Your start date cannot be after your end date",
+          "PROVIDER_ERROR" : "Sportsbook provider is disabled or not configured"
+        }
+      }
+    },
+    "GLOBAL": {
+      "LABEL" : {
+        "GRANTED" : "Granted",
+        "OPENED" : "Opened",
+        "EXPIRED" : "Expired",
+        "CANCELLED" : "Cancelled",
+        "PLACEHOLDER" : "Select status..."
+      },
+      "BONUS": {
+        "STATUS" : {
+          "GRANTED" : "GRANTED",
+          "OPENED" : "OPENED",
+          "EXPIRED" : "EXPIRED",
+          "CANCELLED" : "CANCELLED"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "SERVICE-CASHIER": {
+    "AUTOWITHDRAWALS": {
+      "RULESETS": {
+        "RULE": {
+          "FIELD": {
+            "WD_AMOUNT_LESS_NET_DEPOSIT_PM": "Withdrawal amount less than PM net deposit (excluding NL)"
+          }
+        }
+      }
+    }
+  }
+}

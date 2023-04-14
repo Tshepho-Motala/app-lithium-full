@@ -1,0 +1,49 @@
+{
+  "name": "PayCR",
+  "code": "paycr",
+  "url": "service-cashier-processor-wumg-paycr",
+  "methodNames": ["wu","mg"],
+  "deposit": true,
+  "withdraw": true,
+  "fees": {
+    "flat": 0,
+    "percentage": 0,
+    "minimum": 0
+  },
+  "limits": {
+    "minAmount": 2500,
+    "maxAmount": 0,
+    "maxAmountDay": 0,
+    "maxAmountWeek": 0,
+    "maxAmountMonth": 0,
+    "maxTransactionsDay": 0,
+    "maxTransactionsWeek": 0,
+    "maxTransactionsMonth": 0
+  },
+  "properties": [
+    { 
+      "name": "url",
+      "defaultValue": "https://paybackup.com/webservice/service.asmx",
+      "type": "url",
+      "description": "The API URL. We will add /GetAvailableReceiver to the end to call the request name service."
+    },
+    { 
+      "name": "companyId",
+      "defaultValue": "1",
+      "type": "string",
+      "description": "The processor should supply the API company ID."
+    },
+    { 
+      "name": "username",
+      "defaultValue": "username",
+      "type": "string",
+      "description": "The processor should supply the API username."
+    },
+    { 
+      "name": "password",
+      "defaultValue": "password",
+      "type": "string",
+      "description": "The processor should supply the API password."
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "PLAYER": {
+      "PROMOOPTOUT":{
+          "UPDATE_MARKETING_PREFERENCES": "Update Marketing Preferences",
+          "EDIT_MARKETING_PREFERENCES": "Edit Marketing Preferences",
+          "MARKETING_PREFERENCES": "Marketing Preferences"
+         }
+       }
+     }
+  }
+

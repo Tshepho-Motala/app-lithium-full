@@ -1,0 +1,52 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "CMS": {
+      "ASSETS": {
+        "TITLE": "Web Assets",
+        "DESCRIPTION": "Manage cms assets",
+
+        "FORM": {
+          "TITLE": "Upload Asset",
+          "BUTTON": "Upload",
+          "CANCEL": "Cancel"
+        },
+
+        "FIELDS": {
+          "NAME": {
+            "NAME": "Name"
+          },
+          "URL": {
+            "NAME": "Asset Url"
+          },
+          "SIZE": {
+            "NAME": "Asset Size"
+          },
+          "UPLOADED_DATE": {
+            "NAME": "Date Uploaded"
+          }
+        },
+
+        "TABS": {
+            "FONT": "Fonts",
+            "STYLE": "Styles"
+        },
+        "BUTTON": {
+          "ADD": "Add",
+          "DELETE": "Delete"
+        },
+        "DELETE": {
+          "TITLE": "Please confirm deletion",
+          "PROMPT": "Click cancel to go back, or click confirm to permanently delete this item",
+          "CONFIRM": "Confirm",
+          "CANCEL": "Cancel",
+          "ERROR_MESSAGE": "Failed to remove asset",
+          "SUCCESS_MESSAGE": "Asset was removed successfully"
+        },
+        "ADD": {
+          "ERROR_MESSAGE": "Failed to add asset",
+          "SUCCESS_MESSAGE": "Asset was added successfully"
+        }
+      }
+    }
+  }
+}

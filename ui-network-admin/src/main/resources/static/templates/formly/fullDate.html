@@ -1,0 +1,35 @@
+<div class="row v-reset-row ">
+	<!-- column for date and timezone -->
+	<div class="col-xs-8">
+		<div class="form-group">
+			<label class="control-label">{{to.labelDate}}</label><br/>
+			<div class="input-group">
+				<input type="text"
+					ng-model="model[to.keyDate]" class="form-control"
+					ng-click="datepicker.open($event)"
+					uib-datepicker-popup="{{to.datepickerOptions.format}}"
+					is-open="datepicker.opened" datepicker-options="to.datepickerOptions" ng-disabled="to.disabled" />
+				<span class="input-group-btn">
+					<button type="button" class="btn btn-default"
+						ng-click="datepicker.open($event)" ng-disabled="to.disabled">
+						<i class="glyphicon glyphicon-calendar"></i>
+					</button>
+				</span>
+			</div>
+			<small class="helpblock">{{to.descDate}}</small>
+		</div>
+		<div class="form-group">
+			<label class="control-label">{{to.labelTimezone}}</label><br/>
+			<timezone-selector ng-model="model[to.keyTimezone]" class="form-control" display-utc="true" sort-by="offset" show-local="{{to.showLocal || true}}" set-local="{{to.setLocal || true}}" width="{{to.width}}" ng-disabled="false"></timezone-selector>
+			<br/><small class="helpblock">{{to.descTimezone}}</small>
+		</div>
+	</div>
+	<!-- column timepicker -->
+	<div class="col-xs-2">
+		<div class="form-group">
+			<label class="control-label">{{to.labelTime}}</label><br/>
+			<uib-timepicker ng-model="model[to.keyTime]" ng-disabled="to.disabled"></uib-timepicker>
+			<small class="helpblock">{{to.descTime}}</small>
+		</div>
+	</div>
+</div>

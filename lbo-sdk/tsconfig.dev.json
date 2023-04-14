@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+        "baseUrl": ".",
+        "target": "ES6",
+        "experimentalDecorators": true,
+        "esModuleInterop": true,
+        "module": "commonjs",
+        "lib": ["es5", "es6", "dom"],
+        "rootDir": "src",
+        "paths": {
+            "@/*": [
+              "src/*"
+            ]
+          },
+    }
+}

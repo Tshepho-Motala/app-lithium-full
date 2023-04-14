@@ -1,0 +1,18 @@
+<div  class="container-fluid mb-3">
+
+    <div class="row v-reset-row ">
+        <div class="col-xs-12" style="margin-bottom: 10px">
+            <button lit-if-permission="KYC_ONFIDO_VERIFY_DOCUMENTS" ng-click="controller.uploadAndSubmitDocument()" type="button" class="btn btn-default">{{ "UI_NETWORK_ADMIN.PLAYER.QUICK_ACTIONS.DOCUMENT_UPLOAD_VERIFY" | translate }}</button>
+        </div>
+        <div class="col-xs-12 mb-3">
+            <div class="card card-block">
+                <div class="" style="margin-bottom: 10px;">
+                    <div ng-if="showVendorModal">
+                        <div  id="vueMountPlayerKYCVendorModal"></div>
+                    </div>
+                    <dt class="table table-sm table-responsive" table="controller.verificationsTable"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

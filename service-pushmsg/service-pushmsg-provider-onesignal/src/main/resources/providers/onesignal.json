@@ -1,0 +1,27 @@
+{
+	"code": "onesignal",
+	"name": "OneSignal",
+	"enabled": true,
+	"url": "service-pushmsg-provider-onesignal",
+	"properties": 
+	[
+		{
+			"name": "appId",
+			"defaultValue": "6faca13f-4433-4df8-ae9b-45a742876521",
+			"type": "string",
+			"description": "Your OneSignal App ID or just App ID, is the main identifier we use to differentiate your app from all other OneSignal apps. You will use this in all your SDK initialization codes and API calls. The App ID should not be treated as private."
+		},
+		{
+			"name": "restApiKey",
+			"defaultValue": "M2EzODVmYjktZDZiNy00YzA4LTgzMGMtZTk1ZTJhYWY4ZDhh",
+			"type": "string",
+			"description": "Your REST API key for app-specific operations (getting users of an app, modifying users, getting notifications, sending notifications) listed in the Keys & IDs section, add an HTTP header with the key Authorization and the value Basic REST_API_KEY, where you should replace REST_API_KEY with your actual APP REST API key."
+		},
+		{
+			"name": "baseUrl",
+			"defaultValue": "https://onesignal.com/api/v1/",
+			"type": "string",
+			"description": "The url for the rest calls."
+		}
+	]
+}

@@ -1,0 +1,1 @@
+CREATE UNIQUE INDEX `idx_user_game` ON `recently_played` (`user_id`, `game_id`) ALGORITHM INPLACE LOCK NONE;

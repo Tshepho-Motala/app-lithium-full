@@ -1,0 +1,40 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "SERVICE_CASHIER": {
+      "LIST_PAGE": {
+        "FILTER": {
+          "METHOD_TYPE": "Method Type",
+          "METHOD": "Method",
+          "PROCESSOR": "Processor",
+          "PAYMENT_TYPE": "Payment Type",
+          "CREATED_DATE": "Created Date: Start",
+          "CREATED_DATE_END": "Created Date: END",
+          "UPDATE_DATE": "Updated Date: Start",
+          "UPDATE_DATE_END": "Updated Date: END",
+          "REGISTRATION_DATE": "Registration Date: Start",
+          "REGISTRATION_DATE_END": "Registration Date: END",
+          "STATUS": "Status",
+          "USER": "User",
+          "USER_PLACEHOLDER": "Start typing to Search",
+          "PROCESSOR_REF": "Processor Reference",
+          "DESCRIPTOR": "Descriptor",
+          "ID": "ID",
+          "ID_HINT": "Please enter at least 3 digits.",
+          "AUTO_APPROVED": "Auto-Approved",
+          "TEST_ACCOUNT": "Is Test Account",
+          "TAGS": "Select Tags",
+          "OPERATOR": "Operator",
+          "TRANSACTION_RUNTIME": "Transaction runtime (sec)",
+          "HINT_RUNTIME": "Please use one of the following operators: <, >, =, <=, >=, != followed by the duration in seconds"
+        },
+        "BUTTONS": {
+          "OPEN": "Open",
+          "CANCEL": "Cancel",
+          "CLEAR": "Clear",
+          "TODAY": "Today"
+        },
+        "LOAD_TEXT": "Loading... Please wait"
+      }
+    }
+  }
+}

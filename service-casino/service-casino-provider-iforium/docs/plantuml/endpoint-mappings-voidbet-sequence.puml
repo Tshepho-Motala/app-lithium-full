@@ -1,0 +1,95 @@
+.Void Bet Sequence
+[plantuml]
+----
+@startuml
+
+    box "iForium" #LightGreen
+       participant "Generic Operator Wallet API" as ggo
+    end box
+
+    box "Lithium" #LightBlue
+        participant "iForium Casino Provider" as provider
+        participant "Config Service" as config
+        participant "CasinoClientService" as casino
+    end box
+
+    skinparam handwritten false
+    skinparam backgroundColor transparent
+    skinparam roundcorner 10
+    skinparam BoxPadding 20
+
+    skinparam sequence {
+
+        ArrowColor 3292b4
+        ArrowThickness 2
+
+        LifeLineBorderColor 3292b4
+        LifeLineBackgroundColor #3292b4
+
+        ParticipantBorderColor 3292b4
+        ParticipantBackgroundColor 3292b4
+        ParticipantFontName Arial
+        ParticipantFontSize 17
+        ParticipantFontColor white
+
+        ActorBorderColor 3292b4
+        ActorBackgroundColor aqua
+        ActorFontColor 3292b4
+        ActorFontSize 17
+        ActorFontName Arial
+    }
+
+    ggo ->> provider ++: /v1.0/gameround/placebet
+    provider -->> ggo : Success
+
+    note right of ggo
+        **/voidbet** is a first-order gameplay operation rather
+        than a remediation for errors (as is the case for
+        **/rollbackbet**).
+
+        The Void Bet method is used to return a stake
+        within a Game Round e.g. certain table games
+        return the stake for a placed bet.
+    end note
+
+    ggo ->> provider ++: /v1.0/gameround/voidbet ( OperatorAccountId )
+
+    note right of provider: Domain extracted from OperatorAccountID
+    provider ->> config ++: getConfig(Domain)
+
+    config -->> provider --: IPWhitelist
+    alt IP not found
+        provider -->> ggo : 403 Access Denied
+    else IP found
+'        note right of provider #tomato
+'            Our behaviour here very much depends on the
+'            wallet implementation. If the wallet supports no-op "tombstoning"
+'            of rollbacks when the original debit does not exist, then we can
+'            simply pass through. Otherwise, we will need to lookup the original
+'            debit and take the relevant action.
+'        end note
+'        alt Lookup Required
+            provider ->> casino ++: findTransactionDetailUrl()
+            casino -->> provider --: transactionDetailUrl
+            opt Transaction Found (transactionDetailUrl != null)
+                provider ->> provider : Create BalanceAdjustmentRequest
+                provider ->> casino ++: multiBetV1 (BalanceAdjustmentRequest[setRoundFinished=true|false])
+                casino -->> provider -- :
+            end
+
+'        else Wallet Passthrough
+'            provider ->> provider : Create BalanceAdjustmentRequest
+'            provider ->> casino ++: multiBetV1
+'            casino -->> provider -- :
+'        end
+
+'        opt EndRound == true
+'            provider ->> casino ++: completeBetRound
+'            casino -->> provider -- :
+'        end
+
+        provider -->> ggo --:
+
+    end
+@enduml
+----

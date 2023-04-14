@@ -1,0 +1,13 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "USER": {
+      "FIELDS": {
+        "LIFT_RESTRICTIONS": {
+            "LABEL": "Select Restriction",
+            "PLACEHOLDER": "Select restriction...",
+            "DESCRIPTION": "Specify a reason for this change/update."
+        }
+      }
+    }
+  }
+}

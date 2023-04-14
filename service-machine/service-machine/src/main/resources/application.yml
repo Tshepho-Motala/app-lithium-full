@@ -1,0 +1,34 @@
+server:
+  port: 9912
+  
+spring:
+  datasource:
+    url: jdbc:mysql://localhost/lithium_machine
+    username: root
+    password: mysql
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: validate
+#  cloud:
+#    stream:
+#      bindings:
+#        machineinit:
+#          group: machineinitgroup
+#          binder: rabbit
+#          destination: machineinitqueue 
+  rabbitmq:
+    listener:
+      max-concurrency: 1000
+      concurrency: 100
+        
+lithium:
+  services:
+    db:
+      load-test-data: true
+    machine:
+      graphite-base-url: http://devops-graphite.openshift-metrics.cloud.playsafesa.com/
+        
+logging:
+  level:
+    lithium.service.machine: INFO

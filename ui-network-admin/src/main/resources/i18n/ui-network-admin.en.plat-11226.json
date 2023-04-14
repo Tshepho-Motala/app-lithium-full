@@ -1,0 +1,64 @@
+{
+  "GLOBAL": {
+    "YES": "Yes",
+    "NO": "No"
+  },
+  "ERROR_DICTIONARY": {
+    "THRESHOLDS": {
+      "TYPE_WIN_LIMIT": "Win Limit Threshold",
+      "TYPE_LOSS_LIMIT": "Loss Limit Threshold",
+      "TYPE_DEPOSIT_LIMIT": "Deposit Limit Threshold",
+      "GRANULARITY_YEAR": "Yearly",
+      "GRANULARITY_MONTH": "Monthly",
+      "GRANULARITY_DAY": "Daily",
+      "GRANULARITY_WEEK": "Weekly"
+    }
+  },
+  "UI_NETWORK_ADMIN": {
+    "PLAYER": {
+      "ATTRIBUTE": {
+        "LOSS_LIMITS_VISIBLE": "Loss limits visible?"
+      }
+    },
+    "THRESHOLDS": {
+      "EVENT": {
+        "TYPE_LOSS_LIMIT": "Loss Limit",
+        "TYPE_DEPOSIT_LIMIT": "Deposit Threshold"
+      },
+      "WARNINGS": {
+        "PLAYER_NOTIFICATIONS": "Player receives loss limit notifications?",
+        "PLAYER_NOTIFICATIONS_DESC": "Notifications can't be enabled if loss limit visibility is switched off.",
+        "PLAYER": {
+          "NOTIFICATION_CHANGE_TITLE": "Player Notifications",
+          "NOTIFICATION_CHANGE_LABEL": "Enable player threshold notifications?",
+          "NOTIFICATION_CHANGE_DESC": "If this flag is enabled, then the player will receive a message to inform them that they have crossed a threshold, and is approaching a limit.",
+          "NOTIFICATION_CHANGE_ENABLED": "Player will receive notifications about thresholds.",
+          "NOTIFICATION_CHANGE_DISABLED": "Player will NOT receive notifications about thresholds."
+        }
+      }
+    },
+    "LOSS_LIMITS": {
+      "PLAYER_VISIBILITY": "Visible to player?",
+      "PLAYER_VISIBILITY_DESC_1": "DISABLED - Nothing displayed to player (can and will be enabled upon next event/manually)",
+      "PLAYER_VISIBILITY_DESC_2": "ENABLED - Display loss limits to player.",
+      "PLAYER_VISIBILITY_DESC_3": "OFF - No notifications to player. No Visibility of limits on frontend. Can only be enabled manually from LBO. (If enabled manually, normal flow continues.)",
+      "VISIBILITY_MODAL_TITLE": "Change Loss Limit Visibility",
+      "VISIBILITY": {
+        "LABEL": "Loss Limit Visibility",
+        "DISABLED": "DISABLED",
+        "ENABLED": "ENABLED",
+        "OFF": "OFF",
+        "CHANGE": {
+          "SUCCESS": "Successfully changed player loss limit visibility.",
+          "EXPLANATION": "Explanation",
+          "EXPLAIN_DISABLED": "Current visibility is set to: {{visibility}}. If changed to 'DISABLED', player will not see anything on the frontend, until they trigger a loss limit threshold, or it is enabled manually using this option.",
+          "EXPLAIN_CURRENT_DISABLED": "Visibility is set to: {{visibility}}. Player will not see anything on the frontend, until they trigger a loss limit threshold, or it is enabled manually using this option.",
+          "EXPLAIN_ENABLED": "Current visibility is set to: {{visibility}}. If changed to 'ENABLED', player will be able to see their loss limits on the frontend.",
+          "EXPLAIN_CURRENT_ENABLED": "Current visibility is set to: {{visibility}}. Player will be able to see their loss limits on the frontend.",
+          "EXPLAIN_OFF": "Current visibility is set to: {{visibility}}. If changed to 'OFF', No notifications to player. No Visibility of limits on frontend. Can only be enabled manually using this option. (If enabled manually, normal flow continues.)",
+          "EXPLAIN_CURRENT_OFF": "Current visibility is set to: {{visibility}}. No notifications to player. No Visibility of limits on frontend. Can only be enabled manually using this option. (If enabled manually, normal flow continues.)"
+        }
+      }
+    }
+  }
+}

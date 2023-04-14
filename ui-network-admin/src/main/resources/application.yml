@@ -1,0 +1,387 @@
+server:
+  port: 9800
+
+zuul:
+  debug:
+    request: true
+  ignored-headers: connection, Connection
+  sensitive-headers:
+  ignoredServices: '*'
+  routes:
+    server-oauth2: /auth/**
+    service-user: /services/service-user/**
+    service-user-mass-action: /services/service-user-mass-action/**
+    service-user-search: /services/service-user-search/**
+    service-user-threshold: /services/service-user-threshold/**
+    service-user-provider-threshold: /services/service-user-provider-threshold/**
+    service-user-provider-facebook: /services/service-user-provider-facebook/**
+    service-user-provider-vipps: /services/service-user-provider-vipps/**
+    service-user-provider-youwager: /services/service-user-provider-youwager/**
+    service-domain: /services/service-domain/**
+    service-avatar: /services/service-avatar/**
+    service-translate: /services/service-translate/**
+    service-accounting: /services/service-accounting/**
+    service-accounting-domain-summary: /services/service-accounting-domain-summary/**
+    service-accounting-domain-summary-v2: /services/service-accounting-domain-summary-v2/**
+    service-accounting-history: /services/service-accounting-history/**
+    service-accounting-provider-internal: /services/service-accounting-provider-internal/**
+    service-kyc: /services/service-kyc/**
+    service-accounting-provider-youwager: /services/service-accounting-provider-youwager/**
+    service-provider: /services/service-provider/**
+    service-mail: /services/service-mail/**
+    service-casino: /services/service-casino/**
+    service-casino-cms: /services/service-casino-cms/**
+    service-casino-search: /services/service-casino-search/**
+    service-casino-provider-betsoft: /services/service-casino-provider-betsoft/**
+    service-casino-provider-rival: /services/service-casino-provider-rival/**
+    service-casino-provider-nucleus: /services/service-casino-provider-nucleus/**
+    service-casino-provider-gogame: /services/service-casino-provider-gogame/**
+    service-casino-provider-2winpower: /services/service-casino-provider-2winpower/**
+    service-casino-provider-livedealer: /services/service-casino-provider-livedealer/**
+    service-casino-provider-supera: /services/service-casino-provider-supera/**
+    service-casino-provider-sgs: /services/service-casino-provider-sgs/**
+    service-casino-provider-donira: /services/service-casino-provider-donira/**
+    service-casino-provider-cataboom: /services/service-casino-provider-cataboom/**
+    service-casino-provider-klimalotteriet: /services/service-casino-provider-klimalotteriet/**
+    service-casino-provider-incentive: /services/service-casino-provider-incentive/**
+    service-casino-provider-slotapi: /services/service-casino-provider-slotapi/**
+    service-casino-provider-sportsbook: /services/service-casino-provider-sportsbook/**
+    service-casino-provider-roxor: /services/service-casino-provider-roxor/**
+    service-games: /services/service-games/**
+    service-games-provider-google-rge: /services/service-games-provider-google-rge/**
+    service-cashier:
+      path: /services/service-cashier/**
+      sensitive-headers: connection, Connection
+    service-cashier-provider-mercadonet: /services/service-cashier-provider-mercadonet/**
+    service-cashier-provider-internal: /services/service-cashier-provider-internal/**
+    service-cdn-provider-google: /services/service-cdn-provider-google/**
+    service-geo: /services/service-geo/**
+    service-access-provider-kycgbg: services/service-access-provider-kycgbg/**
+    service-access-provider-transunion: services/service-access-provider-transunion/**
+    service-access-provider-kyc: services/service-access-provider-kyc/**
+    service-report-players: /services/service-report-players/**
+    service-report-player-trans: /services/service-report-player-trans/**
+    service-access: /services/service-access/**
+    service-access-provider-iovation: /services/service-access-provider-iovation/**
+    service-access-provider-gamstop: /services/service-access-provider-gamstop/**
+    service-access-provider-sphonic-cruks: /services/service-access-provider-sphonic-cruks/**
+    service-access-provider-sphonic-iban: /services/service-access-provider-sphonic-iban/**
+    service-access-provider-sphonic-kyc: /services/service-access-provider-sphonic-kyc/**
+    service-kyc-provider-paystack: /services/service-kyc-provider-paystack/**
+    service-affiliate-provider-pap: /services/service-affiliate-provider-pap/**
+    service-affiliate-provider-ia: /services/service-affiliate-provider-ia/**
+    service-sms: /services/service-sms/**
+    service-pushmsg: /services/service-pushmsg/**
+    service-report-games: /services/service-report-games/**
+    service-limit: /services/service-limit/**
+    service-raf: /services/service-raf/**
+    service-xp: /services/service-xp/**
+    service-notifications: /services/service-notifications/**
+    service-promo: /services/service-promo/**
+    service-leaderboard: /services/service-leaderboard/**
+    service-product: /services/service-product/**
+    service-settlement: /services/service-settlement/**
+    service-report-incomplete-players: /services/service-report-incomplete-players/**
+    service-stats: /services/service-stats/**
+    service-changelog: /services/service-changelog/**
+    service-kyc-provider-smileidentity: /services/service-kyc-provider-smileidentity/**
+    service-kyc-provider-onfido: /services/service-kyc-provider-onfido/**
+    service-document-provider-hellosoda: /services/service-document-provider-hellosoda/**
+    service-datafeed-provider-google: /services/service-datafeed-provider-google/**
+    service-document: /services/service-document/**
+    service-casino-provider-iforium: /services/service-casino-provider-iforium/**
+    service-document-generation: /services/service-document-generation/**
+    service-cdn-cms: /services/service-cdn-cms/**
+    service-access-provider-google-recaptcha: /services/service-access-provider-google-recaptcha/**
+    service-user-provider-sphonic-idin: /services/service-user-provider-sphonic-idin/**
+    service-reward: /services/service-reward/**
+    service-reward-provider-casino-roxor: /services/service-reward-provider-casino-roxor/**
+    service-reward-provider-casino-blueprint: /services/service-reward-provider-casino-blueprint/**
+    service-csv-provider-threshold: /services/service-csv-provider-threshold/**
+ribbon:
+  ReadTimeout: 60000
+
+logging:
+  level:
+#    lithium.service.translate.client.TranslationsService: INFO
+    lithium.ui.network.admin.UiNetworkAdminApplication: INFO
+    ro.isdc.wro.http.WroFilter: OFF
+    
+#TODO is this needed?
+spring:
+  aop:
+    proxy-target-class: true
+  servlet:
+    multipart:
+        maxFileSize: 20MB
+        maxRequestSize: 20MB
+
+server-oauth2:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+    ConnectTimeout: 10000
+    ReadTimeout: 60000
+service-user:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-user-mass-action:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-user-search:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-user-provider-facebook:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-user-provider-vipps:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-user-provider-youwager:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-domain:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-avatar:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-translate:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-accounting:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-accounting-domain-summary:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-accounting-history:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-accounting-provider-internal:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-kyc:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-accounting-provider-youwager:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-provider:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-mail:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-casino:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-casino-cms:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-casino-search:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-casino-provider-betsoft:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-casino-provider-rival:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-casino-provider-nucleus:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-casino-provider-gogame:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-casino-provider-2winpower:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-casino-provider-livedealer:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-casino-provider-supera:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-casino-provider-sgs:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-casino-provider-donira:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-casino-provider-cataboom:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-casino-provider-klimalotteriet:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-casino-provider-incentive:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-casino-provider-slotapi:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-casino-provider-sportsbook:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-casino-provider-roxor:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-games:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-games-provider-google-rge:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-cashier:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-cashier-provider-mercadonet:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-cashier-provider-internal:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-cdn-provider-google:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-geo:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-access-provider-kycgbg:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-access-provider-transunion:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-access-provider-kyc:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-report-players:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-report-player-trans:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-access:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-access-provider-iovation:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-access-provider-gamstop:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-access-provider-sphonic-cruks:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-access-provider-sphonic-iban:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-kyc-provider-paystack:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-affiliate-provider-pap:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-affiliate-provider-ia:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-sms:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-pushmsg:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-report-games:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-limit:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-raf:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-xp:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-notifications:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-promo:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-leaderboard:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-product:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-settlement:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-report-incomplete-players:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-stats:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-changelog:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-kyc-provider-smileidentity:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-document-provider-hellosoda:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-datafeed-provider-google:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-document:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-casino-provider-iforium:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-cdn-cms:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-access-provider-google-recaptcha:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-document-generation:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-user-provider-sphonic-idin:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-user-provider-threshold:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-user-threshold:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-access-provider-sphonic-kyc:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-kyc-provider-onfido:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-accounting-domain-summary-v2:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-reward-provider-casino-roxor:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-reward-provider-casino-blueprint:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-reward:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-csv-provider-threshold:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList
+service-csv-provider-user:
+  ribbon:
+    NIWSServerListClassName: com.netflix.niws.loadbalancer.DiscoveryEnabledNIWSServerList

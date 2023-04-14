@@ -1,0 +1,234 @@
+= LSPLAT-9892 PLAT-11017 ⁃ (Ingestion - Casino) Ingest casino bet history
+Reza Khan <reza.khan@wonderlabz.com>
+1.0, Feb 01, 2023:: TA - LSPLAT-9892 PLAT-11017 ⁃ (Ingestion - Casino) Ingest casino bet history
+:sectnums:
+:toc: left
+:toclevels: 4
+:toc-title: LSPLAT-9892 PLAT-11017
+:icons: font
+:source-highlighter: coderay
+:url-quickref: https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/
+:table-caption!:
+
+WARNING: You might need to install graphviz to render the component models on IntelliJ on plantUML if not viewed on GitLab- see https://playsafe.atlassian.net/wiki/spaces/LITHIUM/pages/1674936347/How+To+Setup+Lithium+Local+Development#Noteworthy-Extensions.1[IntelliJ: PlantUML diagramming tool]
+
+== Description
+=== Jira
+* https://livescoregroup.atlassian.net/browse/PLAT-11017
+* https://playsafe.atlassian.net/browse/LSPLAT-9892
+
+=== Gitlab
+* Branch: origin/feature/LSPLAT-9892-PLAT-11017-vb-ingest-casino-bet-history
+* MR: https://gitlab.com/playsafe/lithium/app-lithium-full/-/merge_requests/6293
+
+=== Business
+Any casino bets made by player's within the regulatory data retention period need to be visible to players after migration from the old operator to lithium.
+
+=== Approvals
+|===
+|Component |Reason |Comments
+
+|Li
+|
+|
+
+|DWH
+|
+|
+
+|===
+
+== Architecture
+=== Technical
+NOTE: This process can only begin once all players have been created in lithium, with respective lithium GUID's.
+
+IMPORTANT: Any provided sequences will stipulate a happy path process. All failure scenarios should be thought through, handled, retried where possible, or ultimately fail and rolled back and placed in a parking lot, as per details on previous technical specifications.
+
+TIP: Refer to https://gitlab.com/playsafe/lithium/app-lithium-full/-/blob/3887b3f2b0c8c2dca43259d0f3d008e2ce496e42/service-accounting/service-accounting-provider-internal/docs/TA/LSPLAT-9918-PLAT-11049-vb-migration-accounting-ingest-historic-transactions.adoc#user-content-prerequisites for a brief description of DLQ and PL used for handling failures. This link will become ineffective once the referenced branch above has been merged. After which, the document can be found in the develop branch in the same directory structure.
+
+The business requirement will be fulfilled via a casino bet history migration process, which will retrieve relevant casino bet data from the old operator's datasets and ingest them into lithium in the appropriate schemas to enable continued reporting to players on their historic casino bet information after the migration.
+
+==== The dataset (from sandbox)
+DWH has provided a simplified view consisting of a single bet per record.
+
+[source,sql]
+----
+SELECT * FROM `lithium-virginbet-sandbox.dk_files.casinoSnapshot`
+----
+
+IMPORTANT: The dataset is not limited by date (i.e, regulatory data retention period.) Speak to DWH about this. For production, this will be important. It is not a blocker for now. Implementation and testing can go on.
+
+==== The process
+The relevant tables in lithium are in the casino database, named: *lithium_casino*. The tables include: *bet_round, bet, bet_result*. There are a number of prerequisites before records can be inserted into these tables, which can be ascertained by looking at the foreign keys on each of the main tables.
+
+.The following will have to be done prior to inserting records into the main tables.
+* Creation of games: _lithium_casino.game_
+* Creation of providers: _lithium_casino.provider_
+* Creation of users: _lithium_casino.user_
+
+===== Creation of games
+In order to report on which games the bets were placed, the game information needs to exist in lithium.
+
+It gets a little more complex. _lithium_casino.game_ is only an intermediary table, i.e, it holds is a reference (or GUID) to a game record in _lithium_games.game_. All pertinent game information, such as the game name, is held in _lithium_games.game_.
+
+So, firstly, the game has to be written to _lithium_games.game_, with all of its prerequisites taken care of, such as the creation of _lithium_games.domain_. For a more concise list, refer to the foreign keys in _lithium_games.game_. Finally, the game should be created in a disabled and invisible state.
+
+Once the game exists in _lithium_games.game_, the reference can be written to _lithium_casino.game_.
+
+There will be a small number of games, but much more casino bets. Thus, to prevent unnecessary system impact to service-games for game creation during casino bet ingestion, these games should be created prior to casino bet ingestion.
+
+====== The dataset
+This is TBA. However, based on the main bet dataset, it should be simple to isolate a distinct set of games played within the set of casino bet data to be ingested.
+
+NOTE: Procure from DWH
+
+====== Sequence
+include::../plantuml/sequence/ingest-game-data.puml[]
+
+====== How to construct the provider guid (for lithium_games.game)
+The game dataset will provide a game provider name, and a sub provider name. The sub provider name looks the most relevant.
+
+Construct the _lithium_games.game.provider_guid_ by using the sub provider name lowercase, prefixed with _legacy-_ just in case it becomes necessary to search for and modify the games in the future.
+
+For example, it should look like *legacy-blueprint* or *legacy-evolution*.
+
+====== How to construct the game guid (for lithium_games.game)
+Use the provider guid from above, and add a suffix of the game id as it is in the game dataset.
+
+For example, it should look like *legacy-blueprint-1* or *legacy-blueprint-2*.
+
+===== Creation of providers (for lithium_casino.provider)
+Similar to construction of the provider guid in lithium_games.game above, but now in lithium_casino.provider. Except, lithium_casino.provider requires a unique guid and it is per domain, so we include the domain name first in the guid.
+
+For example, it should look like *virginbet_uk/legacy-blueprint* or *virginbet_uk/legacy-evolution*.
+
+The provider can simply be created at the time of casino bet ingestion using the find or create mechanic, with sane retry and backoff strategies.
+
+===== Creation of users
+Assuming the data dequeued to GameDataQueueProcessor already contains the lithium user guid, the user can simply be created at the time of casino bet ingestion using the find or create mechanic, with sane retry and backoff strategies.
+
+===== Ingestion of bets
+TIP: Study the dataset provided before reading below
+
+For each record in the provided dataset, in lithium, that translates to 3 records. One in lithium_casino.bet_round, another in lithium_casino.bet, and finally lithium_casino.bet_result. The _turnover_ and _return_ data will give guidance to the creation of these records.
+
+|===
+|if _turnover_ |then bet kind is |and if _return_ |then bet result kind is
+
+|>0
+|BET
+|0
+|LOSS
+
+|>0
+|BET
+|>0
+|WIN
+
+|0
+|FREE_BET
+|0
+|FREE_LOSS
+
+|0
+|FREE_BET
+|>0
+|FREE_WIN
+|===
+
+====== Sequence
+include::../plantuml/sequence/ingest-casino-bet-data.puml[]
+
+====== BetPersistService.persist
+|===
+|Param |Input
+
+|currencyCode
+|Not provided. Confirm with DWH if it should always be GBP.
+
+|gameId
+|Provided in dataset but needs alteration. Similar to guid contruction for lithium_games.game explained above, except, domain name needs to be prefixed. Examples:  *virginbet_uk/legacy-blueprint-1 or virginbet_uk/legacy-blueprint-2.*
+
+|kind
+|See explanation above
+
+|providerGuid
+|See explanation above
+
+|roundId
+|Not provided. Use betid from dataset.
+
+|betTransactionId
+|Not provided. Use betid from dataset. We are guaranteed one record per bet.
+
+|checkSequence
+|false
+
+|amount
+|Provided in dataset. i.e, turnover
+
+|transactionTimestamp
+|Provided in dataset. i.e, placementDateTime
+
+|playerGuid
+|Lithium user guid
+
+|domainName
+|Lithium domain name
+
+|lithiumAccountingId
+|null
+
+|balanceAfter
+|null
+
+|roundFinished
+|true
+|===
+
+====== BetResultPersistService.persist
+|===
+|Param |Input
+
+|userGuid
+|Lithium user guid
+
+|gameGuid
+|Same as gameId from BetPersistService.persist
+
+|domainName
+|Lithium domain name
+
+|providerGuid
+|See explanation above
+
+|roundId
+|Not provided. Use betid from dataset. Used to retrieve bet round.
+
+|currencyCode
+|Same as in BetPersistService.persist
+
+|kind
+|See explanation above
+
+|checkSequence
+|false
+
+|sequenceNumber
+|null
+
+|betResultTransactionId
+|Not provided. Use betid from dataset. We are guaranteed one record per bet.
+
+|roundComplete
+|true
+
+|returns
+|Provided in dataset. i.e, return
+
+|transactionTimestamp
+|Provided in dataset. i.e, settlementDateTime
+
+|lithiumAccountingId
+|null
+|===

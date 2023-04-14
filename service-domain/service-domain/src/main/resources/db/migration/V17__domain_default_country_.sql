@@ -1,0 +1,1 @@
+ALTER TABLE `domain` ADD COLUMN `default_country` varchar(3) DEFAULT NULL;

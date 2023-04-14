@@ -1,0 +1,21 @@
+server:
+  port: 2968
+
+eureka:
+  instance:
+    appname: service-datafeed-provider-google
+
+spring:
+  application:
+    name: service-datafeed-provider-google
+
+publisher:
+  executorThreadCount: 4
+
+lithium:
+  service:
+    datafeed:
+      corePoolSize: 4
+      maxPoolSize: 4
+
+

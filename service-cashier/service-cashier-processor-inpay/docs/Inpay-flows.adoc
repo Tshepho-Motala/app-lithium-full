@@ -1,0 +1,12 @@
+= Inpay Withdraw Flow
+1.0, March 10, 2022: LSBet - NL
+:sectnums:
+:toc: left
+:toclevels: 4
+:toc-title: LSBet - NL
+:icons: font
+:url-quickref: https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/
+
+.Inpay Withdraw Flow
+include::plantuml/inpay-withdraw-flow.puml[Flow Diagram]
+

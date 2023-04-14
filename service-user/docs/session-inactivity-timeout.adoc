@@ -1,0 +1,71 @@
+= Service User - Session Inactivity Timeout
+Riaan Schoeman <riaan.schoeman@wonderlabz.com>
+1.0, February 22, 2022: Service User
+:sectnums:
+:toc: left
+:toclevels: 4
+:toc-title: svc-user
+:icons: font
+:url-quickref: https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/
+
+//:stylesheet: css/asciidoctor.css
+//:stylesheet: css/material-blue.css
+
+:domain-client-sourcedir: ../../service-domain/client-service-domain/src/main/java
+:user-sourcedir: ../../service-user/service-user/src/main/java
+
+//This is done tto keep formatting aligned with gitlab
+****
+[verse,,]
+____
+link:../../readme.adoc[Home] | link:readme.adoc[Back]
+____
+****
+
+This document will describe everything related to Session Inactivity Timeout.
+
+== Description
+
+* This feature is used to log out users after a configurable amount of time for inactivity.
+* e.g.
+** login: 2021-12-24 15:53:01
+** last activity: 2021-12-24 16:59:49
+** logout: 2021-12-24 19:00:49 (2hours after last activity)
+** duration: 11267623ms (3 hours 7 minutes 48 seconds)
+* Applicable DomainSettings: (from `service-domain`)
+** Default value: 7200 seconds (2hours)
+
+[source, java]
+----
+include::{domain-client-sourcedir}/lithium/service/domain/client/DomainSettings.java[lines=45..45]
+----
+* Read from:
+
+[source,java]
+----
+include::{user-sourcedir}/lithium/service/user/services/SessionInactivityService.java[lines=35..45]
+----
+
+* Which is used in a scheduled job:
+`lithium.service.user.jobs.SessionInactivityTimeoutJob.processInactiveSessionTimeout`
+
+[source,java]
+----
+include::{user-sourcedir}/lithium/service/user/jobs/SessionInactivityTimeoutJob.java[lines=16..17]
+----
+
+* When a session was added to the cache from the scheduled job above, it is read/checked again in:
+`lithium.service.user.services.LoginEventService.validateSession`
+
+[source,java]
+----
+include::{user-sourcedir}/lithium/service/user/services/LoginEventService.java[lines=211..221]
+----
+
+== Basic Flow (cachePut)
+
+include::plantuml/session-inactivity-timeout.puml[Basic Flow]
+
+== Basic Flow (cacheGet)
+
+include::plantuml/session-inactivity-timeout2.puml[Basic Flow]

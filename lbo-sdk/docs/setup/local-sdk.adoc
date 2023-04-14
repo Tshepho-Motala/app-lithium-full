@@ -1,0 +1,21 @@
+# Run SDK Locally
+
+The SDK is completely decoupled from the original LBO solution. This means that there is no direct reference to any of the generated plugins from the original LBO website, and therefore needs a 'plugin host' in order for it to function correctly on development environments.  
+*Note: You will first need to register your plugin for it to compile during the deploy process.*
+
+Looking in the `package.json`, you will see the following noteworthy scripts:  
+
+**Script: `deploy [key [key2] [key3]]`**  
+This is the entrypoint to generating valid JS plugins from Vue templates. This process takes long, and will output all the assets in the `/assets` folder at the root of this project.  
+
+Passing a plugin key(s) will only deploy the keys set, and skip all other plugins. This can be useful if you want to only run one (or more) plugins on your local environment without waiting for them to all compile.  
+
+You can rerun the deploy script even after the initial deploy, without clearing your assets folder, and everything will still function correctly.  
+
+It is recommended that you run a full deploy on your first use.  
+
+**Script: `host`**  
+Executing this script will start the `PluginHost` server, which will host the assets in the `/assets/` folder. All changes made in this folder are automatically picked up, and you do not need to restart the service after every change.
+
+**Script: `di`**  
+This is a convenience script to execute the `deploy` script, and subsequently the `host` scrip when deploy is complete.  

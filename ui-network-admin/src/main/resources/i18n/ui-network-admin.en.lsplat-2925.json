@@ -1,0 +1,10 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "DOMAIN": {
+      "EMAIL": {
+        "EXISTS_IN_DOMAIN": "The email you are trying to use already exists within the domain, and the domain does not allow duplicate emails.",
+        "EXISTS_IN_ECOSYSTEM": "The email you are trying to use already exists within the ecosystem."
+      }
+    }
+  }
+}

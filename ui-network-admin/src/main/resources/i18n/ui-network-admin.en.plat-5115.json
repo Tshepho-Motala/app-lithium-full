@@ -1,0 +1,10 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "DOMAIN_SELECTOR": {
+      "OUTPUT": {
+        "SELECT_DOMAIN": "Select a Domain",
+        "SELECTED_DOMAIN_HINT": "Click the reset button to select a different domain"
+      }
+    }
+  }
+}

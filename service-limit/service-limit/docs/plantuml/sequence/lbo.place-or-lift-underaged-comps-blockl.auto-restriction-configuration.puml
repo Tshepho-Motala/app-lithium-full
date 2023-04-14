@@ -1,0 +1,46 @@
+.Overview - Force Promotions Block
+[plantuml]
+----
+@startuml
+'https://plantuml.com/sequence-diagram
+
+actor "CS Agent" as csa
+boundary "LBO" as lbo
+participant Lithium as li
+
+autonumber
+
+csa -> lbo: login to LBO
+activate lbo
+    csa -> lbo: Opens Auto Restrictions Rules
+    csa -> lbo: Click add new auto restriction ruleset button
+    csa -> lbo: Selects domain, adds a new auto-restriction name, selects the DomainRestrictionSet and specifies the ruleset outcome to Lift or (Place/Lift)
+    ||10||
+    group Ruleset configuration (Age in years)
+        csa -> lbo: Click add new rule to ruleset button
+        csa -> lbo: Selects Field = "Age"
+        alt LIFT rule
+            csa -> lbo: Selects Operator = "Greater than or equals"
+        else PLACE rule
+            csa -> lbo: Selects Operator = "Less than or equals"
+        end
+        csa -> lbo: Inputs Value = X
+        note right of
+            * When X = 25, then this auto-restriction rule will check against the players date of birth based on the timezone the player had configured on their profile
+                *
+        end note
+    end
+    csa -> lbo: Saves the Auto-Restriction Ruleset
+    lbo -> li: /service-limit/backoffice/auto-restriction/ruleset/livescore_uk/create
+    activate li
+        note left
+            * When a new auto-restriction ruleset is created, it would be included in the UnderagedAutoRestrictionJob that runs once a day just
+              after, and when all rules equates to true for a particular ruleset, the configured outcome (Place/Lift) is executed)
+        end note
+        li -> li: create new auto_restriction_rule_set
+        li --> lbo: Status 200 OK
+    deactivate li
+deactivate lbo
+
+@enduml
+----

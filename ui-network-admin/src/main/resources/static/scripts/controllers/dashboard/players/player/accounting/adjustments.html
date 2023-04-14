@@ -1,0 +1,18 @@
+<div class="modal-header">
+	<h3 class="modal-title" id="modal-title">{{ 'UI_NETWORK_ADMIN.PLAYER.ACCOUNTING.BALANCEADJUST.TITLE' | translate }}
+		<div class="pull-right">
+			<button type="button" class="btn btn-default" ng-click="controller.cancel()">
+				<i class="fa fa-times"></i>
+			</button>
+		</div>
+	</h3>
+</div>
+<form ng-submit="controller.doAdjust()" name="controller.form" autocomplete="off" novalidate>
+<div class="modal-body" id="modal-body">
+	<formly-form model="controller.model" fields="controller.fields" form="controller.form" options="controller.options"></formly-form>
+</div>
+<div class="modal-footer">
+	<button-submit></button-submit>
+	<button-cancel ng-click="controller.cancel()"></button-cancel>
+</div>
+</form>

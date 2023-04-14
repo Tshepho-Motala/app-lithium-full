@@ -1,0 +1,38 @@
+server:
+  port: 9600
+spring:
+  datasource:
+    url: jdbc:mysql://localhost/lithium_translate
+    username: root
+    password: mysql
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: validate
+  cloud:
+    stream:
+      bindings:
+        moduleinfostartupinput:
+          destination: moduleinfostartupoutput
+        translationsregisterinput:
+          consumer:
+            concurrency: 20
+            max-concurrency: 40
+            prefetch: 1
+          group: translationsregistergroup
+          binder: rabbit
+          destination: translationsregisterqueue
+lithium:
+  services:
+    db:
+      load-test-data: false
+    translate:
+      process-translation-migration:
+            cron: 0 1-59 * * * *
+            keepAlive: 60
+#  metrics:
+#    info-threshold-millis: 0
+logging:
+  level:
+    lithium.service.translate: INFO
+#    org.hibernate.type.descriptor.sql: INFO

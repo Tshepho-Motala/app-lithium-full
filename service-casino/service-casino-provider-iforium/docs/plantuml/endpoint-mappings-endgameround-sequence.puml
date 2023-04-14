@@ -1,0 +1,58 @@
+.End Game Round Sequence
+[plantuml]
+----
+@startuml
+
+    box "iForium" #LightGreen
+       participant "Generic Operator Wallet API" as ggo
+    end box
+
+    box "Lithium" #LightBlue
+        participant "iForium Casino Provider" as provider
+        participant "Config Service" as config
+        participant "CasinoClientService" as casino
+    end box
+
+    skinparam handwritten false
+    skinparam backgroundColor transparent
+    skinparam roundcorner 10
+    skinparam BoxPadding 20
+
+    skinparam sequence {
+
+        ArrowColor 3292b4
+        ArrowThickness 2
+
+        LifeLineBorderColor 3292b4
+        LifeLineBackgroundColor #3292b4
+
+        ParticipantBorderColor 3292b4
+        ParticipantBackgroundColor 3292b4
+        ParticipantFontName Arial
+        ParticipantFontSize 17
+        ParticipantFontColor white
+
+        ActorBorderColor 3292b4
+        ActorBackgroundColor aqua
+        ActorFontColor 3292b4
+        ActorFontSize 17
+        ActorFontName Arial
+    }
+
+    ggo ->> provider ++: /v1.0/gameround/end
+
+    note right of provider: Domain extracted from OperatorAccountID
+    provider ->> config ++: getConfig(Domain)
+    config -->> provider --: IPWhitelist
+    alt IP not found
+        provider -->> ggo : 403 Access Denied
+    else IP found
+        provider ->> casino ++: completeBetRound
+        casino -->> provider -- :
+        provider ->> casino ++: getPlayerBalance
+        casino -->> provider -- :
+        provider -->> ggo --:
+    end
+
+@enduml
+----

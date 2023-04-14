@@ -1,0 +1,40 @@
+<div class="col-md-12">
+	<div class="box box-default box-solid">
+		<div class="box-header with-border">
+			{{ 'UI_NETWORK_ADMIN.BONUS.EDIT.TABS.PERCENTAGES' | translate }}
+		</div>
+		<div class="box-body table-responsive">
+			<div class="well">
+				<span>{{ 'UI_NETWORK_ADMIN.BONUS.EDIT.GAME_PERCENTAGES.EXPLAIN' | translate }}</span>
+			</div>
+			<ul class="todo-list ui-sortable">
+				<li ng-repeat="g in controller.model.gamePercentages">
+					<img width="40px" class="img-circle img-bordered-sm" src="//:0" ng-src="{{controller.imageUrl}}gameguid={{g.gameInfo.guid}}&function=thumb"alt="">
+					<div class="tools">
+						<i class="fa fa-trash-o" ng-click="controller.removeGamePercentage(g.id, $index)"></i>
+					</div>
+					<a ng-href="{{controller.demoUrl}}gameguid={{g.gameInfo.guid}}&lang=en" target="_blank">{{ g.gameInfo.name }}</a><br/>
+					<span class="description">
+						<b>Platform: </b>{{(g.gameInfo.labels.os.value || {})}}
+					</span><br/>
+					<span class="description">
+						<b>Provider: </b>{{g.gameInfo.providerGuid.replace("service-casino-provider-","")}}
+					</span><br/>
+					<span class="description">
+						<b>Percentage: </b>
+						<input ng-model="g.percentage" type="text" value="" ui-number-mask="false" min="0" max="100" ui-hide-group-sep>
+					</span>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>
+<div class="col-md-12">
+	<div class="box box-default box-solid">
+		<div class="box-header with-border">Available Games</div>
+		<div class="box-body">
+			<p>Click on a game to add it.</p>
+			<dt table="controller.gamePercentagesList"/>
+		</div>
+	</div>
+</div>

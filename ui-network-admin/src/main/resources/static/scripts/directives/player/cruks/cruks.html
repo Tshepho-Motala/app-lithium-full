@@ -1,0 +1,26 @@
+<div class="box box-default box-solid">
+    <div class="box-header with-border">
+        {{'UI_NETWORK_ADMIN.PLAYER.CRUKS.TITLE'|translate}}
+        <div class="box-tools pull-right">
+            <button ng-if="user.additionalData['cruksId'] === undefined || user.additionalData['cruksId'] === null" type="button" class="btn btn-box-tool" ng-click="editCruks()" lit-if-permission="CRUKS_EDIT" lit-permission-domain="{{user.domain.name}}">
+                <span><i class="fa fa-plus"></i> {{'GLOBAL.ACTION.ADD' | translate}}</span>
+            </button>
+            <button ng-if="user.additionalData['cruksId'] !== undefined && user.additionalData['cruksId'] !== null"  type="button" class="btn btn-box-tool" ng-click="editCruks()" lit-if-permission="CRUKS_EDIT" lit-permission-domain="{{user.domain.name}}">
+                <span><i class="fa fa-pencil-square-o"></i> {{'GLOBAL.ACTION.MODIFY'|translate}}</span>
+            </button>
+        </div>
+    </div>
+    <div class="box-body table-responsive">
+        <div ng-if="user.additionalData['cruksId'] === undefined || user.additionalData['cruksId'] === null" class="box box-danger">
+            <div class="box-body">
+                {{'UI_NETWORK_ADMIN.PLAYER.CRUKS.CRUKS_ID_NOT_SET' | translate}}
+            </div>
+        </div>
+        <table ng-if="user.additionalData['cruksId'] !== undefined && user.additionalData['cruksId'] !== null" class="table table-bordered">
+            <tr>
+                <th width="15%">{{'UI_NETWORK_ADMIN.PLAYER.CRUKS.TITLE' | translate}}:</th>
+                <td style="overflow-wrap: anywhere">{{user.additionalData['cruksId']}}</td>
+            </tr>
+        </table>
+    </div>
+</div>

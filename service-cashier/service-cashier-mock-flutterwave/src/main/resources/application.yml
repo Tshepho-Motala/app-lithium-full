@@ -1,0 +1,31 @@
+server:
+  port: 9632
+spring:
+  datasource:
+    url: jdbc:mysql://localhost/lithium_cashier_mock_flutterwave
+    username: root
+    password: mysql
+  jpa:
+    hibernate:
+      ddl-auto: validate
+      naming:
+        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+        implicit-strategy: org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy
+    show-sql: false
+
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+
+logging:
+  level:
+    lithium.service.cashier.mock.flutterwave: INFO
+
+lithium:
+  service:
+    cashier:
+      mock:
+        flutterwave:
+          webhook-scheduling-in-milliseconds: "10000"
+          webhook-url: "service-cashier-processor-flutterwave/public/webhook"
+          update-status-in-milliseconds: "3000"

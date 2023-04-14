@@ -1,0 +1,57 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost/lithium_document_generation
+    username: root
+    password: mysql
+  jpa:
+    hibernate:
+      ddl-auto: validate
+  application:
+    name: service-document-generation
+  cloud:
+    stream:
+      bindings:
+        service-csv-provider-cashier-transactions-output:
+          binder: rabbit
+          destination: csv-cashier-transaction-queue
+          producer:
+            required-groups:
+              - csv-cashier-transaction-group
+        service-csv-provider-mail-output:
+          binder: rabbit
+          destination: csv-mail-queue
+          producer:
+            required-groups:
+              - csv-mail-group
+        service-csv-provider-threshold-output:
+          binder: rabbit
+          destination: csv-threshold-queue
+          producer:
+            required-groups:
+              - csv-threshold-group
+        service-csv-provider-casino-output:
+          binder: rabbit
+          destination: csv-casino-queue
+          producer:
+            required-groups:
+              - csv-casino-group
+        service-csv-provider-user-output:
+          binder: rabbit
+          destination: csv-user-queue
+          producer:
+            required-groups:
+              - service-csv-provider-user-group
+
+server:
+  port: 9393
+
+logging:
+  level:
+    lithium.service.document.generation: INFO
+
+lithium:
+  service:
+    document:
+      generation:
+        clear-delay-millis: 86400000
+        cron: "0 0 */1 * * *"

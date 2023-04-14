@@ -1,0 +1,98 @@
+.sportsbook settlement data
+[plantuml]
+----
+
+@startuml
+
+' hide the spot
+hide circle
+
+' avoid problems with angled crows feet
+skinparam linetype ortho
+
+entity "scp-sportsbook" as sb {
+  service-casino-provider-sportsbook
+}
+
+sb --> "lithium_casino_sportsbook"
+
+database "lithium_casino_sportsbook" {
+  bet ||--|{ selection
+  selection }|--|| sport
+  selection }|--|| league
+  selection }|--|| status
+  selection }|--|| event
+  selection }|--|| market
+  bet }|--|| user
+
+  class bet {
+    "betId": "637774972306154489",
+    "purchaseId": "637774972306154488",
+    "betName": "2/3",
+    "betDate": "2022-01-11T11:27:09.686",
+    "betSettledDate": "2022-01-13T09:09:46.452",
+    "customerId": "2000000588",
+    "userId": 1
+    "sbtCustomerId": "26629167",
+    "totalOdds": "8.71/1",
+    "stake": 0.05,
+    "brand": "402",
+    "betStatus": "Lost",
+    "isFreeBet": false,
+    "isComboBonus": false,
+    "selectionId": 1,
+    "betTypeId": 13,
+    "return": 0.0
+  }
+
+  class selection {
+    "id": 1,
+    "externalId": "0ML62647249_1",
+    "name": "Zoziya Kardava",
+    "sportId": 1,
+    "leagueId": 1,
+    "eventId": 1,
+    "marketId": 1,
+    "odds": "7/4",
+    "settlementScore": "2 : 6",
+    "statusId": 1
+  }
+
+  class sport {
+    "id": 1,
+    "name": "Tennis",
+    "externalId": 6
+  }
+
+  class league {
+    "id": 1,
+    "name": "ITF W15 Antalya",
+    "externalId": 92927
+  }
+
+  class event {
+    "id": 1,
+    "eventDate": "2022-01-11T14:00",
+    "eventName": "Zoziya Kardava vs Lavinia Tanasie",
+    "externalEventId": 25968487
+  }
+
+  class market {
+    "id": 1,
+    "marketName": "Winner1st Set"
+  }
+
+  class status {
+    "id": 1,
+    "name": "Lost"
+  }
+
+  class user {
+    "id": 1,
+    "guid": "livescore_nigeria/2227755"
+  }
+}
+
+@enduml
+
+----

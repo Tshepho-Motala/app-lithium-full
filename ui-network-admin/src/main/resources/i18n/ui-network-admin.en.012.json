@@ -1,0 +1,100 @@
+{
+	"GLOBAL": {
+		"NA": "N/A",
+		"FIELDS": {
+			"BONUSCODE": "Code",
+			"BONUSNAME": "Name",
+			"BONUSTYPE": "Type"
+		},
+		"DAYS": {
+			"1":"Monday",
+			"2":"Tuesday",
+			"3":"Wednesday",
+			"4":"Thursday",
+			"5":"Friday",
+			"6":"Saturday",
+			"7":"Sunday"
+		}
+	},
+	"UI_NETWORK_ADMIN": {
+		"BONUS": {
+			"NOCODE": "No Bonus Code Specified",
+			"CANCEL": {
+				"PLAYERMAYCANCEL": "Player May Cancel",
+				"PLAYERMAYCANCELEXPLAIN": "This is applicable when a player tries to register a deposit bonus. If set to true, and no deposit minimum amount was specified, then upon a player taking up a new deposit bonus, the current active bonus for that player will be replaced by this new bonus. (Provided all other qualifying criteria has been met.) If set to false, he will not be allowed to register for a new bonus. This setting will be superseded by the minimum deposit amount specified below. ie. If set to true, but an amount was specified and the players current bonus balance is below this amount, the current active bonus may also be canceled.",
+				"MINAMOUNT": "Min Deposit Amount",
+				"MINAMOUNTEXPLAIN": "This is applicable when a player tries to register a deposit bonus. This setting will supersede the 'player may cancel' setting above. If a player tries to register for a new deposit bonus, and the current bonus balance is less than this amount, registration for this new bonus may proceed, otherwise player will receive a message that states there is a current running bonus.",
+				"CANCELONBETBIGGERTHANBALANCE": "Cancel On Bet Bigger Than Balance",
+				"CANCELONBETBIGGERTHANBALANCEEXPLAIN": "This setting is applicable on bets made. If set to false, and a player tries to make a bet larger than the available balance, the bet will not be allowed to proceed. If set to true the bonus will be canceled."
+			},
+			"DOMAIN": "Domain",
+			"FORDEPOSIT": "For Deposit #",
+			"NODEPENDENCY": "This bonus has no prerequisites. So players do not need to complete any other bonus to qualify for this bonus.",
+			"TITLE": {
+				"INFO": "Basic Information",
+				"DEPENDSON": "Dependency Information",
+				"RESTRICTIONS": "Restrictions",
+				"REQUIREMENTS": "Requirements",
+				"FREEMONEY": "Free Money",
+				"FREESPINS": "Free Spins",
+				"CANCEL": "Cancel Rules",
+				"GAMES": "Game Percentages"
+			},
+			"FREEMONEY": {
+				"AMOUNT": "Amount",
+				"WAGER": "Wager Requirement",
+				"EXAMPLE": "Example",
+				"EXPLAIN": "Player will be awarded {{(amount / 100) | cents:controller.domainInfo.currencySymbol}}, and an amount of {{(wager / 100) | cents:controller.domainInfo.currencySymbol}} will be added to the playthrough requirement."
+			},
+			"FREESPINS": {
+				"NUMBER": "Freespins",
+				"WAGERREQUIREMENTS": "Wager Requirements",
+				"GAMELIST": "Game List",
+				"EXAMPLE": "Example",
+				"EXPLAIN": "All winnings from freespins will be counted towards the playthrough requirements. For example if a player finishes all freespins, and won {{50 | currency}}, {{(50*wager) | currency}} wll be added to his play through requirement."
+			},
+			"STARTINGDATE": "Start Date",
+			"EXPIRATIONDATE": "End Date",
+			"VALIDFOR": "Valid For",
+			"VALIDDAYS": "days",
+			"VALIDDAYSDESC": "Once activated by player",
+			"MAXREDEEMABLE": {
+				"TITLE": "Redeemable",
+				"ONCE": "Once",
+				"TIMES": "times",
+				"GRANULARITY_YEAR": "per year",
+				"GRANULARITY_MONTH": "per month",
+				"GRANULARITY_DAY": "per day",
+				"GRANULARITY_WEEK": "per week",
+				"GRANULARITY_TOTAL": "only"
+			},
+			"GAMES": {
+				"GAME": "Game Details",
+				"PERCENTAGE": "Percentage"
+			},
+			"REQUIREMENTS": {
+				"MINDEPOSIT": "Minimum Deposit",
+				"MAXDEPOSIT": "Maximum Deposit",
+				"PERCENTAGE": "Percentage",
+				"WAGER": "Wager Requirement",
+				"EXAMPLE": "Example",
+				"EXPLAIN": "Deposit {{(amount / 100) | currency}} and receive {{(((bonus/100)*amount)/100) | currency}} as bonus. {{((((bonus/100)*amount)/100)+(amount / 100)) | currency}} in total. The player will be required to wager [({{(amount / 100) | currency}} + {{(((bonus/100)*amount)/100) | currency}}) x {{wager}}] / [{{(wagerTotal / 100) | currency}}] before being permitted to make a withdrawal.",
+				"EXPLAIN2": "Minimum deposit of {{(amount / 100) | currency}} required. No bonus percentage specified. The player will still be required to wager [{{(amount / 100) | currency}} x {{wager}}] / [{{(wagerTotal / 100) | currency}}] before being permitted to make a withdrawal."
+			},
+			"ACTIVE": {
+				"DAYS": "Active Days",
+				"TIMES": "Active Times"
+			},
+			"VIEW": {
+				"TITLE": "Bonus ({{bonusCode}})",
+				"DESCRIPTION": "Details for : {{bonusName}}"
+			},
+			"TAB": {
+				"SUMMARY": "Summary",
+				"DASHBOARD": "Dashboard",
+				"HISTORY": "History",
+				"GAME_PERCENTAGES": "Game Percentages"
+			}
+		}
+	}
+}

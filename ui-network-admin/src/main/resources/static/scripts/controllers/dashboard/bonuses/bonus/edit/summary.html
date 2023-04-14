@@ -1,0 +1,291 @@
+	<div class="col-md-6">
+		<div class="box box-default box-solid">
+			<div class="box-header with-border">
+				{{ 'UI_NETWORK_ADMIN.BONUS.TITLE.INFO' | translate }}
+			</div>
+			<div class="box-body table-responsive">
+				<formly-form model="controller.model" fields="controller.basicFields" options="controller.options" form="controller.form">
+				</formly-form>
+			</div>
+		</div>
+		<div class="box box-default box-solid">
+			<div class="box-header with-border">
+				{{ 'UI_NETWORK_ADMIN.BONUS.TITLE.NOTIFICATIONS' | translate }}
+			</div>
+			<div class="box-body table-responsive">
+				<formly-form model="controller.model" fields="controller.notificationFields" options="controller.options" form="controller.form">
+				</formly-form>
+			</div>
+		</div>
+		<div class="box box-default box-solid"  ng-if="!(controller.model.bonusType === 3)">
+			<div class="box-header with-border">
+				{{ 'UI_NETWORK_ADMIN.BONUS.TITLE.CANCEL' | translate }}
+			</div>
+			<div class="box-body table-responsive">
+				<formly-form model="controller.model" fields="controller.cancelRulesFields" options="controller.options" form="controller.form">
+				</formly-form>
+			</div>
+		</div>
+		<div class="box box-default box-solid" ng-if="!(controller.model.bonusType === 3)">
+			<div class="box-header with-border">
+				{{ 'UI_NETWORK_ADMIN.BONUS.TITLE.FREEMONEY' | translate }}
+			</div>
+			<div class="box-body table-responsive">
+				<formly-form model="controller.model" fields="controller.freeMoneyFields" options="controller.options" form="controller.form">
+				</formly-form>
+			</div>
+		</div>
+		<div class="box box-default box-solid" ng-if="!(controller.model.bonusType === 3)">
+			<div class="box-header with-border">
+				{{'UI_NETWORK_ADMIN.BONUS.BONUSFREEMONEY.BOX.TITLE'|translate}}
+				<div class="box-tools pull-right">
+					<button type="button" class="btn btn-box-tool" ng-click="controller.addFreeMoney()">
+						<span><i class="fa fa-plus"></i>{{'GLOBAL.ACTION.ADD'|translate}}</span>
+					</button>
+				</div>
+			</div>
+			<div class="box-body table-responsive">
+				<table class="table table-hover table-striped nowrap" cellspacing="0" width="100%">
+					<thead>
+						<tr>
+							<th>{{'UI_NETWORK_ADMIN.BONUS.BONUSFREEMONEY.CURRENCY.NAME'|translate}}</th>
+							<th>{{'UI_NETWORK_ADMIN.BONUS.BONUSFREEMONEY.AMOUNT.NAME'|translate}}</th>
+							<th>{{'UI_NETWORK_ADMIN.BONUS.BONUSFREEMONEY.IMMEDIATERELEASE.NAME'|translate}}</th>
+<!-- 							<th>{{'UI_NETWORK_ADMIN.BONUS.BONUSFREEMONEY.WAGERREQUIREMENT.NAME'|translate}}</th> -->
+<!-- 							<th>{{'UI_NETWORK_ADMIN.BONUS.FREEMONEY.ADDITIONAL.EXAMPLE'|translate}}</th> -->
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="freeMoney in controller.bonusRevision.bonusFreeMoney">
+							<td>{{freeMoney.currency}}</td>
+							<td>{{freeMoney.amount / 100|currency:freeMoney.currency}}</td>
+							<td>
+								<span ng-if="freeMoney.immediateRelease === undefined || freeMoney.immediateRelease === null || !freeMoney.immediateRelease">No</span>
+								<span ng-if="freeMoney.immediateRelease !== undefined && freeMoney.immediateRelease !== null && freeMoney.immediateRelease">Yes</span>
+							</td>
+<!-- 							<td>{{freeMoney.wagerRequirement}}x</td> -->
+<!-- 							<td>{{'UI_NETWORK_ADMIN.BONUS.FREEMONEY.ADDITIONAL.EXPLAIN'|translate: {amount:(freeMoney.amount*100), wager:((freeMoney.amount*100)*freeMoney.wagerRequirement), currency:freeMoney.currency } }}</td> -->
+							<td>
+								<button type="button" class="btn btn-box-tool pull-right" ng-click="controller.removeAdditionalFreeMoney(freeMoney)">
+									<span><i class="fa fa-trash"></i> Delete</span>
+								</button>
+							</td>
+						</tr>
+						<tr ng-if="controller.bonusRevision.bonusFreeMoney === undefined || controller.bonusRevision.bonusFreeMoney === null || controller.bonusRevision.bonusFreeMoney.length === 0">
+							<td colspan="3">{{'UI_NETWORK_ADMIN.BONUS.BONUSFREEMONEY.TBL.EMPTY'|translate}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="box box-default box-solid" ng-if="!(controller.model.bonusType === 3)">
+			<div class="box-header with-border">
+				{{'UI_NETWORK_ADMIN.BONUS.BONUSEXTERNALGAME.BOX.TITLE'|translate}}
+				<div class="box-tools pull-right">
+					<button type="button" class="btn btn-box-tool" ng-click="controller.addExternalBonusGame()">
+						<span><i class="fa fa-plus"></i>{{'GLOBAL.ACTION.ADD'|translate}}</span>
+					</button>
+				</div>
+			</div>
+			<div class="box-body table-responsive">
+				<table class="table table-hover table-striped nowrap" cellspacing="0" width="100%">
+					<thead>
+					<tr>
+						<th>{{'UI_NETWORK_ADMIN.BONUS.BONUSEXTERNALGAME.PROVIDER.NAME'|translate}}</th>
+						<th>{{'UI_NETWORK_ADMIN.BONUS.BONUSEXTERNALGAME.CAMPAIGNID.NAME'|translate}}</th>
+
+					</tr>
+					</thead>
+					<tbody>
+					<tr ng-repeat="bonusExternalGameConfig in controller.bonusRevision.bonusExternalGameConfigs">
+						<td>{{bonusExternalGameConfig.provider}}</td>
+						<td>{{bonusExternalGameConfig.campaignId}}</td>
+						<td>
+							<button type="button" class="btn btn-box-tool" ng-click="controller.removeExternalBonusGame(bonusExternalGameConfig)">
+								<span><i class="fa fa-trash"></i> Delete</span>
+							</button>
+						</td>
+					</tr>
+					<tr ng-if="controller.bonusRevision.bonusExternalGameConfigs === undefined || controller.bonusRevision.bonusExternalGameConfigs === null || controller.bonusRevision.bonusExternalGameConfigs.length === 0">
+						<td colspan="2">{{'UI_NETWORK_ADMIN.BONUS.BONUSEXTERNALGAME.TBL.EMPTY'|translate}}</td>
+					</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="box box-default box-solid" ng-if="controller.model.bonusType === 1"> <!-- || controller.signupRequirements.length > 0">  -->
+			<div class="box-header with-border">
+				{{ 'UI_NETWORK_ADMIN.BONUS.TITLE.REQUIREMENTS' | translate }}
+			</div>
+			<div class="box-body table-responsive">
+				<formly-form model="controller.model" fields="controller.requirementFields" options="controller.options" form="controller.form">
+				</formly-form>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-6">
+		<div class="box box-default box-solid" ng-if="controller.model.bonusType === 1">
+			<div class="box-header with-border">
+				{{ 'UI_NETWORK_ADMIN.BONUS.TITLE.DEPENDSON' | translate }}
+			</div>
+			<div class="box-body table-responsive">
+				<formly-form model="controller.model" fields="controller.dependencyFields" options="controller.options" form="controller.form">
+				</formly-form>
+				<table class="table table-bordered" ng-if="controller.model.dependsOnBonus.id">
+				<tr>
+					<th width="40%">{{ "GLOBAL.FIELDS.BONUSCODE" | translate }}</th>
+					<td>
+						<a ui-sref="^({bonusId: controller.model.dependsOnBonus.id})">
+						{{ controller.model.dependsOnBonus.bonusCode }}
+						</a>
+					</td>
+				</tr><tr>
+					<th>{{ "GLOBAL.FIELDS.BONUSNAME" | translate }}</th>
+					<td>{{ controller.model.dependsOnBonus.bonusName }}</td>
+				</tr><tr>
+					<th>{{ "GLOBAL.FIELDS.BONUSTYPE" | translate }}</th>
+					<td>
+						<span ng-if="controller.model.dependsOnBonus.bonusType == 0" class="label label-lg label-primary">{{ 'GLOBAL.BONUS.TYPE.0' | translate | uppercase }}</span>
+						<span ng-if="controller.model.dependsOnBonus.bonusType == 1" class="label label-lg label-primary">{{ 'GLOBAL.BONUS.TYPE.1' | translate | uppercase }}</span>
+					</td>
+				</tr><tr>
+					<th>{{ "GLOBAL.FIELDS.STATUS" | translate }}</th>
+					<td>
+						<span ng-if="controller.model.dependsOnBonus.enabled" class="label label-lg label-primary">{{ 'GLOBAL.FIELDS.ENABLED' | translate | uppercase }}</span>
+						<span ng-if="!controller.model.dependsOnBonus.enabled" class="label label-lg label-danger">{{ 'GLOBAL.FIELDS.DISABLED' | translate | uppercase }}</span>
+					</td>
+				</tr>
+				</table>
+			</div>
+		</div>
+		<div class="box box-default box-solid" ng-if="(controller.model.bonusType === 2)">
+			<div class="box-header with-border">
+				{{ 'UI_NETWORK_ADMIN.BONUS.TITLE.TRIGGERS' | translate }}
+			</div>
+			<div class="box-body table-responsive">
+				<formly-form model="controller.model" fields="controller.triggerFields" options="controller.options" form="controller.form">
+				</formly-form>
+			</div>
+		</div>
+		<div class="box box-default box-solid">
+			<div class="box-header with-border">
+				{{ 'UI_NETWORK_ADMIN.BONUS.TITLE.RESTRICTIONS' | translate }}
+			</div>
+			<div class="box-body table-responsive">
+				<formly-form model="controller.model" fields="controller.restrictionFields" options="controller.options" form="controller.form">
+				</formly-form>
+				<label for="restrictionExample" class="control-label">{{"UI_NETWORK_ADMIN.BONUS.EDIT.RESTRICTION.EXAMPLE.TITLE" | translate}}</label>
+				<div id="restrictionExample" class="well">
+					<span>
+						<div ng-if="controller.model.startingDate">
+							{{'UI_NETWORK_ADMIN.BONUS.EDIT.RESTRICTION.EXAMPLE.START' | translate:{startDate: controller.model.startingDate} }}
+							<div ng-if="controller.model.timezone && !controller.model.expirationDate">{{'UI_NETWORK_ADMIN.BONUS.EDIT.RESTRICTION.EXAMPLE.TIMEZONE' | translate:{timezone: controller.model.timezone} }}</div>
+						</div>
+						<div ng-if="controller.model.expirationDate">
+							{{'UI_NETWORK_ADMIN.BONUS.EDIT.RESTRICTION.EXAMPLE.END' | translate:{endDate: controller.model.expirationDate} }}
+							<div ng-if="controller.model.timezone">{{'UI_NETWORK_ADMIN.BONUS.EDIT.RESTRICTION.EXAMPLE.TIMEZONE' | translate:{timezone: controller.model.timezone} }}</div>
+						</div>
+						<div ng-if="controller.model.validDays">
+							{{'UI_NETWORK_ADMIN.BONUS.EDIT.RESTRICTION.EXAMPLE.VALIDDAYS' | translate:{validdays: controller.model.validDays} }}
+						</div>
+						<div ng-if="controller.model.maxRedeemable">
+							{{'UI_NETWORK_ADMIN.BONUS.EDIT.RESTRICTION.EXAMPLE.REDEEMABLE' | translate:{redeemable: controller.model.maxRedeemable} }}
+							<span ng-switch="controller.model.maxRedeemableGranularity">
+								<span ng-switch-when="1">{{'GLOBAL.GRANULARITY.PERYEAR' | translate }}</span>
+								<span ng-switch-when="2">{{'GLOBAL.GRANULARITY.PERMONTH' | translate }}</span>
+								<span ng-switch-when="3">{{'GLOBAL.GRANULARITY.PERDAY' | translate }}</span>
+								<span ng-switch-when="4">{{'GLOBAL.GRANULARITY.PERWEEK' | translate }}</span>
+								<span ng-switch-when="5">{{'GLOBAL.GRANULARITY.INTOTAL' | translate }}</span>
+								<span ng-switch-default>{{'GLOBAL.GRANULARITY.INTOTAL' | translate }}</span>
+							</span>
+						</div>
+						<div ng-if="hasActiveDay(controller.model.activeDays)">
+							{{'UI_NETWORK_ADMIN.BONUS.EDIT.RESTRICTION.EXAMPLE.ACTIVEDAYS' | translate }}
+							<span ng-repeat="(key, value) in controller.model.activeDays track by $index">
+								<span ng-if="value === 'true'">{{ 'GLOBAL.DAYS.'+key | translate }} </span>
+							</span>
+						</div>
+						<div ng-if="controller.model.activeTime.start && controller.model.activeTime.end">
+							{{'UI_NETWORK_ADMIN.BONUS.EDIT.RESTRICTION.EXAMPLE.ACTIVETIMES' | translate: {start: controller.model.activeTime.start, end: controller.model.activeTime.end } }}
+						</div>
+						<div ng-if="controller.model.bonusTriggerType === 9">
+							{{'UI_NETWORK_ADMIN.BONUS.HOURLY.EXPLAIN' | translate: {timeout: controller.model.triggerAmount } }}
+						</div>
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="box box-default box-solid" ng-if="controller.freespinGames.length > 0">
+			<div class="box-header with-border">
+				{{ 'UI_NETWORK_ADMIN.BONUS.TITLE.FREESPINS' | translate }}
+			</div>
+			<div class="box-body table-responsive">
+				<table class="table table-bordered">
+				<tr>
+					<th width="30%">{{ 'UI_NETWORK_ADMIN.BONUS.FREESPINS.NUMBER' | translate }}</th>
+					<td>{{controller.freespinGames[0].bonusRulesFreespins.freespins}}</td>
+				</tr><tr ng-if="controller.freespinGames[0].bonusRulesFreespins.wagerRequirements">
+					<th width="30%">{{ 'UI_NETWORK_ADMIN.BONUS.FREESPINS.WAGERREQUIREMENTS' | translate }}</th>
+					<td>{{controller.freespinGames[0].bonusRulesFreespins.wagerRequirements}}</td>
+				</tr><tr ng-if="controller.freespinGames[0].bonusRulesFreespins.wagerRequirements">
+					<th width="35%">{{ 'UI_NETWORK_ADMIN.BONUS.FREESPINS.EXAMPLE' | translate }}</th>
+					<td class="help-block">{{ 'UI_NETWORK_ADMIN.BONUS.FREESPINS.EXPLAIN' | translate: {wager: controller.freespinGames[0].bonusRulesFreespins.wagerRequirements} }}</td>
+				</tr><tr>
+					<th colspan="2">{{ 'UI_NETWORK_ADMIN.BONUS.FREESPINS.GAMELIST' | translate }}</th>
+				</tr>
+				<tr ng-repeat="g in controller.freespinGames">
+					<td colspan="2">
+						<div class="user-block">
+							<img class="img-circle img-bordered-sm" src="//:0" ng-src="{{controller.imageUrl}}gameguid={{g.gameInfo.guid}}&function=thumb"alt="">
+							<span class="username">
+								<a ng-href="{{controller.demoUrl}}gameguid={{g.gameInfo.guid}}&lang=en" target="_blank">{{ g.gameInfo.name }}</a>
+							</span>
+							<span class="description">
+								<b>Platform: </b>{{(g.gameInfo.labels.os.value || {})}}
+							</span>
+							<span class="description">
+								<b>Provider: </b>{{g.gameInfo.providerGuid.replace("service-casino-provider-","")}}
+							</span>
+						</div>
+					</td>
+				</tr>
+				</table>
+			</div>
+		</div>
+		<div class="box box-default box-solid" ng-if="(controller.model.bonusType === 3)">
+			<div class="box-header with-border">
+				{{'UI_NETWORK_ADMIN.BONUS.BONUSTOKEN.BOX.TITLE'|translate}}
+				<div class="box-tools pull-right" ng-if="controller.bonusRevision.bonusTokens.length < 1">
+					<button type="button" class="btn btn-box-tool" ng-click="controller.addBonusToken()">
+						<span><i class="fa fa-plus"></i>{{'GLOBAL.ACTION.ADD'|translate}}</span>
+					</button>
+				</div>
+			</div>
+			<div class="box-body table-responsive">
+				<table class="table table-hover table-striped nowrap" cellspacing="0" width="100%">
+					<thead>
+					<tr>
+						<th>{{'UI_NETWORK_ADMIN.BONUS.BONUSTOKEN.CURRENCY.NAME'|translate}}</th>
+						<th>{{'UI_NETWORK_ADMIN.BONUS.BONUSTOKEN.AMOUNT.NAME'|translate}}</th>
+						<th>{{'UI_NETWORK_ADMIN.BONUS.BONUSTOKEN.MINIMUMODDS.NAME'|translate}}</th>
+					</tr>
+					</thead>
+					<tbody>
+					<tr ng-repeat="bonusToken in controller.bonusRevision.bonusTokens">
+						<td>{{bonusToken.currency}}</td>
+						<td>{{bonusToken.amount / 100|currency:bonusToken.currency}}</td>
+						<td>{{bonusToken.minimumOdds|number:3}}</td>
+						<td>
+							<button type="button" class="btn btn-box-tool pull-right" ng-click="controller.removeBonusToken(bonusToken)">
+								<span><i class="fa fa-trash"></i> {{'GLOBAL.ACTION.DELETE'|translate}}</span>
+							</button>
+						</td>
+					</tr>
+					<tr ng-if="controller.bonusRevision.bonusTokens === undefined || controller.bonusRevision.bonusTokens === null || controller.bonusRevision.bonusTokens.length === 0">
+						<td colspan="3">{{'UI_NETWORK_ADMIN.BONUS.BONUSTOKEN.TBL.EMPTY'|translate}}</td>
+					</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>

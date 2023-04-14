@@ -1,0 +1,140 @@
+<br/>
+<div bs-loading-overlay bs-loading-overlay-reference-id="{{referenceId}}">
+    <div style="margin: 10px;" class="row v-reset-row ">
+        <div class="col-md-6">
+            <div class="box box-default box-solid">
+                <div class="box-header with-border">
+                    {{'UI_NETWORK_ADMIN.LIMITS.DOMAIN.LOSSLIMITS' | translate}}
+                </div>
+                <div class="box-body table-responsive">
+                    <table class="table table-bordered">
+                        <tr>
+                            <th width="40%">{{'UI_NETWORK_ADMIN.LIMITS.DOMAIN.DAILYLOSSLIMIT.LABEL' | translate}}</th>
+                            <td ng-if="dailyLossLimit">{{dailyLossLimit | number:2}}</td>
+                            <td ng-if="!dailyLossLimit">{{'UI_NETWORK_ADMIN.LIMITS.NOTSET' | translate}}</td>
+                            <td>
+                                <a style="cursor: pointer;" ng-click="changeLimits(3, 2)">
+                                    <span ng-if="!dailyLossLimit"><i
+                                            class="fa fa-pencil-square-o"></i> {{'UI_NETWORK_ADMIN.LIMITS.SET' | translate}}</span>
+                                    <span ng-if="dailyLossLimit"><i
+                                            class="fa fa-pencil-square-o"></i> {{'UI_NETWORK_ADMIN.LIMITS.MODIFY' | translate}}</span>
+                                </a>
+                                &nbsp;
+                                <a ng-if="dailyLossLimit !== undefined && dailyLossLimit !== null"
+                                   style="cursor: pointer;" ng-click="removeLimit(3, 2)">
+                                    <span><i class="fa fa-trash"></i> {{'GLOBAL.ACTION.DELETE' | translate}}</span>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th width="40%">{{'UI_NETWORK_ADMIN.LIMITS.DOMAIN.WEEKLYLOSSLIMIT.LABEL' | translate}}</th>
+                            <td ng-if="weeklyLossLimit">{{weeklyLossLimit | number:2}}</td>
+                            <td ng-if="!weeklyLossLimit">{{'UI_NETWORK_ADMIN.LIMITS.NOTSET' | translate}}</td>
+                            <td>
+                                <a style="cursor: pointer;" ng-click="changeLimits(4, 2)">
+                                    <span ng-if="!weeklyLossLimit"><i
+                                            class="fa fa-pencil-square-o"></i> {{'UI_NETWORK_ADMIN.LIMITS.SET' | translate}}</span>
+                                    <span ng-if="weeklyLossLimit"><i
+                                            class="fa fa-pencil-square-o"></i> {{'UI_NETWORK_ADMIN.LIMITS.MODIFY' | translate}}</span>
+                                </a>
+                                &nbsp;
+                                <a ng-if="weeklyLossLimit !== undefined && weeklyLossLimit !== null"
+                                   style="cursor: pointer;" ng-click="removeLimit(4, 2)">
+                                    <span><i class="fa fa-trash"></i> {{'GLOBAL.ACTION.DELETE' | translate}}</span>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>{{'UI_NETWORK_ADMIN.LIMITS.DOMAIN.MONTHLYLOSSLIMIT.LABEL' | translate}}</th>
+                            <td ng-if="monthlyLossLimit">{{monthlyLossLimit | number:2}}</td>
+                            <td ng-if="!monthlyLossLimit">{{'UI_NETWORK_ADMIN.LIMITS.NOTSET' | translate}}</td>
+                            <td>
+                                <a style="cursor: pointer;" ng-click="changeLimits(2, 2)">
+                                    <span ng-if="!monthlyLossLimit"><i
+                                            class="fa fa-pencil-square-o"></i> {{'UI_NETWORK_ADMIN.LIMITS.SET' | translate}}</span>
+                                    <span ng-if="monthlyLossLimit"><i
+                                            class="fa fa-pencil-square-o"></i> {{'UI_NETWORK_ADMIN.LIMITS.MODIFY' | translate}}</span>
+                                </a>
+                                &nbsp;
+                                <a ng-if="monthlyLossLimit !== undefined && monthlyLossLimit !== null"
+                                   style="cursor: pointer;" ng-click="removeLimit(2, 2)">
+                                    <span><i class="fa fa-trash"></i> {{'GLOBAL.ACTION.DELETE' | translate}}</span>
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="box box-info box-solid">
+                <div class="box-header with-border">
+                    {{'UI_NETWORK_ADMIN.LIMITS.DOMAIN.WINLIMITS' | translate}}
+                </div>
+                <div class="box-body table-responsive">
+                    <table class="table table-bordered">
+                        <tr>
+                            <th width="40%">{{'UI_NETWORK_ADMIN.LIMITS.DOMAIN.DAILYWINLIMIT.LABEL' | translate}}</th>
+                            <td ng-if="dailyWinLimit">{{dailyWinLimit | number:2}}</td>
+                            <td ng-if="!dailyWinLimit">{{'UI_NETWORK_ADMIN.LIMITS.NOTSET' | translate}}</td>
+                            <td>
+                                <a style="cursor: pointer;" ng-click="changeLimits(3, 1)">
+                                    <span ng-if="!dailyWinLimit"><i
+                                            class="fa fa-pencil-square-o"></i> {{'UI_NETWORK_ADMIN.LIMITS.SET' | translate}}</span>
+                                    <span ng-if="dailyWinLimit"><i
+                                            class="fa fa-pencil-square-o"></i> {{'UI_NETWORK_ADMIN.LIMITS.MODIFY' | translate}}</span>
+                                </a>
+                                &nbsp;
+                                <a ng-if="dailyWinLimit !== undefined && dailyWinLimit !== null"
+                                   style="cursor: pointer;" ng-click="removeLimit(3, 1)">
+                                    <span><i class="fa fa-trash"></i> {{'GLOBAL.ACTION.DELETE' | translate}}</span>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th width="40%">{{'UI_NETWORK_ADMIN.LIMITS.DOMAIN.WEEKLYWINLIMIT.LABEL' | translate}}</th>
+                            <td ng-if="weeklyWinLimit">{{weeklyWinLimit | number:2}}</td>
+                            <td ng-if="!weeklyWinLimit">{{'UI_NETWORK_ADMIN.LIMITS.NOTSET' | translate}}</td>
+                            <td>
+                                <a style="cursor: pointer;" ng-click="changeLimits(4, 1)">
+                                    <span ng-if="!weeklyWinLimit"><i
+                                            class="fa fa-pencil-square-o"></i> {{'UI_NETWORK_ADMIN.LIMITS.SET' | translate}}</span>
+                                    <span ng-if="weeklyWinLimit"><i
+                                            class="fa fa-pencil-square-o"></i> {{'UI_NETWORK_ADMIN.LIMITS.MODIFY' | translate}}</span>
+                                </a>
+                                &nbsp;
+                                <a ng-if="weeklyWinLimit !== undefined && weeklyWinLimit !== null"
+                                   style="cursor: pointer;" ng-click="removeLimit(4, 1)">
+                                    <span><i class="fa fa-trash"></i> {{'GLOBAL.ACTION.DELETE' | translate}}</span>
+                                </a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>{{'UI_NETWORK_ADMIN.LIMITS.DOMAIN.MONTHLYWINLIMIT.LABEL' | translate}}</th>
+                            <td ng-if="monthlyWinLimit">{{monthlyWinLimit | number:2}}</td>
+                            <td ng-if="!monthlyWinLimit">{{'UI_NETWORK_ADMIN.LIMITS.NOTSET' | translate}}</td>
+                            <td>
+                                <a style="cursor: pointer;" ng-click="changeLimits(2, 1)">
+                                    <span ng-if="!monthlyWinLimit"><i
+                                            class="fa fa-pencil-square-o"></i> {{'UI_NETWORK_ADMIN.LIMITS.SET' | translate}}</span>
+                                    <span ng-if="monthlyWinLimit"><i
+                                            class="fa fa-pencil-square-o"></i> {{'UI_NETWORK_ADMIN.LIMITS.MODIFY' | translate}}</span>
+                                </a>
+                                &nbsp;
+                                <a ng-if="monthlyWinLimit !== undefined && monthlyWinLimit !== null"
+                                   style="cursor: pointer;" ng-click="removeLimit(2, 1)">
+                                    <span><i class="fa fa-trash"></i> {{'GLOBAL.ACTION.DELETE' | translate}}</span>
+                                </a>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="padding: 19px;">
+        <div class="row v-reset-row  well">
+            <changelog options="changelogs" model=""></changelog>
+        </div>
+    </div>
+</div>

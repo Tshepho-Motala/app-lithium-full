@@ -1,0 +1,8 @@
+{
+  "ERROR_DICTIONARY": {
+    "MY_ACCOUNT": {
+      "DEPOSIT_BLOCKED_BY_TIME_SLOT_LIMIT": "Deposit is blocked due to Time Frame Limit",
+      "BET_BLOCKED_BY_TIME_SLOT_LIMIT": "Bet is blocked due to Time Frame Limit"
+    }
+  }
+}

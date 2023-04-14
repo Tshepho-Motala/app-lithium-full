@@ -1,0 +1,131 @@
+{
+	"GLOBAL": {
+		"BONUS": {
+			"TYPE": {
+				"TRIGGER": {
+					"4": "XP"
+				}
+			}
+		}
+	},
+	"UI_NETWORK_ADMIN": {
+		"XP": {
+			"SCHEME": {
+				"NAME": {
+					"EXISTS": "A scheme with this name already exists."
+				}
+			},
+			"ACTIVESCHEME": "WARNING! The active scheme with name ({{name}}) will be set to INACTIVE, if you choose to set the status of this scheme to ACTIVE.",
+			"FIELDS": {
+				"DOMAIN": {
+					"NAME": "Domain",
+					"DESCRIPTION": "Choose the domain that you are creating the scheme for"
+				},
+				"NAME": {
+					"NAME": "Name",
+					"DESCRIPTION": "The unique name of the scheme"
+				},
+				"DESCRIPTION": {
+					"NAME": "Description",
+					"DESCRIPTION": "A short description of the scheme"
+				},
+				"STATUS": {
+					"NAME": "Status",
+					"DESCRIPTION": "The status of this scheme"
+				},
+				"LEVELS": {
+					"NUMBER": {
+						"NAME": "Number",
+						"DESCRIPTION": "The level number"
+					},
+					"REQUIREDXP": {
+						"NAME": "Required XP (in cents)"
+					},
+					"DESCRIPTION": {
+						"NAME": "Description",
+						"DESCRIPTION": "A short description of the level"
+					},
+					"BONUS": {
+						"NAME": "Bonus",
+						"DESCRIPTION": "The bonus awarded for achieving the level"
+					}
+				},
+				"WAGERPERCENTAGE": {
+					"NAME": "Wager Percentage",
+					"DESCRIPTION": "The percentage of the wager amount that is contributed to XP"
+				}
+			},
+			"BOX": {
+				"DETAILS": "Details",
+				"LEVELS": "Levels",
+				"WAGERINGREQUIREMENTS": "Wagering Requirements"
+			},
+			"ADD": {
+				"TITLE": "Add XP and Leveling Scheme",
+				"DESCRIPTION": "Use the form below to configure an XP and Leveling scheme"
+			},
+			"EDIT": {
+				"TITLE": "Edit XP and Leveling Scheme",
+				"DESCRIPTION": "Use the form below to edit the XP and Leveling scheme"
+			},
+			"VIEW": {
+				"TITLE": "XP and Leveling Scheme",
+				"DESCRIPTION": "Viewing XP and Leveling Scheme"
+			},
+			"LEVELS": {
+				"ADD": {
+					"DOMAINWARN": "Please select the domain first. It is required for acquiring a list of XP bonuses.",
+					"DOMAINCHANGED": "Your domain selection has changed, and your levels configuration contained domain specific bonus information. The bonuses has been removed. Remember to reconfigure the level bonuses.",
+					"TITLE": "Add Level"
+				},
+				"TBL": {
+					"HEADERS": {
+						"NUMBER": "Number",
+						"DESCRIPTION": "Description",
+						"REQUIREDXP": "Required XP",
+						"BONUS": "Bonus"
+					},
+					"EMPTY": "No levels added yet."
+				}
+			},
+			"ERRORS": {
+				"CREATE": "An error occurred while trying to create the XP and Leveling scheme",
+				"EDIT": "An error occurred while trying to edit the XP and Leveling scheme",
+				"REMOVELEVEL": "An error occurred while trying to remove the scheme level",
+				"ADDLEVEL": "An error occurred while trying to add the level to the scheme",
+				"MODIFYLEVEL": "An error occurred while trying to modify the scheme level"
+			},
+			"SUCCESS": {
+				"CREATE": "The XP and Leveling scheme was created successfully",
+				"EDIT": "The XP and Leveling scheme was edited successfully",
+				"REMOVELEVEL": "The scheme level was successfully removed",
+				"ADDLEVEL": "The level was successfully added to the scheme",
+				"MODIFYLEVEL": "The scheme level was successfully modified"
+			}
+		},
+		"BONUS": {
+			"BONUSFREEMONEY": {
+				"ADD": {
+					"TITLE": "Add Additional Free Money"
+				},
+				"CURRENCY": {
+					"NAME": "Currency",
+					"DESCRIPTION": "The currency of the free money to award the player"
+				},
+				"AMOUNT": {
+					"NAME": "Amount",
+					"DESCRIPTION": "The amount of free money to award the player"
+				},
+				"WAGERREQUIREMENT": {
+					"NAME": "Wager Requirement"
+				},
+				"TBL": {
+					"EMPTY": "No additional free money configured."
+				},
+				"BOX": {
+					"TITLE": "Additional Free Money"
+				}
+			}
+		}
+	}
+}

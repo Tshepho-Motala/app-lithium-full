@@ -1,0 +1,45 @@
+server:
+  port: 9905
+  
+spring:
+  datasource:
+    url: jdbc:mysql://localhost/lithium_leaderboard
+    username: root
+    password: mysql
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: validate
+    properties:
+      jadira.usertype.autoRegisterUserTypes: true
+  cloud:
+    stream:
+      bindings:
+        gatewayexchange:
+          binder: rabbit
+          destination: gateway
+          producer:
+            should-declare: false
+        triggerbonusoutput:
+          group: triggerbonusgroup
+          binder: rabbit
+          destination: triggerbonusqueue
+          producer:
+            required-groups: triggerbonusgroup
+        userattributestriggerinput :
+          group: user-attributes-trigger-group-leaderboard
+          binder : rabbit
+          destination : userattributestriggerqueue
+
+lithium:
+  services:
+    db:
+      load-test-data: false
+    leaderboard:
+      jobs:
+        cleanup:
+          cron: 0/30 * * * * *
+
+logging:
+  level:
+    lithium.service.leaderboard: INFO

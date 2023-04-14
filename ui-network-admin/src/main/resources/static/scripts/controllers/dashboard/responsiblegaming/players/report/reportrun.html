@@ -1,0 +1,56 @@
+<div class="container-fluid">
+	<lit-header
+		title="UI_NETWORK_ADMIN.REPORTS.PLAYERS.REPORTRUN.TITLE" 
+		description="UI_NETWORK_ADMIN.REPORTS.PLAYERS.REPORTRUN.DESCRIPTION">
+	</lit-header>
+
+ 	<button-bar>
+		<button-back ng-click="controller.back()"></button-back>
+		<button-refresh ng-click="controller.refresh()"></button-refresh>
+		<button-custom lit-if-permission="GAMSTOP_EXPORT" icon="file-excel-o" text="Export" bclass="default"  ng-click="controller.downloadCsv()"></button-custom>
+	</button-bar>
+
+	<div ng-cloak ng-if="!reportRun.completed" class="alert alert-warning">
+		{{ 'UI_NETWORK_ADMIN.REPORTS.PLAYERS.REPORTRUN.REPORTCOMPLETED' | translate }}
+	</div>
+
+	<div ng-cloak ng-if="reportRun.failed" class="alert alert-danger">
+		{{ 'UI_NETWORK_ADMIN.REPORTS.PLAYERS.REPORTRUN.REPORTFAILED' | translate }}<br/><br/>
+		{{ 'UI_NETWORK_ADMIN.REPORTS.PLAYERS.REPORTRUN.FAILEDREASON' | translate }}: {{reportRun.failReason }}
+    </div>
+	
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="box box-primary" bs-loading-overlay bs-loading-overlay-reference-id="player-reportrun">
+				<div class="box-header with-border">
+					<h3 class="box-title">{{ 'UI_NETWORK_ADMIN.REPORTS.PLAYERS.REPORTRUN.RUNDETAILS' | translate }}</h3>
+				</div>
+				<div class="box-body">
+					<div class="row">
+						<div class="col-xs-12 col-md-6">
+							<p>{{ 'UI_NETWORK_ADMIN.REPORTS.PLAYERS.EMAILTEMPLATE.PLACEHOLDER.REPORT.STARTEDON' | translate }}: {{reportRun.startedOn | datetimedefault }}</p>
+							<p>{{ 'UI_NETWORK_ADMIN.REPORTS.PLAYERS.EMAILTEMPLATE.PLACEHOLDER.REPORT.TOTALRECORDS' | translate }}: {{reportRun.totalRecords}}</p>
+							<p>{{ 'UI_NETWORK_ADMIN.REPORTS.PLAYERS.EMAILTEMPLATE.PLACEHOLDER.REPORT.PROCESSEDRECORDS' | translate }}: {{reportRun.processedRecords}}</p>
+							<p ng-if="reportRun.completed">{{ 'UI_NETWORK_ADMIN.REPORTS.PLAYERS.EMAILTEMPLATE.PLACEHOLDER.REPORT.COMPLETEDON' | translate }}: {{reportRun.completedOn | datetimedefault}}</p>
+							<p ng-if="reportRun.failed">{{ 'UI_NETWORK_ADMIN.REPORTS.PLAYERS.REPORTRUN.FAILEDREASON' | translate }}: {{reportRun.failReason}}</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+ 	<div class="row">
+		<div class="col-xs-12">
+			<div class="box box-info">
+				<div class="box-header with-border">
+					<h3 class="box-title">{{ 'UI_NETWORK_ADMIN.PLAYER.BVN.RESULT' | translate }}</h3>
+				</div>
+				<div class="box-body table-responsive no-padding">
+					<dt table="controller.table"/>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>

@@ -1,0 +1,8 @@
+{
+	"CASHIER-METHOD-BANK": {
+		"WITHDRAWAL_AMOUNT_FIELD_TITLE": "Perform Withdrawal",
+		"WITHDRAWAL_AMOUNT_FIELD_DESCRIPTION": "Enter the amount that you wish to withdraw and the bank details that we should send the funds to.",
+		"WITHDRAWAL_ACCOUNT_FIELD_TITLE": "Account Number",
+		"WITHDRAWAL_ACCOUNT_FIELD_DESCRIPTION": "The account number."
+	}
+}

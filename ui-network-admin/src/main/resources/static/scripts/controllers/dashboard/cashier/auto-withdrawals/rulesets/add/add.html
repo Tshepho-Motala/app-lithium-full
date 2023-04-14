@@ -1,0 +1,71 @@
+<div class="container-fluid" bs-loading-overlay bs-loading-overlay-reference-id="loading">
+    <div class="card card-block" style="margin-bottom: 10px;" ng-init="">
+        <div class="d-flex justify-content-start">
+            <div class="p-2 mr-auto">
+                <span class="title">{{'UI_NETWORK_ADMIN.CASHIER.AUTOWITHDRAWALS.RULESETS.ADD.TITLE'|translate}}</span>
+                <span class="description">{{'UI_NETWORK_ADMIN.CASHIER.AUTOWITHDRAWALS.RULESETS.ADD.DESCRIPTION'|translate}}</span>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <form ng-submit="controller.onSubmit()" name="controller.form" autocomplete="off" novalidate>
+        <buttonbar>
+            <button-back ui-sref="^.list"></button-back>
+            <button-submit></button-submit>
+        </buttonbar>
+        <br/><br/>
+        <div class="row v-reset-row ">
+            <div class="col-xs-12">
+                <div class="card card-block">
+                    <div class="well-clear">
+                        <formly-form model="controller.model" fields="controller.inputFields" options="controller.options" form="controller.form">
+                        </formly-form>
+                    </div>
+                    <div class="well-clear">
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" ng-click="controller.addRule()">
+                                <span><i class="fa fa-plus"></i>{{'GLOBAL.ACTION.ADD'|translate}}</span>
+                            </button>
+                        </div>
+                        <hr style="margin-top: 40px;"/>
+                        <div ng-if="controller.model.rules.length > 0" class="col-xs-12 table-responsive">
+                            <table class="table table-hover table-striped nowrap" cellspacing="0" width="100%">
+                                <thead>
+                                    <tr>
+                                        <th>{{'UI_NETWORK_ADMIN.CASHIER.AUTOWITHDRAWALS.RULESETS.RULE.FIELDS.FIELD.NAME'|translate}}</th>
+                                        <th>{{'UI_NETWORK_ADMIN.CASHIER.AUTOWITHDRAWALS.RULESETS.RULE.FIELDS.OPERATOR.NAME'|translate}}</th>
+                                        <th>{{'UI_NETWORK_ADMIN.CASHIER.AUTOWITHDRAWALS.RULESETS.RULE.FIELDS.VALUE.NAME'|translate}}</th>
+                                        <th>{{'UI_NETWORK_ADMIN.CASHIER.AUTOWITHDRAWALS.RULESETS.RULE.FIELDS.ENABLED.NAME'|translate}}</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="rule in controller.model.rules track by $index">
+                                        <td style="width: 20%;">{{controller.getFieldName(rule.field)}}</td>
+                                        <td style="width: 20%;">{{controller.getOperatorName(rule)}}</td>
+                                        <td style="width: 20%;">{{rule.value}} {{(rule.value2 !== undefined && rule.value2 !== null) ? " to " + rule.value2 : ""}}</td>
+                                        <td style="width: 20%;"><span class="label" ng-class="{'label-success': rule.enabled === true, 'label-danger': rule.enabled === false }">{{(rule.enabled) ? 'ENABLED' : 'DISABLED'}}</span></td>
+                                        <td style="width: 20%;">
+                                            <a ng-click="controller.modifyRule($index)">
+                                                <span class="badge bg-blue"><i class="fa fa-cog"></i></span>
+                                            </a>
+                                            &nbsp;
+                                            <a ng-click="controller.removeRule($index)">
+                                                <span class="badge bg-red"><i class="fa fa-times"></i></span>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div ng-if="controller.model.rules.length === 0">
+                            <div class="col-xs-12">
+                                <b>{{'UI_NETWORK_ADMIN.CASHIER.AUTOWITHDRAWALS.RULESETS.NORULESSETUPYET'|translate}}</b>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

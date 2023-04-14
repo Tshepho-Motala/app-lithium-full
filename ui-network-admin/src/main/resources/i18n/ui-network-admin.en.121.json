@@ -1,0 +1,9 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "DASHBOARD": {
+      "MANUAL_BONUS_VIRTUAL_DEBIT": "Manual Bonus Virtual Adjustments - Taken From Player",
+      "MANUAL_BONUS_VIRTUAL_CREDIT": "Manual Bonus Virtual Adjustments - Given to Player",
+      "MANUAL_BONUS_VIRTUAL_NET": "Manual Bonus Virtual Adjustments Net"
+    }
+  }
+}

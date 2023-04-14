@@ -1,0 +1,1 @@
+ALTER TABLE `user` ADD COLUMN `push_opt_out` BIT(1);

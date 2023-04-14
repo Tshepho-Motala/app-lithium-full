@@ -1,0 +1,67 @@
+.User Mass Validation Stage 2
+[plantuml]
+----
+@startuml
+'https://plantuml.com/sequence-diagram
+
+participant  "svc-user-mass-action" as usermassaction
+queue queue
+participant "svc-user" as user
+
+autonumber
+
+usermassaction->usermassaction: trigger fileUpload for user update processing (STAGE_2)
+usermassaction->usermassaction: retrieveFileUploadById(fileUploadId)
+usermassaction->usermassaction: getFileData For File upload ID
+
+
+
+loop through DataFileList
+usermassaction-->queue: add FileData to action-output-queue for actions processing.
+end
+
+
+== Action Queue Processing ==
+group Queue Processor [Request with a list pf actions to be executed e.g 5 actions]
+ queue-->usermassaction: listens to action-input-queue
+ loop loop per action
+     alt  actionType.GRANT_BONUS
+            ref over usermassaction: Perform GRANT_BONUS action
+        else actionType.CHANGE_STATUS
+            ref over usermassaction: Perform CHANGE_STATUS action
+        else actionType.CHANGE_VERIFICATION_STATUS
+            ref over usermassaction: Perform CHANGE_STATUS action
+        else actionType.MARK_AS_TEST_PLAYER
+            ref over usermassaction: Perform MARK_AS_TEST_PLAYER action
+        else actionType.ADD_PLAYER_TAGS
+            ref over usermassaction: Perform ADD_PLAYER_TAGS action
+        else actionType.REPLACE_PLAYER_TAGS
+            ref over usermassaction: Perform REPLACE_PLAYER_TAGS action
+        else actionType.REMOVE_PLAYER_TAGS
+            ref over usermassaction: Perform REMOVE_PLAYER_TAGS action
+        else actionType.ADD_NOTE
+            ref over usermassaction: Perform ADD_NOTE action
+        else actionType.BALANCE_ADJUSTMENT
+            ref over usermassaction: Perform BALANCE_ADJUSTMENT action
+        else actionType.LIFT_PLAYER_RESTRICTIONS
+            ref over usermassaction: Perform LIFT_PLAYER_RESTRICTIONS action
+        else actionType.PLACE_PLAYER_RESTRICTIONS
+            ref over usermassaction: Perform PLACE_PLAYER_RESTRICTIONS action
+     end
+ end
+note right of usermassaction
+    * Queue processor would perform all actions sequentially by user, so if there are 5 actions to be performed, then the processor would perform action 1, 2, 3, 4, and 5, then it would take the next fileData and do the same from the queue
+end note
+usermassaction->usermassaction: mark FileData.UploadStatus Pass/Fail or Partially fail
+note right of usermassaction
+    * Note: Partially fail means out of 4 if 2 actions fail and 2 pass, the actions that fail will be highlighted by red broken link. Passed actions will be a green check icon.
+end note
+usermassaction->usermassaction: postMassActionChecks
+
+alt All queue has be completed
+usermassaction->usermassaction: Mark fileUpload.UploadStatus: DONE/FAIL_STAGE2
+end
+end
+
+@enduml
+----

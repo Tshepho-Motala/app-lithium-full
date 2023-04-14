@@ -1,0 +1,44 @@
+.Overview - Auto-Restriction Configuration to auto-lift restrictions depending on subordinate type and days active
+[plantuml]
+----
+@startuml
+'https://plantuml.com/sequence-diagram
+
+actor "CS Agent" as csa
+boundary "LBO" as lbo
+participant Lithium as li
+
+autonumber
+
+csa -> lbo: login to LBO
+activate lbo
+    csa -> lbo: Opens Auto Restrictions Rules
+    csa -> lbo: Click add new auto restriction ruleset button
+    csa -> lbo: Selects domain, adds a new auto-restriction name, selects the DomainRestrictionSet and specifies the ruleset outcome to Lift
+    ||10||
+    group Ruleset configuration (Days since the restriction was loaded onto a players account)
+        csa -> lbo: Click add new rule to ruleset button
+        csa -> lbo: Selects Field = "Days Since Restriction Active"
+        csa -> lbo: Selects Operator = "Greater than or equals"
+        csa -> lbo: Inputs Value = X
+    end
+    group Ruleset configuration (Select subordinate type that was placed with restriction)
+        csa -> lbo: Click add new rule to ruleset button
+        csa -> lbo: Selects Field = "Restriction Subordinate Type"
+        csa -> lbo: Selects Operator = "Equals"
+        csa -> lbo: Inputs Value = X
+    end
+    csa -> lbo: Saves the Auto-Restriction Ruleset
+    lbo -> li: /service-limit/backoffice/auto-restriction/ruleset/livescore_uk/create
+    activate li
+        note left
+            * When a new auto-restriction ruleset is created, it would be included in the AutoRestrictionJob that runs
+              every X hours, and when all rules equates to true for a particular ruleset, the configured outcome (Place/Lift) is executed)
+        end note
+        li -> li: create new auto_restriction_rule_set
+        li --> lbo: Status 200 OK
+    deactivate li
+deactivate lbo
+
+@enduml
+----

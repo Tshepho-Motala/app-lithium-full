@@ -1,0 +1,20 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "PLAYER": {
+      "DEV_TOOLS": {
+        "FIELDS": {
+          "REVERT_PENDING_WITHDRAW_BALANCE": {
+            "LABEL": "Revert pending withdrawals balance"
+          },
+          "CLEAR_PENDING_WITHDRAW_BALANCE": {
+            "LABEL": "Clear pending withdrawals balance"
+          },
+          "ERROR_CLEAR_PENDING_WITHDRAW_BALANCE": {
+            "LABEL": "Got error during clear pending withdrawals balance"
+          }
+        }
+      }
+    }
+  }
+}
+

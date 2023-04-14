@@ -1,0 +1,44 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "ACTIVE_BONUS": {
+      "PAGE": {
+        "TITLE": {
+          "HEADING" : "Active Bonuses",
+          "DESCRIPTION" : "List of active bonuses"
+        },
+        "FIELDS": {
+          "TAB": {
+            "DOMAIN_DROPDOWN":{
+              "LABEL": "Brand"
+            },
+            "DATE_FROM":{
+              "LABEL": "From Date"
+            },
+            "DATE_TO":{
+              "LABEL": "To Date"
+            },
+            "BONUS_NAME_AND_CODE":{
+              "LABEL": "Bonus Name"
+            },
+            "STATUS":{
+              "LABEL": "Status"
+            }
+          }
+        },
+        "ERRORS" : {
+          "DATE_FILTER": "Your start date cannot be after your end date"
+        },
+        "TABLE" : {
+          "GRAND_DATE" : "Grant Date",
+          "BONUS_ID" : "Bonus ID",
+          "BONUS_CODE" : "Bonus Code",
+          "BONUS_NAME" : "Bonus Name",
+          "CASH_AMOUNT" : "Amount",
+          "DESCRIPTION" : "Description",
+          "PLAYER_GUID" : "Player GUID",
+          "STATUS" : "Status"
+        }
+      }
+    }
+  }
+}

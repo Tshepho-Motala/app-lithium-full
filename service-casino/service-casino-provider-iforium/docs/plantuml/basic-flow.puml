@@ -1,0 +1,109 @@
+.Basic Flow
+[plantuml]
+----
+@startuml
+
+    box "iForium" #LightGreen
+       participant "Generic Operator Wallet API" as ggo
+    end box
+
+    box "Lithium" #LightBlue
+        participant "iForium Casino Provider" as provider
+        participant "CasinoClientService" as casino
+    end box
+
+    skinparam handwritten false
+    skinparam backgroundColor transparent
+    skinparam roundcorner 10
+    skinparam BoxPadding 20
+
+    skinparam sequence {
+
+        ArrowColor 3292b4
+        ArrowThickness 2
+
+        LifeLineBorderColor 3292b4
+        LifeLineBackgroundColor #3292b4
+
+        ParticipantBorderColor 3292b4
+        ParticipantBackgroundColor 3292b4
+        ParticipantFontName Arial
+        ParticipantFontSize 17
+        ParticipantFontColor white
+
+        ActorBorderColor 3292b4
+        ActorBackgroundColor aqua
+        ActorFontColor 3292b4
+        ActorFontSize 17
+        ActorFontName Arial
+    }
+
+    group Session Endpoints
+        alt Redeem Session Token
+            ggo ->> provider ++: /v1.0/session/redeemtoken
+            provider ->> casino ++:
+            casino -->> provider --:
+            provider -->> ggo --:
+        else Wrap Session Token
+            ggo ->> provider ++: /v1.0/session/wraptoken
+            provider ->> casino ++:
+            casino -->> provider --:
+            provider -->> ggo --:
+        else Create Session Token
+            ggo ->> provider ++: /v1.0/session/createtoken
+            provider ->> casino ++:
+            casino -->> provider --:
+            provider -->> ggo --:
+        end
+    end
+
+    group Gameplay Endpoints
+        alt Get Balance
+            ggo ->> provider ++: /v1.0/balance
+            provider ->> casino ++:
+            casino -->> provider --:
+            provider -->> ggo --:
+        else Place Bet
+            ggo ->> provider ++: /v1.0/gameround/placebet
+            provider ->> casino ++:
+            casino -->> provider --:
+            provider -->> ggo --:
+        else Award Winnings
+            ggo ->> provider ++: /v1.0/gameround/awardwinnings
+            provider ->> casino ++:
+            casino -->> provider --:
+            provider -->> ggo --:
+        else Void Bet
+            ggo ->> provider ++: /v1.0/gameround/voidbet
+            provider ->> casino ++:
+            casino -->> provider --:
+            provider -->> ggo --:
+        else Rollback Bet
+            ggo ->> provider ++: /v1.0/gameround/rollbackbet
+            provider ->> casino ++:
+            casino -->> provider --:
+            provider -->> ggo --:
+        else End Game Round
+            ggo ->> provider ++: /v1.0/gameround/end
+            provider ->> casino ++:
+            casino -->> provider --:
+            provider -->> ggo --:
+        else Credit Transaction
+            ggo ->> provider ++: /v1.0/accounttransaction/credit
+            provider ->> casino ++:
+            casino -->> provider --:
+            provider -->> ggo --:
+        end
+    end
+
+    group Alert Endpoints
+        alt
+            ggo ->> provider ++: /v1.0/alertwalletcallbacknotification
+            provider ->> casino ++:
+            casino -->> provider --:
+            provider -->> ggo --:
+        end
+    end
+
+@enduml
+----

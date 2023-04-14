@@ -1,0 +1,34 @@
+server:
+  port: 9555
+
+spring:
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
+  datasource:
+    url: jdbc:mysql://localhost/lithium_event
+    username: root
+    password: mysql
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: validate
+  cloud:
+    stream:
+      bindings:
+        eventinput:
+          group: eventgroup
+          binder: rabbit
+          destination: eventqueue
+        userattributestriggerinput :
+          group: user-attributes-trigger-group-event
+          binder : rabbit
+          destination : userattributestriggerqueue
+
+
+lithium:
+  services:
+    db:
+      load-test-data: false
+    affiliate:
+      public-url: http://localhost:9105

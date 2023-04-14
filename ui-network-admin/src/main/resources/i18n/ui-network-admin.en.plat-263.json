@@ -1,0 +1,192 @@
+{
+  "GLOBAL": {
+    "ACTION": {
+      "UPDATE": "Update"
+    }
+  },
+  "UI_NETWORK_ADMIN": {
+    "PAGE": {
+      "TITLE": {
+        "MASS_PLAYER_UPDATE": "Mass Player Update"
+      }
+    },
+    "MASS_UPLOAD_HISTORY": {
+      "TABLE": {
+        "UPLOAD_DATE": "Upload Date",
+        "UPLOAD_STATUS": "Upload Status",
+        "RECORDS_FOUND": "Records Found"
+      }
+    },
+    "PLAYERS": {
+      "MASS_UPDATE": {
+        "DOMAIN_SELECT": {
+          "TITLE": "Mass Player Update",
+          "DESCRIPTION": "A mass player update tool.",
+          "DOMAIN_SELECT": "Select a domain to get started."
+        },
+        "ERRORS": {
+          "FILE_UPLOAD_FAILED": "Sorry your file could not upload. Please try again.",
+          "UNABLE_TO_PROCESS_UPLOAD": "There was an problem while trying to process your upload, please contact support if you keep getting this error.",
+          "ACTIONS_VALIDATION": "Sorry there was validation errors on the actions you are trying to perform. Please ensure that you have selected at minimum one action, and do not have any errors, then try and submit your request again for processing"
+        },
+        "TABLE": {
+          "ROW_NUMBER": {
+            "LABEL": "Row No"
+          },
+          "ACCOUNT_STATUS": {
+            "LABEL": "Account Status"
+          },
+          "PLAYER_ID": {
+            "LABEL": "Player-ID"
+          }
+        },
+        "PROGRESS_BAR": {
+          "UPLOADING_LABEL": "Upload in progress, please wait for process to start...",
+          "PROCESSING_LABEL": "Waiting for process to start, please wait...",
+          "ACTIONS_SUCCESSFULLY_APPLIED": "Mass actions successfully applied.",
+          "NO_VALID_PLAYERS": "There are no valid players to process, please upload a new file with valid players"
+        },
+        "SUMMARY": {
+          "EXISTING_PLAYERS": "existing players found",
+          "UNDEFINED_PLAYERS": "undefined players found",
+          "DUPLICATED_PLAYERS": "players duplicated"
+        },
+        "FIELDS": {
+          "CHOOSE_FILE": {
+            "LABEL": "Upload CSV"
+          }
+        },
+        "TOOLTIP": {
+          "LABEL": "CSV format: one column, containing IDs - First row is a header."
+        },
+        "ACTIONS": {
+          "CHANGE_STATUS": {
+            "LABEL": "Change status"
+          },
+          "CHANGE_VERIFICATION_STATUS": {
+            "LABEL": "Change verification status"
+          },
+          "MARK_AS_TEST_PLAYER": {
+            "LABEL": "Mark as test player"
+          },
+          "UPDATE_PLAYER_TAGS": {
+            "LABEL": "Update player tags"
+          },
+          "ADD_NOTE": {
+            "LABEL": "Add note to all players"
+          },
+          "BALANCE_ADJUST": {
+            "LABEL": "Balance adjust"
+          }
+        }
+      }
+    },
+    "BONUSES": {
+      "GRANT_MASS": {
+        "CASH_BONUSES": {
+          "ERRORS": {
+            "FILE_UPLOAD_FAILED": "Sorry your file could not upload. Please try again.",
+            "DEFAULT_AMOUNT_NOT_SPECIFIED": "You should either provide a default amount, or upload your CSV file with amounts per player specified."
+          },
+          "PROGRESS_BAR": {
+            "UPLOADING_LABEL": "Upload in progress, please wait for process to start...",
+            "PROCESSING_LABEL": "Waiting for process to start, please wait...",
+            "ACTIONS_SUCCESSFULLY_APPLIED": "Mass actions successfully applied.",
+            "NO_VALID_PLAYERS": "There are no valid players to process, please upload a new file with valid players"
+          }
+        },
+        "FREESPIN_BONUSES": {
+          "ERRORS": {
+            "FILE_UPLOAD_FAILED": "Sorry your file could not upload. Please try again."
+          },
+          "PROGRESS_BAR": {
+            "UPLOADING_LABEL": "Upload in progress, please wait for process to start...",
+            "PROCESSING_LABEL": "Waiting for process to start, please wait...",
+            "ACTIONS_SUCCESSFULLY_APPLIED": "Mass actions successfully applied.",
+            "NO_VALID_PLAYERS": "There are no valid players to process, please upload a new file with valid players"
+          }
+        }
+      }
+    },
+    "USER": {
+      "FIELDS": {
+        "STATUS": {
+          "COMMENT": {
+            "NAME": "Text",
+            "PLACEHOLDER": "Fill in a reason",
+            "DESCRIPTION": "Specify a reason for this change/update."
+          }
+        },
+        "VERIFICATION_STATUS": {
+          "STATUS": {
+            "NAME": "Verification Status",
+            "PLACEHOLDER": "Select new verification status",
+            "DESCRIPTION": "Please select the new verification status you want"
+          },
+          "COMMENT": {
+            "NAME": "Text",
+            "PLACEHOLDER": "Fill in a reason",
+            "DESCRIPTION": "Specify a reason for this change/update."
+          }
+        },
+        "TEST_PLAYER": {
+          "NAME": "Test Player",
+          "PLACEHOLDER": "Mark as a test player",
+          "DESCRIPTION": "Please select the new test player indicator you want"
+        },
+        "PLAYER_TAGS": {
+          "OPTIONS": {
+            "ADD_TAG": {
+              "RADIO_LABEL": "Add tags",
+              "ADD": {
+                "NAME": "Add Tags",
+                "PLACEHOLDER": "Select tags to add",
+                "DESCRIPTION": "Please select the new tags you want to add"
+              }
+            },
+            "REPLACE_TAG": {
+              "RADIO_LABEL": "Replace tag",
+              "FROM": {
+                "NAME": "From Tag",
+                "PLACEHOLDER": "Select tag to replace from",
+                "DESCRIPTION": "Please select a tag you want to replace from"
+              },
+              "TO": {
+                "NAME": "To Tag",
+                "PLACEHOLDER": "Select tag to be replaced with",
+                "DESCRIPTION": "Please select a tag you want replaced with"
+              }
+            },
+            "REMOVE_ALL_TAGS": {
+              "RADIO_LABEL": "Remove all tags"
+            },
+            "REMOVE_SPECIFIC_TAGS": {
+              "RADIO_LABEL": "Remove specific tags",
+              "REMOVE": {
+                "NAME": "Remove Specific Tags",
+                "PLACEHOLDER": "Select tags to be removed",
+                "DESCRIPTION": "Please select the tags you want to remove"
+              }
+            }
+          }
+        },
+        "NOTE": {
+          "COMMENT": {
+            "NAME": "Text",
+            "PLACEHOLDER": "Fill in a reason",
+            "DESCRIPTION": "Specify a reason for this change/update."
+          }
+        }
+      }
+    },
+    "CHANGELOGS": {
+      "GLOBAL": {
+        "FIELDS": {
+          "PRIORITY": {
+            "PLACEHOLDER": "Select priority..."
+          }
+        }
+      }
+    }
+  }
+}

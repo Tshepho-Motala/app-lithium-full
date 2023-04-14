@@ -1,0 +1,71 @@
+.PayPal Withdraw Flow
+[plantuml]
+----
+
+@startuml
+
+actor Player
+participant Portal
+participant Lithium
+actor LBOOperator
+participant PayPal
+
+autonumber
+
+Player -> Portal  : Player press withdraw
+activate Portal
+Portal -> Lithium : getProcessorAccounts(userGuid)
+activate Lithium
+Lithium --> Portal : getProcessorAccounts(accounts_list)
+deactivate Lithium
+Portal--> Player: List of stored accounts
+Player -> Portal : Player chooses PayPal accounts
+Portal -> Lithium : withdraw(processorAccountId)
+activate Lithium
+Lithium -> Lithium : Check account
+Lithium --> Portal : withdraw(status="WAITFORAPPROVAL")
+deactivate Lithium
+Portal --> Player : withdraw in progress
+deactivate Portal
+
+LBOOperator -> Lithium : Approve Withdraw
+activate Lithium
+Lithium -> PayPal : payout(paypal_account_refference, amount    )
+activate PayPal
+PayPal --> Lithium : payout(status="SUCCESS/PENDING/PROCESSING/DENIED/CANCELED")
+
+
+alt#Gold  #Pink status="DENIED"
+    Lithium -> Lithium: Update transaction status
+    note left
+        Set final transaction status="DECLINED"
+        Return reserved amount to player balance
+    end note
+    Lithium --> LBOOperator: Deposit(status="DECLINED", error)
+else #LightGreen status="SUCCESS"
+    Lithium -> Lithium: Update transaction status
+    note left
+        Set final transaction status="SUCCESS"
+        Update player balance
+    end note
+    Lithium --> LBOOperator: Deposit(status="SUCCESS")
+else #LightBlue status="PENDING/PROCESSING"
+    Lithium --> LBOOperator: Deposit(status="WAITFORPROCESSOR", error)
+    ref over Lithium: PAYMENT.PAYOUTSBATCH.SUCCESS Webhook
+    deactivate Lithium
+end
+
+ == PAYMENT.PAYOUTSBATCH.SUCCESS Webhook==
+    PayPal -> Lithium : webhook(PAYMENT.PAYOUTSBATCH.SUCCESS, transactionId)
+    note left
+         Do nothing in case transaction
+         is already in final state
+     end note
+    activate Lithium
+    Lithium -> PayPal: getPayout(transactionId)
+    PayPal --> Lithium: getPayout(status, error)
+    Lithium -> Lithium: Update transaction status and player balance
+    Lithium --> PayPal: HTTP_OK
+    deactivate Lithium
+    deactivate PayPal
+@enduml

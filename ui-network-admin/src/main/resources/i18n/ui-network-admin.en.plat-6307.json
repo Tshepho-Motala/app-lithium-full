@@ -1,0 +1,13 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "CMS": {
+      "GLOBAL": {
+        "DIALOG": {
+          "CONFIRM_DELETE": {
+            "LOBBY_VERSION" : "version"
+          }
+        }
+      }
+    }
+  }
+}

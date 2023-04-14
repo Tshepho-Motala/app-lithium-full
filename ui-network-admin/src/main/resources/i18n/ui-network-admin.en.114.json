@@ -1,0 +1,13 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "CASHIER": {
+      "PROCESSORS": {
+        "FIELDS": {
+          "RESERVEFUNDSONWITHDRAWAL": {
+            "NAME": "Reserve funds when withdrawal is requested"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,38 @@
+.Manual Activate Bonus Flow (current implementation)
+[plantuml]
+----
+
+@startuml
+
+autonumber
+
+participant "LBO" as lbo
+participant "svc-bonus" as svcbonus
+participant "svc-casino-pr-roxor" as scprx
+participant "RX RGP Rewards" as rxrgp
+participant "svc-casino" as svccasino
+participant "svc-accounting-pr-internal" as svcacct
+
+lbo -> svcbonus: /backoffice/bonus/player/trigger/manual
+activate svcbonus
+svcbonus -> scprx: /bonus/frb/awardbonus
+activate scprx
+scprx -> rxrgp: Grant Reward
+activate rxrgp
+rxrgp -> scprx: Result
+deactivate rxrgp
+scprx -> svcbonus: Result
+deactivate scprx
+svcbonus -> svccasino: /syste/casino/multi-bet/v1
+activate svccasino
+svccasino -> svcacct: /system/adjust/v1
+activate svcacct
+svcacct -> svccasino: Result
+deactivate svcacct
+svccasino -> svcbonus: Result
+deactivate svccasino
+svcbonus -> lbo: Result
+deactivate svcbonus
+
+@enduml
+----

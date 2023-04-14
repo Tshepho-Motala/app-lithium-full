@@ -1,0 +1,27 @@
+server:
+  port: 9105
+
+spring:
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
+  cloud:
+    stream:
+      bindings:
+        affiliatetransactioninput:
+          group: affiliatetransactiongroup
+          binder: rabbit
+          destination: affiliatetransactionqueue
+        transaction-label-accounting-output:
+          group: transaction-label-accounting-group
+          binder: rabbit
+          destination: transaction-label-accounting-queue
+          producer:
+            required-groups: transaction-label-accounting-group
+
+lithium:
+  services:
+    db:
+      load-test-data: false
+    affiliate:
+      public-url: http://localhost:9105

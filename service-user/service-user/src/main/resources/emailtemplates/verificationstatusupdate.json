@@ -1,0 +1,23 @@
+{
+	"name": "verification.status.change",
+	"subject": "Verification Status Change",
+	"body": "Hi %user.firstName% %user.lastName%,Your verification status is now %user.verificationStatus%.",
+	"placeholders": [
+		{
+			"name": "%user.firstName%",
+			"description": "The player's first name"
+		},
+    {
+      "name": "%user.lastNamePrefix%",
+      "description": "The player's last name prefix"
+    },
+		{
+			"name": "%user.lastName%",
+			"description": "The player's last name"
+		},
+		{
+			"name": "%user.verificationStatus%",
+			"description": "The player's verification status"
+		}
+	]
+}

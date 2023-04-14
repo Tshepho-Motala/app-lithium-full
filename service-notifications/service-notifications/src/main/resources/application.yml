@@ -1,0 +1,47 @@
+server:
+  port: 9903
+  
+spring:
+  datasource:
+    url: jdbc:mysql://localhost/lithium_notifications
+    username: root
+    password: mysql
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: validate
+  cloud:
+    stream:
+      bindings:
+        notification-input:
+          group: notification-group
+          binder: rabbit
+          destination: notification-output
+        register-notification-input:
+          group: register-notification-trigger-group
+          binder: rabbit
+          destination: register-notification-queue
+        register-notification-type-input:
+          group: register-notification-type-trigger-group
+          binder: rabbit
+          destination: register-notification-type-queue
+        gatewayexchange:
+          binder: rabbit
+          destination: gateway
+          producer:
+            should-declare: false
+        userattributestriggerinput :
+          group: user-attributes-trigger-group-notifications
+          binder : rabbit
+          destination : userattributestriggerqueue
+
+lithium:
+  services:
+    db:
+      load-test-data: false
+    notifications:
+      mins-before-processing-notification-channels: 1
+        
+logging:
+  level:
+    lithium.service.notifications: INFO

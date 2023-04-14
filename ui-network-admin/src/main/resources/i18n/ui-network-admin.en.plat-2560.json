@@ -1,0 +1,20 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "GAME": {
+      "FIELDS": {
+        "PROGRESSIVE_JACKPOT": {
+          "NAME": "Progressive Jackpot Enabled",
+          "DESCRIPTION": "Has a Progressive Jackpot"
+        },
+        "NETWORKED_JACKPOT_POOL": {
+          "NAME": "Networked Jackpot Pool Enabled",
+          "DESCRIPTION": "Is the game part of a Networked Jackpot Pool"
+        },
+        "LOCAL_JACKPOT_POOL": {
+          "NAME": "Local Jackpot Pool Enabled",
+          "DESCRIPTION": "Is the game part of a Local Jackpot Pool"
+        }
+      }
+    }
+  }
+}

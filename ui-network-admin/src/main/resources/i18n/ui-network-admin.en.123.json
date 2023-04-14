@@ -1,0 +1,11 @@
+{
+  "UI_NETWORK_ADMIN": {
+      "BONUS": {
+        "CUSTOM_FREE_MONEY": {
+          "AMOUNT": "Custom free money amount",
+          "FILE_UPLOAD" : "CSV file for bonus registration.",
+          "FILE_UPLOAD_INFO" : "csv format - (NO HEADER) | [player guid], [bonus free money amount (optional)]"
+        }
+      }
+  }
+}

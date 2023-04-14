@@ -1,0 +1,26 @@
+server:
+  port: 9915
+  
+spring:
+  cloud:
+    stream:
+      bindings:
+        rewardtypeoutputv1:
+          group: rewardtypegroupv1
+          binder: rabbit
+          destination: rewardtypequeuev1
+          producer:
+            required-groups: rewardtypegroupv1
+
+lithium:
+  services:
+    db:
+      load-test-data: true
+        
+logging:
+  level:
+    lithium.leader: WARN
+    org.springframework.cloud.netflix.feign.LithiumFeignClientFactoryBean: INFO
+    lithium.services.WebRequestInterceptorConfiguration: INFO
+    lithium.service.reward.provider.casino.roxor.service: INFO
+

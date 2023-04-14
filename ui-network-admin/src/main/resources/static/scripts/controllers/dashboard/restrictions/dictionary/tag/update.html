@@ -1,0 +1,26 @@
+<div class="modal-content">
+	<form ng-submit="controller.submit()">
+		<div class="modal-header">
+			<h3 class="modal-title" id="modal-title">
+				<i class="fa fa-pencil"></i>
+				{{ 'UI_NETWORK_ADMIN.RESTRICTIONS.TITLES.RESTRICTION_TAG' | translate }}
+				<button-close-window ng-click="controller.cancel()"></button-close-window>
+			</h3>
+		</div>
+	
+		<div class="moday-body" id="modal-body">
+			<div class="row v-reset-row">
+				<div class="col-xs-12 p-2">
+					<formly-form model="controller.model" fields="controller.fields" options="controller.options" form="controller.form">
+					</formly-form>
+				</div>
+			</div>
+		</div>
+	
+		<div class="modal-footer" id="modal-footer">
+			<buttonbar>
+				<button-submit></button-submit>
+			</buttonbar>
+		</div>
+	</form>
+</div>

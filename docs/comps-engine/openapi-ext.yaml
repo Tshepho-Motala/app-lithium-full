@@ -1,0 +1,142 @@
+openapi: "3.0.2"
+info:
+  title: Comps Engine - External Integrations
+  version: "1.0.0"
+servers:
+  - url: 'http://localhost:9000'
+    description: Local Gateway.
+  - url: "https://gateway.lithium-develop.ls-g.net"
+    description: Livescore Lithium Develop
+  - url: "https://gateway.lithium-qa.ls-g.net"
+    description: Livescore Lithium QA
+  - url: "https://gateway.lithium-staging.ls-g.net/"
+    description: Livescore Lithium Staging
+  - url: "https://gateway.lithium-prod.ls-g.net"
+    description: Livescore Lithium Production
+tags:
+  - name: Promotions
+    description: These endpoints relate to promotions.
+
+paths:
+  /service-promo/external/find-promotions:
+    get:
+      tags:
+        - Promotions
+      description: |
+        Obtain a list of promotions that are exclusive that can be used in the
+        add players endpoint.
+      security:
+        - BasicTokenAuth: []
+      parameters:
+        - name: domainName
+          required: true
+          allowEmptyValue: false
+          in: query
+          schema:
+            type: string
+          description: |-
+            The registered brand to use to find promotions available.
+          example: livescore_uk
+        - name: sha256
+          required: true
+          allowEmptyValue: false
+          in: query
+          schema:
+            type: string
+          description: |
+            The hash needs to be calculated using the domainName as key along with a preSharedKey provided by the lithium team.
+            
+            **Example:**
+            
+            If domainName = "livescore_uk" and preSharedKey = "abcdefg123"
+            - then key = "livescore_uk"
+            - and hmac_sha256(key, preSharedKey) = "9c25dc588496932134504bd219c4c23583b373aa22b7f50c82a0f1070bd83079"
+          example: 9c25dc588496932134504bd219c4c23583b373aa22b7f50c82a0f1070bd83079
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/PromotionExt"
+
+  /service-promo/external/add-players:
+    post:
+      tags:
+        - Promotions
+      description: |
+        Can be used to add individual players to an exclusive promotion.
+      security:
+        - BasicTokenAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ExclusiveAddRequest"
+      responses:
+        "200":
+          description: Successfully executed, response contains details.
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ExclusiveAddResponse"
+        "411":
+          description: Invalid promotion provided.
+        "431":
+          description: Invalid sha provided.
+
+components:
+  schemas:
+    PromotionExt:
+      type: object
+      properties:
+        id:
+          type: number
+          format: int64
+          example: 1
+          description: Identifier for the promotion revision.
+        name:
+          type: string
+          example: Welcome Offer - June
+        description:
+          type: string
+          example: When signing up in June receive $$$
+    ExclusiveAddRequest:
+      type: object
+      properties:
+        promotionId:
+          type: number
+          format: int64
+          example: 1
+          description: Identifier for the promotion revision.
+        players:
+          type: array
+          items:
+            type: string
+            example: livescore_uk/riaansuk1
+        sha256:
+          type: string
+          description: |
+            The hash needs to be calculated using the promotionId as key along with a preSharedKey provided by the lithium team.
+
+            **Example:**
+
+            If promotionId = "12" and preSharedKey = "abcdefg123"
+            - then key = "12"
+            - and hmac_sha256(key, preSharedKey) = "9c25dc588496932134504bd219c4c23583b373aa22b7f50c82a0f1070bd83079"
+          example: 9c25dc588496932134504bd219c4c23583b373aa22b7f50c82a0f1070bd83079
+    ExclusiveAddResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        validPlayerCount:
+          type: number
+          example: 14353
+        invalidPlayerCount:
+          type: number
+          example: 0

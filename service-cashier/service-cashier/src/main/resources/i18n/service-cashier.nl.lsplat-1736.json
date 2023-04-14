@@ -1,0 +1,45 @@
+{
+  "SERVICE-CASHIER": {
+    "TRAN": {
+      "START": {
+        "LABEL": "In behandeling"
+      },
+      "WAITFORPROCESSOR": {
+        "LABEL": "In behandeling"
+      },
+      "FATALERROR": {
+        "LABEL": "Mislukt"
+      },
+      "SUCCESS": {
+        "LABEL": "Geslaagd"
+      },
+      "DECLINED": {
+        "LABEL": "Geweigerd"
+      },
+      "WAITFORAPPROVAL": {
+        "LABEL": "In behandeling"
+      },
+      "APPROVED": {
+        "LABEL": "In behandeling"
+      },
+      "REJECTED": {
+        "LABEL": "Afgekeurd"
+      },
+      "CANCEL": {
+        "LABEL": "Geannuleerd"
+      },
+      "EXPIRED": {
+        "LABEL": "Verlopen"
+      },
+      "PLAYER_CANCEL": {
+        "LABEL": "Geannuleerd"
+      },
+      "DEPOSIT": {
+        "LABEL": "Storting"
+      },
+      "WITHDRAWAL": {
+        "LABEL": "Opname"
+      }
+    }
+  }
+}

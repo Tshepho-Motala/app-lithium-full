@@ -1,0 +1,5 @@
+.Rollback Bet
+[source,gherkin]
+----
+include::../../src/docs/gherkin/high-level-spec/rollbackbet.feature[]
+----

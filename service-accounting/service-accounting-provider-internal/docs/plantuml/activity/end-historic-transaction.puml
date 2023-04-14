@@ -1,0 +1,141 @@
+[plantuml]
+----
+@startuml
+start
+
+:Lookup: __transaction__, __allowedAccountTypes__,
+__transactionTypeLabels__, __transactionLabelValues__,
+ and __transactionEntries__;
+
+:__transactionType__ = transaction.transactionType;
+
+while (__transactionTypeLabel__: transactionTypeLabels)
+    :__found__ = transactionTypeLabel.optional;
+
+    while (__transactionLabelValue__: transactionLabelValues)
+        if (matched) then (yes)
+            :found = true;
+
+            if (transactionTypeLabel.accountTypeCode not null or empty) then (yes)
+                :map.put
+                (transactionTypeLabel.accountTypeCode,
+                transactionLabelValue.labelValue): __unqiueLabelValues__;
+            endif
+
+            break;
+        endif
+
+        if (!found) then (yes)
+            :throw 414 error code exception:
+            transaction type requires use of label;
+        endif
+    endwhile
+endwhile
+
+if (uniqueLabelValues not empty) then (yes)
+    while (__key__: uniqueLabelValues.keySet)
+        :Lookup: accountType;
+        :uniqueness check,
+        returns __constraint__ if not unique;
+        if (constraint is not null) then (yes)
+            :throw 409 error code exception:
+            duplicate transaction;
+        endif
+
+        while (__transactionEntry__: transactionEntries)
+            if (transactionEntry.account.accountType.id
+            is equal to accountType.id) then (yes)
+                :list.add
+                __accountLabelValueConstraintList__;
+            endif
+        endwhile
+    endwhile
+endif
+
+:__sum__ = 0;
+
+while (__transactionEntry__: transactionEntries)
+    :__isDebit__ = transactionEntry.amountCents > 0;
+    :__isCredit__ = transactionEntry.amountCents < 0;
+
+    if (allowedAccountTypes not empty) then (yes)
+        :__found__ = false;
+
+        while (__allowedAccountType__: allowedAccountTypes)
+            if (allowedAccountType.accountTypeCode is equal to
+            transactionEntry.account.accountType.code) then (yes)
+                :found = true;
+
+                if (isDebit and allowedAccountType
+                is not debit and
+                transactionEntry.amountCents is not 0)
+                    :throw 414 error code exception:
+                    transaction type doesn't allow account to be debited;
+                endif
+
+                if (isCredit and allowedAccountType
+                is not credit and
+                transactionEntry.amountCents is not 0)
+                    :throw 414 error code exception:
+                    transaction type doesn't allow account to be credited;
+                endif
+
+                break
+            endif
+
+            if (!found) then (yes)
+                :throw 414 error code exception:
+                account type is not allowed on the transaction type;
+            endif
+        endwhile
+    endif
+
+    :sum += transactionEntry.amountCents;
+endwhile
+
+if (sum is not 0) then (yes)
+:throw 414 error code exception:
+transaction is not balanced;
+endif
+
+:Lookup: __summarizeTransactionsAfterDate__:
+configurable date
+(in yml) from which to
+begin player financial
+transaction summarization;
+note right
+Important modifications
+begin here
+end note
+
+while (__transactionEntry__: transactionEntries)
+    if (transactionEntry.date greater than
+    summarizeTransactionsAfterDate) then (yes)
+        :summarization:
+        adjust summary account;
+        note right
+        summaryAccountService
+        .adjust(transactionEntry)
+        end note
+
+        :summarization:
+        adjust summary account transaction type;
+        note right
+        summaryAccountTransactionTypeService
+        .adjust(transactionEntry, transactionType)
+        end note
+    endif
+endwhile
+
+:transaction.closedOn = date from payload;
+:transaction.open = false;
+:persist: __transaction__;
+
+while (__accountLabelValueConstraint__: accountLabelValueConstraintList)
+    :persist: __accountLabelValueConstraint__;
+endwhile
+
+stop
+@enduml
+----
+[plantuml]

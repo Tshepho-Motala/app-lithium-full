@@ -1,0 +1,20 @@
+<div></div>
+  <div class="register-success mat-elevation-z12 background-primary">
+    <div class="register-success-header mtex-bc-primary-800" fxLayout="column" fxLayoutAlign="center center">
+      <h1>{{ domainGuard.domain.displayName }}</h1>
+    </div>
+    <div class="register-success-content" fxLayout="column" fxLayoutAlign="start stretch">
+        <p>
+            Your registration has been successful.
+            <br/><br/>
+            Your account will need to be vetted before being enabled and granted login access.
+            <br/>
+            The administrators have been notified and will promptly begin the process. Once your account has been
+            verified, we will notify you via e-mail. You may then login and make use of the system.
+            <br/><br/>
+            Kind regards
+        </p>
+        <p class="note"><a [routerLink]="[ '..', 'login' ]">Back to login</a></p>
+    </div>
+  </div>
+<div></div>

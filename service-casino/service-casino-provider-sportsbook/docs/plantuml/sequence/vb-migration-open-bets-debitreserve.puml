@@ -1,0 +1,98 @@
+[plantuml]
+----
+@startuml
+
+!define p(name, alias) participant "name" as alias << (L,#AAFFCC) >>
+!define pn(name, alias) participant "name" as alias << (L,#FFAAAA) >>
+!define q(name, alias) queue "name" as alias << (L,#AAFFCC) >>
+!define qn(name, alias) queue "name" as alias << (L,#FFAAAA) >>
+
+autonumber
+
+participant "Sports Gateway" as sportsGateway
+
+box "Lithium" #LightSkyBlue
+p("service-casino-provider-sportsbook", scpSportsbook)
+p("client-service-domain", clientServiceDomain)
+end box
+
+activate sportsGateway
+sportsGateway -> scpSportsbook: POST /bet/debitreserve
+
+activate scpSportsbook
+scpSportsbook -> scpSportsbook: Validate request
+note right
+Request data
+should still
+be valid
+end note
+
+scpSportsbook -> scpSportsbook: Validate sha256
+
+scpSportsbook -> clientServiceDomain: Domain setting evaluation
+
+activate clientServiceDomain
+
+note right
+DANGEROUS_VB_
+MIGRATION_OPEN
+_BETS_INGESTION
+_WITHOUT_BALANCE
+_ADJUST_ENABLED
+end note
+
+clientServiceDomain --> scpSportsbook
+
+deactivate clientServiceDomain
+
+note right
+See notes below
+end note
+
+alt Enabled
+    scpSportsbook -> scpSportsbook: Find or create user
+    note right
+    Outside of transaction.
+    Optimistically, retryable
+    end note
+
+    scpSportsbook -> scpSportsbook: Begin transaction, lock user
+
+    scpSportsbook -> scpSportsbook: Check for duplicate submission. Bet validation
+
+    scpSportsbook -> scpSportsbook: Find reservation, no lock
+
+    alt Found
+        scpSportsbook -> scpSportsbook: Increment reservation amount with bet amount
+
+        scpSportsbook -> scpSportsbook: Validate reservation state. Not cancelled or committed yet
+    else
+        scpSportsbook -> scpSportsbook: Create reservation. Initialise reservation amount with bet amount.
+    end
+
+    scpSportsbook -> scpSportsbook: Increment reservation bet count
+
+    note right
+    Worth noting, we cannot
+    do a proper validation
+    on commitreserve for
+    bet count. Bet count
+    usually comes in from
+    reservation
+    end note
+
+    scpSportsbook -> scpSportsbook: Persist bet and reservation
+
+    scpSportsbook -> scpSportsbook: Add audit trail
+
+else
+    scpSportsbook -> scpSportsbook: Proceed with normal workflow
+end
+
+deactivate scpSportsbook
+
+deactivate sportsGateway
+
+@enduml
+----
+[plantuml]

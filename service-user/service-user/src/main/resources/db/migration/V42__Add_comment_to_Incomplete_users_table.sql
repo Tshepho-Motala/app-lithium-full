@@ -1,0 +1,1 @@
+ALTER TABLE  `incomplete_user` ADD COLUMN stage VARCHAR(200) NULL; 

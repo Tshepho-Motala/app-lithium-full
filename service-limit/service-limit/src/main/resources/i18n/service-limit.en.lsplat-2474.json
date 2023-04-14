@@ -1,0 +1,18 @@
+{
+  "SERVICE-LIMIT": {
+    "RESTRICTIONS": {
+      "RULESETS": {
+        "RULE": {
+          "FIELD": {
+            "SPECIFIC_RESTRICTION_EVENT": "Restriction on specific event"
+          },
+          "EVENTS": {
+            "REGISTRATION": "User is registered",
+            "FIRST_DEPOSIT": "First successful user deposit",
+            "SPECIFIC_RESTRICTION_APPLIED": "Specific restriction is applied"
+          }
+        }
+      }
+    }
+  }
+}

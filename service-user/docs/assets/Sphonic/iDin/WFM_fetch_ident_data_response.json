@@ -1,0 +1,53 @@
+{
+    "SphonicResponse": {
+        "data": {
+            "traceData": {
+                "responseDateTime": "2021-11-10T14:09:27.882Z",
+                "livescoreRequestId": "a449-02b0e63f4593-fce35022-3ce1",
+                "livescoreApplicantId": "aaabb",
+                "sphonicTransactionId": "fce35022-3ce1-4208-a449-02b0e63f4593",
+                "bluemTransactionId": "f7e57b272bf3cebb"
+            },
+            "outcome": {
+                "transactionResult": "Success",
+                "reason": "Bank data received",
+                "authenticationAuthorityId": "RABONL2U",
+                "authenticationAuthorityName": "Rabobank iDIN issuer simulatie",
+                "idResponse": {
+                    "type": "BIN",
+                    "identifier": "FANTASYBANK1234567890"
+                }
+            },
+            "nameData": {
+                "initials": "VJ",
+                "legalLastName": "Vries",
+                "legalLastNamePrefix": "de",
+                "preferredLastName": "Vries-Jansen",
+                "legalFirstName": "",
+                "preferredFirstName": ""
+            },
+            "addressData": {
+                "houseNumber": "19",
+                "houseNumberSuffix": "",
+                "street": "Pascalstreet",
+                "addressExtra": "",
+                "city": "Aachen",
+                "postalCode": "0000AA",
+                "countryCode": "DE",
+                "internationalAddressLine1": "",
+                "internationalAddressLine2": "",
+                "internationalAddressLine3": ""
+            },
+            "ageData": {
+                "dateOfBirth": "1975-07-25"
+            },
+            "genderData": {
+                "gender": "MALE"
+            },
+            "contactData": {
+                "phoneNumber": "+31203051900",
+                "email": "info@equensworldline.nl"
+            }
+        }
+    }
+}

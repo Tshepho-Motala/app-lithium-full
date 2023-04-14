@@ -1,0 +1,180 @@
+.job_template: &createdockerimages
+  stage: createdockerimages
+  image: registry.gitlab.com/playsafe/docker/maven-docker-builder:openjdk17
+  cache:
+    key: app-lithium-full-maven-cache-no-lithium
+    paths:
+      - repository
+  except:
+    - develop
+    - schedules
+  services:
+    - docker:dind
+
+.job_template: &createdockerimages_all
+  stage: createdockerimages
+  image: registry.gitlab.com/playsafe/docker/maven-docker-builder:openjdk17
+  when: manual
+  cache:
+    key: app-lithium-full-maven-cache-no-lithium
+    paths:
+      - repository
+  except:
+    - develop
+    - schedules
+  services:
+    - docker:dind
+  only:
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /\[all\]/
+
+.job_template: &deploy
+  stage: deploy
+  image: registry.gitlab.com/playsafe/docker/lithium-deployer:latest
+  environment:
+    name: $CI_COMMIT_REF_NAME
+  except:
+    - develop
+    - schedules
+  # only:
+  #   refs:
+  #     - /^environment/.*$/
+
+.job_template: &deploy_all
+  stage: deploy
+  image: registry.gitlab.com/playsafe/docker/lithium-deployer:latest
+  when: manual
+  environment:
+    name: $CI_COMMIT_REF_NAME
+  # except:
+  #   - develop
+  #   - schedules
+  only:
+    refs:
+      - /^environment/.*$/
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /\[all\]/
+
+svc-promo:createdockerimage:
+  <<: *createdockerimages
+  script: "sh build/gitlab/build-image.sh svc-promo service-promo/service-promo"
+  only:
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /\[service-promo\]/
+
+svc-promo:createdockerimage_all:
+  <<: *createdockerimages_all
+  script: "sh build/gitlab/build-image.sh svc-promo service-promo/service-promo"
+
+svc-promo:deploy:
+  <<: *deploy
+  script: "bash build/gitlab/deploy.sh svc-promo"
+  only:
+    refs:
+      - /^environment/.*$/
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /\[service-promo\]/
+
+svc-promo:deploy_all:
+  <<: *deploy_all
+  script: "bash build/gitlab/deploy.sh svc-promo"
+
+#  svc-promo-pr-casino-roxor
+svc-promo-pr-casino-roxor:createdockerimage:
+  <<: *createdockerimages
+  script: "sh build/gitlab/build-image.sh svc-promo-pr-casino-roxor service-promo/service-promo-provider-casino-roxor"
+  only:
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /\[service-promo-provider-casino-roxor\]/
+
+svc-promo-pr-casino-roxor:createdockerimage_all:
+  <<: *createdockerimages_all
+  script: "sh build/gitlab/build-image.sh svc-promo-pr-casino-roxor service-promo/service-promo-provider-casino-roxor"
+
+svc-promo-pr-casino-roxor:deploy:
+  <<: *deploy
+  script: "bash build/gitlab/deploy.sh svc-promo-pr-casino-roxor"
+  only:
+    refs:
+      - /^environment/.*$/
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /\[service-promo-provider-casino-roxor\]/
+
+svc-promo-pr-casino-roxor:deploy_all:
+  <<: *deploy_all
+  script: "bash build/gitlab/deploy.sh svc-promo-pr-casino-roxor"
+
+#  svc-promo-pr-user
+svc-promo-pr-user:createdockerimage:
+  <<: *createdockerimages
+  script: "sh build/gitlab/build-image.sh svc-promo-pr-user service-promo/service-promo-provider-user"
+  only:
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /\[service-promo-provider-user\]/
+
+svc-promo-pr-user:createdockerimage_all:
+  <<: *createdockerimages_all
+  script: "sh build/gitlab/build-image.sh svc-promo-pr-user service-promo/service-promo-provider-user"
+
+svc-promo-pr-user:deploy:
+  <<: *deploy
+  script: "bash build/gitlab/deploy.sh svc-promo-pr-user"
+  only:
+    refs:
+      - /^environment/.*$/
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /\[service-promo-provider-user\]/
+
+svc-promo-pr-user:deploy_all:
+  <<: *deploy_all
+  script: "bash build/gitlab/deploy.sh svc-promo-pr-user"
+
+#  svc-promo-pr-sportsbook-sbt
+svc-promo-pr-sportsbook-sbt:createdockerimage:
+  <<: *createdockerimages
+  script: "sh build/gitlab/build-image.sh svc-promo-pr-sportsbook-sbt service-promo/service-promo-provider-sportsbook-sbt"
+  only:
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /\[service-promo-provider-sportsbook-sbt\]/
+
+svc-promo-pr-sportsbook-sbt:createdockerimage_all:
+  <<: *createdockerimages_all
+  script: "sh build/gitlab/build-image.sh svc-promo-pr-sportsbook-sbt service-promo/service-promo-provider-sportsbook-sbt"
+
+svc-promo-pr-sportsbook-sbt:deploy:
+  <<: *deploy
+  script: "bash build/gitlab/deploy.sh svc-promo-pr-sportsbook-sbt"
+  only:
+    refs:
+      - /^environment/.*$/
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /\[service-promo-provider-sportsbook-sbt\]/
+
+svc-promo-pr-sportsbook-sbt:deploy_all:
+  <<: *deploy_all
+  script: "bash build/gitlab/deploy.sh svc-promo-pr-sportsbook-sbt"
+  
+# svc-promo-pr-casino-iforium
+svc-promo-pr-casino-iforium:createdockerimage:
+  <<: *createdockerimages
+  script: "sh build/gitlab/build-image.sh svc-promo-pr-casino-iforium service-promo/service-promo-provider-casino-iforium"
+  only:
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /\[service-promo-provider-casino-iforium\]/
+
+svc-promo-pr-casino-iforium:createdockerimage_all:
+  <<: *createdockerimages_all
+  script: "sh build/gitlab/build-image.sh svc-promo-pr-casino-iforium service-promo/service-promo-provider-casino-iforium"
+
+svc-promo-pr-casino-iforium:deploy:
+  <<: *deploy
+  script: "bash build/gitlab/deploy.sh svc-promo-pr-casino-iforium"
+  only:
+    refs:
+      - /^environment/.*$/
+    variables:
+      - $CI_COMMIT_MESSAGE =~ /\[service-promo-provider-casino-iforium\]/
+
+svc-promo-pr-casino-iforium:deploy_all:
+  <<: *deploy_all
+  script: "bash build/gitlab/deploy.sh svc-promo-pr-casino-iforium"

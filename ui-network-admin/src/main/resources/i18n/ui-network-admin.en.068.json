@@ -1,0 +1,15 @@
+{
+	"UI_NETWORK_ADMIN": {
+		"BONUS": {
+			"TITLE": {
+				"NOTIFICATIONS": "Notifications"
+			},
+			"NOTIFICATIONS": {
+				"ACTIVATION": {
+					"NAME": "Activation Notification Name",
+					"DESCRIPTION": "The notification that should be triggered when the bonus is activated for a player"
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,41 @@
+.Player initiated Promotions OptOut
+[plantuml]
+----
+@startuml
+'https://plantuml.com/sequence-diagram
+
+actor "Player" as player
+boundary "FE" as fe
+participant Lithium as li
+
+autonumber
+
+player -> fe: Toggle promotionsOptOut flag
+activate fe
+    fe -> li: /service-user/profile/opt/{method}/{optOut}
+    activate li
+        alt promotionsOptOut flag change != user.promotionsOptOut
+            li -> li: /service-limit/system/user-restrictions/{domainName}/set-promotions-opt-out
+            li -> li: checkAccess
+            alt access.isCompsSystemPlaced=true
+                li --> fe: Status 403 Access Denied: Player has been restricted from changing their promotions OptOut flag
+            else access.isCompsSystemPlaced=false
+                alt access.isCompsAllowed=false
+                    li --> fe: Status 409 Conflict: Promotions OptOut already enabled
+                else access.isCompsAllowed=true
+                    li -> li: Finds restriction id for PLAYER_COMPS_OPTOUT
+                    li -> li: Places the PLAYER_COMPS_OPTOUT restriction onto player
+                    li -> li: /service-user/system/user/{id}/save-promotions-opt-out?{optOut}
+                    note right
+                        * This endpoint should only ever toggle the promotionsOptOut flag
+                        * ONLY promotions opt out flag should be updatable via this new system save-promotions-opt-out endpoint
+                    end note
+                end
+            end
+        end
+        li -> fe: Status 200 OK_SUCCESS
+    deactivate li
+deactivate fe
+
+@enduml
+----

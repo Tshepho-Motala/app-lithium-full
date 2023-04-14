@@ -1,0 +1,21 @@
+= Service Casino Provider Roxor
+Riaan Schoeman <riaan.schoeman@wonderlabz.com>
+1.0, January 27, 2022: Service Casino Provider Roxor
+:sectnums:
+:toc: left
+:toclevels: 4
+:toc-title: SCP Roxor
+:icons: font
+:url-quickref: https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/
+
+//This is done tto keep formatting aligned with gitlab
+****
+[verse,,]
+____
+link:../../readme.adoc[Home]
+____
+****
+
+== Description
+
+Casino provider implementation used for all games provided by Roxor

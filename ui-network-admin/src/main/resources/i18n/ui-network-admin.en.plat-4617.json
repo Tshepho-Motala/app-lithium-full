@@ -1,0 +1,17 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "SERVICE_CASHIER": {
+      "AUTO_WITHDRAWALS": {
+        "CLONE": {
+          "TITLE": "Clone",
+          "WARNING": " Warning",
+          "TEXT_WARNING": "This will create duplicate rule in the same domain, confirm to continue.",
+          "CANCEL": "Cancel",
+          "CONTINUE": "Continue",
+          "SUCCESSFULLY": "Clone done successfully"
+        }
+      }
+    }
+  }
+}
+

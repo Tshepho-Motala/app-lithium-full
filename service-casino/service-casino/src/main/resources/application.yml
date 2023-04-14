@@ -1,0 +1,129 @@
+server:
+  port: 9784
+
+spring:
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
+  datasource:
+    url: jdbc:mysql://localhost/lithium_casino
+    username: root
+    password: mysql
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: validate
+  cloud:
+    config:
+      fail-fast: true
+      retry:
+        max-attempts: 50
+    stream:
+      bindings:
+        transactiontyperegisteroutput:
+          group: transactiontyperegistergroup
+          binder: rabbit
+          destination: transactiontyperegisterqueue
+          producer:
+            required-groups: transactiontyperegistergroup
+        geooutput:
+          group: geogroup
+          binder: rabbit
+          destination: geoqueue
+          producer:
+            required-groups: geogroup
+        eventoutput:
+          group: eventgroup
+          binder: rabbit
+          destination: eventqueue
+          producer:
+            required-groups: eventgroup
+        domaineventsoutput:
+          group: domaineventgroup
+          destination: domaineventqueue
+          binder: rabbit
+          producer:
+            required-groups: domaineventgroup
+        gatewayexchange:
+          binder: rabbit
+          destination: gateway
+          producer:
+            should-declare: false
+        statslogininput:
+          group: statsgroup
+          binder: rabbit
+          destination: statsloginqueue
+        triggerbonusinput:
+          group: triggerbonusgroup
+          binder: rabbit
+          destination: triggerbonusqueue
+        statsoutputv2:
+          group: statsgroupv2
+          binder: rabbit
+          destination: statsqueuev2
+          producer:
+            required-groups: statsgroupv2
+        missionstatsoutput:
+          group: missionstatsgroup
+          binder: rabbit
+          destination: missionstatsqueue
+          producer:
+            required-groups: missionstatsgroup
+        userattributestriggerinput :
+          group: user-attributes-trigger-group-casino
+          binder : rabbit
+          destination : userattributestriggerqueue
+        casino-bets-migration-input:
+          consumer:
+            concurrency: 20
+            max-attempts: 5
+            back-off-initial-interval: 5000
+            back-off-max-interval: 60000
+            back-off-multiplier: 2.5
+          group: casino-bets-migration-group
+          binder: rabbit
+          destination: casino-bets-migration-queue
+        migration-exception-output:
+          binder: rabbit
+          destination: migration-exception-queue
+          producer:
+            required-groups: migration-exception-group
+
+      rabbit:
+        bindings:
+          casino-bets-migration-input:
+            consumer:
+              autoBindDlq: true
+              requeueRejected: true
+              republishToDlq: true
+
+lithium:
+  services:
+    db:
+      load-test-data: false
+    casino:
+      dlqRetries: 3
+      transaction-geo-device-labels:
+        enabled: true
+      slot-api-data-migration-job:
+        enabled: false
+        data-fetch-size: 25
+        delay-ms: 1000
+        data-end-id: 2311
+      bet-transactions-cleanup-job:
+        enabled: false
+        data-retention-period: -90
+        data-fetch-size: 1000
+        job-execution-interval: '*/10 * * * * *'
+  service:
+    rabbit:
+      exchange:
+        fanout-exchange-list:
+          - gateway
+
+logging:
+  level:
+    org.springframework.cloud.stream: INFO
+    lithium.service.casino.controllers.CasinoBonusCreateController: INFO
+#    org.springframework.web: INFO
+#    feign: INFO

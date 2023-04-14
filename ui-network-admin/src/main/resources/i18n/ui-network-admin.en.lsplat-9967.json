@@ -1,0 +1,26 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "CMS": {
+      "LAYOUT_BUILDER_BANNER": {
+        "MESSAGES": {
+          "UPDATE_POSITIONS": "Update is required before repositioning or adding new banners to page"
+        },
+        "BUTTONS": {
+          "REFRESH": "Refresh",
+          "UPDATE_POSITIONS": "Update Positions"
+        }
+      },
+      "BANNERS_LIST": {
+        "HEADERS": {
+          "TITLE": {
+            "ID": "Id",
+            "NAME": "Name",
+            "START_DATE": "Start Date",
+            "LOGGED_IN": "Logged In",
+            "ACTIONS": "Actions"
+          }
+        }
+      }
+    }
+  }
+}

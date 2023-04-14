@@ -1,0 +1,16 @@
+{
+	"GLOBAL": {
+		"FIELDS": {
+			"DATEOFBIRTH": "Date of Birth"
+		}
+	},
+	"UI_NETWORK_ADMIN": {
+		"USER": {
+			"FIELDS": {
+				"DATEOFBIRTH": {
+					"NAME": "Date of Birth"
+				}
+			}
+		}
+	}
+}

@@ -1,0 +1,47 @@
+= Basic Definitions
+
+[sidebar]
+****
+link:readme.adoc[Home]
+****
+
+.bonus definitions
+[cols="1,1"]
+|===
+|Bonus
+|Bonus Definition with a link to the current active revision and when a revision is being edited the not active edited version.
+
+|Bonus Revision
+|Bonus Revision stores all the data mostly related to the “Summary“ tab of the bonus on LBO
+
+|Bonus Revision Rules
+|Bonus Revision rules stores all the data mostly related to the “Rules“ tab of the bonus on LBO
+
+|Reward Rules Free Spins
+|Reward Rules Free Spins stores all the data mostly related to the “FreeSpins” tab within the “Reward“ tab of the bonus on LBO
+
+|Reward Rules Free Spins Games
+|Reward Rules Free Spins Games stores a list of the games selected on the FreeSpins tab within the Reward tab of the bonus on LBO
+
+Games on LBO are filtered based on the free spin enabled flag being checked on the game definition
+
+|Reward Rules Instant Reward
+|Reward Rules Instant Reward stores all the data mostly related to the “Instant Reward” tab within the “Reward“ tab of the bonus on LBO
+
+|Reward Rules Instant Reward Games
+|Reward Rules Instant Reward Games stores a list of the games selected on the Instant Reward tab within the Reward tab of the bonus on LBO
+
+Games on LBO are filtered based on the instant reward enabled flag being checked on the game definition
+
+|Reward Rules Casino Free Bet (FreeChips)
+|Reward Rules Casino Free Bet stores all the data mostly related to the “Casino Free Bet” tab within the “Reward“ tab of the bonus on LBO
+
+|Reward Rules Casino Free Bet Games
+|Reward Rules Casino Free Bet Games stores a list of the games selected on the Casino Free Bet tab within the Reward tab of the bonus on LBO
+
+Games on LBO are filtered based on the casino free bet enabled flag being checked on the game definition
+
+|Reward Rules Free Money
+|Reward Rules Free Money stores all the data mostly related to the “FreeMoney” tab within the “Reward“ tab of the bonus on LBO
+
+|===

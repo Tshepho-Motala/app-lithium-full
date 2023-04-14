@@ -1,0 +1,28 @@
+server:
+  port: 9494
+
+spring:
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
+  datasource:
+    url: jdbc:mysql://localhost/lithium_affiliate
+    username: root
+    password: mysql
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: create-drop
+  cloud:
+    stream:
+      bindings:
+        statsoutputv2:
+          group: statsgroupv2
+          binder: rabbit
+          destination: statsqueuev2
+          producer:
+            required-groups: statsgroupv2
+lithium:
+  services:
+    db:
+      load-test-data: false

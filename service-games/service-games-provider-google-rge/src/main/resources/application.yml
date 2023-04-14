@@ -1,0 +1,28 @@
+server:
+  port: 9899
+  servlet:
+    context-path: /
+
+spring:
+  application:
+    name: service-games-provider-google-rge
+  datasource:
+    url: jdbc:mysql://localhost/lithium_games_pr_google_rge
+    username: root
+    password: mysql
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: validate
+
+lithium:
+  services:
+    games:
+      provider:
+        google:
+          rge:
+            google-authentication-scheduler-in-millis: 60000
+
+logging:
+  level:
+    lithium.service.games.provider.google.rge: INFO

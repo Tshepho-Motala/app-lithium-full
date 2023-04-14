@@ -1,0 +1,39 @@
+{
+  "SERVICE-CASHIER": {
+    "TRAN": {
+      "START": {
+        "LABEL": "Pending"
+      },
+      "WAITFORPROCESSOR": {
+        "LABEL": "Pending"
+      },
+      "FATALERROR": {
+        "LABEL": "Failed"
+      },
+      "SUCCESS": {
+        "LABEL": "Success"
+      },
+      "DECLINED": {
+        "LABEL": "Declined"
+      },
+      "WAITFORAPPROVAL": {
+        "LABEL": "Pending"
+      },
+      "APPROVED": {
+        "LABEL": "Pending"
+      },
+      "REJECTED": {
+        "LABEL": "Rejected"
+      },
+      "CANCEL": {
+        "LABEL": "Cancelled"
+      },
+      "EXPIRED": {
+        "LABEL": "Expired"
+      },
+      "PLAYER_CANCEL": {
+        "LABEL": "Cancelled"
+      }
+    }
+  }
+}

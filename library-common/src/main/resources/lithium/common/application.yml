@@ -1,0 +1,122 @@
+feign: # https://docs.spring.io/spring-cloud-openfeign/docs/3.1.2/reference/html/appendix.html
+  circuitbreaker:
+    enabled: true
+  client:
+    decodeSlash: false
+    config:
+      default:
+        readTimeout: 30000
+
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          # This really should be THREAD, otherwise timeouts won't happen, but because hystrix is not at this time
+          # able to propagate a spring security context to a worker thread, and thus authentication between rest clients fail,
+          # we have no choice but to run the hystrix command on the same thread as the caller.
+          # See - https://github.com/spring-cloud/spring-cloud-netflix/pull/1093
+          # and - https://github.com/spring-cloud/spring-cloud-security/issues/89
+          # A workaround might be possible via https://jfconavarrete.wordpress.com/2014/09/15/make-spring-security-context-available-inside-a-hystrix-command/
+          # but for now I am running with SEMAPHORE in the hopes that the merge above happens soon.
+          strategy: SEMAPHORE
+          thread:
+            timeoutInMilliseconds: 30000
+
+# Nb.: We need to pay careful attention to the values of the 2 timeout properties above. The exceptions returned may
+#      differ if the values are not set appropriately, and cause inconsistencies. Based on the observations in testing,
+#      if we have them equal, we get the expected outcome. Related:
+#      https://github.com/spring-cloud/spring-cloud-openfeign/commit/cf4fa54ac87cfa0b340db891ef9dd6d1c96fd132#diff-b258ace955d38ee849bf3d4a8e0afdb84712346131522e39bb4782b1cffc8506R311
+
+lithium:
+  services:
+    user:
+      guid-strategy: ID
+  application:
+    shutdown:
+      # How long to wait before shutting down the application after a SIGTERM is received from the container (seconds)
+      # Setting this to 90 seconds in production would be a good idea, since eureka takes it's sweet time to propagate changes
+      wait-seconds: 60
+  system:
+    auth:
+      token-url: http://localhost:8901/oauth/token
+      username: system
+      password: VERYBLOODYgoodpasswordFORuseInSystemAUTHENTICATION99
+
+management:
+  # Restoring the behavior of Spring Boot 1.x actuator endpoints (i.e. having /health instead of /actuator/health)
+  endpoints:
+    web:
+      base-path: /
+      exposure:
+        include: health,prometheus,metrics
+  metrics:
+    #  add common tags for all metrics
+    tags:
+      application: ${spring.application.name}
+    # Calculating quantile 0.999 for all http.server.request metrics
+    web:
+      server:
+        request:
+          autotime:
+            percentiles: 0.999
+    export:
+      defaults:
+        # disable all metric registries unless stated otherwise by the registry-specific property
+        enabled: false
+      # Example of metrics configuration
+      # Enable prometheus metric registry
+#      prometheus:
+#        enabled: true
+      # Enable publishing metrics to console
+#      logging:
+#        enabled: true
+#        step: 1m
+      # Filtering metrics (won't be published)
+#      enable:
+#        cache: false
+#        timer.cacheget: false
+#        jvm: false
+
+logging:
+  level:
+    org.springframework:
+      amqp.rabbit.core: ERROR #Avoid the exchange creation stacktraces in logs
+
+eureka:
+  client:
+    #Could be reduced to improve eureka client registry updates from eureka server but it could have a negative impact on the eureka internals
+    registry-fetch-interval-seconds: 30
+
+# Spring 5 migration, compatibility properties
+spring:
+  task:
+    scheduling:
+      pool:
+        size: 100
+  flyway:
+    # Starting flyway 5 the default migration table has different name: flyway_schema_history
+    table: schema_version
+  main:
+    # Starting SpringBoot 2.6 circular references are prohibited by default and have to be explicitly allowed by enabling special property.
+    allow-circular-references: true
+    # Starting SpringBoot 2.1 the bean overriding is disabled by default
+    allow-bean-definition-overriding: true
+  jpa:
+    hibernate:
+      # disable the Hibernate's  5 newer IdentifierGenerator.
+      # In case of using the new one,  the @GeneratedValue(strategy = GenerationType.AUTO)  in fact will use GenerationType.SEQUENCE and requires the special hibernate_sequence table
+      # In Hibernate's < 5 version for MySQL the GenerationType.AUTO was chosen in fact by persistence provider when GenerationType.AUTO was set.
+      use-new-id-generator-mappings: false
+  jackson:
+    serialization:
+#      Default Spring HttpConverter used auto-preconfigured ObjectMapper with SerializationFeature.WRITE_DATES_AS_TIMESTAMPS disabled
+#      So all Dates in Spring 5 are serialized as a date string instead of timestamp by default.
+#      https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#howto.spring-mvc.customize-jackson-objectmapper
+      write-dates-as-timestamps: true
+  cloud:
+    mvc:
+#  Disable ResourceServerTokenRelayAutoConfiguration, otherwise, it adds an interceptor that creates a session to store the OAuth token
+#  Our app is expected to be stateless. Also having and storing sessions in memory leads to additional gigabytes of heap memory consumption
+      token-relay:
+        enabled: false

@@ -1,0 +1,12 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "CMS": {
+      "JSON": {
+        "OUTPUT": {
+          "COPY_SUCCESS": "Successfully copied JSON to clipboard",
+          "COPY_FAILED": "Failed to copy JSON to clipboard"
+        }
+      }
+    }
+  }
+}

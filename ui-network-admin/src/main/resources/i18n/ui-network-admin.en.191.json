@@ -1,0 +1,11 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "DEPOSITLIMITS": {
+      "SUPPOSED": {
+        "DAILY": "On {{date}} the requested user daily deposit limit with amount {{amount}} has been updated to the supposed status, this new limit will take effect after User approves it.",
+        "WEEKLY": "On {{date}} the requested user weekly deposit limit with amount {{amount}} has been updated to the supposed status, this new limit will take effect after User approves it.",
+        "MONTHLY": "On {{date}} the requested user weekly deposit limit with amount {{amount}} has been updated to the supposed status, this new limit will take effect after User approves it."
+      }
+    }
+  }
+}

@@ -1,0 +1,35 @@
+.Redemption Flow (current implementation)
+[plantuml]
+----
+
+@startuml
+
+autonumber
+
+participant "RX RGP Rewards" as rxrgp
+participant "svc-casino-pr-roxor" as scprx
+participant "svc-casino" as svccasino
+participant "svc-accounting-pr-internal" as svcacct
+participant "RabbitMQ" as rabbitmq
+participant "svc-bonus" as svcbonus
+
+rxrgp -> scprx: /rgp/game-play
+activate scprx
+scprx -> svccasino: /system/casino/multi-bet/v1
+activate svccasino
+svccasino -> svcacct: /system/adjust/v1
+activate svcacct
+svcacct -> svccasino: Result
+deactivate svcacct
+svccasino -> rabbitmq: bonus notification
+rabbitmq -> svcbonus: bonus notification
+activate svcbonus
+svcbonus -> svcbonus: insert playerBonusRewardSummaryDetail record
+svccasino -> scprx: Result
+deactivate svcbonus
+deactivate svccasino
+scprx -> rxrgp: Result
+deactivate svcbonus
+
+@enduml
+----

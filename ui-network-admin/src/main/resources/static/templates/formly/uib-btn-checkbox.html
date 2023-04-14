@@ -1,0 +1,17 @@
+<div class="form-group" ng-class="{'has-error': showError}">
+	<div>
+		<label for="{{id}}" class="control-label" ng-if="to.label">
+			{{to.label}} {{to.required ? '*' : ''}}
+		</label>
+	</div>
+	
+	<div class="btn-group">
+		<label ng-repeat="o in to.options" class="btn btn-{{to.btnclass}}"
+			ng-class="(model[options.key] === o[to.valueProp])?'active':''"
+			ng-model="model[options.key]" uib-btn-checkbox>
+			<i
+				ng-if="to.showicons === true"
+				ng-class="(model[options.key] === o[to.valueProp])?'fa fa-check-square-o':'fa fa-square-o'"></i>
+			<span>{{o[to.labelProp]}}</span></label>
+	</div>
+</div>

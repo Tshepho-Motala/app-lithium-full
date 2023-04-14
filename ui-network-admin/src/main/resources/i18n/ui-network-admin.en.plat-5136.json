@@ -1,0 +1,16 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "RESTRICTIONS": {
+      "EDIT": {
+        "DWH_VISIBLE": {
+          "ENABLE": {
+            "SUCCESS": "Successfully turned on to DWH visibility"
+          },
+          "DISABLE": {
+            "SUCCESS": "Successfully turned off to  DWH visibility"
+          }
+        }
+      }
+    }
+  }
+}

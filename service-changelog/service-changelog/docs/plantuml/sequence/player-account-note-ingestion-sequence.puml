@@ -1,0 +1,80 @@
+[plantuml]
+----
+@startuml
+
+!define p(name, alias) participant "name" as alias << (L,#AAFFCC) >>
+!define pn(name, alias) participant "name" as alias << (L,#FFAAAA) >>
+!define q(name, alias) queue "name" as alias << (L,#AAFFCC) >>
+!define qn(name, alias) queue "name" as alias << (L,#FFAAAA) >>
+
+autonumber
+
+database "big-query" as bigQuery
+
+pn("service-vb-migration", svcVbMigration)
+
+box "rabbit-mq" #LightBlue
+qn("player-account-note-migration-queue", playerAccountNoteQueue)
+end box
+
+box "service-changelog" #LightSkyBlue
+pn("PlayerAccountNoteQueueProcessor n", playerAccountNoteQueueProcessor)
+pn("PlayerAccountNoteIngestionService", playerAccountNoteIngestionService)
+p("ChangeLogEntriesService", changeLogEntriesService)
+end box
+
+activate playerAccountNoteQueueProcessor
+playerAccountNoteQueueProcessor -> playerAccountNoteQueue: Listen
+deactivate playerAccountNoteQueueProcessor
+
+activate svcVbMigration
+
+svcVbMigration -> bigQuery: query
+
+activate bigQuery
+bigQuery --> svcVbMigration
+deactivate bigQuery
+
+loop each record
+svcVbMigration -> playerAccountNoteQueue: enqueue
+
+activate playerAccountNoteQueue
+playerAccountNoteQueue --> svcVbMigration
+
+svcVbMigration -> svcVbMigration: record progress
+end
+
+deactivate svcVbMigration
+
+activate playerAccountNoteQueue
+playerAccountNoteQueue -> playerAccountNoteQueueProcessor: dequeue
+deactivate playerAccountNoteQueue
+
+activate playerAccountNoteQueueProcessor
+playerAccountNoteQueueProcessor -> playerAccountNoteIngestionService: ingest
+
+activate playerAccountNoteIngestionService
+playerAccountNoteIngestionService -> changeLogEntriesService: addNote
+activate changeLogEntriesService
+note right
+Add an overloaded method.
+Similar to the existing one,
+except, there should be a changelog entry
+written with the original account note date.
+
+The CreationDateTime field in the DK data
+should be applied to change_date
+in the change_log table in Lithium.
+
+end note
+deactivate playerAccountNoteIngestionService
+changeLogEntriesService --> playerAccountNoteIngestionService
+deactivate changeLogEntriesService
+playerAccountNoteIngestionService --> playerAccountNoteQueueProcessor
+deactivate playerAccountNoteIngestionService
+playerAccountNoteQueueProcessor --> playerAccountNoteQueue: ACK
+deactivate playerAccountNoteQueueProcessor
+
+@enduml
+----
+[plantuml]

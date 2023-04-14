@@ -1,0 +1,83 @@
+= Loss Limit Threshold
+Riaan Schoeman <riaan.schoeman@wonderlabz.com>
+1.0, January 17, 2023: Service User Threshold - Loss Limit Threshold
+:sectnums:
+:doctype: book
+:toc: left
+:toclevels: 4
+:toc-title: Loss Limit Threshold
+:icons: font
+:url-quickref: https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/
+:revnumber: {project-version}
+:example-caption!:
+ifndef::imagesdir[:imagesdir: images]
+ifndef::sourcedir[:sourcedir: ../../main/java]
+
+[sidebar]
+****
+xref:./index.adoc[Home] |
+xref:./deposit-threshold-trigger.adoc[Deposit Limit Threshold] |
+xref:./loss-limit-visibility-flag.adoc[Loss Limit Visibility Flag]
+****
+
+Below is to explain how/where this is configured, and how the data flows. There are two main controllers for configuring and retrieving information related to loss limit thresholds. (Explained below)
+
+== Introduction
+
+The main class `lithium.service.user.threshold.ServiceUserThresholdApplication` is annotated with:
+[source,java,linenums,indent=0,highlight='2']
+----
+@EnableAccountingSummaryAccountTransactionTypeCompletedEvent( transactionTypeCodes = {"*_BET", "CASHIER_*"} )
+----
+
+The annotation above allows for the main entry point for this feature in `lithium.service.user.threshold.consumer.CompletedSummaryAccountTransactionTypeProcessor.processCompletedSummaryAccountTransactionType`
+
+[source,java,linenums,indent=0,highlight='2']
+----
+if (request.getTransactionType().contains("BET")) {
+  limitService.processLossLimitEvent(d);  <-- Process any event that was generated because of a bet.
+} else if (request.getTransactionType().contains("CASHIER")) {
+  limitService.processCashierEvent(d);
+}
+----
+
+== Basic Flow
+
+[plantuml, format="png", id="sequence1"]
+----
+autonumber
+
+!define p(name, alias) participant "name" as alias << (L,#AAFFCC) >>
+!define q(name, alias) queue "name" as alias << (L,#AAFFCC) >>
+!define pn(name, alias) participant "name" as alias << (L,#FFAAAA) >>
+
+pn("service-user-threshold", sut)
+p("service-casino", sc)
+p("service-accounting", sa)
+p("service-limit", sl)
+q("rabbit", r)
+
+sc -> sa: process casino/sportsbook bet
+sa -> sc: response casino/sportsbook bet
+sa -> r: CompletedSummaryAccountTransactionTypeEvent
+note right
+  These are summaries for specific Transaction Types as
+  registered. (e.g. SPORTS_BET + CASINO_BET / *_BET ))
+end note
+
+r --> sut: process event
+sut -> sl++: retrieve player limits and net loss
+sl -> sa++: request net loss
+sl <- sa--: return net loss
+sut <- sl--: response PlayerLimitV2Dto ()findPlayerLimitV2WithNetLoss)
+sut -> sut: process threshold recording
+----
+
+== Controllers
+=== V1 - BackofficeThresholdLossLimitV1Controller
+
+==== Find: (Domain/Default Level)
+operation::find-default[snippets='http-request,http-response']
+
+==== Find: (Age Level)
+operation::find-age[snippets='http-request,http-response']

@@ -1,0 +1,4 @@
+ALTER TABLE `user`
+ADD COLUMN `email_opt_out` BIT(1) DEFAULT NULL,
+ADD COLUMN `sms_opt_out` BIT(1) DEFAULT NULL,
+ADD COLUMN `call_opt_out` BIT(1) DEFAULT NULL;

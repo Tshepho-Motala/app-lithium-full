@@ -1,0 +1,14 @@
+# API Communication
+
+## Axios Implementation
+
+If you need to use a query in a component Vue
+We have the opportunity to use AXIOS
+https://v2.vuejs.org/v2/cookbook/using-axios-to-consume-apis.html?redirect=true[Vue Axios Documentation]
+
+- We must create new Class and  extend the Base Axios Class "AxiosApiClient" in  "/src/core/axios/AxiosApiClient.ts"
+- We must  create an interface for methods and parameters
+- And in Class methods in (this.provider.) can use all  axios request methods  (get, post, put, patch, delete) see example  `/src/core/axios/axios-api/AutoWithdrawalRulesetsApi.ts`
+- !IMPORTANT!  We need to send "userService" to Class  "AxiosApiClient"
+
+---

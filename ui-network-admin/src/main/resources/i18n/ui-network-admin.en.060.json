@@ -1,0 +1,22 @@
+{
+	"UI_NETWORK_ADMIN": {
+		"RAF": {
+			"CONFIG": {
+				"REFERRALBONUSES": {
+					"MODIFY": {
+						"SUCCESS": "Referral bonuses modified successfully",
+						"ERROR": "Could not modify referral bonuses"
+					}
+				},
+				"REFERRERBONUS": {
+					"NAME": "Referrer Bonus",
+					"DESCRIPTION": "Choose the bonus that should be allocated to the referrer on player conversion."
+				},
+				"REFEREEBONUS": {
+					"NAME": "Referee Bonus",
+					"DESCRIPTION": "Choose the bonus that should be allocated to the referee on player conversion."
+				}
+			}
+		}
+	}
+}

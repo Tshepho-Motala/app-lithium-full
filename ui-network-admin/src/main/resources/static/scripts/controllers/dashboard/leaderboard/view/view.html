@@ -1,0 +1,117 @@
+<div class="container-fluid" bs-loading-overlay bs-loading-overlay-reference-id="{{controller.referenceId}}">
+	<div class="card card-block" style="margin-bottom: 10px;" ng-init="">
+		<div class="d-flex justify-content-start">
+			<div class="p-2 mr-auto">
+				<span class="title">{{controller.model.name}} {{ 'UI_NETWORK_ADMIN.LEADERBOARD.VIEW.TITLE' | translate }}</span>
+				<span class="description">{{controller.model.description}}</span>
+			</div>
+			<div class="ml-auto p-2 text-right" style="width: 50%;">
+				<span style="padding:5px; margin-right: 3px;" class="label label-primary">&nbsp;{{ controller.model.domain.name | uppercase }}&nbsp;</span>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row v-reset-row ">
+		<div class="col-xs-12 bottom-space-10">
+			<button-back ng-click="controller.list()"></button-back>
+			<button-custom ng-if="!controller.model.visible" ng-click="controller.toggle()" bclass="" icon="eye" text="UI_NETWORK_ADMIN.LEADERBOARD.TOGGLE.SHOW"></button-custom>
+			<button-custom ng-if="controller.model.visible" ng-click="controller.toggle()" bclass="" icon="eye-slash" text="UI_NETWORK_ADMIN.LEADERBOARD.TOGGLE.HIDE"></button-custom>
+			<button-enable ng-if="!controller.model.enabled" ng-click="controller.enable()"></button-enable>
+			<button-disable ng-if="controller.model.enabled" ng-click="controller.enable()"></button-disable>
+			<button-refresh ng-click="controller.refresh()"></button-refresh>
+		</div>
+	</div>
+	
+	<div class="row v-reset-row ">
+		<div class="col-xs-12">
+			<div class="box box-default box-solid">
+				<div class="box-header bold-text with-border bg-gray-lighter">
+					&nbsp;
+					<div class="box-tools" style="bottom: 5px;top: 8px;">
+						<span style="padding:5px; margin-right: 3px;" class="label label-info">&nbsp;{{ controller.rruleText }}&nbsp;</span>
+					</div>
+				</div>
+				<div class="box-body">
+					<div class="row v-reset-row ">
+						<div class="col-xs-6">
+							<div class="box box-default box-solid">
+								<div class="box-header bold-text with-border bg-gray-lighter">
+									Leaderboard Configuration
+									<div class="box-tools pull-right">
+										<button type="button" ng-click="controller.onEdit()" ng-show="controller.options.formState.readOnly" class="btn btn-box-tool">
+											<span><i class="fa fa-pencil"></i> Edit</span>
+										</button>
+									</div>
+								</div>
+								<div class="box-body">
+									<form ng-submit="controller.onSubmit()" name="controller.form" novalidate>
+										<formly-form model="controller.model" fields="controller.fields" options="controller.options" form="controller.form">
+										</formly-form>
+										
+										<buttonbar>
+											<button-save ng-show="!controller.options.formState.readOnly" class="pull-left"></button-save>
+											<button-cancel ng-show="!controller.options.formState.readOnly" ng-click="controller.onCancel()"></button-cancel>
+										</buttonbar>
+									</form>
+								</div>
+							</div>
+						</div>
+						<div class="col-xs-6">
+							<scheduler data="controller.scheduler" ng-model="controller.rrule"></scheduler>
+							<div class="box box-default box-solid">
+								<div class="box-header bold-text with-border bg-gray-lighter">
+									Leaderboard Conversion
+									<div class="box-tools pull-right">
+										<button type="button" ng-click="controller.addConversion()" class="btn btn-box-tool">
+											<span><i class="fa fa-plus"></i> {{ 'GLOBAL.ACTION.ADD' | translate }}</span>
+										</button>
+									</div>
+								</div>
+								<div class="box-body no-padding table-responsive">
+									<dt table="controller.leaderboardConversionTable"/>
+								</div>
+							</div>
+							<div class="box box-default box-solid">
+								<div class="box-header bold-text with-border bg-gray-lighter">
+									Leaderboard Notifications
+									<div class="box-tools pull-right">
+										<button type="button" ng-click="controller.addNotification()" class="btn btn-box-tool">
+											<span><i class="fa fa-plus"></i> {{ 'GLOBAL.ACTION.ADD' | translate }}</span>
+										</button>
+									</div>
+								</div>
+								<div class="box-body no-padding table-responsive">
+									<dt table="controller.leaderboardNotificationsTable"/>
+								</div>
+							</div>
+							<div class="box box-default box-solid">
+								<div class="box-header bold-text with-border bg-gray-lighter">
+									Leaderboard History
+								</div>
+								<div class="box-body no-padding table-responsive">
+									<dt table="controller.leaderboardTable"/>
+								</div>
+							</div>
+							
+							<div class="box box-default box-solid">
+								<div class="box-header bold-text with-border bg-gray-lighter">
+									Upcoming (Max 10)
+								</div>
+								<div class="box-body no-padding table-responsive">
+									<table class="table table-condensed table-hover" style="border-bottom-width: 5px;border-bottom-color: #777;">
+									<tbody>
+									<tr ng-repeat="r in controller.upcoming">
+									 	<td>{{$index+1}}</td>
+										<td>{{ r.startDate | date:'yyyy-MM-dd HH:mm:ss':'GMT' }} - {{ r.endDate | date:'yyyy-MM-dd HH:mm:ss':'GMT' }}</td>
+									</tr>
+									</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,214 @@
+<div class="row v-reset-row ">
+    <div class="col-xs-12">
+        <div class="card card-block" ng-show="hideTranTable">
+            <div ui-view></div>
+        </div>
+        <div class="card card-block" ng-show="!hideTranTable">
+            <div class="" style="margin-bottom: 10px;">
+                <div uib-collapse="legendCollapsed">
+                    <div class="col-md-2 col-xs-12">
+                        <div class="form-group">
+                            <label>{{'UI_NETWORK_ADMIN.CASHIER.TYPES.TITLE' | translate}}</label>
+                            <ui-select
+                                    theme="bootstrap"
+                                    ng-model="model.selectedType"
+                                    data-required="true"
+                                    ng-disabled="false"
+                                    on-select="model.selectedType = $item; findDomainMethods($item.type)"
+                                    search-enabled="false">
+                                <ui-select-match
+                                        placeholder="{{'UI_NETWORK_ADMIN.CASHIER.TYPES.SELECT' | translate}}"
+                                        data-allow-clear="false">
+                                    {{model.selectedType.translate | translate}}
+                                </ui-select-match>
+                                <ui-select-choices
+                                        data-repeat="type in types | filter: $select.search">
+                                    <div ng-bind-html="type.translate | translate | highlight: $select.search"></div>
+                                </ui-select-choices>
+                                <ui-select-no-choice>
+                                    <div class="description">...</div>
+                                </ui-select-no-choice>
+                            </ui-select>
+                        </div>
+                    </div><div class="col-md-2 col-xs-12">
+                    <div class="form-group">
+                        <label>{{'UI_NETWORK_ADMIN.CASHIER.METHODS.FIELDS.METHOD.NAME' | translate}}</label>
+                        <ui-select
+                                theme="bootstrap"
+                                ng-model="model.selectedMethod"
+                                ng-required="true"
+                                ng-disabled="false"
+                                on-select="model.selectedMethod = $item; findDomainMethodProcessors($item.id)"
+                                search-enabled="true">
+                            <ui-select-match
+                                    placeholder="{{'UI_NETWORK_ADMIN.CASHIER.METHODS.FIELDS.METHOD.PLACEHOLDER' | translate}}"
+                                    data-allow-clear="false">
+                                {{model.selectedMethod.name}}
+                            </ui-select-match>
+                            <ui-select-choices
+                                    data-repeat="dm in domainMethods | filter: $select.search">
+                                <div ng-bind-html="dm.name | highlight: $select.search"></div>
+                            </ui-select-choices>
+                            <ui-select-no-choice>
+                                <div class="description">...</div>
+                            </ui-select-no-choice>
+                        </ui-select>
+                    </div>
+                </div><div class="col-md-2 col-xs-12">
+                    <div class="form-group">
+                        <label>{{'UI_NETWORK_ADMIN.CASHIER.PROCESSORS.FIELDS.PROCESSOR.NAME' | translate}}</label>
+                        <ui-select
+                                theme="bootstrap"
+                                ng-model="model.selectedProcessor"
+                                ng-required="true"
+                                ng-disabled="false"
+                                on-select="model.selectedProcessor = $item;"
+                                search-enabled="true">
+                            <ui-select-match
+                                    placeholder="{{'UI_NETWORK_ADMIN.CASHIER.PROCESSORS.FIELDS.PROCESSOR.PLACEHOLDER' | translate}}"
+                                    data-allow-clear="false">
+                                {{model.selectedProcessor.description}}
+                            </ui-select-match>
+                            <ui-select-choices
+                                    data-repeat="dmp in domainMethodProcessors | filter: $select.search">
+                                <div ng-bind-html="dmp.description | highlight: $select.search"></div>
+                            </ui-select-choices>
+                            <ui-select-no-choice>
+                                <div class="description">...</div>
+                            </ui-select-no-choice>
+                        </ui-select>
+                    </div>
+                </div><div class="col-md-2 col-xs-12">
+                    <div class="form-group">
+                        <label>{{'UI_NETWORK_ADMIN.CASHIER.FIELDS.PAYMENT_TYPE' | translate}}</label>
+                        <ui-select
+                                theme="bootstrap"
+                                ng-model="model.selectedPaymentType"
+                                data-required="true"
+                                ng-disabled="false"
+                                on-select="model.selectedPaymentType = $item;"
+                                search-enabled="true">
+                            <ui-select-match
+                                    placeholder="{{'UI_NETWORK_ADMIN.CASHIER.FIELDS.PLACEHOLDER' | translate}}"
+                                    data-allow-clear="true">
+                                {{model.selectedPaymentType.paymentType}}
+                            </ui-select-match>
+                            <ui-select-choices
+                                    data-repeat="pt in transactionPaymentTypes | filter: $select.search">
+                                <div ng-bind-html="pt.paymentType | highlight: $select.search"></div>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                </div><div ng-if="allowUserSearch" class="col-md-2 col-xs-12">
+                    <label>User</label>
+                    <div class="input-group">
+                        <input type="text"
+                               ng-model="model.selectedUser"
+                               placeholder="search player"
+                               uib-typeahead="user.username for user in searchUsers($viewValue)"
+                               typeahead-loading="loadingLocations"
+                               typeahead-no-results="noResults"
+                               typeahead-min-length="1"
+                               typeahead-show-hint="true"
+                               typeahead-wait-ms="500"
+                               typeahead-editable="false"
+                               typeahead-on-select="model.selectedUser = $item;"
+                               class="form-control"/>
+                        <div class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="resetUserSearch()"><i class="fa fa-remove"></i></button>
+                        </div>
+                    </div>
+                    <div ng-show="loadingLocations" class="overlay">
+                        <i class="fa fa-refresh fa-spin"></i>
+                    </div>
+                    <div ng-show="noResults" class="form-group has-error">
+                        <span class="help-block"><i class="fa fa-remove"></i>&nbsp;No Results Found</span>
+                    </div>
+                </div><div class="col-md-2 col-xs-12">
+                    <div class="form-group">
+                        <label>Status</label>
+                        <ui-select
+                                theme="bootstrap"
+                                multiple
+                                ng-model="model.selectedStatus"
+                                data-required="true"
+                                ng-disabled="false"
+                                search-enabled="true">
+                            <ui-select-match
+                                placeholder="Select status.."
+                                data-allow-clear="true">
+                                <span ng-bind="'UI_NETWORK_ADMIN.SERVICE_CASHIER.TRANSACTION.STATUS.' + $item.code | translate "></span>
+                            </ui-select-match>
+                            <ui-select-choices
+                                    data-repeat="s in transactionStatuses | filter: $select.search">
+                                <div ng-bind-html="'UI_NETWORK_ADMIN.SERVICE_CASHIER.TRANSACTION.STATUS.' + s.code | translate | highlight: $select.search"></div>
+                            </ui-select-choices>
+                        </ui-select>
+                    </div>
+                </div><div class="col-xs-12">
+                    <div class="row v-reset-row ">
+                        <formly-form model="model" fields="fields" form="form" options="options">
+                        </formly-form>
+                    </div>
+                </div>
+                    <div class="col-xs-12">
+                        <div class="flex-row pull-right">
+                            <button-clear ng-click="resetFilter(true)"></button-clear>
+                            <button-filter ng-click="applyFilter(true)"></button-filter>
+                        </div>
+                    </div>
+                </div>
+                <div class="collapse" uib-collapse="!legendCollapsed">
+                    <!-- <div ng-if="!controller.selectedType" align="center"> -->
+                    <!-- 	<span class="legend-domain">{{'UI_NETWORK_ADMIN.CASHIER.TRANS.LEGEND.NOFILTER'|translate}}</span><br/> -->
+                    <!-- 	<span class="description">{{'UI_NETWORK_ADMIN.CASHIER.TRANS.LEGEND.NOFILTERDESC'|translate}}</span> -->
+                    <!-- </div> -->
+                    <div ng-if="model.selectedType" align="center">
+                        <button-add ng-if="allowAddManualTran" lit-if-permission="CASHIER_TRANSACTIONS_MANUAL_ADD" class="pull-left" ng-click="add()"></button-add>
+                        <button-filter class="pull-left" ng-click="toggleLegendCollapse()"></button-filter>
+                        <div  lit-if-permission="CASHIER_APPROVE" class=" pull-right" align="right">
+                            <div id="vueMountWithdrawalBulk" class="pull-right"></div>
+                        </div>
+                        <div class="button-export-wrap pull-right" align="right">
+                            <span id="vueMountCsvExport" class="pull-right"></span>
+                        </div>
+                        <button-refresh class="pull-right" ng-click="applyFilter(false)"></button-refresh>
+                        <button-clear class="pull-right" ng-click="resetFilter(false)"></button-clear>
+
+                    </div>
+
+                    <div class="text-center col-xs-12" style="padding-top: 10px;">
+                        <span ng-if="model.selectedType.type === 'deposit'" class="description">{{'UI_NETWORK_ADMIN.CASHIER.TRANS.LEGEND.DEPOSITTYPEDESC'|translate}}</span>
+                        <span ng-if="model.selectedType.type === 'withdraw'" class="description">{{'UI_NETWORK_ADMIN.CASHIER.TRANS.LEGEND.WITHDRAWALTYPEDESC'|translate}}</span>
+                        <span ng-if="model.selectedMethod" class="description">{{'UI_NETWORK_ADMIN.CASHIER.TRANS.LEGEND.METHODDESC'|translate: {method:model.selectedMethod.name} }}</span>
+                        <span ng-if="model.selectedStatus.length" class="description">
+                            {{'UI_NETWORK_ADMIN.CASHIER.TRANS.LEGEND.STATUSDESC'|translate: {status:model.selectedStatus.code} }}
+                            <span ng-repeat="status in model.selectedStatus" class="description">{{status.code}} </span>
+                        </span>
+                        <span ng-if="!model.dateStartAfterFilter && !model.dateEndAfterFilter && !model.updatedDateRangeStart && !model.updatedDateRangeEnd && model.createdDateRangeStart && model.createdDateRangeEnd" class="description">
+                            {{'UI_NETWORK_ADMIN.DATE.CREATED'|translate}} {{'UI_NETWORK_ADMIN.DATE.BETWEEN'|translate}} {{model.createdDateRangeStart | date }} {{'UI_NETWORK_ADMIN.DATE.AND'|translate}} {{model.createdDateRangeEnd | date }}
+                        </span>
+                        <span ng-if="model.dateStartAfterFilter && model.dateEndAfterFilter" class="description">{{'UI_NETWORK_ADMIN.DATE.CREATED'|translate}} {{'UI_NETWORK_ADMIN.DATE.BETWEEN'|translate}} {{model.dateStartAfterFilter | date }} {{'UI_NETWORK_ADMIN.DATE.AND'|translate}}  {{model.dateEndAfterFilter | date }}</span>
+                        <span ng-if="model.dateEndAfterFilter && !model.dateStartAfterFilter" class="description">{{'UI_NETWORK_ADMIN.DATE.CREATED'|translate}} {{'UI_NETWORK_ADMIN.DATE.BEFORE'|translate}} {{model.dateEndAfterFilter | date }}</span>
+                        <span ng-if="model.dateStartAfterFilter && !model.dateEndAfterFilter" class="description">{{'UI_NETWORK_ADMIN.DATE.CREATED'|translate}} {{'UI_NETWORK_ADMIN.DATE.FROM'|translate}} {{model.dateStartAfterFilter | date }}</span>
+                        <span ng-if="(model.dateEndAfterFilter || model.dateStartAfterFilter) && (model.updatedDateRangeStart || model.updatedDateRangeEnd)" class="description"> {{'UI_NETWORK_ADMIN.DATE.AND'|translate}} </span>
+                        <span ng-if="model.updatedDateRangeStart && model.updatedDateRangeEnd" class="description">{{'UI_NETWORK_ADMIN.DATE.UPDATED'|translate}} {{'UI_NETWORK_ADMIN.DATE.BETWEEN'|translate}} {{model.updatedDateRangeStart | date }} {{'UI_NETWORK_ADMIN.DATE.AND'|translate}}  {{model.updatedDateRangeEnd | date }}</span>
+                        <span ng-if="model.updatedDateRangeEnd && !model.updatedDateRangeStart" class="description">{{'UI_NETWORK_ADMIN.DATE.UPDATED'|translate}} {{'UI_NETWORK_ADMIN.DATE.BEFORE'|translate}} {{model.updatedDateRangeEnd | date }}</span>
+                        <span ng-if="model.updatedDateRangeStart && !model.updatedDateRangeEnd" class="description">{{'UI_NETWORK_ADMIN.DATE.UPDATED'|translate}} {{'UI_NETWORK_ADMIN.DATE.FROM'|translate}} {{model.updatedDateRangeStart | date }}</span>
+                    </div>
+                    <div class="text-center col-xs-12">
+						<span ng-if="model.selectedUser" class="legend-user">
+							<a ng-if="model.selectedUser.firstName && model.selectedUser.lastName" ui-sref="dashboard.players.player.summary({id:model.selectedUser.id, domainName:model.selectedUser.domain.name})">
+								{{'UI_NETWORK_ADMIN.CASHIER.TRANS.LEGEND.USERDESC'|translate: {player:model.selectedUser.firstName + ' ' + (model.selectedUser.lastNamePrefix != undefined && model.selectedUser.lastNamePrefix != null ? model.selectedUser.lastNamePrefix + ' ' : '') + model.selectedUser.lastName + ' (' + model.selectedUser.username+')'} }}
+							</a>
+                            <a ng-if="!model.selectedUser.firstName && !model.selectedUser.lastName" ui-sref="dashboard.players.player.summary({id:model.selectedUser.id, domainName:model.selectedUser.domain.name})">
+								{{'UI_NETWORK_ADMIN.CASHIER.TRANS.LEGEND.USERDESC'|translate: {player:' (' + model.selectedUser.username+')'} }}
+							</a>
+						</span>
+                    </div>
+                </div>
+            </div>
+            <dt class="table table-sm table-responsive" table="transTable"/>
+        </div>
+    </div>
+</div>

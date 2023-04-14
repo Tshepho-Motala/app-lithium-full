@@ -1,0 +1,10 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "DASHBOARD": {
+      "VIRTUALBETS": "Virtual Bets",
+      "VIRTUALWINS": "Virtual Wins",
+      "VIRTUALLOSSES": "Virtual Losses",
+      "VIRTUALBETSVOIDED": "Virtual Bets Voided"
+    }
+  }
+}

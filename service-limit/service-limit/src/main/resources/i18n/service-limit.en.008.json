@@ -1,0 +1,5 @@
+{
+  "SERVICE-LIMIT": {
+    "WEEKLY_LOSS_LIMIT_REACHED": "Your weekly loss limit of {0} has been reached."
+  }
+}

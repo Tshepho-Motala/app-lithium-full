@@ -1,0 +1,21 @@
+<div class="container-fluid">
+	<lit-header
+		title="GoGame Games"
+		description="A searchable list of GoGame Games">
+	</lit-header>
+	
+	<button-bar>
+		<button-add lit-if-permission="GOGAMEGAMES_GAMES_EDIT" ng-click="controller.addGame()"></button-add>
+	</button-bar>
+	
+	
+	<div class="row v-reset-row ">
+		<div class="col-xs-12">
+			<div class="box">
+				<div class="box-body no-padding table-responsive">
+					<dt table="controller.gogameGamesTable"/>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

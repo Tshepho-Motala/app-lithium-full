@@ -1,0 +1,8 @@
+<div>
+	<label for="{{id}}" class="formly-field-label" style="margin-bottom: 10px;">
+		{{options.templateOptions.label}} {{options.templateOptions.required ? '*' : ''}}
+		<button-custom icon="plus" bclass="default btn-xs" ng-click="addNew()"></button-custom>
+	</label>
+	<formly-transclude></formly-transclude>
+	<hr/>
+</div>

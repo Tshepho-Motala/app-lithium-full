@@ -1,0 +1,11 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "PLAYER": {
+      "QUICK_ACTIONS": {
+        "CHANGE": {
+          "DOB": "Change Date of Birth"
+        }
+      }
+    }
+  }
+}

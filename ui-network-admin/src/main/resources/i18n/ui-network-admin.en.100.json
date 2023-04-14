@@ -1,0 +1,17 @@
+{
+	"UI_NETWORK_ADMIN": {
+		"CASHIER": {
+			"METHODS": {
+				"FIELDS": {
+					"METHOD": {
+						"PROCESOR_DESCRIPTION": {
+							"NAME": "Description.",
+							"PLACEHOLDER": "Method description.",
+							"DESCRIPTION": "Description for this method processor."
+						}
+					}
+				}
+			}
+		}
+	}
+}

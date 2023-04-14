@@ -1,0 +1,74 @@
+.Intervention Casino-no-more Flow
+[plantuml]
+----
+@startuml
+'https://plantuml.com/sequence-diagram
+
+actor "LBO/DWH" as backoffice
+
+participant "Lithium" as l
+participant "GW" as gw
+
+actor player as p
+
+group System Initiated
+  == Casino Intervention subType=1 ==
+  backoffice->l: casino-no-more intervention
+  l->l:
+  note right
+    * system restriction placed on player account
+  end note
+  gw->l++: poll on restrictions endpoint every 30s
+  l->gw--: checkAccess response
+  note right
+    * casinoAllowed == true
+    * casinoSystemPlaced == true : system placed, cannot be altered by player
+    * casinoErrorMessage == e.g. "First casino intervention msg, blocked for 1 week"
+  end note
+  gw->p: disable casino UI components
+  note right
+    * casinoErrorMessage may be displayed to customer when trying to enable casino
+  end note
+
+  == Casino Intervention subType=y ==
+  note over p
+    casino-no-more system placed restriction has expired (x number of days depending on auto-restriction rule), casino-no-more was disabled, and was flagged again by lbo user
+  end note
+  backoffice->l: casino-no-more intervention
+  l->l:
+  note right
+    * system restriction placed on player account
+  end note
+  gw->l++: poll on restrictions endpoint every 30s
+  l->gw--: checkAccess response
+  note right
+    * casinoAllowed == true
+    * casinoSystemPlaced == true : system placed, cannot be altered by player
+    * casinoErrorMessage == e.g. "First casino intervention msg, blocked for x number of days (depending on auto-restriction rule linked to subType)"
+  end note
+  gw->p: disable casino UI components
+    note right
+      * casinoRestrictionMessage may be displayed to customer when trying to enable casino
+    end note
+end
+
+group Player Initiated
+  p->l++: request casino-no-more
+  l->l:
+  note right
+    * restriction placed on player account
+  end note
+  l->p--: response
+
+  gw->l++: poll on restrictions endpoint every 30s
+  l->gw--: checkAccess response
+  note right
+    * casinoAllowed == true
+    * casinoSystemPlaced == false : player initiated, so player can change it again.
+    ** unless a system initiated restriction is placed, then player can't change it anymore.
+    * casinoErrorMessage == n/a
+    * Player is able to toggle themselves back into casino
+  end note
+end
+@enduml
+----

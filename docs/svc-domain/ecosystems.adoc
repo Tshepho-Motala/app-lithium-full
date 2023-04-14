@@ -1,0 +1,60 @@
+= Lithium Ecosystems
+Irwin Herridge <irwin.herridge@wonderlabz.com>
+1.0, July 28, 2022:
+:sectnums:
+:toc: left
+:toclevels: 4
+:toc-title: Ecosystems
+:icons: font
+:url-quickref: https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/
+:table-caption!:
+
+//This is done to keep formatting aligned with gitlab
+****
+[verse,,]
+____
+link:../../readme.adoc[Home]
+____
+****
+
+WARNING: This document is a work in progress https://jira.livescore.com/browse/PLAT-6895
+
+== Ecosystems
+
+.Ecosystem Relationship Types
+|===
+|Type | Business lingual | Usage
+
+| ECOSYSTEM_ROOT
+| Media domain
+| Only one root domain may exist within an ecosystem configuration.
+
+For any user registered on a mutually exclusive domain, a corresponding root user will be auto-registered and have personal information kept in sync between all users linked to each other within the same ecosystem.
+
+The "media" user is mainly used to drive marketing and cross sales to the "betting" domain
+
+| ECOSYSTEM_MUTUALLY_EXCLUSIVE
+| Betting domain
+| Only one mutually exclusive user may be registered within an ecosystem due to regulatory and compliance requirements.
+
+| ECOSYSTEM_MEMBER
+| Non-betting domain
+| not in use today - TD to enable
+
+|===
+
+Two mechanics allow us to keep personal information synced between two registered users on lithium_user described as follows:
+|===
+|Level| Order of Sync |Sync Type
+
+|1
+|email
+|The email address of a player is the primary unique ecosystem identifier within an ecosystem and any player who tries to register with an email that already exists within an ecosystem should not be allowed to have their account created.
+
+|2
+|`UserLinkTypes.CROSS_DOMAIN_LINK`
+|As a secondary link, whenever a player is registered within an ecosystem either via the UUID betting user registration or automatic media user registration, a CROSS_DOMAIN_LINK user link is added to both betting and media users that may be used in the event to maintain syncing where the ecosystem link is broken due to the player changing their email on one of their ecosystem linked accounts. This link, therefore, ensures that the email change is also affected and that the primary syncing mechanism remains in tack.
+|===
+
+
+link:https://docs.google.com/spreadsheets/d/1iAe_MQHktFsMd75oQ-ZLXlw8G6eEsA1c3y1W6spAiyU/edit?usp=sharing[Ecosystem Syncing rules]

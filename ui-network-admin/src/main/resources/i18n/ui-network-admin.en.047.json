@@ -1,0 +1,16 @@
+{
+	"UI_NETWORK_ADMIN": {
+		"DOMAIN": {
+			"FIELDS": {
+				"CURRENCY": {
+					"NAME": "Domain Currency",
+					"DESCRIPTION": "Default currency for users of this domain."
+				},
+				"CURRENCY_SYMBOL": {
+					"NAME": "Domain Currency Symbol",
+					"DESCRIPTION": "Default currency symbol for users of this domain."
+				}				
+			}
+		}
+	}
+}

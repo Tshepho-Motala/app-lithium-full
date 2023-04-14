@@ -1,0 +1,9 @@
+{
+	"UI_NETWORK_ADMIN": {
+		"DOCUMENT": {
+			"FIELDS" : {
+				"FILEUPLOAD": "File upload"
+			}
+		}
+	}
+}

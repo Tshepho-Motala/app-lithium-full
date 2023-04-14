@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LBO ReCaptcha Test</title>
+  </head>
+  <script src="https://www.google.com/recaptcha/api.js?render=6Lc77ZoiAAAAAFNUOh0kI9uObh0RlX1YMmu0kvhk"></script>
+
+  <script>
+    grecaptcha.ready(function () {
+      grecaptcha
+        .execute("6Lc77ZoiAAAAAFNUOh0kI9uObh0RlX1YMmu0kvhk", {
+          action: "register",
+        })
+        .then(function (token) {
+          document.getElementById('log').innerHTML += '<br> <br> <br>'.concat(token);
+          console.log(token);
+        });
+    });
+  </script>
+  <body>
+    <form action="register">
+      <h1>LBO ReCaptcha Test</h1>
+      <input
+        type="hidden"
+        id="captchatoken"
+        name="captchatoken"
+        size="1"
+        value=""
+      />
+      <div id="log"><h2>Response for the silent verification is below, copy and paste this into postman to complete the test :</h2></div>
+    </form>
+  </body>
+</html>

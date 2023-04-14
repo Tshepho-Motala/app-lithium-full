@@ -1,0 +1,17 @@
+server:
+  port: 9202
+
+ribbon:
+  ReadTimeout: 30000
+  ConnectTimeout: 30000
+
+lithium:
+  service:
+    cashier:
+      mock:
+        upay:
+          api-secret: ASDSAD
+          
+logging:
+  level:
+    lithium.service.cashier: INFO

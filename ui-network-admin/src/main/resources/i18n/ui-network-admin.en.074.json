@@ -1,0 +1,151 @@
+{
+	"GLOBAL": {
+		"ACTION": {
+			"REMOVE": "Remove",
+			"REMOVE_LC": "remove"
+		}
+	},
+	"UI_NETWORK_ADMIN": {
+		"DOMAIN": {
+			"CURRENCY": {
+				"SETASDEFAULT": {
+					"CONFIRM": "Are you sure you want to set this as the default currency?",
+					"SUCCESS": "Successfully set as default currency",
+					"ERROR": "Could not set as default currency"
+				},
+				"VIEW": {
+					"BOXES": {
+						"CURRENCY": "Currency"
+					}
+				},
+				"FIELDS": {
+					"NAME": {
+						"NAME": "Name", 
+						"DESCRIPTION": "The name of the currency"
+					},
+					"CODE": {
+						"NAME": "Code",
+						"DESCRIPTION": "The code of the currency"
+					},
+					"TYPE": {
+						"NAME": "Type",
+						"DESCRIPTION": "The type of the currency (Real or Virtual)"
+					},
+					"DESCRIPTION": {
+						"NAME": "Description",
+						"DESCRIPTION": "The description of the currency"
+					}
+				}
+			}
+		},
+		"RAF": {
+			"CONFIG": {
+				"REFERRALBONUSES": {
+					"MODIFY": {
+						"SUCCESS": "Refer a friend configuration successfully saved."
+					}
+				},
+				"FIELDS": {
+					"REFERRERBONUSCODE": {
+						"TITLE": "Referrer Bonus",
+						"DESC": "This is the bonus that will be activated to the player that made the referral. (This happens on player conversion) (If you want to notify the player, please make sure that there is a notification linked to this bonus!)",
+						"PLACE": "Select the referrer bonus.."
+					},
+					"REFEREEBONUSCODE": {
+						"TITLE": "Referee Bonus",
+						"DESC": "This is the bonus that will be activated to the player that was referred by some other player. (This happens on player conversion) (If you want to notify the player, please make sure that there is a notification linked to this bonus!)",
+						"PLACE": "Select the referee bonus.."
+					},
+					"REFERRALNOTIFICATION": {
+						"TITLE": "Referral Notification",
+						"DESC": "This is the notification that will be sent to a player whenever someone signs up with their referral code. (This happens before player conversion) ",
+						"PLACE": "Select the notification.."
+					}
+				}
+			}
+		},
+		"USER": {
+			"FIELDS": {
+				"CATEGORIES": {
+					"NAME": "# Categories"
+				}
+			}
+		},
+		"PLAYER": {
+			"RAF": {
+				"DATE": "Date",
+				"PLAYER": "Player Referred",
+				"CONV": "Converted"
+			},
+			"NOTIFICATION": {
+				"TITLE": "Send Notification",
+				"FIELDS": {
+					"NOTIFICATION": {
+						"LABEL": "Notification",
+						"PLACE": "Select the notification to send to player.",
+						"DESC": "The selected notification will be sent to this player via all the channels setup in the notification. (If the player has not opted out of any/all of the channels."
+					}
+				},
+				"SEND": {
+					"SUCCESS": "Notification was queued and will be delivered to player shortly",
+					"FAIL": "Could not queue notification, please try again later."
+				}
+			},
+			"BUTTON": {
+				"SENDNOTIFICATION": "Send Notification",
+				"SEND": "Send"
+			}
+		},
+		"PLAYERS": {
+			"LIST": {
+				"DESCRIPTION": "a sortable list of players which can be filtered by domain and category."
+			},
+			"CATEGORIES": {
+				"CHANGE": {
+					"TITLE": "Edit Player Categories"
+				},
+				"ADDPLAYERSUCCESS": "Player added to category",
+				"ADDPLAYERERROR": "Player not added to category",
+				"REMOVEPLAYERSUCCESS": "Player removed from category",
+				"REMOVEPLAYERERROR": "Player not removed from category",
+				"PLAYERSEARCH": "Search for the player that you would like to add to this category.",
+				"ADDPLAYERBUTTON": "add player",
+				"VIEWBUTTON": "View Players",
+				"TITLE": "Player Categories",
+				"DESCRIPTION": "A searchable list of categories for players.",
+				"FIELDS": {
+					"NAME": {
+						"TITLE": "Category",
+						"DESC": "Name of the category",
+						"PLACE": "Silver Players"
+					},
+					"DESCRIPTION": {
+						"TITLE": "Description",
+						"DESC": "Description of the category",
+						"PLACE": "Silver Players are special"
+					},
+					"DOMAINNAME": {
+						"TITLE": "Domain",
+						"DESC": "Domain to which this category belongs",
+						"PLACE": "Silver Players are meant for domain X only."
+					},
+					"USERS": {
+						"TITLE": "Players",
+						"DESC": "Players belonging to this category",
+						"PLACE": "0"
+					}
+				},
+				"TABS": {
+					"DETAILS": "Details",
+					"PLAYERS": "Players"
+				},
+				"ADD": {
+					"TITLE": "Add Category"
+				},
+				"EDIT": {
+					"TITLE": "Edit Category"
+				}
+			}
+		}
+	}
+}

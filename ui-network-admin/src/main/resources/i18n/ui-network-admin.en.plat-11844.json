@@ -1,0 +1,30 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "LIST": {
+      "PLAYERS": {
+        "FIELDS": {
+          "FILTER": {
+            "DEPOSIT_COUNT": {
+              "LABEL": "Deposit Count"
+            },
+            "DAYS_SINCE_FIRST_DEPOSIT": {
+              "LABEL": "Days since First deposit"
+            },
+            "TRANSACTION_AMOUNT": {
+              "LABEL": "Transaction Amount"
+            },
+            "ACTIVE_PAYMENT_METHOD": {
+              "LABEL": "Active payment method count"
+            },
+            "PLAYER_STATUS": {
+              "LABEL": "User Account Status"
+            },
+            "PLAYER_TAGS": {
+              "LABEL": "User tags"
+            }
+          }
+        }
+      }
+    }
+  }
+}

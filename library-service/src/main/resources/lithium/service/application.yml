@@ -1,0 +1,79 @@
+security:
+  oauth2:
+    resource:
+      jwt:
+#       This value must correspond to the public key that is specified in the global config
+#       with property lithium.token.jwt.public-key-content
+        keyValue: |
+          -----BEGIN PUBLIC KEY-----
+          MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAxgMJP7+3gipzHOGNnvZq3buNaVNPWEAFEVCHMPPHaPQNLET2fhRKer53lYnLNem9YHKE1RgdaaYM9MkpvpTzYMDnOijo1geh07YfG+lTF1ZgnQL/n+spxW+hH0neqOmcELvB5UXMZs0VzAYtmrxgdOHhGxYGiCufjYjSKyxiZQ4c8WoKATZtxtb+hA+NxvTtt+oLKINbsreY0uguRugpV7+C/4xfO4cH9pypr0Ph7fpdQG80RDAfyjU2lJuU/ynBrgjqYNSFyf4ApR/vyWDn9hueX6lr63UycdrcEHKdrdWIPz8Cc5GQUh0FjIwrQ0fdH4ABnLH/6WAgagk78y4sQRoEE+m6JUv/z2UXwMTbNOhSSR2OL5ztmmYyAkn/e1qXJPaat4h8uP67FbRSvDzPhR70p5lTjCnbSghHgmaVTP5bYMLzPiB0IRHcvZxUDBR3gmlNkboCp+QVnGc8KRId/m8u9moXijwr8OWT/eUKeuMmKNdFhtaSd8vi4BFnCKY1S4H7k2gfVWcphlt9leTd8Dl6BqpEsXIBpAgJjDp+CDFKCdJuBkde5UNKjQNG4Cmk9pHKhABxwapeYTHf+ziDhT7E0W9QEgLAM+vDDV4jCQmWZCzu0FiZ/sMeb5cnVWFd/+WeRyVkl/u02aeoDLOFF/JZAkdF93dG8WXwner485sCAwEAAQ==
+          -----END PUBLIC KEY-----
+spring:
+  jpa:
+    properties:
+      hibernate:
+        generate_statistics: false
+        cache:
+          # https://docs.jboss.org/hibernate/orm/5.0/userguide/html_single/Hibernate_User_Guide.html#caching-config-properties
+          use_query_cache: true
+          use_second_level_cache: true
+          auto_evict_collection_cache: true
+          use_reference_entries: true
+          region:
+            factory_class: lithium.hazelcast.SpringManagedRegionFactory
+  cloud:
+    cluster:
+      leader:
+        # This will allow all applications of the same name to select a leader amongst themselves. We need
+        # that so that any @Scheduled tasks can first check if they are the leader.
+        role: ${spring.application.name}
+        enabled: true
+    stream:
+      bindings:
+        clearcacheinput:
+          destination: clearcacheoutput
+        rolesregisteroutput:
+          group: rolesregistergroup
+          binder: rabbit
+          destination: rolesregisterqueue
+          producer:
+            required-groups: rolesregistergroup
+        translationsregisteroutput:
+          group: translationsregistergroup
+          binder: rabbit
+          destination: translationsregisterqueue
+          producer:
+            required-groups: translationsregistergroup
+  autoconfigure:
+    # SpringBoot2 won't create default user with default password to access app if no explicit UserDetails set.
+    exclude: org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration
+
+#lithium:
+#  services:
+#    db:
+#      load-test-data: false
+
+lithium:
+  hazelcast-client:
+    config: classpath:lithium/service/hazelcast-client-local.xml
+    cache-operation-timeout-ms: 100
+    event-thread-count: 2
+    io-input-thread-count: 4
+    io-write-through: false
+    io-output-thread-count: 4
+    response-thread-count: 4
+    response-thread-dynamic: false
+  leader:
+    heartbeat-ms: 30000
+  shards:
+    heartbeat-ms: 120000
+  external-api-authorizations:
+    - id: ls-gw
+      secret-key: IKGGIUYFGK7I96G3IGJKJ5GVIUTDF3O
+
+logging:
+  level:
+    # See https://github.com/spring-cloud/spring-cloud-sleuth/issues/467
+    # We get a log every time we get a rabbit message that indicates the rabbit message is missing trace ID data.
+    # Until we can get this resolved, we'll have to ignore it for now so as not to cause log spam
+    org.springframework.cloud.sleuth.instrument.messaging.MessagingSpanExtractor: ERROR

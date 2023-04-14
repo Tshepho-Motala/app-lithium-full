@@ -1,0 +1,87 @@
+{
+	"name": "Paysafecard",
+	"code": "paysafecard",
+	"url": "service-cashier-processor-paysafecard",
+	"methodNames": [
+		"paysafecard"
+	],
+	"deposit": true,
+	"fees": {
+		"flat": 0,
+		"percentage": 0,
+		"minimum": 0
+	},
+	"withdraw": false,
+	"limits": {
+		"minAmount": 2500,
+		"maxAmount": 0,
+		"maxAmountDay": 0,
+		"maxAmountWeek": 0,
+		"maxAmountMonth": 0,
+		"maxTransactionsDay": 0,
+		"maxTransactionsWeek": 0,
+		"maxTransactionsMonth": 0
+	},
+	"properties": [
+		{
+			"name": "baseUrl",
+			"defaultValue": "https://pay.skrill.com/",
+			"type": "url",
+			"description": "Base Skrill URL."
+		},
+		{
+			"name": "skrillMerchantEmail",
+			"defaultValue": "",
+			"type": "string",
+			"description": "Email address associated with the Skrill merchant account."
+		},
+		{
+			"name": "returnUrl",
+			"defaultValue": "",
+			"type": "string",
+			"description": "URL to which the customer is returned once the payment is made. If this field is not filled, the Skrill Quick Checkout page closes automatically at the end of the transaction and the customer is returned to the page on your website from where they were redirected to Skrill."
+		},
+		{
+			"name": "returnUrlText",
+			"defaultValue": "",
+			"type": "string",
+			"description": "The text on the button when the customer finishes their payment."
+		},
+		{
+			"name": "returnUrlTarget",
+			"defaultValue": "",
+			"type": "string",
+			"description": "Specifies a target in which the return_url value is displayed upon successful payment from the customer. Default value is 1.\n1 = '_top'\n2 = '_parent'\n3 = '_self'\n4= '_blank'"
+		},
+		{
+			"name": "cancelUrl",
+			"defaultValue": "",
+			"type": "string",
+			"description": "URL to which the customer is returned if the payment is cancelled or fails. If no cancel URL is provided the Cancel button is not displayed."
+		},
+		{
+			"name": "cancelUrlTarget",
+			"defaultValue": "",
+			"type": "string",
+			"description": "Specifies a target in which the cancel_url value is displayed upon cancellation of payment by the customer. Default value is 1.\n1 = '_top'\n2 = '_parent'\n3 = '_self'\n4= '_blank'"
+		},
+		{
+			"name": "logoUrl",
+			"defaultValue": "",
+			"type": "string",
+			"description": "The URL of the logo which you would like to appear in the top right of the Skrill page. The logo must be accessible via HTTPS or it will not be shown."
+		},
+		{
+			"name": "callbackUrl",
+			"defaultValue": "https://sslforward.playsafesa.com:5000/service-cashier-processor-paysafecard/callback/a580673d7304629dbe8a729d02079d38/",
+			"type": "string",
+			"description": "Internal callback URL that is provided to Skrill"
+		},
+		{
+			"name": "secretWord",
+			"defaultValue": "(averyGOODsecretWORD)",
+			"type": "string",
+			"description": "Secret word that is setup on the Skrill merchant backoffice under developer settings"
+		}
+	]
+}

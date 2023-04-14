@@ -1,0 +1,235 @@
+<form ng-submit="controller.save()" name="controller.form" autocomplete="off" novalidate>
+	<div class="row v-reset-row ">
+		<div class="col-xs-12">
+			<div class="card">
+				<div class="col-xs-12 top-space-15">
+					<div class="well-clear">
+						<button-custom ng-click="controller.listTransactions()" bclass="default btn-sm" icon="level-up" text="GLOBAL.ACTION.BACK"></button-custom>
+						<button-save></button-save>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="top-space-15"></div>
+	<div class="row v-reset-row ">
+		<div class="col-xs-12">
+			<div class="card">
+				<div class="">
+					<div class="col-xs-12 col-md-6 top-space-15">
+						<div class="card">
+							<div class="card-header bold-text">
+								{{'UI_NETWORK_ADMIN.CASHIER.TRANSACTION.MANUAL.CARDS.TRANSACTIONTYPEINFORMATION'|translate}}
+								<div class="pull-right">
+									<span ng-if="controller.selectedTransactionType.id === 1" class="badge badge-wrap card-success">{{'UI_NETWORK_ADMIN.CASHIER.TRANSACTION.MANUAL.DEPOSIT.NAME'|translate}}</span>
+									<span ng-if="controller.selectedTransactionType.id === 2" class="badge badge-wrap card-danger">{{'UI_NETWORK_ADMIN.CASHIER.TRANSACTION.MANUAL.WITHDRAWAL.NAME'|translate}}</span>
+								</div>
+							</div>
+							<div class="card-block">
+								<div class="col-xs-12 col-md-6">
+									<div class="form-group">
+										<label>{{'UI_NETWORK_ADMIN.CASHIER.TRANSACTION.MANUAL.TYPE.NAME' | translate}}</label>
+										<ui-select
+											theme="bootstrap"
+											ng-model="controller.selectedTransactionType"
+											ng-required="true"
+											ng-disabled="false"
+											on-select="controller.transactionType = $item;"
+											search-enabled="true">
+											<ui-select-match
+												placeholder="{{'UI_NETWORK_ADMIN.CASHIER.TRANSACTION.MANUAL.TYPE.NAME' | translate}}"
+												data-allow-clear="false">
+												{{controller.selectedTransactionType.name}}
+											</ui-select-match>
+											<ui-select-choices data-repeat="type in controller.transactionTypes | filter: $select.search">
+												<div ng-bind-html="type.name | highlight: $select.search"></div>
+											</ui-select-choices>
+											<ui-select-no-choice>
+												<div class="description">...</div>
+											</ui-select-no-choice>
+										</ui-select>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="top-space-15"></div>
+						<div class="card">
+							<div class="card-header bold-text">
+								{{'UI_NETWORK_ADMIN.CASHIER.TRANSACTION.MANUAL.CARDS.PROCESSORINFORMATION'|translate}}
+							</div>
+							<div class="card-block">
+								<div class="col-xs-12 col-md-6">
+									<div class="form-group">
+										<label>{{'UI_NETWORK_ADMIN.CASHIER.METHODS.FIELDS.METHOD.NAME' | translate}}</label>
+										<ui-select
+											theme="bootstrap"
+											ng-model="controller.selectedMethod"
+											ng-required="true"
+											ng-disabled="false"
+											on-select="controller.noMethodChosen = false; controller.selectedMethod = $item; controller.findDomainMethodProcessors($item.id)"
+											search-enabled="true">
+											<ui-select-match
+												placeholder="{{'UI_NETWORK_ADMIN.CASHIER.METHODS.FIELDS.METHOD.PLACEHOLDER' | translate}}"
+												data-allow-clear="false">
+												{{controller.selectedMethod.name}}
+											</ui-select-match>
+											<ui-select-choices
+												data-repeat="dm in controller.domainMethods | filter: $select.search">
+												<div ng-bind-html="dm.name | highlight: $select.search"></div>
+											</ui-select-choices>
+											<ui-select-no-choice>
+												<div class="description">...</div>
+											</ui-select-no-choice>
+										</ui-select>
+										<div ng-show="controller.noMethodChosen" class="form-group has-error">
+											<span class="help-block"><i class="fa fa-remove"></i>&nbsp;No Method Chosen</span>
+										</div>
+									</div>
+								</div>
+								<div class="col-xs-12 col-md-6">
+									<div class="form-group">
+										<label>{{'UI_NETWORK_ADMIN.CASHIER.PROCESSORS.FIELDS.PROCESSOR.NAME' | translate}}</label>
+										<ui-select
+											theme="bootstrap"
+											ng-model="controller.selectedProcessor"
+											ng-required="true"
+											ng-disabled="false"
+											on-select="controller.noProcessorChosen = false; controller.selectedProcessor = $item;"
+											search-enabled="true">
+											<ui-select-match
+												placeholder="{{'UI_NETWORK_ADMIN.CASHIER.PROCESSORS.FIELDS.PROCESSOR.PLACEHOLDER' | translate}}"
+												data-allow-clear="false">
+												{{controller.selectedProcessor.description}}
+											</ui-select-match>
+											<ui-select-choices
+												data-repeat="dmp in controller.domainMethodProcessors | filter: $select.search">
+												<div ng-bind-html="dmp.description | highlight: $select.search"></div>
+											</ui-select-choices>
+											<ui-select-no-choice>
+												<div class="description">...</div>
+											</ui-select-no-choice>
+										</ui-select>
+										<div ng-show="controller.noProcessorChosen" class="form-group has-error">
+											<span class="help-block"><i class="fa fa-remove"></i>&nbsp;No Processor Chosen</span>
+										</div>
+									</div>
+								</div>
+								<div class="col-xs-12">
+									<formly-form model="controller.model" fields="controller.processorFields" options="controller.options" form="controller.form">
+									</formly-form>
+								</div>
+							</div>
+						</div>
+						<div class="top-space-15"></div>
+						<div class="card">
+							<div class="card-header bold-text">
+								{{'UI_NETWORK_ADMIN.CASHIER.TRANSACTION.MANUAL.CARDS.INPUTFIELDS'|translate}}
+							</div>
+							<div class="card-block">
+								<div class="col-xs-12" ng-if="controller.selectedMethodInputFields.length > 0">
+									<formly-form model="controller.model" fields="controller.inputFields" options="controller.options" form="controller.form">
+									</formly-form>
+								</div>
+								<div class="col-xs-12" ng-if="controller.selectedMethodInputFields === undefined || controller.selectedMethodInputFields.length < 1">
+									<span>No input fields found.</span>
+								</div>
+							</div>
+						</div>
+						<div class="top-space-15"></div>
+						<div class="card">
+							<div class="card-header bold-text">
+								{{'UI_NETWORK_ADMIN.CASHIER.TRANSACTION.MANUAL.CARDS.OUTPUTFIELDS'|translate}}
+							</div>
+							<div class="card-block">
+								<div class="col-xs-12" ng-if="controller.selectedMethodOutputFields.length > 0">
+									<formly-form model="controller.model" fields="controller.outputFields" options="controller.options" form="controller.form">
+									</formly-form>
+								</div>
+								<div class="col-xs-12" ng-if="controller.selectedMethodOutputFields === undefined || controller.selectedMethodOutputFields.length < 1">
+									<span>No output fields found.</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-xs-12 col-md-6 top-space-15">
+						<div class="card">
+							<div class="card-header bold-text">
+								{{'UI_NETWORK_ADMIN.CASHIER.TRANSACTION.MANUAL.CARDS.USERINFORMATION'|translate}}
+							</div>
+							<div class="card-block">
+								<div class="col-xs-12">
+									<div class="input-group">
+										<input type="text"
+											ng-model="controller.selectedUser"
+											placeholder="search player"
+											uib-typeahead="user.username for user in controller.searchUsers($viewValue)"
+											typeahead-loading="loadingLocations"
+											typeahead-no-results="noResults"
+											typeahead-min-length="2"
+											typeahead-show-hint="true"
+											typeahead-wait-ms="500"
+											typeahead-editable="false"
+											typeahead-on-select="controller.selectedUser = $item; controller.loadAvailableBonuses();"
+											class="form-control"/>
+										<div class="input-group-btn">
+											<button type="button" class="btn btn-default" ng-click="controller.resetUserSearch()"><i class="fa fa-remove"></i></button>
+										</div>
+									</div>
+									<div ng-show="loadingLocations" class="overlay">
+										<i class="fa fa-refresh fa-spin"></i>
+									</div>
+									<div ng-show="noResults" class="form-group has-error">
+										<span class="help-block"><i class="fa fa-remove"></i>&nbsp;No Results Found</span>
+									</div>
+									<div ng-show="controller.noPlayerChosen" class="form-group has-error">
+										<span class="help-block"><i class="fa fa-remove"></i>&nbsp;No Player Chosen</span>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="top-space-15"></div>
+						<div class="card">
+							<div class="card-header bold-text">
+								{{'UI_NETWORK_ADMIN.CASHIER.TRANSACTION.MANUAL.CARDS.TRANSACTIONINFORMATION'|translate}}
+							</div>
+							<div class="card-block">
+								<div class="col-xs-12">
+									<div ng-if="controller.selectedTransactionType.id === 1">
+										<label>{{'UI_NETWORK_ADMIN.CASHIER.TRANSACTION.MANUAL.DEPOSIT.FIELDS.BONUS.NAME'|translate}}</label>
+										<ui-select
+											theme="bootstrap"
+											ng-model="controller.selectedBonus"
+											ng-required="false"
+											ng-disabled="false"
+											on-select="controller.bonusError = ''; controller.selectedBonus = $item;"
+											search-enabled="true">
+											<ui-select-match
+												placeholder="{{'UI_NETWORK_ADMIN.CASHIER.TRANSACTION.MANUAL.DEPOSIT.FIELDS.BONUS.NAME'|translate}}"
+												data-allow-clear="false">
+												{{controller.selectedBonus.bonusName}}
+											</ui-select-match>
+											<ui-select-choices
+												data-repeat="ab in controller.availableBonuses | filter: $select.search">
+												<div ng-bind-html="ab.bonusName | highlight: $select.search"></div>
+											</ui-select-choices>
+											<ui-select-no-choice>
+												<div class="description">...</div>
+											</ui-select-no-choice>
+										</ui-select>
+										<div ng-if="controller.bonusError.length > 0" class="form-group has-error">
+											<span class="help-block"><i class="fa fa-remove"></i>&nbsp;{{controller.bonusError}}</span>
+										</div>
+										<br/>
+									</div>
+									<formly-form model="controller.model" fields="controller.transactionFields" options="controller.options" form="controller.form">
+									</formly-form>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="top-space-15"></div>
+			</div>
+		</div>
+	</div>
+</form>

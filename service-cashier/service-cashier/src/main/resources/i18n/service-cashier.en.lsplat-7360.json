@@ -1,0 +1,13 @@
+{
+  "SERVICE-CASHIER": {
+    "AUTOWITHDRAWALS": {
+      "RULESETS": {
+        "RULE": {
+          "FIELD": {
+            "AUTO_APPROVED_WDS": "No. of Auto-Approved Withdrawals in a Row"
+          }
+        }
+      }
+    }
+  }
+}

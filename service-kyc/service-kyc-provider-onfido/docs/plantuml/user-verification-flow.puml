@@ -1,0 +1,82 @@
+.User Verification Flow with Onfido
+[plantuml]
+----
+
+@startuml
+'https://plantuml.com/sequence-diagram
+
+actor Client as player
+participant "Lithium" as lithium
+participant "Onfido API" as onfido
+
+== Get applicant id ==
+
+player -> lithium++: get applicant_id
+lithium -> lithium: check in db is client\n have related applicant_id
+alt applicant_id exists
+    lithium -> onfido++: call "get applicant" API
+    onfido --> lithium--: applicant
+    group check is applicant data actual [data is not actual]
+        rnote over lithium, onfido
+            update applicant on Onfido side with user data
+        end rnote
+        lithium -> onfido++: call "update applicant" API
+        onfido --> lithium--:
+    end
+    lithium --> player: applicant_id
+else applicant_id not exists
+    lithium -> onfido++: call "create applicant" API
+    onfido --> lithium--: applicant id
+    lithium -> lithium: save applicant_id to db
+    lithium --> player--: applicant_id
+end
+
+== Upload documents ==
+
+player -> onfido++: uppload documents
+onfido --> player--:
+
+== Create check ==
+
+player -> lithium++: submit check
+lithium -> onfido++: call "create check" API
+onfido --> lithium--: check_id
+lithium -> lithium:
+    note right
+        * create check attempt with status **initiated**
+        * save check attempt to db
+    end note
+lithium --> player--:
+
+== Handle check.completed webhook ==
+
+onfido -> lithium++:
+lithium -> lithium:
+    note right
+        * validate is check attempt in **initiated** state
+        * update check attempt status in db with **processing**
+    end note
+lithium -> onfido++: call "retrieve check" API
+onfido --> lithium--: check
+lithium -> lithium:
+    note right
+        * if **"check.result"** field equals to **"clear"** - update user's status with **externally_verified**
+        * update check attempt status in db with **complete** or **fail**
+    end note
+lithium -> onfido++: call "reports list" API
+onfido --> lithium--: reports list
+loop processing report
+    rnote over lithium, onfido
+        retrieve from **Onfido** uploaded document's data
+    end rnote
+    lithium -> onfido++: call "find document" API
+    onfido --> lithium--: document details
+    lithium -> onfido++: call "download document" API
+    onfido --> lithium--: document content
+    lithium -> lithium: save document at document service
+end
+lithium --> onfido--:
+
+@enduml
+
+----

@@ -1,0 +1,25 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "REPORTS": {
+      "INCOMPLETEPLAYERS": {
+        "LIST": {
+          "DESCRIPTION": "Below is a list of all scheduled or ad-hoc reports on incomplete players."
+        },
+        "CREATE": {
+          "TITLE": "Incomplete Player Report - Add"
+        },
+        "REPORT": {
+          "TITLE": "Incomplete Player Report",
+          "DESCRIPTION": "A report consisting of players who have started but not completed a sign-up"
+        },
+        "EDIT": {
+          "TITLE": "Incomplete Player Report - Edit"
+        },
+        "REPORTRUN": {
+          "TITLE": "Report Run",
+          "DESCRIPTION": "Below are the results of a single run of the report. Select 'Download Excel' to retrieve a copy of the report in Excel format."
+        }
+      }
+    }
+  }
+}

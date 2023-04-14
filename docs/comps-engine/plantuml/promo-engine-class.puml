@@ -1,0 +1,32 @@
+.promo-engine-class
+[plantuml]
+----
+
+@startuml
+diamond start
+class TransactionCompletedEventService {
+  +processCompletedTransaction(CompleteTransaction request) throws Exception
+  -registerStat()
+}
+start -- TransactionCompletedEventService: event received
+
+class MissionStatsService {
+  +register(MissionContext missionContext)
+  -findUserMissionsAndRegisterStats(MissionContext missionContext)
+}
+
+TransactionCompletedEventService -- MissionStatsService: call to register
+
+class UserMissionService {
+  +findUserMissions(MissionContext missionContext)
+}
+
+MissionStatsService -- UserMissionService: find usermissions
+
+class MissionService {
+  +findAllCurrentByDomain(MissionContext missionContext)
+}
+UserMissionService -- MissionService: find applicable missions
+@enduml
+
+----

@@ -1,0 +1,12 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "CASHIER": {
+      "TRANS": {
+        "FILTER": {
+          "REGISTRATION_START": "Registration Date: Start",
+          "REGISTRATION_END": "Registration Date: End"
+        }
+      }
+    }
+  }
+}

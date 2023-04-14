@@ -1,0 +1,20 @@
+= Domain Summaries
+:toc:
+
+== What are Domain Summaries?
+Domain Summaries hold financial statistics for player domains that are summarised by account, transaction type, or label value. Data is grouped by granularities over periods. For open periods, data is constantly being updated, shortly following a balance adjustment event such as a casino bet or win, or a cashier deposit or withdrawal, etc.
+
+These events are queued on rabbitmq from the accounting service after a successful adjustment. The domain summary service has a configurable number of concurrent rabbit listeners to process events off of the queue, with each listener operating on its own subset of data, by a unique shard UUID.
+
+include::plantuml/summaries-adjustment.puml[]
+
+By making use of counters that are kept up to date, lithium has the ability of providing valuable financial information for player domains, without the expensive database aggregation queries over potentially millions of records.
+
+=== What is granularity?
+Granularity refers to the interval in which data is accumulated for. Domain summaries currently support intervals of day, week, month, year, and total.
+
+=== What is a period?
+A period is a span of time covering a specific start and end date.
+
+=== What is "label value"?
+Label values are a concept utilised significantly across lithium. It is an approach to storing generic key/value pair data, without duplication. We use it here to group player domain financial statistics by certain key/value pairs. Examples of some labels include: game_guid, geo_country. With this data, we can answer the questions: "What was the amount of bets made on a certain game yesterday?" or, "What was the amount of bets made from a certain country last month?"

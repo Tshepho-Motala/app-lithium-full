@@ -1,0 +1,41 @@
+<div class="container-fluid">
+	<lit-header
+		title="GoGame Game Tutorials"
+		description="A searchable list of GoGame Game Tutorials">
+	</lit-header>
+	
+	<div class="row v-reset-row ">
+		<div class="col-xs-12">
+			<button-add lit-if-permission="GOGAMEGAMES_TUTORIALS_EDIT" ui-sref="^.add"></button-add>
+			<button-refresh ng-click="controller.refresh()"></button-refresh>
+			<div class="pull-right">
+				<div class="btn-group" uib-dropdown>
+					<button id="dropdown-domain" type="button" class="btn btn-default" uib-dropdown-toggle>
+						{{ controller.selectedDomainsDisplay }} <span class="caret"></span>
+					</button>
+					<ul class="dropdown-menu dropdown-menu-right px-2 pb-2" uib-dropdown-menu role="menu" aria-labelledby="dropdown-type">
+						<li role="menuitem"><a ng-click="controller.domainSelectAll()">All Domains</a></li>
+						<li class="divider"></li>
+						<li class="domain-select" role="menuitem" ng-repeat="domain in controller.domains | unique : 'name'">
+							<input ng-model="domain.selected" type="checkbox" title="DOMAIN" ng-change="controller.domainSelect()"/>
+								{{domain.name}}
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<br/>
+	
+	
+	<div class="row v-reset-row ">
+		<div class="col-xs-12">
+			<div class="box">
+				<div class="box-body no-padding table-responsive">
+					<dt table="controller.gogameTutorialsTable"/>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

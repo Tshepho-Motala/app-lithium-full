@@ -1,0 +1,15 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "BRANDCONFIG": {
+      "TAB": {
+        "ERROR_MESSAGES": {
+          "TAB": {
+            "GAMES": {
+              "TITLE": "Games"
+            }
+          }
+        }
+      }
+    }
+  }
+}

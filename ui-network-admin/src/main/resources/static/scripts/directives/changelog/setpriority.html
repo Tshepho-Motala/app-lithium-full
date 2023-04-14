@@ -1,0 +1,21 @@
+<div class="modal-header" bs-loading-overlay bs-loading-overlay-reference-id="{{controller.referenceId}}">
+	<h3 class="modal-title" id="modal-title">
+		<span>{{'UI_NETWORK_ADMIN.CHANGELOGS.GLOBAL.FIELDS.PRIORITY.CHANGE.HEADER'|translate}}</span>
+	</h3>
+</div>
+
+<form ng-submit="controller.submit()" name="controller.form" autocomplete="off" novalidate>
+	<div class="modal-body" id="modal-body">
+		<div class="row v-reset-row ">
+			<div class="col-xs-12">
+				<formly-form model="controller.model" fields="controller.fields" form="controller.form" options="controller.options">
+				</formly-form>
+			</div>
+		</div>
+	</div>
+	
+	<div class="modal-footer">
+		<button-submit></button-submit>
+		<button-cancel ng-click="controller.cancel()"></button-cancel>
+	</div>
+</form>

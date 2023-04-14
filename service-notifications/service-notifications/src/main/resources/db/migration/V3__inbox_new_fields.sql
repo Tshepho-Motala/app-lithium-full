@@ -1,0 +1,3 @@
+ALTER TABLE `inbox`
+ADD COLUMN `processing` BIT(1) NOT NULL DEFAULT 0,
+ADD COLUMN `processed` BIT(1) NOT NULL DEFAULT 0;

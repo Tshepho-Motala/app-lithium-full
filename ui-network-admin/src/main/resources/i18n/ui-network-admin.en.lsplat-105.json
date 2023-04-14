@@ -1,0 +1,48 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "BRANDCONFIG": {
+      "TAB": {
+        "ERROR_MESSAGES": {
+          "TITLE": "Error Messages",
+          "TAB": {
+            "REGISTRATION": {
+              "TITLE": "Registration"
+            },
+            "LOGIN":{
+              "TITLE": "Login"
+            },
+            "PASSWORD":{
+              "TITLE": "Password"
+            },
+            "DEPOSIT":{
+              "TITLE": "Deposit"
+            },
+            "WITHDRAW":{
+              "TITLE": "Withdrawal"
+            },
+            "MY_ACCOUNT":{
+              "TITLE": "My Account"
+            }
+          },
+          "TABLE": {
+            "ID": "Id",
+            "DESCRIPTION":"Description",
+            "ERROR_MESSAGE": "Error Message",
+            "LOCALE": "Locale",
+            "VIEW": "View",
+            "EDIT": "Edit"
+          },
+          "EDIT": {
+            "VIEW_TITLE": "View error messages",
+            "EDIT_TITLE": "Add/edit error messages",
+            "SUCCESS_STORED": "Translation was stored successfully.",
+            "SUCCESS_EDITED": "Translation was edited successfully.",
+            "SUCCESS_REMOVED": "Translation was removed successfully.",
+            "DEFAULT_LANGUAGE": "default",
+            "SELECT_LANGUAGE": "Select a language"
+          }
+        }
+      }
+    }
+  }
+}

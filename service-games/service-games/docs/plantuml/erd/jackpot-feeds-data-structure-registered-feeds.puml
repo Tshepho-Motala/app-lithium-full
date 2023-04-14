@@ -1,0 +1,37 @@
+[plantuml]
+----
+@startuml
+skinparam linetype ortho
+
+!define T(name,desc) class name as "desc" << (T,#FFAAAA) >>
+!define pk(x) <b>x</b>
+!define fk(x) <color:purple><i>x</i></color>
+!define unique(x) <color:green>x</color>
+!define nn(x) <u>x</u>
+
+T(m, "module") {
+    pk(id): BIGINT(20) <<generated>>
+    --
+    unique(name): VARCHAR(255)
+}
+
+T(gs, "game_supplier") {
+    pk(id): BIGINT(20) <<generated>>
+    --
+    .
+}
+
+T(jf, "progressive_jackpot_feed") {
+    pk(id): BIGINT(20) <<generated>>
+    --
+    enabled: BIT(1)
+    registered_on: DATETIME
+    last_updated_on: DATETIME
+    fk(module_id): BIGINT(20)
+    fk(game_supplier_id): BIGINT(20)
+}
+
+m ||..|{ jf
+gs ||..|{ jf
+@enduml
+----

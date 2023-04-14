@@ -1,0 +1,15 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "CASHIER": {
+      "PAYMENT_METHOD": {
+        "VERIFICATION_ERROR": "Verification error",
+        "EDIT": {
+          "ERROR" : {
+            "UNVERIFIED_CONTRA_ACCOUNT": "Unverified account can not be set as contra.",
+            "UNABLE_TO_SAVE": "Unable to save. Please try again."
+          }
+        }
+      }
+    }
+  }
+}

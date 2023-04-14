@@ -1,0 +1,28 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "PLAYER": {
+      "QUICK_ACTIONS": {
+        "RESET": {
+          "PASSWORD": "Reset Password"
+        }
+      },
+      "PASSWORDRESET": {
+        "TITLE": "Password Reset",
+        "FIELDS": {
+          "TOKENTYPE": {
+            "LABEL": "Token Type",
+            "DESCRIPTION": "Select if the generated token should be numeric or alphanumeric."
+          },
+          "MESSAGETYPE": {
+            "LABEL": "Message Type",
+            "DESCRIPTION": "Select if the reset token should be sent via email or sms."
+          },
+          "TOKENLENGTH": {
+            "LABEL": "Token Length",
+            "DESCRIPTION": "The length of the token to be generated."
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,12 @@
+server:
+  port: ${PORT:7200}
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost/lithium_report_player_trans
+    username: root
+    password: mysql
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: validate

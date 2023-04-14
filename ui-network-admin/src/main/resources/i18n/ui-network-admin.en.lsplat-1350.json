@@ -1,0 +1,39 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "PLAYER": {
+      "QUICK_ACTIONS" : {
+        "CHANGE": {
+            "NAME": "Change IBAN",
+            "PLACEHOLDER": "Change IBAN",
+            "DESCRIPTION": "Change Your International Bank Account Number (IBAN).",
+            "ERROR": "Not a valid IBAN",
+            "SHORT_ERROR": "IBAN number is too short",
+            "LONG_ERROR": "IBAN number is too long"
+        },
+        "UPDATE" : {
+          "SUCCESS" : "IBAN changed Successfully",
+          "ERROR" : "Error IBAN Failed To Update"
+        }
+      }
+    },
+    "USER": {
+      "FIELDS": {
+        "STATUS": {
+          "COMMENT": {
+            "LABEL": "Text",
+            "PLACEHOLDER": "Fill in a reason",
+            "DESCRIPTION": "Specify a reason for this change/update."
+
+          }
+        }
+      }
+    },
+    "CHANGELOGS": {
+      "GLOBAL": {
+        "FIELDS": {
+          "COMMENTS": "Text"
+        }
+      }
+    }
+  }
+}

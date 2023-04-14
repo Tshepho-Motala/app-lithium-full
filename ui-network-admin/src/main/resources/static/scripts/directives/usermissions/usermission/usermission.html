@@ -1,0 +1,154 @@
+<div class="row v-reset-row ">
+	<div class="col-xs-6">
+		<div class="box box-default">
+			<div class="box-header with-border">
+				<h3 class="box-title">{{'UI_NETWORK_ADMIN.USERMISSIONS.BOXES.MISSION'|translate}}</h3>
+			</div>
+			<div class="box-body">
+				<table class="table table-hover table-striped nowrap" cellspacing="0" width="100%">
+				<tbody>
+					<tr>
+						<th style="width: 20%;">Name</th>
+						<td>{{data.promotionRevision.name}}</td>
+					</tr><tr>
+						<th>Description</th>
+						<td>{{data.promotionRevision.description}}</td>
+					</tr>
+					<tr>
+						<th>Active</th>
+						<td>{{data.active}}</td>
+					</tr><tr>
+						<th>Expired</th>
+						<td>{{data.expired}}</td>
+					</tr><tr>
+						<th>{{'UI_NETWORK_ADMIN.USERMISSIONS.FIELDS.STARTED.NAME'|translate}}</th>
+						<td>{{data.startedDisplay}}</td>
+					</tr><tr>
+						<th>Completed</th>
+						<td>{{data.completedDisplay}}</td>
+					<tr><tr>
+						<th style="width: 20%;">{{'UI_NETWORK_ADMIN.USERMISSIONS.FIELDS.PERCENTAGE.NAME'|translate}}</td>
+						<td><uib-progressbar class="progress-striped active" type="info" value="(data.percentage === undefined || data.percentage === null)? 0: data.percentage|number:2"><span style="color: black;">{{(data.percentage === undefined || data.percentage === null)? 0: data.percentage|number:2}}%</span></uib-progressbar></td>
+					</tr>
+				</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="col-xs-6">
+		<div class="box box-default">
+			<div class="box-header with-border">
+				<h3 class="box-title">{{'UI_NETWORK_ADMIN.USERMISSIONS.BOXES.USER'|translate}}</h3>
+			</div>
+			<div class="box-body">
+				<table class="table table-hover table-striped nowrap" cellspacing="0" width="100%">
+				<tbody>
+					<tr>
+						<th style="width: 20%;">{{'UI_NETWORK_ADMIN.USERMISSIONS.FIELDS.USER.NAME'|translate}}</th>
+						<td>{{data.user.guid}}</td>
+					</tr><tr>
+						<th>Timezone</th>
+						<td>{{data.timezone}}</td>
+					</tr>
+				</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="col-xs-12">
+		<div class="box box-default">
+			<div class="box-header with-border">
+				<h3 class="box-title">{{'UI_NETWORK_ADMIN.USERMISSIONS.BOXES.CHALLENGES'|translate}}</h3>
+			</div>
+			<div class="box-body">
+				<div class="col-xs-12">
+					<div ng-if="data.challenges.length === 0">
+						<div class="card-danger-shadow">
+							<div class="card card-block">
+								<span class="description" align="center">
+									No challenges?
+								</span>
+							</div>
+						</div>
+						<br/>
+					</div>
+					<div ui-tree ng-if="data.challenges.length > 0" data-max-depth="1">
+						<ol ui-tree-nodes ng-model="data.challenges" class="">
+							<li ui-tree-node ng-repeat="challenge in data.challenges" style="padding-bottom: 4px;">
+								<div class="row v-reset-row " style="margin-bottom: 5px;">
+									<div class="card card-block">
+										<div class="d-flex justify-content-start" ng-click="collapseChallenge(challenge)">
+											<div class="p-2">
+												<i class="fa fa-chevron-up" ng-show="challenge.collapsed"></i>
+												<i class="fa fa-chevron-down" ng-show="!challenge.collapsed"></i>
+											</div>
+											<div class="divider"></div>
+											<div class="p-2">
+												<div class="user-block">
+													<a ng-click="openLightBox(challenge.iconUrl);$event.stopPropagation();">
+														<img class="img-circle img-bordered-sm" src="//:0" ng-src="{{challenge.iconUrl}}" alt="">
+													</a>
+												</div>
+											</div>
+											<div class="p-2">
+												<span class="badge-wrap card-info" ng-if="challenge.started">STARTED: {{challenge.startedDisplay}}</span>
+												<span class="badge-wrap card-warning" ng-if="!challenge.started">NOT STARTED</span>
+												<br/>
+												<span class="badge-wrap card-success" ng-if="challenge.challengeComplete">COMPLETED: {{challenge.completedDisplay}}</span>
+											</div>
+											<div class="p-2">
+												<span class="description">
+													{{challenge.challenge.description}}
+												</span>
+											</div>
+										</div>
+										<div class="" style="padding-top: 10px;">
+											<uib-progressbar class="progress-striped active" type="info" value="(challenge.percentage === undefined || challenge.percentage === null)? 0: challenge.percentage|number:2"><span style="color: black;">{{(challenge.percentage === undefined || challenge.percentage === null)? 0: challenge.percentage|number:2}}%</span></uib-progressbar>
+										</div>
+										<div uib-collapse="!challenge.collapsed" class="panel-collapse collapse">
+											<div class="card-content">
+												<hr/>
+												<div style="text-align: center;" class="card-outline-warning" ng-if="challenge.rules.length === 0">No rules?</div>
+												<div class="card card-block" style="margin-bottom: 5px;" ng-repeat="rule in challenge.rules">
+													<table class="table table-hover table-striped nowrap" cellspacing="0" width="100%">
+													<tbody>
+													<tr>
+														<th>{{'UI_NETWORK_ADMIN.USERMISSIONS.FIELDS.STARTED.NAME'|translate}}</th>
+														<td ng-if="rule.started">{{rule.startedDisplay}}</td>
+														<td ng-if="!rule.started"><label class="label label-lg label-danger">NOT STARTED</label></td>
+													</tr><tr>
+														<th>Completed</th>
+														<td>{{rule.completedDisplay}}</td>
+													</tr><tr>
+														<th>{{'UI_NETWORK_ADMIN.USERMISSIONS.FIELDS.PERCENTAGE.NAME'|translate}}</th>
+														<td colspan="2"><uib-progressbar class="progress-striped active" type="info" value="(rule.percentage === undefined || rule.percentage === null)? 0: rule.percentage|number:2"><span style="color: black;">{{(rule.percentage === undefined || rule.percentage === null)? 0: rule.percentage|number:2}}%</span></uib-progressbar></td>
+													</tr>
+
+													<tr>
+														<th style="width: 20%;">{{'UI_NETWORK_ADMIN.MISSIONS.FIELDS.CHALLENGE.CHALLENGERULES.RULE.EXPLANATION'|translate}}</th>
+														<td>
+															<span class="label label-primary" style="font-size: 10pt;">{{getChallengeRuleExplanation(rule.rule.type, rule.rule.action, rule.rule.identifier, rule.rule.value)|translate: { val: rule.rule.value, gameName: getGameName(rule.rule.identifier) } }}</span>
+															
+														</td>
+													</tr>
+													
+													</tbody>
+													</table>
+													<div class="well mt-2">
+														{{ getRuleProgressExplanation(rule, challenge) }}
+													</div>
+<!-- 													<pre>{{rule|json}}</pre> -->
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</li>
+						</ol>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+<!-- 	<pre>{{data|json}}</pre> -->
+</div>

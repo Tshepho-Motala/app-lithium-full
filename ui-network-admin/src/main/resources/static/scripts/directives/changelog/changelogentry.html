@@ -1,0 +1,83 @@
+<div>
+    <buttonbar>
+        <button-back ui-sref="{{controller.backhref}}"></button-back>
+    </buttonbar>
+
+    <br/><br/>
+
+    <div class="row v-reset-row ">
+        <div class="col-md-6 col-xs-12">
+            <div class="well-clear" style="background-color: white">
+                <table class="table table-hover" cellspacing="0" width="100%">
+                    <tbody>
+                    <tr>
+                        <th class="form-label" style="width: 30%;">{{'UI_NETWORK_ADMIN.CHANGELOGS.GLOBAL.FIELDS.ENTITY'|translate}}</th>
+                        <td>{{controller.entry.entity.name}}</td>
+                    </tr><tr>
+                        <th class="form-label">{{'UI_NETWORK_ADMIN.CHANGELOGS.GLOBAL.FIELDS.ENTITYRECORDID'|translate}}</th>
+                        <td>{{controller.entry.entityRecordId}}</td>
+                    </tr><tr>
+                        <th class="form-label">{{'UI_NETWORK_ADMIN.CHANGELOGS.GLOBAL.FIELDS.TYPE'|translate}}</th>
+                        <td>{{controller.entry.type.name}}</td>
+                    </tr><tr>
+                        <th class="form-label">{{'UI_NETWORK_ADMIN.CHANGELOGS.GLOBAL.FIELDS.AUTHOR' | translate}}</th>
+                        <td ng-if="controller.entry.authorFullName === undefined || controller.entry.authorFullName === null">{{controller.entry.authorUser.guid}}</td>
+                        <td ng-if="controller.entry.authorFullName !== undefined || controller.entry.authorFullName !== null">{{controller.entry.authorFullName}}</td>
+                    </tr>
+                    <tr>
+                        <th class="form-label">{{'UI_NETWORK_ADMIN.CHANGELOGS.GLOBAL.FIELDS.PRIORITY.LABEL' | translate}}</th>
+                        <td>{{controller.getPriority(controller.entry.priority)}}</td>
+                        <!--td lit-if-permission="CHANGELOGS_GLOBAL_EDIT">
+                            <a style="cursor: pointer;" ng-click="controller.setPriority()">
+                                <span><i class="fa fa-pencil-square-o"></i> {{'UI_NETWORK_ADMIN.CHANGELOGS.GLOBAL.FIELDS.PRIORITY.MODIFY'|translate}}</span>
+                            </a>
+                        <td-->
+                    </tr>
+                    <tr>
+                        <th class="form-label">{{'UI_NETWORK_ADMIN.CHANGELOGS.GLOBAL.FIELDS.CHANGEDATE' | translate}}</th>
+                        <td>{{controller.entry.changeDate | datetimedefault}}</td>
+                    </tr>
+                    <tr>
+                        <th class="form-label">{{'UI_NETWORK_ADMIN.CHANGELOGS.GLOBAL.FIELDS.CATEGORYNAME' | translate}}</th>
+                        <td>{{controller.entry.category.name}}</td>
+                    </tr>
+                    <tr>
+                        <th class="form-label">{{'UI_NETWORK_ADMIN.CHANGELOGS.GLOBAL.FIELDS.SUBCATEGORY' | translate}}</th>
+                        <td>{{controller.entry.subCategory.name}}</td>
+                    </tr>
+                    <tr>
+                        <th class="form-label">{{'UI_NETWORK_ADMIN.CHANGELOGS.GLOBAL.FIELDS.COMMENTS' | translate}}</th>
+                        <td><pre class="pre-normal nowrap">{{controller.entry.comments}}</pre></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="row v-reset-row ">
+        <div class="col-xs-12">
+            <div class="well-clear" style="background-color: white">
+                <table class="table table-hover nowrap" cellspacing="0" width="100%">
+                    <thead>
+                    <th style="width: 20%;">{{'UI_NETWORK_ADMIN.CHANGELOGS.GLOBAL.FIELDS.FIELDCHANGE.FIELD'|translate}}</th>
+                    <th style="width: 20%;">{{'UI_NETWORK_ADMIN.CHANGELOGS.GLOBAL.FIELDS.FIELDCHANGE.FROM'|translate}}</th>
+                    <th style="width: 20%;">{{'UI_NETWORK_ADMIN.CHANGELOGS.GLOBAL.FIELDS.FIELDCHANGE.TO'|translate}}</th>
+                    <th style="width: 10%">{{'UI_NETWORK_ADMIN.CHANGELOGS.GLOBAL.FIELDS.FIELDCHANGE.EDITED_BY'|translate}}</th>
+                    <th style="width: 10%">{{'UI_NETWORK_ADMIN.CHANGELOGS.GLOBAL.FIELDS.FIELDCHANGE.DATE_UPDATED'|translate}}</th>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="fieldChange in controller.entry.fieldChanges">
+                        <td>{{fieldChange.field}}</td>
+                        <td>{{fieldChange.field === 'priority'? controller.getPriority(fieldChange.fromValue) : fieldChange.fromValue}}</td>
+                        <td>{{fieldChange.field === 'priority'? controller.getPriority(fieldChange.toValue) : fieldChange.toValue}}</td>
+                        <td>{{fieldChange.editedBy.guid}}</td>
+                        <td>{{fieldChange.dateUpdated | datetimedefault}}</td>
+
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

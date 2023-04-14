@@ -1,0 +1,26 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "BONUS": {
+      "BONUSEXTERNALGAME": {
+        "BOX": {
+          "TITLE": "External Bonus Game Configuration",
+          "DESCRIPTION": "The ability to link an external bonus games provider to a bonus and produce a unique link for a player when a bonus is redeemed."
+        },
+        "PROVIDER": {
+          "NAME": "Game Provider",
+          "DESCRIPTION": "Select the external bonus games provider from the list."
+        },
+        "CAMPAIGNID": {
+          "NAME": "Internal Campaign Id",
+          "DESCRIPTION": "This is the campaign id allocated in the provider configuration tab in domains configuration."
+        },
+        "TBL": {
+          "EMPTY": "No external bonus games configured."
+        },
+        "ADD": {
+          "TITLE": "Add external bonus game configuration."
+        }
+      }
+    }
+  }
+}

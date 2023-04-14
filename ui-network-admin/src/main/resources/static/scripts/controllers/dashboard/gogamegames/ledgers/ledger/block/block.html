@@ -1,0 +1,108 @@
+<div class="container-fluid">
+	<div class="box box-primary box-widget">
+		<div class="box-body box-profile">
+			<div class="user-block">
+				<div class="pull-right">
+					<span class="label">&nbsp;</span>
+					<br/>
+					<span style="line-height:inherit;" class="label label-primary">{{controller.model.domain.name|uppercase}}</span>
+				</div>
+				<h4 style="font-weight: bold;">
+					Ledger Block ({{controller.ledgerBlock.id}})
+				</h4>
+				<small>PREVIOUS HASH: {{controller.ledgerBlock.previousHash}}<br/></small>
+				<small ng-if="controller.ledgerBlock.hash">HASH: {{controller.ledgerBlock.hash}}<br/></small>
+				<small>RESULT BATCH: <a target="_blank" ui-sref="dashboard.gogamegames.resultbatches.resultbatch({id: controller.ledgerBlock.resultBatch.id})">VIEW</a></small>
+			</div>
+		</div>
+	</div>
+	
+	<buttonbar>
+		<button-back ui-sref="dashboard.gogamegames.ledgers.ledger({id: controller.ledger.id})"></button-back>
+		<button-refresh ng-click="controller.refresh()"></button-refresh>
+	</buttonbar>
+	
+	<br/><br/>
+	
+	<div ng-if="controller.ledgerBlock.processing" class="panel box box-warning">
+		<div class="box-header with-border">
+			<h4 class="box-title">Ledger block is currently processing.</h4>
+		</div>
+	</div>
+	
+	<div class="row v-reset-row ">
+		<div class="col-xs-6">
+			<div class="info-box bg-aqua">
+				<span class="info-box-icon"><i class="fa fa-spinner"></i></span>
+				
+				<div class="info-box-content">
+					<span class="info-box-text">LEDGER BLOCK PROCESSING</span>
+					<span class="info-box-number">{{controller.ledgerBlock.numCompleted/controller.ledgerBlock.resultBatch.quantity*100|number:2}}%</span>
+					<div class="progress">
+ 						<div class="progress-bar" style="width: {{controller.ledgerBlock.numCompleted/controller.ledgerBlock.resultBatch.quantity*100}}%"></div>
+					</div>
+					<span class="progress-description">
+						{{controller.ledgerBlock.numCompleted}} of {{controller.ledgerBlock.resultBatch.quantity}}
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-6">
+			<div class="info-box bg-green">
+				<span class="info-box-icon"><i class="fa fa-file-text-o"></i></span>
+				<div class="info-box-content">
+					<span class="info-box-text">ENTRIES LEFT</span>
+					<span class="info-box-number">{{controller.countNew}} of {{controller.ledgerBlock.resultBatch.quantity}}</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row v-reset-row ">
+		<div class="col-md-4 col-sm-6 col-xs-12">
+			<div class="info-box">
+				<span class="info-box-icon bg-aqua">
+					<i class="fa fa-star-o"></i>
+				</span>
+				<div class="info-box-content">
+					<span class="info-box-text">NEW</span>
+					<span class="info-box-number">{{controller.countNew}}</span>
+				</div>
+			</div>
+		</div>
+		
+		<div class="col-md-4 col-sm-6 col-xs-12">
+			<div class="info-box">
+				<span class="info-box-icon bg-yellow">
+					<i class="fa fa-star-half-o"></i>
+				</span>
+				<div class="info-box-content">
+					<span class="info-box-text">SEEN</span>
+					<span class="info-box-number">{{controller.countSeen}}</span>
+				</div>
+			</div>
+		</div>
+		
+		<div class="col-md-4 col-sm-6 col-xs-12">
+			<div class="info-box">
+				<span class="info-box-icon bg-green">
+					<i class="fa fa-star"></i>
+				</span>
+				<div class="info-box-content">
+					<span class="info-box-text">TAKEN</span>
+					<span class="info-box-number">{{controller.countTaken}}</span>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="row v-reset-row ">
+		<div class="col-xs-12">
+			<div class="box">
+				<div class="box-body no-padding table-responsive">
+					<dt table="controller.ledgerBlocksTable"/>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

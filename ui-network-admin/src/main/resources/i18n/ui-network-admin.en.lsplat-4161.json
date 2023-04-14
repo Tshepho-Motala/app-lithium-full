@@ -1,0 +1,20 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "CMS": {
+      "JSON": {
+        "OUTPUT": {
+          "FULL_JSON": "Full Json",
+          "ACTIVE_LOBBY": "Active Lobby",
+          "SELECTED_PAGE": "Selected Page"
+        }
+      },
+      "NAVIGATION_MANAGEMENT": {
+        "BUTTONS": {
+          "SAVE": "Save",
+          "CANCEL": "Cancel",
+          "MODIFY": "Modify"
+        }
+      }
+    }
+  }
+}

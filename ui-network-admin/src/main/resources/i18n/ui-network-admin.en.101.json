@@ -1,0 +1,12 @@
+{
+  "GLOBAL": {
+    "ACTION": {
+      "ADDCOMMENT": "Add Comment",
+      "COMMENTANDCLEAR": "Comment and Clear",
+      "COMMENTANDAPPROVE": "Comment and Approve",
+      "COMMENTANDRETRY": "Comment and Retry",
+      "COMMENTANDMARKSUCCESS": "Comment and Mark Success",
+      "COMMENTANDCANCEL": "Comment and Cancel"
+    }
+  }
+}

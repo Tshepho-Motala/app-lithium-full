@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "lithium-virginbet-sandbox",
+  "private_key_id": "b6f221e2d0266d3f4a620185935d30dd2e1b6fa0",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCl4mRmdKQehku+\nZsden13BXRBSVFxRAY9UpgnBOBl1SiO9z4xvgFLF2z7eAQkXiO7NJBS/Le+Y17F4\nJk84KtKBfKhHEg452xkOZtrXedvuvkVmTCtODS6UZ1wfsqyGW/KqCYfCqdcMEtvR\n1jkME2KDFjGkApQAXahe3uVVtVOiFtbJ5itB603WVC5UxK76pvGa6oG84hcK1LU9\nhtpmjJMpIDH1gliqdRTsNDKqTf1ImTbHv3ZaUVYdWPec0nkcfQIEYISGYYvUeRCG\nmcxGquWidwn7OWxg8/M+SGqRGKNNu2JQg3N7jY374wUujI+udAHJdbdU3JRQP1Nt\nyWO0xnJvAgMBAAECggEADdpDhHN4zHHDkSwNDx+jg9ptMAA1JgX0KF9QkORJ6qEH\n2LnPIkqRiaNJnd7GmcKzdR8ZD8QFbk/o1T3safuC0RG4uG1PZyZ0R7RwJwQD8+0g\nvNkJ2WlBZV7iSGVdLJUwxQv/ByheucvjXnkTZ35A65h8Cb8LXqJzmoSQ8IuFZz4l\nkUx1Ma06gGdTLPOjG86Qqexz/THww0TWSInHF3YtYh0YiGRBH5MjSX1g3IapEEnz\nFOqipqNz6Af11v97kdlYEY8fJXX4JgH/XbDQFC78M5pebt0Kv8hhIWx320rwN8iH\n7OTwTPOZJ+xBjnLTWO1tqnN4jMfFWOWOTc5bNZlz9QKBgQDW3wYTaeWpfnxG5QAW\nBXjTPJStMa9eX8OqNqemFl2ZlOdfmuDPe4HpVySwVeQmIJLMYQN2BLsM6nHIMvp7\nbBIj/AHOgS7RleUEQ15XV2fKMLcd4bC+mFPdY5KGldbZ9Nz8XhC4AQHT7zsGruKT\n0PQ3I0p1qLYvZ1I6wQqKGfeTnQKBgQDFovKP+aZxhadKsPG16j3uMnAXb1ySnRFk\nNkroshL6iDeLSReLY8+KcmQ2dHZNXOm/aIRvemM0MmsL4X+eg738N0MmaZ80dPj5\nXyhCDLxzaUWllMKNPEYzWSyIqVpl88nmfg0b69/ZaX8A1/HPmFPFQoVVGqj4/Rdj\neBVQzxS+ewKBgCp4puDLe8PG5pW0yhGQP1Oxk8mwGnPTBf/tEbI4lYO39Qvmty0L\nwp/2w5+/Ont20M1pF6AKS1bAOIFT4kLnF6bZNxo0Wqa+tCflkQ4+jpteibN0WtUx\nktIdzmaf03n9dnjDtxZHzK6xiL9Hbi29jaggZ6VeFbTE/XHzmju16kPZAoGBAMCi\nMJbQmMDxqruMeCv94ts24jaVXr+wxHDO0ni4iPMUrj7ewUolwPaKxM6m+WAyfcsJ\nDnyx59vKgLgV1RQmCJm7K4JXVMwGb15wt4aZb112cGIR+wc6hpoqAtQ5bVkOI+67\nUf+zCn6Y6ydhU9op+Qy958OptqTp21AijXQ0Q13dAoGAeNxvCcdv51N+ximxcv+S\nj72hHiFoBux34zjWsdXi+YjQse/cAIuHWgbp9pA/Wrw72i1xKA+MeV3JpO9Srdpy\nPPb/Y332gMjvI/F4ZyiJHCWcsv2l11q3OJKKFX5iZ2xu1kRjwv7BX0YqpS6I7pha\n+c95KH+9HUT7IMfZF0f+nqI=\n-----END PRIVATE KEY-----\n",
+  "client_email": "lithium-vb-migration@lithium-virginbet-sandbox.iam.gserviceaccount.com",
+  "client_id": "100593461920667254014",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/lithium-vb-migration%40lithium-virginbet-sandbox.iam.gserviceaccount.com"
+}

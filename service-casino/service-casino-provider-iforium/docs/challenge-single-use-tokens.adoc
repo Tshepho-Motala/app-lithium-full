@@ -1,0 +1,30 @@
+= Single-Use Tokens
+
+[quote, Gameflex Generic Operator Wallet API]
+--
+The Session Token should always be unique, non-sequential, single use and expire within a maximum of 60 seconds for the purposes of security.
+--
+
+The single-use aspect of the Session Token presents us with a certain degree of unwanted complexity. The Iforium Casino Provider is designed to be fully stateless. It is essentially a proxy to the underlying wallet, receiving calls from Iforium, transalating them and passing them upstream.
+
+Supporting single use would require the introduction of state, to track the tokens received and detect a re-presentation.
+
+IMPORTANT: We have agreed with Iforium that we will not implement this aspect.
+
+== Consequences
+
+In not rejecting duplicate submissions to `link:endpoint-mappings-session-redeemtoken.adoc[/v1.0/session/redeemtoken]`, we are allowing the possibility the redemption of an intercepted token. This would allow a malicious eavesdropper to acquire the `sessionKey` for a player and use it to gain access to private data and transact against their wallet.
+
+However, this vulnerability is mitigated in the following ways:
+
+* The Session Token has a TTL of 60 seconds - any attack must occur within that time.
+* All communications are encrypted over SSL - the Session Token is never clearly visible in URIs
+* Calls are only accepted from whitelisted IP addresses - any attack would have to either come from within the Provider's network or successfully spook an IP within that range.
+
+== Outline Solution
+
+Should it be decided that the Iforium Casino Provider must, indeed, introduce support for single-use tokens, some form of distributed cache would need to be made available to the implementation.
+
+NOTE: A database table would seem to be overkill. Hazelcast would be a better fit.
+
+include::plantuml/challenge-single-use-tokens-sequence.puml[]

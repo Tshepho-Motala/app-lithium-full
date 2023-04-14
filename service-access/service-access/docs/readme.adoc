@@ -1,0 +1,108 @@
+= Service Access Microservice Documentation
+Irwin Herridge <irwin.herridge@wonderlabz.com>
+1.0, November 13, 2021: Service Access Documentation
+:toc:
+:icons: font
+:url-quickref: https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/
+
+The intent for this readme is to provide technical knowledge of service access and the services that it provides to both internal and external platform consumers.
+
+---
+
+* Access control rules can be configured on LBO: Administration → Access Control Rulesets
+
+* Access Providers can be configured on LBO: Administration -> Domains -> View (Parent Domain) -> Providers -> Access
+
+---
+
+== System APIs
+
+The following system API's has been identified and should each also have their own corresponding aDoc that includes sequence diagrams in support of the API documentation.
+
+.System APIs
+[cols="5,2a"]
+|====
+|URI | Documentation
+
+| POST {gateway}/service-access/authorization/{domainName}/{accessRuleName}/checkAuthorization
+| link:check-authorization.adoc[Check authorization]
+
+|====
+
+== External APIs
+
+.External APIs
+[cols="5,2a"]
+|====
+| URI | Documentation
+
+| POST {gateway}/external/authorization/{domainName}/{accessRuleName}/check-authorization
+| link:check-external-validation.adoc[Check external validation]
+
+|====
+
+== Backoffice APIs
+
+.Backoffice APIs
+[cols="5,2a"]
+|====
+| URI | Documentation
+
+| POST {gateway}/service-access/authorization/{domainName}/{accessRuleName}/checkAuthorization
+| link:check-authorization.adoc[Test check authorization]
+
+|====
+
+* [ ] List all backoffice API's
+
+== Abbreviations
+
+
+.Table List of Abbreviations
+|===
+|Abbreviation | Meaning
+
+|ACL
+|Access Control List
+
+|ACR
+|Access Control Rule
+
+|===
+
+== Technical Debt
+
+The following table lists all URIs that are not conforming to standards and needs to be migrated at some stage.
+
+.Technical Debt APIs
+|====
+|As Is | To Be
+
+| {gateway}/service-access/authorization/{domainName}/{accessRuleName}/checkAuthorization
+| {gateway}/service-access/system/authorization/{domainName}/{accessRuleName}/check-authorization
+
+{gateway}/service-access/backoffice/authorization/{domainName}/{accessRuleName}/test-check-authorization
+
+| {gateway}/service-access/authorization/{domainName}/{accessRuleName}/isAccessRuleEnabled
+| {gateway}/service-access/system/authorization/{domainName}/{accessRuleName}/is-access-rule-enabled
+
+| {gateway}/service-access/accessrules/{domainName}/{accessRuleName}
+| {gateway}/service-access/system/access-rules/{domainName}/{accessRuleName}
+
+| {gateway}/service-access/accessrules/findByValue
+| {gateway}/service-access/system/access-rules/find-by-value
+
+| {gateway}/service-access/accessrules/addValueInListInRuleInDomain
+| {gateway}/service-access/system/access-rules/add-value-in-list
+
+| {lbo-gateway}/services/service-access/accessrules/findByDomain/{domainName}
+| {lbo-gateway}/services/service-access/backoffice/access-rules/find-by-domain/{domainName}
+
+| {lbo-gateway}/services/service-access/accessrules/findByValue
+| {lbo-gateway}/services/service-access/backoffice/access-rules/find-by-value
+
+| {lbo-gateway}/services/service-access/accessrules/addValueInListInRuleInDomain
+| {lbo-gateway}/services/service-access/access-rules/add-value-in-list
+|====
+
+* [ ] Create Technical Debt ticket to migrate endpoints

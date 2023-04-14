@@ -1,0 +1,49 @@
+<br/>
+<div class='card card-block'>
+  <div class='' style='margin-bottom: 10px;'>
+    <div class='col-xs-12'>
+      <div class='pull-right d-flex'>
+        <div id='vueMountCsvExport'></div>
+      </div>
+      <div class='flex-row pull-left'>
+        <button-clear ng-click='controller.resetFilter()'></button-clear>
+        <button-refresh ng-click='controller.refresh()'></button-refresh>
+        <button-filter ng-click='controller.applyFilter()'></button-filter>
+      </div>
+    </div>
+    <div uib-collapse='controller.legendCollapsed'>
+      <div class='row v-reset-row '>
+        <formly-form model='controller.model' fields='controller.fields' form='controller.form' options='controller.options'>
+        </formly-form>
+        <div class='col-md-3 col-xs-12'>
+          <label>{{'UI_NETWORK_ADMIN.SIGNUPEVENTS.FILTERS.USER.LABEL' | translate}}</label>
+          <div class='input-group'>
+            <input type='text'
+                   ng-model='controller.selectedUser'
+                   placeholder="{{'UI_NETWORK_ADMIN.SIGNUPEVENTS.FILTERS.USER.PLACEHOLDER' | translate}}"
+                   uib-typeahead='user.username for user in controller.searchUsers($viewValue)'
+                   typeahead-loading='loadingUserLocations'
+                   typeahead-no-results='noUserResults'
+                   typeahead-min-length='2'
+                   typeahead-show-hint='true'
+                   typeahead-wait-ms='500'
+                   typeahead-editable='false'
+                   typeahead-on-select='controller.selectedUser = $item;'
+                   class='form-control' />
+            <div class='input-group-btn'>
+              <button type='button' class='btn btn-default' ng-click='controller.resetUserSearch()'><i class='fa fa-remove'></i></button>
+            </div>
+          </div>
+          <div ng-show='loadingUserLocations' class='overlay'>
+            <i class='fa fa-refresh fa-spin'></i>
+          </div>
+          <div ng-show='noUserResults' class='form-group has-error'>
+            <span class='help-block'><i class='fa fa-remove'></i>&nbsp;{{'UI_NETWORK_ADMIN.SIGNUPEVENTS.FILTERS.USER.NO_RESULTS' | translate}}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <dt class='no-padding table-responsive' table='controller.thresholdHistoryTable' />
+  <div id='vueMountPlayerThresholdHistory'></div>
+</div>

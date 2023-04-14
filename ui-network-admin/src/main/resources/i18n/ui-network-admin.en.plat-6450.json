@@ -1,0 +1,8 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "PLAYER": {
+      "HAS_EVER_SELFEXCLUDED": "Yes",
+      "HAS_NEVER_SELFEXCLUDED": "No"
+    }
+  }
+}

@@ -1,0 +1,19 @@
+<div class="modal-header">
+	<h3 class="modal-title" id="modal-title">{{ 'UI_NETWORK_ADMIN.EXTEND_SESSION.TITLE' | translate }}</h3>
+</div>
+
+<div class="modal-body" id="modal-body" ng-init="controller.countdown()">
+	<div class="row v-reset-row ">
+		<div class="col-xs-12">
+			{{ 'UI_NETWORK_ADMIN.EXTEND_SESSION.EXPLAIN1' | translate }}
+			<h1 class="headline text-red" ng-bind="controller.timeout">&nbsp;</h1> {{ 'UI_NETWORK_ADMIN.EXTEND_SESSION.TIME_UNIT' | translate }}<br/>
+			<span ng-if="controller.canExtend">{{ 'UI_NETWORK_ADMIN.EXTEND_SESSION.EXPLAIN2' | translate }}</span>
+			<span ng-if="!controller.canExtend">{{ 'UI_NETWORK_ADMIN.EXPIRE_SESSION.EXPLAIN2' | translate }}</span>
+		</div>
+	</div>
+</div>
+
+<div class="modal-footer">
+	<button-custom btype="button" ng-if="controller.canExtend" ng-click="controller.extendSession()" bclass="default" icon="clock-o" text="GLOBAL.ACTION.EXTEND_SESSION"></button-custom>
+	<button-signout ng-click="controller.logout()"></button-signout>
+</div>

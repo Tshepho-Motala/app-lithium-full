@@ -1,0 +1,13 @@
+{
+  "UI_NETWORK_ADMIN" : {
+    "CMS" : {
+      "BANNER_SELECTION" : {
+        "UNPUBLISHED_LOBBY" : {
+          "WARNING_MESSAGE" : {
+            "TITLE" : "Please publish the lobby first before adding banners"
+          }
+        }
+      }
+    }
+  }
+}

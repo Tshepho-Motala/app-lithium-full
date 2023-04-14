@@ -1,0 +1,24 @@
+<div class="row v-reset-row ">
+    <div class="col-md-6">
+        <balance-limit domain="controller.userData.domain" balance-limits="controller.userData.balanceLimits" ng-model="controller.user"></balance-limit>
+        <realitycheck lit-if-permission="USER_REALITYCHECK_VIEW" lit-permission-domain="{{controller.user.domain.name}}" reality-check="controller.userData.realityCheck" ng-model="controller.user"></realitycheck>
+        <userlimits data="controller.userData.limits" ng-model="controller.user"></userlimits>
+        <selfexclusionv2 exclusion="controller.userData.selfExclusion" data="" ng-model="controller.user"></selfexclusionv2>
+        <cooloff cool-off="controller.userData.coolOff" ng-model="controller.user"></cooloff>
+    </div>
+    <div class="col-md-6">
+        <user-restrictions user-restrictions="controller.userData.userRestrictions" data="" ng-model="controller.user"></user-restrictions>
+        <userdepositlimits domain="controller.userData.domain" data="controller.userData.depositLimits" ng-model="controller.user"></userdepositlimits>
+        <timeframelimit lit-if-permission="PLAYER_TIME_SLOT_VIEW" domain="controller.userData.domain" data="controller.userData.depositLimits" ng-model="controller.user"></timeframelimit>
+        <cruks cool-off="controller.userData.coolOff" ng-model="controller.user" ng-if="controller.domainSettings['cruksId'] == 'show' ? true : false" lit-if-permission="CRUKS_VIEW" lit-permission-domain="{{controller.user.domain.name}}"></cruks>
+        <play-time-limits ng-if="controller.userData.domain.playtimeLimit" domain="controller.userData.domain" ng-model="controller.user"></play-time-limits>
+        <playerprotection ng-model="controller.user"></playerprotection>
+    </div>
+    <div class="col-xs-12">
+        <div class="box">
+            <div class="box-body no-padding table-responsive">
+                <dt table="controller.RealityCheckTable"/>
+            </div>
+        </div>
+    </div>
+</div>

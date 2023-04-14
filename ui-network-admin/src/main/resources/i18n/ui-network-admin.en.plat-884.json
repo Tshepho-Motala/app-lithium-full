@@ -1,0 +1,10 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "CSVEXPORT": {
+      "BUTTON" : {
+        "EXPORT": "Export",
+        "DOWNLOAD": "Download"
+      }
+    }
+  }
+}

@@ -1,0 +1,33 @@
+.iDin Integration via Sphonic Overview
+[plantuml]
+----
+@startuml
+'https://plantuml.com/sequence-diagram
+
+actor player
+boundary "Livescore App / GW" as lsa
+participant "svc-user" as su
+participant "svc-user-pr-sphonic-idin" as supsi
+participant "svc-access" as sa
+participant "svc-domain" as svcdomain
+participant "svc-changelog" as svcchangelog
+boundary "iDin Screens" as idin
+participant Sphonic as sphonic
+
+autonumber
+
+== STEP#2: Interacts with iDin / bank screens ==
+
+lsa->>idin: Sends player to verificationUrl
+activate idin
+    note right of idin
+        * Verification URL loads the iDin Screens for the user to interact with: the implementation of these screens are out of bounds to Lithium
+            * On completion of the iDin screens, Livescore App would redirect to the returnUrl which is based on the redirect URL on STEP#3 which includes a
+              uniquely identifier iDinApplicantHash to pull the players personal details into the registration screens
+    end note
+player-->idin: Interacts with iDin / bank screens
+idin->>lsa: on iDin screen flow end, redirects to returnUrl
+deactivate idin
+
+@enduml
+----

@@ -1,0 +1,15 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "MAIL": {
+      "TEMPLATES": {
+        "FIELDS": {
+          "USER_OPEN_STATUS_ONLY": {
+            "NAME": "Send only to OPEN accounts",
+            "DESCRIPTION": "Ability to skip individual transactional mails for accounts in status frozen or blocked"
+          }
+        }
+      }
+    }
+  }
+}
+

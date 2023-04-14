@@ -1,0 +1,166 @@
+{
+	"info": {
+		"_postman_id": "a08501b6-2514-4216-b23b-b427c668e8b3",
+		"name": "Gamstop",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "{{gateway}}/service-access-provider-gamstop/external/checkAuthorization",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJsYXN0TmFtZSI6IkR1Y2siLCJqd3RVc2VyIjoiSDRzSUFBQUFBQUFBQUdXUFRRK0NNQXlHLzRycEdSQ2s0T0Jrb2xlakIvVmlQSlJ0TEVTK3dwaUpJZngzeTgzb1llbVRKMi9YZG9JS2NwR0dIampJd1VXSndEUVVtRzB4Q3NHRGt1VzVjeU5qelhodzhzbW9HWHUyTzFXTlZGRFExL1MyVkdwTGdld2FEaWorTk9iU2N0Q1k1alhVa3RUaUxlVDNDZjcwSW83YTBJMmZYZTJwSlVYc2V3WDVPRGc5UHp3Z2pzUXlMREJCOUpPTnpIeFVDZnBaSEFrZnQ1a295cWlRS0RTM1diTnNmYnBlbU0zM3FQWFBmZk1IN3hVdUMvNEFBQUE9IiwidXNlcl9uYW1lIjoidTE1ODQ2MDg0OTc0MTAiLCJvcHRPdXRTbXMiOm51bGwsInNlc3Npb25JZCI6ODI4NCwidXNlckd1aWQiOiJnZ212cmxjYWQvdTE1ODQ2MDg0OTc0MTAiLCJ1c2VySWQiOjg2MCwiYXV0aG9yaXRpZXMiOlsiUk9MRV9VU0VSIl0sImNsaWVudF9pZCI6ImFjbWUiLCJmaXJzdE5hbWUiOiJQb3V0Iiwib3B0T3V0RW1haWwiOnRydWUsInNjb3BlIjpbIm9wZW5pZCJdLCJvcHRPdXRQdXNoIjpudWxsLCJleHAiOjE1OTYyMDc0NTQsInNob3J0R3VpZCI6IlBPVVQiLCJqdGkiOiJiZWFjYjU0NC05MDEyLTQ0MjUtOWZkOS00ODI1ZGJhYmI5ZDIiLCJlbWFpbCI6InBvdXRAZGl0YWJhLnBsYXlzYWZlc2EuY29tIiwidXNlcm5hbWUiOiJ1MTU4NDYwODQ5NzQxMCIsIm9wdE91dENhbGwiOm51bGx9.pr3ifRYJlJTp1Ep7TYB3y9Sr797fB0WFWYaQSMs3qvR7_UjLOnyiMtA_g9Y7MRfkoa6gXBprZkW-AX1JiN6JKtiST0dsIFza1qeXy6ddBnfAYCtSTs7zrPz4L6agEsRuCCCEMXoP8URP8g0OweKH3qmfL8oyxCTLtpPVhhrwIuzKkTxc_loTRiuDklwCqragOAcSJkwBebRjirWxZJWWm5AXCdcHl1a9PtbBtkTy7CoDnPRLnBY2HP9neflCZjRxkbg62vX-8zcU2K7jSaCMTM7W_z_3lCc1_GgGiI4q6KBfc1sj6v2hfUrQWRwKAiWEBslX1y5VQmeQ93JqVHDhVTKNFajFaSmn6d6cyAoDQaudtOxKvmZHSFMJqaqJl8bsfdAFlT5m7048vkWWFucgWegJ6OyiUBi-AS0D85u7I6MAjT2H65teJSji2X17-DwL_W4I9P6qrxQ9l_uzkaGduc7ng2r_b2Xf6kVj6NIvOMWGecY1oMHUZ5ynL4S8q_NwjXT2tNVJpcB_AgyYUixVIXCnrONkdrUaspy1kvH6BPxr5ZDzILccXAFnVy2xe01Wl30dK2l0D7ooD5oe0WimhRr3QzV4Mdctu82FJFyqorkr8j8ZoMOqm6TpxUgk4Sd3GgXFQKCdfWfyz_c9Y2gUZdh0eFdMNw9gts8FjHwh3Gw",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"domain\" : \"ggmvrlcad\",\n    \"userGuid\" : \"ggmvrlcad/U1584608497410\",\n    \"domainName\": \"ggmvrlcad\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{gateway}}/service-access-provider-gamstop/external/checkAuthorization",
+					"host": [
+						"{{gateway}}"
+					],
+					"path": [
+						"service-access-provider-gamstop",
+						"external",
+						"checkAuthorization"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://api.stage.gamstop.io/health",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "X-API-Key",
+						"value": " 4e7a6335-e7b78395e67e87220cc27086f63a38f5",
+						"type": "text"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://api.stage.gamstop.io/health",
+					"protocol": "https",
+					"host": [
+						"api",
+						"stage",
+						"gamstop",
+						"io"
+					],
+					"path": [
+						"health"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "https://api.stage.gamstop.io/v2",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {}
+			},
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "X-API-Key",
+						"value": " 4e7a6335-e7b78395e67e87220cc27086f63a38f5",
+						"type": "text"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "firstname",
+							"value": "Daniel",
+							"type": "text"
+						},
+						{
+							"key": "lastName",
+							"value": "Pasquier",
+							"type": "text"
+						},
+						{
+							"key": "dateOfBirth",
+							"value": "1945-05-29",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "umaury@blanc.org",
+							"type": "text"
+						},
+						{
+							"key": "postcode",
+							"value": "PE166RY",
+							"type": "text"
+						},
+						{
+							"key": "mobile",
+							"value": "07700900000",
+							"type": "text"
+						}
+					],
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://api.stage.gamstop.io/v2",
+					"protocol": "https",
+					"host": [
+						"api",
+						"stage",
+						"gamstop",
+						"io"
+					],
+					"path": [
+						"v2"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer"
+	},
+	"protocolProfileBehavior": {}
+}

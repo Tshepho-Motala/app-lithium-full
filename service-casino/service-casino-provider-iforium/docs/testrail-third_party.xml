@@ -1,0 +1,629 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<suite>
+    <id>S28480</id>
+    <name>iForium New Content Provider</name>
+    <description></description>
+    <sections>
+        <section>
+            <name>Feature</name>
+            <description></description>
+
+            <cases>
+
+                <case>
+                    <id>C47387500</id>
+                    <title>Game Ready</title>
+                    <template>Test Case</template>
+                    <type>Functionality</type>
+                    <priority>Select Priority</priority>
+                    <estimate></estimate>
+                    <references>OTPI-51</references>
+                    <custom>
+                        <isreviewed>
+                            <id>1</id>
+                            <value>No</value>
+                        </isreviewed>
+                        <isautomated>
+                            <id>1</id>
+                            <value>No</value>
+                        </isautomated>
+                        <automation_type>
+                            <id>0</id>
+                            <value>None</value>
+                        </automation_type>
+                        <preconds>1) Customer is registered on website.
+                            2) Wallet balance of CUR 100.00.
+                        </preconds>
+                        <steps>3) Find and launch game.</steps>
+                        <expected>- Loading phase should indicate progress.
+                            - Game may (if supported) ask player to choose their preferred sound option (on/off).
+                            - Loading phase should indicate when it is finished (i.e. 100%/progress bar).
+                            - Game may (if shown) display the player&apos;s balance.
+                            - Game should be in the ready state to accept bets.
+                        </expected>
+                    </custom>
+                </case>
+
+                <case>
+                    <id>C47387501</id>
+                    <title>Game Play (REAL Mode)</title>
+                    <template>Test Case</template>
+                    <type>Functionality</type>
+                    <priority>Select Priority</priority>
+                    <estimate></estimate>
+                    <references>OTPI-51</references>
+                    <custom>
+                        <isreviewed>
+                            <id>1</id>
+                            <value>No</value>
+                        </isreviewed>
+                        <isautomated>
+                            <id>1</id>
+                            <value>No</value>
+                        </isautomated>
+                        <automation_type>
+                            <id>0</id>
+                            <value>None</value>
+                        </automation_type>
+                        <preconds>[C1093972]</preconds>
+                        <steps>1) Choose bet configuration (line size, coin size, etc).
+                            2. Place the bet.
+                        </steps>
+                        <expected>- Bet should be accepted.
+                            - Bet result should be pending outcome (game starts animation/waiting on croupier/etc).
+                            - Game should (if shown) display the player&apos;s updated balance (prior to the bet
+                            result).
+                            - Player&apos;s updated balance should be displayed in Home/profile page (prior to the bet
+                            result).
+                            - Console should (if shown) display the player&apos;s updated balance (prior to the bet
+                            result).
+                            - Console controls should be disabled whilst the bet result is being determined.
+                            - Console controls should be re-enabled once the bet result is determined (any winnings
+                            declared).
+                            - Game should (if shown) display the player&apos;s updated balance once the bet result is
+                            determined (any winnings declared).
+                            - Player&apos;s updated balance should be displayed in Home/profile page once the bet result
+                            is determined (any winnings declared).
+                            - Console should (if shown) display the player&apos;s updated balance.
+                            - Game should be in the ready state to accept further bets.
+                        </expected>
+                    </custom>
+                </case>
+
+                <case>
+                    <id>C47387517</id>
+                    <title>Game Play Mode (if supported)</title>
+                    <template>Test Case</template>
+                    <type>Functionality</type>
+                    <priority>Select Priority</priority>
+                    <estimate></estimate>
+                    <references>OTPI-51</references>
+                    <custom>
+                        <isreviewed>
+                            <id>1</id>
+                            <value>No</value>
+                        </isreviewed>
+                        <isautomated>
+                            <id>1</id>
+                            <value>No</value>
+                        </isautomated>
+                        <automation_type>
+                            <id>0</id>
+                            <value>None</value>
+                        </automation_type>
+                        <preconds>[C1093972]</preconds>
+                        <steps>1) Press (if shown) switch play mode (Play for Fun/Play for Real button etc).</steps>
+                        <expected>1. Game should be reloaded (refer to expected results in [C1093972]) for the given
+                            play mode.
+                        </expected>
+                    </custom>
+                </case>
+
+                <case>
+                    <id>C47387502</id>
+                    <title>Game Help Section</title>
+                    <template>Test Case</template>
+                    <type>Functionality</type>
+                    <priority>Select Priority</priority>
+                    <estimate></estimate>
+                    <references>OTPI-51</references>
+                    <custom>
+                        <isreviewed>
+                            <id>1</id>
+                            <value>No</value>
+                        </isreviewed>
+                        <isautomated>
+                            <id>1</id>
+                            <value>No</value>
+                        </isautomated>
+                        <automation_type>
+                            <id>0</id>
+                            <value>None</value>
+                        </automation_type>
+                        <preconds>[C1093972]</preconds>
+                        <steps>1) Find and open game help section.
+                            2) Locate RTP (Return to Player) information.
+                        </steps>
+                        <expected>- Game should display Help Section.
+                            - RTP should be clearly displayed (&gt;= 94% is normal for 3rd party games; not a hard and
+                            fast rule).
+                        </expected>
+                    </custom>
+                </case>
+
+                <case>
+                    <id>C47387505</id>
+                    <title>Game Device Compatibility</title>
+                    <template>Test Case</template>
+                    <type>Functionality</type>
+                    <priority>Select Priority</priority>
+                    <estimate></estimate>
+                    <references>OTPI-51</references>
+                    <custom>
+                        <isreviewed>
+                            <id>1</id>
+                            <value>No</value>
+                        </isreviewed>
+                        <isautomated>
+                            <id>1</id>
+                            <value>No</value>
+                        </isautomated>
+                        <automation_type>
+                            <id>0</id>
+                            <value>None</value>
+                        </automation_type>
+                        <preconds>1) Confirmation of approved list of devices and version from the game provider.
+                            2) Get the Intersection from approved devices of Provider and Gamesys approved device
+                            list.(NB: The following table updated with the approved list)
+                            |||:Device | OS Version| Browser Version |
+                            || Samsung Tab | Android 4.4 | Chrome |
+                            || Samsung Galaxy S6 edge |Android 7.0 | Chrome |
+                            || Samsung Galaxy S5 | Android 7.0 | Chrome |
+                            ||iPad Air 2 | iOS v. 10.2.1 | Safari |
+                            ||iPhone 5 | iOS v. 10.2.1 | Safari |
+                            ||iPhone SE | iOS v. 11.0.3 | Safari |
+                            ||iPhone 6 | iOS v. 10.3.3 | Safari |
+                            ||iPhone 7+ | iOS v. 10.3.3 | Safari |
+
+
+                            2) Customer is registered on website.
+                            3) Wallet balance of CUR 100.00.
+                            4) Find and Launch the game.
+
+                        </preconds>
+                        <steps>For each device and browser:
+                            1) Rotate device from portrait to landscape.
+                            2) Rotate device from landscape to portrait.
+                            3) Switch task to any application.
+                            4) Switch back to game.
+                            5) Press Home key to return to home screen.
+                            6) Restore game window (via task manager).
+                            7) Press Power button to turn device to standby mode.
+                            8) Press Power button to turn device on.
+                            9) Interrupt game via call received.
+                            10) Disable data/wi-fi mode to simulate connection loss.
+                        </steps>
+                        <expected>for all the steps
+
+                            1) The game should load and fit in the screen correctly.
+                            2) Game UI controls should be displayed correctly.
+                            3) Balances should be displayed correctly.
+                            4) Home button or Profile button should display correct balance.
+                        </expected>
+                    </custom>
+                </case>
+
+                <case>
+                    <id>C47387508</id>
+                    <title>OrientationChange(resizeChange)</title>
+                    <template>Test Case</template>
+                    <type>Functionality</type>
+                    <priority>Select Priority</priority>
+                    <estimate></estimate>
+                    <references>OTPI-51</references>
+                    <custom>
+                        <isreviewed>
+                            <id>1</id>
+                            <value>No</value>
+                        </isreviewed>
+                        <isautomated>
+                            <id>1</id>
+                            <value>No</value>
+                        </isautomated>
+                        <automation_type>
+                            <id>0</id>
+                            <value>None</value>
+                        </automation_type>
+                        <preconds>Note : This test is valid where the game have a feature to play the game in both
+                            portrait and landscape modes on mobile (Ex : BP Game &quot;TED&quot; which has a bonus round
+                            which has to be played in portrait mode).
+
+                            1) Customer is registered on website.
+                            2) Wallet balance of CUR 100.00.
+                            3) Find and Launch the game.
+                        </preconds>
+                        <steps>1) Rotate device from portrait to landscape.
+                            2) Rotate device from landscape to portrait.
+                        </steps>
+                        <expected>1) The game should load and fit in the screen correctly.
+                            2) Game UI controls should be displayed correctly.
+                            3) Balances should be displayed correctly.
+                            4) Home button or Profile button should display correct balance.
+                        </expected>
+                    </custom>
+                </case>
+            </cases>
+        </section>
+        <section>
+            <name>Game Specific Feature</name>
+            <description></description>
+
+            <cases>
+
+                <case>
+                    <id>C47387504</id>
+                    <title>Game Feature JackPot (if exist)</title>
+                    <template>Test Case</template>
+                    <type>Functionality</type>
+                    <priority>Select Priority</priority>
+                    <estimate></estimate>
+                    <references>CRP-2373</references>
+                    <custom>
+                        <isreviewed>
+                            <id>1</id>
+                            <value>No</value>
+                        </isreviewed>
+                        <isautomated>
+                            <id>1</id>
+                            <value>No</value>
+                        </isautomated>
+                        <automation_type>
+                            <id>0</id>
+                            <value>None</value>
+                        </automation_type>
+                        <preconds>NB: This test is only for a game with a jackpot feature
+
+                            1) Customer is registered on website.
+                            2) Wallet balance of CUR 100.00.
+                        </preconds>
+                        <steps>1) Find and Launch the game.
+                            2) Place a bet with amount 10.00, a small amount of bet will be put into the Jackpot (Which
+                            is called Jackpot Accrual, would be able see the pot on the top(header) of the game).
+                            3) place the bets until you win the Jackpot.
+                        </steps>
+                        <expected>1) The Jackpot amount will be Awarded to the player (called as Jackpot Win).
+                            2) The balance in the game and at the profile should be updated with the Jackpot amount.
+                            3) Check splunk logs fro Jackpot Win information and Accrual
+                        </expected>
+                    </custom>
+                </case>
+
+                <case>
+                    <id>C47387514</id>
+                    <title>Game Feature (Bonus game, Free Spin, Gamble )</title>
+                    <template>Multi Step Test Case</template>
+                    <type>Functionality</type>
+                    <priority>Select Priority</priority>
+                    <estimate></estimate>
+                    <references></references>
+                    <custom>
+                        <isreviewed>
+                            <id>1</id>
+                            <value>No</value>
+                        </isreviewed>
+                        <isautomated>
+                            <id>1</id>
+                            <value>No</value>
+                        </isautomated>
+                        <automation_type>
+                            <id>0</id>
+                            <value>None</value>
+                        </automation_type>
+                    </custom>
+                </case>
+
+                <case>
+                    <id>C47387515</id>
+                    <title>Game Feature - Multi bet in the same round (if exist)</title>
+                    <template>Multi Step Test Case</template>
+                    <type>Functionality</type>
+                    <priority>Select Priority</priority>
+                    <estimate></estimate>
+                    <references></references>
+                    <custom>
+                        <isreviewed>
+                            <id>1</id>
+                            <value>No</value>
+                        </isreviewed>
+                        <isautomated>
+                            <id>1</id>
+                            <value>No</value>
+                        </isautomated>
+                        <automation_type>
+                            <id>0</id>
+                            <value>None</value>
+                        </automation_type>
+                    </custom>
+                </case>
+            </cases>
+        </section>
+        <section>
+            <name>Error handling</name>
+            <description></description>
+
+            <cases>
+
+                <case>
+                    <id>C47387503</id>
+                    <title>Game Disconnected</title>
+                    <template>Test Case</template>
+                    <type>Functionality</type>
+                    <priority>Select Priority</priority>
+                    <estimate></estimate>
+                    <references>OTPI-51</references>
+                    <custom>
+                        <isreviewed>
+                            <id>1</id>
+                            <value>No</value>
+                        </isreviewed>
+                        <isautomated>
+                            <id>1</id>
+                            <value>No</value>
+                        </isautomated>
+                        <automation_type>
+                            <id>0</id>
+                            <value>None</value>
+                        </automation_type>
+                        <preconds>[C1093972]</preconds>
+                        <steps>1) Find and Launch the Game
+                            2) Terminate internet connection
+                            3) Place a bet in the game
+                        </steps>
+                        <expected>Disconnected POPUP should be displayed on the game screen
+                            ![](index.php?/attachments/get/15390)
+                        </expected>
+                    </custom>
+                </case>
+
+                <case>
+                    <id>C47387506</id>
+                    <title>Deposit on Insufficient Funds</title>
+                    <template>Test Case</template>
+                    <type>Functionality</type>
+                    <priority>Select Priority</priority>
+                    <estimate></estimate>
+                    <references>OTPI-51</references>
+                    <custom>
+                        <isreviewed>
+                            <id>1</id>
+                            <value>No</value>
+                        </isreviewed>
+                        <isautomated>
+                            <id>1</id>
+                            <value>No</value>
+                        </isautomated>
+                        <automation_type>
+                            <id>0</id>
+                            <value>None</value>
+                        </automation_type>
+                        <preconds>[C1093972]</preconds>
+                        <steps>1) Find and Launch the game.
+                            2) Place a bet with an amount more than the account balance
+                            3) In Insufficient funds warning click Deposit
+                            4) Enter deposit details
+                            5) Submit deposit
+                        </steps>
+                        <expected>- Either deposit overlay or page should redirect back to game.
+                            - Game should be in ready state to accept further bets
+                            - Game (If shown) should display player&apos;s current balance
+                            - Console should display player&apos;s current balance
+                        </expected>
+                    </custom>
+                </case>
+
+                <case>
+                    <id>C47387507</id>
+                    <title>Re-login on Not Logged In</title>
+                    <template>Test Case</template>
+                    <type>Functionality</type>
+                    <priority>Select Priority</priority>
+                    <estimate></estimate>
+                    <references>OTPI-51</references>
+                    <custom>
+                        <isreviewed>
+                            <id>1</id>
+                            <value>No</value>
+                        </isreviewed>
+                        <isautomated>
+                            <id>1</id>
+                            <value>No</value>
+                        </isautomated>
+                        <automation_type>
+                            <id>0</id>
+                            <value>None</value>
+                        </automation_type>
+                        <preconds>1) Customer is registered on website.
+                            2) Wallet balance of CUR 100.00.
+                        </preconds>
+                        <steps>1) Find and Launch the game in a separate/new Tab.
+                            2) Logout of the website from the main page tab.
+                            3) Place a bet in the game.
+                            4) Click login button in NotLoggedIn warning
+                        </steps>
+                        <expected>- Should be redirected to login page.
+                            - Game should be in ready state to accept further bets once the player logged in again.
+                        </expected>
+                    </custom>
+                </case>
+
+                <case>
+                    <id>C47387516</id>
+                    <title>Daily/weekly /Monthly bet limit</title>
+                    <template>Multi Step Test Case</template>
+                    <type>Functionality</type>
+                    <priority>Select Priority</priority>
+                    <estimate></estimate>
+                    <references></references>
+                    <custom>
+                        <isreviewed>
+                            <id>1</id>
+                            <value>No</value>
+                        </isreviewed>
+                        <isautomated>
+                            <id>1</id>
+                            <value>No</value>
+                        </isautomated>
+                        <automation_type>
+                            <id>0</id>
+                            <value>None</value>
+                        </automation_type>
+                    </custom>
+                </case>
+            </cases>
+        </section>
+        <section>
+            <name>UK regulation</name>
+            <description></description>
+
+            <cases>
+
+                <case>
+                    <id>C47387509</id>
+                    <title>Verify UK Reality check Message</title>
+                    <template>Test Case</template>
+                    <type>Functionality</type>
+                    <priority>Select Priority</priority>
+                    <estimate></estimate>
+                    <references>OTPI-134</references>
+                    <custom>
+                        <isreviewed>
+                            <id>1</id>
+                            <value>No</value>
+                        </isreviewed>
+                        <isautomated>
+                            <id>1</id>
+                            <value>No</value>
+                        </isautomated>
+                        <automation_type>
+                            <id>0</id>
+                            <value>None</value>
+                        </automation_type>
+                        <preconds>1) Customer is registered on website (Starspins supports session limits).
+                            2) Wallet balance of CUR 100.00.
+                            3) Go to Account section.
+                            4) Find and locate Responsible Gaming page.
+                            5) Set session limit of 30/60/120 minutes (in test proposal there is 2 second setting).
+                            6) Find and launch game.
+                        </preconds>
+                        <steps>Play game in regular way. Repeat, if necessary, until you reach/nearing session limit.
+                        </steps>
+                        <expected>Should display Reality Check warning.
+                            The Game should be completed.
+                            After dismissing Reality Check warning:
+                            Game should be in the ready state to accept further bets.
+                            Console controls should be re-enabled.
+                        </expected>
+                    </custom>
+                </case>
+
+                <case>
+                    <id>C47387510</id>
+                    <title>Verify that NetPosition updated on successful processing of request</title>
+                    <template>Multi Step Test Case</template>
+                    <type>Functionality</type>
+                    <priority>Select Priority</priority>
+                    <estimate></estimate>
+                    <references></references>
+                    <custom>
+                        <isreviewed>
+                            <id>1</id>
+                            <value>No</value>
+                        </isreviewed>
+                        <isautomated>
+                            <id>1</id>
+                            <value>No</value>
+                        </isautomated>
+                        <automation_type>
+                            <id>0</id>
+                            <value>None</value>
+                        </automation_type>
+                    </custom>
+                </case>
+
+                <case>
+                    <id>C47387511</id>
+                    <title>Verify that Net position is defined as the total of all winnings minus the sum of all losses
+                        since the start of the session
+                    </title>
+                    <template>Multi Step Test Case</template>
+                    <type>Functionality</type>
+                    <priority>Select Priority</priority>
+                    <estimate></estimate>
+                    <references></references>
+                    <custom>
+                        <isreviewed>
+                            <id>1</id>
+                            <value>No</value>
+                        </isreviewed>
+                        <isautomated>
+                            <id>1</id>
+                            <value>No</value>
+                        </isautomated>
+                        <automation_type>
+                            <id>0</id>
+                            <value>None</value>
+                        </automation_type>
+                    </custom>
+                </case>
+
+                <case>
+                    <id>C47387512</id>
+                    <title>Verify that The elapsed time is displayed for the duration of the gaming session</title>
+                    <template>Multi Step Test Case</template>
+                    <type>Functionality</type>
+                    <priority>Select Priority</priority>
+                    <estimate></estimate>
+                    <references></references>
+                    <custom>
+                        <isreviewed>
+                            <id>1</id>
+                            <value>No</value>
+                        </isreviewed>
+                        <isautomated>
+                            <id>1</id>
+                            <value>No</value>
+                        </isautomated>
+                        <automation_type>
+                            <id>0</id>
+                            <value>None</value>
+                        </automation_type>
+                    </custom>
+                </case>
+
+                <case>
+                    <id>C47387513</id>
+                    <title>Verify that game display the time in</title>
+                    <template>Multi Step Test Case</template>
+                    <type>Functionality</type>
+                    <priority>Select Priority</priority>
+                    <estimate></estimate>
+                    <references></references>
+                    <custom>
+                        <isreviewed>
+                            <id>1</id>
+                            <value>No</value>
+                        </isreviewed>
+                        <isautomated>
+                            <id>1</id>
+                            <value>No</value>
+                        </isautomated>
+                        <automation_type>
+                            <id>0</id>
+                            <value>None</value>
+                        </automation_type>
+                    </custom>
+                </case>
+            </cases>
+        </section>
+    </sections>
+</suite>

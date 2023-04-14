@@ -1,0 +1,13 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "/system/casino/multi-bet/v1?locale=en_GB"
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "casino_multi_bet_v1.json",
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}

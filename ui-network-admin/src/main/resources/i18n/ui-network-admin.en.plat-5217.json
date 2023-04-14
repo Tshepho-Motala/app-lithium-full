@@ -1,0 +1,65 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "CASHIER_CONFIG": {
+      "DELETE": "Delete",
+      "OVERRIDE": "Override",
+      "SAVE_OVERRIDES": "Save Overrides",
+      "DEFAULT": "Default",
+      "SAVE": "Save",
+      "CLOSE": "Close",
+      "VIEW_CHANGE_HISTORY_PROCESSOR": "View the change history for this processor",
+      "CHANGELOG": "Changelog",
+      "CHANGE_HISTORY": "Change history",
+      "SUBMIT": "Submit",
+      "EVALUATED_PRIOR": "Evaluated prior to transaction attempt from user",
+      "EVALUATED_PRIOR_PROCESSOR": "Evaluated for processor display to user",
+      "FEES_CALC": {
+        "PERCENTAGE": "Percentage",
+        "FLAT_FEE": "Flat fee of",
+        "MIN_FEE": "Minimum fee",
+        "SPECIFIED": "specified",
+        "WILL_BE_DEDUCTED": "will be deducted",
+        "WILL_BE_ADDED": "will be added to the fees"
+      },
+      "NAME": "Name",
+      "METHOD": "Method",
+      "ADD": "Add",
+      "SELECT_FILTERS": "Select filters",
+      "OR": "OR",
+      "EXAMPLE_CASHIER": "Example cashier for",
+      "TYPE_DELETE": "Type DELETE here and click Delete button",
+      "MISSING_LIMITS": "Missing Limits",
+      "PROPERTIES": "Properties",
+      "COMMENT": "Comment added on ",
+      "CHANGELOGS": {
+        "BODY": {
+          "COPYBONUS": "Bonus copied ",
+          "MARKBONUSCURRENT": "Bonus marked as current ",
+          "MARKBONUSEDIT": "Bonus marked as edit ",
+          "CHANGEBONUSSTATUS": "Bonus status changed "
+        },
+        "CHANGE": {
+          "NOVALUE": " was changed",
+          "FROMTOVALUE": "changed from ",
+          "TOVALUE": " set to ",
+          "FROMVALUE": " was cleared. The old value was ",
+          "COPYBONUS_START": "Revision ",
+          "COPYBONUS_END": " was copied to ",
+          "MARKBONUSCURRENT": " has been marked as current version. (Previous current revision ",
+          "FIELD": "Field"
+        }
+      },
+      "LOADMORE": "Load more...",
+      "PROFILES": "Profiles",
+      "METHODS": "Methods",
+      "DEPOSIT_METHODS": "Deposit Methods",
+      "WITHDRAWAL_METHODS": "Withdrawal Methods",
+      "OVERRIDE_LIST": {
+        "DOMAIN": "Domain Limits (DL)",
+        "GLOBAL": "Global Player Limits (GPL) / Global Player Fees (GPF)",
+        "PROFILE": "Profile Limits (PL) / Profile Fees (PF)",
+        "USER": "Individual Player Limits (IPL) / Individual Player Fees (IPF)"
+      }
+    }
+  }
+}

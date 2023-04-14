@@ -1,0 +1,19 @@
+{
+  "SERVICE-CASHIER": {
+    "AUTOWITHDRAWALS": {
+      "RULESETS": {
+        "RULE": {
+          "FIELD": {
+            "PLAYER_TAGS": "Player Tags",
+            "FIRST_TIME_PAYMENT_METHOD_WITHDRAWAL": "First Time Payment Method Withdrawal",
+            "IS_VERIFIED_PAYMENT_METHOD": "Verified Payment Method",
+            "IS_CONTRA_ACCOUNT_PAYMENT_METHOD": "Contra Account Payment Method"
+          },
+          "OPERATOR": {
+            "NOT_IN": "Contains none of the following"
+          }
+        }
+      }
+    }
+  }
+}

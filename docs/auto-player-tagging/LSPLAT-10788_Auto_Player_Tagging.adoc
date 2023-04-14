@@ -1,0 +1,290 @@
+= Auto Tagging accounts by Affiliate Ref
+Riaan Schoeman <riaan.schoeman@wonderlabz.com>
+1.0, January 26, 2023: Auto Player Tagging
+:sectnums:
+:toc: left
+:toclevels: 4
+:toc-title: Auto Player Tagging
+:icons: font
+:url-quickref: https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/
+:table-caption!:
+
+:erd-include: ../includes/erd.puml
+:seq-include: ../includes/sequence.puml
+
+:svc-user-sourcedir: ../../service-user/service-user/src/main/java
+
+[IMPORTANT]
+====
+This TA is a first DRAFT and has not been completed.
+
+It was decided after a meeting
+with the product owner (Stefan), that we will implement a 'quick win' for Cheltenham 2023
+
+Current implementation injects the affiliateGuid label value as a user_category/tag on the player profile endpoint.
+====
+
+
+//This is done to keep formatting aligned with gitlab
+****
+[verse,,]
+____
+link:../../readme.adoc[Home]
+____
+****
+
+== Description
+=== Jira
+* link:https://playsafe.atlassian.net/browse/LSPLAT-10788[LSPLAT-10788]
+* link:https://livescoregroup.atlassian.net/browse/PLAT-11818[PLAT-11818]
+
+=== Gitlab
+* Branch: origin/architect/LSPLAT-10788_PLAT-11818_auto_tagging
+* MR: link:https://gitlab.com/playsafe/lithium/app-lithium-full/-/merge_requests/0000[]
+
+=== External Dependencies
+* TL to facilitate all relevant communication.
+
+==== Swagger (To be completed *before* development starts)
+* n/a
+
+==== DWH
+* Mapping table data needs to be communicated to DWH.
+
+==== Other
+* n/a
+
+=== Business
+
+==== Background
+
+We are looking to add an auto tagging feature to be used alongside promotions, so we can grant/deny access to promotions via the relevant tag.
+
+example:
+
+users that registers via LiveScore Media on convergence journey would have an affiliate ref attached to the acc, a tag that corresponds to the Affiliate Ref needs to be added automatically on registration.
+
+If this feature is added we can then grant access to promotions on the Promotions Page by tag allowing new users to claim relevant bonuses without any manual intervention.
+
+Approx 200 extra P2P’s over Cheltenham with average Value of £90 - 180K est. on UK alone
+
+== Architecture
+
+* The `affiliate%Guid` fields are used to pass in the relevant affiliate data.
+* Player Registration Example: (Note: Lines 23-26)
+** Request:
++
+[source,http,linenums,highlight=23-26]
+----
+POST /service-user/frontend/livescore_uk/register/v3 HTTP/1.1
+Host: localhost:9000
+Authorization: Basic YWNtZTphY21lc2VjcmV0
+Content-Type: application/json
+Content-Length: 550
+
+{
+  "username": "Kenyon81",
+  "password": "123123",
+  "email": "testKiera3@hotmail.com",
+  "firstName": "Andy",
+  "lastName": "Nienow",
+  "countryCode": "GB",
+  "dobYear": 1982,
+  "dobMonth": 6,
+  "dobDay": 16,
+  "domainName": "livescore_uk",
+  "emailOptOut": true,
+  "smsOptOut": true,
+  "callOptOut": true,
+  "pushOptOut": true,
+  "leaderboardOptOut": true,
+  "affiliateGuid": "c_announcement_banner_web_UKEO40WED_20230124_20230125",
+  "affiliateSecondaryGuid1": "B",
+  "affiliateSecondaryGuid2": "C",
+  "affiliateSecondaryGuid3": "D"
+}
+----
+
+* We need to create a mapping between this passed in data, which could have very long values, and the tags that we want to display for this affiliation.
+** i.e. c_announcement_banner_web_UKEO40WED_20230124_20230125 === AFF_TAG_1
+* Currently the affiliate data is stored in label values tables linked to user revisions. This needs to be changed.
+** Proposed Table Structure:
++
+.Affiliate Data
+["plantuml"]
+----
+include::../includes/erd.puml[]
+
+T(d, "domain\n (existing domain table)") {
+  pk(id) bigint(20) <<generated>>
+  --
+  nn(unique(name)): varchar(255)
+}
+
+T(u, "user\n (existing user table)") {
+  pk(id) bigint(20) <<generated>>
+  --
+  nn(unique(guid)): varchar(255)
+}
+
+T(uc, "user_category\n (existing user_category table)") {
+  pk(id) bigint(20) <<generated>>
+  --
+  nn(unique(name)): varchar(255)
+  fk(affiliate_id): bigint(20)
+}
+
+TN(ua, "user_affiliate\n Link between player and affiliate data") {
+  pk(id) bigint(20) <<generated>>
+  --
+  fk(user_id): bigint(20)
+  fk(affiliate_id): bigint(20)
+}
+
+TN(a, "affiliate\n Contains main affiliate guid, with \nlinks to secondary affiliate guid data") {
+  pk(id) bigint(20) <<generated>>
+  --
+  version: int(11)
+  nn(unique(guid)): varchar(255) {***A**}
+  fk(secondary_guid_1_id): bigint(20)
+  fk(secondary_guid_2_id): bigint(20)
+  fk(secondary_guid_3_id): bigint(20)
+  fk(domain_id): bigint(20)
+}
+note right of a
+    **A** - This will be the 'affiliateGuid'
+    passed in during registration
+end note
+
+TN(as, "affiliate_secondary\n Contains secondary affiliate data") {
+  pk(id) bigint(20) <<generated>>
+  --
+  version: int(11)
+  nn(unique(guid)): varchar(255) {***A**}
+  fk(primary_guid_id): bigint(20) {***B**}
+}
+note bottom of as
+  **A** - This will be the 'affiliateSecondaryGuid1
+    /affiliateSecondaryGuid2
+    /affiliateSecondaryGuid3'
+    passed in during registration
+  **B** - This is the link back to the 'affiliateGuid' record.
+end note
+
+a --{ as #line:red;line.bold;text:red : 1..3
+note right
+    Can only be linked to 3 secondary guids at most.
+    This is the B/C/D part of the btag
+end note
+a -- d : Linked to domain
+a -- ua #line:red;line.bold;text:red : Linking table for player to affiliate data
+ua -- u: *
+a -- uc
+
+skinparam frame {
+  FontSize 14
+  BorderColor #00008B
+  BackgroundColor #E0FFFF
+}
+
+frame Legend as l {
+    T(aa, "Existing Table Color") {
+        <color:green>unique</color>
+        <color:purple><i>foreign key</i></color>
+    }
+    TN(bb, "New Table Color") {
+        <color:green>unique</color>
+        <color:purple><i>foreign key</i></color>
+    }
+}
+----
++
+.Sample data:
+["plantuml"]
+----
+@startjson
+{
+  "affiliate": {
+    "id": 1,
+    "version": 0,
+    "guid": "c_announcement_banner_web_UKEO40WED_20230124_20230125",
+    "secondary_guid_1_id": null,
+    "secondary_guid_2_id": null,
+    "secondary_guid_3_id": null
+  },
+  "domain": {
+    "id": 1,
+    "name": "livescore_uk"
+  },
+  "user": {
+    "id": 1,
+    "guid": "livescore_uk/1234565"
+  },
+  "user_affiliate": {
+    "id": 1,
+    "user_id": 1,
+    "affiliate_id": 1
+  },
+  "user_category": {
+    "id": 1,
+    "name": "AFF_TAG_1",
+    "affiliate_id": 1
+  }
+}
+@endjson
+----
+
+* Registration as shown above, needs to be adapted to make use of the new table structure above.
+** Inside `lithium.service.user.services.SignupService.postRegisterPlayer`:
++
+[source,java]
+----
+affiliateService.registerAffiliatePlayer(pb, user);
+----
++
+linking to:
++
+[source,java]
+----
+lithium.service.user.services.AffiliateService.registerAffiliatePlayer
+----
++
+*** Affiliate data will not be saved using label values anymore.
+*** Will instead use table structure above.
+*** If the affiliate guid exists, and is linked to a tag, the player needs to be linked to this tag. (table: user_categories)
+
+* Speak to PO to find out if a migration job is required. (label values to new table structure)
+** There is alot of records on production:
++
+[source,sql]
+----
+select count(lv.value) as 'count', d.name as 'domain' from user_revision_label_value urlv
+left outer join label_value lv on urlv.label_value_id = lv.id
+    left outer join label l on lv.label_id = l.id
+left outer join user_revision ur on urlv.user_revision_id = ur.id
+left outer join user u on ur.user_id = u.id and ur.id = u.current_id
+    left outer join domain d on u.domain_id = d.id
+where l.name = 'affiliateGuid'
+group by d.name;
+----
++
+["plantuml"]
+----
+@startjson
+#highlight "Domain Counts" / "livescore_media"
+#highlight "Domain Counts" / "livescore_nl"
+{
+    "Domain Counts": {
+        "livescore_ie" : 23423,
+        "livescore_media": 310782,
+        "livescore_nigeria": 620591,
+        "livescore_nl": 24564,
+        "livescore_uk": 214212
+    }
+}
+@endjson
+----
+* Tags will need to be changed so that they can be linked to an affiliate tag.
+** Affiliate data will now be linked to a domain. (Do lookup for domain related affiliate data)
++
+image::assets/Screenshot1.png[LBO Add Tag]

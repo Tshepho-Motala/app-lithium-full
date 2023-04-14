@@ -1,0 +1,40 @@
+.Mass Action Grant Bonus
+[plantuml]
+----
+@startuml
+'https://plantuml.com/sequence-diagram
+
+participant  "svc-user-mass-action" as usermassaction
+participant "svc-casino" as casino
+
+alt Perform GRANT_BONUS action
+    usermassaction->usermassaction: handle bonus validations (setting grantBonus true/false)
+    note right of usermassaction
+        * massActionRegisterFor will be one of the bonuses that we have on our system
+        * if (fileData.getDataError() != null) { grantBonus = false; }
+        * If the above condition is met then we do bonus allocation
+    end note
+    alt grantBonus = true
+        usermassaction->casino:grantMassBonus {gateway}/service-casino/system/casino/bonus/mass-action-trigger
+        activate casino
+        alt success
+            casino-->usermassaction: Successful Response
+        else exception
+            casino-->usermassaction: Error Response
+            deactivate casino
+            usermassaction->usermassaction: create error_log record (fileData.id, action.id, errorCode, errorMessage)
+            note right of usermassaction
+                * When an error occurs on a action, then a record will be written to the error_log that provides
+                  reference back to the player and action being performed
+
+                ErrorCode:
+                * a unique it will be based on action being executed.
+                ErrorMessage
+                * a unique code that gets created per errorMessage
+            end note
+        end
+    end
+end
+
+@enduml
+----

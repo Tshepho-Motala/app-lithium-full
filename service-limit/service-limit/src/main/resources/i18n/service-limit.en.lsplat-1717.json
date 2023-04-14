@@ -1,0 +1,7 @@
+{
+  "ERROR_DICTIONARY": {
+    "MY_ACCOUNT": {
+      "TIME_SLOT_LIMIT_RANGE_VALIDATION": "From time must be less than To time"
+    }
+  }
+}

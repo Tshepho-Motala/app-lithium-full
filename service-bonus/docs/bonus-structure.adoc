@@ -1,0 +1,13 @@
+= Basic Bonus Structure
+Riaan Schoeman <riaan.schoeman@wonderlabz.com>
+1.0, November 17, 2021: Missions Framework
+:sectnums:
+:icons: font
+:url-quickref: https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/
+
+[sidebar]
+****
+link:readme.adoc[Home]
+****
+
+include::plantuml/basic-bonus-structure.puml[]

@@ -1,0 +1,151 @@
+<div class="tab-pane active" id="feesTab">
+	<div class="row v-reset-row ">
+		<div class="col-xs-12" ng-if="((controller.viewas === 'domain') && !dmp.fees) || ((controller.viewas === 'user') && !dmp.dmpu.fees) || ((controller.viewas === 'profile') && !dmp.dmpp.fees)">
+			<div class="card-danger-shadow">
+				<div class="card card-block">
+					<span class="description" align="center">
+						{{'UI_NETWORK_ADMIN.CASHIER.FEES_NOT_SET'| translate}}<hr/>
+						<button-override lit-if-permission="CASHIER_CONFIG,CASHIER_CONFIG_ADD,CASHIER_CONFIG_EDIT" ng-click="controller.override('fees', dmp, dm);"></button-override>
+					</span>
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-4">
+			<div class="form-group" ng-class="{'has-error': showError}">
+				<label for="dmp.processor.fees.flatDec" class="control-label" ng-if="((controller.viewas === 'domain') && dmp.fees) || ((controller.viewas === 'user') && dmp.dmpu.fees) || ((controller.viewas === 'profile') && dmp.dmpp.fees)">{{'UI_NETWORK_ADMIN.CASHIER.PROCESSORS.FIELDS.FEES.FLAT.NAME'| translate}}</label>
+				<div ng-if="dmp.dmpu.fees">
+					<span class="text-muted" ng-if="dmp.domainMethod.deposit" tooltip title="{{'UI_NETWORK_ADMIN.SERVICE_CASHIER.FEES.IPF.DESC_FLAT'| translate}}">{{'UI_NETWORK_ADMIN.SERVICE_CASHIER.FEES.IPF.TITLE'| translate}}:&nbsp;<i class="fa fa-question-circle" aria-hidden="true"></i></span>
+<!-- 					<span class="text-muted">{{'UI_NETWORK_ADMIN.SERVICE_CASHIER.FEES.IPF'|translate}}</span> -->
+					<input type="text" ng-change="controller.exampleFees(dmp)" ng-model="dmp.dmpu.fees.flatDec" class="form-control user"
+						ui-money-mask currency-symbol="{{controller.currencySymbol}}" ui-negative-number="" ng-if="controller.currencySymbol"
+						placeholder="{{'UI_NETWORK_ADMIN.CASHIER.PROCESSORS.FIELDS.FEES.FLAT.PLACEHOLDER'| translate}}">
+					<span class="description" ng-if="dmp.showHelp">{{'UI_NETWORK_ADMIN.SERVICE_CASHIER.FEES.IPF.DESC_FLAT'| translate}}</span>
+				</div>
+				<div ng-if="dmp.dmpp.fees">
+					<span class="text-muted" ng-if="dmp.domainMethod.deposit" tooltip title="{{'UI_NETWORK_ADMIN.SERVICE_CASHIER.FEES.PF.DESC_FLAT'| translate}}">{{'UI_NETWORK_ADMIN.SERVICE_CASHIER.FEES.PF.TITLE'| translate}}:&nbsp;<i class="fa fa-question-circle" aria-hidden="true"></i></span>
+<!-- 					<span class="text-muted">{{'UI_NETWORK_ADMIN.SERVICE_CASHIER.FEES.PF'|translate}}</span> -->
+					<input type="text" ng-change="controller.exampleFees(dmp)" ng-model="dmp.dmpp.fees.flatDec" class="form-control profile" ng-if="controller.currencySymbol"
+						ui-money-mask currency-symbol="{{controller.currencySymbol}}" ui-negative-number="" ng-readonly="controller.viewas === 'user'"
+						placeholder="{{'UI_NETWORK_ADMIN.CASHIER.PROCESSORS.FIELDS.FEES.FLAT.PLACEHOLDER'| translate}}">
+					<span class="description" ng-if="dmp.showHelp">{{'UI_NETWORK_ADMIN.SERVICE_CASHIER.FEES.PF.DESC_FLAT'| translate}}</span>
+				</div>
+				<div ng-if="dmp.fees">
+					<span class="text-muted" ng-if="dmp.domainMethod.deposit" tooltip title="{{'UI_NETWORK_ADMIN.SERVICE_CASHIER.FEES.GPF.DESC_FLAT'| translate}}">{{'UI_NETWORK_ADMIN.SERVICE_CASHIER.FEES.GPF.TITLE'| translate}}:&nbsp;<i class="fa fa-question-circle" aria-hidden="true"></i></span>
+<!-- 					<span class="text-muted">{{'UI_NETWORK_ADMIN.SERVICE_CASHIER.FEES.GPF'|translate}}</span> -->
+					<input type="text" ng-change="controller.exampleFees(dmp)" ng-model="dmp.fees.flatDec" class="form-control gpl" ng-if="controller.currencySymbol"
+						   ui-money-mask currency-symbol="{{controller.currencySymbol}}"  ui-negative-number="" ng-readonly="(controller.viewas === 'profile') || (controller.viewas === 'user')"
+						placeholder="{{'UI_NETWORK_ADMIN.CASHIER.PROCESSORS.FIELDS.FEES.FLAT.PLACEHOLDER'| translate}}">
+					<span class="description" ng-if="dmp.showHelp">{{'UI_NETWORK_ADMIN.SERVICE_CASHIER.FEES.GPF.DESC_FLAT'| translate}}</span>
+				</div>
+<!-- 				<div> -->
+<!-- 					<span class="text-muted">Global Processor Value:</span> -->
+<!-- 					<input type="text" ng-change="controller.exampleFees(dmp)" ng-model="dmp.processor.fees.flatDec" class="form-control" -->
+<!-- 						ui-money-mask="2" ui-negative-number="" readonly="readonly" -->
+<!-- 						placeholder="{{'UI_NETWORK_ADMIN.CASHIER.PROCESSORS.FIELDS.FEES.FLAT.PLACEHOLDER'| translate}}"> -->
+<!-- 				</div> -->
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-4">
+			<div class="form-group" ng-class="{'has-error': showError}">
+				<label for="dmp.processor.fees.percentage" class="control-label" ng-if="((controller.viewas === 'domain') && dmp.fees) || ((controller.viewas === 'user') && dmp.dmpu.fees) || ((controller.viewas === 'profile') && dmp.dmpp.fees)">{{'UI_NETWORK_ADMIN.CASHIER.PROCESSORS.FIELDS.FEES.PERCENTAGE.NAME'| translate}}</label>
+				<div ng-if="dmp.dmpu.fees">
+					<span class="text-muted" ng-if="dmp.domainMethod.deposit" tooltip title="{{'UI_NETWORK_ADMIN.SERVICE_CASHIER.FEES.IPF.DESC_PERC'| translate}}">{{'UI_NETWORK_ADMIN.SERVICE_CASHIER.FEES.IPF.TITLE'| translate}}:&nbsp;<i class="fa fa-question-circle" aria-hidden="true"></i></span>
+<!-- 					<span class="text-muted">{{'UI_NETWORK_ADMIN.SERVICE_CASHIER.FEES.IPF'|translate}}</span> -->
+					<input type="text" ng-change="controller.exampleFees(dmp)" ng-model="dmp.dmpu.fees.percentage" class="form-control user"
+						ui-percentage-mask ui-hide-group-sep ui-percentage-value
+						placeholder="{{'UI_NETWORK_ADMIN.CASHIER.PROCESSORS.FIELDS.FEES.PERCENTAGE.PLACEHOLDER'| translate}}">
+					<span class="description" ng-if="dmp.showHelp">{{'UI_NETWORK_ADMIN.SERVICE_CASHIER.FEES.IPF.DESC_PERC'| translate}}</span>
+				</div>
+				<div ng-if="dmp.dmpp.fees">
+					<span class="text-muted" ng-if="dmp.domainMethod.deposit" tooltip title="{{'UI_NETWORK_ADMIN.SERVICE_CASHIER.FEES.PF.DESC_PERC'| translate}}">{{'UI_NETWORK_ADMIN.SERVICE_CASHIER.FEES.PF.TITLE'| translate}}:&nbsp;<i class="fa fa-question-circle" aria-hidden="true"></i></span>
+<!-- 					<span class="text-muted">{{'UI_NETWORK_ADMIN.SERVICE_CASHIER.FEES.PF'|translate}}</span> -->
+					<input type="text" ng-change="controller.exampleFees(dmp)" ng-model="dmp.dmpp.fees.percentage" class="form-control profile"
+						ui-percentage-mask ui-hide-group-sep ui-percentage-value ng-readonly="controller.viewas === 'user'"
+						placeholder="{{'UI_NETWORK_ADMIN.CASHIER.PROCESSORS.FIELDS.FEES.PERCENTAGE.PLACEHOLDER'| translate}}">
+					<span class="description" ng-if="dmp.showHelp">{{'UI_NETWORK_ADMIN.SERVICE_CASHIER.FEES.PF.DESC_PERC'| translate}}</span>
+				</div>
+				<div ng-if="dmp.fees">
+					<span class="text-muted" ng-if="dmp.domainMethod.deposit" tooltip title="{{'UI_NETWORK_ADMIN.SERVICE_CASHIER.FEES.GPF.DESC_PERC'| translate}}">{{'UI_NETWORK_ADMIN.SERVICE_CASHIER.FEES.GPF.TITLE'| translate}}:&nbsp;<i class="fa fa-question-circle" aria-hidden="true"></i></span>
+<!-- 					<span class="text-muted">{{'UI_NETWORK_ADMIN.SERVICE_CASHIER.FEES.GPF'|translate}}</span> -->
+					<input type="text" ng-change="controller.exampleFees(dmp)" ng-model="dmp.fees.percentage" class="form-control gpl"
+						ui-percentage-mask ui-hide-group-sep ui-percentage-value ng-readonly="(controller.viewas === 'profile') || (controller.viewas === 'user')"
+						placeholder="{{'UI_NETWORK_ADMIN.CASHIER.PROCESSORS.FIELDS.FEES.PERCENTAGE.PLACEHOLDER'| translate}}">
+					<span class="description" ng-if="dmp.showHelp">{{'UI_NETWORK_ADMIN.SERVICE_CASHIER.FEES.GPF.DESC_PERC'| translate}}</span>
+				</div>
+<!-- 				<div> -->
+<!-- 					<span class="text-muted">Global Processor Value:</span> -->
+<!-- 					<input type="text" ng-change="controller.exampleFees(dmp)" ng-model="dmp.processor.fees.percentage" class="form-control" -->
+<!-- 						ui-percentage-mask ui-hide-group-sep ui-percentage-value readonly="readonly" -->
+<!-- 						placeholder="{{'UI_NETWORK_ADMIN.CASHIER.PROCESSORS.FIELDS.FEES.PERCENTAGE.PLACEHOLDER'| translate}}"> -->
+<!-- 				</div> -->
+			</div>
+		</div>
+		<div class="col-xs-12 col-md-4">
+			<div class="form-group" ng-class="{'has-error': showError}">
+				<label for="dmp.processor.fees.minimumDec" class="control-label" ng-if="((controller.viewas === 'domain') && dmp.fees) || ((controller.viewas === 'user') && dmp.dmpu.fees) || ((controller.viewas === 'profile') && dmp.dmpp.fees)">{{'UI_NETWORK_ADMIN.CASHIER.PROCESSORS.FIELDS.FEES.MINIMUM.NAME'| translate}}</label>
+				<div ng-if="dmp.dmpu.fees">
+					<span class="text-muted" ng-if="dmp.domainMethod.deposit" tooltip title="{{'UI_NETWORK_ADMIN.SERVICE_CASHIER.FEES.IPF.DESC_MIN'| translate}}">{{'UI_NETWORK_ADMIN.SERVICE_CASHIER.FEES.IPF.TITLE'| translate}}:&nbsp;<i class="fa fa-question-circle" aria-hidden="true"></i></span>
+<!-- 					<span class="text-muted">{{'UI_NETWORK_ADMIN.SERVICE_CASHIER.FEES.IPF'|translate}}</span> -->
+					<input type="text" ng-change="controller.exampleFees(dmp)" ng-model="dmp.dmpu.fees.minimumDec" class="form-control user"
+						ui-money-mask currency-symbol="{{controller.currencySymbol}}" ui-negative-number="" ng-if="controller.currencySymbol"
+						placeholder="{{'UI_NETWORK_ADMIN.CASHIER.PROCESSORS.FIELDS.FEES.MINIMUM.PLACEHOLDER'| translate}}">
+					<span class="description" ng-if="dmp.showHelp">{{'UI_NETWORK_ADMIN.SERVICE_CASHIER.FEES.IPF.DESC_MIN'| translate}}</span>
+				</div>
+				<div ng-if="dmp.dmpp.fees">
+					<span class="text-muted" ng-if="dmp.domainMethod.deposit" tooltip title="{{'UI_NETWORK_ADMIN.SERVICE_CASHIER.FEES.PF.DESC_MIN'| translate}}">{{'UI_NETWORK_ADMIN.SERVICE_CASHIER.FEES.PF.TITLE'| translate}}:&nbsp;<i class="fa fa-question-circle" aria-hidden="true"></i></span>
+<!-- 					<span class="text-muted">{{'UI_NETWORK_ADMIN.SERVICE_CASHIER.FEES.PF'|translate}}</span> -->
+					<input type="text" ng-change="controller.exampleFees(dmp)" ng-model="dmp.dmpp.fees.minimumDec" class="form-control profile" ng-if="controller.currencySymbol"
+						ui-money-mask currency-symbol="{{controller.currencySymbol}}" ui-negative-number="" ng-readonly="controller.viewas === 'user'"
+						placeholder="{{'UI_NETWORK_ADMIN.CASHIER.PROCESSORS.FIELDS.FEES.MINIMUM.PLACEHOLDER'| translate}}">
+					<span class="description" ng-if="dmp.showHelp">{{'UI_NETWORK_ADMIN.SERVICE_CASHIER.FEES.PF.DESC_MIN'| translate}}</span>
+				</div>
+				<div ng-if="dmp.fees">
+					<span class="text-muted" ng-if="dmp.domainMethod.deposit" tooltip title="{{'UI_NETWORK_ADMIN.SERVICE_CASHIER.FEES.GPF.DESC_MIN'| translate}}">{{'UI_NETWORK_ADMIN.SERVICE_CASHIER.FEES.GPF.TITLE'| translate}}:&nbsp;<i class="fa fa-question-circle" aria-hidden="true"></i></span>
+<!-- 					<span class="text-muted">{{'UI_NETWORK_ADMIN.SERVICE_CASHIER.FEES.GPF'|translate}}</span> -->
+					<input type="text" ng-change="controller.exampleFees(dmp)" ng-model="dmp.fees.minimumDec" class="form-control gpl" ng-if="controller.currencySymbol"
+						ui-money-mask currency-symbol="{{controller.currencySymbol}}" ui-negative-number="" ng-readonly="(controller.viewas === 'profile') || (controller.viewas === 'user')"
+						placeholder="{{'UI_NETWORK_ADMIN.CASHIER.PROCESSORS.FIELDS.FEES.MINIMUM.PLACEHOLDER'| translate}}">
+					<span class="description" ng-if="dmp.showHelp">{{'UI_NETWORK_ADMIN.SERVICE_CASHIER.FEES.GPF.DESC_MIN'| translate}}</span>
+				</div>
+<!-- 				<div> -->
+<!-- 					<span class="text-muted">Global Processor Value:</span> -->
+<!-- 					<input type="text" ng-change="controller.exampleFees(dmp)" ng-model="dmp.processor.fees.minimumDec" class="form-control" -->
+<!-- 						ui-money-mask="2" ui-negative-number="" readonly="readonly" -->
+<!-- 						placeholder="{{'UI_NETWORK_ADMIN.CASHIER.PROCESSORS.FIELDS.FEES.MINIMUM.PLACEHOLDER'| translate}}"> -->
+<!-- 				</div> -->
+			</div>
+		</div>
+		<div class="col-xs-12" ng-if="((controller.viewas === 'domain') && dmp.fees) || ((controller.viewas === 'user') && dmp.dmpu.fees) || ((controller.viewas === 'profile') && dmp.dmpp.fees)">
+			<label for="feesExample" class="control-label">
+				{{"UI_NETWORK_ADMIN.SERVICE_CASHIER.FEES.EXAMPLE.TITLE" | translate}}
+				<span class="description">{{'UI_NETWORK_ADMIN.SERVICE_CASHIER.FEES.EXAMPLE.START' | translate: {player_amount:150} }}</span>
+			</label>
+			<div id="feesExample" class="well">
+				<div ng-if="dmp.fe.perc">{{'UI_NETWORK_ADMIN.SERVICE_CASHIER.FEES.EXAMPLE.PERC' | translate: {percentage: dmp.fe.perc, percentage_amount: dmp.fe.perc_amount } }}</div>
+				<div ng-if="dmp.fe.flatDec">{{'UI_NETWORK_ADMIN.SERVICE_CASHIER.FEES.EXAMPLE.FLAT' | translate: {flat: dmp.fe.flatDec } }}</div>
+				<div ng-if="dmp.fe.minimumDec">{{'UI_NETWORK_ADMIN.SERVICE_CASHIER.FEES.EXAMPLE.MIN' | translate: {min: dmp.fe.minimumDec } }}</div>
+				<div ng-if="dmp.fe.perc || dmp.fe.flatDec || dmp.fe.minimumDec">
+					<div ng-if="(dmp.fe.minimumDec >= dmp.fe.fee_amount)">{{'UI_NETWORK_ADMIN.SERVICE_CASHIER.FEES.EXAMPLE.MIN_MORE' | translate }}</div>
+					<div ng-if="(dmp.fe.minimumDec < dmp.fe.fee_amount)">{{'UI_NETWORK_ADMIN.SERVICE_CASHIER.FEES.EXAMPLE.MIN_LESS' | translate: {fee_amount: dmp.fe.fee_amount } }}</div>
+					<div>{{'UI_NETWORK_ADMIN.SERVICE_CASHIER.FEES.EXAMPLE.TOTAL' | translate: {total_amount: dmp.fe.total_amount } }}</div>
+				</div>
+				<div ng-if="!dmp.fe.perc && !dmp.fe.flatDec && !dmp.fe.minimumDec">{{'UI_NETWORK_ADMIN.SERVICE_CASHIER.FEES.EXAMPLE.NO_FEES' | translate: {player_amount:150 } }}</div>
+			</div>
+		</div>
+
+		<div class="col-xs-12" ng-if="((controller.viewas === 'domain') && !dmp.domainMethod.deposit) || ((controller.viewas === 'user') && dmp.dmpu.fees) || ((controller.viewas === 'profile') && dmp.dmpp.fees)">
+			<label class="control-label">{{'UI_NETWORK_ADMIN.SERVICE_CASHIER.FEES.PROCESSOR_COMM_STRAT' | translate }}</label>
+		</div>
+		<div class="col-xs-12" ng-if="((controller.viewas === 'domain') && dmp.fees  && !dmp.domainMethod.deposit) || ((controller.viewas === 'user') && dmp.dmpu.fees) || ((controller.viewas === 'profile') && dmp.dmpp.fees)">
+			<select class="ui-select-container ui-select-bootstrap dropdown" ng-model="dmp.fees.strategy" ng-if="dmp">
+				<option value="1" ng-selected="dmp.fees.strategy == 1">{{'UI_NETWORK_ADMIN.SERVICE_CASHIER.FEES.CHARGE_OPTION_1' | translate }}</option>
+				<option value="2" ng-selected="dmp.fees.strategy == 2">{{'UI_NETWORK_ADMIN.SERVICE_CASHIER.FEES.CHARGE_OPTION_2' | translate }}</option>
+			</select>
+			<div class="row v-reset-row "><br></div>
+			<div id="feeDeductionStrategy" class="well">
+				<div ng-if="dmp.fees.strategy == 1">{{'UI_NETWORK_ADMIN.SERVICE_CASHIER.FEES.CHARGE_OPTION_1_HELP_MESSAGE' | translate}}</div>
+				<div ng-if="dmp.fees.strategy == 2">{{'UI_NETWORK_ADMIN.SERVICE_CASHIER.FEES.CHARGE_OPTION_2_HELP_MESSAGE' | translate}}</div>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,16 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "USER": {
+      "FIELDS": {
+        "LAST_NAME_PREFIX": {
+          "PATTERN": "Your Last Name Prefix may not contain any numbers / special characters."
+        },
+        "VERIFICATIONSTATUS": {
+          "CODES": {
+            "TEMPORARY_ID": "Temporary ID"
+          }
+        }
+      }
+    }
+  }
+}

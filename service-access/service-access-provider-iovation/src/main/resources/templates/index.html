@@ -1,0 +1,54 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Include Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous" />
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
+          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous" />
+
+    <!-- Script containing config required by iovation -->
+    <script type="text/javascript">
+        window.io_global_object_name = "MAGIC";
+        window.MAGIC = window.MAGIC || {
+            "enable_flash" : false,
+            "bbout_element_id" : "blackboxformfield",
+            "bb_callback": function ( bb, complete ) {
+                                var bb_field = document.getElementById( "blackboxcallbackelement" );
+                                bb_field.value = bb;
+                            } ,
+            "loader" : {
+                "uri_hook" : "iojs",
+                "version" : "general5",
+                "subkey" : "5FExse+oA1134BhiwCF2EeQ1TfisPJGha4CpVG2nd7E="
+            }
+        };
+    </script>
+
+    <!-- Custom script to emulate iovation behaviour in getting a blackbox -->
+    <script src="blackbox.js"></script>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row"><strong>Mypage</strong></div>
+    <div class="row">
+        <!-- Injection into field using element id -->
+        <input type="text" id="blackboxformfield" value="undefined"/>
+    </div>
+    <div class="row">
+        <!-- Callback method populating element with blackbox value -->
+        <input type="text" id="blackboxcallbackelement" value="undefined"/>
+    </div>
+    <div class="row">
+        <!-- call to method for explicit bb retrieval -->
+        <button onclick="getBlackbox()" name="mybutton" value="mybutton">button is here</button>
+    </div>
+
+</div>
+</body>
+</html>

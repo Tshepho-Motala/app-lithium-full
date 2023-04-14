@@ -1,0 +1,170 @@
+<div class="container-fluid">
+	<div class="box box-primary box-widget">
+		<div class="box-body box-profile">
+			<div class="user-block">
+				<h4 style="font-weight: bold;">
+					{{controller.model.edit.name}}
+				</h4>
+			</div>
+		</div>
+	</div>
+	
+	<form ng-submit="controller.onSubmit()" name="controller.form" novalidate>
+		<buttonbar>
+			<button-back ui-sref="dashboard.promotions.promotion.view({id: controller.model.id, missionRevisionId: controller.model.current.id})"></button-back>
+			<button-custom btype="submit" bclass="primary submit-button" icon="floppy-o" text="Commit all changes"></button-custom>
+			<button-custom btype="button" ng-click="controller.onContinue()" bclass="default" icon="clock-o" text="Continue later with this edit"></button-custom>
+		</buttonbar>
+		
+		<br/><br/>
+		
+		<div class="row v-reset-row ">
+			<div class="col-xs-7">
+				<div class="box box-primary">
+					<div class="box-header with-border">
+						<h3 class="box-title">{{'UI_NETWORK_ADMIN.MISSIONS.BOXES.MISSIONDETAILS'|translate}}</h3>
+					</div>
+					<div class="box-body">
+						<formly-form model="controller.model" fields="controller.fields" options="controller.options" form="controller.form">
+						</formly-form>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-5">
+				<div class="box box-primary">
+					<div class="box-header with-border">
+						<h3 class="box-title">{{'UI_NETWORK_ADMIN.MISSIONS.BOXES.MISSIONREWARD'|translate}}</h3>
+					</div>
+					<div class="box-body">
+						<formly-form model="controller.model" fields="controller.missionRewardFields" options="controller.options" form="controller.form">
+						</formly-form>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-xs-5">
+				<promotion-user-category promotion-revision="controller.model.edit" promotion-id="controller.model.id" allow-delete="true" allow-add="true" persist="true"/>
+			</div>
+		</div>
+		
+		<div class="row v-reset-row ">
+			<div class="col-xs-12">
+				<div class="box box-primary">
+					<div class="box-header with-border">
+						<h3 class="box-title">{{'UI_NETWORK_ADMIN.MISSIONS.BOXES.MISSIONCHALLENGES'|translate}}</h3>
+						<div class="box-tools pull-right">
+							<button type="button" class="btn btn-box-tool" ng-click="controller.addChallenge()">
+								<span><i class="fa fa-plus"></i>{{'GLOBAL.ACTION.ADD'|translate}}</span>
+							</button>
+						</div>
+					</div>
+					<div class="box-body">
+						<div class="col-xs-12">
+							<div ng-if="controller.model.edit.challenges.length === 0">
+								<div class="card-danger-shadow">
+									<div class="card card-block">
+										<span class="description" align="center">
+											{{'UI_NETWORK_ADMIN.MISSIONS.FIELDS.CHALLENGE.NOTSETUP'|translate}}
+										</span>
+									</div>
+								</div>
+								<br/>
+							</div>
+							
+							<div ui-tree ng-if="controller.model.edit.challenges.length > 0" data-max-depth="1">
+								<ol ui-tree-nodes ng-model="controller.model.edit.challenges" class="">
+									<li ui-tree-node ng-repeat="challenge in controller.model.edit.challenges" style="padding-bottom: 4px;">
+										<div class="row v-reset-row " style="margin-bottom: 5px;">
+											<div class="card card-block">
+												<div class="d-flex justify-content-start" ng-click="controller.collapseChallenge(challenge)">
+													<div class="p-2">
+														<i class="fa fa-chevron-up" ng-show="challenge.collapsed"></i>
+														<i class="fa fa-chevron-down" ng-show="!challenge.collapsed"></i>
+													</div>
+													<div class="divider"></div>
+													<div class="p-2">
+														<div class="user-block" >
+															<a ng-click="controller.openLightBox(challenge.iconUrl);$event.stopPropagation();">
+																<img ng-show="!challenge.iconUrl" class="img-circle img-bordered-sm" src="//:0" ng-src="{{challenge.iconUrl}}" alt="">
+															</a>
+														</div>
+													</div>
+													<div class="p-2">
+														<span class="badge-wrap card-success" ng-if="challenge.reward.bonusCode">{{'UI_NETWORK_ADMIN.MISSIONS.FIELDS.CHALLENGE.CHALLENGEREWARD.REWARDLABEL'|translate:{challengeReward: challenge.reward.bonusCode} }}</span>
+														<span class="badge-wrap card-danger" ng-if="!challenge.reward.bonusCode">{{'UI_NETWORK_ADMIN.MISSIONS.FIELDS.CHALLENGE.CHALLENGEREWARD.NOTSETUPLABEL'|translate}}</span>
+														<br/>
+														<span class="badge-wrap card-success" ng-if="challenge.rules && challenge.rules.length > 0">{{'UI_NETWORK_ADMIN.MISSIONS.FIELDS.CHALLENGE.CHALLENGERULES.RULESLABEL'|translate: {rules: challenge.rules.length} }}</span>
+														<span class="badge-wrap card-danger" ng-if="!challenge.rules || challenge.rules.length === 0">{{'UI_NETWORK_ADMIN.MISSIONS.FIELDS.CHALLENGE.CHALLENGERULES.NOTSETUPLABEL'|translate}}</span>
+													</div>
+													<div class="p-2">
+														<span class="description">
+															{{challenge.description}}
+														</span>
+													</div>
+													<div class="ml-auto p-2"></div>
+													<div class="p-2">
+														<span uib-dropdown keyboard-nav>
+															<div id="menu-dropdown" uib-dropdown-toggle ng-click="$event.stopPropagation();" class="dropdown-ellipsis-center">
+																<i class="fa fa-ellipsis-v menu-blue-grey"></i>
+															</div>
+															<ul class="dropdown-menu dropdown-menu-right" uib-dropdown-menu dropdown-menu-right aria-labelledby="menu-dropdown">
+																<li class="dropdown-item"><a href ng-click="controller.modifyChallenge(challenge); $event.stopPropagation();">{{'GLOBAL.ACTION.MODIFY'|translate}}</a></li>
+																<li class="dropdown-item"><a href ng-click="controller.removeChallenge(challenge); $event.stopPropagation();">{{'GLOBAL.ACTION.DELETE'|translate}}</a></li>
+<!--																<li class="dropdown-divider" ng-if="!challenge.rules || challenge.rules.length < 1">&nbsp;</li>-->
+<!--																<li class="dropdown-item" ng-if="!challenge.rules || challenge.rules.length < 1"><a href ng-click="controller.addChallengeRule(challenge); $event.stopPropagation();">{{'UI_NETWORK_ADMIN.MISSIONS.CHALLENGERULE.ADDRULE'|translate}}</a></li>-->
+																<li class="dropdown-divider">&nbsp;</li>
+																<li class="dropdown-item"><a href ng-click="controller.addChallengeRule(challenge); $event.stopPropagation();">{{'UI_NETWORK_ADMIN.MISSIONS.CHALLENGERULE.ADDRULE'|translate}}</a></li>
+															</ul>
+														</span>
+													</div>
+												</div>
+												<div uib-collapse="!challenge.collapsed" class="panel-collapse collapse">
+													<div class="card-content">
+														<hr/>
+														<div style="text-align: center;" class="card-outline-warning" ng-if="!challenge.rules || challenge.rules.length === 0">{{'UI_NETWORK_ADMIN.MISSIONS.FIELDS.CHALLENGE.CHALLENGERULES.NOTSETUP'|translate}}</div>
+														<div class="card card-block" style="margin-bottom: 5px;" ng-repeat="rule in challenge.rules">
+															<div class="d-flex justify-content-start">
+																<div class="ml-auto p-2"></div>
+																<div class="p-2">
+																	<span uib-dropdown keyboard-nav>
+																		<div id="menu-dropdown" uib-dropdown-toggle ng-click="$event.stopPropagation();" class="dropdown-ellipsis-center">
+																			<i class="fa fa-ellipsis-v menu-blue-grey"></i>
+																		</div>
+																		<ul class="dropdown-menu dropdown-menu-right" uib-dropdown-menu dropdown-menu-right aria-labelledby="menu-dropdown">
+																			<li class="dropdown-item"><a href ng-click="controller.modifyChallengeRule(challenge, rule); $event.stopPropagation();">{{'GLOBAL.ACTION.MODIFY'|translate}}</a></li>
+																			<li class="dropdown-item"><a href ng-click="controller.removeChallengeRule(challenge, rule); $event.stopPropagation();">{{'GLOBAL.ACTION.DELETE'|translate}}</a></li>
+																		</ul>
+																	</span>
+																</div>
+															</div>
+															<table class="table table-hover table-striped nowrap" cellspacing="0" width="100%">
+															<tbody>
+															<tr>
+																<th>{{'UI_NETWORK_ADMIN.MISSIONS.FIELDS.CHALLENGE.CHALLENGERULES.RULE.ACTION'|translate}}</th>
+																<td>{{rule.action}}</td>
+															</tr><tr>
+																<th>{{'UI_NETWORK_ADMIN.MISSIONS.FIELDS.CHALLENGE.CHALLENGERULES.RULE.VALUE'|translate}}</th>
+																<td>{{rule.value}}</td>
+															</tr><tr>
+																<th>{{'UI_NETWORK_ADMIN.MISSIONS.FIELDS.CHALLENGE.CHALLENGERULES.RULE.EXPLANATION'|translate}}</th>
+																<td><span class="label label-primary" style="font-size: 10pt;">{{controller.getChallengeRuleExplanation(rule.type, rule.action, rule.identifier, rule.value)|translate: { val: rule.value, gameName: controller.getGameName(rule.identifier) } }}</span></td>
+															</tr>
+															</tbody>
+															</table>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</li>
+								</ol>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+<!-- 		<pre>{{controller.model|json}}</pre> -->
+	</form>
+</div>

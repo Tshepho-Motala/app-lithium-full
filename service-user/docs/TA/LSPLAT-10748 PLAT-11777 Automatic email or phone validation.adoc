@@ -1,0 +1,419 @@
+= Automatic email or phone validation using IDIN response
+Steve Mak <steven.makunzva@wonderlabz.com>
+
+:sectnums:
+:toc: left
+:toclevels: 4
+:toc-title: Table of Contents
+:icons: font
+:url-quickref: https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/
+:table-caption!:
+
+== Description
+=== Jira
+* link:https://playsafe.atlassian.net/browse/LSPLAT-10748[LSPLAT-10748]
+* link:https://livescoregroup.atlassian.net/browse/PLAT-11777[PLAT-11777]
+
+=== Gitlab
+* Branch: origin/feature/LSPLAT-10748_iDin_auto_email_phone_validation
+* MR: link: [https://gitlab.com/playsafe/lithium/app-lithium-full/-/merge_requests/6350]
+
+=== External Dependencies
+==== Swagger
+IMPORTANT: To be completed *before* development starts
+
+TIP: TL to facilitate changes to GW/FE.
+
+The resume functionality will be controlled by the frontend when they receive a response from iDin step 1 they will store the iDinApplicantHash against the user session. If there is a request from the same player then they check if there is a stored  iDinApplicantHash. A request will be sent to stage 1 which includes the iDinApplicantHash and backend will return the response which was returned from the initial request and frontend will redirect the user to that link. If the user did not enter their details then they will be prompted to do so otherwise the link would highlight that they have already been verified and in that case a request to stage 2 is issued.
+
+=== Business
+Simplify the NL on-boarding journey by automatically comparing the email and phone for players signing up via iDin flow, and if the contact details match then validate the contact details. So that players can continue to login and upload their ID, instead of interrupting their first login and going to their email client for manual email validation via token. This flow will continue to function in case auto validation fails.
+
+Implement resume functionality so a player that abandons the iDin registration flow at any point will continue with the original verification URL and iDin applicant hash instead of creating a new incomplete user and verification URL. This will only be supported if done from the same device.
+
+Add logging on INFO to better understand where we are having drop-offs in the iDin registration flow.
+
+Acceptance criteria:
+
+* Players that registered through iDin will bypass the manual email and cellphone number validation, should the player register with the same email or cellphone number that was returned on the iDin stage 2 response.
+* Implement resume functionality to the iDin registration process when request is send through same device
+* Add logging INFO withing the iDin registration flow
+
+== Architecture
+
+.iDin Integration via Sphonic Overview
+[plantuml]
+----
+@startuml
+'https://plantuml.com/sequence-diagram
+
+actor player
+boundary "Livescore App / GW" as lsa
+participant "svc-user" as su
+participant "svc-user-pr-sphonic-idin" as supsi
+participant "svc-access" as sa
+participant "svc-domain" as svcdomain
+participant "svc-changelog" as svcchangelog
+boundary "iDin Screens" as idin
+participant Sphonic as sphonic
+
+autonumber
+
+== STEP#1: iDin START ==
+
+player-->lsa: Register using iDin
+activate lsa
+    alt Resume session
+        note right of lsa
+            * On LivescoreApp the iDinApplicantHash may be stored in session
+        end note
+        lsa->lsa: retrieve iDinApplicantHash from session
+        alt iDinApplicantHash found in session
+            lsa->lsa: resume
+                lsa->su: {{gateway}}/service-user/players/{domainName}/register/incomplete/v1?method=idin
+                note left of su
+                    PlayerBasic request body {
+                        "stage": "1",
+                        "additionalData": {
+                            "iDinReturnUrl": "http://returnURL"
+                            "iDinApplicantHash" : "39b6763cd1ae527f04965e647c04"
+                        }
+                    }
+                end note
+
+                activate su
+                    su->su: resolve idin registration provider (service-user-provider-sphonic-idin)
+                    su->su: buildUserDetailsRequest
+                    su->supsi: {{gateway}}/service-user-provider-sphonic-idin/system/external-register
+                    note left of supsi
+                        ExternalUserDetailsRequest {
+                            "stage": 1,
+                            "domainName": "livescore_nl",
+                            "playerBasic": {
+                                "additionalData": {
+                                    "iDinReturnUrl": "http://returnURL",
+                                    "playerIpAddress": "5.250.191.25",
+                                    "iDinApplicantHash" : "39b6763cd1ae527f04965e647c04"
+                                }
+                            }
+                        }
+                    end note
+                    activate supsi
+                        supsi->supsi: Validate iDinApplicantHash
+                        supsi->supsi: Fetch iDinVerificationUrl using iDinApplicantHash
+                        supsi->supsi: buildExternalUserDetailsResponse
+                        note left of supsi
+                            ExternalUserDetailsResponse {
+                                "stage": 1,
+                                "domainName": "livescore_nl",
+                                "outcome": "Success"
+                                "playerBasic": {
+                                    "additionalData"": {
+                                        "iDinApplicantHash": "39b6763cd1ae527f04965e647c04",
+                                        "iDinVerificationUrl": "https://test.vmb.fyi/s/BZYGCA"
+                                    }
+                                }
+                            }
+                        end note
+                        supsi-->su: Response ExternalUserDetailsResponse
+                        su -->su : Find or create incomplete_user using iDinApplicantHash
+                        su --> su : map incomplete_user to playerBasic
+                        su -> lsa : Response playerBasic
+                    deactivate supsi
+        end
+    end
+    lsa->su: {{gateway}}/service-user/players/{domainName}/register/incomplete/v1?method=idin
+    note left of su
+        PlayerBasic request body {
+            "stage": "1",
+            "additionalData": {
+                "iDinReturnUrl": "http://returnURL",
+                "iDinApplicantHash" : null
+            }
+        }
+    end note
+    alt method=idin, stage=1
+        activate su
+            su->su: resolve idin registration provider (service-user-provider-sphonic-idin)
+            su->su: buildUserDetailsRequest
+            su->supsi: {{gateway}}/service-user-provider-sphonic-idin/system/external-register
+            note left of supsi
+                ExternalUserDetailsRequest {
+                    "stage": 1,
+                    "domainName": "livescore_nl",
+                    "playerBasic": {
+                        "additionalData": {
+                            "iDinReturnUrl": "http://returnURL",
+                            "playerIpAddress": "5.250.191.25"
+                        }
+                    }
+                }
+            end note
+            activate supsi
+                supsi->supsi: Generates unique iDinApplicantHash
+                supsi->supsi: Creates a new idin_request
+                note right of supsi
+                    * ** requestId **: to be generated by Lithium
+                        * requestId is used by Sphonic as a correlation id between multiple requests
+
+                    * ** iDinApplicantHash **: will be generated by Lithium and needs to be unique
+                        * Each hash will be linked to an applicantId where the applicantId would simply be the id on idin_request table
+                        * The hash should be generated using the playerIpAddress and timestamp
+
+                    * ** returnUrl **:
+                        * Later in the flow as part of the iDin redirect back to returnUrl -> Livescore App would make use of the iDinApplicantHash
+                           to retrieve the applicant data and would populate the registration screens with the applicant data as needed.
+
+                    ** An incomplete user will be created and associated to the iDinApplicantHash and will also store the stage, createdDate and lastModifiedDate which may be used to see where players drops off in the process. **
+                end note
+                supsi -> sphonic: get access token
+                activate sphonic
+                    sphonic -->> supsi: accessToken
+                deactivate sphonic
+                supsi->sphonic: iDinStart Worflow request(requestId, applicationId, returnUrl)
+                note left of sphonic
+                    IDINStart Request: {
+                      "requestDetails": {
+                        "requestId": "{{lithiumRequestId}}",
+                        "requestDateTime": "2022-03-16T13:03:43"
+                      },
+                      "requestData": {
+                        "Applicant_Reference": "{{idinRequest.id}}",
+                        "Return_URL": "https://applicaton.livescore.net/holdingpage"
+                      }
+                    }
+                end note
+                activate sphonic
+                    note left of sphonic
+                        IDINStart Response: {
+                           "sphonicResponse": {
+                               "data": {
+                                   "responseDateTime": "2021-11-09T17:32:28Z",
+                                   "livescoreRequestId": "{{lithiumRequestId}}",
+                                   "livescoreAppliantId": "{{idinRequest.id}}",
+                                   "sphonicTransactionId": "56c14f84-bf73-4355-88ab-9d6985ebbd22",
+                                   "bluemTransactionId": "a117638133e7277",
+                                   "identURL": "https://test.vmb.fyi/s/BZYGCA"
+                               }
+                           }
+                       }
+                    end note
+                    sphonic-->supsi: iDinStart Worflow response(bluemTransactionId, verificationUrl=identURL)
+                deactivate sphonic
+                supsi->supsi: updates idin_request table with iDinStart response fields
+                note right of supsi
+                    * Adds bluemTransactionId and verificationUrl to idin_request table for later retrieval via the iDinApplicantHash that was used to create the idin_request record
+                end note
+                supsi->supsi: store iDinStart Worflow response as json string on new table on idin_response
+                supsi->supsi: buildExternalUserDetailsResponse
+                note left of supsi
+                    ExternalUserDetailsResponse {
+                        "stage": 1,
+                        "domainName": "livescore_nl",
+                        "outcome": "Success"
+                        "playerBasic": {
+                            "additionalData"": {
+                                "iDinApplicantHash": "averyuniquehash",
+                                "iDinVerificationUrl": "https://test.vmb.fyi/s/BZYGCA"
+                            }
+                        }
+                    }
+                end note
+                supsi-->su: Response ExternalUserDetailsResponse
+            deactivate supsi
+            su->su: creates new incomplete_user with iDinVerificationUrl and iDinApplicantHash stored as incomplete_user_label_value's
+            su->su: map userDetailsResponse.playerBasic to Incomplete register playerBasic request body
+        end
+        note left of su
+            * For method=idin, we will be removing the incomplete_user.id from the Incomplete User response since the iDinApplicantHash would need
+              to be used as a secure identifier when returning on stage 2 when continuing the iDin registration journey
+        end note
+        su-->lsa: Response Incomplete User
+    deactivate su
+    lsa->lsa: Adds iDinApplicantHash to session
+    note right of lsa
+        * iDin will be keeping state for up to 90 days after consent has been provided and therefore should the user have
+          completed the iDin external screen flows (STEP#2) but have not completed the registration flow (STEP#3), then the LivescoreApp may resume
+          at STEP#3 using the returnURL and iDinApplicantHash.
+        * Should the iDin outcome be Expired or Cancelled, then the iDinApplicantHash needs to be removed from the LivescoreApp session and have the process re-started from STEP#1
+
+        Outcomes from iDin:
+        * Expired
+          * Remove iDinApplicantHash from session on LivescoreApp and restart at STEP#1
+        * Cancelled
+          * Remove iDinApplicantHash from session on LivescoreApp and restart at STEP#1
+        * Success
+          * Need to re-join at STEP#3 by redirecting to returnURL using iDinApplicantHash that was stored in session
+        * Failure
+          * Remove iDinApplicantHash from session on LivescoreApp and restart at STEP#1
+    end note
+@enduml
+----
+
+
+.iDin Integration via Sphonic Overview
+[plantuml]
+----
+@startuml
+'https://plantuml.com/sequence-diagram
+
+actor player
+boundary "Livescore App / GW" as lsa
+participant "svc-user" as su
+participant "svc-user-pr-sphonic-idin" as supsi
+participant "svc-access" as sa
+participant "svc-domain" as svcdomain
+participant "svc-changelog" as svcchangelog
+participant "svc-kyc" as svckyc
+boundary "iDin Screens" as idin
+participant Sphonic as sphonic
+
+autonumber
+
+
+== STEP#4: continues with registration flow on Livescore App ==
+
+player->lsa: continues with registration flow
+
+lsa->sa: /service-access/external/authorization/livescore_nl/cruksAccessRule/check-authorization?locale=nl
+activate sa
+    sa-->lsa: Response ExternalValidationResponse
+deactivate sa
+note right of lsa: Should a valid CRUKS ID be returned on the ExternalValidationResponse, then the user would continue with the registration flow
+lsa->su: /service-user/frontend/livescore_nl/register/v4?locale=nl
+activate su
+    ... pre registration flow...
+    su -> su: check if incomplete user flow (contains valid applicantHash)
+    alt incomplete user found
+        group validate pre-registration steps compelete for configured provider
+          su -> svcdomain++: check if register provider was configured for incomplete user flows
+          svcdomain -->> su--: provider response
+          su -> supsi++: POST /system/validate-pre-registration
+          supsi --> supsi: validate if pre-registration conditions met
+          supsi --> su--: Response
+          alt conditions not met
+            su->lsa: Status463IncompleteUserRegistrationException
+          end
+        end
+        su->su: copy incomplete_user data to playerBasic
+    else incomplete user not found
+        su->lsa: Status463IncompleteUserRegistrationException
+    else incomplete_user.status != "Success"
+        su->lsa: Status463IncompleteUserRegistrationException
+    end
+    ... post registration flow ...
+    alt registered from an incomplete_user
+        su -> su: check if incomplete user flow (contains valid applicationHash)
+        su -> svcdomain++: check if register provider was configured for incomplete user flows
+        svcdomain -->> su--: provider response
+        alt iDin Incomplete User Flow
+          su -> supsi++: POST /{external-register-module-name}/system/do-post-registration-steps
+                          note left of supsi
+                            {
+                                "userId" : "23",
+                                "applicantGuid" : "livescore_nl/36464GF3645",
+                                "cellphoneNumber" : "363562625",
+                                "email" : "idin@livescore.com"
+                            }
+                          end note
+            supsi --> supsi: validate if pre-registration conditions met
+            alt pre-registration conditions met
+              alt user.address_verified = true, user.email_validated = true, user.cellphone_validated = true
+                supsi -> su++: POST /service-user/system/user/verify-contact-details where contactValidatedType=IDIN
+                note left of supsi
+                  {
+                    "userGuid": "domainName/id",
+                    "addressValidate" : {
+                        "addressValidated" : "true",
+                        "comment" : "Address has been verified by iDin"
+                    }
+                    "cellphoneNumberValidate" : {
+                        "cellphoneNumberValidated" : "true",
+                        "comment" : "Phone has been verified by iDin"
+                    },
+                    "emailValidate" : {
+                       "emailValidated" : "true",
+                       "comment" : "Email has been verified by iDin"
+                    }
+                    "contactVerifiedType": "IDIN",
+                    "category": "ACCOUNT",
+                    "subCategory": "IDIN_VERIFICATION"
+                  }
+                end note
+                su -> su: update lithium_user.user.address_verified = true
+                su -> su: update lithium_user.user.emailValidated = true
+                su -> su: update lithium_user.user.cellphoneNumberValidated = true
+                su -> su: Update changelogs with provided Category and SubCategory
+                su --> pubsub: Send ACCOUNT_UPDATE event to notify DWH that the address, email and cellphone number have been verified by iDin
+                su -->> supsi: Response 200
+              end
+              supsi ->> svckyc: POST /service-kyc/system/result/save
+              supsi ->> svcchangelog: create new iDIN changelog from stage 2 idin_response.raw_response_data
+            end
+          supsi -->> su--: Response
+        end
+        su->su: remove incomplete_user after success user registration (cleanup)
+        su->su: refresh user (addressVerified, emailValidated and cellphoneValidated might have been updated)
+    end
+    su-->lsa: Response User
+deactivate su
+
+deactivate lsa
+
+@enduml
+----
+
+In order to validate the email and phone number the following changes need to be performed.
+
+. The PostRegistrationSteps object will be modified to add 2 more fields that is `email` and `cellphoneNumber` which will be used for verification in the service-user-provider-sphonic-idin service.
+* *POST* `/service-user-provider-sphonic-idin/system/do-post-registration-steps`
+[source,json]
+----
+{
+    "userId" : 12,
+    "applicantGuid" : "livescore_nl/4747636RGHD7362F",
+    "email" : "idinverification@livescore.com",
+    "cellphoneNumber" : "43737373764"
+}
+
+----
+[start=2]
+. The ContactDetailsValidated object response will include address, email and cellphone number verification results.
+[source,json]
+----
+  {
+    "userGuid": "domainName/id",
+    "addressVerified" : {
+        "addressVerified" : "true",
+        "comment" : "Address has been verified by iDin"
+    },
+    "cellphoneNumberValidated" : {
+        "cellphoneNumberValidated" : "true",
+        "comment" : "Phone number has been verified by iDin"
+    },
+    "emailValidated" : {
+       "emailValidated" : "true",
+       "comment" : "Email has been verified by iDin"
+    },
+    "contactVerifiedType": "IDIN",
+    "category": "ACCOUNT",
+    "subCategory": "IDIN_VERIFICATION"
+  }
+
+----
+[start=3]
+. Add a new column `cellphone_number` to the `service-user-provider-sphonic-provider.user` table.
+. Add a new colum `email` to the `service-user-provider-sphonic-provider.user` table.
+. Add a new colum `email_validated` to the `service-user-provider-sphonic-provider.user` table.
+. Add a new colum `cellphone_validated` to the `service-user-provider-sphonic-provider.user` table.
+. Bypass the email token validation step on user `signup` process for users that got registered through iDin
+.. Move the post registration steps `IncompleteUserService#postRegistrationStepsIncompleteUser` for incomplete user to be executed before `EmailValidationService#sendEmailValidationTokenEmail`
+... If the contact details validation passed then the email validation will be skipped otherwise it will be executed and the user will perform the normal token validation
+
+
+
+
+
+
+
+

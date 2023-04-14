@@ -1,0 +1,31 @@
+<div class="container-fluid" bs-loading-overlay bs-loading-overlay-reference-id="{{controller.referenceId}}">
+	<div class="card card-block" style="margin-bottom: 10px;" ng-init="">
+		<div class="d-flex justify-content-start">
+			<div class="p-2 mr-auto" style="width: 50%;">
+				<span class="title">{{ 'UI_NETWORK_ADMIN.ACCESSCONTROL.LIST.TITLE' | translate }}</span>
+				<span class="description">{{ 'UI_NETWORK_ADMIN.ACCESSCONTROL.LIST.DESCRIPTION' | translate }}</span>
+			</div>
+			<div class="ml-auto p-2 text-right" style="width: 50%;">
+				<span ng-repeat="domain in controller.selectedDomains"><span style="padding:5px; margin-right: 3px;" class="label label-primary">&nbsp;{{ domain | uppercase }}&nbsp;</span></span>
+			</div>
+		</div>
+	</div>
+
+	<div class="row v-reset-row ">
+		<div class="col-xs-12 bottom-space-10">
+			<button-add ng-click="controller.addModal()" lit-if-permission="ACCESSCONTROL_ADD"></button-add>
+			<div class="pull-right">
+				<div  id="vueMountDomainSelect"></div>
+			</div>
+		</div>
+	</div>
+	<div class="row v-reset-row ">
+		<div class="col-xs-12">
+			<div class="box">
+				<div class="box-body no-padding table-responsive">
+					<dt table="controller.accessControlListTable"/>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

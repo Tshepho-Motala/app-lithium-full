@@ -1,0 +1,87 @@
+.External DWH Restrictions API
+[plantuml]
+----
+@startuml
+'https://plantuml.com/sequence-diagram
+
+actor DWH as dwh
+participant "SVC-LIMIT" as sl
+participant "CLIENT-SVC-USER" as csu
+
+||10||
+
+note over dwh, sl: ExternalDwhRestrictionController#set
+
+autonumber
+
+dwh -> sl: POST /external/restriction/v1/set
+    activate sl
+
+    ||10||
+
+    alt Invalid authorization identification
+        sl -> sl: validate hash (check if apiAuthorizationId secret key has been configured on application.yml)
+        sl --> dwh: Status401UnAuthorisedException
+
+        ||10||
+    else Could not calculate hash
+        sl -> sl: validate hash
+        sl --> dwh: Status500InternalServerErrorException
+
+        ||10||
+    else Hash received does not match expected hash
+        sl -> sl: validate hash (compares calculated hash and received hash)
+        sl --> dwh: Status470HashInvalidException
+
+        ||10||
+    end
+
+    ||10||
+
+    alt User Found
+        sl -> csu: find user by userGuid
+            activate csu
+
+            csu --> sl: return user object
+
+        deactivate csu
+
+        ||10||
+
+    else User Not Found
+
+        sl -> csu: find user by userGuid
+            activate csu
+
+            csu --> sl: UserNotFoundException
+
+        deactivate csu
+
+        sl --> dwh: Status404UserNotFoundException
+
+        ||10||
+
+    end
+
+    ||10||
+
+    deactivate csu
+
+    sl -> sl: find restriction set for restrictionId that was requested to be set on the player
+    sl -> sl: Find all restrictions that can be loaded on the domain the player exists on, that are enabled and has a dwhVisible = true
+
+    alt Restriction not found
+        sl -> sl: check if restrictionId to be loaded on player exist and has a dwhVisible = true and is enabled
+        sl --> dwh: Status404RestrictionNotFoundException
+
+        ||10||
+    else Restriction is found on domain and isDwhVisible and enabled
+        sl -> sl: place restriction
+
+        ||10||
+    end
+    sl --> dwh: return player restriction loaded
+deactivate sl
+
+@enduml
+----

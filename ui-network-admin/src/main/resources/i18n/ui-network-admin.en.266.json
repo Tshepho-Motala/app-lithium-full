@@ -1,0 +1,47 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "ACTIVE_BONUSES": {
+      "GLOBAL": {
+        "FIELDS": {
+          "CASINO_CHIPS": "Casino Chips"
+        }
+      }
+    },
+    "GAME": {
+      "FIELDS": {
+        "CASINO_CHIP_ENABLED": {
+          "NAME": "Casino Chip Enabled",
+          "DESCRIPTION": "Is this game enabled for Casino Chip Rewards"
+        }
+      }
+    },
+    "BONUS": {
+      "EDIT": {
+        "CASINOCHIPS": {
+          "ADDGAME": "Click on a game to add it.",
+          "AVAILABLEGAMES": "Available Games",
+          "SELECTPROVIDER": "Select game provider: ",
+          "SELECTPROVIDEROPTION": "--Please choose--"
+        },
+        "BUTTON": {
+          "CASINO_CHIP": "Casino Chips"
+        },
+        "CASINO_CHIP_PLATFORM": "Platform",
+        "CASINO_CHIP_PROVIDER": "Platform",
+        "CASINO_CHIPS": {
+          "CASINO_CHIP_GAMELIST": "Game List",
+          "CASINO_CHIP_VALUE": "Unit Value in cents",
+          "CASINO_CHIP_VALUE_EXAMPLE": "Description",
+          "CASINO_CHIP_VALUE_EXPLAIN": "The unit value in cents ie). 10 would mean the reward is worth 10 cents"
+        },
+        "TABS": {
+          "CASINO_CHIPS": "Casino Chips"
+        },
+        "CASINO_CHIPS": {
+          "NOGAMES": "You have not chosen a game to be associated with the Casino Chip Reward",
+          "NO_UNIT_VALUE": "You have not chosen the unit value to be associated with the Casino Chip Reward"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,99 @@
+{
+    "UI_NETWORK_ADMIN": {
+        "LIMITS": {
+            "SET": "Set",
+            "MODIFY": "Modify",
+            "NOTSET": "Not Set.",
+            "PLAYER": {
+                "REMOVE": {
+                    "SUCCESS": "Player limit removed"
+                },
+                "CHANGE": {
+                    "DAILYLOSS": "Change Daily Loss Limit",
+                    "MONTHLYLOSS": "Change Monthly Loss Limit",
+                    "SUCCESS": "Player limit changed",
+                    "ERROR": "Could not update player limit",
+                    "MAXLIMITLOWER": "The max limit is less than the amount you are trying to set"
+                },
+                "LOSSLIMITS": "Player Loss Limits",
+                "DAILYLOSSLIMIT": {
+                    "LABEL": "Daily Loss Limit",
+                    "DESCRIPTION": "Set the daily loss amount for the player"
+                },
+                "MONTHLYLOSSLIMIT": {
+                    "LABEL": "Monthly Loss Limit",
+                    "DESCRIPTION": "Set the monthly loss amount for the player"
+                }
+            },
+            "DOMAIN": {
+                "REMOVE": {
+                    "LIMIT": {
+                        "SUCCESS": "Domain limit removed"
+                    },
+                    "MAXLIMIT": {
+                        "SUCCESS": "Domain max limit removed"
+                    }
+                },
+                "CHANGE": {
+                    "LIMIT": {
+                        "DAILYLOSS": "Change Global Player Daily Loss Limit",
+                        "MONTHLYLOSS": "Change Global Player Monthly Loss Limit",
+                        "DAILYWIN": "Change Global Player Daily Win Limit",
+                        "MONTHLYWIN": "Change Global Player Monthly Win Limit",
+                        "SUCCESS": "Domain limit set",
+                        "ERROR": "Could not set domain limit",
+                        "MAXLIMITLOWER": "The max limit is less than the amount you are trying to set"
+                    }, 
+                    "MAXLIMIT": {
+                        "DAILYLOSS": "Change Global Player Max Daily Loss Limit",
+                        "MONTHLYLOSS": "Change Global Player Max Monthly Loss Limit",
+                        "DAILYWIN": "Change Global Player Max Daily Win Limit",
+                        "MONTHLYWIN": "Change Global Player Max Monthly Win Limit",
+                        "SUCCESS": "Domain max limit set",
+                        "ERROR": "Could not set max domain limit"
+                    }
+                },
+                "SANITIZE": {
+                    "LABEL": "Sanitize Limits",
+                    "SUCCESS": "Limits sanitized"
+                },
+                "MAXLOSSLIMITS": "Global Player Max Loss Limits",
+                "MAXDAILYLOSSLIMIT": {
+                    "LABEL": "Max Daily Loss Limit",
+                    "DESCRIPTION": "Set the maximum daily loss amount"
+                },
+                "MAXMONTHLYLOSSLIMIT": {
+                    "LABEL": "Max Monthly Loss Limit",
+                    "DESCRIPTION": "Set the maximum monthly loss amount"
+                },
+                "LOSSLIMITS": "Global Player Loss Limits",
+                "DAILYLOSSLIMIT": {
+                    "LABEL": "Daily Loss Limit",
+                    "DESCRIPTION": "Set the daily loss amount"
+                },
+                "MONTHLYLOSSLIMIT": {
+                    "LABEL": "Monthly Loss Limit",
+                    "DESCRIPTION": "Set the monthly loss amount"
+                },
+                "MAXWINLIMITS": "Global Player Max Win Limits",
+                "MAXDAILYWINLIMIT": {
+                    "LABEL": "Max Daily Win Limit",
+                    "DESCRIPTION": "Set the maximum daily win amount"
+                },
+                "MAXMONTHLYWINLIMIT": {
+                    "LABEL": "Max Monthly Loss Limit",
+                    "DESCRIPTION": "Set the maximum monthly win amount"
+                },
+                "WINLIMITS": "Global Player Win Limits",
+                "DAILYWINLIMIT": {
+                    "LABEL": "Daily Win Limit",
+                    "DESCRIPTION": "Set the daily win amount"
+                },
+                "MONTHLYWINLIMIT": {
+                    "LABEL": "Monthly Win Limit",
+                    "DESCRIPTION": "Set the monthly win amount"
+                }
+            }
+        }
+    }
+}

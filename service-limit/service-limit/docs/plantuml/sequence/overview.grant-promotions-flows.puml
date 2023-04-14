@@ -1,0 +1,44 @@
+.Overview Force Promotions Block
+[plantuml]
+
+----
+@startuml
+
+boundary "FE" as fe
+boundary "LBO" as lbo
+participant Lithium as li
+actor "DWH" as svc
+participant "External" as external
+
+autonumber
+
+alt Grant Promotion to Player Frontend
+    fe -> li: Grant promotion
+    activate fe
+    deactivate fe
+    activate li
+else Grant Promotions to Player from Backoffice
+    lbo -> li: Grant promotion
+    activate lbo
+    deactivate lbo
+else Grant Promotions to Player from System
+    li -> li: Grant promotion
+    activate li
+    deactivate li
+else Grant Promotions to Player from External
+    external -> li: Grant promotion
+    activate external
+    deactivate external
+end
+li -> li: checkAccess: Checks whether there are any RESTRICTION_COMPS restrictions loaded onto the player (Access.isCompsAllowed())
+alt compsAllow=true
+    ||10||
+    li -> li: Continue Grant promotions Flow
+else compsAllow=false
+    ||10||
+    note over li: Respond with an exception that the promotions has been blocked for this player and may not be granted any new promotions.
+end
+deactivate li
+
+@enduml
+----

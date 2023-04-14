@@ -1,0 +1,204 @@
+{
+	"UI_NETWORK_ADMIN": {
+		"MAIL": {
+			"DEFAULTTEMPLATES": {
+				"PLACEHOLDERS": {
+					"NAME": "Name",
+					"DESCRIPTION": "Description"
+				}
+			},
+			"HEADER": {
+				"TITLE": "Mail",
+				"DESCRIPTION": "Mail related settings"
+			},
+			"TAB": {
+				"TEMPLATES": "Templates",
+				"DEFAULTTEMPLATES": "Default Templates"
+			},
+			"TEMPLATES": {
+				"ADD": {
+					"TITLE": "Add Template"
+				},
+				"FIELDS": {
+					"NAME": {
+						"NAME": "Template Name",
+						"DESCRIPTION": "A descriptive name for this template that should be unique per language, per domain, and will be used when referring to templates."
+					},
+					"LANG": {
+						"NAME": "Language",
+						"DESCRIPTION": "The language of this template. You may create many versions of this template, one for each language."
+					},
+					"SUBJECT": {
+						"NAME": "Email Subject",
+						"DESCRIPTION": "The subject of the email. Keep it short and to the point, and stay away from all capitals or special characters."
+					},
+					"BODY": {
+						"NAME": "Email Body",
+						"DESCRIPTION": "The html body of the email. Feel free to make use of the template fields to enhance the personality of the email. Avoid using images to present text."
+					},
+					"ENABLED": {
+						"NAME": "Enabled",
+						"DESCRIPTION": "Enable or disable this email template"
+					}
+				},
+				"SUCCESS": {
+					"ADD": "Email template added successfully",
+					"SAVE": "Email template saved successfully"
+				},
+				"ERRORS": {
+					"ADD": "An error occurred while trying to add the email template. Please try again.",
+					"SAVE": "An error occurred while trying to save the email template. Please try again.",
+					"EDIT": "An error occurred while trying to edit the email template. Please try again."
+				}
+			}
+		},
+		"SMS": {
+			"DEFAULTTEMPLATES": {
+				"PLACEHOLDERS": {
+					"NAME": "Name",
+					"DESCRIPTION": "Description"
+				}
+			},
+			"HEADER": {
+				"TITLE": "SMS",
+				"DESCRIPTION": "SMS related settings"
+			},
+			"TAB": {
+				"PROVIDERS": "Providers",
+				"TEMPLATES": "Templates",
+				"DEFAULTTEMPLATES": "Default Templates"
+			},
+			"PROVIDERS": {
+				"ADD": {
+					"TITLE": "Add Provider",
+					"SUCCESS": "Provider Successfully Added",
+					"SUCCESSSHOWPROP": "Showing properties for provider just added, please check to make sure if you need to specify overrides or configure anything.",
+					"ERROR": "Could not add provider, please check the page for any possible missing fields/errors."
+				},
+				"EDIT": {
+					"TITLE": "Edit Provider",
+					"ORDERCHANGEDSUCCESS": "New Provider Display Order Saved Successfully.",
+					"ENABLED": "Provider Enabled Successfully.",
+					"DISABLED": "Provider Disabled Successfully.",
+					"SUCCESS": "Provider Changes Successfully Saved.",
+					"ERROR": "Could not modify provider group details, please check the page for any possible missing fields/errors.",
+					"ORDERCHANGED": "Display order has been modified, please remember to save the new order before proceeding. You can use the 'Save Order' button at the top of the page to save this new ordering."
+				},
+				"DELETE": {
+					"TITLE": "Delete Provider",
+					"WARNING": "Are you sure you want to delete this provider ?",
+					"WARNING2": "If you delete this provider it will not be available anymore. This change is permanent and cannot be undone!",
+					"CANCEL": "Provider delete was cancelled successfully",
+					"SUCCESS": "Provider Deleted Successfully!",
+					"ERROR": "Could not delete provider, please try again later, or contact support if problem persists."
+				},
+				"FIELDS": {
+					"DESCRIPTION": {
+						"NAME": "Description",
+						"DESCRIPTION": "E.g. My favourite provider of all time..",
+						"PLACEHOLDER": "Short description to remember this setup"
+					},
+					"PROVIDER": {
+						"NAME": "Provider",
+						"DESCRIPTION": "This is the provider to be associated with this provider group",
+						"PLACEHOLDER": "Select the provider"
+					}
+				},
+				"PROPERTIES": {
+					"TITLE": "Provider Properties",
+					"TABLE": {
+						"ID": "Id",
+						"NAME": "Name",
+						"VALUE": "Value",
+						"OVERRIDE": "Override",
+						"DESC": "Description"
+					},
+					"DELETESUCCESS": "Successfully Removed Property Override",
+					"SAVESUCCESS": "Successfully Saved Properties"
+				},
+				"EMPTY": "No providers setup yet. Use the add button at the top to add a provider."
+			},
+			"TEMPLATES": {
+				"ADD": {
+					"TITLE": "Add Template"
+				},
+				"FIELDS": {
+					"NAME": {
+						"NAME": "Template Name",
+						"DESCRIPTION": "A descriptive name for this template that should be unique per language, per domain, and will be used when referring to templates.",
+						"UNIQUE": "This template name for this domain with the selected language already exists"
+					},
+					"LANG": {
+						"NAME": "Language",
+						"DESCRIPTION": "The language of this template. You may create many versions of this template, one for each language."
+					},
+					"ENABLED": {
+						"NAME": "Enabled",
+						"DESCRIPTION": "Enable or disable this sms template"
+					},
+					"TEXT": {
+						"NAME": "Text",
+						"DESCRIPTION": "The text for this sms template"
+					},
+					"DESCRIPTION": {
+						"NAME": "Description",
+						"DESCRIPTION": "The purpose of this sms template"
+					}
+				},
+				"SUCCESS": {
+					"ADD": "SMS template added successfully",
+					"SAVE": "SMS template saved successfully"
+				},
+				"ERRORS": {
+					"ADD": "An error occurred while trying to add the sms template. Please try again.",
+					"SAVE": "An error occurred while trying to save the sms template. Please try again.",
+					"EDIT": "An error occurred while trying to edit the sms template. Please try again."
+				}
+			}
+		},
+		"EMAILTEMPLATE": {
+			"FIELDS": {
+				"NAME": {
+					"UNIQUE": "This template name for this domain with the selected language already exists"
+				}
+			}
+		},
+		"SMSQUEUE": {
+			"LIST": {
+				"TITLE": "SMS Queue",
+				"DESCRIPTION": "A list of sms's queued for your domains"
+			},
+			"VIEW": {
+				"TITLE": "SMS",
+				"DESCRIPTION": "Review the sms information"
+			},
+			"SMS": {
+				"BASICINFORMATION": "Basic Information",
+				"CREATEDDATE": "Created Date",
+				"FROM": "From",
+				"TO": "To",
+				"PROCESSINGINFORMATION": "Processing Information",
+				"CURRENTLYPROCESSING": "Currently Processing",
+				"PRIORITY": "Priority",
+				"SENT": "Sent",
+				"SENTDATE": "Sent Date",
+				"ERRORINFORMATION": "Error Information",
+				"ERRORCOUNT": "Error Count",
+				"LATESTERRORREASON": "Latest Error Reason",
+				"TEXT": "Text",
+				"USER": "User",
+				"USERINFO": {
+					"TITLE": "User Information",
+					"USER": "User",
+					"NAME": "Name",
+					"USERNAME": "Username"
+				}
+			}
+		},
+		"PLAYER": {
+			"TAB": {
+				"SMSHISTORY": "SMS History"
+			}
+		}
+	}
+}

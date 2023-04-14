@@ -1,0 +1,848 @@
+{
+	"info": {
+		"_postman_id": "b53a289a-47b6-406c-a914-62ddf2c6313d",
+		"name": "Lithium IncentiveGames API",
+		"description": "The following document describes the APIs that will allow Incentive Games to register transactions\nwithin Lithium.\n---\nSome requests require a sha256 checksum that accompanies the payload. To calculate the checksum, concatenate \nthe fields identified in the description of the respective sha256 field, using a colon as separator. \nThereafter pass it to your preferred hmac sha256 function together with the pre-shared key supplied by \nLithium. \n\nSee https://www.freeformatter.com/hmac-generator.html to test (ensure to select SHA256)\n\n    hmac_sha256(\"USERID:TRANSACTIONID:TRANSACTIONID:TRANSACTIONID\", PRESHAREDKEY\") = 54d7516fa4291efddbef355f9006583d67c76ebfce6bda9ae4532d1ca1cfa8c3\n    hmac_sha256(\"SETTLEMENTTRANSACTIONID19:BETTRANSACTIONID19\", \"PRESHAREDKEY\") = d7c382a8c59766e602e261438de9deeaf7cad09894a8cbc05d851196bc1b9bfe\n",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Validate",
+			"item": [
+				{
+					"name": "ValidateSession",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{USERTOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{gateway}}/service-casino-provider-incentive/validatesession",
+							"host": [
+								"{{gateway}}"
+							],
+							"path": [
+								"service-casino-provider-incentive",
+								"validatesession"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Validate a session token and obtain customer details.",
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Placement",
+			"item": [
+				{
+					"name": "Placement",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{USERTOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"userId\": \"INCENTIVEUSERID\",\n\t\"currencyCode\": \"NGN\",\n\t\"bets\": [\n\t\t{\n\t\t\t\"transactionTimestamp\": 1587691290000,\n\t\t\t\"betTransactionId\": \"BETTRANSACTIONID29\",\n\t\t\t\"totalOdds\": 2064818900556270,\n\t\t\t\"totalStake\": 100.50,\n\t\t\t\"maxPotentialWin\": 10000.00,\n\t\t\t\"events\": [\n\t\t\t\t{\n\t\t\t\t\t\"sportName\": \"Football\",\n\t\t\t\t\t\"sportCode\": \"FB\",\n\t\t\t\t\t\"competitionCode\": \"FB-GB-VEPL\",\n\t\t\t\t\t\"eventName\": \"Brighton v Spurs\",\n\t\t\t\t\t\"eventStartTime\": 1586886240000,\n\t\t\t\t\t\"marketCode\": \"1X2\",\n\t\t\t\t\t\"marketName\": \"Win/Draw/Win\",\n\t\t\t\t\t\"price\": 7.67,\n\t\t\t\t\t\"selectionId\": \"SELECTIONID8\",\n\t\t\t\t\t\"selectionCode\": \"DRAW\",\n\t\t\t\t\t\"selectionName\": \"Draw\"\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"sportName\": \"Football\",\n\t\t\t\t\t\"sportCode\": \"FB\",\n\t\t\t\t\t\"competitionCode\": \"FB-GB-VEPL\",\n\t\t\t\t\t\"eventName\": \"Brighton v Spurs v2\",\n\t\t\t\t\t\"eventStartTime\": 1586886240000,\n\t\t\t\t\t\"marketCode\": \"1X2\",\n\t\t\t\t\t\"marketName\": \"Win/Draw/Win\",\n\t\t\t\t\t\"price\": 7.67,\n\t\t\t\t\t\"selectionId\": \"SELECTIONID8\",\n\t\t\t\t\t\"selectionCode\": \"WIN\",\n\t\t\t\t\t\"selectionName\": \"Win\"\n\t\t\t\t}\n\t\t\t]\n\t\t}\n\t],\n\t\"extraData\": \"SOMETHING\",\n\t\"sha256\": \"80d5d283c8cf49333078fcfc7c4e172ab1c4246bc5b15f17eaedf3303d47f1dc\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{gateway}}/service-casino-provider-incentive/placement",
+							"host": [
+								"{{gateway}}"
+							],
+							"path": [
+								"service-casino-provider-incentive",
+								"placement"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Placement Without Competition",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{USERTOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"userId\": \"INCENTIVEUSERID\",\n\t\"currencyCode\": \"NGN\",\n\t\"bets\": [\n\t\t{\n\t\t\t\"transactionTimestamp\": 1587691290000,\n\t\t\t\"betTransactionId\": \"BETTRANSACTIONID25\",\n\t\t\t\"totalOdds\": 100.50,\n\t\t\t\"totalStake\": 100.50,\n\t\t\t\"maxPotentialWin\": 10000.00,\n\t\t\t\"events\": [\n\t\t\t\t{\n\t\t\t\t\t\"eventName\": \"Brighton v Spurs\",\n\t\t\t\t\t\"eventStartTime\": 1586886240000,\n\t\t\t\t\t\"marketCode\": \"1X2\",\n\t\t\t\t\t\"marketName\": \"Win/Draw/Win\",\n\t\t\t\t\t\"price\": 7.67,\n\t\t\t\t\t\"selectionId\": \"SELECTIONID8\",\n\t\t\t\t\t\"selectionCode\": \"DRAW\",\n\t\t\t\t\t\"selectionName\": \"Draw\"\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"eventName\": \"Brighton v Spurs v2\",\n\t\t\t\t\t\"eventStartTime\": 1586886240000,\n\t\t\t\t\t\"marketCode\": \"1X2\",\n\t\t\t\t\t\"marketName\": \"Win/Draw/Win\",\n\t\t\t\t\t\"price\": 7.67,\n\t\t\t\t\t\"selectionId\": \"SELECTIONID8\",\n\t\t\t\t\t\"selectionCode\": \"WIN\",\n\t\t\t\t\t\"selectionName\": \"Win\"\n\t\t\t\t}\n\t\t\t]\n\t\t}\n\t],\n\t\"extraData\": \"SOMETHING\",\n\t\"sha256\": \"785d0e29b48a9c553e96450fd96ddba2ef72f6a84634cf5373035e55151668e1\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{gateway}}/service-casino-provider-incentive/placement",
+							"host": [
+								"{{gateway}}"
+							],
+							"path": [
+								"service-casino-provider-incentive",
+								"placement"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Settlement",
+			"item": [
+				{
+					"name": "Settlement",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"settlementTransactionId\": \"SETTLEMENTTRANSACTIONID108\",\n\t\"betTransactionId\": \"BETTRANSACTIONID15\",\n\t\"result\": \"WIN\",\n\t\"returns\": 1000.99,\n    \"currencyCode\": \"NGN\",\n\t\"transactionTimestamp\": 1587691290000,\n\t\"selections\": [\n\t\t{\n\t\t\t\"selectionId\": \"SELECTIONID8\",\n\t\t\t\"result\": \"WIN\"\n\t\t},\n\t\t{\n\t\t\t\"selectionId\": \"SELECTIONID8\",\n\t\t\t\"result\": \"WIN\"\n\t\t}\n\t],\n\t\"sha256\": \"056e2c214246ec5a2d56533a1f18da986415161a0c72d4201bc84538f061d475\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{gateway}}/service-casino-provider-incentive/settlement",
+							"host": [
+								"{{gateway}}"
+							],
+							"path": [
+								"service-casino-provider-incentive",
+								"settlement"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Settlement Loss",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"settlementTransactionId\": \"SETTLEMENTTRANSACTIONID118\",\n\t\"betTransactionId\": \"BETTRANSACTIONID16\",\n\t\"result\": \"LOST\",\n\t\"returns\": 0,\n    \"currencyCode\": \"NGN\",\n\t\"transactionTimestamp\": 1587691290000,\n\t\"selections\": [\n\t\t{\n\t\t\t\"selectionId\": \"SELECTIONID8\",\n\t\t\t\"result\": \"WIN\"\n\t\t},\n\t\t{\n\t\t\t\"selectionId\": \"SELECTIONID8\",\n\t\t\t\"result\": \"WIN\"\n\t\t}\n\t],\n\t\"sha256\": \"056e2c214246ec5a2d56533a1f18da986415161a0c72d4201bc84538f061d475\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{gateway}}/service-casino-provider-incentive/settlement",
+							"host": [
+								"{{gateway}}"
+							],
+							"path": [
+								"service-casino-provider-incentive",
+								"settlement"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Settlement Void",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"settlementTransactionId\": \"SETTLEMENTTRANSACTIONID121\",\n\t\"betTransactionId\": \"BETTRANSACTIONID23\",\n\t\"result\": \"VOID\",\n\t\"returns\": 120.50,\n    \"currencyCode\": \"NGN\",\n\t\"transactionTimestamp\": 1587691290000,\n\t\"selections\": [\n\t\t{\n\t\t\t\"selectionId\": \"SELECTIONID8\",\n\t\t\t\"result\": \"WIN\"\n\t\t},\n\t\t{\n\t\t\t\"selectionId\": \"SELECTIONID8\",\n\t\t\t\"result\": \"WIN\"\n\t\t}\n\t],\n\t\"sha256\": \"056e2c214246ec5a2d56533a1f18da986415161a0c72d4201bc84538f061d475\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{gateway}}/service-casino-provider-incentive/settlement",
+							"host": [
+								"{{gateway}}"
+							],
+							"path": [
+								"service-casino-provider-incentive",
+								"settlement"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Pick5 / Pick6 / PickX Entry",
+			"item": [
+				{
+					"name": "/service-casino-provider-incentive/pickany/entry",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{USERTOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"gameCode\": \"PICK5\",\n    \"predictorId\": 1,\n    \"competitionCode\": \"COMPETITION1\",\n    \"entryTransactionId\": \"ENTRY3\",\n    \"picks\": [\n        {\n            \"eventId\": 1,\n            \"eventName\": \"Man vs Chel\",\n            \"eventStartTime\": 1,\n            \"homeScore\": 1,\n            \"awayScore\": 0\n        },\n        {\n            \"eventId\": 2,\n            \"eventName\": \"Vdb vs Att\",\n            \"eventStartTime\": 1,\n            \"homeScore\": 1,\n            \"awayScore\": 0\n        }\n    ],\n    \"entryTimestamp\": 1,\n    \"sha256\": \"c8c88e350ab3099dabff66616032508549250d6595a259e54a0e3c756755509f\",\n    \"extraData\": \"<string>\"\n}"
+						},
+						"url": {
+							"raw": "{{gateway}}/service-casino-provider-incentive/pickany/entry",
+							"host": [
+								"{{gateway}}"
+							],
+							"path": [
+								"service-casino-provider-incentive",
+								"pickany",
+								"entry"
+							]
+						},
+						"description": "Register a Pick game entry for a player.\n\nA call to this API does not affect the player balance. It is a free entry.\n\nThe API is retryable. Sending the same data again, if a previous entry was received successfully, will result in an identical response to\nthe original successful request.\n\nThis API will require a bearer token in the Authorisation header,\nwhich will be used to identify the player to whom this entry belongs to.\nTo secure the endpoint, the caller has to supply a hash of the data utilising the pre-shared key \nthat is never transmitted.\n"
+					},
+					"response": [
+						{
+							"name": "User account is disabled. Do not resubmit.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"gameCode\": \"<string>\",\n    \"predictorId\": \"<long>\",\n    \"competitionCode\": \"<string>\",\n    \"entryTransactionId\": \"<string>\",\n    \"picks\": [\n        {\n            \"eventId\": \"<long>\",\n            \"eventName\": \"<string>\",\n            \"eventStartTime\": \"<long>\",\n            \"homeScore\": \"<long>\",\n            \"awayScore\": \"<long>\"\n        },\n        {\n            \"eventId\": \"<long>\",\n            \"eventName\": \"<string>\",\n            \"eventStartTime\": \"<long>\",\n            \"homeScore\": \"<long>\",\n            \"awayScore\": \"<long>\"\n        }\n    ],\n    \"entryTimestamp\": \"<long>\",\n    \"sha256\": \"<string>\",\n    \"extraData\": \"<string>\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/service-casino-provider-incentive/pickany/entry",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"service-casino-provider-incentive",
+										"pickany",
+										"entry"
+									]
+								}
+							},
+							"status": "Method Not Allowed",
+							"code": 405,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "The service is unavailabe (is it running?). Please resubmit the same request later.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"gameCode\": \"<string>\",\n    \"predictorId\": \"<long>\",\n    \"competitionCode\": \"<string>\",\n    \"entryTransactionId\": \"<string>\",\n    \"picks\": [\n        {\n            \"eventId\": \"<long>\",\n            \"eventName\": \"<string>\",\n            \"eventStartTime\": \"<long>\",\n            \"homeScore\": \"<long>\",\n            \"awayScore\": \"<long>\"\n        },\n        {\n            \"eventId\": \"<long>\",\n            \"eventName\": \"<string>\",\n            \"eventStartTime\": \"<long>\",\n            \"homeScore\": \"<long>\",\n            \"awayScore\": \"<long>\"\n        }\n    ],\n    \"entryTimestamp\": \"<long>\",\n    \"sha256\": \"<string>\",\n    \"extraData\": \"<string>\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/service-casino-provider-incentive/pickany/entry",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"service-casino-provider-incentive",
+										"pickany",
+										"entry"
+									]
+								}
+							},
+							"status": "Gateway Timeout",
+							"code": 504,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "The input data failed to validate. Please fix the request and submit a new one. The same transaction ID may be used.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"gameCode\": \"<string>\",\n    \"predictorId\": \"<long>\",\n    \"competitionCode\": \"<string>\",\n    \"entryTransactionId\": \"<string>\",\n    \"picks\": [\n        {\n            \"eventId\": \"<long>\",\n            \"eventName\": \"<string>\",\n            \"eventStartTime\": \"<long>\",\n            \"homeScore\": \"<long>\",\n            \"awayScore\": \"<long>\"\n        },\n        {\n            \"eventId\": \"<long>\",\n            \"eventName\": \"<string>\",\n            \"eventStartTime\": \"<long>\",\n            \"homeScore\": \"<long>\",\n            \"awayScore\": \"<long>\"\n        }\n    ],\n    \"entryTimestamp\": \"<long>\",\n    \"sha256\": \"<string>\",\n    \"extraData\": \"<string>\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/service-casino-provider-incentive/pickany/entry",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"service-casino-provider-incentive",
+										"pickany",
+										"entry"
+									]
+								}
+							},
+							"status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+							"code": 422,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "The request contained a document that could not be parsed due to a syntax error. Please do not resubmit before changing the content.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"gameCode\": \"<string>\",\n    \"predictorId\": \"<long>\",\n    \"competitionCode\": \"<string>\",\n    \"entryTransactionId\": \"<string>\",\n    \"picks\": [\n        {\n            \"eventId\": \"<long>\",\n            \"eventName\": \"<string>\",\n            \"eventStartTime\": \"<long>\",\n            \"homeScore\": \"<long>\",\n            \"awayScore\": \"<long>\"\n        },\n        {\n            \"eventId\": \"<long>\",\n            \"eventName\": \"<string>\",\n            \"eventStartTime\": \"<long>\",\n            \"homeScore\": \"<long>\",\n            \"awayScore\": \"<long>\"\n        }\n    ],\n    \"entryTimestamp\": \"<long>\",\n    \"sha256\": \"<string>\",\n    \"extraData\": \"<string>\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/service-casino-provider-incentive/pickany/entry",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"service-casino-provider-incentive",
+										"pickany",
+										"entry"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "The server is experiencing technical problems and is unavailable. Please resubmit the same request later.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"gameCode\": \"<string>\",\n    \"predictorId\": \"<long>\",\n    \"competitionCode\": \"<string>\",\n    \"entryTransactionId\": \"<string>\",\n    \"picks\": [\n        {\n            \"eventId\": \"<long>\",\n            \"eventName\": \"<string>\",\n            \"eventStartTime\": \"<long>\",\n            \"homeScore\": \"<long>\",\n            \"awayScore\": \"<long>\"\n        },\n        {\n            \"eventId\": \"<long>\",\n            \"eventName\": \"<string>\",\n            \"eventStartTime\": \"<long>\",\n            \"homeScore\": \"<long>\",\n            \"awayScore\": \"<long>\"\n        }\n    ],\n    \"entryTimestamp\": \"<long>\",\n    \"sha256\": \"<string>\",\n    \"extraData\": \"<string>\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/service-casino-provider-incentive/pickany/entry",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"service-casino-provider-incentive",
+										"pickany",
+										"entry"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "The supplied hash is incorrect. You may resubmit the same transaction with a new hash. The transaction will not be stored.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"gameCode\": \"<string>\",\n    \"predictorId\": \"<long>\",\n    \"competitionCode\": \"<string>\",\n    \"entryTransactionId\": \"<string>\",\n    \"picks\": [\n        {\n            \"eventId\": \"<long>\",\n            \"eventName\": \"<string>\",\n            \"eventStartTime\": \"<long>\",\n            \"homeScore\": \"<long>\",\n            \"awayScore\": \"<long>\"\n        },\n        {\n            \"eventId\": \"<long>\",\n            \"eventName\": \"<string>\",\n            \"eventStartTime\": \"<long>\",\n            \"homeScore\": \"<long>\",\n            \"awayScore\": \"<long>\"\n        }\n    ],\n    \"entryTimestamp\": \"<long>\",\n    \"sha256\": \"<string>\",\n    \"extraData\": \"<string>\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/service-casino-provider-incentive/pickany/entry",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"service-casino-provider-incentive",
+										"pickany",
+										"entry"
+									]
+								}
+							},
+							"code": 470,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"gameCode\": \"<string>\",\n    \"predictorId\": \"<long>\",\n    \"competitionCode\": \"<string>\",\n    \"entryTransactionId\": \"<string>\",\n    \"picks\": [\n        {\n            \"eventId\": \"<long>\",\n            \"eventName\": \"<string>\",\n            \"eventStartTime\": \"<long>\",\n            \"homeScore\": \"<long>\",\n            \"awayScore\": \"<long>\"\n        },\n        {\n            \"eventId\": \"<long>\",\n            \"eventName\": \"<string>\",\n            \"eventStartTime\": \"<long>\",\n            \"homeScore\": \"<long>\",\n            \"awayScore\": \"<long>\"\n        }\n    ],\n    \"entryTimestamp\": \"<long>\",\n    \"sha256\": \"<string>\",\n    \"extraData\": \"<string>\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/service-casino-provider-incentive/pickany/entry",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"service-casino-provider-incentive",
+										"pickany",
+										"entry"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"lithiumEntryId\": \"<long>\"\n}"
+						},
+						{
+							"name": "Access token is missing or invalid. Please supply a new bearer token and resubmit the same request.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"gameCode\": \"<string>\",\n    \"predictorId\": \"<long>\",\n    \"competitionCode\": \"<string>\",\n    \"entryTransactionId\": \"<string>\",\n    \"picks\": [\n        {\n            \"eventId\": \"<long>\",\n            \"eventName\": \"<string>\",\n            \"eventStartTime\": \"<long>\",\n            \"homeScore\": \"<long>\",\n            \"awayScore\": \"<long>\"\n        },\n        {\n            \"eventId\": \"<long>\",\n            \"eventName\": \"<string>\",\n            \"eventStartTime\": \"<long>\",\n            \"homeScore\": \"<long>\",\n            \"awayScore\": \"<long>\"\n        }\n    ],\n    \"entryTimestamp\": \"<long>\",\n    \"sha256\": \"<string>\",\n    \"extraData\": \"<string>\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/service-casino-provider-incentive/pickany/entry",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"service-casino-provider-incentive",
+										"pickany",
+										"entry"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Pick5 / Pick6 / PickX Settlement",
+			"item": [
+				{
+					"name": "/service-casino-provider-incentive/pickany/settlement",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"entryTransactionId\": \"ENTRY3\",\n    \"settlementTransactionId\": \"SETTLEMENT4\",\n    \"settlementTimestamp\": 2,\n    \"picks\": [\n        {\n            \"eventId\": 1,\n            \"homeScoreResult\": 1,\n            \"awayScoreResult\": 0,\n            \"pointsResult\": 10\n        },\n        {\n            \"eventId\": 1,\n            \"homeScoreResult\": 1,\n            \"awayScoreResult\": 0,\n            \"pointsResult\": 10\n        }\n    ],\n    \"totalPointsResult\": 20,\n    \"sha256\": \"0edeaac3b6e15582b6e21b5d1c23f267ddf1581a4b8d130d6bc84907f0647a52\",\n    \"extraData\": \"<string>\"\n}"
+						},
+						"url": {
+							"raw": "{{gateway}}/service-casino-provider-incentive/pickany/settlement",
+							"host": [
+								"{{gateway}}"
+							],
+							"path": [
+								"service-casino-provider-incentive",
+								"pickany",
+								"settlement"
+							]
+						},
+						"description": "Register a Pick5 or Pick6 game entry settlement result for a player.\n\nA call to this API does not affect the player balance.\n\nThe API is retryable. Sending the same data again, if a previous entry was received successfully, will result in an identical response to\nthe original successful request.\n\nThis API does not require a bearer token, as a settlement might happen while a player is logged out. To secure the endpoint,\nthe caller has to supply the unique reference to the entry, and generate a hash of the data utilising the pre-shared key \nthat is never transmitted.\n"
+					},
+					"response": [
+						{
+							"name": "OK",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"entryTransactionId\": \"<string>\",\n    \"settlementTransactionId\": \"<string>\",\n    \"settlementTimestamp\": \"<long>\",\n    \"picks\": [\n        {\n            \"eventId\": \"<long>\",\n            \"homeScoreResult\": \"<long>\",\n            \"awayScoreResult\": \"<long>\",\n            \"pointsResult\": \"<long>\"\n        },\n        {\n            \"eventId\": \"<long>\",\n            \"homeScoreResult\": \"<long>\",\n            \"awayScoreResult\": \"<long>\",\n            \"pointsResult\": \"<long>\"\n        }\n    ],\n    \"totalPointsResult\": \"<long>\",\n    \"sha256\": \"<string>\",\n    \"extraData\": \"<string>\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/service-casino-provider-incentive/pickany/settlement",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"service-casino-provider-incentive",
+										"pickany",
+										"settlement"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n \"lithiumEntryId\": \"<long>\",\n \"lithiumSettlementId\": \"<long>\"\n}"
+						},
+						{
+							"name": "The server is experiencing technical problems and is unavailable. Please resubmit the same request later.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"entryTransactionId\": \"<string>\",\n    \"settlementTransactionId\": \"<string>\",\n    \"settlementTimestamp\": \"<long>\",\n    \"picks\": [\n        {\n            \"eventId\": \"<long>\",\n            \"homeScoreResult\": \"<long>\",\n            \"awayScoreResult\": \"<long>\",\n            \"pointsResult\": \"<long>\"\n        },\n        {\n            \"eventId\": \"<long>\",\n            \"homeScoreResult\": \"<long>\",\n            \"awayScoreResult\": \"<long>\",\n            \"pointsResult\": \"<long>\"\n        }\n    ],\n    \"totalPointsResult\": \"<long>\",\n    \"sha256\": \"<string>\",\n    \"extraData\": \"<string>\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/service-casino-provider-incentive/pickany/settlement",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"service-casino-provider-incentive",
+										"pickany",
+										"settlement"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "The supplied hash is incorrect. You may resubmit the same transaction with a new hash. The transaction will not be stored.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"entryTransactionId\": \"<string>\",\n    \"settlementTransactionId\": \"<string>\",\n    \"settlementTimestamp\": \"<long>\",\n    \"picks\": [\n        {\n            \"eventId\": \"<long>\",\n            \"homeScoreResult\": \"<long>\",\n            \"awayScoreResult\": \"<long>\",\n            \"pointsResult\": \"<long>\"\n        },\n        {\n            \"eventId\": \"<long>\",\n            \"homeScoreResult\": \"<long>\",\n            \"awayScoreResult\": \"<long>\",\n            \"pointsResult\": \"<long>\"\n        }\n    ],\n    \"totalPointsResult\": \"<long>\",\n    \"sha256\": \"<string>\",\n    \"extraData\": \"<string>\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/service-casino-provider-incentive/pickany/settlement",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"service-casino-provider-incentive",
+										"pickany",
+										"settlement"
+									]
+								}
+							},
+							"code": 470,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "The input data failed to validate. Please fix the request and submit a new one. The same transaction ID may be used.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"entryTransactionId\": \"<string>\",\n    \"settlementTransactionId\": \"<string>\",\n    \"settlementTimestamp\": \"<long>\",\n    \"picks\": [\n        {\n            \"eventId\": \"<long>\",\n            \"homeScoreResult\": \"<long>\",\n            \"awayScoreResult\": \"<long>\",\n            \"pointsResult\": \"<long>\"\n        },\n        {\n            \"eventId\": \"<long>\",\n            \"homeScoreResult\": \"<long>\",\n            \"awayScoreResult\": \"<long>\",\n            \"pointsResult\": \"<long>\"\n        }\n    ],\n    \"totalPointsResult\": \"<long>\",\n    \"sha256\": \"<string>\",\n    \"extraData\": \"<string>\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/service-casino-provider-incentive/pickany/settlement",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"service-casino-provider-incentive",
+										"pickany",
+										"settlement"
+									]
+								}
+							},
+							"status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+							"code": 422,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "The referenced transaction was not found. Do not resubmit.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"entryTransactionId\": \"<string>\",\n    \"settlementTransactionId\": \"<string>\",\n    \"settlementTimestamp\": \"<long>\",\n    \"picks\": [\n        {\n            \"eventId\": \"<long>\",\n            \"homeScoreResult\": \"<long>\",\n            \"awayScoreResult\": \"<long>\",\n            \"pointsResult\": \"<long>\"\n        },\n        {\n            \"eventId\": \"<long>\",\n            \"homeScoreResult\": \"<long>\",\n            \"awayScoreResult\": \"<long>\",\n            \"pointsResult\": \"<long>\"\n        }\n    ],\n    \"totalPointsResult\": \"<long>\",\n    \"sha256\": \"<string>\",\n    \"extraData\": \"<string>\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/service-casino-provider-incentive/pickany/settlement",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"service-casino-provider-incentive",
+										"pickany",
+										"settlement"
+									]
+								}
+							},
+							"status": "Not Found",
+							"code": 404,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "The request contained a document that could not be parsed due to a syntax error. Please do not resubmit before changing the content.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"entryTransactionId\": \"<string>\",\n    \"settlementTransactionId\": \"<string>\",\n    \"settlementTimestamp\": \"<long>\",\n    \"picks\": [\n        {\n            \"eventId\": \"<long>\",\n            \"homeScoreResult\": \"<long>\",\n            \"awayScoreResult\": \"<long>\",\n            \"pointsResult\": \"<long>\"\n        },\n        {\n            \"eventId\": \"<long>\",\n            \"homeScoreResult\": \"<long>\",\n            \"awayScoreResult\": \"<long>\",\n            \"pointsResult\": \"<long>\"\n        }\n    ],\n    \"totalPointsResult\": \"<long>\",\n    \"sha256\": \"<string>\",\n    \"extraData\": \"<string>\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/service-casino-provider-incentive/pickany/settlement",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"service-casino-provider-incentive",
+										"pickany",
+										"settlement"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "The service is unavailabe (is it running?). Please resubmit the same request later.",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"entryTransactionId\": \"<string>\",\n    \"settlementTransactionId\": \"<string>\",\n    \"settlementTimestamp\": \"<long>\",\n    \"picks\": [\n        {\n            \"eventId\": \"<long>\",\n            \"homeScoreResult\": \"<long>\",\n            \"awayScoreResult\": \"<long>\",\n            \"pointsResult\": \"<long>\"\n        },\n        {\n            \"eventId\": \"<long>\",\n            \"homeScoreResult\": \"<long>\",\n            \"awayScoreResult\": \"<long>\",\n            \"pointsResult\": \"<long>\"\n        }\n    ],\n    \"totalPointsResult\": \"<long>\",\n    \"sha256\": \"<string>\",\n    \"extraData\": \"<string>\"\n}"
+								},
+								"url": {
+									"raw": "{{baseUrl}}/service-casino-provider-incentive/pickany/settlement",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"service-casino-provider-incentive",
+										"pickany",
+										"settlement"
+									]
+								}
+							},
+							"status": "Gateway Timeout",
+							"code": 504,
+							"_postman_previewlanguage": "text",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "text/plain"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "OpenAPI.yaml",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{gateway}}/service-casino-provider-incentive/openapi.yaml",
+					"host": [
+						"{{gateway}}"
+					],
+					"path": [
+						"service-casino-provider-incentive",
+						"openapi.yaml"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "987fdf54-9269-4c8b-b922-d86859967db7",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "32059748-8653-4bd9-a0aa-941c40fd5b94",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "920e3698-1efa-4290-9f49-7caced182fa1",
+			"key": "baseUrl",
+			"value": "https://gateway.lithium-develop.ls-g.net",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}

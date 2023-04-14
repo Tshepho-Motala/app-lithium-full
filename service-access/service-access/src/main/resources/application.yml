@@ -1,0 +1,44 @@
+spring:
+  application :
+    name : service-access
+  datasource:
+    url: jdbc:mysql://localhost/lithium_access
+    username: root
+    password: mysql
+  jpa:
+    show-sql: false
+    properties:
+      jadira.usertype.autoRegisterUserTypes: true
+    hibernate:
+      ddl-auto: validate
+  servlet:
+    multipart:
+        maxFileSize: 20MB
+        maxRequestSize: 20MB
+        file-size-threshold: 1MB
+  cloud:
+    stream:
+      bindings:
+        userattributestriggerinput :
+          group : user-attributes-trigger-group-access
+          binder : rabbit
+          destination : userattributestriggerqueue
+
+server:
+  port: 9595
+          
+lithium:
+  services:
+    db:
+      load-test-data: false
+  service:
+    access:
+      jobs:
+        remove-raw-data-records:
+          cron : 0 0 */4 * * *
+          days : -45
+          page-size : 1000
+
+logging:
+  level:
+    lithium.service.access: INFO

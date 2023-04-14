@@ -1,0 +1,22 @@
+package lithium.service.casino.provider.evolution.model.request;
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@EqualsAndHashCode(callSuper = true)
+public class CreditRequest extends Request {
+
+    private String currency;
+
+    private Game game;
+
+    private Transaction transaction;
+
+    private String uuid;
+
+}

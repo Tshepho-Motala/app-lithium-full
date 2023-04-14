@@ -1,0 +1,57 @@
+[plantuml]
+----
+@startuml
+'These definitions can be removed once https://gitlab.com/playsafe/lithium/app-lithium-full/-/merge_requests/5282 is merged,
+'and rather include the base template
+!define p(name, alias) participant "name" as alias << (L,#AAFFCC) >>
+!define q(name, alias) queue "name" as alias << (L,#AAFFCC) >>
+!define pn(name, alias) participant "name" as alias << (L,#FFAAAA) >>
+
+autonumber
+
+actor Player as player
+
+participant "Frontend" as fe
+p("Server-Oauth2", oauth2)
+
+box "SVC-User" #LightBlue
+p("UserProviderController", upc)
+p("UserActiveSessionsMetadataService", uasm)
+end box
+
+activate player
+player -> fe: Login
+activate fe
+fe -> oauth2: POST: /auth/token
+activate oauth2
+oauth2 -> upc: POST: /users/auth
+activate upc
+upc -> upc: Validate
+note right
+Perform authentication
+validation logic
+end note
+alt Successful authentication
+  upc -> uasm: updateMetadata
+  activate uasm
+  note right
+    Increment the user active
+    session count. If active
+    session count is 1, set
+    playtime limit last
+    updated timestamp to the
+    time now.
+  end note
+  uasm --> upc
+  deactivate uasm
+end
+upc --> oauth2
+deactivate upc
+oauth2 --> fe
+deactivate oauth2
+fe --> player
+deactivate fe
+deactivate player
+@enduml
+----
+[plantuml]

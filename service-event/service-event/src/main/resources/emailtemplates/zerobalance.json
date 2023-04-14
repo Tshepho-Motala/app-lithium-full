@@ -1,0 +1,43 @@
+{
+	"name": "email.zero.balance.deposit.number.[depositCount+1]",
+	"subject": "Zero balance email template",
+	"body": "<html><body><p>Deposit count + 1 is the number of deposits made plus 1</p></body></html>",
+	"placeholders": [
+		{
+			"name": "%user.userName%",
+			"description": "The player's username"
+		},
+		{
+			"name": "%user.emailAddress%",
+			"description": "The player's email address"
+		},
+		{
+			"name": "%user.firstName%",
+			"description": "The player's first name"
+		},
+		{
+			"name": "%user.lastName%",
+			"description": "The player's last name"
+		},
+		{
+			"name": "%user.createdDate%",
+			"description": "The player's registration date"
+		},
+		{
+			"name": "%user.dateOfBirth%",
+			"description": "The player's date of birth"
+		},
+		{
+			"name": "%domain.name%",
+			"description": "The domain's display name"
+		},
+		{
+			"name": "%domain.url%",
+			"description": "The domain's URL"
+		},
+		{
+			"name": "%domain.supportEmail%",
+			"description": "The domain's support email address"
+		}
+	]
+}

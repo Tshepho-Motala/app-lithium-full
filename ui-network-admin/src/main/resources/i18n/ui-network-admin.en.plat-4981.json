@@ -1,0 +1,94 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "PAGE_HEADER": {
+      "DASHBOARD": {
+        "TITLE": "Domain Dashboard",
+        "DESCRIPTION": "An overview of the general performance of the chosen domain"
+      },
+      "BRAND_CONFIG": {
+        "TITLE": "Brand Configuration",
+        "DESCRIPTION": "Various brand configuration options"
+      },
+      "MASS_PLAYER_UPDATE": {
+        "TITLE": "Mass Player Update",
+        "DESCRIPTION": "A mass player update tool."
+      },
+      "CASHIER_CONFIG": {
+        "TITLE": "Cashier",
+        "DESCRIPTION": "Cashier related settings",
+        "SUBTITLE": "Deposit Methods"
+      },
+      "BONUSES_GRANT": {
+        "TITLE": "Grant Mass Bonuses",
+        "DESCRIPTION": "A mass bonus allocation tool"
+      },
+      "CASHIER_TRANSACTIONS": {
+        "TITLE": "Cashier",
+        "DESCRIPTION": "Cashier related settings"
+      },
+      "SPORTBOOK_BETS": {
+        "TITLE": "Sportsbook Bets",
+        "DESCRIPTION": "A searchable table of Sportsbook Bets"
+      },
+      "CASINO_LOBBIES": {
+        "TITLE": "Casino Lobbies",
+        "DESCRIPTION": "To manage game and promotional content within the Casino Lobby pages"
+      },
+      "CASINO_GAMES": {
+        "TITLE": "Games",
+        "DESCRIPTION": "Start by selecting the domain(s) you would like to see then clicking the display button."
+      },
+      "GAMES_SUPPLIERS": {
+        "TITLE": "Game Suppliers",
+        "DESCRIPTION": "To manage game suppliers"
+      },
+      "GAMES_TYPES": {
+        "TITLE": "Game Types",
+        "DESCRIPTION": "To manage game types"
+      },
+      "PROGRESSIVE_BALANCES": {
+        "TITLE": "Progressive Jackpot Balances",
+        "DESCRIPTION": "To manage progressive jackpot balances"
+      },
+      "MAIL_CONFIG": {
+        "TITLE": "Mail",
+        "DESCRIPTION": "Mail related settings"
+      },
+      "SMS_CONFIG": {
+        "TITLE": "SMS",
+        "DESCRIPTION": "SMS related settings"
+      },
+      "CMS_TEMPLATES": {
+        "TITLE": "Templates",
+        "DESCRIPTION": "A searchable list of all templates"
+      },
+      "CMS_IMAGES": {
+        "TITLE": "Images",
+        "DESCRIPTION": "A searchable list of all image templates"
+      },
+      "PUSH_MESSAGES": {
+        "TITLE": "Push Message",
+        "DESCRIPTION": "Push Message related settings"
+      },
+      "RAF_CONFIG": {
+        "TITLE": "Refer a Friend",
+        "DESCRIPTION": "Refer a Friend related settings"
+      },
+      "RAF_CLICKS": {
+        "TITLE": "Referral Clicks",
+        "DESCRIPTION": "View a list of referral clicks. Filter by domain and referrer (player)."
+      },
+      "RAF_SIGNUPS": {
+        "TITLE": "Referral Signups",
+        "DESCRIPTION": "View a list of referral signups. Filter by domain and referrer (player)."
+      },
+      "RAF_CONVERSIONS": {
+        "TITLE": "Referral Conversions",
+        "DESCRIPTION": "View a list of referral conversions. Filter by domain and referrer (player)."
+      },
+      "BANK_ACCOUNT_LOOKUP": {
+        "SUBTITLE": "Bank Account Lookup"
+      }
+    }
+  }
+}

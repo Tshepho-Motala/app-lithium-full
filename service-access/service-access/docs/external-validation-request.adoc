@@ -1,0 +1,32 @@
+= ExternalValidationRequest
+
+|====
+| Field | Type
+
+| firstName
+| String
+
+| lastNamePrefix
+| String
+
+| placeOfBirth
+| String
+
+| dobYear
+| Integer
+
+| dobMonth
+| Integer
+
+| dobDay
+| Integer
+
+| email
+| String
+
+| additionalData
+| Map<String, String>
+
+| sha256
+| String
+|====

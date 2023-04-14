@@ -1,0 +1,47 @@
+{
+	"UI_NETWORK_ADMIN": {
+		"TEMPLATES": {
+			"ADD": {
+				"TITLE": "Add a Template"
+			},
+			"FIELDS": {
+				"NAME": {
+					"NAME": "Template Name",
+					"DESCRIPTION": "A descriptive name for this template that should be unique per language, per domain, and will be used when referring to templates."
+				},
+				"LANG": {
+					"NAME": "Language",
+					"DESCRIPTION": "The language of this template. You may create many versions of this template, one for each language."
+				},
+				"DESCRIPTION": {
+					"NAME": "Description",
+					"DESCRIPTION": "Provide a short description for this template."
+				},
+				"CONTENT": {
+					"NAME": "Content",
+					"DESCRIPTION": "The html content of the template. Feel free to make use of the template fields to enhance the personality of the content. Avoid using images to present text."
+				},
+				"ENABLED": {
+					"NAME": "Enabled",
+					"DESCRIPTION": "Enable or disable this template."
+				}
+			},
+			"SUCCESS": {
+				"ADD": "Template added successfully",
+				"SAVE": "Template saved successfully"
+			},
+			"ERRORS": {
+				"ADD": "Could not add template",
+				"SAVE": "Could not save template",
+				"EDIT": "Could not open edit for template"
+			},
+			"TAB": {
+				"LIST": "List"
+			},
+			"HEADER": {
+				"TITLE": "Templates",
+				"DESCRIPTION": "A searchable list of all templates"
+			}
+		}
+	}
+}

@@ -1,0 +1,76 @@
+server:
+  port: 9813
+  servlet:
+    context-path: /
+
+spring:
+  application:
+    name: service-casino-provider-roxor
+  datasource:
+    url: jdbc:mysql://localhost/lithium_casino_roxor
+    username: root
+    password: mysql
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: validate
+  cloud:
+    stream:
+      bindings:
+        free-games-input:
+          group: free-games-group
+          binder: rabbit
+          destination: free-games-output
+        suppliergamemetadataoutput:
+          group: suppliergamemetadatagroup
+          destination: suppliergamemetadataqueue
+          binder: rabbit
+          content-type: application/json
+          producer:
+            required-groups: suppliergamemetadatagroup
+  flyway:
+    enabled: true
+
+lithium:
+  services:
+    casino:
+      provider:
+        roxor:
+          progressive-scheduler-in-milliseconds: 30000
+          evolution:
+            direct-game-launch-scheduler-in-milliseconds: 20000
+          replay-url:
+            use-domain-as-website: true
+          message-handlers:
+            gameplay-operation-event:
+              rabbitmq:
+                listener:
+                  retry:
+                    initial-interval: 10000
+                    multiplier: 2
+                    max-interval: 80000
+                    max-attempts: 5
+                    listener-concurrency: 4
+              dlq:
+                # i.e The number of times we republish back to the original queue before finally moving the message
+                # to the PLQ.
+                # Default: The first time we enter the DLQ we republish back to original queue. If failures continue,
+                # it will be retried as per the configuration above. Once the retries are exhausted, it's sent to the
+                # DLQ a second time but this time we move the message to the PLQ.
+
+                retries: 1
+
+eureka:
+  instance:
+    appname: service-casino-provider-roxor
+
+logging:
+  level:
+    ROOT: WARN
+    lithium.service.casino.provider.roxor: INFO
+#    org.springframework.retry.support.RetryTemplate: INFO
+#    org.hibernate.stat: INFO
+#    org.hibernate: INFO
+#    org.hibernate.type: INFO
+#    org.hibernate.type.descriptor.sql: INFO
+#    org.hibernate.stat: INFO

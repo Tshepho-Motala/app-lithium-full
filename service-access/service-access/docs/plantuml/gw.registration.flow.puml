@@ -1,0 +1,93 @@
+.FE-GW to Lithium Registration Flow
+[plantuml]
+----
+
+
+@startuml
+'https://plantuml.com/sequence-diagram
+
+actor FE
+actor GW
+participant Lithium
+participant Sphonic
+participant BlueM
+
+autonumber
+
+FE -> GW: register User
+  activate GW
+'  IBAN CALL
+  group External Validation IBAN API
+    note over Lithium: Note that GW calls Lithium with an access rule that has been configured to an external IBAN Provider configuration
+    GW -> Lithium: {gateway}/external/authorization/{domainName}/{accessRuleName}/check-authorization
+      activate Lithium
+
+      Lithium -> Sphonic: Get Sphonic Access Token {https://user-mgnt-api.sphonic.net/api/v1/machines/login/universal-router-live}
+      activate Sphonic
+      Sphonic --> Lithium: accessToken
+      deactivate Sphonic
+
+      Lithium -> Sphonic: https://universal-router.sphonic.net/56cb7bfc-7f61-409a-9a5a-3ecc91adfeca/IBANConnection
+      activate Sphonic
+        Sphonic -> BlueM: do IBAN Connection Workflow
+          activate BlueM
+        BlueM --> Sphonic: IBAN result
+        deactivate BlueM
+        Sphonic --> Lithium: IBAN result
+      deactivate Sphonic
+
+      Lithium --> GW: ExternalValidationResponse
+    deactivate Lithium
+  end
+
+'  CRUKS CALL
+  group External Validation CRUKS API
+  note over Lithium: Note that GW calls Lithium with an access rule that has been configured to an external CRUKS Provider configuration
+    GW -> Lithium: {gateway}/external/authorization/{domainName}/{accessRuleName}/check-authorization
+      activate Lithium
+
+      Lithium -> Sphonic: Get Sphonic Access Token {https://user-mgnt-api.sphonic.net/api/v1/machines/login/universal-router-live}
+      activate Sphonic
+      Sphonic --> Lithium: accessToken
+      deactivate Sphonic
+
+      Lithium -> Sphonic: https://universal-router.sphonic.net/56cb7bfc-7f61-409a-9a5a-3ecc91adfeca/RegistrationConnection
+      activate Sphonic
+        Sphonic -> BlueM: do CRUKS RegistrationConnection Workflow
+          activate BlueM
+        BlueM --> Sphonic: CRUKS result
+        deactivate BlueM
+        Sphonic --> Lithium: CRUKS result
+      deactivate Sphonic
+
+      Lithium --> GW: ExternalValidationResponse
+    deactivate Lithium
+  end
+
+' RegisterV4
+  group Player Registration
+    GW -> Lithium: /frontend/{domainName}/register/v4
+      activate Lithium
+      Lithium -> Lithium: do registration
+      group Implicit login on successful registration
+        Lithium -> Lithium: do Sphonic CRUKS Login Access Rule
+        Lithium -> Sphonic: Get Sphonic Access Token {https://user-mgnt-api.sphonic.net/api/v1/machines/login/universal-router-live}
+              activate Sphonic
+              Sphonic --> Lithium: accessToken
+              deactivate Sphonic
+
+              Lithium -> Sphonic: https://universal-router.sphonic.net/56cb7bfc-7f61-409a-9a5a-3ecc91adfeca/LoginConnection
+              activate Sphonic
+                Sphonic -> BlueM: do CRUKS LoginConnection Workflow
+                  activate BlueM
+                BlueM --> Sphonic: CRUKS result
+                deactivate BlueM
+                Sphonic --> Lithium: CRUKS result
+              deactivate Sphonic
+      end
+      Lithium --> GW: oauthAccessTokenResponse
+      deactivate Lithium
+  end
+  GW --> FE: user registered successfully and logged in
+@enduml
+----

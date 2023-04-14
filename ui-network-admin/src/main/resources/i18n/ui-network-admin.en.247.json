@@ -1,0 +1,17 @@
+{
+  "GLOBAL": {
+    "FIELDS": {
+      "DEFAULT": "Default"
+    }
+  },
+  "UI_NETWORK_ADMIN": {
+    "CASHIER": {
+      "METHODS": {
+        "MENU": {
+          "SET_AS_DEFAULT_METHOD": "Set as Default",
+          "REMOVE_DEFAULT_METHOD": "Remove Default"
+        }
+      }
+    }
+  }
+}

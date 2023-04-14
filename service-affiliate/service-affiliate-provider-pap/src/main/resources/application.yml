@@ -1,0 +1,41 @@
+server:
+  port: 9499
+
+spring:
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
+  datasource:
+    url: jdbc:mysql://localhost/lithium_affiliate_provider_pap
+    username: root
+    password: mysql
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: validate
+  cloud:
+    stream:
+      default:
+        consumer:
+          concurrency: 1
+          instance-count: 1
+      instance-count: 1
+      bindings:
+        papexportinput:
+          group: papexportgroup
+          binder: rabbit
+          destination: papexportqueue
+          consumer:
+            concurrency: 1
+            instance-count: 1
+        papexportoutput:
+          group: papexportgroup
+          binder: rabbit
+          destination: papexportqueue
+          producer:
+            required-groups: papexportgroup
+
+lithium:
+  services:
+    db:
+      load-test-data: false

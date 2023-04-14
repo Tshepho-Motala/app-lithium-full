@@ -1,0 +1,26 @@
+@import '~@angular/material/theming';
+
+@mixin app-theme($theme) {
+
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+  $warn: map-get($theme, warn);
+  $background: map-get($theme, background);
+  $foreground: map-get($theme, foreground);
+
+  body {
+    font-family: Roboto,"Helvetica Neue",sans-serif;
+    margin: 0;
+    padding: 0;
+    background-image: url('assets/backgrounds/3.jpg') !important;
+    background-position: center center !important;
+    background-size: cover !important;
+//
+  }
+
+  .background-primary {
+    background: mat-color($background, background) !important;
+  }
+
+
+}

@@ -1,0 +1,13 @@
+{
+  "SERVICE-CASHIER": {
+    "AUTOWITHDRAWALS": {
+      "RULESETS": {
+        "RULE": {
+          "FIELD": {
+            "MANUALLY_APPROVED_WDS": "Count of consecutive manually approved WDs"
+          }
+        }
+      }
+    }
+  }
+}

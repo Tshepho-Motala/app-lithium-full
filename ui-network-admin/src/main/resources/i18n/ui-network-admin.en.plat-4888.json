@@ -1,0 +1,47 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "DROP_DOWN_MENU": {
+      "DOMAIN": {
+        "ALL": "All domains selected",
+        "NO": "No domains selected",
+        "MANY": "domains selected",
+        "ONE": "domain selected"
+      },
+      "RESTRICTION": {
+          "ALL": "All restrictions selected",
+          "NO": "No restrictions selected",
+          "MANY": "restrictions selected",
+          "ONE": "restriction selected",
+          "EMPTY": "List is empty"
+      },
+      "TAG": {
+        "ALL": "All tags selected",
+        "NO": "No tags selected",
+        "MANY": "tags selected",
+        "ONE": "tag selected",
+        "EMPTY": "List is empty"
+      },
+      "ECOSYSTEM": {
+        "ALL": "All ecosystems selected",
+        "NO": "No ecosystems selected",
+        "MANY": "ecosystems selected",
+        "ONE": "ecosystem selected",
+        "EMPTY": "List is empty"
+      },
+      "TYPE": {
+        "ALL": "All types selected",
+        "NO": "No types selected",
+        "MANY": "types selected",
+        "ONE": "type selected",
+        "EMPTY": "List is empty"
+      },
+      "STATUS": {
+        "ALL": "All statuses selected",
+        "NO": "No statuses selected",
+        "MANY": "statuses selected",
+        "ONE": "status selected",
+        "EMPTY": "List is empty"
+      }
+    }
+  }
+}

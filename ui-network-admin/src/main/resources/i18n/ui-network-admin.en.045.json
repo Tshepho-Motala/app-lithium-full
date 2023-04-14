@@ -1,0 +1,32 @@
+{
+	"UI_NETWORK_ADMIN": {
+		"CASHIER": {
+			"TRANSACTION": {
+				"ISMANUAL": "MANUAL",
+				"MANUAL": {
+					"CARDS": {
+						"PROCESSORINFORMATION": "Processor Information",
+						"INPUTFIELDS": "Input Fields",
+						"OUTPUTFIELDS": "Output Fields",
+						"USERINFORMATION": "User Information",
+						"TRANSACTIONINFORMATION": "Transaction Information"
+					},
+					"DEPOSIT": {
+						"NAME": "DEPOSIT",
+						"FIELDS": {
+							"BONUS": {
+								"NAME": "Bonus"
+							},
+							"PROCESSORREFERENCE": {
+								"NAME": "Processor Reference"
+							},
+							"AMOUNT": {
+								"NAME": "Amount"
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

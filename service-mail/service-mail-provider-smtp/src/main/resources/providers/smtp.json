@@ -1,0 +1,60 @@
+{
+	"code": "smtp",
+	"name": "smtp",
+	"enabled": true,
+	"url": "service-mail-provider-smtp",
+	"properties": 
+	[
+		{
+			"name": "host",
+			"defaultValue": "exchange.playsafesa.com",
+			"type": "string",
+			"description": "The SMTP mail host"
+		},
+		{
+			"name": "port",
+			"defaultValue": "587",
+			"type": "number",
+			"description": "The SMTP mail port"
+		},
+		{
+			"name": "username",
+			"defaultValue": "",
+			"type": "string",
+			"description": "The SMTP mail account username"
+		},
+		{
+			"name": "password",
+			"defaultValue": "",
+			"type": "string",
+			"description": "The SMTP mail account password"
+		},
+		{
+			"name": "auth",
+			"defaultValue": "true",
+			"type": "boolean",
+			"description": "Enable auth?"
+		},
+		{
+			"name": "tls",
+			"defaultValue": "true",
+			"type": "boolean",
+			"description": "Enable tls?"
+		},
+		{
+			"name": "from",
+			"defaultValue": "",
+			"type": "string",
+			"description": "The from address is the domain support e-mail address. However, if this is set, it will override the from address."
+		},
+		{
+			"name": "bcc",
+			"defaultValue": "",
+			"type": "string",
+			"description": "If set to a valid email address, any mail going out through this provider will be BCC'd to the email address specified"
+		}
+	],
+	"providerType": {
+		"name": "delivery"
+	}
+}

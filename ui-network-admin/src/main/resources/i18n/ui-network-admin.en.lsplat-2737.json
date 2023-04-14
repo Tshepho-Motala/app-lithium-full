@@ -1,0 +1,12 @@
+{
+	"UI_NETWORK_ADMIN": {
+		"RESTRICTIONS": {
+			"FIELDS": {
+				"DWH_VISIBLE": {
+					"NAME": "DWH Visible",
+					"DESCRIPTION": "Should the restriction be accessible by DWH?"
+				}
+			}
+		}
+	}
+}

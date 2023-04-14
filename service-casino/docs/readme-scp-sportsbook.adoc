@@ -1,0 +1,22 @@
+= SCP Sportsbook
+Riaan Schoeman <riaan.schoeman@wonderlabz.com>
+1.0, December 6, 2021: Service Casino
+:sectnums:
+:toc: left
+:toclevels: 4
+:toc-title: Service Casino Provider Sportsbook
+:icons: font
+:url-quickref: https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/
+
+//:stylesheet: css/asciidoctor.css
+//:stylesheet: css/material-blue.css
+
+//This is done tto keep formatting aligned with gitlab
+****
+[verse,,]
+____
+link:../../readme.adoc[home] | link:readme.adoc[back]
+____
+****
+
+include::plantuml/seq-sb-bet-reserve.puml[]

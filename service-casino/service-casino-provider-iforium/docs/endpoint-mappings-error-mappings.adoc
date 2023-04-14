@@ -1,0 +1,110 @@
+= Error Mappings
+
+NOTE: The Generic Operator Wallet API (GGO) does not use HTTP status codes for business logic rules (i.e. returning 404 when an Account is not found). All responses should return a HTTP 200 status code and the error code returned in the response body will be used.
+
+[TIP]
+--
+Mapping of internal Exceptions to Iforium Error codes is implemented in link:https://gitlab.com/playsafe/lithium/app-lithium-full/-/blob/develop/service-casino/service-casino-provider-iforium/src/main/java/lithium/service/casino/provider/iforium/handler/MainExceptionHandler.java[lithium.service.casino.provider.iforium.handler.MainExceptionHandler]
+--
+
+[options="header", cols="^.<5s,.<10m,.<40a,.<15,.<30"]
+|===
+|GGO Code|Title|Description|Lithium Error|Comments
+
+| 0
+| Success
+| The API call has successfully completed without any errors. 
+| 
+|
+
+| -1
+| Unknown Error
+| An unknown error has occurred during the API call e.g. The Operator Wallet has a problem.
+|
+|
+
+| -2 
+| Insufficient Funds
+| The Operator Wallet has insufficient Player funds to complete the debit.
+|
+|
+
+| -3
+| Session Not Found
+| The session token was not found on the Operator Wallet or the session token has expired.
+|
+|
+
+| -4
+| Account Frozen
+| The account has been suspended / frozen by the Operator Wallet.
+|
+|
+
+| -5
+| Account Not Found
+| The account was not found on the Operator Wallet.
+|
+|
+
+| -6
+| API Authentication failed
+| This should be returned if the Signature is invalid or Identification Token not found.
+|
+|
+
+| -7
+| Transaction Not Completed
+| The debit/credit transaction has not been completed in the Operator Wallet.
+|
+|
+
+| -8
+| Transaction Not Found
+| The debit/credit transaction cannot be found in the Operator Wallet.
+|
+|
+
+| -9
+| Currency Mismatch
+| The Operator Wallet Currency Code mismatches the Currency Code of the Gameflex Account.
+|
+|
+
+| -10
+| Stake Limit
+| The bet has exceeded the individual stake limit set for the Player inside the Operator Platform.
+|
+| icon:question-circle[role="red" size="1x" set=fa] [red small]#__Stake vs. Wager?__#
+
+| -11
+| Wager Limit
+| The bet will exceed the wager limit set for the Player inside the Operator Platform.
+|
+|
+
+| -12
+| Loss Limit
+| The bet will exceed the loss limit set for the Player inside the Operator Platform.
+|
+|
+
+| -13
+| Session Length Limit
+| The Player has exceeded the session length set for the Player inside the Operator Platform.
+|
+|
+
+| -14
+| Game Round Not Found
+| The Game Round has not been found.
+|
+|
+
+| -15
+| Game Not Found
+| The Game has not been configured in the Operator Platform.
+|
+|
+
+|===

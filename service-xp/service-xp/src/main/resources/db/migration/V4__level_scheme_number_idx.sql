@@ -1,0 +1,1 @@
+CREATE UNIQUE INDEX `idx_scheme_number` ON `level`(`scheme_id`, `number`) ALGORITHM INPLACE LOCK NONE;

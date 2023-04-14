@@ -1,0 +1,65 @@
+.Sphonic IBAN Flow
+[plantuml]
+----
+
+@startuml
+header Sphonic IBAN Flow
+footer Page %page% of %lastpage%
+skinparam sequenceMessageAlign center
+box "Lithium" #LightBlue
+participant CashierProcessor
+participant Cashier
+participant IBANAccessProvider
+database DB
+end box
+participant Sphonic
+autonumber
+
+ ==Authentication Job==
+ loop infinite each 1 minute
+        IBANAccessProvider -> DB: get stored authentication tokens
+        activate IBANAccessProvider
+        activate DB
+        DB --> IBANAccessProvider: List tokens per domain, with expirationTime
+        deactivate DB
+        IBANAccessProvider -> DB: delete expired tokens
+        loop for each expired token
+             IBANAccessProvider -> Sphonic: authenticate(credentials)
+             activate Sphonic
+             Sphonic --> IBANAccessProvider: authenticate(token, expiresIn)
+             deactivate Sphonic
+             IBANAccessProvider -> DB: save authentication token (domain, token, now + expiresIn - expirationDelay)
+             deactivate IBANAccessProvider
+        end
+
+end
+ ==IBAN Verification==
+CashierProcessor -> Cashier  : callBack(status=SUCCESS, processorAccountData(IBAN, accountName))
+note right
+    Run Sphonic IBAN verification
+    in case BANK_ACCOUNT_NAME_EXTERNAL_SPHONIC
+    is configured in "account_verifications"
+    corresponding processor property
+end note
+activate Cashier
+Cashier -> IBANAccessProvider : post registration checkAuthorization(userGuid, IBAN)
+activate IBANAccessProvider
+IBANAccessProvider -> DB: get access token by domain
+activate DB
+DB --> IBANAccessProvider: token
+deactivate
+IBANAccessProvider -> Sphonic: iban workflow(token, iban, firstName, lastName)
+activate Sphonic
+Sphonic --> IBANAccessProvider: response(result(PASS/FAIL/REVIEW/NONE))
+deactivate Sphonic
+alt#Gold #Pink finalResult=FAIL/REVIEW/NONE
+    IBANAccessProvider --> Cashier: checkAuthorization(REJECT/REVIEW/NOT_FILLED)
+else #LightGreen finalResult=PASS
+
+    IBANAccessProvider --> Cashier: checkAuthorization(ACCEPT)
+    end
+ref over Cashier: Store processor account with verification status
+
+deactivate IBANAccessProvider
+deactivate Cashier
+@enduml

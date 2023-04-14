@@ -1,0 +1,40 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "CASINO": {
+      "PROGRESSIVE_BALANCES": {
+        "FIELDS": {
+          "WON_BY_AMOUNT": {
+            "LABEL": "Won by Amount"
+          }
+        },
+        "NAVIGATION_TABS": {
+          "PROGRESSIVE_FEEDS": "Progressive Jackpot Balances",
+          "CONFIGURATION": "Configuration",
+          "SELECT_DOMAIN": "Select a domain to get started."
+        },
+        "REGISTERED_FIELDS": {
+          "ID": "Id",
+          "REGISTERED_ON": "Registered On",
+          "LAST_UPDATED_ON": "Last Updated On",
+          "MODULE_NAME": "Module Name",
+          "GAME_SUPPLIER_NAME": "Module Supplier",
+          "ENABLED": "Enabled"
+        }
+      },
+      "REGISTERED_PROGRESSIVE_FEEDS": {
+        "EDIT": {
+          "SUCCESS": "Registered Progressive Feed successfully edited.",
+          "ERROR": "Error encountered while editing registered progressive feed .",
+          "FLAG": {
+            "CONFIRM": {
+              "TITLE": "Are you sure you want to make the following change?"
+            },
+            "CHANGE_FIELD": "Change field",
+            "FROM": " from ",
+            "TO_VALUE": " to "
+          }
+        }
+      }
+    }
+  }
+}

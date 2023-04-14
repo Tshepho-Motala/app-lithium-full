@@ -1,0 +1,83 @@
+{
+	"GLOBAL": {
+		"GRANULARITY": {
+			"FORYEAR": "for the year",
+			"FORMONTH": "for the month",
+			"FORDAY": "for the day",
+			"FORWEEK": "for the week",
+			"ANY": "Any"
+		},
+		"BONUS": {
+			"TYPE": {
+				"2": "Trigger",
+				"TRIGGER": {
+					"0": "Manuel",
+					"1": "Deposit",
+					"2": "Login",
+					"3": "Refer-a-friend"
+				}
+			}
+		}
+	},
+	"UI_NETWORK_ADMIN": {
+		"BONUS": {
+			"TITLE": {
+				"TRIGGERS": "Trigger"
+			},
+			"EXAMPLE": {
+				"LABEL": "Example"
+			},
+			"TRIGGER": {
+				"ANY": "Any",
+				"ANYEXPLAIN": "If checked this bonus will be applicable for any deposit.",
+				"EXPLAIN": {
+					"5": "This bonus will be allocated if the player completes {{type}} # {{amount}} in total.",
+					"4": "This bonus will be allocated if the player completes {{type}} # {{amount}} for the week.",
+					"3": "This bonus will be allocated if the player completes {{type}} # {{amount}} for the day.",
+					"2": "This bonus will be allocated if the player completes {{type}} # {{amount}} for the month.",
+					"1": "This bonus will be allocated if the player completes {{type}} # {{amount}} for the year."
+				},
+				"TYPE": {
+					"TITLE": "Trigger Type",
+					"0": "Manual",
+					"1": "Deposit",
+					"2": "Login",
+					"3": "Refer a Friend"
+				},
+				"AMOUNT": {
+					"TITLE": "Number"
+				},
+				"GRANULARITY": {
+					"TITLE": "Trigger",
+					"1": "for the year",
+					"2": "for the month",
+					"3": "for the day",
+					"4": "for the week",
+					"5": "in total",
+					"6": "for the hour",
+					"ANY": "Any"
+				}
+			},
+			"TRIGGERAMOUNT": {
+				"LABEL": "Number",
+				"DESCRIPTION": "This is the amount combined with the selection below to determine when the bonus should be allocated."
+			},
+			"TRIGGERGRANULARITY": {
+				"LABEL": "",
+				"DESCRIPTION": "Please see the example below for and explanation of the trigger selected."
+			},
+			"ADD": {
+				"BASIC": {
+					"TYPE": {
+						"DESCRIPTION": "Please select the type of bonus to create"
+					},
+					"TRIGGERTYPE": {
+						"LABEL": "Trigger Type",
+						"PLACEHOLDER": "",
+						"DESCRIPTION": "Please select the type of trigger for this bonus."
+					}
+				}
+			}
+		}
+	}
+}

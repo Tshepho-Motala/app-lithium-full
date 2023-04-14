@@ -1,0 +1,13 @@
+{
+	"UI_NETWORK_ADMIN": {
+		"COUNTRY": {
+			"FIELDS": {
+				"NAME": "Default country",
+				"COUNTRY": {
+					"NAME": "Default country",
+					"DESCRIPTION": "Default country for domain"
+				}
+			}
+		}
+	}
+}

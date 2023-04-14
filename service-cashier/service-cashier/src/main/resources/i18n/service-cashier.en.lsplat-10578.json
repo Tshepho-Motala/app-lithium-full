@@ -1,0 +1,13 @@
+{
+  "SERVICE-CASHIER": {
+    "AUTOWITHDRAWALS": {
+      "RULESETS": {
+        "RULE": {
+          "FIELD": {
+            "SYSTEM_WD_OVER_BALANCE_LIMIT": "System withdrawal over balance limit"
+          }
+        }
+      }
+    }
+  }
+}

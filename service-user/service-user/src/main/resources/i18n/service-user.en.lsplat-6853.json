@@ -1,0 +1,7 @@
+{
+  "ERROR_DICTIONARY": {
+    "REGISTRATION": {
+      "TIME_SLOT_LIMIT_INVALID_RANGE": "Time-Slot-Limit-Start & Time-Slot-Limit-End difference must be within a 24h period '00:00 - 23:59' & in 24h format HH:MM"
+    }
+  }
+}

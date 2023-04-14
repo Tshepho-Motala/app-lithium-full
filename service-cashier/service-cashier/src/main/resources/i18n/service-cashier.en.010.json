@@ -1,0 +1,13 @@
+{
+  "SERVICE-CASHIER": {
+    "AUTOWITHDRAWALS": {
+      "RULESETS": {
+        "RULE": {
+          "FIELD": {
+            "VERIFICATION_STATUS": "Verification Status"
+          }
+        }
+      }
+    }
+  }
+}

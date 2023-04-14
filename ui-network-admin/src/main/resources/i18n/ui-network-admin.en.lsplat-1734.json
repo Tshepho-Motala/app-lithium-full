@@ -1,0 +1,11 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "DOMAIN": {
+      "SETTINGS": {
+        "ERRORS": {
+          "COULD_NOT_RETRIEVE": "Could not retrieve domain settings"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,13 @@
+<div class="col-lg-4 col-md-12">
+	<div class="info-box">
+		<span class="info-box-icon info-box-icon-lith bg-{{data.color}}"><i class="{{data.icon}}"></i></span>
+
+		<div class="info-box-content info-box-content-lith">
+			<span class="info-box-text">{{data.titleKey|translate}}</span>
+			<span class="info-box-number">{{data.countcurrent}}</span>
+			<span><small><b>{{data.countlast1}}</b> last {{granularityKey|translate|lowercase}}</small></span><br/>
+			<span><small><b>{{data.countlast2}}</b> previous {{granularityKey|translate|lowercase}}</small></span><br/>
+			<span><small><b>{{data.counttotal}}</b> {{'GLOBAL.GRANULARITY.ALL_TIME'|translate|lowercase}}</small></span>
+		</div>
+	</div>
+</div>

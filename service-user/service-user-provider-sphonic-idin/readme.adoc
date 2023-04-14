@@ -1,0 +1,12 @@
+= iDin registration
+==================
+
+== Timeouts
+We need to cater for situation when the system experiences a timeout connection. When not handled this will result in
+a system crush and can also be used to ensure the system performs optimally. In order to simulate a timeout connection error
+we need to perform the steps below:
+
+1. Login to LBO and go to provider settings and for iDin under the register tab
+2. Under the iDin url setting replace it with : https://universal-router.stg.sphoniclabs.net/d03bd5dc-a450-4b23-a806-213bcf834224/TimeoutSim
+3. You can change the timeout settings as well because the link points to a URL that points to a resource that runs an infinite loop
+4. Execute your postman scripts to get the results

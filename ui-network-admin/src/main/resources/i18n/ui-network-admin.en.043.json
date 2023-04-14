@@ -1,0 +1,17 @@
+{
+	"UI_NETWORK_ADMIN": {
+		"MAIL": {
+			"TEMPLATES": {
+				"TEST": {
+					"TITLE": "E-mail template quick test",
+					"FIELDS": {
+						"RECIPIENTEMAIL": {
+							"NAME": "Recipient Email",
+							"DESCRIPTION": "The email address to send the test email to"
+						}
+					}
+				}
+			}
+		}
+	}
+}

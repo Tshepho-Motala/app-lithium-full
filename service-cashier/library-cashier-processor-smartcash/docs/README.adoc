@@ -1,0 +1,10 @@
+Checkout Backoffice sendbox:
+url: https://developers.smartcashpsb.ng/login
+user: lsngdevelop
+psw: Livescore1!
+otp sent to: kaloyan.todorov@livescore.com
+
+
+user: lsdev_mk
+psw: MyAirtelP@ss1
+otp sent to: mykola.klipailo@onseo.biz

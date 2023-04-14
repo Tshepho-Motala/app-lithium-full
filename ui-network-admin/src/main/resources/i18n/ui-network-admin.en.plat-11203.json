@@ -1,0 +1,11 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "PLAYER": {
+      "INFO-HEADER": {
+        "LT_DEPOSIT_ATTEMPTS": "LT Deposit Attempts",
+        "LT_DEPOSIT_SUCCESS": "LT Deposit Success",
+        "LT_PLACED_TO": "LT Placed TO"
+      }
+    }
+  }
+}

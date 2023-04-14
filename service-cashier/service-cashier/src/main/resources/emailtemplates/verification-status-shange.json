@@ -1,0 +1,63 @@
+{
+  "name": "verification.status.[statusName]",
+  "subject": "Restriction action was applied",
+  "body": "<html><body><p>[statusName] possible values are : 'age_only_verified' , 'externally_verified' , 'underaged' , 'sof_verified' , 'manually_verified' , 'unverified_level'</p><p></p><br/><p>Template name examples: </p><br/><p>verification.status.age_only_verified</p><br/><p>verification.status.unverified_level</p></body></html>",
+  "placeholders": [
+    {
+      "name": "%user.userName%",
+      "description": "The player's name"
+    },
+    {
+      "name": "%user.firstName%",
+      "description": "The player's first name"
+    },
+    {
+      "name": "%user.lastName%",
+      "description": "The player's last name"
+    },
+    {
+      "name": "%user.lastNamePrefix%",
+      "description": "The player's last name predix"
+    },
+    {
+      "name": "%user.emailAddress%",
+      "description": "The player's email address"
+    },
+    {
+      "name": "%user.cellphoneNumber%",
+      "description": "The player's phone number"
+    },
+    {
+      "name": "%user.verificationStatus%",
+      "description": "The player's verification status"
+    },
+    {
+      "name": "%user.guid%",
+      "description": "The player's giId"
+    },
+    {
+      "name": "%user.playerLink%",
+      "description": "The player's account link"
+    },
+    {
+      "name": "%user.accountStatus%",
+      "description": "The player's account status"
+    },
+    {
+      "name": "%user.ageVerified%",
+      "description": "The player's age was verified"
+    },
+    {
+      "name": "%user.addressVerified%",
+      "description": "The player's address was verified"
+    },
+    {
+      "name": "%user.dateOfBirth%",
+      "description": "The player's DOB"
+    },
+    {
+      "name": "%user.createdDate%",
+      "description": "Date create of the account"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "MAIL": {
+      "TEMPLATES": {
+        "FIELDS": {
+          "FROM": {
+            "NAME": "From Email Address",
+            "DESCRIPTION": "From Email Address"
+          }
+        }
+      }
+    }
+  }
+}

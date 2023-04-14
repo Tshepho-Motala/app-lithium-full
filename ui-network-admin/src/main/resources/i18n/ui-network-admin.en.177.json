@@ -1,0 +1,15 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "PLAYER": {
+      "TAB": {
+        "CASHIERTRANSACTIONS": "Cashier Transactions"
+      }
+    },
+    "CASHIER": {
+      "REMARKS": {
+        "TITLE": "Remarks",
+        "NOREMARKS": "No remarks added yet."
+      }
+    }
+  }
+}

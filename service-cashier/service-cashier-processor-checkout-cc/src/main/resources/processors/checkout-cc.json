@@ -1,0 +1,99 @@
+{
+	"name": "Checkout-cc",
+	"code": "checkout-cc",
+	"url": "service-cashier-processor-checkout-cc",
+	"methodNames": [
+		"checkout-cc"
+	],
+	"deposit": true,
+	"fees": {
+		"flat": 0,
+		"percentage": 0,
+		"minimum": 0
+	},
+	"withdraw": true,
+	"limits": {
+		"minAmount": 2500,
+		"maxAmount": 0,
+		"maxAmountDay": 0,
+		"maxAmountWeek": 0,
+		"maxAmountMonth": 0,
+		"maxTransactionsDay": 0,
+		"maxTransactionsWeek": 0,
+		"maxTransactionsMonth": 0
+	},
+	"properties": [
+		{
+			"name": "payment_form_url",
+			"defaultValue": "",
+			"type": "url",
+			"description": "Payment Form URL."
+		},
+		{
+			"name": "use_sendbox",
+			"defaultValue": "false",
+			"type": "boolean",
+			"description": "Choose whether to use test ot live environment"
+		},
+		{
+			"name": "payments_api",
+			"defaultValue": "https://api.checkout.com/payments",
+			"type": "url",
+			"description": "The base URL for the payment api"
+		},
+		{
+			"name": "use_3DSecure",
+			"defaultValue": "true",
+			"type": "boolean",
+			"description": "Choose whether to use 3DS"
+		},
+		{
+			"name": "public_key",
+			"defaultValue": "",
+			"type": "string",
+			"description": "Checkout API publicKey. Please paste your public key here."
+		},
+		{
+			"name": "secret_key",
+			"defaultValue": "",
+			"type": "string",
+			"description": "Checkout API secretKey. Please paste your secret key here."
+		},
+		{
+			"name": "send_billing_address",
+			"defaultValue": "true",
+			"type": "boolean",
+			"description": "Send billing address to checkout to enable AVS check. Default is true."
+		},
+		{
+			"name": "void_on_expire",
+			"defaultValue": "false",
+			"type": "boolean",
+			"description": "Void expired transaction."
+		},
+		{
+			"name": "pending_on_redirect",
+			"defaultValue": "false",
+			"type": "boolean",
+			"description": "Enables feature to return status pending on redirect in case transaction is not in final state."
+		},
+		{
+			"name": "attempt_n3d",
+			"defaultValue": "false",
+			"type": "boolean",
+			"description": "Enables auto downgrade payment to no-3Ds in case bank does not support 3Ds."
+		},
+		{
+			"name": "allow_card_types",
+			"defaultValue": "debit",
+			"type": "frontend",
+			"description": "Allowed card types (debit, credit)."
+		},
+		{
+			"name": "exemption",
+			"defaultValue": "transaction_risk_assessment",
+			"type": "string",
+			"description": "Specifies an exemption reason so that the payment is not processed using 3D Secure authentication."
+		}
+	]
+}

@@ -1,0 +1,1 @@
+ALTER TABLE `report_run` ADD COLUMN `period_string` VARCHAR(255) DEFAULT NULL;

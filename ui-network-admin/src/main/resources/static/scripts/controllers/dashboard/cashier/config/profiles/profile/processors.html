@@ -1,0 +1,30 @@
+<div class="row v-reset-row ">
+	<div class="col-xs-12" style="margin-bottom: 10px">
+		<button-add ng-click="controller.addProcessor()"></button-add>
+	</div>
+</div>
+<div class="row v-reset-row " ng-repeat="dmp in controller.processors | filter:filterValue ">
+	<div class="col-md-8 col-md-offset-2">
+		<div class="box" ng-class="{ 'box-danger': dmp.deleted, 'box-primary': dmp.enabled, 'disabled': dmp.deleted}">
+			<div class="box-header with-border">
+				<div class="user-block">
+					<div class="widget-user-image">
+						<img ng-if="dmp.domainMethodProcessor.domainMethod.image" class="img-circle img-responsive" src="//:0" ng-src="data:{{dmp.domainMethodProcessor.domainMethod.image.filetype}};base64,{{dmp.domainMethodProcessor.domainMethod.image.base64}}" alt="">
+						<img ng-if="!dmp.domainMethodProcessor.domainMethod.image && dmp.domainMethodProcessor.domainMethod.method.image" class="img-circle img-responsive" src="//:0" ng-src="data:{{dmp.domainMethodProcessor.domainMethod.method.image.filetype}};base64,{{dmp.domainMethodProcessor.domainMethod.method.image.base64}}" alt="">
+					</div>
+					<span class="username"><a ui-sref="dashboard.cashier.method.processor.edit({dmpId:dmp.id})">{{dmp.domainMethodProcessor.processor.name}}</a></span>
+					<span class="description">{{dmp.domainMethodProcessor.domainMethod.name}}</span>
+				</div>
+				<div class="box-tools">
+					<span class="description">{{dmp.weight}}</span>
+					<button type="button" class="btn btn-box-tool">
+						<i class="fa fa-edit"></i>
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<div ng-if="controller.processors.length === 0">
+	no processors
+</div>

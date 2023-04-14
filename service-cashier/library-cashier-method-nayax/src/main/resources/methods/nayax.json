@@ -1,0 +1,21 @@
+{
+	"name": "Nayax",
+	"code": "nayax",
+	"image": {
+		"filename": "/methods/nayax.png",
+		"filetype": "image/png"
+	},
+	"depositStages": [
+		{
+			"number": 1,
+			"title": "Nayax Card Processor",
+			"description": null,
+			"inputFields": []
+		},
+		{
+			"number": 2,
+			"title": "Nayax Card Processor",
+			"description": "Please present your card to the Nayax card terminal."
+		}
+	]
+}

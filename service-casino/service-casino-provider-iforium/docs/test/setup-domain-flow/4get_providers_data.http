@@ -1,0 +1,7 @@
+### store providerId after call data[0].id
+GET http://localhost:9800/services/service-domain/domain/livescore_uk/providers
+Authorization: Bearer {{USERTOKEN_UK}}
+
+###
+GET http://localhost:9800/services/service-domain/domain/livescore_ua/providers
+Authorization: Bearer {{USERTOKEN_UA}}

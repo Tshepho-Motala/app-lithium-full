@@ -1,0 +1,29 @@
+<div class="container-fluid">
+	<lit-header
+		title="{{ title | translate}}"
+		description="{{ description | translate}}">
+	</lit-header>
+	
+	<button-bar>
+        <button-back ui-sref="dashboard.ecosystems.list"></button-back>
+        <button-enable ng-if="!controller.model.enabled" ng-click="controller.enable(true)"></button-enable>
+        <button-disable ng-if="controller.model.enabled" ng-click="controller.enable(false)"></button-disable>
+	</button-bar>
+	<div class="card card-block col-md-8 col-md-offset-2">
+        <form ng-submit="controller.save()" novalidate>
+            <div class="row v-reset-row ">
+                <div class="col-xs-12">
+                    <formly-form model="controller.model" fields="controller.fields" form="controller.form" options="controller.options">
+                    </formly-form>
+                </div>
+            </div>
+            <div class="row v-reset-row ">
+                <div class="col-xs-12">
+                    <button-edit  ng-click="controller.edit()" ng-show="controller.options.formState.readOnly"></button-edit>
+                    <button-submit ng-show="!controller.options.formState.readOnly"></button-submit>
+                    <button-cancel ng-show="!controller.options.formState.readOnly" ng-click="controller.cancel()"></button-cancel>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

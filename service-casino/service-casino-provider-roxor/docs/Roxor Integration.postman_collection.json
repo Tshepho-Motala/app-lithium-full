@@ -1,0 +1,3712 @@
+{
+	"info": {
+		"_postman_id": "02d3599d-5238-4fad-95d3-72a7957b21aa",
+		"name": "Roxor Integration",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "System Authentication",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									"",
+									"tests[\"Response time is less than 200ms\"] = responseTime < 200;",
+									"",
+									"var jsonData = JSON.parse(responseBody);",
+									"tests[\"Token reveived\"] = jsonData.expires_in === 43199;",
+									"",
+									"postman.setEnvironmentVariable(\"SYSTEMTOKEN\", jsonData.access_token);",
+									""
+								]
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "system",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "VERYBLOODYgoodpasswordFORuseInSystemAUTHENTICATION99",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic c3lzdGVtOlZFUllCTE9PRFlnb29kcGFzc3dvcmRGT1J1c2VJblN5c3RlbUFVVEhFTlRJQ0FUSU9OOTk="
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{gateway}}/server-oauth2/oauth/token",
+							"host": [
+								"{{gateway}}"
+							],
+							"path": [
+								"server-oauth2",
+								"oauth",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Admin Authentication",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									"",
+									"tests[\"Response time is less than 200ms\"] = responseTime < 200;",
+									"",
+									"var jsonData = JSON.parse(responseBody);",
+									"tests[\"Token reveived\"] = jsonData.expires_in === 43199;",
+									"",
+									"postman.setEnvironmentVariable(\"ADMINTOKEN\", jsonData.access_token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "acme",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "acmesecret",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic YWNtZTphY21lc2VjcmV0"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "{{admin_username}}",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "{{admin_password}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{gateway}}/server-oauth2/oauth/token",
+							"host": [
+								"{{gateway}}"
+							],
+							"path": [
+								"server-oauth2",
+								"oauth",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Player Authentication",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									"",
+									"tests[\"Response time is less than 1000ms\"] = responseTime < 1000;",
+									"",
+									"var jsonData = JSON.parse(responseBody);",
+									"tests[\"Token reveived\"] = jsonData.access_token;",
+									"",
+									"postman.setEnvironmentVariable(\"USERTOKEN\", jsonData.access_token);",
+									"postman.setEnvironmentVariable(\"REFRESHTOKEN\", jsonData.refresh_token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "acme",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "acmesecret",
+									"type": "string"
+								},
+								{
+									"key": "saveHelperData",
+									"value": true,
+									"type": "boolean"
+								},
+								{
+									"key": "showPassword",
+									"value": false,
+									"type": "boolean"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic YWNtZTphY21lc2VjcmV0",
+								"disabled": true
+							},
+							{
+								"key": "X-Forwarded-For",
+								"value": "10.0.0.2",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "grant_type",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "{{playerdomain}}/{{playerusername}}",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "{{playerpassword}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{gateway}}/server-oauth2/oauth/token",
+							"host": [
+								"{{gateway}}"
+							],
+							"path": [
+								"server-oauth2",
+								"oauth",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find LoginEvent By SessionKey",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{SYSTEMTOKEN}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Length",
+								"value": "<calculated when request is sent>",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{gateway}}/service-user/system/loginevents/from-session-key?sessionKey={{SESSION_KEY}}",
+							"host": [
+								"{{gateway}}"
+							],
+							"path": [
+								"service-user",
+								"system",
+								"loginevents",
+								"from-session-key"
+							],
+							"query": [
+								{
+									"key": "sessionKey",
+									"value": "{{SESSION_KEY}}"
+								}
+							]
+						},
+						"description": "    "
+					},
+					"response": []
+				},
+				{
+					"name": "Find LoginEvent By UserGuid",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{SYSTEMTOKEN}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{gateway}}/service-user/system/loginevents/last-login-event?userGuid={{roxorgame_playerid}}",
+							"host": [
+								"{{gateway}}"
+							],
+							"path": [
+								"service-user",
+								"system",
+								"loginevents",
+								"last-login-event"
+							],
+							"query": [
+								{
+									"key": "userGuid",
+									"value": "{{roxorgame_playerid}}"
+								}
+							]
+						},
+						"description": "    "
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "Player Signup v2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									"",
+									"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"rflamengo_rxr\",\n    \"password\": \"Gauteng\",\n    \"cellphoneNumber\": \"0832092310\",\n    \"firstName\": \"Richard\",\n    \"lastName\": \"Flamengo\",\n    \"email\": \"rflamengo@gmail.com\"\n}"
+						},
+						"url": {
+							"raw": "{{gateway}}/service-user/frontend/{{playerdomain}}/register/v2",
+							"host": [
+								"{{gateway}}"
+							],
+							"path": [
+								"service-user",
+								"frontend",
+								"{{playerdomain}}",
+								"register",
+								"v2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Player Change Password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{USERTOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "Gauteng321",
+							"options": {
+								"raw": {
+									"language": "text"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{gateway}}/service-user/profile/changepassword",
+							"host": [
+								"{{gateway}}"
+							],
+							"path": [
+								"service-user",
+								"profile",
+								"changepassword"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Player Update Password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{USERTOKEN}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"currentPassword\" : \"Gauteng321\",\n    \"newPassword\" : \"Gauteng\",\n    \"confirmPassword\" : \"Gauteng\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{gateway}}/service-user/profile/updatepassword",
+							"host": [
+								"{{gateway}}"
+							],
+							"path": [
+								"service-user",
+								"profile",
+								"updatepassword"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Test Wrapper",
+			"item": [
+				{
+					"name": "Get Domain Game List",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{USERTOKEN}}"
+							}
+						],
+						"url": {
+							"raw": "{{gateway}}/service-games/games/{{playerdomain}}/domainGameData",
+							"host": [
+								"{{gateway}}"
+							],
+							"path": [
+								"service-games",
+								"games",
+								"{{playerdomain}}",
+								"domainGameData"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Start Demo Game",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{SYSTEMTOKEN}}"
+							}
+						],
+						"url": {
+							"raw": "{{gateway}}/service-games/games/livescore_nigeria/demoGame?gameguid=service-casino-provider-roxor_play-banghai&lang=en",
+							"host": [
+								"{{gateway}}"
+							],
+							"path": [
+								"service-games",
+								"games",
+								"livescore_nigeria",
+								"demoGame"
+							],
+							"query": [
+								{
+									"key": "gameguid",
+									"value": "service-casino-provider-roxor_play-banghai"
+								},
+								{
+									"key": "lang",
+									"value": "en"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Start Game",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{SYSTEMTOKEN}}"
+							}
+						],
+						"url": {
+							"raw": "{{gateway}}/service-games/games/livescore_nigeria/startGame?gameguid=service-casino-provider-roxor_play-banghai&lang=en&token={{USERTOKEN}}&currency=GBP",
+							"host": [
+								"{{gateway}}"
+							],
+							"path": [
+								"service-games",
+								"games",
+								"livescore_nigeria",
+								"startGame"
+							],
+							"query": [
+								{
+									"key": "gameguid",
+									"value": "service-casino-provider-roxor_play-banghai"
+								},
+								{
+									"key": "lang",
+									"value": "en"
+								},
+								{
+									"key": "token",
+									"value": "{{USERTOKEN}}"
+								},
+								{
+									"key": "currency",
+									"value": "GBP"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Game Url",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"type": "text",
+								"value": "Bearer {{USERTOKEN}}"
+							}
+						],
+						"url": {
+							"raw": "{{gateway}}/service-games/games/{{playerdomain}}/getGameUrl?token={{USERTOKEN}}&gameguid=service-casino-provider-roxor_play-banghai&lang=en&currency=GBP",
+							"host": [
+								"{{gateway}}"
+							],
+							"path": [
+								"service-games",
+								"games",
+								"{{playerdomain}}",
+								"getGameUrl"
+							],
+							"query": [
+								{
+									"key": "machineGUID",
+									"value": "",
+									"disabled": true
+								},
+								{
+									"key": "token",
+									"value": "{{USERTOKEN}}"
+								},
+								{
+									"key": "gameguid",
+									"value": "service-casino-provider-roxor_play-banghai"
+								},
+								{
+									"key": "lang",
+									"value": "en"
+								},
+								{
+									"key": "currency",
+									"value": "GBP"
+								},
+								{
+									"key": "tutorial",
+									"value": null,
+									"disabled": true
+								},
+								{
+									"key": "platform",
+									"value": "tablet",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "ServerToServer",
+			"item": [
+				{
+					"name": "GamePlay",
+					"item": [
+						{
+							"name": "Spin-Win",
+							"item": [
+								{
+									"name": "Call 1 - START DEBIT CREDIT FINISH - SUCCESS",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"tests[\"Status code is 200\"] = responseCode.code === 200;",
+													"",
+													"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "SessionKey",
+												"type": "text",
+												"value": "{{SESSION_KEY}}"
+											},
+											{
+												"key": "GameplayId",
+												"type": "text",
+												"value": "spin-win-52"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"playerId\" : \"{{roxorgame_playerid}}\",\n  \"website\" : \"{{roxorgame_website}}\",\n  \"platform\" : \"desktop\",\n  \"gameKey\" : \"{{roxorgame_gamekey}}\",\n  \"gamePlayId\" : \"spin-win-52\",\n  \"operations\" : [{\n    \"operationType\" : \"START_GAME_PLAY\"\n  },{\n    \"operationType\" : \"TRANSFER\",\n    \"amount\" : {\n        \"currency\" : \"GBP\",\n        \"amount\" : 10\n    },\n    \"transferId\" : \"spin_win_52-transfer-01-debit\",\n    \"type\" : \"DEBIT\"\n  },{\n    \"operationType\" : \"TRANSFER\",\n    \"amount\" : {\n        \"currency\" : \"GBP\",\n        \"amount\" : 100\n    },\n    \"transferId\" : \"spin_win_52-transfer-02-credit\",\n    \"type\" : \"CREDIT\"\n  },{\n    \"operationType\" : \"FINISH_GAME_PLAY\"\n  }]\n}"
+										},
+										"url": {
+											"raw": "{{gateway}}/service-casino-provider-roxor/rgp/game-play",
+											"host": [
+												"{{gateway}}"
+											],
+											"path": [
+												"service-casino-provider-roxor",
+												"rgp",
+												"game-play"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Call 1 - START DEBIT CREDIT FINISH - SUCCESS Copy",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"tests[\"Status code is 200\"] = responseCode.code === 200;",
+													"",
+													"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "SessionKey",
+												"type": "text",
+												"value": "52055308-f3dd-4074-b2e5-9891ee9ca955"
+											},
+											{
+												"key": "GameplayId",
+												"type": "text",
+												"value": "7f935e7a-64eb-42b9-b181-f49369035815"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"playerId\": \"fb930e38-e12b-4708-a3a5-4ce4ad9f3a2e\",\n    \"website\": \"livescorebet\",\n    \"platform\": \"desktop\",\n    \"gameKey\": \"blackjack-a\",\n    \"gamePlayId\": \"7f935e7a-64eb-42b9-b181-f49369035815\",\n    \"operations\": [\n        {\n            \"operationType\": \"START_GAME_PLAY\"\n        },\n        {\n            \"operationType\": \"TRANSFER\",\n            \"amount\": {\n                \"currency\": \"GBP\",\n                \"amount\": 10\n            },\n            \"transferId\": \"7d171cb2-9bcb-4848-bc8c-ba612628f5da\",\n            \"type\" : \"DEBIT\"\n        }\n    ]\n}"
+										},
+										"url": {
+											"raw": "{{gateway}}/service-casino-provider-roxor/rgp/game-play",
+											"host": [
+												"{{gateway}}"
+											],
+											"path": [
+												"service-casino-provider-roxor",
+												"rgp",
+												"game-play"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Spin-Lose",
+							"item": [
+								{
+									"name": "Call 1 - START DEBIT FINISH - SUCCESS",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"tests[\"Status code is 200\"] = responseCode.code === 200;",
+													"",
+													"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "SessionKey",
+												"type": "text",
+												"value": "{{SESSION_KEY}}"
+											},
+											{
+												"key": "GameplayId",
+												"type": "text",
+												"value": "spin-lose-05"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"playerId\" : \"{{roxorgame_playerid}}\",\n  \"website\" : \"{{roxorgame_website}}\",\n  \"platform\" : \"desktop\",\n  \"gameKey\" : \"{{roxorgame_gamekey}}\",\n  \"gamePlayId\" : \"spin-lose-05\",\n  \"operations\" : [{\n    \"operationType\" : \"START_GAME_PLAY\"\n  },{\n    \"operationType\" : \"TRANSFER\",\n    \"amount\" : {\n        \"currency\" : \"GBP\",\n        \"amount\" : 10\n    },\n    \"transferId\" : \"spin-lose-05-transfer-01-debit\",\n    \"type\" : \"DEBIT\"\n  }, {\n    \"operationType\" : \"FINISH_GAME_PLAY\"\n  }]\n}"
+										},
+										"url": {
+											"raw": "{{gateway}}/service-casino-provider-roxor/rgp/game-play",
+											"host": [
+												"{{gateway}}"
+											],
+											"path": [
+												"service-casino-provider-roxor",
+												"rgp",
+												"game-play"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Call 1 - START FREE_PLAY FINISH - SUCCESS",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"tests[\"Status code is 200\"] = responseCode.code === 200;",
+													"",
+													"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "SessionKey",
+												"type": "text",
+												"value": "{{SESSION_KEY}}"
+											},
+											{
+												"key": "GameplayId",
+												"type": "text",
+												"value": "free-spin-lose-02"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"gameKey\": \"{{roxorgame_gamekey}}\",\n    \"gamePlayId\": \"free-spin-lose-02\",\n    \"operations\": [\n        {\n            \"operationType\": \"START_GAME_PLAY\"\n        },\n        {\n            \"amount\": {\n                \"amount\": 25,\n                \"currency\": \"GBP\"\n            },\n            \"operationType\": \"FREE_PLAY\",\n            \"source\": {\n                \"sourceId\": \"48\",\n                \"sourceType\": \"roxorgaminglocal\"\n            },\n            \"transferId\": \"free-spin-lose-02-transfer-01\"\n        },\n        {\n            \"operationType\": \"FINISH_GAME_PLAY\"\n        }\n    ],\n    \"platform\": \"desktop\",\n    \"playerId\": \"{{roxorgame_playerid}}\",\n    \"website\": \"{{roxorgame_website}}\"\n}"
+										},
+										"url": {
+											"raw": "{{gateway}}/service-casino-provider-roxor/rgp/game-play",
+											"host": [
+												"{{gateway}}"
+											],
+											"path": [
+												"service-casino-provider-roxor",
+												"rgp",
+												"game-play"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Spin-Duplicate-Operations-Pass",
+							"item": [
+								{
+									"name": "Call 1 - START DEBIT CREDIT FINISH - SUCCESS",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"tests[\"Status code is 200\"] = responseCode.code === 200;",
+													"",
+													"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "SessionKey",
+												"type": "text",
+												"value": "{{SESSION_KEY}}"
+											},
+											{
+												"key": "GameplayId",
+												"type": "text",
+												"value": "dup-pass-02"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"playerId\" : \"{{roxorgame_playerid}}\",\n  \"website\" : \"{{roxorgame_website}}\",\n  \"platform\" : \"desktop\",\n  \"gameKey\" : \"{{roxorgame_gamekey}}\",\n  \"gamePlayId\" : \"dup-pass-02\",\n  \"operations\" : [ {\n    \"operationType\" : \"START_GAME_PLAY\"\n  }, {\n    \"operationType\" : \"TRANSFER\",\n    \"amount\" : {\n        \"currency\" : \"GBP\",\n        \"amount\" : 10\n    },\n    \"transferId\" : \"dup-pass-02-transfer-01-debit\",\n    \"type\" : \"DEBIT\"\n  },{\n    \"operationType\" : \"TRANSFER\",\n    \"amount\" : {\n        \"currency\" : \"GBP\",\n        \"amount\" : 100\n    },\n    \"transferId\" : \"dup-pass-02-transfer-02-credit\",\n    \"type\" : \"CREDIT\"\n  },{\n    \"operationType\" : \"FINISH_GAME_PLAY\"\n  }]\n}"
+										},
+										"url": {
+											"raw": "{{gateway}}/service-casino-provider-roxor/rgp/game-play",
+											"host": [
+												"{{gateway}}"
+											],
+											"path": [
+												"service-casino-provider-roxor",
+												"rgp",
+												"game-play"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Call 2 - DEBIT CREDIT FINISH - DUPLICATE",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"tests[\"Status code is 200\"] = responseCode.code === 200;",
+													"",
+													"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "SessionKey",
+												"type": "text",
+												"value": "{{SESSION_KEY}}"
+											},
+											{
+												"key": "GameplayId",
+												"type": "text",
+												"value": "dup-pass-02"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"playerId\" : \"{{roxorgame_playerid}}\",\n  \"website\" : \"{{roxorgame_website}}\",\n  \"platform\" : \"desktop\",\n  \"gameKey\" : \"{{roxorgame_gamekey}}\",\n  \"gamePlayId\" : \"dup-pass-02\",\n  \"operations\" : [{\n    \"operationType\" : \"TRANSFER\",\n    \"amount\" : {\n        \"currency\" : \"GBP\",\n        \"amount\" : 10\n    },\n    \"transferId\" : \"dup-pass-02-transfer-01-debit\",\n    \"type\" : \"DEBIT\"\n  },{\n    \"operationType\" : \"TRANSFER\",\n    \"amount\" : {\n        \"currency\" : \"GBP\",\n        \"amount\" : 100\n    },\n    \"transferId\" : \"dup-pass-02-transfer-02-credit\",\n    \"type\" : \"CREDIT\"\n  },{\n    \"operationType\" : \"FINISH_GAME_PLAY\"\n  }]\n}"
+										},
+										"url": {
+											"raw": "{{gateway}}/service-casino-provider-roxor/rgp/game-play",
+											"host": [
+												"{{gateway}}"
+											],
+											"path": [
+												"service-casino-provider-roxor",
+												"rgp",
+												"game-play"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Spin-Duplicate-Operations-Error",
+							"item": [
+								{
+									"name": "Call 1 - START DEBIT CREDIT FINISH - SUCCESS",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"tests[\"Status code is 200\"] = responseCode.code === 200;",
+													"",
+													"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "SessionKey",
+												"type": "text",
+												"value": "{{SESSION_KEY}}"
+											},
+											{
+												"key": "GameplayId",
+												"type": "text",
+												"value": "dup-error-03"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"playerId\" : \"{{roxorgame_playerid}}\",\n  \"website\" : \"{{roxorgame_website}}\",\n  \"platform\" : \"desktop\",\n  \"gameKey\" : \"{{roxorgame_gamekey}}\",\n  \"gamePlayId\" : \"dup-error-03\",\n  \"operations\" : [ {\n    \"operationType\" : \"START_GAME_PLAY\"\n  }, {\n    \"operationType\" : \"TRANSFER\",\n    \"amount\" : {\n        \"currency\" : \"GBP\",\n        \"amount\" : 10\n    },\n    \"transferId\" : \"dup-error-03-transfer-01-debit\",\n    \"type\" : \"DEBIT\"\n  },{\n    \"operationType\" : \"TRANSFER\",\n    \"amount\" : {\n        \"currency\" : \"GBP\",\n        \"amount\" : 100\n    },\n    \"transferId\" : \"dup-error-03-transfer-02-credit\",\n    \"type\" : \"CREDIT\"\n  },{\n    \"operationType\" : \"FINISH_GAME_PLAY\"\n  }]\n}"
+										},
+										"url": {
+											"raw": "{{gateway}}/service-casino-provider-roxor/rgp/game-play",
+											"host": [
+												"{{gateway}}"
+											],
+											"path": [
+												"service-casino-provider-roxor",
+												"rgp",
+												"game-play"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Call 2 - START DEBIT CREDIT FINISH - ERROR",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"tests[\"Status code is 200\"] = responseCode.code === 200;",
+													"",
+													"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "SessionKey",
+												"type": "text",
+												"value": "{{SESSION_KEY}}"
+											},
+											{
+												"key": "GameplayId",
+												"type": "text",
+												"value": "dup-error-03"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"playerId\" : \"{{roxorgame_playerid}}\",\n  \"website\" : \"{{roxorgame_website}}\",\n  \"platform\" : \"desktop\",\n  \"gameKey\" : \"{{roxorgame_gamekey}}\",\n  \"gamePlayId\" : \"dup-error-03\",\n  \"operations\" : [ {\n    \"operationType\" : \"START_GAME_PLAY\"\n  }, {\n    \"operationType\" : \"TRANSFER\",\n    \"amount\" : {\n        \"currency\" : \"GBP\",\n        \"amount\" : 10\n    },\n    \"transferId\" : \"dup-error-03-transfer-01-debit\",\n    \"type\" : \"DEBIT\"\n  },{\n    \"operationType\" : \"TRANSFER\",\n    \"amount\" : {\n        \"currency\" : \"GBP\",\n        \"amount\" : 100\n    },\n    \"transferId\" : \"dup-error-03-transfer-02-credit\",\n    \"type\" : \"CREDIT\"\n  },{\n    \"operationType\" : \"FINISH_GAME_PLAY\"\n  }]\n}"
+										},
+										"url": {
+											"raw": "{{gateway}}/service-casino-provider-roxor/rgp/game-play",
+											"host": [
+												"{{gateway}}"
+											],
+											"path": [
+												"service-casino-provider-roxor",
+												"rgp",
+												"game-play"
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							]
+						},
+						{
+							"name": "Transfer-Cancel-Success",
+							"item": [
+								{
+									"name": "Call 1 - START DEBIT - SUCCESS",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"tests[\"Status code is 200\"] = responseCode.code === 200;",
+													"",
+													"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "SessionKey",
+												"type": "text",
+												"value": "{{SESSION_KEY}}"
+											},
+											{
+												"key": "GameplayId",
+												"type": "text",
+												"value": "transfer-cancel-11"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"playerId\" : \"{{roxorgame_playerid}}\",\n  \"website\" : \"{{roxorgame_website}}\",\n  \"platform\" : \"desktop\",\n  \"gameKey\" : \"{{roxorgame_gamekey}}\",\n  \"gamePlayId\" : \"transfer-cancel-11\",\n  \"operations\" : [ {\n    \"operationType\" : \"START_GAME_PLAY\"\n  }, {\n    \"operationType\" : \"TRANSFER\",\n    \"amount\" : {\n        \"currency\" : \"GBP\",\n        \"amount\" : 10\n    },\n    \"transferId\" : \"transfer-cancel-11-transfer-01-debit\",\n    \"type\" : \"DEBIT\"\n  }]\n}"
+										},
+										"url": {
+											"raw": "{{gateway}}/service-casino-provider-roxor/rgp/game-play",
+											"host": [
+												"{{gateway}}"
+											],
+											"path": [
+												"service-casino-provider-roxor",
+												"rgp",
+												"game-play"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Call 2 - CANCEL DEBIT from Call 1 - SUCCESS",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"tests[\"Status code is 200\"] = responseCode.code === 200;",
+													"",
+													"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "SessionKey",
+												"type": "text",
+												"value": "{{SESSION_KEY}}"
+											},
+											{
+												"key": "GameplayId",
+												"type": "text",
+												"value": "transfer-cancel-11"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"playerId\" : \"{{roxorgame_playerid}}\",\n  \"website\" : \"{{roxorgame_website}}\",\n  \"platform\" : \"desktop\",\n  \"gameKey\" : \"{{roxorgame_gamekey}}\",\n  \"gamePlayId\" : \"transfer-cancel-11\",\n  \"operations\" : [ {\n    \"operationType\" : \"CANCEL_TRANSFER\",\n    \"amount\" : {\n        \"currency\" : \"GBP\",\n        \"amount\" : 10\n    },\n    \"transferId\" : \"transfer-cancel-11-transfer-01-debit\",\n    \"type\" : \"DEBIT\"\n  }, {\n    \"operationType\" : \"FINISH_GAME_PLAY\"\n  }]\n}"
+										},
+										"url": {
+											"raw": "{{gateway}}/service-casino-provider-roxor/rgp/game-play",
+											"host": [
+												"{{gateway}}"
+											],
+											"path": [
+												"service-casino-provider-roxor",
+												"rgp",
+												"game-play"
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							]
+						},
+						{
+							"name": "Transfer-Cancel-Error-Prior-Credit",
+							"item": [
+								{
+									"name": "Call 1 - Start Debit Credit - Success",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"tests[\"Status code is 200\"] = responseCode.code === 200;",
+													"",
+													"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "SessionKey",
+												"type": "text",
+												"value": "{{SESSION_KEY}}"
+											},
+											{
+												"key": "GameplayId",
+												"type": "text",
+												"value": "transfer-cancel-error-03"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"playerId\" : \"{{roxorgame_playerid}}\",\n  \"website\" : \"{{roxorgame_website}}\",\n  \"platform\" : \"desktop\",\n  \"gameKey\" : \"{{roxorgame_gamekey}}\",\n  \"gamePlayId\" : \"transfer-cancel-error-03\",\n  \"operations\" : [{\n    \"operationType\" : \"START_GAME_PLAY\"\n  },{\n    \"operationType\" : \"TRANSFER\",\n    \"amount\" : {\n        \"currency\" : \"GBP\",\n        \"amount\" : 10\n    },\n    \"transferId\" : \"transfer-cancel-error-03-transfer-01-debit\",\n    \"type\" : \"DEBIT\"\n  },{\n    \"operationType\" : \"TRANSFER\",\n    \"amount\" : {\n        \"currency\" : \"GBP\",\n        \"amount\" : 100\n    },\n    \"transferId\" : \"transfer-cancel-error-03-transfer-02-credit\",\n    \"type\" : \"CREDIT\"\n  }]\n}"
+										},
+										"url": {
+											"raw": "{{gateway}}/service-casino-provider-roxor/rgp/game-play",
+											"host": [
+												"{{gateway}}"
+											],
+											"path": [
+												"service-casino-provider-roxor",
+												"rgp",
+												"game-play"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Call 2 - Transfer Cancel - Debit - Error",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"tests[\"Status code is 200\"] = responseCode.code === 200;",
+													"",
+													"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "SessionKey",
+												"type": "text",
+												"value": "{{SESSION_KEY}}"
+											},
+											{
+												"key": "GameplayId",
+												"type": "text",
+												"value": "transfer-cancel-error-03"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"playerId\" : \"{{roxorgame_playerid}}\",\n  \"website\" : \"{{roxorgame_website}}\",\n  \"platform\" : \"desktop\",\n  \"gameKey\" : \"{{roxorgame_gamekey}}\",\n  \"gamePlayId\" : \"transfer-cancel-error-03\",\n  \"operations\" : [ {\n    \"operationType\" : \"CANCEL_TRANSFER\",\n    \"amount\" : {\n        \"currency\" : \"GBP\",\n        \"amount\" : 10\n    },\n    \"transferId\" : \"transfer-cancel-error-03-transfer-01-debit\",\n    \"type\" : \"DEBIT\"\n  }, {\n    \"operationType\" : \"FINISH_GAME_PLAY\"\n  }]\n}"
+										},
+										"url": {
+											"raw": "{{gateway}}/service-casino-provider-roxor/rgp/game-play",
+											"host": [
+												"{{gateway}}"
+											],
+											"path": [
+												"service-casino-provider-roxor",
+												"rgp",
+												"game-play"
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							]
+						},
+						{
+							"name": "Transfer-Cancel-OutOfOrder-Ignore",
+							"item": [
+								{
+									"name": "Call 1 - Start, Debit - Success",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"tests[\"Status code is 200\"] = responseCode.code === 200;",
+													"",
+													"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "SessionKey",
+												"type": "text",
+												"value": "{{SESSION_KEY}}"
+											},
+											{
+												"key": "GameplayId",
+												"type": "text",
+												"value": "transfer-cancel-ignore-02"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"playerId\" : \"{{roxorgame_playerid}}\",\n  \"website\" : \"{{roxorgame_website}}\",\n  \"platform\" : \"desktop\",\n  \"gameKey\" : \"{{roxorgame_gamekey}}\",\n  \"gamePlayId\" : \"transfer-cancel-ignore-02\",\n  \"operations\" : [ {\n    \"operationType\" : \"START_GAME_PLAY\"\n  }, {\n    \"operationType\" : \"TRANSFER\",\n    \"amount\" : {\n        \"currency\" : \"GBP\",\n        \"amount\" : 10\n    },\n    \"transferId\" : \"transfer-cancel-ignore-02-transfer-01-debit\",\n    \"type\" : \"DEBIT\"\n  }]\n}"
+										},
+										"url": {
+											"raw": "{{gateway}}/service-casino-provider-roxor/rgp/game-play",
+											"host": [
+												"{{gateway}}"
+											],
+											"path": [
+												"service-casino-provider-roxor",
+												"rgp",
+												"game-play"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Call 2 - Cancel Before Transfer - Ignore",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"tests[\"Status code is 200\"] = responseCode.code === 200;",
+													"",
+													"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "SessionKey",
+												"type": "text",
+												"value": "{{SESSION_KEY}}"
+											},
+											{
+												"key": "GameplayId",
+												"type": "text",
+												"value": "transfer-cancel-ignore-02"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"playerId\" : \"{{roxorgame_playerid}}\",\n  \"website\" : \"{{roxorgame_website}}\",\n  \"platform\" : \"desktop\",\n  \"gameKey\" : \"{{roxorgame_gamekey}}\",\n  \"gamePlayId\" : \"transfer-cancel-ignore-02\",\n  \"operations\" : [ {\n    \"operationType\" : \"CANCEL_TRANSFER\",\n    \"amount\" : {\n        \"currency\" : \"GBP\",\n        \"amount\" : 10\n    },\n    \"transferId\" : \"transfer-cancel-ignore-02-cancel_transfer-01-debit\",\n    \"type\" : \"DEBIT\"\n  }, {\n    \"operationType\" : \"FINISH_GAME_PLAY\"\n  }]\n}"
+										},
+										"url": {
+											"raw": "{{gateway}}/service-casino-provider-roxor/rgp/game-play",
+											"host": [
+												"{{gateway}}"
+											],
+											"path": [
+												"service-casino-provider-roxor",
+												"rgp",
+												"game-play"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Call 3 - Transfer - Linked to Cancel Transfer Call 2 - Error",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"tests[\"Status code is 200\"] = responseCode.code === 200;",
+													"",
+													"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "SessionKey",
+												"type": "text",
+												"value": "{{SESSION_KEY}}"
+											},
+											{
+												"key": "GameplayId",
+												"type": "text",
+												"value": "transfer-cancel-ignore-02"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"playerId\" : \"{{roxorgame_playerid}}\",\n  \"website\" : \"{{roxorgame_website}}\",\n  \"platform\" : \"desktop\",\n  \"gameKey\" : \"{{roxorgame_gamekey}}\",\n  \"gamePlayId\" : \"transfer-cancel-ignore-02\",\n  \"operations\" : [ {\n    \"operationType\" : \"TRANSFER\",\n    \"amount\" : {\n        \"currency\" : \"GBP\",\n        \"amount\" : 10\n    },\n    \"transferId\" : \"transfer-cancel-ignore-02-cancel_transfer-01-debit\",\n    \"type\" : \"DEBIT\"\n  }, {\n    \"operationType\" : \"FINISH_GAME_PLAY\"\n  }]\n}"
+										},
+										"url": {
+											"raw": "{{gateway}}/service-casino-provider-roxor/rgp/game-play",
+											"host": [
+												"{{gateway}}"
+											],
+											"path": [
+												"service-casino-provider-roxor",
+												"rgp",
+												"game-play"
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							]
+						},
+						{
+							"name": "Spin-Win-Reverse-Win",
+							"item": [
+								{
+									"name": "Call 1 - START DEBIT CREDIT",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"tests[\"Status code is 200\"] = responseCode.code === 200;",
+													"",
+													"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "SessionKey",
+												"type": "text",
+												"value": "{{SESSION_KEY}}"
+											},
+											{
+												"key": "GameplayId",
+												"type": "text",
+												"value": "TRANSFER-CANCEL-CREDIT-02"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"playerId\" : \"{{roxorgame_playerid}}\",\n  \"website\" : \"{{roxorgame_website}}\",\n  \"platform\" : \"desktop\",\n  \"gameKey\" : \"{{roxorgame_gamekey}}\",\n  \"gamePlayId\" : \"TRANSFER-CANCEL-CREDIT-02\",\n  \"operations\" : [{\n    \"operationType\" : \"START_GAME_PLAY\"\n  },{\n    \"operationType\" : \"TRANSFER\",\n    \"amount\" : {\n        \"currency\" : \"GBP\",\n        \"amount\" : 10\n    },\n    \"transferId\" : \"TRANSFER-CANCEL-CREDIT-02-transfer-01-debit\",\n    \"type\" : \"DEBIT\"\n  },{\n    \"operationType\" : \"TRANSFER\",\n    \"amount\" : {\n        \"currency\" : \"GBP\",\n        \"amount\" : 100\n    },\n    \"transferId\" : \"TRANSFER-CANCEL-CREDIT-02-02-credit\",\n    \"type\" : \"CREDIT\"\n  }]\n}"
+										},
+										"url": {
+											"raw": "{{gateway}}/service-casino-provider-roxor/rgp/game-play",
+											"host": [
+												"{{gateway}}"
+											],
+											"path": [
+												"service-casino-provider-roxor",
+												"rgp",
+												"game-play"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Call 2 -  CANCEL CREDIT",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"tests[\"Status code is 200\"] = responseCode.code === 200;",
+													"",
+													"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "SessionKey",
+												"type": "text",
+												"value": "{{SESSION_KEY}}"
+											},
+											{
+												"key": "GameplayId",
+												"type": "text",
+												"value": "TRANSFER-CANCEL-CREDIT-02"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"playerId\" : \"{{roxorgame_playerid}}\",\n  \"website\" : \"{{roxorgame_website}}\",\n  \"platform\" : \"desktop\",\n  \"gameKey\" : \"{{roxorgame_gamekey}}\",\n  \"gamePlayId\" : \"TRANSFER-CANCEL-CREDIT-02\",\n  \"operations\" : [{\n    \"operationType\" : \"CANCEL_TRANSFER\",\n    \"amount\" : {\n        \"currency\" : \"GBP\",\n        \"amount\" : 100\n    },\n    \"transferId\" : \"TRANSFER-CANCEL-CREDIT-02-02-credit\",\n    \"type\" : \"CREDIT\"\n  }, {\n      \"operationType\" : \"FINISH_GAME_PLAY\"\n  }]\n}"
+										},
+										"url": {
+											"raw": "{{gateway}}/service-casino-provider-roxor/rgp/game-play",
+											"host": [
+												"{{gateway}}"
+											],
+											"path": [
+												"service-casino-provider-roxor",
+												"rgp",
+												"game-play"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "RefWallet",
+							"item": [
+								{
+									"name": "OnlyFinish",
+									"item": [
+										{
+											"name": "Call 1 - START DEBIT - SUCCESS",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"tests[\"Status code is 200\"] = responseCode.code === 200;",
+															"",
+															"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "SessionKey",
+														"type": "text",
+														"value": "{{SESSION_KEY}}"
+													},
+													{
+														"key": "GameplayId",
+														"type": "text",
+														"value": "ref-wallet-only-finish-01"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"playerId\" : \"{{roxorgame_playerid}}\",\n  \"website\" : \"{{roxorgame_website}}\",\n  \"platform\" : \"desktop\",\n  \"gameKey\" : \"{{roxorgame_gamekey}}\",\n  \"gamePlayId\" : \"ref-wallet-only-finish-01\",\n  \"operations\" : [ {\n    \"operationType\" : \"START_GAME_PLAY\"\n  }, {\n    \"operationType\" : \"TRANSFER\",\n    \"amount\" : {\n        \"currency\" : \"GBP\",\n        \"amount\" : 10\n    },\n    \"transferId\" : \"ref-wallet-only-finish-01-transfer-01-debit\",\n    \"type\" : \"DEBIT\"\n  }]\n}"
+												},
+												"url": {
+													"raw": "{{gateway}}/service-casino-provider-roxor/rgp/game-play",
+													"host": [
+														"{{gateway}}"
+													],
+													"path": [
+														"service-casino-provider-roxor",
+														"rgp",
+														"game-play"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Call 2 - FINISH - SUCCESS",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"tests[\"Status code is 200\"] = responseCode.code === 200;",
+															"",
+															"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "SessionKey",
+														"type": "text",
+														"value": "{{SESSION_KEY}}"
+													},
+													{
+														"key": "GameplayId",
+														"type": "text",
+														"value": "ref-wallet-only-finish-01"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"playerId\" : \"{{roxorgame_playerid}}\",\n  \"website\" : \"{{roxorgame_website}}\",\n  \"platform\" : \"desktop\",\n  \"gameKey\" : \"{{roxorgame_gamekey}}\",\n  \"gamePlayId\" : \"ref-wallet-only-finish-01\",\n  \"operations\" : [{\n    \"operationType\" : \"FINISH_GAME_PLAY\"\n  }]\n}"
+												},
+												"url": {
+													"raw": "{{gateway}}/service-casino-provider-roxor/rgp/game-play",
+													"host": [
+														"{{gateway}}"
+													],
+													"path": [
+														"service-casino-provider-roxor",
+														"rgp",
+														"game-play"
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "MultiFinishBatch (To Confirm)",
+									"item": [
+										{
+											"name": "Call 1 - START DEBIT FINISH - SUCCESS",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"tests[\"Status code is 200\"] = responseCode.code === 200;",
+															"",
+															"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "SessionKey",
+														"type": "text",
+														"value": "{{SESSION_KEY}}"
+													},
+													{
+														"key": "GameplayId",
+														"type": "text",
+														"value": "ref-wallet-multi-finish-batch-01"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"playerId\" : \"{{roxorgame_playerid}}\",\n  \"website\" : \"{{roxorgame_website}}\",\n  \"platform\" : \"desktop\",\n  \"gameKey\" : \"{{roxorgame_gamekey}}\",\n  \"gamePlayId\" : \"ref-wallet-multi-finish-batch-01\",\n  \"operations\" : [ {\n    \"operationType\" : \"START_GAME_PLAY\"\n  }, {\n    \"operationType\" : \"TRANSFER\",\n    \"amount\" : {\n        \"currency\" : \"GBP\",\n        \"amount\" : 10\n    },\n    \"transferId\" : \"ref-wallet-multi-finish-batch-01-transfer-01-debit\",\n    \"type\" : \"DEBIT\"\n  }, {\n    \"operationType\" : \"FINISH_GAME_PLAY\"\n  }]\n}"
+												},
+												"url": {
+													"raw": "{{gateway}}/service-casino-provider-roxor/rgp/game-play",
+													"host": [
+														"{{gateway}}"
+													],
+													"path": [
+														"service-casino-provider-roxor",
+														"rgp",
+														"game-play"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Call 2 - FINISH - SUCCESS",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"tests[\"Status code is 200\"] = responseCode.code === 200;",
+															"",
+															"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "SessionKey",
+														"type": "text",
+														"value": "{{SESSION_KEY}}"
+													},
+													{
+														"key": "GameplayId",
+														"type": "text",
+														"value": "ref-wallet-multi-finish-batch-01"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"playerId\" : \"{{roxorgame_playerid}}\",\n  \"website\" : \"{{roxorgame_website}}\",\n  \"platform\" : \"desktop\",\n  \"gameKey\" : \"{{roxorgame_gamekey}}\",\n  \"gamePlayId\" : \"ref-wallet-multi-finish-batch-01\",\n  \"operations\" : [{\n    \"operationType\" : \"FINISH_GAME_PLAY\"\n  }]\n}"
+												},
+												"url": {
+													"raw": "{{gateway}}/service-casino-provider-roxor/rgp/game-play",
+													"host": [
+														"{{gateway}}"
+													],
+													"path": [
+														"service-casino-provider-roxor",
+														"rgp",
+														"game-play"
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "MultiFinishSingle - Error",
+									"item": [
+										{
+											"name": "Call 1 - START DEBIT FINISH FINISH - ERROR",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"tests[\"Status code is 200\"] = responseCode.code === 200;",
+															"",
+															"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "SessionKey",
+														"type": "text",
+														"value": "{{SESSION_KEY}}"
+													},
+													{
+														"key": "GameplayId",
+														"type": "text",
+														"value": "ref-wallet-multi-finish-single-01"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"playerId\" : \"{{roxorgame_playerid}}\",\n  \"website\" : \"{{roxorgame_website}}\",\n  \"platform\" : \"desktop\",\n  \"gameKey\" : \"{{roxorgame_gamekey}}\",\n  \"gamePlayId\" : \"ref-wallet-multi-finish-single-01\",\n  \"operations\" : [ {\n    \"operationType\" : \"START_GAME_PLAY\"\n  }, {\n    \"operationType\" : \"TRANSFER\",\n    \"amount\" : {\n        \"currency\" : \"GBP\",\n        \"amount\" : 10\n    },\n    \"transferId\" : \"ref-wallet-multi-finish-single-01-transfer-01-debit\",\n    \"type\" : \"DEBIT\"\n  }, {\n    \"operationType\" : \"FINISH_GAME_PLAY\"\n  }, {\n    \"operationType\" : \"FINISH_GAME_PLAY\"\n  }]\n}"
+												},
+												"url": {
+													"raw": "{{gateway}}/service-casino-provider-roxor/rgp/game-play",
+													"host": [
+														"{{gateway}}"
+													],
+													"path": [
+														"service-casino-provider-roxor",
+														"rgp",
+														"game-play"
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "NewGameNoStart",
+									"item": [
+										{
+											"name": "Call 1 - DEBIT FINISH - SUCCESS",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"tests[\"Status code is 200\"] = responseCode.code === 200;",
+															"",
+															"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "SessionKey",
+														"type": "text",
+														"value": "{{SESSION_KEY}}"
+													},
+													{
+														"key": "GameplayId",
+														"type": "text",
+														"value": "ref-wallet-no-start-01"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"playerId\" : \"{{roxorgame_playerid}}\",\n  \"website\" : \"{{roxorgame_website}}\",\n  \"platform\" : \"desktop\",\n  \"gameKey\" : \"{{roxorgame_gamekey}}\",\n  \"gamePlayId\" : \"ref-wallet-no-start-01\",\n  \"operations\" : [ {\n    \"operationType\" : \"TRANSFER\",\n    \"amount\" : {\n        \"currency\" : \"GBP\",\n        \"amount\" : 10\n    },\n    \"transferId\" : \"ref-wallet-no-start-01-transfer-01-debit\",\n    \"type\" : \"DEBIT\"\n  }, {\n    \"operationType\" : \"FINISH_GAME_PLAY\"\n  }]\n}"
+												},
+												"url": {
+													"raw": "{{gateway}}/service-casino-provider-roxor/rgp/game-play",
+													"host": [
+														"{{gateway}}"
+													],
+													"path": [
+														"service-casino-provider-roxor",
+														"rgp",
+														"game-play"
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "JackpotCredit",
+									"item": [
+										{
+											"name": "Call 1 - START JACKPOT_CREDIT - SUCCESS",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"tests[\"Status code is 200\"] = responseCode.code === 200;",
+															"",
+															"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "SessionKey",
+														"type": "text",
+														"value": "{{SESSION_KEY}}"
+													},
+													{
+														"key": "GameplayId",
+														"type": "text",
+														"value": "ref-wallet-no-start-jackpot-01"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"playerId\" : \"{{roxorgame_playerid}}\",\n  \"website\" : \"{{roxorgame_website}}\",\n  \"platform\" : \"desktop\",\n  \"gameKey\" : \"{{roxorgame_gamekey}}\",\n  \"gamePlayId\" : \"ref-wallet-no-start-jackpot-01\",\n  \"operations\" : [{\n    \"operationType\" : \"START_GAME_PLAY\"\n  }, {\n    \"operationType\" : \"TRANSFER\",\n    \"amount\" : {\n        \"currency\" : \"GBP\",\n        \"amount\" : 10\n    },\n    \"transferId\" : \"ref-wallet-no-start-jackpot-01-transfer-01-debit\",\n    \"type\" : \"JACKPOT_CREDIT\"\n  }]\n}"
+												},
+												"url": {
+													"raw": "{{gateway}}/service-casino-provider-roxor/rgp/game-play",
+													"host": [
+														"{{gateway}}"
+													],
+													"path": [
+														"service-casino-provider-roxor",
+														"rgp",
+														"game-play"
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "NoGameKey-Error",
+									"item": [
+										{
+											"name": "Call 1 - NO-GAME-KEY - ERROR",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"tests[\"Status code is 200\"] = responseCode.code === 200;",
+															"",
+															"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "SessionKey",
+														"type": "text",
+														"value": "{{SESSION_KEY}}"
+													},
+													{
+														"key": "GameplayId",
+														"type": "text",
+														"value": "refwallet-nogamekey-01"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"playerId\" : \"{{roxorgame_playerid}}\",\n  \"website\" : \"{{roxorgame_website}}\",\n  \"platform\" : \"desktop\",\n  \"gamePlayId\" : \"refwallet-nogamekey-01\",\n  \"operations\" : [{\n    \"operationType\" : \"START_GAME_PLAY\"\n  },{\n    \"operationType\" : \"TRANSFER\",\n    \"amount\" : {\n        \"currency\" : \"GBP\",\n        \"amount\" : 10\n    },\n    \"transferId\" : \"refwallet-nogamekey-01-transfer-01-debit\",\n    \"type\" : \"DEBIT\"\n  },{\n    \"operationType\" : \"TRANSFER\",\n    \"amount\" : {\n        \"currency\" : \"GBP\",\n        \"amount\" : 100\n    },\n    \"transferId\" : \"refwallet-nogamekey-01-transfer-02-credit\",\n    \"type\" : \"CREDIT\"\n  },{\n    \"operationType\" : \"FINISH_GAME_PLAY\"\n  }]\n}"
+												},
+												"url": {
+													"raw": "{{gateway}}/service-casino-provider-roxor/rgp/game-play",
+													"host": [
+														"{{gateway}}"
+													],
+													"path": [
+														"service-casino-provider-roxor",
+														"rgp",
+														"game-play"
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "NoGamePlayIDBody-Error",
+									"item": [
+										{
+											"name": "Call 1 - NO-GAME-PLAY-ID-BODY - ERROR",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"tests[\"Status code is 200\"] = responseCode.code === 200;",
+															"",
+															"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "SessionKey",
+														"type": "text",
+														"value": "{{SESSION_KEY}}"
+													},
+													{
+														"key": "GameplayId",
+														"type": "text",
+														"value": "refwallet-nogameplayidbody-01"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"playerId\" : \"{{roxorgame_playerid}}\",\n  \"website\" : \"{{roxorgame_website}}\",\n  \"platform\" : \"desktop\",\n  \"gameKey\" : \"{{roxorgame_gamekey}}\",\n  \"operations\" : [{\n    \"operationType\" : \"START_GAME_PLAY\"\n  },{\n    \"operationType\" : \"TRANSFER\",\n    \"amount\" : {\n        \"currency\" : \"GBP\",\n        \"amount\" : 10\n    },\n    \"transferId\" : \"refwallet-nogameplayidbody-01-transfer-01-debit\",\n    \"type\" : \"DEBIT\"\n  },{\n    \"operationType\" : \"TRANSFER\",\n    \"amount\" : {\n        \"currency\" : \"GBP\",\n        \"amount\" : 100\n    },\n    \"transferId\" : \"refwallet-nogameplayidbody-01-transfer-02-credit\",\n    \"type\" : \"CREDIT\"\n  },{\n    \"operationType\" : \"FINISH_GAME_PLAY\"\n  }]\n}"
+												},
+												"url": {
+													"raw": "{{gateway}}/service-casino-provider-roxor/rgp/game-play",
+													"host": [
+														"{{gateway}}"
+													],
+													"path": [
+														"service-casino-provider-roxor",
+														"rgp",
+														"game-play"
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "NoGamePlayIDHeader-Error",
+									"item": [
+										{
+											"name": "Call 1 - NO-GAME-PLAY-ID-BODY - ERROR",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"tests[\"Status code is 200\"] = responseCode.code === 200;",
+															"",
+															"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "SessionKey",
+														"type": "text",
+														"value": "{{SESSION_KEY}}"
+													},
+													{
+														"key": "GameplayId",
+														"type": "text",
+														"value": "refwallet-nogameplayidheader-01",
+														"disabled": true
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"playerId\" : \"{{roxorgame_playerid}}\",\n  \"website\" : \"{{roxorgame_website}}\",\n  \"platform\" : \"desktop\",\n  \"gameKey\" : \"{{roxorgame_gamekey}}\",\n  \"gamePlayId\" : \"refwallet-nogameplayidheader-01\",\n  \"operations\" : [{\n    \"operationType\" : \"START_GAME_PLAY\"\n  },{\n    \"operationType\" : \"TRANSFER\",\n    \"amount\" : {\n        \"currency\" : \"GBP\",\n        \"amount\" : 10\n    },\n    \"transferId\" : \"refwallet-nogameplayidheader-01-transfer-01-debit\",\n    \"type\" : \"DEBIT\"\n  },{\n    \"operationType\" : \"TRANSFER\",\n    \"amount\" : {\n        \"currency\" : \"GBP\",\n        \"amount\" : 100\n    },\n    \"transferId\" : \"refwallet-nogameplayidheader-01-transfer-02-credit\",\n    \"type\" : \"CREDIT\"\n  },{\n    \"operationType\" : \"FINISH_GAME_PLAY\"\n  }]\n}"
+												},
+												"url": {
+													"raw": "{{gateway}}/service-casino-provider-roxor/rgp/game-play",
+													"host": [
+														"{{gateway}}"
+													],
+													"path": [
+														"service-casino-provider-roxor",
+														"rgp",
+														"game-play"
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "GamePlayIDMismatchBodyHeader-Error",
+									"item": [
+										{
+											"name": "Call 1 - GAME-PLAY-ID-MISMATCH-BODY-HEADER - ERROR",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"tests[\"Status code is 200\"] = responseCode.code === 200;",
+															"",
+															"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "SessionKey",
+														"type": "text",
+														"value": "{{SESSION_KEY}}"
+													},
+													{
+														"key": "GameplayId",
+														"type": "text",
+														"value": "refwallet-gameplayidmismatch-01"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"playerId\" : \"{{roxorgame_playerid}}\",\n  \"website\" : \"{{roxorgame_website}}\",\n  \"platform\" : \"desktop\",\n  \"gameKey\" : \"{{roxorgame_gamekey}}\",\n  \"gamePlayId\" : \"refwallet-gameplayidmismatch-02\",\n  \"operations\" : [{\n    \"operationType\" : \"START_GAME_PLAY\"\n  },{\n    \"operationType\" : \"TRANSFER\",\n    \"amount\" : {\n        \"currency\" : \"GBP\",\n        \"amount\" : 10\n    },\n    \"transferId\" : \"refwallet-gameplayidmismatch-01-transfer-01-debit\",\n    \"type\" : \"DEBIT\"\n  },{\n    \"operationType\" : \"TRANSFER\",\n    \"amount\" : {\n        \"currency\" : \"GBP\",\n        \"amount\" : 100\n    },\n    \"transferId\" : \"refwallet-gameplayidmismatch-01-transfer-02-credit\",\n    \"type\" : \"CREDIT\"\n  },{\n    \"operationType\" : \"FINISH_GAME_PLAY\"\n  }]\n}"
+												},
+												"url": {
+													"raw": "{{gateway}}/service-casino-provider-roxor/rgp/game-play",
+													"host": [
+														"{{gateway}}"
+													],
+													"path": [
+														"service-casino-provider-roxor",
+														"rgp",
+														"game-play"
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "NoPlayerId-Error",
+									"item": [
+										{
+											"name": "Call 1 - GAME-PLAY-NO-PLAYER-ID - ERROR",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"tests[\"Status code is 200\"] = responseCode.code === 200;",
+															"",
+															"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "SessionKey",
+														"type": "text",
+														"value": "{{SESSION_KEY}}"
+													},
+													{
+														"key": "GameplayId",
+														"type": "text",
+														"value": "refwallet-noplayerid-01"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"website\" : \"{{roxorgame_website}}\",\n  \"platform\" : \"desktop\",\n  \"gameKey\" : \"{{roxorgame_gamekey}}\",\n  \"gamePlayId\" : \"refwallet-noplayerid-01\",\n  \"operations\" : [{\n    \"operationType\" : \"START_GAME_PLAY\"\n  },{\n    \"operationType\" : \"TRANSFER\",\n    \"amount\" : {\n        \"currency\" : \"GBP\",\n        \"amount\" : 10\n    },\n    \"transferId\" : \"refwallet-noplayerid-01-transfer-01-debit\",\n    \"type\" : \"DEBIT\"\n  },{\n    \"operationType\" : \"TRANSFER\",\n    \"amount\" : {\n        \"currency\" : \"GBP\",\n        \"amount\" : 100\n    },\n    \"transferId\" : \"refwallet-noplayerid-01-transfer-02-credit\",\n    \"type\" : \"CREDIT\"\n  },{\n    \"operationType\" : \"FINISH_GAME_PLAY\"\n  }]\n}"
+												},
+												"url": {
+													"raw": "{{gateway}}/service-casino-provider-roxor/rgp/game-play",
+													"host": [
+														"{{gateway}}"
+													],
+													"path": [
+														"service-casino-provider-roxor",
+														"rgp",
+														"game-play"
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "NoWebsite-Error",
+									"item": [
+										{
+											"name": "Call 1 - NO-WEBSITE - ERROR",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"tests[\"Status code is 200\"] = responseCode.code === 200;",
+															"",
+															"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "SessionKey",
+														"type": "text",
+														"value": "{{SESSION_KEY}}"
+													},
+													{
+														"key": "GameplayId",
+														"type": "text",
+														"value": "refwallet-nowebsite-01"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"playerId\" : \"{{roxorgame_playerid}}\",\n  \"platform\" : \"desktop\",\n  \"gameKey\" : \"{{roxorgame_gamekey}}\",\n  \"gamePlayId\" : \"refwallet-nowebsite-01\",\n  \"operations\" : [{\n    \"operationType\" : \"START_GAME_PLAY\"\n  },{\n    \"operationType\" : \"TRANSFER\",\n    \"amount\" : {\n        \"currency\" : \"GBP\",\n        \"amount\" : 10\n    },\n    \"transferId\" : \"refwallet-nowebsite-01-transfer-01-debit\",\n    \"type\" : \"DEBIT\"\n  },{\n    \"operationType\" : \"TRANSFER\",\n    \"amount\" : {\n        \"currency\" : \"GBP\",\n        \"amount\" : 100\n    },\n    \"transferId\" : \"refwallet-nowebsite-01-transfer-02-credit\",\n    \"type\" : \"CREDIT\"\n  },{\n    \"operationType\" : \"FINISH_GAME_PLAY\"\n  }]\n}"
+												},
+												"url": {
+													"raw": "{{gateway}}/service-casino-provider-roxor/rgp/game-play",
+													"host": [
+														"{{gateway}}"
+													],
+													"path": [
+														"service-casino-provider-roxor",
+														"rgp",
+														"game-play"
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "TransferCancel-Single",
+									"item": [
+										{
+											"name": "Call 1 - START DEBIT DEBIT_CANCEL FINISH - SUCCESS",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"tests[\"Status code is 200\"] = responseCode.code === 200;",
+															"",
+															"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "SessionKey",
+														"type": "text",
+														"value": "{{SESSION_KEY}}"
+													},
+													{
+														"key": "GameplayId",
+														"type": "text",
+														"value": "refwallet-trans-cancel-single-01"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"playerId\" : \"{{roxorgame_playerid}}\",\n  \"website\" : \"{{roxorgame_website}}\",\n  \"platform\" : \"desktop\",\n  \"gameKey\" : \"{{roxorgame_gamekey}}\",\n  \"gamePlayId\" : \"refwallet-trans-cancel-single-01\",\n  \"operations\" : [ {\n    \"operationType\" : \"START_GAME_PLAY\"\n  }, {\n    \"operationType\" : \"TRANSFER\",\n    \"amount\" : {\n        \"currency\" : \"GBP\",\n        \"amount\" : 10\n    },\n    \"transferId\" : \"refwallet-trans-cancel-single-01-transfer-01-debit\",\n    \"type\" : \"DEBIT\"\n  }, {\n    \"operationType\" : \"CANCEL_TRANSFER\",\n    \"amount\" : {\n        \"currency\" : \"GBP\",\n        \"amount\" : 10\n    },\n    \"transferId\" : \"refwallet-trans-cancel-single-01-transfer-01-debit\",\n    \"type\" : \"DEBIT\"\n  }, {\n      \"operationType\" : \"FINISH_GAME_PLAY\"\n  }]\n}"
+												},
+												"url": {
+													"raw": "{{gateway}}/service-casino-provider-roxor/rgp/game-play",
+													"host": [
+														"{{gateway}}"
+													],
+													"path": [
+														"service-casino-provider-roxor",
+														"rgp",
+														"game-play"
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "TransferCancel-Batch-Error",
+									"item": [
+										{
+											"name": "Call 1 - START DEBIT - SUCCESS",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"tests[\"Status code is 200\"] = responseCode.code === 200;",
+															"",
+															"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "SessionKey",
+														"type": "text",
+														"value": "{{SESSION_KEY}}"
+													},
+													{
+														"key": "GameplayId",
+														"type": "text",
+														"value": "refwallet-trans-cancel-batch-error-01"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"playerId\" : \"{{roxorgame_playerid}}\",\n  \"website\" : \"{{roxorgame_website}}\",\n  \"platform\" : \"desktop\",\n  \"gameKey\" : \"{{roxorgame_gamekey}}\",\n  \"gamePlayId\" : \"refwallet-trans-cancel-batch-error-01\",\n  \"operations\" : [ {\n    \"operationType\" : \"START_GAME_PLAY\"\n  }, {\n    \"operationType\" : \"TRANSFER\",\n    \"amount\" : {\n        \"currency\" : \"GBP\",\n        \"amount\" : 10\n    },\n    \"transferId\" : \"refwallet-trans-cancel-batch-error-01-transfer-01-debit\",\n    \"type\" : \"DEBIT\"\n  } ]\n}"
+												},
+												"url": {
+													"raw": "{{gateway}}/service-casino-provider-roxor/rgp/game-play",
+													"host": [
+														"{{gateway}}"
+													],
+													"path": [
+														"service-casino-provider-roxor",
+														"rgp",
+														"game-play"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Call 2 - CREDIT DEBIT_CANCEL - ERROR",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"tests[\"Status code is 200\"] = responseCode.code === 200;",
+															"",
+															"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "SessionKey",
+														"type": "text",
+														"value": "{{SESSION_KEY}}"
+													},
+													{
+														"key": "GameplayId",
+														"type": "text",
+														"value": "refwallet-trans-cancel-batch-error-01"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"playerId\" : \"{{roxorgame_playerid}}\",\n  \"website\" : \"{{roxorgame_website}}\",\n  \"platform\" : \"desktop\",\n  \"gameKey\" : \"{{roxorgame_gamekey}}\",\n  \"gamePlayId\" : \"refwallet-trans-cancel-batch-error-01\",\n  \"operations\" : [ {\n    \"operationType\" : \"TRANSFER\",\n    \"amount\" : {\n        \"currency\" : \"GBP\",\n        \"amount\" : 10\n    },\n    \"transferId\" : \"refwallet-trans-cancel-batch-error-01-transfer-02-credit\",\n    \"type\" : \"CREDIT\"\n  }, {\n    \"operationType\" : \"CANCEL_TRANSFER\",\n    \"amount\" : {\n        \"currency\" : \"GBP\",\n        \"amount\" : 10\n    },\n    \"transferId\" : \"refwallet-trans-cancel-batch-error-01-transfer-01-debit\",\n    \"type\" : \"DEBIT\"\n  }]\n}"
+												},
+												"url": {
+													"raw": "{{gateway}}/service-casino-provider-roxor/rgp/game-play",
+													"host": [
+														"{{gateway}}"
+													],
+													"path": [
+														"service-casino-provider-roxor",
+														"rgp",
+														"game-play"
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "FreeSpin",
+							"item": [
+								{
+									"name": "Call 1 - START FREE_PLAY FINISH",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"tests[\"Status code is 200\"] = responseCode.code === 200;",
+													"",
+													"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "SessionKey",
+												"type": "text",
+												"value": "{{SESSION_KEY}}"
+											},
+											{
+												"key": "GameplayId",
+												"type": "text",
+												"value": "free-spin-31"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"gameKey\": \"{{roxorgame_gamekey}}\",\n    \"gamePlayId\": \"free-spin-31\",\n    \"operations\": [\n        {\n            \"operationType\": \"START_GAME_PLAY\"\n        },\n        {\n            \"amount\": {\n                \"amount\": 25,\n                \"currency\": \"GBP\"\n            },\n            \"operationType\": \"FREE_PLAY\",\n            \"source\": {\n                \"sourceId\": \"48\",\n                \"sourceType\": \"roxorgaminglocal\"\n            },\n            \"transferId\": \"free-spin-31-transfer-01\"\n        },\n        {\n            \"operationType\": \"FINISH_GAME_PLAY\"\n        }\n    ],\n    \"platform\": \"desktop\",\n    \"playerId\": \"{{roxorgame_playerid}}\",\n    \"website\": \"{{roxorgame_website}}\"\n}"
+										},
+										"url": {
+											"raw": "{{gateway}}/service-casino-provider-roxor/rgp/game-play",
+											"host": [
+												"{{gateway}}"
+											],
+											"path": [
+												"service-casino-provider-roxor",
+												"rgp",
+												"game-play"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Call 1 - START FREE_PLAY TRANSFER_CREDIT FINISH",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"tests[\"Status code is 200\"] = responseCode.code === 200;",
+													"",
+													"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "SessionKey",
+												"type": "text",
+												"value": "{{SESSION_KEY}}"
+											},
+											{
+												"key": "GameplayId",
+												"type": "text",
+												"value": "free-spin-credit-05"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"gameKey\": \"{{roxorgame_gamekey}}\",\n    \"gamePlayId\": \"free-spin-credit-05\",\n    \"operations\": [\n        {\n            \"operationType\": \"START_GAME_PLAY\"\n        },\n        {\n            \"amount\": {\n                \"amount\": 25,\n                \"currency\": \"GBP\"\n            },\n            \"operationType\": \"FREE_PLAY\",\n            \"source\": {\n                \"sourceId\": \"48\",\n                \"sourceType\": \"roxorgaminglocal\"\n            },\n            \"transferId\": \"free-spin-credit-05-transfer-01\"\n        },\n        {\n            \"operationType\" : \"TRANSFER\",\n            \"amount\" : {\n                \"currency\" : \"GBP\",\n                \"amount\" : 100\n            },\n            \"transferId\" : \"free-spin-credit-05-transfer-02\",\n            \"type\" : \"CREDIT\"\n        },\n        {\n            \"operationType\": \"FINISH_GAME_PLAY\"\n        }\n    ],\n    \"platform\": \"desktop\",\n    \"playerId\": \"{{roxorgame_playerid}}\",\n    \"website\": \"{{roxorgame_website}}\"\n}"
+										},
+										"url": {
+											"raw": "{{gateway}}/service-casino-provider-roxor/rgp/game-play",
+											"host": [
+												"{{gateway}}"
+											],
+											"path": [
+												"service-casino-provider-roxor",
+												"rgp",
+												"game-play"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Cancel Free Spin",
+							"item": [
+								{
+									"name": "Call 1 - START FREE_PLAY",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"tests[\"Status code is 200\"] = responseCode.code === 200;",
+													"",
+													"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "SessionKey",
+												"type": "text",
+												"value": "{{SESSION_KEY}}"
+											},
+											{
+												"key": "GameplayId",
+												"type": "text",
+												"value": "free-spin-cancel-16"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"gameKey\": \"{{roxorgame_gamekey}}\",\n    \"gamePlayId\": \"free-spin-cancel-16\",\n    \"operations\": [\n        {\n            \"operationType\": \"START_GAME_PLAY\"\n        },\n        {\n            \"amount\": {\n                \"amount\": 25,\n                \"currency\": \"GBP\"\n            },\n            \"operationType\": \"FREE_PLAY\",\n            \"source\": {\n                \"sourceId\": \"48\",\n                \"sourceType\": \"roxorgaminglocal\"\n            },\n            \"transferId\": \"free-spin-cancel-16-transfer-01\"\n        }\n    ],\n    \"platform\": \"desktop\",\n    \"playerId\": \"{{roxorgame_playerid}}\",\n    \"website\": \"{{roxorgame_website}}\"\n}"
+										},
+										"url": {
+											"raw": "{{gateway}}/service-casino-provider-roxor/rgp/game-play",
+											"host": [
+												"{{gateway}}"
+											],
+											"path": [
+												"service-casino-provider-roxor",
+												"rgp",
+												"game-play"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Call 1 - START CANCEL_FREE_PLAY FINISH",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"tests[\"Status code is 200\"] = responseCode.code === 200;",
+													"",
+													"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "SessionKey",
+												"type": "text",
+												"value": "{{SESSION_KEY}}"
+											},
+											{
+												"key": "GameplayId",
+												"type": "text",
+												"value": "free-spin-cancel-16"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"gameKey\": \"{{roxorgame_gamekey}}\",\n    \"gamePlayId\": \"free-spin-cancel-16\",\n    \"operations\": [\n        {\n            \"amount\": {\n                \"amount\": 25,\n                \"currency\": \"GBP\"\n            },\n            \"operationType\": \"CANCEL_FREE_PLAY\",\n            \"source\": {\n                \"sourceId\": \"48\",\n                \"sourceType\": \"roxorgaminglocal\"\n            },\n            \"transferId\": \"free-spin-cancel-16-transfer-01\"\n        }\n    ],\n    \"platform\": \"desktop\",\n    \"playerId\": \"{{roxorgame_playerid}}\",\n    \"website\": \"{{roxorgame_website}}\"\n}"
+										},
+										"url": {
+											"raw": "{{gateway}}/service-casino-provider-roxor/rgp/game-play",
+											"host": [
+												"{{gateway}}"
+											],
+											"path": [
+												"service-casino-provider-roxor",
+												"rgp",
+												"game-play"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "SessionKey Changes",
+							"item": [
+								{
+									"name": "Debit No SessionKey",
+									"item": [
+										{
+											"name": "Call 1 - START DEBIT FAIL",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"tests[\"Status code is 200\"] = responseCode.code === 200;",
+															"",
+															"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "SessionKey",
+														"type": "text",
+														"value": "{{SESSION_KEY}}",
+														"disabled": true
+													},
+													{
+														"key": "GameplayId",
+														"type": "text",
+														"value": "no-session-spin-fail-03"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"playerId\" : \"{{roxorgame_playerid}}\",\n  \"website\" : \"{{roxorgame_website}}\",\n  \"platform\" : \"desktop\",\n  \"gameKey\" : \"{{roxorgame_gamekey}}\",\n  \"gamePlayId\" : \"no-session-spin-fail-03\",\n  \"operations\" : [{\n    \"operationType\" : \"START_GAME_PLAY\"\n  },{\n    \"operationType\" : \"TRANSFER\",\n    \"amount\" : {\n        \"currency\" : \"GBP\",\n        \"amount\" : 10\n    },\n    \"transferId\" : \"no-session-spin-fail-03-transfer-01-debit\",\n    \"type\" : \"DEBIT\"\n  }]\n}"
+												},
+												"url": {
+													"raw": "{{gateway}}/service-casino-provider-roxor/rgp/game-play",
+													"host": [
+														"{{gateway}}"
+													],
+													"path": [
+														"service-casino-provider-roxor",
+														"rgp",
+														"game-play"
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "Debit With Session Credit No Session",
+									"item": [
+										{
+											"name": "Call 1 - START DEBIT WITH SESSION - SUCCESS",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"tests[\"Status code is 200\"] = responseCode.code === 200;",
+															"",
+															"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "SessionKey",
+														"type": "text",
+														"value": "{{SESSION_KEY}}"
+													},
+													{
+														"key": "GameplayId",
+														"type": "text",
+														"value": "no-session-spin-debit-03"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"playerId\" : \"{{roxorgame_playerid}}\",\n  \"website\" : \"{{roxorgame_website}}\",\n  \"platform\" : \"desktop\",\n  \"gameKey\" : \"{{roxorgame_gamekey}}\",\n  \"gamePlayId\" : \"no-session-spin-debit-03\",\n  \"operations\" : [{\n    \"operationType\" : \"START_GAME_PLAY\"\n  },{\n    \"operationType\" : \"TRANSFER\",\n    \"amount\" : {\n        \"currency\" : \"GBP\",\n        \"amount\" : 10\n    },\n    \"transferId\" : \"no-session-spin-debit-03-transfer-01-debit\",\n    \"type\" : \"DEBIT\"\n  }]\n}"
+												},
+												"url": {
+													"raw": "{{gateway}}/service-casino-provider-roxor/rgp/game-play",
+													"host": [
+														"{{gateway}}"
+													],
+													"path": [
+														"service-casino-provider-roxor",
+														"rgp",
+														"game-play"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Call 2 - CREDIT FINISH NO SESSION - SUCCESS",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"tests[\"Status code is 200\"] = responseCode.code === 200;",
+															"",
+															"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "SessionKey",
+														"type": "text",
+														"value": "{{SESSION_KEY}}",
+														"disabled": true
+													},
+													{
+														"key": "GameplayId",
+														"type": "text",
+														"value": "no-session-spin-debit-03"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"playerId\" : \"{{roxorgame_playerid}}\",\n  \"website\" : \"{{roxorgame_website}}\",\n  \"platform\" : \"desktop\",\n  \"gameKey\" : \"{{roxorgame_gamekey}}\",\n  \"gamePlayId\" : \"no-session-spin-debit-03\",\n  \"operations\" : [{\n    \"operationType\" : \"TRANSFER\",\n    \"amount\" : {\n        \"currency\" : \"GBP\",\n        \"amount\" : 100\n    },\n    \"transferId\" : \"no-session-spin-debit-03-transfer-02-credit\",\n    \"type\" : \"CREDIT\"\n  },{\n    \"operationType\" : \"FINISH_GAME_PLAY\"\n  }]\n}"
+												},
+												"url": {
+													"raw": "{{gateway}}/service-casino-provider-roxor/rgp/game-play",
+													"host": [
+														"{{gateway}}"
+													],
+													"path": [
+														"service-casino-provider-roxor",
+														"rgp",
+														"game-play"
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "Transfer-Cancel-No Session Success",
+									"item": [
+										{
+											"name": "Call 1 - START DEBIT - SUCCESS",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"tests[\"Status code is 200\"] = responseCode.code === 200;",
+															"",
+															"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "SessionKey",
+														"type": "text",
+														"value": "{{SESSION_KEY}}"
+													},
+													{
+														"key": "GameplayId",
+														"type": "text",
+														"value": "transfer-cancel-no-session-01"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"playerId\" : \"{{roxorgame_playerid}}\",\n  \"website\" : \"{{roxorgame_website}}\",\n  \"platform\" : \"desktop\",\n  \"gameKey\" : \"{{roxorgame_gamekey}}\",\n  \"gamePlayId\" : \"transfer-cancel-no-session-01\",\n  \"operations\" : [ {\n    \"operationType\" : \"START_GAME_PLAY\"\n  }, {\n    \"operationType\" : \"TRANSFER\",\n    \"amount\" : {\n        \"currency\" : \"GBP\",\n        \"amount\" : 10\n    },\n    \"transferId\" : \"transfer-cancel-no-session-01-transfer-01-debit\",\n    \"type\" : \"DEBIT\"\n  }]\n}"
+												},
+												"url": {
+													"raw": "{{gateway}}/service-casino-provider-roxor/rgp/game-play",
+													"host": [
+														"{{gateway}}"
+													],
+													"path": [
+														"service-casino-provider-roxor",
+														"rgp",
+														"game-play"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Call 2 - CANCEL DEBIT from Call 1 - SUCCESS",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"tests[\"Status code is 200\"] = responseCode.code === 200;",
+															"",
+															"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "SessionKey",
+														"type": "text",
+														"value": "{{SESSION_KEY}}",
+														"disabled": true
+													},
+													{
+														"key": "GameplayId",
+														"type": "text",
+														"value": "transfer-cancel-no-session-01"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"playerId\" : \"{{roxorgame_playerid}}\",\n  \"website\" : \"{{roxorgame_website}}\",\n  \"platform\" : \"desktop\",\n  \"gameKey\" : \"{{roxorgame_gamekey}}\",\n  \"gamePlayId\" : \"transfer-cancel-no-session-01\",\n  \"operations\" : [ {\n    \"operationType\" : \"CANCEL_TRANSFER\",\n    \"amount\" : {\n        \"currency\" : \"GBP\",\n        \"amount\" : 10\n    },\n    \"transferId\" : \"transfer-cancel-no-session-01-transfer-01-debit\",\n    \"type\" : \"DEBIT\"\n  }, {\n    \"operationType\" : \"FINISH_GAME_PLAY\"\n  }]\n}"
+												},
+												"url": {
+													"raw": "{{gateway}}/service-casino-provider-roxor/rgp/game-play",
+													"host": [
+														"{{gateway}}"
+													],
+													"path": [
+														"service-casino-provider-roxor",
+														"rgp",
+														"game-play"
+													]
+												}
+											},
+											"response": []
+										}
+									],
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										}
+									]
+								},
+								{
+									"name": "Invalid Session",
+									"item": [
+										{
+											"name": "Call 1 - START DEBIT FAIL",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"tests[\"Status code is 200\"] = responseCode.code === 200;",
+															"",
+															"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "SessionKey",
+														"type": "text",
+														"value": "INVALID_SESSION"
+													},
+													{
+														"key": "GameplayId",
+														"type": "text",
+														"value": "invalid-session-spin-fail-01"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n  \"playerId\" : \"{{roxorgame_playerid}}\",\n  \"website\" : \"{{roxorgame_website}}\",\n  \"platform\" : \"desktop\",\n  \"gameKey\" : \"{{roxorgame_gamekey}}\",\n  \"gamePlayId\" : \"invalid-session-spin-fail-01\",\n  \"operations\" : [{\n    \"operationType\" : \"START_GAME_PLAY\"\n  },{\n    \"operationType\" : \"TRANSFER\",\n    \"amount\" : {\n        \"currency\" : \"GBP\",\n        \"amount\" : 10\n    },\n    \"transferId\" : \"invalid-session-spin-fail-01-transfer-01-debit\",\n    \"type\" : \"DEBIT\"\n  }]\n}"
+												},
+												"url": {
+													"raw": "{{gateway}}/service-casino-provider-roxor/rgp/game-play",
+													"host": [
+														"{{gateway}}"
+													],
+													"path": [
+														"service-casino-provider-roxor",
+														"rgp",
+														"game-play"
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "DebitRollback-BeforeDebit",
+							"item": [
+								{
+									"name": "Call 1 - CANCEL DEBIT - SUCCESS",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"tests[\"Status code is 200\"] = responseCode.code === 200;",
+													"",
+													"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "SessionKey",
+												"type": "text",
+												"value": "{{SESSION_KEY}}"
+											},
+											{
+												"key": "GameplayId",
+												"type": "text",
+												"value": "rollback-before-debit-06"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"playerId\" : \"{{roxorgame_playerid}}\",\n  \"website\" : \"{{roxorgame_website}}\",\n  \"platform\" : \"desktop\",\n  \"gameKey\" : \"{{roxorgame_gamekey}}\",\n  \"gamePlayId\" : \"rollback-before-debit-06\",\n  \"operations\" : [ {\n    \"operationType\" : \"CANCEL_TRANSFER\",\n    \"amount\" : {\n        \"currency\" : \"GBP\",\n        \"amount\" : 10\n    },\n    \"transferId\" : \"rollback-before-debit-06-transfer-01-debit\",\n    \"type\" : \"DEBIT\"\n  }]\n}"
+										},
+										"url": {
+											"raw": "{{gateway}}/service-casino-provider-roxor/rgp/game-play",
+											"host": [
+												"{{gateway}}"
+											],
+											"path": [
+												"service-casino-provider-roxor",
+												"rgp",
+												"game-play"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Call 2 - START DEBIT - ERROR",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"tests[\"Status code is 200\"] = responseCode.code === 200;",
+													"",
+													"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "SessionKey",
+												"type": "text",
+												"value": "{{SESSION_KEY}}"
+											},
+											{
+												"key": "GameplayId",
+												"type": "text",
+												"value": "rollback-before-debit-06"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"playerId\" : \"{{roxorgame_playerid}}\",\n  \"website\" : \"{{roxorgame_website}}\",\n  \"platform\" : \"desktop\",\n  \"gameKey\" : \"{{roxorgame_gamekey}}\",\n  \"gamePlayId\" : \"rollback-before-debit-06\",\n  \"operations\" : [ {\n    \"operationType\" : \"START_GAME_PLAY\"\n  }, {\n    \"operationType\" : \"TRANSFER\",\n    \"amount\" : {\n        \"currency\" : \"GBP\",\n        \"amount\" : 10\n    },\n    \"transferId\" : \"rollback-before-debit-06-transfer-01-debit\",\n    \"type\" : \"DEBIT\"\n  }]\n}"
+										},
+										"url": {
+											"raw": "{{gateway}}/service-casino-provider-roxor/rgp/game-play",
+											"host": [
+												"{{gateway}}"
+											],
+											"path": [
+												"service-casino-provider-roxor",
+												"rgp",
+												"game-play"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "DebitErrorRollback",
+							"item": [
+								{
+									"name": "Call 1 - START DEBIT - ERROR",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"tests[\"Status code is 200\"] = responseCode.code === 200;",
+													"",
+													"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "SessionKey",
+												"type": "text",
+												"value": "{{SESSION_KEY}}"
+											},
+											{
+												"key": "GameplayId",
+												"type": "text",
+												"value": "debit-error-transfer-cancel-07"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"playerId\" : \"{{roxorgame_playerid}}\",\n  \"website\" : \"{{roxorgame_website}}\",\n  \"platform\" : \"desktop\",\n  \"gameKey\" : \"not_valid_game_key\",\n  \"gamePlayId\" : \"debit-error-transfer-cancel-07\",\n  \"operations\" : [ {\n    \"operationType\" : \"START_GAME_PLAY\"\n  }, {\n    \"operationType\" : \"TRANSFER\",\n    \"amount\" : {\n        \"currency\" : \"GBP\",\n        \"amount\" : 50\n    },\n    \"transferId\" : \"debit-error-transfer-cancel-07-transfer-01-debit\",\n    \"type\" : \"DEBIT\"\n  }]\n}"
+										},
+										"url": {
+											"raw": "{{gateway}}/service-casino-provider-roxor/rgp/game-play",
+											"host": [
+												"{{gateway}}"
+											],
+											"path": [
+												"service-casino-provider-roxor",
+												"rgp",
+												"game-play"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Call 2 - CANCEL DEBIT from Call 1 - SUCCESS",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"tests[\"Status code is 200\"] = responseCode.code === 200;",
+													"",
+													"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "SessionKey",
+												"type": "text",
+												"value": "{{SESSION_KEY}}"
+											},
+											{
+												"key": "GameplayId",
+												"type": "text",
+												"value": "debit-error-transfer-cancel-07"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"playerId\" : \"{{roxorgame_playerid}}\",\n  \"website\" : \"{{roxorgame_website}}\",\n  \"platform\" : \"desktop\",\n  \"gameKey\" : \"{{roxorgame_gamekey}}\",\n  \"gamePlayId\" : \"debit-error-transfer-cancel-07\",\n  \"operations\" : [ {\n    \"operationType\" : \"CANCEL_TRANSFER\",\n    \"amount\" : {\n        \"currency\" : \"GBP\",\n        \"amount\" : 50\n    },\n    \"transferId\" : \"debit-error-transfer-cancel-07-transfer-01-debit\",\n    \"type\" : \"DEBIT\"\n  }, {\n    \"operationType\" : \"FINISH_GAME_PLAY\"\n  }]\n}"
+										},
+										"url": {
+											"raw": "{{gateway}}/service-casino-provider-roxor/rgp/game-play",
+											"host": [
+												"{{gateway}}"
+											],
+											"path": [
+												"service-casino-provider-roxor",
+												"rgp",
+												"game-play"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "rgp/authenticatePlayer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									"",
+									"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "SessionKey",
+								"value": "{{SESSION_KEY}}",
+								"type": "text"
+							},
+							{
+								"key": "X-Forward-For",
+								"value": "127.0.0.1",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "SessionKey",
+								"value": "123",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"playerId\": \"{{roxorgame_playerid}}\",\n    \"website\": \"{{roxorgame_website}}\"\n}"
+						},
+						"url": {
+							"raw": "{{gateway}}/service-casino-provider-roxor/rgp/authenticatePlayer",
+							"host": [
+								"{{gateway}}"
+							],
+							"path": [
+								"service-casino-provider-roxor",
+								"rgp",
+								"authenticatePlayer"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "rgp/balance",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									"",
+									"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "SessionKey",
+								"type": "text",
+								"value": "{{SESSION_KEY}}"
+							},
+							{
+								"key": "X-Forward-For",
+								"value": "127.0.0.1",
+								"type": "text"
+							},
+							{
+								"key": "SessionKey",
+								"value": "123",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"playerId\": \"{{roxorgame_playerid}}\",\n    \"website\": \"{{roxorgame_website}}\",\n    \"gameKey\": \"{{roxorgame_gamekey}}\"\n}"
+						},
+						"url": {
+							"raw": "{{gateway}}/service-casino-provider-roxor/rgp/balance",
+							"host": [
+								"{{gateway}}"
+							],
+							"path": [
+								"service-casino-provider-roxor",
+								"rgp",
+								"balance"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "rgp/transfer",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									"",
+									"tests[\"Response time is less than 200ms\"] = responseTime < 200;"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "SessionKey",
+								"type": "text",
+								"value": "{{SESSION_KEY}}"
+							},
+							{
+								"key": "X-Forward-For",
+								"type": "text",
+								"value": "127.0.0.1",
+								"disabled": true
+							},
+							{
+								"key": "SessionKey",
+								"type": "text",
+								"value": "123",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"gamePlayId\": \"123\",\n    \"transferId\" : \"123\",\n    \"website\": \"{{roxorgame_website}}\",\n    \"gameKey\": \"{{roxorgame_gamekey}}\"\n    \n}"
+						},
+						"url": {
+							"raw": "{{gateway}}/service-casino-provider-roxor/rgp/transfer",
+							"host": [
+								"{{gateway}}"
+							],
+							"path": [
+								"service-casino-provider-roxor",
+								"rgp",
+								"transfer"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Roxor Progressive",
+			"item": [
+				{
+					"name": "By Website",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://ppc2.platform.gamesys.games/game-configuration-api/v2/progressive/context/frontend/progressive-amounts/website/jackpotjoy",
+							"protocol": "https",
+							"host": [
+								"ppc2",
+								"platform",
+								"gamesys",
+								"games"
+							],
+							"path": [
+								"game-configuration-api",
+								"v2",
+								"progressive",
+								"context",
+								"frontend",
+								"progressive-amounts",
+								"website",
+								"jackpotjoy"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "By Website Game",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://ppc2.platform.gamesys.games/game-configuration-api/v2/progressive/context/frontend/website/livescorebet/gameKey/play-phoenix-jackpot",
+							"protocol": "https",
+							"host": [
+								"ppc2",
+								"platform",
+								"gamesys",
+								"games"
+							],
+							"path": [
+								"game-configuration-api",
+								"v2",
+								"progressive",
+								"context",
+								"frontend",
+								"website",
+								"livescorebet",
+								"gameKey",
+								"play-phoenix-jackpot"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lithium Roxor Wrapper",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{gateway}}/service-casino-provider-roxor/test/rgp/progressive/jackpotjoy",
+							"host": [
+								"{{gateway}}"
+							],
+							"path": [
+								"service-casino-provider-roxor",
+								"test",
+								"rgp",
+								"progressive",
+								"jackpotjoy"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lithium Roxor Scheduler Wrapper",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{SYSTEMTOKEN}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{gateway}}/service-casino-provider-roxor/test/rgp/progressive/scheduler/test",
+							"host": [
+								"{{gateway}}"
+							],
+							"path": [
+								"service-casino-provider-roxor",
+								"test",
+								"rgp",
+								"progressive",
+								"scheduler",
+								"test"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Rewards",
+			"item": [
+				{
+					"name": "System Casino Roxor Bonus Query",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{gateway}}/service-casino-provider-roxor/rgp//players/livescore_nigeria/708/rewards?provider=lithium&website=roxorgaminglocal&gameKey=play-banghai",
+							"host": [
+								"{{gateway}}"
+							],
+							"path": [
+								"service-casino-provider-roxor",
+								"rgp",
+								"",
+								"players",
+								"livescore_nigeria",
+								"708",
+								"rewards"
+							],
+							"query": [
+								{
+									"key": "provider",
+									"value": "lithium"
+								},
+								{
+									"key": "website",
+									"value": "roxorgaminglocal"
+								},
+								{
+									"key": "gameKey",
+									"value": "play-banghai"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Roxor Provider Get Rewards",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Add Game",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer {{SYSTEMTOKEN}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{gateway}}/service-games/games/add?providerGuid=service-casino-provider-roxor&providerGameId=play-foxin-twins&gameName=Foxin Twins&description=Slot Machine Game&domainName={{playerdomain}}",
+					"host": [
+						"{{gateway}}"
+					],
+					"path": [
+						"service-games",
+						"games",
+						"add"
+					],
+					"query": [
+						{
+							"key": "providerGuid",
+							"value": "service-casino-provider-roxor"
+						},
+						{
+							"key": "providerGameId",
+							"value": "play-foxin-twins"
+						},
+						{
+							"key": "gameName",
+							"value": "Foxin Twins"
+						},
+						{
+							"key": "description",
+							"value": "Slot Machine Game"
+						},
+						{
+							"key": "domainName",
+							"value": "{{playerdomain}}"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

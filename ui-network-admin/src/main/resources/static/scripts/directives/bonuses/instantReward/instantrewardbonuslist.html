@@ -1,0 +1,29 @@
+<div class="row v-reset-row ">
+    <div class="col-xs-12">
+        <div uib-collapse="controller.legendCollapsed">
+            <div class="row v-reset-row ">
+                <formly-form model="controller.model" fields="controller.fields" form="controller.form" options="controller.options">
+                </formly-form>
+            </div>
+            <div class="col-xs-12">
+                <div class="flex-row pull-right">
+                    <button-clear ng-click="controller.resetFilter(true)"></button-clear>
+                    <button-filter type="submit" ng-click="controller.applyFilter(true)"></button-filter>
+                </div>
+            </div>
+        </div>
+        <div class="collapse" uib-collapse="!controller.legendCollapsed">
+            <div align="center">
+                <button-filter class="pull-left" ng-click="controller.toggleLegendCollapse()"></button-filter>
+                <button-refresh class="pull-right" ng-click="controller.applyFilter(false)"></button-refresh>
+                <button-clear class="pull-right" ng-click="controller.resetFilter(false)"></button-clear>
+            </div>
+            <div class="text-center col-xs-12" style="padding-top: 10px;">
+                <span class="description"> <label>{{'UI_NETWORK_ADMIN.PLAYER.TAB.CASHBONUS.FILTERS.BONUSCODES' | translate}} {{controller.filteredBonusCodes.toString()}}</label><br/></span>
+                <span ng-if="controller.model.dateRangeStart || controller.model.dateRangeEnd" class="description"> <label ng-if="controller.model.dateRangeStart"> from {{controller.model.dateRangeStart|date}}</label> <label ng-if="controller.model.dateRangeEnd"> up to {{controller.model.dateRangeEnd|date}}</label><br/></span>
+            </div>
+        </div>
+        <dt class="table table-sm table-responsive" table="controller.cashBonusTable"/>
+    </div>
+</div>
+

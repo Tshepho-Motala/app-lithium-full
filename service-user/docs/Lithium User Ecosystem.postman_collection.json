@@ -1,0 +1,579 @@
+{
+	"info": {
+		"_postman_id": "c47c7bc3-37c3-48f8-9a08-2732aa975f88",
+		"name": "Lithium User Ecosystem",
+		"description": "The following document describes the APIs that will allow a sportsbook provider to register transactions\nwithin Lithium.\n---\nSome requests require a sha256 checksum that accompanies the payload. To calculate the checksum, concatenate \nthe fields identified in the description of the respective sha256 field, using a colon as separator. \nThereafter pass it to your preferred hmac sha256 function together with the pre-shared key supplied by \nLithium. \n\nSee https://www.freeformatter.com/hmac-generator.html to test (ensure to select SHA256)\n\n    hmac_sha256(\"TESTDATA\", PRESHAREDKEY\") = cd322232cde0f9f6f8c3c0c7833ee8931af66677f1bf4c85691e0d777c9c567d\n    \n",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "service-user",
+			"item": [
+				{
+					"name": "backoffice",
+					"item": [
+						{
+							"name": "ecosystem",
+							"item": [
+								{
+									"name": "User link add",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{backoffice-user-access-token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{gateway}}/service-user/backoffice/user-link/add-user-link?primaryUserGuid={{player-guid}}&secondaryUserGuid={{player-guid-secondary}}&userLinkTypeCode=SIMILAR_DETAILS&linkNote=The players have similar details",
+											"host": [
+												"{{gateway}}"
+											],
+											"path": [
+												"service-user",
+												"backoffice",
+												"user-link",
+												"add-user-link"
+											],
+											"query": [
+												{
+													"key": "primaryUserGuid",
+													"value": "{{player-guid}}",
+													"description": "The initiating user for a link"
+												},
+												{
+													"key": "secondaryUserGuid",
+													"value": "{{player-guid-secondary}}",
+													"description": "The destination user for the link"
+												},
+												{
+													"key": "userLinkTypeCode",
+													"value": "SIMILAR_DETAILS",
+													"description": "Use a code from the User link type list"
+												},
+												{
+													"key": "linkNote",
+													"value": "The players have similar details",
+													"description": "A freeform text field for link notes"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "User link type list",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{backoffice-user-access-token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{gateway}}/service-user/backoffice/user-link/type-list",
+											"host": [
+												"{{gateway}}"
+											],
+											"path": [
+												"service-user",
+												"backoffice",
+												"user-link",
+												"type-list"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "User link update",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{backoffice-user-access-token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{gateway}}/service-user/backoffice/user-link/update-user-link?userLinkId=1&linkNote=My link is updated now&deleted=false",
+											"host": [
+												"{{gateway}}"
+											],
+											"path": [
+												"service-user",
+												"backoffice",
+												"user-link",
+												"update-user-link"
+											],
+											"query": [
+												{
+													"key": "userLinkId",
+													"value": "1",
+													"description": "Id of the user link relationship. Can be obtained by viewing user links"
+												},
+												{
+													"key": "linkNote",
+													"value": "My link is updated now",
+													"description": "Freeform link note"
+												},
+												{
+													"key": "deleted",
+													"value": "false",
+													"description": "Optional field to delete a link"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "User link list",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{backoffice-user-access-token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{gateway}}/service-user/backoffice/user-link/list-by-user?userGuid={{player-guid}}",
+											"host": [
+												"{{gateway}}"
+											],
+											"path": [
+												"service-user",
+												"backoffice",
+												"user-link",
+												"list-by-user"
+											],
+											"query": [
+												{
+													"key": "userGuid",
+													"value": "{{player-guid}}"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "User link table",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{backoffice-user-access-token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{gateway}}/service-user/backoffice/user-link/table?ecosystemName=echosystem007&draw=1&start=0&length=10",
+											"host": [
+												"{{gateway}}"
+											],
+											"path": [
+												"service-user",
+												"backoffice",
+												"user-link",
+												"table"
+											],
+											"query": [
+												{
+													"key": "domainNames",
+													"value": null,
+													"description": "Array of domain names to check for user links and return",
+													"disabled": true
+												},
+												{
+													"key": "ecosystemName",
+													"value": "echosystem007",
+													"description": "user links on a specific ecosystem. Ecosystem name as configured in the ecosystem config."
+												},
+												{
+													"key": "draw",
+													"value": "1"
+												},
+												{
+													"key": "start",
+													"value": "0"
+												},
+												{
+													"key": "length",
+													"value": "10"
+												}
+											]
+										},
+										"description": "Pass in either domain names or ecosystem name to show user links on the relevant criteria"
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Domain List",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{backoffice-user-access-token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{gateway}}/service-domain/domains/findAllDomains",
+									"host": [
+										"{{gateway}}"
+									],
+									"path": [
+										"service-domain",
+										"domains",
+										"findAllDomains"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "frontend",
+					"item": [
+						{
+							"name": "registerV4",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"let username = '';",
+											"",
+											"const characters ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789'",
+											"",
+											"for (let i = 0; i <= (Math.floor(Math.random() * 4) + 8); i++) {",
+											"    let selector = Math.floor(Math.random() * characters.length);",
+											"    ",
+											"    username += characters[selector]",
+											"}",
+											"console.log('Username = ' + username);",
+											"",
+											"pm.collectionVariables.set(\"username\", username);",
+											"",
+											"let password = '';",
+											"",
+											"const passwordCharacters ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+=-'",
+											"",
+											"for (let i = 0; i <= (Math.floor(Math.random() * 4) + 8); i++) {",
+											"    let selector = Math.floor(Math.random() * passwordCharacters.length);",
+											"    ",
+											"    password += passwordCharacters[selector]",
+											"}",
+											"console.log('Password = ' + password);",
+											"",
+											"pm.collectionVariables.set(\"password\", password);",
+											"",
+											""
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJsYXN0TmFtZSI6IkFkbWluaXN0cmF0b3IiLCJqd3RVc2VyIjoiSDRzSUFBQUFBQUFBQUlXUnkwN0RNQkJGZjhXYWRReHFHMUNURlpIQ0F2RlFWZFFWcXBEclIyWGgxSkVmbGFES3Z6TW1EYlJFZ3QzNFhQdk9IYzhCTkpTVERDS1V3RVNqZDVDQnd2bzV0dEpoYmJDdUV0YytPQlpzWWhLWlQvcU5rSXBGRXk2NGJaQ0wza3JzVUQ4cWlYb29Ydzd3QzZiajB0cEFhdHV3cjY2dGdGSXg0MlVHN3Z0RlZUL2VQYUdJSHNGRmxFUmZkT3N1NjI4WXZaZWVXeWNIMTRjQmtGcnVwYkV0cVk1em5YUm9UOUtNbkY0LzJOaHNZZGk3ZE9keCswanRXWXF4VzN6N3g0MVFzcnIveTNLZEFVdjd5UVhqYWw3UVlpTVV6WE11NmVaNk5xRkZQdU5DVGE4UXpOTmZiZFArVm92YkpSNjJQNE5lRHZ2MUdodE51MCtEbm5qMit3RUFBQT09Iiwic2Vzc2lvbktleSI6IjhlZmJjNTRjLTAxMWItNGU4YS04ZjVkLTU3MWY5YTE5YTYxMCIsInVzZXJfbmFtZSI6ImFkbWluIiwic2Vzc2lvbklkIjoyLCJ1c2VyR3VpZCI6ImRlZmF1bHQvYWRtaW4iLCJ1c2VySWQiOjEsImF1dGhvcml0aWVzIjpbIkFETUlOIl0sImNsaWVudF9pZCI6ImRlZmF1bHQvdW5hIiwiZmlyc3ROYW1lIjoiU3VwZXIiLCJhdWQiOlsib2F1dGgyLXJlc291cmNlIl0sInNjb3BlIjpbIm9wZW5pZCJdLCJkb21haW5OYW1lIjoiZGVmYXVsdCIsInJlZ2lzdHJhdGlvbkRhdGUiOjE2MTI3ODMwODUwMDAsImV4cCI6MTYxNTUzMzQyNywic2hvcnRHdWlkIjoiU1VQRVIiLCJqdGkiOiI0Y2I5YTNmYy1jOWEwLTQyOGItOTQ4NC1kZGM3Njc4NDkyYzMiLCJlbWFpbCI6InN1cGVyQGRlZmF1bHQuY29tIiwidXNlcm5hbWUiOiJhZG1pbiJ9.ZzciL5tInAnzzb3oVhO7PYuSZ7Fem4ZbcWz80VtWvXMA77DgLonWjyaUlC-m6JyvbuIrQZOAMvz-nw1i-F7Xu8egdosn7O3IUQpkeSk1EzNvlYXT3moBNYL2UjZp527TEBwbWY43eTPBlwNqOEBUxROSUhLPfhnqFSYIu0VOPxkcq-rbu-oaHCZenfiAwTn1zU4JEMr_-8PKdrLLj4VE9Zg056bgYRlaYplTkDNRcvxfbkoxOlr-ZwB5GczuFuoAVnGQXcLhxrPva_Yvdpy_BxW2e0oFexY56x6OaRBG5NsAzJW-2QFGbnxHPSac9OKEM5byAAiIkRs-tmJZ0IWmrGKrVh3U2xU2azW28hUlUOy_Y6mfe46OGZk5Hwkr3UFFFfYnHTdJcrGZjWsdeGXD0mmj3MotNM5Or37fDdhP4I-F0270Gi6-hmJkMdDDAd5HVBkOelI7Vq-Rf4Mm-EErDeXz8cwqFc3od-VWoM7YRnaT7Y_1vT0W-0AIq6TCuGGVF2lFz6PaY3U4UE8Gt8mx6Bt01mLcUrHvO81bRqFL_MxXTpEl0sIXJrICcHcNhNif30-EcU5hnHnDqzvwPJF4-WVjzi9c2ZvwyE1do-4fVV0m7xQFbV5Sw-JImhXHU0Qpf48udJzb_23dcfVtJ7JLGycGEoGPzKMzw9DOyqdtoYY",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "clientId",
+										"value": "acme",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "clientSecret",
+										"value": "acmesecret",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Authorization",
+										"value": "Basic YWNtZTphY21lc2VjcmV0",
+										"type": "text"
+									},
+									{
+										"key": "Accept-Language",
+										"value": "AF",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"username\": \"{{username}}\",\n  \"password\": \"{{password}}\",\n  \"email\": \"{{username}}@wonderlabz.com\",\n  \"firstName\": \"{{$randomFirstName}}\",\n  \"lastNamePrefix\": \"van den\",\n  \"lastName\": \"{{$randomLastName}}\",\n  \"additionalData\": {\n      \"cruksId\": \"1234567890\",\n      \"iban\": \"123456782ohwegohwefpkwdg\"\n  },\n  \"dobYear\": 1984,\n  \"dobMonth\": 1,\n  \"dobDay\": 1,\n  \"depositLimitDaily\": \"string\",\n  \"depositLimitWeekly\": \"string\",\n  \"depositLimitMonthly\": \"string\",\n  \"balanceLimit\": 0,\n  \"timeCap\": \"DAILY\",\n  \"timeCapAmount\": 120,\n  \"smsOptOut\": true\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{gateway}}/service-user/frontend/livescore_nl/register/v4",
+									"host": [
+										"{{gateway}}"
+									],
+									"path": [
+										"service-user",
+										"frontend",
+										"livescore_nl",
+										"register",
+										"v4"
+									],
+									"query": [
+										{
+											"key": "locale",
+											"value": "af",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "UNA (Backoffice) Authentication",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Token reveived\"] = jsonData.access_token;",
+							"",
+							"postman.setEnvironmentVariable(\"backoffice-user-access-token\", jsonData.access_token);",
+							"postman.setEnvironmentVariable(\"backoffice-user-refresh-token\", jsonData.refresh_token);",
+							"postman.setEnvironmentVariable(\"backoffice-user-guid\", jsonData.userGuid);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "acme",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "acmesecret",
+							"type": "string"
+						},
+						{
+							"key": "saveHelperData",
+							"value": true,
+							"type": "boolean"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic YWNtZTphY21lc2VjcmV0",
+						"warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman."
+					},
+					{
+						"key": "X-Forwarded-For",
+						"type": "text",
+						"value": "10.0.0.2"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "{{backoffice-domain}}/{{backoffice-username}}",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "{{backoffice-password}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{gateway}}/server-oauth2/oauth/token",
+					"host": [
+						"{{gateway}}"
+					],
+					"path": [
+						"server-oauth2",
+						"oauth",
+						"token"
+					]
+				},
+				"description": "You will need to add the required parameters to the active environment or global scope to allow the authentication to function"
+			},
+			"response": []
+		},
+		{
+			"name": "Player Authentication",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Token reveived\"] = jsonData.access_token;",
+							"",
+							"postman.setEnvironmentVariable(\"player-access-token\", jsonData.access_token);",
+							"postman.setEnvironmentVariable(\"player-refresh-token\", jsonData.refresh_token);",
+							"postman.setEnvironmentVariable(\"player-guid\", jsonData.userGuid);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "acme",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "acmesecret",
+							"type": "string"
+						},
+						{
+							"key": "saveHelperData",
+							"value": true,
+							"type": "boolean"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic YWNtZTphY21lc2VjcmV0",
+						"warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman."
+					},
+					{
+						"key": "X-Forwarded-For",
+						"type": "text",
+						"value": "10.0.0.2"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "{{player-domain}}/{{player-username}}",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "{{player-password}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{gateway}}/server-oauth2/oauth/token",
+					"host": [
+						"{{gateway}}"
+					],
+					"path": [
+						"server-oauth2",
+						"oauth",
+						"token"
+					]
+				},
+				"description": "You will need to add the required parameters to the active environment or global scope to allow the authentication to function"
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://gateway.lithium-develop.ls-g.net",
+			"type": "string"
+		}
+	]
+}

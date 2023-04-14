@@ -1,0 +1,65 @@
+<div class="box box-{{data.box}} box-solid" bs-loading-overlay bs-loading-overlay-reference-id="{{referenceId}}">
+    <div class="box-header with-border">
+        {{data.title | translate}}
+        <div class="box-tools pull-right">
+            <button type="button" class="btn btn-box-tool" ng-if="user.ageVerified === true" ng-click="toggleAgeVerification()" lit-if-permission="PLAYER_VALIDATE_AGE" lit-permission-domain="{{user.domain.name}}">
+                <span><i class="glyphicon glyphicon-exclamation-sign"></i> {{ "UI_NETWORK_ADMIN.PLAYER.QUICK_ACTIONS.CHANGE.AGE_VERIFIED.UNVERIFIED" | translate }} </span>
+            </button>
+            <button type="button" class="btn btn-box-tool" ng-if="user.ageVerified === false" ng-click="toggleAgeVerification()" lit-if-permission="PLAYER_VALIDATE_AGE" lit-permission-domain="{{user.domain.name}}">
+                <span><i class="glyphicon glyphicon-alert"></i> {{ "UI_NETWORK_ADMIN.PLAYER.QUICK_ACTIONS.CHANGE.AGE_VERIFIED.VERIFIED" | translate }} </span>
+            </button>
+            <button type="button" class="btn btn-box-tool" ng-if="user.addressVerified === true" ng-click="toggleAddressVerification()" lit-if-permission="PLAYER_VALIDATE_ADDRESS" lit-permission-domain="{{user.domain.name}}">
+                <span><i class="glyphicon glyphicon-exclamation-sign"></i> {{ "UI_NETWORK_ADMIN.PLAYER.QUICK_ACTIONS.CHANGE.ADDRESS_VERIFIED.UNVERIFIED" | translate }} </span>
+            </button>
+            <button type="button" class="btn btn-box-tool" ng-if="user.addressVerified === false" ng-click="toggleAddressVerification()" lit-if-permission="PLAYER_VALIDATE_ADDRESS" lit-permission-domain="{{user.domain.name}}">
+                <span><i class="glyphicon glyphicon-alert"></i> {{ "UI_NETWORK_ADMIN.PLAYER.QUICK_ACTIONS.CHANGE.ADDRESS_VERIFIED.VERIFIED" | translate }} </span>
+            </button>
+            <button type="button" class="btn btn-box-tool" ng-click="changeStatus()" lit-if-permission="PLAYER_VERIFICATION_STATUS"
+                    lit-permission-domain="{{user.domain.name}}">
+                <span><i class="fa fa-gear"></i> {{ "GLOBAL.ACTION.CHANGE" | translate }} </span>
+            </button>
+        </div>
+    </div>
+    <div class="box-body table-responsive">
+        <table class="table table-bordered">
+            <tr>
+                <th width="40%">{{ "GLOBAL.FIELDS.STATUS" | translate }}</th>
+                <td>
+                    <span ng-if="user.verificationStatus === 1 && !user.emailValidated && data.domainSettings['validate_email_on_registration'] === 'true'" class="label label-lg label-warning">{{ "UI_NETWORK_ADMIN.USER.FIELDS.VERIFICATIONSTATUS.CODES.TEMPORARY_ID" | translate }}</span>
+                    <span ng-if="user.verificationStatus === 1 && user.emailValidated && data.domainSettings['validate_email_on_registration'] === 'true'" class="label label-lg label-warning">{{ "UI_NETWORK_ADMIN.USER.FIELDS.VERIFICATIONSTATUS.CODES.UNVERIFIED" | translate }}</span>
+                    <span ng-if="user.verificationStatus === 1 && data.domainSettings['validate_email_on_registration'] !== 'true'" class="label label-lg label-warning">{{ "UI_NETWORK_ADMIN.USER.FIELDS.VERIFICATIONSTATUS.CODES.UNVERIFIED" | translate }}</span>
+                    <span ng-if="user.verificationStatus === 2" class="label label-lg label-info">{{ "UI_NETWORK_ADMIN.USER.FIELDS.VERIFICATIONSTATUS.CODES.MANUALLY_VERIFIED" | translate }}</span>
+                    <span ng-if="user.verificationStatus === 3" class="label label-lg label-info">{{ "UI_NETWORK_ADMIN.USER.FIELDS.VERIFICATIONSTATUS.CODES.EXTERNALLY_VERIFIED" | translate }}</span>
+                    <span ng-if="user.verificationStatus === 4" class="label label-lg label-info">{{ "UI_NETWORK_ADMIN.USER.FIELDS.VERIFICATIONSTATUS.CODES.SOF_VERIFIED" | translate }}</span>
+                    <span ng-if="user.verificationStatus === 5" class="label label-lg label-info">{{ "UI_NETWORK_ADMIN.USER.FIELDS.VERIFICATIONSTATUS.CODES.UNDERAGED" | translate }}</span>
+                    <span ng-if="user.verificationStatus === 6" class="label label-lg label-info">{{ "UI_NETWORK_ADMIN.USER.FIELDS.VERIFICATIONSTATUS.CODES.AGE_ONLY_VERIFIED" | translate }}</span>
+                    <span ng-if="!user.verificationStatus" class="label label-lg label-danger">{{"UI_NETWORK_ADMIN.USER.FIELDS.VERIFICATIONSTATUS.CODES.NOT_SETUP" | translate }}</span>
+                </td>
+            </tr>
+            <tr>
+                <th width="40%">{{'UI_NETWORK_ADMIN.USER.FIELDS.AGE_VERIFIED.VERIFIED'|translate}}</th>
+                <td>
+                    <span class="label label-lg label-info" ng-if="user.ageVerified == '1'">{{ "UI_NETWORK_ADMIN.USER.FIELDS.AGE_VERIFIED.VERIFIED" | translate }}</span>
+                    <span class="label label-lg label-warning" ng-if="user.ageVerified == '0'">{{ "UI_NETWORK_ADMIN.USER.FIELDS.AGE_VERIFIED.UNVERIFIED" | translate }}</span>
+                </td>
+            </tr>
+            <tr>
+                <th width="40%">{{'UI_NETWORK_ADMIN.USER.FIELDS.ADDRESS_VERIFIED.VERIFIED'|translate}}</th>
+                <td>
+                    <span class="label label-lg label-info" ng-if="user.addressVerified == '1'">{{ "UI_NETWORK_ADMIN.USER.FIELDS.ADDRESS_VERIFIED.VERIFIED" | translate }}</span>
+                    <span class="label label-lg label-warning" ng-if="user.addressVerified == '0'">{{ "UI_NETWORK_ADMIN.USER.FIELDS.ADDRESS_VERIFIED.UNVERIFIED" | translate }}</span>
+                </td>
+            </tr>
+        </table>
+        <table class="table table-bordered" ng-if="data.showHistory">
+            <tr>
+                <th colspan="2">Status History</th>
+            </tr>
+            <tr>
+                <td colspan="2">
+                    &nbsp;
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

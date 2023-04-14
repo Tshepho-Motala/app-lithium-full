@@ -1,0 +1,14 @@
+{
+	"UI_NETWORK_ADMIN": {
+		"GAME": {
+			"EDIT": {
+				"GRAPHIC_REMOVED_SUCCESS": "Graphic removed successfully"
+			},
+			"IMAGES": {
+				"DOMAIN": {
+					"REMOVE": "Remove Domain Graphic"
+				}
+			}
+		}
+	}
+}

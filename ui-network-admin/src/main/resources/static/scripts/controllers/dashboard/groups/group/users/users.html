@@ -1,0 +1,12 @@
+<form ng-submit="controller.save()" novalidate>
+	<div class="row v-reset-row " lit-if-permission="GROUP_USERS_ADD" lit-permission-domain="{{domainName}}">
+		<div class="col-xs-12">
+			<button-add ng-click="controller.userAddModal()"></button-add>
+		</div>
+	</div>
+	<div class="row v-reset-row ">
+		<div class="col-xs-12 no-padding table-responsive">
+			<dt table="controller.usersTable"/>
+		</div>
+	</div>
+</form>

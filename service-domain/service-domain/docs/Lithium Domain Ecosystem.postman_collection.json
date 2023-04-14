@@ -1,0 +1,840 @@
+{
+	"info": {
+		"_postman_id": "cbab0f17-7675-4564-a92b-2b79983eadc0",
+		"name": "Lithium Domain Ecosystem",
+		"description": "The following document describes the APIs that will allow a sportsbook provider to register transactions\nwithin Lithium.\n---\nSome requests require a sha256 checksum that accompanies the payload. To calculate the checksum, concatenate \nthe fields identified in the description of the respective sha256 field, using a colon as separator. \nThereafter pass it to your preferred hmac sha256 function together with the pre-shared key supplied by \nLithium. \n\nSee https://www.freeformatter.com/hmac-generator.html to test (ensure to select SHA256)\n\n    hmac_sha256(\"TESTDATA\", PRESHAREDKEY\") = cd322232cde0f9f6f8c3c0c7833ee8931af66677f1bf4c85691e0d777c9c567d\n    \n",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "service-domain",
+			"item": [
+				{
+					"name": "backoffice",
+					"item": [
+						{
+							"name": "ecosystem",
+							"item": [
+								{
+									"name": "Ecosystem List",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{backoffice-user-access-token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{gateway}}/service-domain/backoffice/ecosystem/list",
+											"host": [
+												"{{gateway}}"
+											],
+											"path": [
+												"service-domain",
+												"backoffice",
+												"ecosystem",
+												"list"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Ecosystem Relationship Type List",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{backoffice-user-access-token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{gateway}}/service-domain/backoffice/ecosystem/relationship-type/list",
+											"host": [
+												"{{gateway}}"
+											],
+											"path": [
+												"service-domain",
+												"backoffice",
+												"ecosystem",
+												"relationship-type",
+												"list"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Ecosystem Domain Relationship List",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{backoffice-user-access-token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{gateway}}/service-domain/backoffice/ecosystem/domain-relationship/list?ecosystemName=echosystem007",
+											"host": [
+												"{{gateway}}"
+											],
+											"path": [
+												"service-domain",
+												"backoffice",
+												"ecosystem",
+												"domain-relationship",
+												"list"
+											],
+											"query": [
+												{
+													"key": "ecosystemName",
+													"value": "echosystem007"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Ecosystem Domain Relationship Add",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{backoffice-user-access-token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{gateway}}/service-domain/backoffice/ecosystem/domain-relationship/add?ecosystemId=1&domainId=12&relationshipTypeId=2",
+											"host": [
+												"{{gateway}}"
+											],
+											"path": [
+												"service-domain",
+												"backoffice",
+												"ecosystem",
+												"domain-relationship",
+												"add"
+											],
+											"query": [
+												{
+													"key": "ecosystemId",
+													"value": "1"
+												},
+												{
+													"key": "domainId",
+													"value": "12"
+												},
+												{
+													"key": "relationshipTypeId",
+													"value": "2"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Ecosystem Domain Relationship Remove",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{backoffice-user-access-token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{gateway}}/service-domain/backoffice/ecosystem/domain-relationship/remove?ecosystemDomainRelationshipId=2",
+											"host": [
+												"{{gateway}}"
+											],
+											"path": [
+												"service-domain",
+												"backoffice",
+												"ecosystem",
+												"domain-relationship",
+												"remove"
+											],
+											"query": [
+												{
+													"key": "ecosystemDomainRelationshipId",
+													"value": "2"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Ecosystem Create Or Modify",
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": [
+												{
+													"key": "token",
+													"value": "{{backoffice-user-access-token}}",
+													"type": "string"
+												}
+											]
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"id\" : \"0\",\n    \"name\" : \"echosystem007\",\n    \"displayName\" : \"Echosystem Zero-Zero-Seven\",\n    \"description\" : \"My awesome ecosystem 007\",\n    \"enabled\" : \"true\",\n    \"deleted\" : \"false\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{gateway}}/service-domain/backoffice/ecosystem/create-or-modify",
+											"host": [
+												"{{gateway}}"
+											],
+											"path": [
+												"service-domain",
+												"backoffice",
+												"ecosystem",
+												"create-or-modify"
+											]
+										}
+									},
+									"response": []
+								}
+							],
+							"protocolProfileBehavior": {},
+							"_postman_isSubFolder": true
+						},
+						{
+							"name": "Domain List",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{backoffice-user-access-token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{gateway}}/service-domain/domains/findAllDomains",
+									"host": [
+										"{{gateway}}"
+									],
+									"path": [
+										"service-domain",
+										"domains",
+										"findAllDomains"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Domain Create (LS Media)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "c83aff54-4675-490f-8e22-e918528d41ac",
+										"exec": [
+											"tests[\"Status code is 200\"] = responseCode.code === 200;",
+											"",
+											"var jsonData = JSON.parse(responseBody);",
+											"tests[\"Domain creation id\"] = jsonData.data.id;",
+											"",
+											"postman.setEnvironmentVariable(\"ls-media-domain-id\", jsonData.data.id);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{backoffice-user-access-token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"players\": true,\n    \"name\": \"livescore_media\",\n    \"displayName\": \"Livescore Media\",\n    \"description\": \"Livescore Media Domain\",\n    \"defaultCountry\": \"GBR\",\n    \"supportUrl\": \"http://livescore-media.com\",\n    \"url\": \"http://livescore-media.com\",\n    \"supportEmail\": \"livescore-media@livescore-media.com\",\n    \"currency\": \"GBP\",\n    \"currencySymbol\": \"£\",\n    \"defaultLocale\": \"en_GB\",\n    \"parentId\": 1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{gateway}}/service-domain/domains",
+									"host": [
+										"{{gateway}}"
+									],
+									"path": [
+										"service-domain",
+										"domains"
+									]
+								},
+								"description": "There can also be a UNA (backoffice) domain for the player domain.\nThe backoffice domain should not form part of the ecosystem setup since it is outside of the realm of domain interactions."
+							},
+							"response": []
+						},
+						{
+							"name": "Domain Create (LS Bet UK)",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"id": "57e74265-29f5-46e0-a3a0-2e7dc455ed2a",
+										"exec": [
+											"tests[\"Status code is 200\"] = responseCode.code === 200;",
+											"",
+											"var jsonData = JSON.parse(responseBody);",
+											"tests[\"Domain creation id\"] = jsonData.data.id;",
+											"",
+											"postman.setEnvironmentVariable(\"ls-bet-uk-domain-id\", jsonData.data.id);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{backoffice-user-access-token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"players\": true,\n    \"name\": \"livescore_bet_uk\",\n    \"displayName\": \"Livescore Bet UK\",\n    \"description\": \"Livescore Bet UK Domain\",\n    \"defaultCountry\": \"GBR\",\n    \"supportUrl\": \"http://livescore-bet-uk.com\",\n    \"url\": \"http://livescore-bet-uk.com\",\n    \"supportEmail\": \"livescore-bet-uk@livescore-bet-uk.com\",\n    \"currency\": \"GBP\",\n    \"currencySymbol\": \"£\",\n    \"defaultLocale\": \"en_GB\",\n    \"parentId\": 1\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{gateway}}/service-domain/domains",
+									"host": [
+										"{{gateway}}"
+									],
+									"path": [
+										"service-domain",
+										"domains"
+									]
+								},
+								"description": "There can also be a UNA (backoffice) domain for the player domain.\nThe backoffice domain should not form part of the ecosystem setup since it is outside of the realm of domain interactions."
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				},
+				{
+					"name": "system",
+					"item": [
+						{
+							"name": "Domain List",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{backoffice-user-access-token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{gateway}}/service-domain/domains/findAllDomains",
+									"host": [
+										"{{gateway}}"
+									],
+									"path": [
+										"service-domain",
+										"domains",
+										"findAllDomains"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Ecosystem domains by domainName (boolean)",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{system-user-access-token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "domainName",
+											"value": "livescore_media",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{gateway}}/service-domain/system/ecosystem/is-domain-in-any-ecosystem",
+									"host": [
+										"{{gateway}}"
+									],
+									"path": [
+										"service-domain",
+										"system",
+										"ecosystem",
+										"is-domain-in-any-ecosystem"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Ecosystem domains by domainName (domains)",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{system-user-access-token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "domainName",
+											"value": "livescore_media",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{gateway}}/service-domain/system/ecosystem/domain-relationship/list-by-domain-name",
+									"host": [
+										"{{gateway}}"
+									],
+									"path": [
+										"service-domain",
+										"system",
+										"ecosystem",
+										"domain-relationship",
+										"list-by-domain-name"
+									]
+								},
+								"description": "Domains in ecosystem when a domain name is provided"
+							},
+							"response": []
+						},
+						{
+							"name": "Ecosystem domains by ecosystemName",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "{{system-user-access-token}}",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "ecosystemName",
+											"value": "echosystem007",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{gateway}}/service-domain/system/ecosystem/domain-relationship/list-by-ecosystem-name",
+									"host": [
+										"{{gateway}}"
+									],
+									"path": [
+										"service-domain",
+										"system",
+										"ecosystem",
+										"domain-relationship",
+										"list-by-ecosystem-name"
+									]
+								},
+								"description": "Domains in ecosystem when a domain name is provided"
+							},
+							"response": []
+						}
+					],
+					"protocolProfileBehavior": {},
+					"_postman_isSubFolder": true
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "UNA (Backoffice) Authentication",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "cbc1b265-6046-427b-89c5-4c135a88447b",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Token reveived\"] = jsonData.access_token;",
+							"",
+							"postman.setEnvironmentVariable(\"backoffice-user-access-token\", jsonData.access_token);",
+							"postman.setEnvironmentVariable(\"backoffice-user-refresh-token\", jsonData.refresh_token);",
+							"postman.setEnvironmentVariable(\"backoffice-user-guid\", jsonData.userGuid);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "acme",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "acmesecret",
+							"type": "string"
+						},
+						{
+							"key": "saveHelperData",
+							"value": true,
+							"type": "boolean"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic YWNtZTphY21lc2VjcmV0",
+						"warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman."
+					},
+					{
+						"key": "X-Forwarded-For",
+						"type": "text",
+						"value": "10.0.0.2"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "{{backoffice-domain}}/{{backoffice-username}}",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "{{backoffice-password}}",
+							"type": "text"
+						}
+					],
+					"options": {
+						"formdata": {}
+					}
+				},
+				"url": {
+					"raw": "{{gateway}}/server-oauth2/oauth/token",
+					"host": [
+						"{{gateway}}"
+					],
+					"path": [
+						"server-oauth2",
+						"oauth",
+						"token"
+					]
+				},
+				"description": "You will need to add the required parameters to the active environment or global scope to allow the authentication to function"
+			},
+			"response": []
+		},
+		{
+			"name": "System Authentication",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a2eed26d-63f7-4535-b49b-51a68625e6ae",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Token reveived\"] = jsonData.access_token;",
+							"",
+							"postman.setEnvironmentVariable(\"system-user-access-token\", jsonData.access_token);",
+							"postman.setEnvironmentVariable(\"system-user-refresh-token\", jsonData.refresh_token);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "{{system-username}}",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "{{system-password}}",
+							"type": "string"
+						},
+						{
+							"key": "saveHelperData",
+							"value": true,
+							"type": "boolean"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic YWNtZTphY21lc2VjcmV0",
+						"warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman."
+					},
+					{
+						"key": "X-Forwarded-For",
+						"type": "text",
+						"value": "10.0.0.2"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"type": "text"
+						}
+					],
+					"options": {
+						"formdata": {}
+					}
+				},
+				"url": {
+					"raw": "{{gateway}}/server-oauth2/oauth/token",
+					"host": [
+						"{{gateway}}"
+					],
+					"path": [
+						"server-oauth2",
+						"oauth",
+						"token"
+					]
+				},
+				"description": "You will need to add the required parameters to the active environment or global scope to allow the authentication to function"
+			},
+			"response": []
+		},
+		{
+			"name": "Player Authentication",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8ed5aa35-c0e7-4462-9bab-503d544db943",
+						"exec": [
+							"tests[\"Status code is 200\"] = responseCode.code === 200;",
+							"",
+							"var jsonData = JSON.parse(responseBody);",
+							"tests[\"Token reveived\"] = jsonData.access_token;",
+							"",
+							"postman.setEnvironmentVariable(\"player-access-token\", jsonData.access_token);",
+							"postman.setEnvironmentVariable(\"player-refresh-token\", jsonData.refresh_token);",
+							"postman.setEnvironmentVariable(\"player-guid\", jsonData.userGuid);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "username",
+							"value": "acme",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "acmesecret",
+							"type": "string"
+						},
+						{
+							"key": "saveHelperData",
+							"value": true,
+							"type": "boolean"
+						},
+						{
+							"key": "showPassword",
+							"value": false,
+							"type": "boolean"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic YWNtZTphY21lc2VjcmV0",
+						"warning": "This is a duplicate header and will be overridden by the Authorization header generated by Postman."
+					},
+					{
+						"key": "X-Forwarded-For",
+						"type": "text",
+						"value": "10.0.0.2"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "grant_type",
+							"value": "password",
+							"type": "text"
+						},
+						{
+							"key": "username",
+							"value": "{{player-domain}}/{{player-username}}",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "{{player-password}}",
+							"type": "text"
+						}
+					],
+					"options": {
+						"formdata": {}
+					}
+				},
+				"url": {
+					"raw": "{{gateway}}/server-oauth2/oauth/token",
+					"host": [
+						"{{gateway}}"
+					],
+					"path": [
+						"server-oauth2",
+						"oauth",
+						"token"
+					]
+				},
+				"description": "You will need to add the required parameters to the active environment or global scope to allow the authentication to function"
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"id": "baseUrl",
+			"key": "baseUrl",
+			"value": "https://gateway.lithium-develop.ls-g.net",
+			"type": "string"
+		}
+	],
+	"protocolProfileBehavior": {}
+}

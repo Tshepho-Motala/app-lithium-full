@@ -1,0 +1,78 @@
+<div class="container-fluid" bs-loading-overlay bs-loading-overlay-reference-id="{{controller.referenceId}}">
+	<div class="col-xs-12">
+		<div class="panel box box-primary">
+			<div class="box-header with-border">
+				<a data-toggle="collapse" data-target="#collapse1,#collapse2">
+					<h4 class="panel-title">
+						Help
+						<div id="collapse2" class="pull-right collapse in"><i class="fa fa-plus"></i></div>
+					</h4>
+				</a>
+			</div>
+			<div id="collapse1" class="panel-collapse collapse">
+				<ul>
+					<li>Below is a list of all the games that are available to your domain and any domains that you can
+						manage.
+					</li>
+					<li>You can edit some of the game information by clicking on the individual edit buttons for each
+						game.
+					</li>
+					<li>The game will only display in the customer-facing game list once you have enabled visibility
+						by placing a tick on the checkbox under the column named visible for the game in question.
+					</li>
+					<li>You can make a game invisible by removing the tick on the checkbox under the column named
+						visible for the game in question.
+					</li>
+					<li>You can enable a game on this page by placing a tick on the checkbox under the column named
+						enable for the game in question.
+					</li>
+					<li>You can disable a game on this page by removing the tick on the checkbox under the column named
+						enable for the game in question.
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="row v-reset-row ">
+			<div class="col-xs-12">
+				<button-add lit-if-permission="GAME_ADD" ng-click="controller.add()"></button-add>
+				<button-custom bclass="btn btn-danger" lit-if-permission="GAME_LIST_POPULATE"
+							   ng-click="controller.refreshProviderGameList()" icon="refresh"
+							   text="Refresh provider games"></button-custom>
+			</div>
+		</div>
+
+		<div class="row v-reset-row ">
+			<div class="col-xs-12 bottom-space-10 top-space-25 text-right">
+				<div  id="vueMountGameSearchTopBar"></div>
+			</div>
+		</div>
+		<div class="row v-reset-row ">
+			<div class="col-xs-12">
+				<div class="card card-block">
+					<div class="" style="margin-bottom: 10px;">
+						<div uib-collapse="controller.legendCollapsed">
+							<div class="row v-reset-row ">
+								<formly-form model="controller.model" fields="controller.filterFields" form="controller.form" options="controller.options" class="d-flex flex-wrap">
+								</formly-form>
+							</div>
+							<div class="col-xs-12">
+								<div class="flex-row pull-right">
+									<button-clear ng-click="controller.resetFilter(true)"></button-clear>
+									<button-refresh ng-click="controller.tableLoad()"></button-refresh>
+									<button-filter ng-click="controller.applyFilter(true)"></button-filter>
+								</div>
+							</div>
+						</div>
+						<div class="collapse" uib-collapse="!controller.legendCollapsed">
+							<div align="pull-left">
+								<button-filter ng-click="controller.toggleLegendCollapse()"></button-filter>
+								<button-refresh ng-click="controller.tableLoad()"></button-refresh>
+							</div>
+						</div>
+						<dt class="table table-sm table-responsive" table="controller.gameSearchTable"/>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

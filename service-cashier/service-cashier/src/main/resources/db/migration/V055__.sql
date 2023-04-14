@@ -1,0 +1,1 @@
+ALTER TABLE `domain_method` ADD COLUMN `fe_default` BIT(1) DEFAULT 0;

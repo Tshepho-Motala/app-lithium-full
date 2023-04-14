@@ -1,0 +1,37 @@
+POST http://localhost:9800/services/service-domain/domains
+Authorization: Bearer {{USERTOKEN_UK}}
+Content-Type: application/json;charset=UTF-8
+
+{
+  "players": true,
+  "name": "livescore_uk",
+  "displayName": "Livescore UK",
+  "defaultCountry": "GBR",
+  "supportUrl": "http://localhost",
+  "url": "http://localhost",
+  "supportEmail": "support@email.com",
+  "currency": "GBP",
+  "currencySymbol": "GBP",
+  "defaultLocale": "en_UK",
+  "parentId": 1
+}
+
+###
+POST http://localhost:9800/services/service-domain/domains
+Authorization: Bearer {{USERTOKEN_UK}}
+Content-Type: application/json;charset=UTF-8
+
+{
+  "players": true,
+  "name": "livescore_ua",
+  "displayName": "Livescore UA",
+  "defaultCountry": "GBR",
+  "supportUrl": "http://localhost",
+  "url": "http://localhost",
+  "supportEmail": "support@email.com",
+  "currency": "GBP",
+  "currencySymbol": "GBP",
+  "defaultLocale": "en_UK",
+  "parentId": 1
+}
+

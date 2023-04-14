@@ -1,0 +1,91 @@
+.Database Layout
+[plantuml]
+----
+
+@startuml
+
+top to bottom direction
+skinparam linetype ortho
+!define Table(name) class name as "name" << (T,#FFAAAA) >>
+!define Table(name,desc) class name as "name (desc)" << (T,#FFAAAA) >>
+
+Table(Activity) {
+   id:  long 
+   name:  String 
+}
+Table(Challenge) {
+   id:  Long 
+   description:  String 
+   version:  int 
+}
+Table(Domain) {
+   id:  Long 
+   name:  String 
+   version:  int 
+}
+
+Table(Mission) {
+   id:  Long 
+   version:  int 
+}
+Table(MissionRevision, PromoRevision) {
+   id:  Long 
+   description:  String 
+   duration:  Integer 
+   endDate:  Date 
+   granularityBreak:  Boolean 
+   granularityStartOffset:  Integer 
+   maxRedeemable:  Integer 
+   maxRedeemableGranularity:  Integer 
+   name:  String 
+   sequenceNumber:  Integer 
+   startDate:  Date 
+   type:  Integer 
+   version:  int 
+   xpLevel:  Integer 
+}
+Table(PromoProvider) {
+   id:  long 
+   category:  String 
+   url:  String 
+}
+Table(PromoProviderExtraField) {
+   id:  long 
+   dataType:  FieldDataType 
+   description:  String 
+   name:  String 
+}
+Table(PromoProviderExtraFieldRuleValue) {
+   id:  long 
+   value:  String 
+   version:  int 
+}
+Table(Reward) {
+   id:  Long 
+   bonusCode:  String 
+   version:  int 
+}
+Table(Rule) {
+   id:  Long 
+   operation:  Operation 
+   value:  Long 
+   version:  int 
+}
+
+Challenge                        "0..*" -[#595959,plain]-> "0..1" Reward
+Challenge                        "0..1" <-[#595959,plain]-> "0..*" Rule                             
+Mission                          "0..*" -[#595959,plain]-> "0..1" MissionRevision
+MissionRevision                  "0..1" <-[#595959,plain]-> "0..*" Challenge
+MissionRevision                  "0..*" -[#595959,plain]-> "0..1" Domain                           
+MissionRevision                  "0..*" -[#595959,plain]-> "0..1" Mission                          
+MissionRevision                  "0..*" -[#595959,plain]-> "0..1" Reward                           
+PromoProvider                    "0..1" <-[#595959,plain]-> "0..*" Activity
+PromoProvider                    "0..1" <-[#595959,plain]-> "0..*" PromoProviderExtraField          
+PromoProviderExtraFieldRuleValue "0..1" -[#595959,plain]-> "0..1" PromoProviderExtraField          
+PromoProviderExtraFieldRuleValue "0..*" -[#595959,plain]-> "0..1" Rule                             
+Reward                           "0..*" -[#595959,plain]-> "0..1" Challenge                        
+Reward                           "0..*" -[#595959,plain]-> "0..1" MissionRevision                  
+Rule                             "0..*" -[#595959,plain]-> "0..1" Activity                         
+Rule                             "0..*" -[#595959,plain]-> "0..1" PromoProvider                    
+@enduml
+----

@@ -1,0 +1,10 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "PLAYER": {
+      "INFO-HEADER": {
+        "SESSION-LOGOUT": "Session Logout",
+        "SESSION-DURATION": "Session duration"
+      }
+    }
+  }
+}

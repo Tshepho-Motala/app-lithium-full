@@ -1,0 +1,78 @@
+{
+  "name": "eMerchant-wpf",
+  "code": "emerchant-wpf",
+  "image": {
+    "filename": "/methods/emerchant.png",
+    "filetype": "image/png"
+  },
+  "depositStages": [
+    {
+      "number": 0,
+      "title": "Required Player Information",
+      "description": "Please fill in the missing details below before we proceed.",
+      "inputFields": [
+        {
+          "code": "firstName",
+          "name": "Firstname"
+        },
+        {
+          "code": "lastName",
+          "name": "Lastname"
+        },
+        {
+          "code": "email",
+          "name": "Email"
+        },
+        {
+          "code": "cellphoneNumber",
+          "name": "Cellphone Number"
+        },
+        {
+          "code": "residentialAddress.addressLine1",
+          "name": "Address Line 1",
+          "displayOrder": "5"
+        },
+        {
+          "code": "residentialAddress.city",
+          "name": "City",
+          "displayOrder": "4"
+        },
+        {
+          "code": "residentialAddress.adminLevel1",
+          "name": "Province/State",
+          "displayOrder": "2"
+        },
+        {
+          "code": "residentialAddress.country",
+          "name": "Country",
+          "displayOrder": "1"
+        },
+        {
+          "code": "residentialAddress.adminLevel1Code",
+          "name": "Province/State",
+          "type": "hidden"
+        },
+        {
+          "code": "residentialAddress.countryCode",
+          "name": "Country",
+          "type": "hidden"
+        },
+        {
+          "code": "residentialAddress.postalCode",
+          "name": "Postal Code",
+          "displayOrder": "3"
+        }
+      ]
+    },
+    {
+      "number": 1,
+      "title": "Enter Amount",
+      "description": null
+    },
+    {
+      "number": 2,
+      "title": "Waiting for Confirmation",
+      "description": "Hang on while we wait for the processor to confirm your deposit."
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "CASHIER": {
+      "AUTOWITHDRAWALS": {
+        "RULESETS": {
+          "FIELDS": {
+            "DELAYED_START": {
+              "NAME": "Delayed start",
+              "DESCRIPTION": "Should this ruleset be delay?"
+            }
+          }
+        }
+      }
+    }
+  }
+}

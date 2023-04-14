@@ -1,0 +1,33 @@
+{
+  "UI_NETWORK_ADMIN":{
+    "LIST":{
+      "PLAYERS":{
+        "FIELDS": {
+          "FILTER": {
+            "USERNAME": {
+              "LABEL": "Username"
+            },
+            "FIRST_NAME": {
+              "LABEL": "First Name Starts with"
+            },
+            "LAST_NAME": {
+              "LABEL": "Last Name Starts with"
+            },
+            "STATUS": {
+              "LABEL": "Status"
+            },
+            "ID": {
+              "LABEL": "ID"
+            },
+            "SIGNUP_DATE_START": {
+              "LABEL": "Signup Date: Range Start"
+            },
+            "SIGNUP_DATE_END": {
+              "LABEL": "Signup Date: Range End"
+            }
+          }
+        }
+      }
+    }
+  }
+}

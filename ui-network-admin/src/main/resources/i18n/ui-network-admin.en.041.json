@@ -1,0 +1,36 @@
+{
+	"GLOBAL": {
+		"ACTION": {
+			"MARKSUCCESS": "Mark Success"
+		}
+	},
+	"UI_NETWORK_ADMIN": {
+		"CASHIER": {
+			"TRANSACTION": {
+				"RETRY": {
+					"EXPLANATION": "The transaction will be retried at the current processing stage.",
+					"CONFIRM": "Are you sure you want to retry this transaction?"
+				},
+				"CLEAR": {
+					"EXPLANATION": "The chosen processor for this transaction will be cleared, providing the opportunity to retry the transaction using a different processor. The choice of processor will be based on the current rules, and it is therefore recommended to first change the order of processors or disable the specific processor for this user before clearing and retrying the transaction.",
+					"CONFIRM": "Are you sure you want to clear the processor on this transaction?"
+				},
+				"CANCEL": {
+					"EXPLANATION": "The status of the transaction will be overridden to Cancel. This will not contact the processor. The transaction will be cancelled and the player will receive an email based on the 'deposit.cancel.player' email template if it exists.",
+					"CONFIRM": "Are you sure you want to cancel this transaction?"
+				},
+				"SUCCESS": {
+					"EXPLANATION": "The status of the transaction will be overridden to Success. This will not contact the processor. The funds will be allocated to the player account and the player will receive an email based on the 'deposit.success.player' email template if it exists.",
+					"CONFIRM": "Are you sure you want to mark this transaction as successful?",
+					"WITHDRAWAL": {
+						"EXPLANATION": "Use this to flag the transaction as approved and deduct the funds from the player account when the withdrawal on the process was already completed manually."
+					}
+				},
+				"APPROVE": {
+					"EXPLANATION": "The transaction is awaiting approval. The status of the transaction will be set to approved, thereafter processing will commence.",
+					"CONFIRM": "Are you sure you want to approve this transaction?"
+				}
+			}
+		}
+	}
+}

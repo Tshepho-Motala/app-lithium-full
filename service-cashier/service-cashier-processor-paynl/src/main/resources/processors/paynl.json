@@ -1,0 +1,70 @@
+{
+  "name": "paynl",
+  "code": "paynl",
+  "url": "service-cashier-processor-paynl",
+  "methodNames": [
+    "paynl"
+  ],
+  "deposit": false,
+  "fees": {
+    "flat": 0,
+    "percentage": 0,
+    "minimum": 0
+  },
+  "withdraw": true,
+    "limits": {
+      "minAmount": 2500,
+      "maxAmount": 0,
+      "maxAmountDay": 0,
+      "maxAmountWeek": 0,
+      "maxAmountMonth": 0,
+      "maxTransactionsDay": 0,
+      "maxTransactionsWeek": 0,
+      "maxTransactionsMonth": 0
+    },
+  "properties": [
+    {
+      "name": "payments_api_url",
+      "defaultValue": "https://rest.pay.nl/v1/payout",
+      "type": "url",
+      "description": "The base URL for the payment api"
+    },
+    {
+      "name": "get_transaction_url",
+      "defaultValue": "https://rest.pay.nl/v1/transactions",
+      "type": "url",
+      "description": "Fetch a transaction"
+    },
+    {
+      "name": "username",
+      "defaultValue": "",
+      "type": "string",
+      "description": "Pay.nl account login"
+    },
+    {
+      "name": "password",
+      "defaultValue": "",
+      "type": "string",
+      "description": "Pay.nl account password"
+    },
+    {
+      "name": "serviceId",
+      "defaultValue": "",
+      "type": "string",
+      "description": "The ID of your service"
+    },
+    {
+      "name": "description",
+      "defaultValue": "",
+      "type": "string",
+      "description": "Is shown on the statement of the payer"
+    },
+    {
+      "name": "skip_amount_check",
+      "defaultValue": "false",
+      "type": "boolean",
+      "description": "Skip amount check."
+    }
+  ]
+}
+    

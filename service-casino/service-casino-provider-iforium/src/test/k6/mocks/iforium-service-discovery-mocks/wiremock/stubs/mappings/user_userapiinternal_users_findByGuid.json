@@ -1,0 +1,13 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "/userapiinternal/users/findByGuid?guid=livescore_uk%2Fiforium1631692276888"
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "user_userapiinternal_users_findByGuid.json",
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}

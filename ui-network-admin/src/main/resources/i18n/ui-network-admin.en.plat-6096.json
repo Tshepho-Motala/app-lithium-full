@@ -1,0 +1,20 @@
+{
+  "GLOBAL": {
+    "FIELDS": {
+      "PENDING_EMAIL_ADDRESS": "Pending Email Address"
+    }
+  },
+  "UI_NETWORK_ADMIN": {
+    "PERSONAL": {
+      "REDO_EMAIL_VALIDATION": "Redo Validation"
+    },
+    "USER": {
+      "EMAIL": {
+        "VALIDATION": {
+          "PROCESSED": "Validation email has been sent to recipient",
+          "FAILED": "Failure on processing validation email"
+        }
+      }
+    }
+  }
+}

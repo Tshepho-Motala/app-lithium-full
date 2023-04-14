@@ -1,0 +1,8 @@
+<div class="select-brand">
+
+  <md-select placeholder="Brand" [(ngModel)]="brandId" required>
+    <md-option *ngFor="let b of brands" [value]="b.id">{{ b.displayName }}</md-option>
+  </md-select>
+
+</div>
+

@@ -1,0 +1,91 @@
+@mixin material-ex($theme) {
+  // Extract whichever individual palettes you need from the theme.
+  $primary: map-get($theme, primary);
+  $accent: map-get($theme, accent);
+
+  $size-list: 50 100 200 300 400 500 600 700 800 900 A100 A200 A400 A700;
+  @each $current-size in $size-list {
+      .mtex-bc-primary-#{$current-size} { 
+        background-color: mat-color($primary, $current-size); 
+      }
+      .mtex-tc-primary-#{$current-size} {
+        color: mat-color($primary, $current-size) !important;
+      }
+      .mtex-bc-accent-#{$current-size} { 
+        background-color: mat-color($accent, $current-size); 
+      }
+      .mtex-tc-accent-#{$current-size} {
+        color: mat-color($accent, $current-size) !important;
+      }
+  }
+
+  $size-list: 50 100 200 300 400 500 600 700 800 900;
+  @each $current-size in $size-list {
+      .mtex-bc-grey-#{$current-size} { background-color: mat-color($mat-grey, $current-size); }
+      .mtex-tc-grey-#{$current-size} { color: mat-color($mat-grey, $current-size) !important; }
+  }
+
+  .mtex-bc-white { background-color: white !important; }
+  .mtex-tc-white { color: white !important ; }
+
+  a.active {
+    color: mat-color($accent, 800) !important;
+    md-icon {
+      color: mat-color($accent, 800) !important;
+    }
+  }
+
+  mtex-menu {
+    > ul {
+      padding: 0;
+      margin: 0;
+
+      ul {
+        margin: 0 0 0 1em;
+        padding: 0;
+      }
+    }
+
+    a, a:visited, a:active, a:hover { 
+      text-decoration: none;
+      color: black;
+    }
+
+    li { 
+      list-style-type: none; 
+      &.active {
+        color: mat-color($accent, 800) !important;
+        ul {
+          color: black;
+        }
+      }
+    }
+
+    .mtex-menu-item-content {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      md-icon:first-of-type {
+        margin-right: 0.5em;
+      }
+      &:hover {
+        background-color: mat-color($mat-grey, 100);
+      }
+      padding: 1em;
+      
+    }
+  }
+
+  mtex-layout-page.mtex-fixed .content {
+    max-width: 600px;
+  }
+
+  #secondaryToolbar {
+    
+    .mat-toolbar-row > div {
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+    }
+  }
+}

@@ -1,0 +1,154 @@
+{
+	"GLOBAL": {
+		"ACTION": {
+			"TEST": "Test",
+			"MESSAGE": "Message"
+		}
+	},
+	"UI_NETWORK_ADMIN": {
+		"ACCESSCONTROL": {
+			"SAVE_MESSAGE": {
+				"SUCCESS": "The Message was changed successfully.",
+				"ERROR": "Unable to change. Please try again.",
+				"RULE": "Rule: ",
+				"DEFAULT_RULE": "Rule: Default"
+			},
+			"LIST": {
+				"TITLE": "Access Control Lists",
+				"DESCRIPTION": "These are lists that can be configured as part of rules in rulesets.",
+				"ADD_VALUE": {
+					"TITLE": "Add List Value"
+				},
+				"TYPES": {
+					"IP_LIST": "IP List",
+					"IP_RANGE": "IP Range",
+					"COUNTRY_LIST": "Country List (via ip data)",
+					"COUNTRY_LIST_PROFILE": "Country List (via profile)",
+					"STATE_LIST": "State List (via ip data)",
+					"STATE_LIST_PROFILE": "State List (via profile)",
+					"CITY_LIST": "City List (via ip data)",
+					"CITY_LIST_PROFILE": "City List (via profile)",
+					"BROWSER_LIST": "Browser List",
+					"OS_LIST": "OS List",
+					"POST_LIST": "POST List"
+				}
+			},
+			"RULESETS": {
+				"DEFAULT": {
+					"TITLE": "Default Rule"
+				},
+				"TEST": {
+					"EXPLAIN": "Explanation",
+					"ERROR_MESSAGE": "Player Message"
+				},
+				"EDITRULE": {
+					"DELETED": "was deleted.",
+					"INCREASE_PRIORITY": "increased priority",
+					"DECREASE_PRIORITY": "decreased priority",
+					"MESSAGE_EDIT": {
+						"TITLE": "Reject Message ({{ ruleName }})"
+					},
+					"TITLE": "Edit Rule",
+					"OUTCOME_DESC": "These are used to map outcomes provided by the external provider to determine the final outcomes.",
+					"DESC": {
+						"LABEL": "Description",
+						"PLACEHOLDER": "Rule description",
+						"DESCRIPTION": "Good description to identify the rule."
+					},
+					"ACTIONSUCCESS": {
+						"LABEL": "Action (If Success)",
+						"PLACEHOLDER": "",
+						"DESCRIPTION": "Action to take if this rule was successful."
+					},
+					"ACTIONFAILED": {
+						"LABEL": "Action (If Failed)",
+						"PLACEHOLDER": "",
+						"DESCRIPTION": "Action to take if this rule was unsuccessful."
+					},
+					"ENABLED": {
+						"LABEL": "Enabled",
+						"DESCRIPTION": "Is this rule enabled?"
+					}
+				},
+				"RULES": {
+					"DEFAULT": "Default",
+					"LIST": "List",
+					"PROVIDER": "Provider",
+					"CHANGE_MSG": "Change Message"
+				},
+				"LIST": {
+					"TITLE": "Access Control Rulesets",
+					"DESCRIPTION": "List of Access Control Rulesets"
+				},
+				"VIEW": {
+					"TABLE": {
+						"NAME": "Description",
+						"TYPE": "Type",
+						"ACTION_SUCCESS": "Action (If Success)",
+						"ACTION_FAIL": "Action (If Failed)",
+						"ORDER": "Order",
+						"REJECT_MSG": "Reject Message"
+					},
+					"INFO_TITLE": "Ruleset Information",
+					"DESC_TITLE": "Action Descriptions",
+					"RULES_TITLE": "Rules",
+					"ACTIONS": {
+						"REJECT": "Reject",
+						"REJECT_DESC": "Stop processing  and return failure",
+						"ACCEPT": "Accept",
+						"ACCEPT_DESC": "Stop processing and return success",
+						"CONTINUE": "Continue",
+						"CONTINUE_DESC": "Continue processing",
+						"ACCEPT_VERIFY": "Accept and verify",
+						"ACCEPT_VERIFY_DESC": "Stop processing, flag player as externally verified, then return success"
+					},
+					"TITLE": "Access Control Ruleset",
+					"DESCRIPTION": "Review the access ruleset, and if you have the access to do so, add/remove an ACL or modify an existing ACLs properties",
+					"HELP": "Use the control's below to setup the access ruleset. Make use of the test interface to test your configuration for each scenario."
+				},
+				"EDIT": {
+					"BASIC": {
+						"DOMAIN": {
+							"LABEL": "Domain",
+							"PLACEHOLDER": "Select Access Ruleset Domain",
+							"DESCRIPTION": "The domain for which this access ruleset will be created"
+						},
+						"NAME": {
+							"LABEL": "Name",
+							"PLACEHOLDER": "Enter Name of Access Ruleset",
+							"DESCRIPTION": "The unique name for this access ruleset",
+							"UNIQUE": "The access ruleset name is not unique for this domain",
+							"PATTERN": "Only letters, numbers, underscores, and dots allowed"
+						},
+						"DESC": {
+							"LABEL": "Description",
+							"PLACEHOLDER": "Access ruleset description",
+							"DESCRIPTION": "The description of this access ruleset"
+						},
+						"STATUS": {
+							"LABEL": "Enabled",
+							"DESCRIPTION": "Should this access ruleset be enabled?"
+						}
+					}
+				},
+				"ADD": {
+					"TITLE": "Add Access Ruleset for Domain",
+					"BASIC": {
+						"DOMAIN": {
+							"LABEL": "Domain",
+							"PLACEHOLDER": "Select Access Ruleset Domain",
+							"DESCRIPTION": "The domain for which this access ruleset will be created"
+						},
+						"NAME": {
+							"LABEL": "Name",
+							"PLACEHOLDER": "Enter Name of Access Ruleset",
+							"DESCRIPTION": "The unique name for this access ruleset",
+							"UNIQUE": "The access ruleset name is not unique for this domain",
+							"PATTERN": "Only letters, numbers, underscores, and dots allowed"
+						}
+					}
+				}
+			}
+		}
+	}
+}

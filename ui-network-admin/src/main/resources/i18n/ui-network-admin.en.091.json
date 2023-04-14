@@ -1,0 +1,12 @@
+{
+	"UI_NETWORK_ADMIN": {
+		"NOTIFICATIONS": {
+			"FIELDS": {
+				"DISPLAYNAME": {
+					"NAME": "Display Name",
+					"DESCRIPTION": "Keep it short and user-friendly, something that can be used on the website to distinguish notifications from one another"
+				}
+			}
+		}
+	}
+}

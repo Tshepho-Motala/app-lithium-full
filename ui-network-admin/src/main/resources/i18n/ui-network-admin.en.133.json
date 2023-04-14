@@ -1,0 +1,39 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "CHANGELOGS": {
+      "GLOBAL": {
+        "LIST": {
+          "TITLE": "Global Changelog Entries",
+          "DESCRIPTION": "A searchable list of global changelog entries"
+        },
+        "ENTRY": {
+          "TITLE": "Changelog Entry",
+          "DESCRIPTION": "Changelog entry details, field changes, etc."
+        },
+        "FIELDS": {
+          "CHANGEDATERANGESTART": "Change Date: Range Start",
+          "CHANGEDATERANGEEND": "Change Date: Range End",
+          "ENTITIES": {
+            "LABEL": "Entities",
+            "PLACEHOLDER": "Select entities..."
+          },
+          "TYPES": {
+            "LABEL": "Types",
+            "PLACEHOLDER": "Select types..."
+          },
+          "ENTITY": "Entity",
+          "ENTITYRECORDID": "Entity Record Id",
+          "TYPE": "Type",
+          "CHANGEDATE": "Change Date",
+          "AUTHOR": "Author",
+          "COMMENTS": "Comments",
+          "FIELDCHANGE": {
+            "FIELD": "Field",
+            "FROM": "From",
+            "TO": "To"
+          }
+        }
+      }
+    }
+  }
+}

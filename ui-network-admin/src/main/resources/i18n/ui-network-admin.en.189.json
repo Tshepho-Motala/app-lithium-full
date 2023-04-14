@@ -1,0 +1,66 @@
+{
+	"UI_NETWORK_ADMIN": {
+		"PLAYERS": {
+			"TAGS": {
+				"CHANGE": {
+					"TITLE": "Edit Player Tags"
+				},
+				"ADDPLAYERSUCCESS": "Player added to tag",
+				"ADDPLAYERERROR": "Player not added to tag",
+				"REMOVEPLAYERSUCCESS": "Player removed from tag",
+				"REMOVEPLAYERERROR": "Player not removed from tag",
+				"PLAYERSEARCH": "Search for the player that you would like to add to this tag.",
+				"ADDPLAYERBUTTON": "add player",
+				"VIEWBUTTON": "View Players",
+				"TITLE": "Player Tags",
+				"DESCRIPTION": "A searchable list of tags for players.",
+				"FIELDS": {
+					"NAME": {
+						"TITLE": "Tag",
+						"DESC": "Name of the tag",
+						"PLACE": "Silver Players"
+					},
+					"DESCRIPTION": {
+						"TITLE": "Description",
+						"DESC": "Description of the tag",
+						"PLACE": "Silver Players are special"
+					},
+					"DOMAINNAME": {
+						"TITLE": "Domain",
+						"DESC": "Domain to which this tag belongs",
+						"PLACE": "Silver Players are meant for domain X only."
+					},
+					"USERS": {
+						"TITLE": "Players",
+						"DESC": "Players belonging to this tag",
+						"PLACE": "0"
+					}
+				},
+				"TABS": {
+					"DETAILS": "Details",
+					"PLAYERS": "Players"
+				},
+				"ADD": {
+					"TITLE": "Add Tag"
+				},
+				"EDIT": {
+					"TITLE": "Edit Tag"
+				}
+			}
+		},
+		"PLAYER": {
+			"QUICK_ACTIONS": {
+				"CHANGE": {
+					"TAG": "Change Tag"
+				}
+			}
+		},
+		"USER": {
+			"FIELDS": {
+				"TAGS": {
+					"NAME": "# Tags"
+				}
+			}
+		}
+	}
+}

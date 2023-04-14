@@ -1,0 +1,26 @@
+[
+  {
+    "name": "Once Upon A Time",
+    "commercialName": "Once Upon A Time",
+    "enabled": true,
+    "providerGameId": "service-casino-provider-iforium_1000",
+    "description": "Just a game",
+    "supplierGameRewardGuid": "BP_OnceUponATime"
+  },
+  {
+    "name": "Ted",
+    "commercialName": "Ted",
+    "enabled": true,
+    "providerGameId": "service-casino-provider-iforium_2000",
+    "description": "Just Ted",
+    "supplierGameRewardGuid": "BP_Ted"
+  },
+  {
+    "name": "Once Upon A Wish",
+    "commercialName": "Once Upon A Wish",
+    "enabled": false,
+    "providerGameId": "service-casino-provider-iforium_3000",
+    "description": "Just a wish",
+    "supplierGameRewardGuid": "BP_OnceUponATime"
+  }
+]

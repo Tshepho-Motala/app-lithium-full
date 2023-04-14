@@ -1,0 +1,106 @@
+= Test Session Creation
+
+In the absence of a more graceful approach, a valid test session can be acquired by running the Iforium Casino Provider functional tests and extracting the `OperatorAccountId` that is used.
+
+
+== 1. Clone the Functional Tests project
+
+Clone link:https://gitlab.com/playsafe/lithium/service-casino-provider-iforium-test[Iforium Casino Provider Functional Tests]
+
+== 2. Update Key Properties
+
+In link:https://gitlab.com/playsafe/lithium/service-casino-provider-iforium-test/-/blob/main/src/test/resources/application-develop.properties[application-develop.properties], set the following values:
+
+[options="header", cols="<.20m,.<30"]
+|===
+| Property| Value
+
+| lithium.gateway.system-user-basic-auth-api-token
+| c3lzdGVtOlZFUllCTE9PRFlnb29kcGFzc3dvcmRGT1J1c2VJblN5c3RlbUFVVEhFTlRJQ0FUSU9OOTk=
+
+| lithium.gateway.acme-user-basic-auth-api-token
+| YWNtZTphY21lc2VjcmV0
+
+| lithium.admin.username
+| admin
+
+| lithium.admin.password
+| Gauteng
+
+| iforium.password
+| e5MBduV3
+
+|===
+
+== 3. Add Header to IForiumService
+
+In link:https://gitlab.com/playsafe/lithium/service-casino-provider-iforium-test/-/blob/main/src/test/java/service/casino/provider/iforium/service/IForiumService.java[IForiumService.java], add an `X-Forwarded-For` header  for the Roxor VPN (34.89.5.142) to the requests sent in link:https://gitlab.com/playsafe/lithium/service-casino-provider-iforium-test/-/blob/main/src/test/java/service/casino/provider/iforium/service/IForiumService.java#L88[balance()] and link:https://gitlab.com/playsafe/lithium/service-casino-provider-iforium-test/-/blob/main/src/test/java/service/casino/provider/iforium/service/IForiumService.java#L104[redeemToken()]:
+
+[code,java]
+----
+.header("X-Forwarded-For", "34.89.5.142")
+----
+
+== 4. Configure Cucumber
+
+We only want to run a single test - the Success scenario from the Balance feature.
+
+To achieve this, we need to:
+
+* Tag the link:https://gitlab.com/playsafe/lithium/service-casino-provider-iforium-test/-/blob/main/src/test/resources/features/balance.feature#L11[Scenario: Success] scenario with `@run`:
+
+[code,java]
+----
+@run
+Scenario: Success
+----
+
+* Update https://gitlab.com/playsafe/lithium/service-casino-provider-iforium-test/-/blob/main/src/test/java/service/casino/provider/iforium/CucumberIntegrationTest.java#L10[CucumberIntegrationTest] to include only tests tagged with `@run` :
+
+[code,java]
+----
+@CucumberOptions(
+    ...
+    tags = "@run", // "@run and not @ignore"
+    ...
+)
+----
+
+== 5. Run Test and Extract OperatorAccountId
+
+You can now run the scenario, which should print the required value for `OperatorAccountId` used in the request. You can use this value to populate the link:https://gitlab.com/playsafe/lithium/app-lithium-full/-/tree/develop/service-casino/service-casino-provider-iforium/docs/gameflex-test-page.adoc[Gameflex Test Page].
+
+[code,bash]
+----
+@balance @run
+Scenario: Success                                   # src/test/resources/features/balance.feature:12
+2021-10-25 12:38:01.062  INFO 64142 --- [           main] s.c.p.i.service.LithiumUserService       : Retrieving admin access token...
+2021-10-25 12:38:03.163  INFO 64142 --- [           main] s.c.p.i.service.LithiumUserService       : Registering user...
+2021-10-25 12:38:05.749  INFO 64142 --- [           main] s.c.p.i.service.LithiumUserService       : Adjusting user balance...
+Given the following players exist:                # service.casino.provider.iforium.definition.PlayerCreatorStepDefinition.theFollowingPlayerSessionsExist(io.cucumber.datatable.DataTable)
+Given the PlatformKey is L100                     # service.casino.provider.iforium.definition.CommonStepDefinition.theKeyIsValue(java.lang.String,java.lang.String)
+And the Sequence is generated-uuid                # service.casino.provider.iforium.definition.CommonStepDefinition.theKeyIsValue(java.lang.String,java.lang.String)
+And the Timestamp is 2020-09-14T13:21:49.9546136Z # service.casino.provider.iforium.definition.CommonStepDefinition.theKeyIsValue(java.lang.String,java.lang.String)
+And the OperatorAccountID is userGuid-1           # service.casino.provider.iforium.definition.CommonStepDefinition.theKeyIsValue(java.lang.String,java.lang.String)
+Request method:	POST
+Request URI:	https://gateway.lithium-develop.ls-g.net/service-casino-provider-iforium/v1.0/balance
+Proxy:			<none>
+Request params:	<none>
+Query params:	<none>
+Form params:	<none>
+Path params:	<none>
+Headers:		Authorization=Basic cm94b3JfdXNlcjplNU1CZHVWMw==
+X-Forwarded-For=34.89.5.142
+Accept=*/*
+Content-Type=application/json; charset=UTF-8
+Cookies:		<none>
+Multiparts:		<none>
+Body:
+{
+"PlatformKey": "L100",
+"Sequence": "b99e54cf-ed05-4e4c-99f8-1dc713224625",
+"Timestamp": "2020-09-14T13:21:49.9546136Z",
+"OperatorAccountID": "livescore_uk/77937"
+}
+...
+----

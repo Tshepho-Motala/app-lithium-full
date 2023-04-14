@@ -1,0 +1,5 @@
+.Place Bet
+[source,gherkin]
+----
+include::../../src/docs/gherkin/high-level-spec/placebet.feature[]
+----

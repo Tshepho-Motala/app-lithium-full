@@ -1,0 +1,48 @@
+<aside class="main-sidebar">
+
+	<!-- sidebar: style can be found in sidebar.less -->
+	<section class="sidebar">
+		<!-- Sidebar Menu -->
+		<ul class="sidebar-menu">
+			<li class="header">MENU</li>
+			<li ng-repeat="parent in menuItems" ng-switch="parent.children != null" class="treeview" ng-class="{ 'active': parent.active }">
+				<a ng-switch-when="false" ui-sref="{{ parent.route }}">
+					<i class="fa fa-{{ parent.icon }}"></i> 
+					<span>{{ parent.titleKey | translate }}</span>
+				</a>
+				<a ng-switch-when="true" ng-click="parent.expanded = true">
+					<i class="fa fa-{{ parent.icon }}"></i> 
+					<span>{{ parent.titleKey | translate }}</span>
+					<span class="pull-right-container">
+						<i class="fa fa-angle-left pull-right"></i>
+					</span>
+				</a>
+				<ul class="treeview-menu" ng-show="parent.expanded">
+					<li ng-repeat="child in parent.children" ng-switch="child.children != null" class="treeview" ng-class="{ 'active': child.active, 'menu-item-disabled': child.disabled}">
+						<a ng-switch-when="false" ui-sref="{{ child.route }}">
+							<i class="fa fa-{{ child.icon }}"></i> 
+							<span>{{ child.titleKey | translate }}</span>
+						</a>
+						<a ng-switch-when="true" ng-click="child.expanded = true">
+							<i class="fa fa-{{ child.icon }}"></i> 
+							<span>{{ child.titleKey | translate }}</span>
+							<span class="pull-right-container">
+								<i class="fa fa-angle-left pull-right"></i>
+							</span>
+						</a>
+						<ul class="treeview-menu" ng-show="child.expanded">
+							<li ng-repeat="grandchild in child.children" class="treeview" ng-class="{ 'active': grandchild.active }">
+								<a ui-sref="{{ grandchild.route }}">
+									<i class="fa fa-{{ grandchild.icon }}"></i> 
+									<span>{{ grandchild.titleKey | translate }}</span>
+								</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+		</ul>
+		<!-- /.sidebar-menu -->
+	</section>
+	<!-- /.sidebar -->
+</aside>

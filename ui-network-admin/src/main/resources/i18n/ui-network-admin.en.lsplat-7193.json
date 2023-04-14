@@ -1,0 +1,14 @@
+{
+  "UI_NETWORK_ADMIN" : {
+    "CMS" : {
+      "LAYOUT_BUILDER_WIDGET" : {
+        "OUTPUT" : {
+          "MODIFY_WIDGET_DIALOG" : {
+            "TITLE" : "Modify Widget",
+            "SUCCESS" : "Widget Modified Successfully"
+          }
+        }
+      }
+    }
+  }
+}

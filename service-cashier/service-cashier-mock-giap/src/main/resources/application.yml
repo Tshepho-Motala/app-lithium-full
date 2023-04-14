@@ -1,0 +1,17 @@
+server.port: 9798
+
+ribbon:
+  ReadTimeout: 30000
+  ConnectTimeout: 30000
+  
+spring:
+  thymeleaf:
+    cache: false
+
+lithium:
+  service:
+    cashier:
+      mock:
+        cc:
+          qwipi:
+            key: 2n2zXX6N

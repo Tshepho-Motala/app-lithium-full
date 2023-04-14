@@ -1,0 +1,13 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "ACCOUNTING": {
+      "TRANSACTIONS": {
+        "FIELDS": {
+          "AMOUNT_GENERAL": {
+            "LABEL": "Amount"
+          }
+        }
+      }
+    }
+  }
+}

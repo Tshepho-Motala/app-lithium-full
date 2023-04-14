@@ -1,0 +1,90 @@
+{
+  "name": "Paystack",
+  "code": "paystack",
+  "image": {
+    "filename": "/methods/paystack.png",
+    "filetype": "image/png"
+  },
+  "depositStages": [
+    {
+      "number": 1,
+      "title": "Enter Amount",
+      "description": "Specify the amount you wish to deposit.",
+      "inputFields": [
+        {
+          "code": "return_url",
+          "name": "Return URL",
+          "description": "Return URL once transaction is complete. Will be appended with a status and reference number",
+          "type": "return_url",
+          "required": true
+        },
+        {
+          "code": "cancel_url",
+          "name": "Cancel URL",
+          "description": "Return URL once transaction is canceled.",
+          "type": "cancel_url",
+          "required": false
+        },
+        {
+          "code": "cardReference",
+          "name": "Paystack card reference",
+          "type": "string",
+          "required": false
+        },
+        {
+          "code": "save_card",
+          "name": "Save card",
+          "description": "Save card for the future payments.",
+          "type": "boolean",
+          "required": false
+        }
+      ],
+      "outputFields": []
+    },
+    {
+      "number": 2,
+      "title": "Your transaction is awaiting approval.",
+      "description": "We have submitted your transaction and we are awaiting approval. Please check back later.",
+      "inputFields": [],
+      "outputFields": []
+    }
+  ],
+  "withdrawalStages": [
+    {
+      "number": 1,
+      "title": "Enter Amount",
+      "description": "Specify the amount you wish to withdraw.",
+      "inputFields": [
+        {
+          "code": "account_number",
+          "name": "Account number",
+          "description": "Receiver account number",
+          "type": "string",
+          "required": false
+        },
+        {
+          "code": "bank_code",
+          "name": "Bank code",
+          "description": "Receiver account bank code",
+          "type": "string",
+          "required": false
+        },
+        {
+          "code": "processorAccountId",
+          "name": "Lithium processor account",
+          "description": "Lithium processor account contain details about bank payer account",
+          "type": "long",
+          "required": false
+        }
+      ],
+      "outputFields": []
+    },
+    {
+      "number": 2,
+      "title": "Your transaction is awaiting approval.",
+      "description": "We have submitted your transaction and we are awaiting approval. Please check back later.",
+      "inputFields": [],
+      "outputFields": []
+    }
+  ]
+}

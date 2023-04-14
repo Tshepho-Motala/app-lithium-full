@@ -1,0 +1,3 @@
+-- Sync from user.testAccount to from service-cashier and service-accounting
+--request GET .../service-user/data-migration-job/service-user/user-attributes?dryRun=false&pageSize=100&delay=1000
+--header 'Authorization: Bearer <usertoken>

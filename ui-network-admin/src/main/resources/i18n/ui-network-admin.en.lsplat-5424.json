@@ -1,0 +1,26 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "CMS": {
+      "NAVIGATION_MANAGEMENT": {
+        "FIELDS": {
+          "CODE": {
+            "LABEL": "Nav Code"
+          },
+          "TITLE": {
+            "LABEL": "Nav Title"
+          }
+        }
+      },
+      "ADD_SUB_NAVIGATION": {
+        "FIELDS": {
+          "CODE": {
+            "LABEL": "Sub Navigation Code"
+          },
+          "TITLE": {
+            "LABEL": "Sub Navigation Title"
+          }
+        }
+      }
+    }
+  }
+}

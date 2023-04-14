@@ -1,0 +1,20 @@
+# Packages
+
+Packages are installed from [NPM](https://www.npmjs.com/) directly into the `node_modules` folder in the project's root directory. These packages are all written in JavaScript (or TypeScript with .d.ts typing files) and can immediately be imported and used after installation.  
+
+## Installing a package
+
+If there is arbitrary functionality that needs to be implemented which already has a **well established** library written for it, then you can install in providing all aspects of the following checklist is understood:  
+
+- [ ] The library has full and complete documentation
+- [ ] The library is built for production environments
+- [ ] The library has adequate downloads and community support
+- [ ] The library is still active and has responses from the original developer on bugs
+- [ ] The library's licensing is not restrictive and allows for us to use it in a production environment.
+
+You can then execute the following command in your terminal (replacing `X` with the package name). Please note the `--save` switch in the command, which will update the package.json file so other developers can install the same plugin.  
+`npm i --save X`
+
+### When to _not_ install a package
+
+While packages make it easier to do less work for the same result, caution needs to be considered when installing UI packages, tiny helper packages that only add a few lines of code, or packages with no community support/downloads.

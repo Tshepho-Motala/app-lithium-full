@@ -1,0 +1,63 @@
+{
+	"GLOBAL": {
+		"ACTION": {
+			"UPLOADFILE" : "Upload",
+			"DOWNLOADFILE" : "Download"
+			}
+		},
+	"UI_NETWORK_ADMIN": {
+		"PLAYER" : {
+			"TAB" : {
+				"DOCUMENT" : "Documents"
+			}
+		},
+		"DOCUMENT": {
+			"ADD" : {
+				"TITLE" : "Add document",
+				"SUCCESS" : "Document created"
+			},
+			"EDIT" : {
+				"TITLE" : "Edit document",
+				"SUCCESS" : "Document modified"
+			},
+			"UPLOAD" : {
+				"SUCCESS" : "Document uploaded"
+			},
+			"EXTERNAL" : {
+				"NAME" : "External",
+				"DESCRIPTION" : "Documents visible to the player and administrative staff."
+			},
+			"INTERNAL" : {
+				"NAME" : "Internal",
+				"DESCRIPTION" : "Documents visible to the administrative staff only."
+			},
+			"FIELDS" : {
+				"NAME": {
+					"NAME": "Name",
+					"PLACEHOLDER": "Document name",
+					"DESCRIPTION": "The document name"
+				},
+				"STATUS": {
+					"NAME": "Status",
+					"PLACEHOLDER": "Document status",
+					"DESCRIPTION": "The status of the document"
+				},
+				"FUNCTION": {
+					"NAME": "Function",
+					"PLACEHOLDER": "Document function",
+					"DESCRIPTION": "The function of the document"
+				},
+				"ARCHIVE": {
+					"NAME": "Archived",
+					"PLACEHOLDER": "",
+					"DESCRIPTION": "Check to archive document"
+				},
+				"DELETED": {
+					"NAME": "Deleted",
+					"PLACEHOLDER": "",
+					"DESCRIPTION": "Check to delete document"
+				}
+			}
+		}
+	}
+}

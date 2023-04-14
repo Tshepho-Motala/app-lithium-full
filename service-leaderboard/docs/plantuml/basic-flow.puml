@@ -1,0 +1,19 @@
+.Basic Flow
+[plantuml]
+----
+
+@startuml
+
+participant "svc-accounting-pr-internal" as acctint
+participant "svc-leaderboard" as leaderboard
+participant "svc-bonus" as bonus
+
+acctint->leaderboard: Completed Transaction
+activate leaderboard
+leaderboard->leaderboard: process completed transaction
+
+'deactivate leaderboard
+leaderboard->bonus: bonus trigger (when LB ends)
+
+@enduml
+----

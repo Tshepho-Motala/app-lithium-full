@@ -1,0 +1,7 @@
+<div class="mtex-search-container">
+  <md-icon>search</md-icon>
+  <md-input-container md-line>
+    <input mdInput placeholder="Search" [value]="value" (keyup)="onKeyUp($event.target.value)">
+  </md-input-container>
+  <button md-button (click)="clear()"><md-icon>close</md-icon></button>
+</div>

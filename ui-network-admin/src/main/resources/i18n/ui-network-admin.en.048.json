@@ -1,0 +1,27 @@
+{
+	"UI_NETWORK_ADMIN": {
+		"DASHBOARD": {
+			"PLAYER_BALANCE" : "Player Account Balance",
+			"BONUS_BALANCE" : "Player Bonus Account Balance",
+			"PENDING_BONUS_BALANCE" : "Player Pending Bonus Account Balance"
+		},
+		"REPORTS": {
+			"PLAYERS": {
+				"EMAILTEMPLATE": {
+					"PLACEHOLDER": {
+						"PLAYER": {
+							"CURRENTBALANCECASINOBONUSPENDING": "Current Balance (Casino Bonus Pending)",
+							"OPENINGBALANCECASINOBONUSPENDING": "Opening Balance (Casino Bonus Pending)",
+							"CLOSINGBALANCECASINOBONUSPENDING": "Closing Balance (Casino Bonus Pending)",
+							"CASINOBONUSPENDINGCOUNT": "Casino Bonus Pending Count",
+							"CASINOBONUSPENDINGAMOUNT": "Casino Bonus Pending Amount",
+							"CASINOBONUSTRANSFERTOBONUSPENDINGAMOUNT": "Casino Bonus Transfer To Bonus Pending Amount",
+							"CASINOBONUSTRANSFERFROMBONUSPENDINGAMOUNT": "Casino Bonus Transfer From Bonus Pending Amount",
+							"CASINOBONUSPENDINGCANCELAMOUNT": "Casino Bonus Pending Cancel Amount"
+						}
+					}
+				}
+			}
+		}
+	}
+}

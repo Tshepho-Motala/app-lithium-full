@@ -1,0 +1,2 @@
+ALTER TABLE `game`
+    ADD COLUMN `commercial_name` VARCHAR(255) DEFAULT NULL;

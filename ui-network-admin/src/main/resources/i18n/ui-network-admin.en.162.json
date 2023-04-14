@@ -1,0 +1,15 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "PLAYER": {
+      "INFO-HEADER": {
+        "REGISTERED": "Registered",
+        "LAST-UPDATED": "Last Updated",
+        "LAST-LOGIN": "Last Login",
+        "FAILED-PASSWORD-RESET-ATTEMPTS": "Failed Password Reset Attempts",
+        "LT-DEPOSITS": "LT Deposits",
+        "LT-WITHDRAWALS": "LT Withdrawals",
+        "PENDING-WITHDRAWALS": "Pending Withdrawals"
+      }
+    }
+  }
+}

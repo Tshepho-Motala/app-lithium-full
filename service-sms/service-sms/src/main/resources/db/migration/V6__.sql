@@ -1,0 +1,2 @@
+CREATE UNIQUE INDEX `idx_name` ON `defaultsmstemplate`(`name`) ALGORITHM INPLACE LOCK NONE;
+CREATE UNIQUE INDEX `idx_default_template_and_name` ON `defaultsmstemplate_placeholder`(`defaultsmstemplate_id`,`name`) ALGORITHM INPLACE LOCK NONE;

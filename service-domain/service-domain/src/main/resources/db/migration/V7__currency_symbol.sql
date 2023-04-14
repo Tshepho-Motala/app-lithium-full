@@ -1,0 +1,1 @@
+ALTER TABLE `domain`ADD COLUMN `currency_symbol` VARCHAR(3) NOT NULL DEFAULT '$' AFTER `currency`;

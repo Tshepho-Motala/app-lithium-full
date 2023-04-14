@@ -1,0 +1,65 @@
+.GET External Error Dictionary Translations
+[plantuml]
+----
+
+@startuml
+'https://plantuml.com/sequence-diagram
+
+actor external
+participant "svc-translate" as st
+participant "cachingDomainClientService" as cdcs
+database language
+
+autonumber
+
+external -> st: GET /service-translate/external/translations/error-dictionary
+    activate st
+
+    alt Validate Hash
+        st -> st: validate hash
+    else Hash invalid
+        st -> st: validate hash
+        st --> external: Status470HashInvalidException
+    end
+
+    alt @RequestParam ecosystemName provided
+            st -> cdcs: retrieve all enabled domains inside ecosystem
+            cdcs --> st: return domainNames
+        alt isValidEcosystem & Enabled
+            st -> st: continues and adds domainNames to be returned in get translations query
+        else !isValidEcosystem || !Enabled
+            st --> external: Status 404 - Ecosystem Not Found
+        end
+    else @RequestParam domainName provided
+            st -> cdcs: checks if domain name exist and is enabled
+            cdcs --> st: return domainName
+        alt isValidDomainName & Enabled
+            st -> st: continues and adds domainName to be returned in get translations query
+        else !isValidDomainName || !Enabled
+            st --> external: Status 404 - Domain Not Found
+        end
+    else
+        st -> cdcs: get all enabled domains
+        cdcs --> st: return domainNames
+        st -> st: adds default domain to domainNames (Need to also return all default translations here))
+    end
+
+    alt @RequestParam locale provided
+        language --> st: Find language from locale
+        alt Language found
+            st -> st: Continues and adds locale to be returned in get translations query
+        else Language not found
+            st -> external: Status 404 - Language not Found
+        else Language not enabled
+            st -> external: Status 404 - Language not Enabled
+        end
+    else Find all enabled Languages
+        language --> st: Find all enabled locale2s
+    end
+
+    st -> st: translationService.getValuesV2ByCodeStartingWithAndLastUpdatedSince(new String[]{"ERROR_DICTIONARY"}, domainNames.toArray(new String[0]), locale2s.toArray(new String[0]), lastUpdatedSince)
+    st -> st: Map response to ExternalTranslationsResponse
+    st -> external: return ExternalTranslationsResponse
+deactivate st
+@enduml
+----

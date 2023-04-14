@@ -1,0 +1,67 @@
+{
+	"name": "player.deposit.[transactionCount]",
+	"subject": "Nth deposit email template",
+	"body": "<html><body><p>Transaction count is the number of deposits made + 1 for this deposit</p></body></html>",
+	"placeholders": [
+		{
+			"name": "%user.emailAddress%",
+			"description": "The player's email address"
+		},
+		{
+			"name": "%user.userName%",
+			"description": "The player's username"
+		},
+		{
+			"name": "%user.firstName%",
+			"description": "The player's first name"
+		},
+		{
+			"name": "%user.lastName%",
+			"description": "The player's last name"
+		},
+		{
+			"name": "%domain.name%",
+			"description": "The domain's display name"
+		},
+		{
+			"name": "%domain.url%",
+			"description": "The domain's URL"
+		},
+		{
+			"name": "%domain.supportEmail%",
+			"description": "The domain's support email address"
+		},
+		{
+			"name": "%cashier.transactionType%",
+			"description": "The type of transaction"
+		},
+		{
+			"name": "%cashier.transactionId%",
+			"description": "The transaction ID"
+		},
+		{
+			"name": "%cashier.amount%",
+			"description": "The transaction amount"
+		},
+		{
+			"name": "%cashier.processorMethod%",
+			"description": "The processor method"
+		},
+		{
+			"name": "%cashier.processorReference%",
+			"description": "The processor reference"
+		},
+		{
+			"name": "%cashier.processorResponse%",
+			"description": "The processor response (for internal use)"
+		},
+		{
+			"name": "%cashier.request%",
+			"description": "The request (for internal use)"
+		},
+		{
+			"name": "%cashier.response%",
+			"description": "The response (for internal use)"
+		}
+	]
+}

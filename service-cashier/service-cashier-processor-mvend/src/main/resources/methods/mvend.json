@@ -1,0 +1,53 @@
+{
+  "name": "Mvend",
+  "code": "mvend",
+  "image": {
+    "filename": "/methods/mvend.png",
+    "filetype": "image/png"
+  },
+  "depositStages": [    {
+      "number": 1,
+      "title": "Single stage server to server deposit",
+      "description": "This should not show",
+      "outputFields": []
+    }
+  ],
+  "properties": [
+    {
+      "name": "mvend_url",
+      "defaultValue": "http://localhost:9000/service-cashier-mock-mvend",
+      "type": "url",
+      "description": "The API URL. We will add /paymentserver/async to the requests"
+    },
+    {
+      "name": "username",
+      "defaultValue": "someusername",
+      "type": "string",
+      "description": "A username provided to Mvend for API calls"
+    },
+    {
+      "name": "password",
+      "defaultValue": "somepassword",
+      "type": "string",
+      "description": "A password provided to Mvend for API calls"
+    },
+    {
+      "name": "secret_key",
+      "defaultValue": "AE19FF83B22128FA",
+      "type": "string",
+      "description": "A pre-shared key, not transmitted via API calls, provided to Mvend"
+    },
+    {
+      "name": "mvend_appid",
+      "defaultValue": "1",
+      "type": "string",
+      "description": "An app id provided by Mvend"
+    },
+    {
+      "name": "mvend_apikey",
+      "defaultValue": "AE19FF83B22128FA",
+      "type": "string",
+      "description": "A pre-shared key, not transmitted via API calls, provided by Mvend"
+    }
+  ]
+}

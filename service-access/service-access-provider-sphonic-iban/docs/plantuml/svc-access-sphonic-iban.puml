@@ -1,0 +1,58 @@
+.IBAN API request
+[plantuml]
+-----
+@startuml
+'https://plantuml.com/sequence-diagram
+
+participant "svc-access" as sva
+participant "svc-access-pr-sphonic-iban" as svciban
+participant "svc-changelog" as svcc
+participant Sphonic
+participant BlueM
+
+autonumber
+sva --> svciban: {gateway}/external/authorization/livescore_nigeria/ibanAccessRule/check-authorization
+activate svciban
+svciban --> Sphonic : authentication {https://user-mgnt-api.sphonic.net/api/v1/machines/login/universal-router-live}
+  activate Sphonic
+  Sphonic --> svciban: accessToken
+  deactivate Sphonic
+
+svciban --> Sphonic : https://universal-router.sphonic.net
+  activate Sphonic
+    Sphonic --> BlueM: do IBAN Connection flow
+    activate BlueM
+    BlueM --> svciban: IBAN result
+    deactivate BlueM
+    alt ibanResult = PASS
+    svciban -> svciban: result.setAuthorisationOutcome(EAuthorizationOutcome.ACCEPT)
+
+    else ibanResult = FAIL
+    svciban -> svciban: result.setAuthorisationOutcome(EAuthorizationOutcome.REJECT)
+
+    else ibanResult = REVIEW
+    svciban -> svciban: result.setAuthorisationOutcome(EAuthorizationOutcome.REVIEW)
+
+    else ibanResult = ERROR
+    svciban -> svciban: result.setAuthorisationOutcome(EAuthorizationOutcome.TIMEOUT)
+
+    else other ibanResults
+    svciban -> svciban: result.setAuthorisationOutcome(EAuthorizationOutcome.REJECT)
+    activate svcc
+     svciban --> svcc: log.error("Unhandled result received from iban workflow")
+
+     else MissingIbanException
+     svciban -> svciban: result.setAuthorisationOutcome(EAuthorizationOutcome.REJECT)
+
+     else iBANException
+     svciban -> svciban: result.setAuthorisationOutcome(EAuthorizationOutcome.TIMEOUT
+     svciban --> svcc: log.error("IBAN API failed to get a valid response from Sphonic : result = ERROR ")
+
+    end
+    svciban --> svcc: logVerificationAttemptToRelatedUser
+    svciban -> svciban: build result
+    deactivate svcc
+  deactivate Sphonic
+svciban --> sva: Response<ProviderAuthorizationResult>
+deactivate svciban
+@enduml

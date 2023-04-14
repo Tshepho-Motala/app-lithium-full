@@ -1,0 +1,33 @@
+{
+	"UI_NETWORK_ADMIN": {
+		"PLAYER": {
+			"TAB": {
+				"LOGINEVENTS": "Login Events"
+			},
+			"LOGINEVENTS": {
+				"DATE": "Date",
+				"IPADDRESS": "IP Address",
+				"COMMENT": "Comment",
+				"USERNAME": "Username",
+				"FIRSTNAME": "First Name",
+				"LASTNAME": "Last Name"
+			}
+		},
+		"DOMAIN": {
+			"FIELDS": {
+				"SUPPORTURL": {
+					"NAME": "Support URL",
+					"DESCRIPTION": "Support URL for this domain."
+				},
+				"SUPPORTEMAIL": {
+					"NAME": "Support Email",
+					"DESCRIPTION": "Support Email for this domain."
+				},
+				"URL": {
+					"NAME": "URL",
+					"DESCRIPTION": "URL for this domain."
+				}
+			}
+		}
+	}
+}

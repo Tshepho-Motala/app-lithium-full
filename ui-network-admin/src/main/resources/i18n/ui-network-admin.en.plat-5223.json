@@ -1,0 +1,11 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "CMS": {
+      "GLOBAL": {
+        "OUTPUT": {
+          "SELECT_SUBNAVIGATION_MESSAGE": "Please select a sub-navigation"
+        }
+      }
+    }
+  }
+}

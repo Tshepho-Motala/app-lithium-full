@@ -1,0 +1,16 @@
+:host {
+  md-spinner {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+.loading-dialog {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  .text {
+    padding-left: 1em;
+  }
+}

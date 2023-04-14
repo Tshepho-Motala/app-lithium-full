@@ -1,0 +1,53 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "BALANCE_LIMITS": {
+      "TITLE": "Balance Limit",
+      "LABEL": "Balance Limit",
+      "NOT_SET": "not set",
+      "PENDING": "Balance limit increase requested on {{date_requested}} to {{amount}}.\n This new limit will take effect on {{date_affected}}",
+      "LIMIT_USED": "Percentage of the limit used:",
+      "REMAIN_TO_LIMIT": "Amount remaining to limit",
+      "DISABLED_MESSAGE": "Balance limit disabled for current domain",
+      "CHANGE": {
+        "EXPLAIN": {
+          "SMALLER": "This limit change is smaller (or equal) than the current limit, and will take effect immediately.",
+          "LARGER": "This is an increase to this balance limit, and will only take effect within 7 days."
+        },
+        "NEW_LIMIT": {
+          "LABEL": "New Balance Limit",
+          "DESCRIPTION": "The maximum amount of money to be held in player current balance. The different will be automatically withdrawn to the contra account."
+        },
+        "CURRENT_LIMIT": {
+          "LABEL": "Current Balance Limit",
+          "DESCRIPTION": "The current balance limit for this player"
+        },
+        "EXPLANATION": "Explanation",
+        "CONFIRMATION_MESSAGE": "Are you sure you want to decrease the amount from \"{{amount_from}}\" to \"{{amount_to}}\"?",
+        "CONFIRM":"Confirm"
+      },
+      "SAVE": {
+        "SUCCESS": "Balance limit saved successfully.",
+        "ERROR": "Balance limit could not be saved, please try again."
+      }
+    },
+    "DOMAIN": {
+      "FIELDS": {
+        "BALANCE_LIMITS": {
+          "NAME": "Player Balance Limit",
+          "DESCRIPTION": "Allow player balance limit to be specified."
+        },
+        "PLAYTIME_LIMIT_SERVICE": {
+          "NAME": "Playtime Limit Service",
+          "DESCRIPTION": "Allow Playtime limit to be specified."
+        }
+      }
+    },
+    "PLAYER": {
+      "QUICK_ACTIONS": {
+        "MODIFY": {
+          "BALANCE_LIMIT": "Update Balance Limit"
+        }
+      }
+    }
+  }
+}

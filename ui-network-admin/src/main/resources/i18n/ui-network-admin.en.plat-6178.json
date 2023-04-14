@@ -1,0 +1,33 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "BONUS": {
+      "ACTIVATION_HISTORY": {
+        "END_DATE": "Completed Date"
+      }
+    },
+    "PROMOTIONS": {
+      "LIST": {
+        "TITLE": "Promotions Management",
+        "DESCRIPTION": "Promotions setup for the selected domains will be listed here."
+      },
+      "FIELDS": {
+        "MAXREDEEMABLE": {
+          "NAME": "Redeemable",
+          "DESCRIPTION": "The amount of times this bonus may be redeemed by the player."
+        },
+        "DURATION": {
+          "NAME": "Duration",
+          "DESCRIPTION": ""
+        },
+        "GRANULARITYSTARTOFFSET": {
+          "NAME": "Start offset",
+          "DESCRIPTION": ""
+        },
+        "GRANULARITYBREAK": {
+          "NAME": "Break",
+          "DESCRIPTION": ""
+        }
+      }
+    }
+  }
+}

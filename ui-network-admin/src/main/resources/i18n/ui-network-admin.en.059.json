@@ -1,0 +1,55 @@
+{
+	"UI_NETWORK_ADMIN": {
+		"RAF": {
+			"DOMAINSELECTED": "The information displayed below is for the chosen domain.",
+			"FILTER": {
+				"REFERRER": "Search for a player, to filter the list below by referrer."
+			},
+			"CLICKS": {
+				"LIST": {
+					"TITLE": "Referral Clicks",
+					"DESCRIPTION": "View a list of referral clicks. Filter by domain and referrer (player).",
+					"DOMAIN": "Domain",
+					"REFERRER": "Referrer",
+					"TIMESTAMP": "Timestamp",
+					"IP": "IP",
+					"USERAGENT": "User Agent"
+				}
+			},
+			"SIGNUPS": {
+				"LIST": {
+					"TITLE": "Referral Signups",
+					"DESCRIPTION": "View a list of referral signups. Filter by domain and referrer (player).",
+					"DOMAIN": "Domain",
+					"REFERRER": "Referrer",
+					"PLAYER": "Player",
+					"TIMESTAMP": "Timestamp",
+					"CONVERTED": "Converted"
+				}
+			},
+			"CONVERSIONS": {
+				"LIST": {
+					"TITLE": "Referral Conversions",
+					"DESCRIPTION": "View a list of referral conversions. Filter by domain and referrer (player).",
+					"DOMAIN": "Domain",
+					"REFERRER": "Referrer",
+					"PLAYER": "Player",
+					"TIMESTAMP": "Timestamp",
+					"CONVERTED": "Converted"
+				}
+			},
+			"CONFIG": {
+				"HEADER": {
+					"TITLE": "Refer a Friend",
+					"DESCRIPTION": "Refer a Friend related settings"
+				}
+			}
+		},
+		"USER": {
+			"REFERRAL": {
+				"REFERRER": "Referrer",
+				"CONVERTED": "Converted"
+			}
+		}
+	}
+}

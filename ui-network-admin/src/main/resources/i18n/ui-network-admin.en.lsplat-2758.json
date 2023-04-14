@@ -1,0 +1,14 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "CASHIER": {
+      "PROCESSORS": {
+        "MENU": {
+          "DISPLAY_ACTIVE": "Display Active",
+          "DISPLAY_INACTIVE": "Display Inactive",
+          "DISPLAY_ACTIVATED": "Domain Method Processor display has been activated",
+          "DISPLAY_DEACTIVATED": "Domain Method Processor display has been deactivated"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,1964 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<definitions
+	xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/"
+	xmlns:tns="https://www.neosurf.info/soap/"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns="http://schemas.xmlsoap.org/wsdl/"
+	targetNamespace="https://www.neosurf.info/soap/">
+	<types>
+		<xsd:schema
+			targetNamespace="https://www.neosurf.info/soap/">
+			<xsd:import
+				namespace="http://schemas.xmlsoap.org/soap/encoding/" />
+			<xsd:import namespace="http://schemas.xmlsoap.org/wsdl/" />
+			<xsd:complexType name="dticket">
+				<xsd:all>
+					<xsd:element name="date_expiry" type="xsd:string" />
+					<xsd:element name="dt_add_info_1" type="xsd:string" />
+					<xsd:element name="dt_add_info_2" type="xsd:string" />
+					<xsd:element name="dt_add_info_3" type="xsd:string" />
+					<xsd:element name="duration_expiry" type="xsd:string" />
+					<xsd:element name="pincode" type="xsd:string" />
+					<xsd:element name="serial_nb" type="xsd:string" />
+				</xsd:all>
+			</xsd:complexType>
+			<xsd:complexType name="rproduct">
+				<xsd:all>
+					<xsd:element name="currency" type="xsd:string" />
+					<xsd:element name="description" type="xsd:string" />
+					<xsd:element name="dt_version" type="xsd:string" />
+					<xsd:element name="ean13" type="xsd:string" />
+					<xsd:element name="IDProduct" type="xsd:int" />
+					<xsd:element name="name" type="xsd:string" />
+					<xsd:element name="price" type="xsd:int" />
+					<xsd:element name="provider" type="xsd:string" />
+					<xsd:element name="reseller_commission" type="xsd:int" />
+					<xsd:element name="short_name" type="xsd:string" />
+					<xsd:element name="tva" type="xsd:int" />
+					<xsd:element name="neomiles" type="xsd:int" />
+				</xsd:all>
+			</xsd:complexType>
+			<xsd:complexType name="dtickets">
+				<xsd:complexContent>
+					<xsd:restriction base="SOAP-ENC:Array">
+						<xsd:attribute ref="SOAP-ENC:arrayType"
+							wsdl:arrayType="tns:dticket[]" />
+					</xsd:restriction>
+				</xsd:complexContent>
+			</xsd:complexType>
+			<xsd:complexType name="rcatalog">
+				<xsd:complexContent>
+					<xsd:restriction base="SOAP-ENC:Array">
+						<xsd:attribute ref="SOAP-ENC:arrayType"
+							wsdl:arrayType="tns:rproduct[]" />
+					</xsd:restriction>
+				</xsd:complexContent>
+			</xsd:complexType>
+			<xsd:complexType name="ArrayOfString">
+				<xsd:complexContent>
+					<xsd:restriction base="SOAP-ENC:Array">
+						<xsd:attribute ref="SOAP-ENC:arrayType"
+							wsdl:arrayType="xsd:string[]" />
+					</xsd:restriction>
+				</xsd:complexContent>
+			</xsd:complexType>
+		</xsd:schema>
+	</types>
+	<message name="bill_paymentRequest">
+		<part name="amount" type="xsd:int" />
+		<part name="currency" type="xsd:string" />
+		<part name="hash" type="xsd:string" />
+		<part name="IDReseller" type="xsd:string" />
+		<part name="IDTransaction" type="xsd:string" />
+		<part name="IDUser" type="xsd:int" />
+		<part name="operator" type="xsd:string" />
+	</message>
+	<message name="bill_paymentResponse">
+		<part name="auth_nb" type="xsd:string" />
+		<part name="datetime_created" type="xsd:string" />
+	</message>
+	<message name="cancel_paymentRequest">
+		<part name="hash" type="xsd:string" />
+		<part name="IDMerchant" type="xsd:int" />
+		<part name="IDService" type="xsd:int" />
+		<part name="IDTransaction" type="xsd:string" />
+	</message>
+	<message name="cancel_paymentResponse">
+		<part name="auth_nb" type="xsd:string" />
+		<part name="credit" type="xsd:int" />
+		<part name="datetime_created" type="xsd:string" />
+	</message>
+	<message name="check_transaction_statusRequest">
+		<part name="amount" type="xsd:int" />
+		<part name="currency" type="xsd:string" />
+		<part name="hash" type="xsd:string" />
+		<part name="IDMerchant" type="xsd:int" />
+		<part name="IDService" type="xsd:int" />
+		<part name="IDTransaction" type="xsd:string" />
+		<part name="Neosurf_payment_ID" type="xsd:int" />
+		<part name="serial_nb" type="xsd:int" />
+		<part name="transaction_type" type="xsd:string" />
+	</message>
+	<message name="check_transaction_statusResponse">
+		<part name="amount" type="xsd:int" />
+		<part name="currency" type="xsd:string" />
+		<part name="hash" type="xsd:string" />
+		<part name="IDMerchant" type="xsd:int" />
+		<part name="IDService" type="xsd:int" />
+		<part name="IDTransaction" type="xsd:string" />
+		<part name="Neosurf_payment_ID" type="xsd:int" />
+		<part name="serial_nb" type="xsd:int" />
+		<part name="transaction_status" type="xsd:string" />
+		<part name="transaction_type" type="xsd:string" />
+	</message>
+	<message name="credit_cardRequest">
+		<part name="amount" type="xsd:int" />
+		<part name="currency" type="xsd:string" />
+		<part name="hash" type="xsd:string" />
+		<part name="IDReseller" type="xsd:string" />
+		<part name="IDTransaction" type="xsd:string" />
+		<part name="IDUser" type="xsd:int" />
+		<part name="serial_nb" type="xsd:string" />
+	</message>
+	<message name="credit_cardResponse">
+		<part name="auth_nb" type="xsd:string" />
+		<part name="datetime_created" type="xsd:string" />
+		<part name="IDProduct" type="xsd:int" />
+		<part name="reseller_credit" type="xsd:int" />
+		<part name="serial_credit" type="xsd:int" />
+		<part name="user_credit" type="xsd:int" />
+	</message>
+	<message name="credit_simRequest">
+		<part name="amount" type="xsd:int" />
+		<part name="currency" type="xsd:string" />
+		<part name="hash" type="xsd:string" />
+		<part name="IDReseller" type="xsd:string" />
+		<part name="IDTransaction" type="xsd:string" />
+		<part name="IDUser" type="xsd:int" />
+		<part name="operator" type="xsd:string" />
+		<part name="tel_nb" type="xsd:string" />
+	</message>
+	<message name="credit_simResponse">
+		<part name="auth_nb" type="xsd:string" />
+		<part name="datetime_created" type="xsd:string" />
+		<part name="reseller_credit" type="xsd:int" />
+		<part name="tel_credit" type="xsd:int" />
+		<part name="tel_credit_date_expiry" type="xsd:string" />
+		<part name="user_credit" type="xsd:int" />
+	</message>
+	<message name="get_dticketsRequest">
+		<part name="currency" type="xsd:string" />
+		<part name="hash" type="xsd:string" />
+		<part name="IDProduct" type="xsd:int" />
+		<part name="IDReseller" type="xsd:string" />
+		<part name="IDTransaction" type="xsd:string" />
+		<part name="IDUser" type="xsd:int" />
+		<part name="quantity" type="xsd:int" />
+	</message>
+	<message name="get_dticketsResponse">
+		<part name="additional_info" type="xsd:string" />
+		<part name="auth_nb" type="xsd:string" />
+		<part name="datetime_created" type="xsd:string" />
+		<part name="dt_version" type="xsd:string" />
+		<part name="dtickets" type="tns:dtickets" />
+		<part name="reseller_credit" type="xsd:int" />
+		<part name="user_credit" type="xsd:int" />
+	</message>
+	<message name="get_dtickets_voidRequest">
+		<part name="auth_nb" type="xsd:string" />
+		<part name="hash" type="xsd:string" />
+		<part name="reason_comment" type="xsd:string" />
+		<part name="reason_label" type="xsd:string" />
+	</message>
+	<message name="get_dtickets_voidResponse">
+		<part name="datetime_created" type="xsd:string" />
+		<part name="reseller_credit" type="xsd:int" />
+		<part name="result_code" type="xsd:int" />
+		<part name="user_credit" type="xsd:int" />
+	</message>
+	<message name="get_dtickets_void2Request">
+		<part name="IDReseller" type="xsd:string" />
+		<part name="IDTransaction" type="xsd:string" />
+		<part name="IDUser" type="xsd:int" />
+		<part name="hash" type="xsd:string" />
+		<part name="reason_comment" type="xsd:string" />
+		<part name="reason_label" type="xsd:string" />
+	</message>
+	<message name="get_dtickets_void2Response">
+		<part name="datetime_created" type="xsd:string" />
+		<part name="reseller_credit" type="xsd:int" />
+		<part name="result_code" type="xsd:int" />
+		<part name="user_credit" type="xsd:int" />
+	</message>
+	<message name="get_rcatalogRequest">
+		<part name="hash" type="xsd:string" />
+		<part name="IDReseller" type="xsd:string" />
+		<part name="IDUser" type="xsd:int" />
+	</message>
+	<message name="get_rcatalogResponse">
+		<part name="datetime_created" type="xsd:string" />
+		<part name="rcatalog" type="tns:rcatalog" />
+	</message>
+	<message name="get_rtemplate_fieldsRequest">
+		<part name="hash" type="xsd:string" />
+		<part name="IDUser" type="xsd:int" />
+		<part name="dt_version" type="xsd:string" />
+	</message>
+	<message name="get_rtemplate_fieldsResponse">
+		<part name="url_logo" type="xsd:string" />
+		<part name="url_template" type="xsd:string" />
+		<part name="tpl_credit_L1" type="xsd:string" />
+		<part name="tpl_credit_L2" type="xsd:string" />
+		<part name="tpl_credit_L3" type="xsd:string" />
+		<part name="tpl_legal_mentions_L1" type="xsd:string" />
+		<part name="tpl_legal_mentions_L2" type="xsd:string" />
+		<part name="tpl_legal_mentions_L3" type="xsd:string" />
+		<part name="tpl_legal_mentions_L4" type="xsd:string" />
+		<part name="tpl_legal_mentions_L5" type="xsd:string" />
+		<part name="tpl_legal_mentions_L6" type="xsd:string" />
+		<part name="tpl_legal_mentions_L7" type="xsd:string" />
+		<part name="tpl_manual_L1" type="xsd:string" />
+		<part name="tpl_manual_L2" type="xsd:string" />
+		<part name="tpl_manual_L3" type="xsd:string" />
+		<part name="tpl_manual_L4" type="xsd:string" />
+		<part name="tpl_manual_L5" type="xsd:string" />
+		<part name="tpl_manual_L6" type="xsd:string" />
+		<part name="tpl_manual_L7" type="xsd:string" />
+		<part name="tpl_manual_L8" type="xsd:string" />
+		<part name="tpl_name_L1" type="xsd:string" />
+		<part name="tpl_name_L2" type="xsd:string" />
+		<part name="tpl_name_L3" type="xsd:string" />
+		<part name="tpl_promo_L1" type="xsd:string" />
+		<part name="tpl_promo_L2" type="xsd:string" />
+		<part name="tpl_promo_L3" type="xsd:string" />
+		<part name="tpl_promo_L4" type="xsd:string" />
+		<part name="tpl_promo_L5" type="xsd:string" />
+		<part name="tpl_promo_L6" type="xsd:string" />
+		<part name="tpl_promo_L7" type="xsd:string" />
+		<part name="tpl_promo_L8" type="xsd:string" />
+		<part name="tpl_promo_L9" type="xsd:string" />
+		<part name="tpl_promo_L10" type="xsd:string" />
+		<part name="tpl_promo_L11" type="xsd:string" />
+		<part name="tpl_promo_L12" type="xsd:string" />
+	</message>
+	<message name="get_echeckRequest">
+		<part name="amount" type="xsd:int" />
+		<part name="currency" type="xsd:string" />
+		<part name="hash" type="xsd:string" />
+		<part name="IDProduct" type="xsd:int" />
+		<part name="IDReseller" type="xsd:string" />
+		<part name="IDTransaction" type="xsd:string" />
+		<part name="IDUser" type="xsd:int" />
+	</message>
+	<message name="get_echeckResponse">
+		<part name="additional_info" type="xsd:string" />
+		<part name="auth_nb" type="xsd:string" />
+		<part name="datetime_created" type="xsd:string" />
+		<part name="dt_version" type="xsd:string" />
+		<part name="dtickets" type="tns:dtickets" />
+		<part name="reseller_credit" type="xsd:int" />
+		<part name="user_credit" type="xsd:int" />
+	</message>
+	<message name="neocash_checkRequest">
+		<part name="amount" type="xsd:int" />
+		<part name="currency" type="xsd:string" />
+		<part name="hash" type="xsd:string" />
+		<part name="IDReseller" type="xsd:string" />
+		<part name="IDTransaction" type="xsd:string" />
+		<part name="IDUser" type="xsd:int" />
+		<part name="serial_nb" type="xsd:string" />
+	</message>
+	<message name="neocash_checkResponse">
+		<part name="surtaxed_amount" type="xsd:int" />
+		<part name="reseller_amount" type="xsd:int" />
+	</message>
+	<message name="neocash_creditRequest">
+		<part name="amount" type="xsd:int" />
+		<part name="currency" type="xsd:string" />
+		<part name="hash" type="xsd:string" />
+		<part name="IDReseller" type="xsd:string" />
+		<part name="IDTransaction" type="xsd:string" />
+		<part name="IDUser" type="xsd:int" />
+		<part name="serial_nb" type="xsd:string" />
+	</message>
+	<message name="neocash_creditResponse">
+		<part name="auth_nb" type="xsd:string" />
+		<part name="datetime_created" type="xsd:string" />
+		<part name="reseller_credit" type="xsd:int" />
+		<part name="serial_nb_balance" type="xsd:int" />
+		<part name="user_credit" type="xsd:int" />
+	</message>
+	<message name="make_paymentRequest">
+		<part name="amount" type="xsd:int" />
+		<part name="currency" type="xsd:string" />
+		<part name="hash" type="xsd:string" />
+		<part name="IDMerchant" type="xsd:int" />
+		<part name="IDService" type="xsd:int" />
+		<part name="IDTicket" type="xsd:string" />
+		<part name="IDTransaction" type="xsd:string" />
+	</message>
+	<message name="make_paymentResponse">
+		<part name="auth_nb" type="xsd:string" />
+		<part name="credit" type="xsd:int" />
+		<part name="datetime_created" type="xsd:string" />
+	</message>
+	<message name="make_payment_custinfoRequest">
+		<part name="amount" type="xsd:int" />
+		<part name="currency" type="xsd:string" />
+		<part name="hash" type="xsd:string" />
+		<part name="IDMerchant" type="xsd:int" />
+		<part name="IDService" type="xsd:int" />
+		<part name="IDTicket" type="xsd:string" />
+		<part name="IDTransaction" type="xsd:string" />
+	</message>
+	<message name="make_payment_custinfoResponse">
+		<part name="auth_nb" type="xsd:string" />
+		<part name="credit" type="xsd:int" />
+		<part name="datetime_created" type="xsd:string" />
+		<part name="IDCustomer" type="xsd:int" />
+	</message>
+	<message name="money_transferRequest">
+		<part name="amount" type="xsd:int" />
+		<part name="currency" type="xsd:string" />
+		<part name="giver_country" type="xsd:string" />
+		<part name="giver_email" type="xsd:string" />
+		<part name="giver_first_name" type="xsd:string" />
+		<part name="giver_last_name" type="xsd:string" />
+		<part name="giver_tel" type="xsd:string" />
+		<part name="hash" type="xsd:string" />
+		<part name="IDReseller" type="xsd:string" />
+		<part name="IDTransaction" type="xsd:string" />
+		<part name="IDUser" type="xsd:int" />
+		<part name="pincode" type="xsd:string" />
+		<part name="receiver_country" type="xsd:string" />
+		<part name="receiver_email" type="xsd:string" />
+		<part name="receiver_first_name" type="xsd:string" />
+		<part name="receiver_last_name" type="xsd:string" />
+		<part name="receiver_tel" type="xsd:string" />
+	</message>
+	<message name="money_transferResponse">
+		<part name="auth_nb" type="xsd:string" />
+		<part name="datetime_created" type="xsd:string" />
+		<part name="transfer_code" type="xsd:string" />
+	</message>
+	<message name="neopay_burn_codeRequest">
+		<part name="hash" type="xsd:string" />
+		<part name="IDReseller" type="xsd:string" />
+		<part name="IDTransaction" type="xsd:string" />
+		<part name="IDUser" type="xsd:int" />
+		<part name="pincode" type="xsd:string" />
+	</message>
+	<message name="neopay_burn_codeResponse">
+		<part name="amount" type="xsd:int" />
+		<part name="auth_nb" type="xsd:string" />
+		<part name="datetime_created" type="xsd:string" />
+		<part name="dt_version" type="xsd:string" />
+		<part name="reseller_credit" type="xsd:int" />
+		<part name="user_credit" type="xsd:int" />
+	</message>
+	<message name="neopay_check_codeRequest">
+		<part name="hash" type="xsd:string" />
+		<part name="IDReseller" type="xsd:string" />
+		<part name="IDUser" type="xsd:int" />
+		<part name="pincode" type="xsd:string" />
+	</message>
+	<message name="neopay_check_codeResponse">
+		<part name="amount" type="xsd:int" />
+		<part name="currency" type="xsd:string" />
+		<part name="dateh_expiry" type="xsd:string" />
+		<part name="datetime_created" type="xsd:string" />
+		<part name="is_adult" type="xsd:string" />
+		<part name="status" type="xsd:string" />
+	</message>
+	<message name="ticket_check_creditRequest">
+		<part name="amount" type="xsd:int" />
+		<part name="hash" type="xsd:string" />
+		<part name="IDMerchant" type="xsd:int" />
+		<part name="IDTicket" type="xsd:string" />
+	</message>
+	<message name="ticket_check_creditResponse">
+		<part name="credit" type="xsd:int" />
+		<part name="datetime_created" type="xsd:string" />
+	</message>
+	<message name="transactionFinalAmountRequest">
+		<part name="input" type="xsd:struct" />
+	</message>
+	<message name="transactionFinalAmountResponse">
+		<part name="finalAmount" type="xsd:string" />
+		<part name="exchangedAmount" type="xsd:string" />
+		<part name="exchangeRate" type="xsd:string" />
+		<part name="exchangeCommissionRate" type="xsd:string" />
+		<part name="exchangeCommissionFees" type="xsd:string" />
+		<part name="operationRate" type="xsd:string" />
+		<part name="operationFees" type="xsd:string" />
+	</message>
+	<message name="transactionCreditCardWithout3DRequest">
+		<part name="input" type="xsd:struct" />
+	</message>
+	<message name="transactionCreditCardWithout3DResponse">
+		<part name="amount" type="xsd:int" />
+		<part name="created" type="xsd:string" />
+		<part name="currency" type="xsd:string" />
+		<part name="errorCode" type="xsd:string" />
+		<part name="errorMessage" type="xsd:string" />
+		<part name="status" type="xsd:string" />
+		<part name="transactionId" type="xsd:int" />
+		<part name="methodExpiry" type="xsd:string" />
+		<part name="methodId" type="xsd:string" />
+		<part name="methodLabel" type="xsd:string" />
+		<part name="methodName" type="xsd:string" />
+		<part name="methodChargedAmount" type="xsd:int" />
+		<part name="methodCurrency" type="xsd:string" />
+	</message>
+	<message name="transactionGatewayRequest">
+		<part name="input" type="xsd:struct" />
+	</message>
+	<message name="transactionGatewayResponse">
+		<part name="urlRedirectForm" type="xsd:string" />
+	</message>
+	<message name="transactionGatewayCallbackRequest">
+		<part name="input" type="xsd:struct" />
+	</message>
+	<message name="transactionGatewayCallbackResponse">
+		<part name="transactionId" type="xsd:int" />
+		<part name="returnStatus" type="xsd:string" />
+		<part name="version" type="xsd:int" />
+	</message>
+	<message name="transactionGatewayCheckCallbackRequest">
+		<part name="creditCardBin" type="xsd:string" />
+		<part name="creditCardCountry" type="xsd:string" />
+		<part name="creditCardExpiryDate" type="xsd:string" />
+		<part name="creditCardLast4" type="xsd:string" />
+		<part name="creditCardScheme" type="xsd:string" />
+		<part name="hash" type="xsd:string" />
+		<part name="informations" type="xsd:string" />
+		<part name="transactionId" type="xsd:int" />
+	</message>
+	<message name="transactionGatewayCheckCallbackResponse">
+		<part name="ReturnCode" type="xsd:boolean" />
+	</message>
+	<message name="transactionNeosurfCreditEmailRequest">
+		<part name="input" type="xsd:struct" />
+	</message>
+	<message name="transactionNeosurfCreditEmailResponse">
+		<part name="amount" type="xsd:int" />
+		<part name="created" type="xsd:string" />
+		<part name="currency" type="xsd:string" />
+		<part name="errorCode" type="xsd:string" />
+		<part name="errorMessage" type="xsd:string" />
+		<part name="status" type="xsd:string" />
+		<part name="transactionId" type="xsd:int" />
+		<part name="methodExpiry" type="xsd:string" />
+		<part name="methodId" type="xsd:string" />
+		<part name="methodLabel" type="xsd:string" />
+		<part name="methodName" type="xsd:string" />
+		<part name="methodChargedAmount" type="xsd:int" />
+		<part name="methodCurrency" type="xsd:string" />
+	</message>
+	<message name="transactionNeosurfPinRequest">
+		<part name="input" type="xsd:struct" />
+	</message>
+	<message name="transactionNeosurfPinResponse">
+		<part name="amount" type="xsd:int" />
+		<part name="created" type="xsd:string" />
+		<part name="currency" type="xsd:string" />
+		<part name="errorCode" type="xsd:string" />
+		<part name="errorMessage" type="xsd:string" />
+		<part name="status" type="xsd:string" />
+		<part name="transactionId" type="xsd:int" />
+		<part name="methodExpiry" type="xsd:string" />
+		<part name="methodId" type="xsd:string" />
+		<part name="methodLabel" type="xsd:string" />
+		<part name="methodName" type="xsd:string" />
+		<part name="methodChargedAmount" type="xsd:int" />
+		<part name="methodCurrency" type="xsd:string" />
+	</message>
+	<message name="transactionNeosurfLoginRequest">
+		<part name="input" type="xsd:struct" />
+	</message>
+	<message name="transactionNeosurfLoginResponse">
+		<part name="amount" type="xsd:int" />
+		<part name="created" type="xsd:string" />
+		<part name="currency" type="xsd:string" />
+		<part name="errorCode" type="xsd:string" />
+		<part name="errorMessage" type="xsd:string" />
+		<part name="status" type="xsd:string" />
+		<part name="transactionId" type="xsd:int" />
+		<part name="methodExpiry" type="xsd:string" />
+		<part name="methodId" type="xsd:string" />
+		<part name="methodLabel" type="xsd:string" />
+		<part name="methodName" type="xsd:string" />
+		<part name="methodChargedAmount" type="xsd:int" />
+		<part name="methodCurrency" type="xsd:string" />
+	</message>
+	<message name="transactionNeosurfReverseRequest">
+		<part name="input" type="xsd:struct" />
+	</message>
+	<message name="transactionNeosurfReverseResponse">
+		<part name="amount" type="xsd:int" />
+		<part name="created" type="xsd:string" />
+		<part name="currency" type="xsd:string" />
+		<part name="errorCode" type="xsd:string" />
+		<part name="errorMessage" type="xsd:string" />
+		<part name="status" type="xsd:string" />
+		<part name="transactionId" type="xsd:int" />
+		<part name="methodExpiry" type="xsd:string" />
+		<part name="methodId" type="xsd:string" />
+		<part name="methodLabel" type="xsd:string" />
+		<part name="methodName" type="xsd:string" />
+		<part name="methodChargedAmount" type="xsd:int" />
+		<part name="methodCurrency" type="xsd:string" />
+	</message>
+	<message name="transactionQrcodeRequest">
+		<part name="input" type="xsd:struct" />
+	</message>
+	<message name="transactionQrcodeResponse">
+		<part name="network" type="xsd:string" />
+		<part name="qrcode" type="xsd:string" />
+		<part name="expiry" type="xsd:string" />
+	</message>
+	<message name="transactionCheckSignatureRequest">
+		<part name="input" type="xsd:struct" />
+	</message>
+	<message name="transactionCheckSignatureResponse">
+		<part name="response" type="xsd:string" />
+	</message>
+	<message name="transactionInitRequest">
+		<part name="input" type="xsd:struct" />
+	</message>
+	<message name="transactionInitResponse">
+		<part name="amount" type="xsd:int" />
+		<part name="created" type="xsd:string" />
+		<part name="currency" type="xsd:string" />
+		<part name="errorCode" type="xsd:string" />
+		<part name="errorMessage" type="xsd:string" />
+		<part name="status" type="xsd:string" />
+		<part name="transactionId" type="xsd:int" />
+		<part name="methodExpiry" type="xsd:string" />
+		<part name="methodId" type="xsd:string" />
+		<part name="methodLabel" type="xsd:string" />
+		<part name="methodName" type="xsd:string" />
+		<part name="methodChargedAmount" type="xsd:int" />
+		<part name="methodCurrency" type="xsd:string" />
+		<part name="kycDetails" type="xsd:string" />
+	</message>
+	<message name="transactionKycCheckRequest">
+		<part name="input" type="xsd:struct" />
+	</message>
+	<message name="transactionKycCheckResponse">
+		<part name="kycMethodResponse" type="xsd:string" />
+	</message>
+	<message name="transactionCreditCardWith3DRequest">
+		<part name="input" type="xsd:struct" />
+	</message>
+	<message name="transactionCreditCardWith3DResponse">
+		<part name="url3d" type="xsd:string" />
+	</message>
+	<message name="transactionGetDetailsRequest">
+		<part name="input" type="xsd:struct" />
+	</message>
+	<message name="transactionGetDetailsResponse">
+		<part name="amount" type="xsd:int" />
+		<part name="created" type="xsd:string" />
+		<part name="currency" type="xsd:string" />
+		<part name="errorCode" type="xsd:string" />
+		<part name="errorMessage" type="xsd:string" />
+		<part name="status" type="xsd:string" />
+		<part name="transactionId" type="xsd:int" />
+		<part name="methodExpiry" type="xsd:string" />
+		<part name="methodId" type="xsd:string" />
+		<part name="methodLabel" type="xsd:string" />
+		<part name="methodName" type="xsd:string" />
+		<part name="methodChargedAmount" type="xsd:int" />
+		<part name="methodCurrency" type="xsd:string" />
+	</message>
+	<message name="transactionNeosurfPinDepositRequest">
+		<part name="input" type="xsd:struct" />
+	</message>
+	<message name="transactionNeosurfPinDepositResponse">
+		<part name="amount" type="xsd:int" />
+		<part name="created" type="xsd:string" />
+		<part name="currency" type="xsd:string" />
+		<part name="errorCode" type="xsd:string" />
+		<part name="errorMessage" type="xsd:string" />
+		<part name="status" type="xsd:string" />
+		<part name="transactionId" type="xsd:int" />
+		<part name="methodExpiry" type="xsd:string" />
+		<part name="methodId" type="xsd:string" />
+		<part name="methodLabel" type="xsd:string" />
+		<part name="methodName" type="xsd:string" />
+		<part name="methodChargedAmount" type="xsd:int" />
+		<part name="methodCurrency" type="xsd:string" />
+	</message>
+	<message name="userCreateLightRequest">
+		<part name="input" type="xsd:struct" />
+	</message>
+	<message name="userCreateLightResponse">
+		<part name="neosurfKyc" type="xsd:int" />
+		<part name="neosurfPin3" type="xsd:string" />
+		<part name="neosurfPin" type="xsd:string" />
+		<part name="neosurfReloadLevel" type="xsd:int" />
+		<part name="neosurfSerialNb" type="xsd:int" />
+		<part name="neosurfStatus" type="xsd:string" />
+		<part name="neosurfUserId" type="xsd:int" />
+		<part name="neosurfCurrency" type="xsd:string" />
+	</message>
+	<message name="userResendConfirmationEmailRequest">
+		<part name="input" type="xsd:struct" />
+	</message>
+	<message name="userResendConfirmationEmailResponse">
+		<part name="resendConfirmationEmail" type="xsd:string" />
+	</message>
+	<message name="userCreateRequest">
+		<part name="input" type="xsd:struct" />
+	</message>
+	<message name="userCreateResponse">
+		<part name="neosurfKyc" type="xsd:int" />
+		<part name="neosurfPin3" type="xsd:string" />
+		<part name="neosurfPin" type="xsd:string" />
+		<part name="neosurfReloadLevel" type="xsd:int" />
+		<part name="neosurfSerialNb" type="xsd:int" />
+		<part name="neosurfStatus" type="xsd:string" />
+		<part name="neosurfUserId" type="xsd:int" />
+	</message>
+	<message name="userVerifyEmailInitRequest">
+		<part name="input" type="xsd:struct" />
+	</message>
+	<message name="userVerifyEmailInitResponse">
+		<part name="neosurfEmailVerificationToken" type="xsd:string" />
+	</message>
+	<message name="userVerifyEmailVerifyCodeRequest">
+		<part name="input" type="xsd:struct" />
+	</message>
+	<message name="userVerifyEmailVerifyCodeResponse">
+		<part name="userVerifyEmailVerifyCodeResponse" type="xsd:string" />
+	</message>
+	<message name="userForgotPasswordInitRequest">
+		<part name="input" type="xsd:struct" />
+	</message>
+	<message name="userForgotPasswordInitResponse">
+		<part name="forgotPasswordHash" type="xsd:string" />
+	</message>
+	<message name="userForgotPasswordVerifyCodeRequest">
+		<part name="input" type="xsd:struct" />
+	</message>
+	<message name="userForgotPasswordVerifyCodeResponse">
+		<part name="userForgotPasswordVerifyCodeResponse"
+			type="xsd:string" />
+	</message>
+	<message name="userForgotPasswordResetRequest">
+		<part name="input" type="xsd:struct" />
+	</message>
+	<message name="userForgotPasswordResetResponse">
+		<part name="userForgotPasswordResetResponse" type="xsd:string" />
+	</message>
+	<message name="userGetBalanceRequest">
+		<part name="input" type="xsd:struct" />
+	</message>
+	<message name="userGetBalanceResponse">
+		<part name="neosurfBalance" type="xsd:int" />
+		<part name="neosurfCurrency" type="xsd:string" />
+	</message>
+	<message name="userGetDetailsRequest">
+		<part name="input" type="xsd:struct" />
+	</message>
+	<message name="userGetDetailsResponse">
+		<part name="neosurfKyc" type="xsd:int" />
+		<part name="neosurfPin3" type="xsd:string" />
+		<part name="neosurfPin" type="xsd:string" />
+		<part name="neosurfReloadLevel" type="xsd:int" />
+		<part name="neosurfSerialNb" type="xsd:int" />
+		<part name="neosurfStatus" type="xsd:string" />
+		<part name="neosurfUserId" type="xsd:int" />
+		<part name="neosurfCurrency" type="xsd:string" />
+		<part name="userDocumentCsvHistory" type="xsd:string" />
+		<part name="userGender" type="xsd:string" />
+		<part name="userFirstName" type="xsd:string" />
+		<part name="userLastName" type="xsd:string" />
+		<part name="userDateOfBirth" type="xsd:string" />
+		<part name="userTelephoneNumber" type="xsd:string" />
+		<part name="userStreet" type="xsd:string" />
+		<part name="userZipCode" type="xsd:string" />
+		<part name="userCity" type="xsd:string" />
+		<part name="userCountry" type="xsd:string" />
+		<part name="userEmail" type="xsd:string" />
+	</message>
+	<message name="userUpdatePersonalInfoRequest">
+		<part name="input" type="xsd:struct" />
+	</message>
+	<message name="userUpdatePersonalInfoResponse">
+		<part name="neosurfKyc" type="xsd:int" />
+		<part name="neosurfPin3" type="xsd:string" />
+		<part name="neosurfPin" type="xsd:string" />
+		<part name="neosurfReloadLevel" type="xsd:int" />
+		<part name="neosurfSerialNb" type="xsd:int" />
+		<part name="neosurfUserId" type="xsd:int" />
+		<part name="neosurfCurrency" type="xsd:string" />
+	</message>
+	<message name="userLoginRequest">
+		<part name="input" type="xsd:struct" />
+	</message>
+	<message name="userLoginResponse">
+		<part name="sessionType" type="xsd:string" />
+		<part name="sessionId" type="xsd:string" />
+	</message>
+	<message name="userLogoutRequest">
+		<part name="input" type="xsd:struct" />
+	</message>
+	<message name="userLogoutResponse">
+		<part name="logout" type="xsd:string" />
+	</message>
+	<message name="userUploadDocumentRequest">
+		<part name="input" type="xsd:struct" />
+	</message>
+	<message name="userUploadDocumentResponse">
+		<part name="neosurfDocumentId" type="xsd:int" />
+		<part name="neosurfDocumentStatus" type="xsd:string" />
+		<part name="created" type="xsd:string" />
+	</message>
+	<message name="userHistoryRequest">
+		<part name="input" type="xsd:struct" />
+	</message>
+	<message name="userHistoryResponse">
+		<part name="historyDetails" type="xsd:string" />
+	</message>
+	<message name="userGetDepositMethodsRequest">
+		<part name="input" type="xsd:struct" />
+	</message>
+	<message name="userGetDepositMethodsResponse">
+		<part name="depositMethods" type="xsd:string" />
+	</message>
+	<message name="usersGetLimitsRequest">
+		<part name="input" type="xsd:struct" />
+	</message>
+	<message name="usersGetLimitsResponse">
+		<part name="limitsDetails" type="xsd:string" />
+	</message>
+	<message name="userGetLimitsRequest">
+		<part name="input" type="xsd:struct" />
+	</message>
+	<message name="userGetLimitsResponse">
+		<part name="limitsDetails" type="xsd:string" />
+	</message>
+	<message name="voucherLoginRequest">
+		<part name="input" type="xsd:struct" />
+	</message>
+	<message name="voucherLoginResponse">
+		<part name="sessionId" type="xsd:string" />
+		<part name="sessionType" type="xsd:string" />
+	</message>
+	<message name="voucherLogoutRequest">
+		<part name="input" type="xsd:struct" />
+	</message>
+	<message name="voucherLogoutResponse">
+		<part name="logout" type="xsd:string" />
+	</message>
+	<message name="voucherGetBalanceRequest">
+		<part name="input" type="xsd:struct" />
+	</message>
+	<message name="voucherGetBalanceResponse">
+		<part name="voucherBalance" type="xsd:string" />
+		<part name="voucherCurrency" type="xsd:string" />
+	</message>
+	<message name="voucherGetHistoryRequest">
+		<part name="input" type="xsd:struct" />
+	</message>
+	<message name="voucherGetHistoryResponse">
+		<part name="historyDetails" type="xsd:string" />
+	</message>
+	<message name="voucherGetDetailsRequest">
+		<part name="input" type="xsd:struct" />
+	</message>
+	<message name="voucherGetDetailsResponse">
+		<part name="label" type="xsd:string" />
+		<part name="status" type="xsd:string" />
+		<part name="serial" type="xsd:string" />
+		<part name="expirationDate" type="xsd:string" />
+		<part name="balance" type="xsd:string" />
+		<part name="extraDetails" type="xsd:string" />
+	</message>
+	<message name="pincodeLoginRequest">
+		<part name="input" type="xsd:struct" />
+	</message>
+	<message name="pincodeLoginResponse">
+		<part name="sessionType" type="xsd:string" />
+		<part name="sessionId" type="xsd:string" />
+	</message>
+	<message name="storeLocatorRequest">
+		<part name="input" type="xsd:struct" />
+	</message>
+	<message name="storeLocatorResponse">
+		<part name="storesList" type="xsd:string" />
+	</message>
+	<message name="appGetAdRequest">
+		<part name="input" type="xsd:struct" />
+	</message>
+	<message name="appGetAdResponse">
+		<part name="imagePath" type="xsd:string" />
+		<part name="imageType" type="xsd:string" />
+		<part name="expirationDate" type="xsd:string" />
+		<part name="url" type="xsd:string" />
+	</message>
+	<portType name="Neosurf Web ServicesPortType">
+		<operation name="bill_payment">
+			<input message="tns:bill_paymentRequest" />
+			<output message="tns:bill_paymentResponse" />
+		</operation>
+		<operation name="cancel_payment">
+			<input message="tns:cancel_paymentRequest" />
+			<output message="tns:cancel_paymentResponse" />
+		</operation>
+		<operation name="check_transaction_status">
+			<input message="tns:check_transaction_statusRequest" />
+			<output message="tns:check_transaction_statusResponse" />
+		</operation>
+		<operation name="credit_card">
+			<input message="tns:credit_cardRequest" />
+			<output message="tns:credit_cardResponse" />
+		</operation>
+		<operation name="credit_sim">
+			<input message="tns:credit_simRequest" />
+			<output message="tns:credit_simResponse" />
+		</operation>
+		<operation name="get_dtickets">
+			<input message="tns:get_dticketsRequest" />
+			<output message="tns:get_dticketsResponse" />
+		</operation>
+		<operation name="get_dtickets_void">
+			<input message="tns:get_dtickets_voidRequest" />
+			<output message="tns:get_dtickets_voidResponse" />
+		</operation>
+		<operation name="get_dtickets_void2">
+			<input message="tns:get_dtickets_void2Request" />
+			<output message="tns:get_dtickets_void2Response" />
+		</operation>
+		<operation name="get_rcatalog">
+			<input message="tns:get_rcatalogRequest" />
+			<output message="tns:get_rcatalogResponse" />
+		</operation>
+		<operation name="get_rtemplate_fields">
+			<input message="tns:get_rtemplate_fieldsRequest" />
+			<output message="tns:get_rtemplate_fieldsResponse" />
+		</operation>
+		<operation name="get_echeck">
+			<input message="tns:get_echeckRequest" />
+			<output message="tns:get_echeckResponse" />
+		</operation>
+		<operation name="neocash_check">
+			<input message="tns:neocash_checkRequest" />
+			<output message="tns:neocash_checkResponse" />
+		</operation>
+		<operation name="neocash_credit">
+			<input message="tns:neocash_creditRequest" />
+			<output message="tns:neocash_creditResponse" />
+		</operation>
+		<operation name="make_payment">
+			<input message="tns:make_paymentRequest" />
+			<output message="tns:make_paymentResponse" />
+		</operation>
+		<operation name="make_payment_custinfo">
+			<input message="tns:make_payment_custinfoRequest" />
+			<output message="tns:make_payment_custinfoResponse" />
+		</operation>
+		<operation name="money_transfer">
+			<input message="tns:money_transferRequest" />
+			<output message="tns:money_transferResponse" />
+		</operation>
+		<operation name="neopay_burn_code">
+			<input message="tns:neopay_burn_codeRequest" />
+			<output message="tns:neopay_burn_codeResponse" />
+		</operation>
+		<operation name="neopay_check_code">
+			<input message="tns:neopay_check_codeRequest" />
+			<output message="tns:neopay_check_codeResponse" />
+		</operation>
+		<operation name="ticket_check_credit">
+			<input message="tns:ticket_check_creditRequest" />
+			<output message="tns:ticket_check_creditResponse" />
+		</operation>
+		<operation name="transactionFinalAmount">
+			<input message="tns:transactionFinalAmountRequest" />
+			<output message="tns:transactionFinalAmountResponse" />
+		</operation>
+		<operation name="transactionCreditCardWithout3D">
+			<input message="tns:transactionCreditCardWithout3DRequest" />
+			<output message="tns:transactionCreditCardWithout3DResponse" />
+		</operation>
+		<operation name="transactionGateway">
+			<input message="tns:transactionGatewayRequest" />
+			<output message="tns:transactionGatewayResponse" />
+		</operation>
+		<operation name="transactionGatewayCallback">
+			<input message="tns:transactionGatewayCallbackRequest" />
+			<output message="tns:transactionGatewayCallbackResponse" />
+		</operation>
+		<operation name="transactionGatewayCheckCallback">
+			<input message="tns:transactionGatewayCheckCallbackRequest" />
+			<output message="tns:transactionGatewayCheckCallbackResponse" />
+		</operation>
+		<operation name="transactionNeosurfCreditEmail">
+			<input message="tns:transactionNeosurfCreditEmailRequest" />
+			<output message="tns:transactionNeosurfCreditEmailResponse" />
+		</operation>
+		<operation name="transactionNeosurfPin">
+			<input message="tns:transactionNeosurfPinRequest" />
+			<output message="tns:transactionNeosurfPinResponse" />
+		</operation>
+		<operation name="transactionNeosurfLogin">
+			<input message="tns:transactionNeosurfLoginRequest" />
+			<output message="tns:transactionNeosurfLoginResponse" />
+		</operation>
+		<operation name="transactionNeosurfReverse">
+			<input message="tns:transactionNeosurfReverseRequest" />
+			<output message="tns:transactionNeosurfReverseResponse" />
+		</operation>
+		<operation name="transactionQrcode">
+			<input message="tns:transactionQrcodeRequest" />
+			<output message="tns:transactionQrcodeResponse" />
+		</operation>
+		<operation name="transactionCheckSignature">
+			<input message="tns:transactionCheckSignatureRequest" />
+			<output message="tns:transactionCheckSignatureResponse" />
+		</operation>
+		<operation name="transactionInit">
+			<input message="tns:transactionInitRequest" />
+			<output message="tns:transactionInitResponse" />
+		</operation>
+		<operation name="transactionKycCheck">
+			<input message="tns:transactionKycCheckRequest" />
+			<output message="tns:transactionKycCheckResponse" />
+		</operation>
+		<operation name="transactionCreditCardWith3D">
+			<input message="tns:transactionCreditCardWith3DRequest" />
+			<output message="tns:transactionCreditCardWith3DResponse" />
+		</operation>
+		<operation name="transactionGetDetails">
+			<input message="tns:transactionGetDetailsRequest" />
+			<output message="tns:transactionGetDetailsResponse" />
+		</operation>
+		<operation name="transactionNeosurfPinDeposit">
+			<input message="tns:transactionNeosurfPinDepositRequest" />
+			<output message="tns:transactionNeosurfPinDepositResponse" />
+		</operation>
+		<operation name="userCreateLight">
+			<input message="tns:userCreateLightRequest" />
+			<output message="tns:userCreateLightResponse" />
+		</operation>
+		<operation name="userResendConfirmationEmail">
+			<input message="tns:userResendConfirmationEmailRequest" />
+			<output message="tns:userResendConfirmationEmailResponse" />
+		</operation>
+		<operation name="userCreate">
+			<input message="tns:userCreateRequest" />
+			<output message="tns:userCreateResponse" />
+		</operation>
+		<operation name="userVerifyEmailInit">
+			<input message="tns:userVerifyEmailInitRequest" />
+			<output message="tns:userVerifyEmailInitResponse" />
+		</operation>
+		<operation name="userVerifyEmailVerifyCode">
+			<input message="tns:userVerifyEmailVerifyCodeRequest" />
+			<output message="tns:userVerifyEmailVerifyCodeResponse" />
+		</operation>
+		<operation name="userForgotPasswordInit">
+			<input message="tns:userForgotPasswordInitRequest" />
+			<output message="tns:userForgotPasswordInitResponse" />
+		</operation>
+		<operation name="userForgotPasswordVerifyCode">
+			<input message="tns:userForgotPasswordVerifyCodeRequest" />
+			<output message="tns:userForgotPasswordVerifyCodeResponse" />
+		</operation>
+		<operation name="userForgotPasswordReset">
+			<input message="tns:userForgotPasswordResetRequest" />
+			<output message="tns:userForgotPasswordResetResponse" />
+		</operation>
+		<operation name="userGetBalance">
+			<input message="tns:userGetBalanceRequest" />
+			<output message="tns:userGetBalanceResponse" />
+		</operation>
+		<operation name="userGetDetails">
+			<input message="tns:userGetDetailsRequest" />
+			<output message="tns:userGetDetailsResponse" />
+		</operation>
+		<operation name="userUpdatePersonalInfo">
+			<input message="tns:userUpdatePersonalInfoRequest" />
+			<output message="tns:userUpdatePersonalInfoResponse" />
+		</operation>
+		<operation name="userLogin">
+			<input message="tns:userLoginRequest" />
+			<output message="tns:userLoginResponse" />
+		</operation>
+		<operation name="userLogout">
+			<input message="tns:userLogoutRequest" />
+			<output message="tns:userLogoutResponse" />
+		</operation>
+		<operation name="userUploadDocument">
+			<input message="tns:userUploadDocumentRequest" />
+			<output message="tns:userUploadDocumentResponse" />
+		</operation>
+		<operation name="userHistory">
+			<input message="tns:userHistoryRequest" />
+			<output message="tns:userHistoryResponse" />
+		</operation>
+		<operation name="userGetDepositMethods">
+			<input message="tns:userGetDepositMethodsRequest" />
+			<output message="tns:userGetDepositMethodsResponse" />
+		</operation>
+		<operation name="usersGetLimits">
+			<input message="tns:usersGetLimitsRequest" />
+			<output message="tns:usersGetLimitsResponse" />
+		</operation>
+		<operation name="userGetLimits">
+			<input message="tns:userGetLimitsRequest" />
+			<output message="tns:userGetLimitsResponse" />
+		</operation>
+		<operation name="voucherLogin">
+			<input message="tns:voucherLoginRequest" />
+			<output message="tns:voucherLoginResponse" />
+		</operation>
+		<operation name="voucherLogout">
+			<input message="tns:voucherLogoutRequest" />
+			<output message="tns:voucherLogoutResponse" />
+		</operation>
+		<operation name="voucherGetBalance">
+			<input message="tns:voucherGetBalanceRequest" />
+			<output message="tns:voucherGetBalanceResponse" />
+		</operation>
+		<operation name="voucherGetHistory">
+			<input message="tns:voucherGetHistoryRequest" />
+			<output message="tns:voucherGetHistoryResponse" />
+		</operation>
+		<operation name="voucherGetDetails">
+			<input message="tns:voucherGetDetailsRequest" />
+			<output message="tns:voucherGetDetailsResponse" />
+		</operation>
+		<operation name="pincodeLogin">
+			<input message="tns:pincodeLoginRequest" />
+			<output message="tns:pincodeLoginResponse" />
+		</operation>
+		<operation name="storeLocator">
+			<input message="tns:storeLocatorRequest" />
+			<output message="tns:storeLocatorResponse" />
+		</operation>
+		<operation name="appGetAd">
+			<input message="tns:appGetAdRequest" />
+			<output message="tns:appGetAdResponse" />
+		</operation>
+	</portType>
+	<binding name="Neosurf Web ServicesBinding"
+		type="tns:Neosurf Web ServicesPortType">
+		<soap:binding style="rpc"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<operation name="bill_payment">
+			<soap:operation
+				soapAction="https://www.neosurf.info/soap/#bill_payment" style="rpc" />
+			<input>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="cancel_payment">
+			<soap:operation
+				soapAction="https://www.neosurf.info/soap/#cancel_payment"
+				style="rpc" />
+			<input>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="check_transaction_status">
+			<soap:operation
+				soapAction="https://www.neosurf.info/soap/#check_transaction_status"
+				style="rpc" />
+			<input>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="credit_card">
+			<soap:operation
+				soapAction="https://www.neosurf.info/soap/#credit_card" style="rpc" />
+			<input>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="credit_sim">
+			<soap:operation
+				soapAction="https://www.neosurf.info/soap/#credit_sim" style="rpc" />
+			<input>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="get_dtickets">
+			<soap:operation
+				soapAction="https://www.neosurf.info/soap/#get_dtickets" style="rpc" />
+			<input>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="get_dtickets_void">
+			<soap:operation
+				soapAction="https://www.neosurf.info/soap/#get_dtickets_void"
+				style="rpc" />
+			<input>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="get_dtickets_void2">
+			<soap:operation
+				soapAction="https://www.neosurf.info/soap/#get_dtickets_void2"
+				style="rpc" />
+			<input>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="get_rcatalog">
+			<soap:operation
+				soapAction="https://www.neosurf.info/soap/#get_rcatalog" style="rpc" />
+			<input>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="get_rtemplate_fields">
+			<soap:operation
+				soapAction="https://www.neosurf.info/soap/#get_rtemplate_fields"
+				style="rpc" />
+			<input>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="get_echeck">
+			<soap:operation
+				soapAction="https://www.neosurf.info/soap/#get_echeck" style="rpc" />
+			<input>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="neocash_check">
+			<soap:operation
+				soapAction="https://www.neosurf.info/soap/#neocash_check"
+				style="rpc" />
+			<input>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="neocash_credit">
+			<soap:operation
+				soapAction="https://www.neosurf.info/soap/#neocash_credit"
+				style="rpc" />
+			<input>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="make_payment">
+			<soap:operation
+				soapAction="https://www.neosurf.info/soap/#make_payment" style="rpc" />
+			<input>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="make_payment_custinfo">
+			<soap:operation
+				soapAction="https://www.neosurf.info/soap/#make_payment_custinfo"
+				style="rpc" />
+			<input>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="money_transfer">
+			<soap:operation
+				soapAction="https://www.neosurf.info/soap/#money_transfer"
+				style="rpc" />
+			<input>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="neopay_burn_code">
+			<soap:operation
+				soapAction="https://www.neosurf.info/soap/#neopay_burn_code"
+				style="rpc" />
+			<input>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="neopay_check_code">
+			<soap:operation
+				soapAction="https://www.neosurf.info/soap/#neopay_check_code"
+				style="rpc" />
+			<input>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="ticket_check_credit">
+			<soap:operation
+				soapAction="https://www.neosurf.info/soap/#ticket_check_credit"
+				style="rpc" />
+			<input>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="transactionFinalAmount">
+			<soap:operation
+				soapAction="https://www.neosurf.info/soap/#transactionFinalAmount"
+				style="rpc" />
+			<input>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="transactionCreditCardWithout3D">
+			<soap:operation
+				soapAction="https://www.neosurf.info/soap/#transactionCreditCardWithout3D"
+				style="rpc" />
+			<input>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="transactionGateway">
+			<soap:operation
+				soapAction="https://www.neosurf.info/soap/#transactionGateway"
+				style="rpc" />
+			<input>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="transactionGatewayCallback">
+			<soap:operation
+				soapAction="https://www.neosurf.info/soap/#transactionGatewayCallback"
+				style="rpc" />
+			<input>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="transactionGatewayCheckCallback">
+			<soap:operation
+				soapAction="https://www.neosurf.info/soap/#transactionGatewayCheckCallback"
+				style="rpc" />
+			<input>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="transactionNeosurfCreditEmail">
+			<soap:operation
+				soapAction="https://www.neosurf.info/soap/#transactionNeosurfCreditEmail"
+				style="rpc" />
+			<input>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="transactionNeosurfPin">
+			<soap:operation
+				soapAction="https://www.neosurf.info/soap/#transactionNeosurfPin"
+				style="rpc" />
+			<input>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="transactionNeosurfLogin">
+			<soap:operation
+				soapAction="https://www.neosurf.info/soap/#transactionNeosurfLogin"
+				style="rpc" />
+			<input>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="transactionNeosurfReverse">
+			<soap:operation
+				soapAction="https://www.neosurf.info/soap/#transactionNeosurfReverse"
+				style="rpc" />
+			<input>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="transactionQrcode">
+			<soap:operation
+				soapAction="https://www.neosurf.info/soap/#transactionQrcode"
+				style="rpc" />
+			<input>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="transactionCheckSignature">
+			<soap:operation
+				soapAction="https://www.neosurf.info/soap/#transactionCheckSignature"
+				style="rpc" />
+			<input>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="transactionInit">
+			<soap:operation
+				soapAction="https://www.neosurf.info/soap/#transactionInit"
+				style="rpc" />
+			<input>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="transactionKycCheck">
+			<soap:operation
+				soapAction="https://www.neosurf.info/soap/#transactionKycCheck"
+				style="rpc" />
+			<input>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="transactionCreditCardWith3D">
+			<soap:operation
+				soapAction="https://www.neosurf.info/soap/#transactionCreditCardWith3D"
+				style="rpc" />
+			<input>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="transactionGetDetails">
+			<soap:operation
+				soapAction="https://www.neosurf.info/soap/#transactionGetDetails"
+				style="rpc" />
+			<input>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="transactionNeosurfPinDeposit">
+			<soap:operation
+				soapAction="https://www.neosurf.info/soap/#transactionNeosurfPinDeposit"
+				style="rpc" />
+			<input>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="userCreateLight">
+			<soap:operation
+				soapAction="https://www.neosurf.info/soap/#userCreateLight"
+				style="rpc" />
+			<input>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="userResendConfirmationEmail">
+			<soap:operation
+				soapAction="https://www.neosurf.info/soap/#userResendConfirmationEmail"
+				style="rpc" />
+			<input>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="userCreate">
+			<soap:operation
+				soapAction="https://www.neosurf.info/soap/#userCreate" style="rpc" />
+			<input>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="userVerifyEmailInit">
+			<soap:operation
+				soapAction="https://www.neosurf.info/soap/#userVerifyEmailInit"
+				style="rpc" />
+			<input>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="userVerifyEmailVerifyCode">
+			<soap:operation
+				soapAction="https://www.neosurf.info/soap/#userVerifyEmailVerifyCode"
+				style="rpc" />
+			<input>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="userForgotPasswordInit">
+			<soap:operation
+				soapAction="https://www.neosurf.info/soap/#userForgotPasswordInit"
+				style="rpc" />
+			<input>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="userForgotPasswordVerifyCode">
+			<soap:operation
+				soapAction="https://www.neosurf.info/soap/#userForgotPasswordVerifyCode"
+				style="rpc" />
+			<input>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="userForgotPasswordReset">
+			<soap:operation
+				soapAction="https://www.neosurf.info/soap/#userForgotPasswordReset"
+				style="rpc" />
+			<input>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="userGetBalance">
+			<soap:operation
+				soapAction="https://www.neosurf.info/soap/#userGetBalance"
+				style="rpc" />
+			<input>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="userGetDetails">
+			<soap:operation
+				soapAction="https://www.neosurf.info/soap/#userGetDetails"
+				style="rpc" />
+			<input>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="userUpdatePersonalInfo">
+			<soap:operation
+				soapAction="https://www.neosurf.info/soap/#userUpdatePersonalInfo"
+				style="rpc" />
+			<input>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="userLogin">
+			<soap:operation
+				soapAction="https://www.neosurf.info/soap/#userLogin" style="rpc" />
+			<input>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="userLogout">
+			<soap:operation
+				soapAction="https://www.neosurf.info/soap/#userLogout" style="rpc" />
+			<input>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="userUploadDocument">
+			<soap:operation
+				soapAction="https://www.neosurf.info/soap/#userUploadDocument"
+				style="rpc" />
+			<input>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="userHistory">
+			<soap:operation
+				soapAction="https://www.neosurf.info/soap/#userHistory" style="rpc" />
+			<input>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="userGetDepositMethods">
+			<soap:operation
+				soapAction="https://www.neosurf.info/soap/#userGetDepositMethods"
+				style="rpc" />
+			<input>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="usersGetLimits">
+			<soap:operation
+				soapAction="https://www.neosurf.info/soap/#usersGetLimits"
+				style="rpc" />
+			<input>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="userGetLimits">
+			<soap:operation
+				soapAction="https://www.neosurf.info/soap/#userGetLimits"
+				style="rpc" />
+			<input>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="voucherLogin">
+			<soap:operation
+				soapAction="https://www.neosurf.info/soap/#voucherLogin" style="rpc" />
+			<input>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="voucherLogout">
+			<soap:operation
+				soapAction="https://www.neosurf.info/soap/#voucherLogout"
+				style="rpc" />
+			<input>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="voucherGetBalance">
+			<soap:operation
+				soapAction="https://www.neosurf.info/soap/#voucherGetBalance"
+				style="rpc" />
+			<input>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="voucherGetHistory">
+			<soap:operation
+				soapAction="https://www.neosurf.info/soap/#voucherGetHistory"
+				style="rpc" />
+			<input>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="voucherGetDetails">
+			<soap:operation
+				soapAction="https://www.neosurf.info/soap/#voucherGetDetails"
+				style="rpc" />
+			<input>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="pincodeLogin">
+			<soap:operation
+				soapAction="https://www.neosurf.info/soap/#pincodeLogin" style="rpc" />
+			<input>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="storeLocator">
+			<soap:operation
+				soapAction="https://www.neosurf.info/soap/#storeLocator" style="rpc" />
+			<input>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+		<operation name="appGetAd">
+			<soap:operation
+				soapAction="https://www.neosurf.info/soap/#appGetAd" style="rpc" />
+			<input>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</input>
+			<output>
+				<soap:body use="encoded"
+					namespace="https://www.neosurf.info/soap/"
+					encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+			</output>
+		</operation>
+	</binding>
+	<service name="Neosurf Web Services">
+		<port name="Neosurf Web ServicesPort"
+			binding="tns:Neosurf Web ServicesBinding">
+			<soap:address
+				location="https://www.neosurf.info:443/soap/index.php" />
+		</port>
+	</service>
+</definitions>

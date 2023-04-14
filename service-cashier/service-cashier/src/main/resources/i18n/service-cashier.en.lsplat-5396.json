@@ -1,0 +1,13 @@
+{
+  "SERVICE-CASHIER": {
+    "AUTOWITHDRAWALS": {
+      "RULESETS": {
+        "RULE": {
+          "FIELD": {
+            "LT_DEPOSIT_AMOUNT_IN_CENTS": "Lifetime Deposit Amount (in cents)"
+          }
+        }
+      }
+    }
+  }
+}

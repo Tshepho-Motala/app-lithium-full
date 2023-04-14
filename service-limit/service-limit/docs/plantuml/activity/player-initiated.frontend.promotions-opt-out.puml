@@ -1,0 +1,48 @@
+.FE PLayer toggles Promotions OptOut flag ON
+[plantuml]
+----
+@startuml
+'https://plantuml.com/activity-diagram-beta
+
+start
+:login;
+note right
+* On login, all restrictions are being returned with the compsAllowed,
+      compsSystemPlaced and compsErrorMessage, compsRestrictionName
+** Access.compsSystemPlaced = true - INTERVENTION_COMPS_BLOCK or UNDERAGE_COMPS_BLOCK restriction has been placed on player account
+** Access.compsSystemPlaced = false - PLAYER_COMPS_OPTOUT restriction has been placed on player account
+** Access.compsRestrictionName = INTERVENTION_COMPS_BLOCK, UNDERAGE_COMPS_BLOCK or PLAYER_COMPS_OPTOUT
+*** This may be used to indicate what kind of complementary block has been placed on a player account
+end note
+if (compsAllowed=true) then (true)
+    if (compsSystemPlaced=true) then (true)
+        :Disable toggling promotions optOut flag;
+        note left
+        * FE needs to disable the Promotions OptOut
+          flag when a system placed restriction exist
+          on the player
+        end note
+        stop
+    else (false)
+    endif
+else (false)
+   :Toggle promotions OptOut ON;
+   note right
+      * promotionsOptOut=true
+      * PLAYER_COMPS_OPTOUT restriction gets added on player
+      ** compsAllowed=false
+      ** compsSystemPlaced=false
+   end note
+endif
+:Toggle promotions OptOut OFF;
+note right
+   * promotionsOptOut=false
+   * PLAYER_COMPS_OPTOUT restriction gets removed from player
+   ** compsAllowed=true
+   ** compsSystemPlaced=false
+end note
+
+stop
+
+@enduml
+----

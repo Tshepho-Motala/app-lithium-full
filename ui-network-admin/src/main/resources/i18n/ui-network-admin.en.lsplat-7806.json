@@ -1,0 +1,13 @@
+{
+  "UI_NETWORK_ADMIN" : {
+    "CMS" : {
+      "LAYOUT_SELECTOR" : {
+        "OUTPUT" : {
+          "WIDGET_MANAGEMENT" : {
+            "TITLE" : "Widget Management"
+          }
+        }
+      }
+    }
+  }
+}

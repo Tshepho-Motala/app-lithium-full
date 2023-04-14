@@ -1,0 +1,72 @@
+.Sphonic KYC Flow
+[plantuml]
+----
+
+@startuml
+header Sphonic KYC Flow
+footer Page %page% of %lastpage%
+skinparam sequenceMessageAlign center
+participant Client
+box "Lithium" #LightBlue
+participant UserService
+participant KYCAccessProvider
+participant DB
+participant KYCService
+end box
+participant Sphonic
+autonumber
+
+ ==Authentication Job==
+ loop infinite each 1 minute
+        KYCAccessProvider -> DB: get stored authentication tokens
+        activate KYCAccessProvider
+        activate DB
+        DB --> KYCAccessProvider: List tokens per domain, with expirationTime
+        deactivate DB
+        KYCAccessProvider -> DB: delete expired tokens
+        loop for each expired token
+             KYCAccessProvider -> Sphonic: authenticate(credentials)
+             activate Sphonic
+             Sphonic --> KYCAccessProvider: authenticate(token, expiresIn)
+             deactivate Sphonic
+             KYCAccessProvider -> DB: save authentication token (domain, token, now + expiresIn - expirationDelay)
+             deactivate KYCAccessProvider
+        end
+
+end
+ ==KYC Verification==
+Client -> UserService  : register(firstName, LastName, dob, address)
+activate UserService
+UserService-> UserService: register User
+UserService -> KYCAccessProvider : post registration checkAuthorization(userGuid)
+activate KYCAccessProvider
+KYCAccessProvider -> DB: get access token by domain
+activate DB
+DB --> KYCAccessProvider: token
+deactivate
+KYCAccessProvider -> Sphonic: kyc workflow(token, firstName, lastName, DOB, address)
+activate Sphonic
+Sphonic --> KYCAccessProvider: kycResponse(finalResult(PASS/FAIL/REVIEW/ERROR), residencyMatch, dobMatch, vendorData)
+deactivate Sphonic
+alt#Gold #Pink finalResult=REVIEW/ERROR
+    KYCAccessProvider --> UserService: checkAuthorization(REVIEW/REJECT)
+else #Pink finalResult=FAIL
+    alt#Gold partial match is enabled
+    KYCAccessProvider -> UserService: update user status by residencyMatch, dobMatch
+
+    end
+    KYCAccessProvider --> UserService: checkAuthorization(REJECT)
+else #LightGreen finalResult=PASS
+    KYCAccessProvider -> UserService: update user status by residencyMatch, dobMatch
+    KYCAccessProvider --> UserService: checkAuthorization(ACCEPT)
+end
+note right
+    finalResult definition logic is configurable on Sphonic side per market
+    for NL dobMatch is always "none" and is not taken to account
+        (age verification should be done by doc upload only)
+    for UK both are counted
+end note
+KYCAccessProvider -> KYCService: sendVerificationResult(kycResponse(finalResult, residencyMatch, dobMatch, vendorData))
+deactivate KYCAccessProvider
+deactivate UserService
+@enduml

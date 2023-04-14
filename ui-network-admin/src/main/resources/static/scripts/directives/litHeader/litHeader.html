@@ -1,0 +1,9 @@
+<div>
+	<h2>{{ title | translate }}</h2>
+	<p style="padding-bottom: 5px; margin-bottom: 15px; border-bottom: 1px solid #ddd"><em>{{ description | translate }}</em></p>
+	<p><ng-transclude></ng-transclude></p>
+	<div ng-if="hideBreadcrumb == true">
+		<div ncy-breadcrumb />
+	</div>
+	<lithiumbar />
+</div>

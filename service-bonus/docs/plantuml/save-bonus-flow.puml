@@ -1,0 +1,35 @@
+.Save Bonus Flow
+[plantuml]
+----
+
+@startuml
+
+autonumber
+
+participant "LBO" as lbo
+participant "svc-bonus" as svcbonus
+
+==First Page==
+lbo -> svcbonus: service-bonus/bonus-create/create/bonus
+note right
+    When creating a bonus the first page in the wizard requests basic information
+    which populates primarily the bonus and initialises the bonus-revision.
+    Then the user is navigated to the bonus detail pages
+end note
+activate svcbonus
+svcbonus -> lbo: response
+deactivate svcbonus
+
+==Bonus Details==
+lbo -> svcbonus: service-bonus/bonus-create/bonus
+note right
+    After the user completes the full bonus detail related pages this service is
+    used to update the revision and insert the corresponding revision and reward
+    rules associated to the bonus.
+end note
+activate svcbonus
+svcbonus -> lbo: response
+deactivate svcbonus
+
+@enduml
+----

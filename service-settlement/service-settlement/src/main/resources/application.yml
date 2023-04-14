@@ -1,0 +1,21 @@
+server:
+  port: 9913
+  
+spring:
+  datasource:
+    url: jdbc:mysql://localhost/lithium_settlement
+    username: root
+    password: mysql
+  jpa:
+    show-sql: false
+    hibernate:
+      ddl-auto: validate
+        
+lithium:
+  services:
+    db:
+      load-test-data: true
+        
+logging:
+  level:
+    lithium.service.settlement: INFO

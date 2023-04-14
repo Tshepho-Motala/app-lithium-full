@@ -1,0 +1,12 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "DASHBOARD-BETA-V2": {
+      "TITLE": "Domain Dashboard (BETA v2)"
+    },
+    "PAGE": {
+      "TITLE": {
+        "DASHBOARD-BETA-V2": "Dashboard (BETA v2)"
+      }
+    }
+  }
+}

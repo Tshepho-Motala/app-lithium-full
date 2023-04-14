@@ -1,0 +1,19 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "PLAYER": {
+      "QUICK_ACTIONS": {
+          "VERIFY_BY_BANK_ACCOUNT": "Verify by Bank Account"
+      },
+      "VERIFY_BY_BANK_ACCOUNT": {
+        "TITLE": "Verify by Bank Account Number",
+        "ACCOUNT_NUMBER": "Bank Account Number",
+        "ACCOUNT_PLACEHOLDER": "Bank Account Number",
+        "ACCOUNT_DESCRIPTION": "Enter 10-digit NUBAN account number",
+        "BANK_CODE": "Bank",
+        "BANK_PLACEHOLDER": "drop-down list of supported banks",
+        "BANK_DESCRIPTION": "Select a bank institution the bank account belongs to",
+        "ERROR": "Failed to verify by Bank Account Number"
+      }
+    }
+  }
+}

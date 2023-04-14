@@ -1,0 +1,17 @@
+server.port: 9790
+
+ribbon:
+  ReadTimeout: 30000
+  ConnectTimeout: 30000
+
+lithium:
+  service:
+    cashier:
+      mock:
+        wumg:
+          paymentclicks:
+            api-user: 9844
+            api-password: Hsdf3234fsdfaf234ef23e2
+logging:
+  level:
+    lithium.service.cashier: INFO

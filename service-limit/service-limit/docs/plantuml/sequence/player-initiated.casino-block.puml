@@ -1,0 +1,46 @@
+.Player initiated Casino Block Casino-no-more
+[plantuml]
+----
+@startuml
+'https://plantuml.com/sequence-diagram
+
+actor "FE" as fe
+boundary "GW" as gw
+participant Lithium as li
+
+autonumber
+
+fe -> gw: Toggle casino-no-more flag
+activate gw
+    gw -> li: /service-limit/frontend/casino-no-more
+    activate li
+        li -> li: find user from player bearer token
+        alt user not found
+            li --> gw: Status 404 - Player not found
+        end
+        li -> li: checkAccess
+        alt access.isCasinoSystemPlaced=true
+            li --> gw: Status 403 Access Denied: Restricted from toggling casino-no-more flag, system placed casino-no-more restriction exist on player
+        else access.isCompsSystemPlaced=false
+            li -> li: Checks whether the player has a SystemRestriction.PLAYER_CASINO_BLOCK domain restriction set loaded on their account
+            alt SystemRestriction.PLAYER_CASINO_BLOCK exist on player account
+                alt DomainSetting.ALLOW_LIFTING_PLAYER_CASINO_BLOCK = true
+                    li -> li: LIFT SystemRestriction.PLAYER_CASINO_BLOCK
+                else DomainSetting.ALLOW_LIFTING_PLAYER_CASINO_BLOCK = false
+                    li --> gw: Status 403 Access Denied: Restricted from toggling casino-no-more flag, please contact customer support
+                end
+            else
+                alt access.isCasinoAllowed=false
+                    li --> gw: Status 409 Conflict: Player Casino block already enabled
+                else access.isCasinoAllowed=true
+                    li -> li: PLACE SystemRestriction.PLAYER_CASINO_BLOCK
+                end
+            end
+        end
+        li --> gw: Status 200 OK_SUCCESS
+    deactivate li
+    gw --> fe: Status 200 OK_SUCCESS
+deactivate gw
+
+@enduml
+----

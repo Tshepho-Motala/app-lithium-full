@@ -1,0 +1,50 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "ACTIVE_BONUSES" : {
+      "GLOBAL" : {
+        "FIELDS": {
+          "INSTANT_REWARD_FREESPINS": "Instant Reward Freespins"
+        }
+      }
+    },
+    "GAME" : {
+      "FIELDS" : {
+        "INSTANT_REWARD_FREESPIN_ENABLED" : {
+          "NAME" : "Instant Reward Freespin Enabled",
+          "DESCRIPTION" : "Is this game enabled for Instant Reward Freespins"
+        }
+      }
+    },
+    "BONUS" : {
+      "EDIT" : {
+        "BUTTON" : {
+          "INSTANT_REWARD_FREESPINS" : "Instant Reward Freespins"
+        },
+        "INSTANT_REWARD_NEW" : {
+          "INSTANT_REWARD_UNIT_VALUE" : "Unit Value in cents",
+          "INSTANT_REWARD_UNIT_VALUE_EXAMPLE" : "Description",
+          "INSTANT_REWARD_NUMBER_OF_UNITS" : "Number of Units ",
+          "INSTANT_REWARD_UNIT_VALUE_EXPLAIN" : "The unit value in cents ie). 10 would mean the reward is worth 10 cents",
+          "INSTANT_REWARD_NUMBER_OF_UNITS_EXAMPLE" : "Description",
+          "INSTANT_REWARD_NUMBER_OF_UNITS_EXPLAIN" : "The number of units associated with the Instant Reward"
+        },
+        "INSTANT_REWARD_FREESPINS" : {
+          "INSTANT_REWARD_UNIT_VALUE" : "Unit Value in cents",
+          "INSTANT_REWARD_UNIT_VALUE_EXAMPLE" : "Description",
+          "INSTANT_REWARD_NUMBER_OF_UNITS" : "Number of Units ",
+          "INSTANT_REWARD_UNIT_VALUE_EXPLAIN" : "The unit value in cents ie). 10 would mean the reward is worth 10 cents",
+          "INSTANT_REWARD_NUMBER_OF_UNITS_EXAMPLE" : "Description",
+          "INSTANT_REWARD_NUMBER_OF_UNITS_EXPLAIN" : "The number of units associated with the Instant Reward Freespin"
+        },
+        "TABS": {
+          "INSTANT_REWARD_FREESPINS" : "Instant Reward Freespins"
+        },
+        "INSTANT_REWARDS_FREESPINS" :{
+          "NOGAMES": "You have not chosen a game to be associated with the Instant Reward Freespin",
+          "NO_NUMBER_OF_UNITS": "You have not chosen the number of units to be associated with the Instant Reward Freespin",
+          "NO_UNIT_VALUE": "You have not chosen the unit value to be associated with the Instant Reward Freespin"
+        }
+      }
+    }
+  }
+}

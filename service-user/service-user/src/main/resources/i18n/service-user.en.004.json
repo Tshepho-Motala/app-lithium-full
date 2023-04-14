@@ -1,0 +1,8 @@
+{
+	"SERVICE_USER": {
+		"PASSWORDRESET": {
+			"INVALIDTOKEN": "Please enter the correct temporary code.",
+			"INVALIDDOB": "Please enter your date of birth correctly."
+		}
+    }
+}

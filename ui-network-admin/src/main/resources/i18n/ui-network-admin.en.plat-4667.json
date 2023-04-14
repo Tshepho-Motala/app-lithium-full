@@ -1,0 +1,12 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "SERVICE_CASHIER": {
+      "TRANSACTION": {
+        "STATUS": {
+          "PLAYER_CANCELLED": "PLAYER CANCELLED",
+          "AUTO_APPROVED_DELAYED": "AUTO APPROVED DELAYED"
+        }
+      }
+    }
+  }
+}

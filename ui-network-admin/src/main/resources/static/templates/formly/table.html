@@ -1,0 +1,15 @@
+<table id="{{id}}" class="table table-bordered table-hover dataTable" role="grid" use-boolean>
+<thead>
+<tr>
+	<th ng-repeat="th in to.thead">{{th}}</th>
+</tr>
+</thead>
+<tbody>
+<tr ng-repeat="row v-reset-row  in to.rows">
+	<td ng-show="key.indexOf('hide') !== 0" ng-repeat="(key, td) in row">{{td}}</td>
+</tr>
+<tr>
+<td colspan="2"><button-refresh ng-click="recompileAllTheThings=true">Recompile All Things!</button-refresh></td>
+</tr>
+</tbody>
+</table>

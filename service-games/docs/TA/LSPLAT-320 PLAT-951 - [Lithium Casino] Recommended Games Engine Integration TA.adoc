@@ -1,0 +1,244 @@
+= LSPLAT-320 - PLAT-951 ⁃ [Lithium Casino] Recommended Games Engine Integration
+Irwin Herridge <irwin.herridge@wonderlabz.com>
+1.0, June 10, 2022:: TA - LSPLAT-320 PLAT-951 ⁃ [Lithium Casino] Recommended Games Engine Integration
+:toc: left
+:toclevels: 4
+:toc-title: LSPLAT-320 PLAT-951
+:icons: font
+:url-quickref: https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/
+
+== Information
+=== Tickets
+* https://jira.livescore.com/browse/PLAT-951
+* https://playsafe.atlassian.net/browse/LSPLAT-320
+
+=== Dependencies
+* N/A
+
+=== MR
+* https://gitlab.com/playsafe/lithium/app-lithium-full/-/merge_requests/TBA
+* This MR contains the branch that should be used to complete this task!
+
+WARNING: You might need to install graphviz to render the component models on IntelliJ on plantUML if not viewed on GitLab- see https://playsafe.atlassian.net/wiki/spaces/LITHIUM/pages/1674936347/How+To+Setup+Lithium+Local+Development#Noteworthy-Extensions.1[IntelliJ: PlantUML diagramming tool]
+
+== Description (From Ticket)
+=== Business Need
+
+When a player visits a Casino, they are faced with choosing from a vast number of games to play. To make it easier for players to find the games they like and in order to provide a more personalized experience, a game recommendation engine can be integrated to the platform sending games through to the front end which can be populated in a specific game category within the casino lobby.
+
+The RGE has been built in house by Livescore and is available from the data team
+
+https://europe-west2-aiplatform.googleapis.com/v1/projects/1458136687/locations/europe-west2/endpoints/2399609360830431232:predict
+
+The documentation and process for querying this endpoint is exactly the same as for the Virgin Bet recommendation endpoint.
+
+https://cloud.google.com/vertex-ai/docs/reference/rest/v1/projects.locations.endpoints/predict
+
+(also see attached on ticket).
+
+Unlike Virgin Bet, the returned list of games will not be a list of integers (unique game ids). Instead, this returned list of games will use the Game Provider and the Game GUID to uniquely identify games.
+
+An example of an element of this list would be:
+
+    {
+       "gameProviderName": "service-casino-provider-roxor",
+       "gameGUID": "play-secrets-of-the-phoenix"
+    }
+
+== Architecture
+
+=== Overview
+
+=== Component Decomposition
+
+include::../plantuml/recommended-games-engine-component.puml[]
+
+include::../plantuml/recommended-games-engine-sequence.puml[]
+
+=== Technical
+
+. Create a new provider type called Games: `ProviderType.GAMES`
+* Remember to include service-domain in your affected modules, else it won't configure on LBO
+
+. Create a new module called service-games-provider-google-rge
+* You will need to create a provider wrapper endpoint that can be called from service-games as per the provided sequence diagram above which will allow us to get a list of recommended games via the Predict API as per https://cloud.google.com/vertex-ai/docs/reference/rest/v1/projects.locations.endpoints/predict
+** We will only be proxying the Predict endpoint mentioned above and only have a single table on the provider to store an access token that you will retrieve via a GoogleAuthenticationService, discussed in a later section.
+** You may also reference the `access_token_snippet.py` python script in _service-games\assests\LSPLAT-320\*_ to generate access token that you may then use to call the predict API as per the following curl. (_You may need to get python installed with pip its package manager to get it running locally_ but a java implementation is also provided for ease of implememtation)
+*** Request curl:
+
+        curl --location --request POST 'https://europe-west2-aiplatform.googleapis.com/v1/projects/1458136687/locations/europe-west2/endpoints/2399609360830431232:predict' \
+        --header 'Authorization: Bearer ya29.c.b0AXv0zTODGPdyJQnWB1EqMjgo6Ss5t4V8xwgQMzGhy9T00v9Ok0qSrbhQ8kfXOaseyAckbfU-myzF98ABC4VxgH71tnOgTLWMMy8S-y3AjzZdsaMQ4uTDjQWxi5bgZZreY1qvCconeq9L5SSOCQpCgxJFHGuklfG--ITPIuprIU9On_PwqAzXovVIZfU2Sqz4HPm6EBEycQsU6p_rq1Ls4eeJHFq1qYE........................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................' \
+        --header 'Content-Type: application/json' \
+        --data-raw '{
+            "instances": [
+                {
+                    "user_guid": "livescore_nl\1111"
+                }
+            ]
+        }'
+
+IMPORTANT: Please note that at the time of this writeup, the predict API accepted a user_id instead of a user_guid, please check with the Data Science team if the model has not changed and still uses the user_id instead of user_guid, as it needs to be aligned to user_guid instead.
+
+WARNING: The predict API may also be called for anonymous users; whereby we will pass a user guid = domainName/0 - This will ensure that we call the API with an unknown user; having the endpoint return a global list of recommended games.
+
+*** Response
+
+    {
+    "predictions": [
+        {
+            "user_id": 10,
+            "recommendations": [
+                {
+                    "gameGUID": "play-secrets-of-the-phoenix",
+                    "gameProviderName": "service-casino-provider-roxor"
+                },
+                {
+                    "gameGUID": "play-phoenix-megaways",
+                    "gameProviderName": "service-casino-provider-roxor"
+                },
+                {
+                    "gameProviderName": "service-casino-provider-roxor",
+                    "gameGUID": "play-phoenix-elements"
+                },
+                {
+                    "gameProviderName": "service-casino-provider-roxor",
+                    "gameGUID": "play-bonanza"
+                },
+                {
+                    "gameGUID": "11652",
+                    "gameProviderName": "service-casino-provider-iforium"
+                },
+                {
+                    "gameGUID": "play-mg-big-bonus",
+                    "gameProviderName": "service-casino-provider-roxor"
+                },
+                {
+                    "gameProviderName": "service-casino-provider-roxor",
+                    "gameGUID": "play-gold-cash-free-spins"
+                },
+                {
+                    "gameGUID": "play-9-pots-o-gold",
+                    "gameProviderName": "service-casino-provider-roxor"
+                },
+                {
+                    "gameProviderName": "service-casino-provider-roxor",
+                    "gameGUID": "play-hot-off-the-sevens"
+                },
+                {
+                    "gameProviderName": "service-casino-provider-slotapi",
+                    "gameGUID": "72001"
+                }
+            ]
+        }
+    ],
+    "deployedModelId": "2579682977181073408",
+    "model": "projects/1458136687/locations/europe-west2/models/4257977525818359808",
+    "modelDisplayName": "lsbuk-model-display-name-conf"
+}
+
+. Ensure that @TimeThisMethod is added onto the call to svc-games to get the recommended games list retrieved.
+** From APM we can see that the casino-cms lobby is being called around 55 times per minute over the last few days. View here: https://kibana.lithium-prod.ls-g.net/app/apm/services/svc-casino-cms/transactions/view?kuery=svc-casino-cms&rangeFrom=now-30d%2Fd&rangeTo=now&transactionName=FrontendLobbyController%23load&transactionType=request&latencyAggregationType=avg&traceId=e5854190dd2780d0044519bc30cd9c1e&transactionId=e0bed4fd9357f325[APM Link]
+image:../assets/LSPLAT-320/amp-frontend-lobby-controller-load.png[]
+
+. Authentication via the Google Cloud client libraries
+* We will need to build out a similar authentication mechanism as was done in regard to authenticating via Sphonic where we have a job that pre-authenticates to get a Bearer token from Google which will then later be used to call the Predict API using the Bearer token recevied from the authentication service that you will be building. See `SphonicAuthenticationService` as a reference implementation to base your GoogleAuthenticationSerivice on.
+
+include::../plantuml/recommended-games-engine-google-authentication-service-sequence.puml[]
+
+** Add the following dependencies to your new provider service pom.xml
+
+    <dependencyManagement>
+      <dependencies>
+        <dependency>
+          <groupId>com.google.cloud</groupId>
+          <artifactId>libraries-bom</artifactId>
+          <version>26.1.3</version>
+          <type>pom</type>
+          <scope>import</scope>
+        </dependency>
+      </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+        <groupId>com.google.cloud</groupId>
+        <artifactId>google-cloud-storage</artifactId>
+    </dependency>
+
+*** Also see https://cloud.google.com/storage/docs/reference/libraries for more info on Google Cloud Storage Libraries
+
+** We will be Using the Google Cloud Storage Libraries to get the access token, whereby we will be passing credentials using code instead of a JSON file that is picked up as environment variable (This is to allow us to configure each domain differently should we need to, instead of starting up with only one configuration)
+
+*** Your provider settings will need to have the following fields as a minimum as you will later see that we use an objectMapper to get a JSON string which we can then pass into the GoogleCredentials object as an InputStream.
+
+    private String type;
+    @JsonProperty("project_id")
+    private String projectId;
+    @JsonProperty("private_key_id")
+    private String privateKeyId;
+    @JsonProperty("private_key")
+    private String privateKey;
+    @JsonProperty("client_email")
+    private String clientEmail;
+    @JsonProperty("client_id")
+    private String clientId;
+    @JsonProperty("auth_uri")
+    private String authUri;
+    @JsonProperty("token_uri")
+    private String tokenUri;
+    @JsonProperty("auth_provider_x509_cert_url")
+    private String authProviderX509CertUrl;
+    @JsonProperty("client_x509_cert_url")
+    private String clientX509CertUrl;
+
+WARNING: You would also need to add the parameters used to build the predict API URL as per https://cloud.google.com/vertex-ai/docs/reference/rest/v1/projects.locations.endpoints/predict as provider settings (i.e. predictURL=europe-west2-aiplatform.googleapis.com, project=1458136687, location=europe-west2, endpoint=2399609360830431232)
+
+*** Using the Google Storage Libraries with your provider settings to get the access token and its expiration date, that is required by your authentication service to get access tokens pre-emptively (as per the sequence diagram provided above).
+
+[source,json]
+include::../assets/LSPLAT-320/casino-rec-gw-sa.json[]
+
+* Doing the following on your provider settings object should provide you with the JSON output as shown in the JSON code snippet above
+
+[source,java]
+    ObjectMapper mapper = new ObjectMapper();
+    String json =  mapper.writeValueAsString(providerSetting);
+
+* Now putting it all together
+
+[source,java]
+----
+/**
+ * Ref: https://cloud.google.com/docs/authentication/production#passing_code
+ * We will be mapping our Provider Settings to JSON as InputStream therefore having it configurable per domain,
+ *    as the Vertex AI models might sit under different service accounts
+ */
+ObjectMapper mapper = new ObjectMapper();
+String json =  mapper.writeValueAsString(providerSetting);
+GoogleCredentials credentials = GoogleCredentials.fromStream(new ByteArrayInputStream(json.getBytes()))
+    .createScoped(Lists.newArrayList("https://www.googleapis.com/auth/cloud-platform"));
+Storage storage = StorageOptions.newBuilder().setCredentials(credentials).build().getService();
+
+storage.get(providerSettings.getBucketName());
+
+String token = String.valueOf(credentials.getAccessToken().getTokenValue());
+String expirationDate = String.valueOf(credentials.getAccessToken().getExpirationTime());
+log.debug("Bearer " + token + " is expiring on " + expirationDate);
+----
+
+* Running the code snippet above, you should get the access token and expiration date as seen below:
+[source,bash]
+ Bearer ya29.c.b0AXv0zTOJQY4mim7WxNe3yvWp_Dcy_GF9cuT6bH6EH3l3y3hf8_b_yjZ12qPdQWtKmGCUsbQTEvlc5qCDp1dcNnMpBL50SdIaaiRO_YUhR9P3DDBIRoSK2XiEq_HFgN18GzAXEAl07qtMqQomE94OrGtiwFQTZ0SJjkhNiMp3EqxOhiyjw_poK9d6XOYZYZRm--rWCPCbXWDLx8amKtWC1Xyxw-oRz7A........................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................ is expiring on Mon Jun 13 09:20:55 SAST 2022
+
+* Using the above Bearer token, we are now able to call the Predict API as per the flow provided in the first sequence diagram of this document.
+
+=== v2 changes
+
+. As a result of some storage.bucket.list permissions issues experienced throughout all environments, a workaround to be implemented that will only reference a single bucket name, instead of trying to list all bucket names. This bucket is then used to retrieve an access token from the Google Cloud Storage libraries.
+* Add a new provider setting called `bucketName` to the provider settings config
+* Instead of iterating through all storage.bucket.list, find the bucket by name by using the configured provider setting instead. (See latest code snippet above )
+* There has also been a major bump in the com.google.cloud libraries (from 25.4.0 to 26.1.3). Please update the version on the rge provider pom.xml.
+
+Testing locally:
+
+image::../assets/LSPLAT-9616 PLAT-10746 storage.get.png[]

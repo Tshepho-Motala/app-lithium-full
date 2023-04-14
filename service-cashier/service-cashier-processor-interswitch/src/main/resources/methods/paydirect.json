@@ -1,0 +1,8 @@
+{
+  "name": "Interswitch PayDirect",
+  "code": "paydirect",
+  "image": {
+    "filename": "/methods/interswitch.png",
+    "filetype": "image/png"
+  }
+}

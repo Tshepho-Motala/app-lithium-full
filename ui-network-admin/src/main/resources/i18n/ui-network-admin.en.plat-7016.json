@@ -1,0 +1,15 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "MAIL": {
+      "TEMPLATES": {
+          "FIELDS": {
+            "POPUP_TITLE": "Changing the name of a template could cause current system functionality to stop working, are you sure you want to proceed?",
+            "MODAL_TITLE": "Modify Mail Template name",
+            "SAVE": "Yes",
+            "CANCEL": "No",
+            "CKEDITOR": "The template content editor is still in source mode. Changes will not persist. Please switch the mode of the template content editor."
+          }
+        }
+      }
+    }
+  }

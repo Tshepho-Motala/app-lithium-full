@@ -1,0 +1,29 @@
+// :host {
+//   display: block;
+//   position: absolute;
+//   font-size: 75%;
+//   bottom: -.5em;
+//   color: red;
+// }
+
+:host {
+  display: block;
+  position: absolute;
+  font-size: 75%;
+  top: 2.3em;
+  color: red;
+
+  &.mat-right {
+    right: 0;
+  }
+
+  [dir='rtl'] & {
+    right: 0;
+    left: auto;
+
+    &.mat-right {
+      right: auto;
+      left: 0;
+    }
+  }
+}

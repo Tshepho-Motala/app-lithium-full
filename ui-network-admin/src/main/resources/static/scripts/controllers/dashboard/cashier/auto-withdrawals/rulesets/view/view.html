@@ -1,0 +1,124 @@
+<div class="container-fluid position-relative">
+
+    <!-- Last page -->
+    <div>
+        <div class="card card-block" style="margin-bottom: 10px;" ng-init="">
+            <div class="d-flex justify-content-start">
+                <div class="p-2 mr-auto">
+                    <span class="title">{{'UI_NETWORK_ADMIN.CASHIER.AUTOWITHDRAWALS.RULESETS.VIEW.TITLE'|translate}}</span>
+                    <span class="description">({{controller.ruleset.id}} - {{controller.ruleset.name}})</span> <br/>
+                    <span class="label" ng-class="{'label-success': controller.ruleset.enabled === true, 'label-danger': controller.ruleset.enabled === false }">{{(controller.ruleset.enabled) ? 'ENABLED' : 'DISABLED'}}</span>
+                </div>
+            </div>
+        </div>
+        <br/>
+
+        <buttonbar>
+            <button-back ui-sref="^.list"></button-back>
+            <button-edit lit-if-permission="AUTOWITHDRAWALS_RULESETS_EDIT" lit-permission-domain="{{controller.ruleset.domain.name}}" ui-sref="dashboard.cashier.autowithdrawals.rulesets.edit({id: controller.ruleset.id})"></button-edit>
+            <div style="display: inline-block"  lit-if-permission="AUTOWITHDRAWALS_RULESETS_EDIT" lit-permission-domain="{{controller.ruleset.domain.name}}">
+                <div  id="vueMountCloneRuleset"></div>
+            </div>
+            <button-custom ng-if="controller.ruleset.enabled" lit-if-permission="AUTOWITHDRAWALS_RULESETS_EDIT" lit-permission-domain="{{controller.ruleset.domain.name}}" click-confirm="{{'UI_NETWORK_ADMIN.CASHIER.AUTOWITHDRAWALS.RULESET.PROCESS.CONFIRM'|translate}}"  click-confirmed="controller.processRuleset()" bclass="warning" icon="refresh" text="{{'UI_NETWORK_ADMIN.CASHIER.AUTOWITHDRAWALS.RULESET.PROCESS.NAME'|translate}}"></button-custom>
+
+            <small ng-if="controller.ruleset.enabled" lit-if-permission="AUTOWITHDRAWALS_RULESETS_EDIT" lit-permission-domain="{{controller.ruleset.domain.name}}" style="color: orange; font-weight: bold;">{{'UI_NETWORK_ADMIN.CASHIER.AUTOWITHDRAWALS.RULESET.PROCESS.DESC'|translate}}</small>
+        </buttonbar>
+        <br/><br/>
+        <div class="row v-reset-row ">
+            <div class="col-xs-12">
+                <div class="card card-block">
+                    <div class="well-clear">
+                        <div class="col-xs-12 table-responsive">
+                            <table class="table table-hover nowrap" cellspacing="0" width="100%">
+                                <tbody>
+                                <tr>
+                                    <th style="width: 25%;">{{'UI_NETWORK_ADMIN.CASHIER.AUTOWITHDRAWALS.RULESETS.FIELDS.NAME.NAME'|translate}}</th>
+                                    <td>{{controller.ruleset.name}}</td>
+                                </tr><tr>
+                                    <th>{{'UI_NETWORK_ADMIN.CASHIER.AUTOWITHDRAWALS.RULESETS.FIELDS.DOMAIN.NAME'|translate}}</th>
+                                    <td>{{controller.ruleset.domain.name}}</td>
+                                </tr><tr>
+                                    <th>{{'UI_NETWORK_ADMIN.CASHIER.AUTOWITHDRAWALS.RULESETS.FIELDS.ENABLED.NAME'|translate}}</th>
+                                    <td>{{controller.ruleset.enabled}}</td>
+                                </tr><tr>
+                                    <th>{{'UI_NETWORK_ADMIN.CASHIER.AUTOWITHDRAWALS.RULESETS.FIELDS.LASTUPDATED.NAME'|translate}}</th>
+                                    <td>{{controller.ruleset.lastUpdated|datetimedefault}}</td>
+                                </tr><tr>
+                                    <th>{{'UI_NETWORK_ADMIN.CASHIER.AUTOWITHDRAWALS.RULESETS.FIELDS.LASTUPDATEDBY.NAME'|translate}}</th>
+                                    <td>{{controller.ruleset.lastUpdatedBy}}</td>
+                                </tr></tr>
+                                <th>{{'UI_NETWORK_ADMIN.CASHIER.AUTOWITHDRAWALS.RULESETS.FIELDS.DELAYED_START.NAME'|translate}}</th>
+                                <td>{{controller.ruleset.delayedStart}}</td>
+                                </tr><tr ng-if="controller.ruleset.delayedStart === true">
+                                    <th>{{'UI_NETWORK_ADMIN.CASHIER.AUTOWITHDRAWALS.RULESETS.FIELDS.DELAY.NAME'|translate}}</th>
+                                    <td>{{controller.ruleset.delay}}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="well-clear">
+                        <div ng-if="controller.ruleset.rules.length > 0" class="col-xs-12 table-responsive">
+                            <table class="table table-hover table-striped nowrap" cellspacing="0" width="100%">
+                                <thead>
+                                <tr>
+                                    <th>{{'UI_NETWORK_ADMIN.CASHIER.AUTOWITHDRAWALS.RULESETS.RULE.FIELDS.FIELD.NAME'|translate}}</th>
+                                    <th>{{'UI_NETWORK_ADMIN.CASHIER.AUTOWITHDRAWALS.RULESETS.RULE.FIELDS.OPERATOR.NAME'|translate}}</th>
+                                    <th>{{'UI_NETWORK_ADMIN.CASHIER.AUTOWITHDRAWALS.RULESETS.RULE.FIELDS.VALUE.NAME'|translate}}</th>
+                                    <th>{{'UI_NETWORK_ADMIN.CASHIER.AUTOWITHDRAWALS.RULESETS.RULE.FIELDS.ENABLED.NAME'|translate}}</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr ng-repeat="rule in controller.ruleset.rules track by $index">
+                                    <td style="width: 25%;">{{controller.getFieldName(rule.field)}}</td>
+                                    <td style="width: 25%;">{{controller.getOperatorName(rule)}}</td>
+                                    <td style="width: 25%;">{{controller.getValue(rule)}}</td>
+                                    <td style="width: 25%;"><span class="label" ng-class="{'label-success': rule.enabled === true, 'label-danger': rule.enabled === false }">{{(rule.enabled) ? 'ENABLED' : 'DISABLED'}}</span></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div ng-if="controller.ruleset.rules.length === 0">
+                            <div class="col-xs-12">
+                                <b>{{'UI_NETWORK_ADMIN.CASHIER.AUTOWITHDRAWALS.RULESETS.NORULESSETUPYET'|translate}}</b>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br/>
+        <div class="row v-reset-row ">
+            <div class="col-xs-12">
+                <changelog options="controller.changelogs"></changelog>
+            </div>
+        </div>
+        <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <span class="modal-title" >{{'UI_NETWORK_ADMIN.CASHIER.AUTOWITHDRAWALS.RULESET.PROCESS.CLONE_TITLE'|translate}}</span>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="btn-group" uib-dropdown>
+                            <button id="dropdown-domain" type="button" class="btn btn-default" uib-dropdown-toggle>
+                                {{ controller.selectedDomain }}{{controller.defaultSelectedDomain}}
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-right px-2 pb-2" uib-dropdown-menu role="menu" aria-labelledby="dropdown-type" placement="top-right">
+                                <li class="domain-select" role="menuitem" ng-repeat="domain in controller.domains | unique : 'name'">
+                                    <button  ng-click="controller.domainSelect(domain.name)">{{domain.name}}</button>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" ng-click="controller.cloneRuleset();" data-dismiss="modal">{{'UI_NETWORK_ADMIN.CASHIER.AUTOWITHDRAWALS.RULESET.PROCESS.CONFIRM'|translate}}</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

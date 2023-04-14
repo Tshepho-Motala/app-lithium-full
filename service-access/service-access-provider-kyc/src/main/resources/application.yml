@@ -1,0 +1,10 @@
+server:
+  port: 9603
+
+spring:
+ application:
+   name: service-access-provider-kyc
+   
+eureka:
+  instance:
+    appname: service-access-provider-kyc

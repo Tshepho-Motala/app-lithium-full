@@ -1,0 +1,233 @@
+= Endpoint Review
+:toc:
+
+NOTE: Additional notes at https://docs.google.com/document/d/1s7dOqQu5iPVv5I1OmTY6JCIGXwyP7Wj3VqSwCNuTNLI/edit?usp=sharing
+
+== Session Endpoints
+
+NOTE: Implemented in link:https://gitlab.com/playsafe/lithium/app-lithium-full/-/blob/develop/service-casino/service-casino-provider-iforium/src/main/java/lithium/service/casino/provider/iforium/controller/SessionController.java[lithium.service.casino.provider.iforium.controller.SessionController]
+
+IMPORTANT: IP whitelisting uses only the first IP in the `X-Forwarded-For` header
+
+WARNING: We should log the IPs but not return them in the error message
+
+=== /v1.0/session/redeemtoken
+
+[NOTE]
+--
+Session token wrapped as per link:miscellaneous-wraptoken.adoc[Wrap Session Token]
+
+* Auth credentials base64 encoded
+** Actual value hardcoded as application name
+--
+
+[IMPORTANT]
+--
+Optional fields not returned:
+
+* `OperatorUserName`
+* `OperatorDisplayName`
+* `City`
+* `DateOfBirth`
+* `Gender`
+--
+
+=== /v1.0/session/createtoken
+
+IMPORTANT: No attempt is made to register the user or to create a session. The Session is simply validated and wrapped.
+
+== Wallet Endpoints
+
+IMPORTANT: Mapping of internal Exceptions to Iforium Error codes is implemented in link:https://gitlab.com/playsafe/lithium/app-lithium-full/-/blob/develop/service-casino/service-casino-provider-iforium/src/main/java/lithium/service/casino/provider/iforium/handler/MainExceptionHandler.java[lithium.service.casino.provider.iforium.handler.MainExceptionHandler]
+
+[quote,Rupert]
+--
+Just a comment that this would be far more readable if the mappings were in a Map, and not just references to the enumeration from within each method.
+--
+
+=== /v1.0/balance
+
+NOTE: Implemented in link:https://gitlab.com/playsafe/lithium/app-lithium-full/-/blob/develop/service-casino/service-casino-provider-iforium/src/main/java/lithium/service/casino/provider/iforium/controller/BalanceController.java[lithium.service.casino.provider.iforium.controller.BalanceController]
+
+[IMPORTANT]
+--
+* Only the `CASH` balance is returned - Bonus Funds hardcoded to zero
+* Funds Priority hardcoded to `Unknown`
+* The scale is set on the balance retrieved from Lithium - `setScale(BALANCE_SCALE, RoundingMode.HALF_UP)` - why?
+* Exceptions are not explicitly declared, so the constrained set of supported return codes cannot be guaranteed or tested - to be fixed.
+--
+
+=== /v1.0/gameround/placebet
+
+NOTE: Implemented in link:https://gitlab.com/playsafe/lithium/app-lithium-full/-/blob/develop/service-casino/service-casino-provider-iforium/src/main/java/lithium/service/casino/provider/iforium/controller/GameRoundController.java[lithium.service.casino.provider.iforium.controller.GameRoundController]
+
+[IMPORTANT]
+--
+ * IP should be the first thing checked - once we have the domain. Same for all endpoints.
+ * Currency is not returned in the LoginEvent, which means we have to make a call to getBalance(). We should ask Lithium to fix this.
+ * getPlayerBalance() called twice in the same method - should fix this.
+ * getPlayerBalance() called _again_ within getGame() - should pass this in.
+ * Further calls to getPlayerBalance() within exception handlers
+ * We _do not__ generate a unique value for `BalanceAdjustmentComponent.internalTransactionId`
+ * Liquidity doesn't support `startRound`
+ * OperatorTransactionReference echoes GameRoundTransactionID
+ * Additional call to completeBetRound not made - setRoundFinished used instead
+--
+
+[WARNING]
+--
+ * Locale for multiBetV1() hardcoded to en_GB
+--
+
+[quote, rupert]
+--
+There is a lot of duplication in the buildBalanceAdjustmentComponentXXX methods - this could be significantly normalised...
+--
+
+=== /v1.0/gameround/awardwinnings
+
+NOTE: Implemented in link:https://gitlab.com/playsafe/lithium/app-lithium-full/-/blob/develop/service-casino/service-casino-provider-iforium/src/main/java/lithium/service/casino/provider/iforium/controller/GameRoundController.java[lithium.service.casino.provider.iforium.controller.GameRoundController]
+
+[IMPORTANT]
+--
+The UserGuid is checked only if the LoginEvent is not null. This seems pointless. Why check at all? If the LoginEvent is null (an out-of-session request) then the UserGuid will not be checked anyway and, presumably, we rely on the wallet to throw an exception:
+[source,java]
+----
+if (loginEvent != null) {
+GameRoundUtils.checkUserGuidValidity(awardWinningsRequest, loginEvent, AccountNotFoundException.class);
+}
+----
+--
+
+[WARNING]
+--
+ * `CASINO_LOSS` if end true and amount 0 ; `CASINO_WIN` otherwise
+ * Additional call to completeBetRound not made - setRoundFinished used instead
+--
+
+=== /v1.0/gameround/voidbet
+
+[IMPORTANT]
+--
+* `CASINO_VOID`
+* We don't appear to be checking for the game round existence, and I don't see a specific exception being thrown from multibetV1(). Are we returning -14 error?
+--
+
+=== /v1.0/gameround/rollbackbet
+
+=== /v1.0/gameround/end
+
+=== /v1.0/accounttransaction/credit
+
+=== /v1.0/alertwalletcallbacknotification
+
+== Game Service Controller
+
+NOTE: Implemented in `link:https://gitlab.com/playsafe/lithium/app-lithium-full/-/tree/develop/service-casino/service-casino-provider-iforium/src/main/java/lithium/service/casino/provider/iforium/controller/ServiceGameController.java[lithium.service.casino.provider.iforium.controller.ServiceGameController]`
+
+IMPORTANT: Message used within link:https://gitlab.com/playsafe/lithium/app-lithium-full/-/blob/develop/service-games/client-service-games/src/main/java/lithium/service/games/client/exceptions/Status501NotImplementedException.java[Status501NotImplementedException] is `Not yet implemented` - should be `Not Implemented`
+
+=== /games/{domainName}/startGame
+
+NOTE: Implemented in `link:https://gitlab.com/playsafe/lithium/app-lithium-full/-/tree/develop/service-casino/service-casino-provider-iforium/src/main/java/lithium/service/casino/provider/iforium/service/impl/ServiceGameServiceImpl.java[lithium.service.casino.provider.iforium.service.impl.ServiceGameServiceImpl]`
+
+[IMPORTANT]
+--
+* `@RequestParam(value = "os", required = false)` : Default and optional added in implementation - why?
+* `@RequestParam(value = "currency", required = false)` :  Default and optional added in implementation - why?
+* `platform` default of `desktop` - why?
+--
+
+WARNING: `devicechannel` hardcoded to `web`
+
+[NOTE]
+--
+* `StartGameUrl`, `CasinoId` and `LobbyUrl` retrieved from config
+* `DomainName` passed in request and `Domain` retrieved from `lithium.service.domain.client.CachingDomainClientService`
+* `Config` retrieved from `lithium.service.casino.provider.iforium.config.ProviderConfigService`
+--
+
+=== /games/{domainName}/demoGame
+
+NOTE: Implemented in `link:https://gitlab.com/playsafe/lithium/app-lithium-full/-/tree/develop/service-casino/service-casino-provider-iforium/src/main/java/lithium/service/casino/provider/iforium/service/impl/ServiceGameServiceImpl.java[lithium.service.casino.provider.iforium.service.impl.ServiceGameServiceImpl]`
+
+[IMPORTANT]
+--
+* `@RequestParam(value = "os", required = false)` : Default and optional added in implementation - why?
+* `@RequestParam(value = "lang")` - Default added in implementation - why?
+* Exceptions not declared - why?:
+** `Status429UserLoggedOutException`
+** `Status483PlayerCasinoNotAllowedException`
+** `Status500LimitInternalSystemClientException`
+** `Status502ProviderProcessingException`
+--
+
+WARNING: `devicechannel` hardcoded to `web`
+
+[NOTE]
+--
+* `StartGameUrl`, `CasinoId` and `LobbyUrl` retrieved from config
+* `DomainName` passed in request and `Domain` retrieved from `lithium.service.domain.client.CachingDomainClientService`
+* `Config` retrieved from `lithium.service.casino.provider.iforium.config.ProviderConfigService`
+--
+WARNING: `platform` hardocded to `desktop`
+
+=== /games/{domainName}/listGames
+
+NOTE: Implemented in `link:.https://gitlab.com/playsafe/lithium/app-lithium-full/-/tree/develop/service-casino/service-casino-provider-iforium/src/main/java/lithium/service/casino/provider/iforium/service/impl/ListGameServiceImpl[lithium.service.casino.provider.iforium.service.impl.ListGameServiceImpl]
+
+[IMPORTANT]
+--
+* Narrows throws declaration to `Status512ProviderNotConfiguredException` - why?
+* CSV copied to a temprary file - `list_games_iforium_casino_pr_XX.csv` - why?
+* guid == required
+* CSV `channel` mapped to `os` LABEL
+--
+
+[NOTE]
+--
+* `Config` retrieved from `lithium.service.casino.provider.iforium.config.ProviderConfigService`
+* `ListGameUrl` retrieved from `lithium.service.casino.provider.iforium.config.ProviderConfigService`
+* `localJackpotPool` hardcoded to `false`
+* `networkedJackpotPool` hardcoded to `false`
+--
+
+=== /games/{domainName}/listDomainGamesDT
+Returns an empty `link:https://gitlab.com/playsafe/lithium/app-lithium-full/-/blob/develop/library-common/src/main/java/lithium/service/client/datatable/DataTableResponse.java[lithium.service.client.datatable.DataTableResponse]`.
+
+=== /games/{domainName}/listDomainGamesReport
+Returns an empty `link:https://gitlab.com/playsafe/lithium/app-lithium-full/-/blob/develop/library-common/src/main/java/lithium/service/client/datatable/DataTableResponse.java[lithium.service.client.datatable.DataTableResponse]`.
+
+=== /games/{gameId}/unlock/toggle
+Returns a `501 - Not Implemented` response.
+
+IMPORTANT: Why does the implementation differ? This endpoint uses the standard response builder to deliver the 501 (which has the correct message).
+
+=== /games/{domainName}/listFrbGames
+Returns a `501 - Not Implemented` response (link:https://gitlab.com/playsafe/lithium/app-lithium-full/-/blob/develop/service-games/client-service-games/src/main/java/lithium/service/games/client/exceptions/Status501NotImplementedException.java[Status501NotImplementedException])
+
+=== /games/add
+Returns a `501 - Not Implemented` response (link:https://gitlab.com/playsafe/lithium/app-lithium-full/-/blob/develop/service-games/client-service-games/src/main/java/lithium/service/games/client/exceptions/Status501NotImplementedException.java[Status501NotImplementedException])
+
+=== /games/{gameId}/findById
+Returns a `501 - Not Implemented` response (link:https://gitlab.com/playsafe/lithium/app-lithium-full/-/blob/develop/service-games/client-service-games/src/main/java/lithium/service/games/client/exceptions/Status501NotImplementedException.java[Status501NotImplementedException])
+
+=== /games/{gameId}/editGraphic/{graphicFunction}
+Returns a `501 - Not Implemented` response (link:https://gitlab.com/playsafe/lithium/app-lithium-full/-/blob/develop/service-games/client-service-games/src/main/java/lithium/service/games/client/exceptions/Status501NotImplementedException.java[Status501NotImplementedException])
+
+=== /games/edit
+Returns a `501 - Not Implemented` response (link:https://gitlab.com/playsafe/lithium/app-lithium-full/-/blob/develop/service-games/client-service-games/src/main/java/lithium/service/games/client/exceptions/Status501NotImplementedException.java[Status501NotImplementedException])
+
+=== /games/{domainName}/listDomainGames
+Returns a `501 - Not Implemented` response (link:https://gitlab.com/playsafe/lithium/app-lithium-full/-/blob/develop/service-games/client-service-games/src/main/java/lithium/service/games/client/exceptions/Status501NotImplementedException.java[Status501NotImplementedException])
+
+=== /games/{domainName}/find/guid/{gameGuid}
+Returns a `501 - Not Implemented` response (link:https://gitlab.com/playsafe/lithium/app-lithium-full/-/blob/develop/service-games/client-service-games/src/main/java/lithium/service/games/client/exceptions/Status501NotImplementedException.java[Status501NotImplementedException])
+
+=== /games/{domainName}/find/guid/{gameGuid}/no-labels
+Returns a `501 - Not Implemented` response (link:https://gitlab.com/playsafe/lithium/app-lithium-full/-/blob/develop/service-games/client-service-games/src/main/java/lithium/service/games/client/exceptions/Status501NotImplementedException.java[Status501NotImplementedException])
+
+=== /games/{domainName}/isGameLockedForPlayer
+Returns a `501 - Not Implemented` response.
+
+IMPORTANT: Why does the implementation differ? This endpoint uses the standard response builder to deliver the 501 (which has the correct message).

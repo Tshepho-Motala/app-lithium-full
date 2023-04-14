@@ -1,0 +1,44 @@
+<mtex-layout-page mtexFixed>
+  <div *mtexLayoutToolbarSecondaryStart>
+    <h3>Campaigns</h3>
+  </div>
+
+  <div style="margin: 1em; display: flex; justify-content: center; flex-wrap: wrap">
+    <mtex-filter-archived style="margin: 1em" [(archived)]="archived" (archivedChange)="load()"></mtex-filter-archived>
+    <filter-brand  style="margin: 1em" [(brand)]="brand" (brandChange)="load()"></filter-brand>
+    <button style="margin: 1em" md-raised-button (click)="add()">Add Campaign</button>
+  </div>
+
+  <div style="margin: 1em; display: flex; justify-content: center">
+    <mtex-search style="flex: 1" (valueChanged)="search($event)"></mtex-search>
+  </div>
+
+  <div class="campaign-cards" [@fadeAnimation]='true'>
+
+    <loading-overlay [isLoading]="isLoading"></loading-overlay>
+
+    <div class="campaign-cards-group">
+      <div class="campaign-cards-group-title">Active Campaigns</div>
+      <div class="campaign-cards-group-count">{{ campaigns.length }} campaigns</div>
+    </div>
+
+    <md-card *ngFor="let campaign of campaigns" class="campaign-card" (click)="open(campaign.id)">
+      <img src="http://placehold.it/100x100">
+      <md-card-content>
+        <div class="campaign-card-title">{{ campaign.name }}</div>
+        <div class="campaign-card-subtitle">Created on {{ campaign.createdDate | date:'fullDate'}}</div>
+        <div class="campaign-card-subtitle"><b>{{ campaign.brand.displayName }}</b></div>
+      </md-card-content>
+    </md-card>
+
+    <mdex-pager (currentPageChanged)="load()"></mdex-pager>
+
+    <div *ngIf="campaigns.length == 0 && filtered">The search returned no results.</div>
+    <div *ngIf="campaigns.length == 0 && !filtered">
+      You have no campaigns yet. Use the add button bottom right to create your first campaign.
+    </div>
+  </div>
+
+</mtex-layout-page>
+
+<router-outlet></router-outlet>

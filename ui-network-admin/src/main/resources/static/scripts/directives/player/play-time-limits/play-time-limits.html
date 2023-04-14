@@ -1,0 +1,103 @@
+<div class="box box-info box-solid bs-loading-container" bs-loading-overlay
+     bs-loading-overlay-reference-id="{{controller.referenceId}}">
+
+    <!-- Header with Title -->
+    <div class="box-header with-border">
+        {{'UI_NETWORK_ADMIN.PLAY_TIME_LIMITS.TABLE.TITLE' | translate}}
+        <div ng-if="controller.arePlayTimeLimitSettingsActive || model.ptlUserData.currentConfigRevision !== undefined" class="box-tools pull-right">
+            <button ng-click="controller.refresh()" type="button" class="btn btn-box-tool">
+                <i class="fa fa-refresh"></i> refresh
+            </button>
+        </div>
+    </div>
+
+    <!-- Table -->
+    <div class="box-body table-responsive" style="padding: 4px;">
+        <table class="table table-hover table-striped nowrap"
+               ng-if="!controller.arePlayTimeLimitSettingsActive">
+            <tr>
+                <td>
+                    <span>{{'UI_NETWORK_ADMIN.PLAY_TIME_LIMITS.DISABLE.MESSAGE' | translate}}</span>
+                </td>
+            </tr>
+        </table>
+
+        <table class="table table-hover table-striped nowrap"
+               ng-if="controller.arePlayTimeLimitSettingsActive">
+            <!-- Header with Column Titles -->
+            <tr style="background-color: #d2d6de;">
+                <th>{{'UI_NETWORK_ADMIN.PLAY_TIME_LIMITS.TABLE.TYPE' | translate}}</th>
+                <th>{{'UI_NETWORK_ADMIN.PLAY_TIME_LIMITS.TABLE.PERIOD' | translate}}</th>
+                <th>{{'UI_NETWORK_ADMIN.PLAY_TIME_LIMITS.TABLE.LIMIT' | translate}}</th>
+                <th>{{'UI_NETWORK_ADMIN.PLAY_TIME_LIMITS.TABLE.REMAINING' | translate}}</th>
+                <th></th>
+            </tr>
+
+            <!-- Body with Column Values -->
+            <tr>
+                <!-- Type -->
+                <td>{{'UI_NETWORK_ADMIN.PLAY_TIME_LIMITS.TABLE.PLAY_TIME_LIMIT' | translate}}</td>
+
+                <!-- Granularity -->
+                <td ng-if="model.ptlUserData.currentConfigRevision.granularity === undefined">
+                    {{'UI_NETWORK_ADMIN.PLAY_TIME_LIMITS.TABLE.NOT_SET' | translate}}
+                </td>
+                <td ng-if="model.ptlUserData.currentConfigRevision.granularity !== undefined">
+                    {{translateGranularity(model.ptlUserData.currentConfigRevision.granularity.type)}}
+                </td>
+
+                <!-- Limit -->
+                <td ng-if="model.ptlUserData.currentConfigRevision.secondsAllocated === undefined">
+                    {{'UI_NETWORK_ADMIN.PLAY_TIME_LIMITS.TABLE.NOT_SET' | translate}}
+                </td>
+                <td ng-if="model.ptlUserData.currentConfigRevision.secondsAllocated !== undefined">
+                    {{secondsToHumanTime(model.ptlUserData.currentConfigRevision.secondsAllocated)}}
+                </td>
+
+                <!-- Limit Remaining -->
+                <td ng-if="model.ptlUserData.currentConfigRevision.secondsAllocated === undefined
+                || model.ptlUserData.secondsAccumulated === undefined">
+                    {{'UI_NETWORK_ADMIN.PLAY_TIME_LIMITS.TABLE.NOT_SET' | translate}}
+                </td>
+                <td ng-if="model.ptlUserData.currentConfigRevision.secondsAllocated !== undefined
+                && model.ptlUserData.secondsAccumulated !== undefined">
+                    <!--          {{secondsToHumanTime(model.ptlUserData.currentConfigRevision.secondsAllocated-->
+                    <!--            - model.ptlUserData.secondsAccumulated)-->
+                    <!--          }}      -->
+                    {{secondsToHumanTime(model.ptlUserData.currentConfigRevision.secondsAllocated
+                    - model.ptlUserData.secondsAccumulated)
+                    }}
+                </td>
+
+                <!-- Edit Play Time Limit -->
+                <td>
+                    <a style="cursor: pointer; display: inline;">
+            <span class="ng-scope">
+                <i lit-if-permission="PLAYER_PLAY_TIME_LIMIT_EDIT"
+                   ng-click="controller.editPlayTimeLimits()"
+                   class="fa fa-pencil-square-o"></i>
+            </span>
+                    </a>
+                </td>
+            </tr>
+
+            <tr id="ptlLabel" ng-if="model.ptlUserData.pendingConfigRevision !== undefined && model.ptlUserData.pendingConfigRevision !== null"
+                style="background-color: #FCF8E3;">
+                <td colspan="5">
+                    {{'UI_NETWORK_ADMIN.PLAY_TIME_LIMITS.TABLE.LIMIT_INCREASE_REQUESTED' | translate}}
+                    {{controller.applyFullDateTimeFormat(model.ptlUserData.pendingConfigRevision.createdDate)}}
+                    {{'UI_NETWORK_ADMIN.PLAY_TIME_LIMITS.TABLE.TO' | translate}}
+                    {{secondsToHumanTime(model.ptlUserData.pendingConfigRevision.secondsAllocated)}}<br>
+                    {{'UI_NETWORK_ADMIN.PLAY_TIME_LIMITS.TABLE.LIMIT_AFFECT' | translate}}
+                    {{controller.applyFullDateTimeFormat(model.ptlUserData.pendingConfigRevision.effectiveFrom)}}
+                    <a style="cursor: pointer; display: inline;">
+            <span>
+             <i ng-click="controller.removePendingConfigPlayTimeLimit(model.ptlUserData.id)" class="fa fa-trash"></i>
+            </span>
+                    </a>
+                </td>
+            </tr>
+
+        </table>
+    </div>
+</div>

@@ -1,0 +1,1 @@
+ALTER TABLE `report_run_results` ADD COLUMN `deposit_fee_cents` bigint(20) DEFAULT NULL;

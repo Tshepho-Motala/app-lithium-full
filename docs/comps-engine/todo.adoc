@@ -1,0 +1,221 @@
+= Future State
+Riaan Schoeman <riaan.schoeman@wonderlabz.com>
+1.0, November 17, 2021: Missions Framework
+:sectnums:
+:toc: left
+:toclevels: 4
+:toc-title: svc-bonus
+:icons: font
+:url-quickref: https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/
+
+.Menu
+[%collapsible]
+====
+link:readme.adoc[Back]
+====
+
+== General Information
+
+* link:glossary.adoc[Glossary] has been defined, and this is not the original, so this could be updated. Will confirm with Adam about final version.
+
+== LBO
+* Some menu changes have already been done with the Squads TA.
+
+== svc-bonus (future name svc-reward)
+* Rename to svc-rewards.
+* Some parts of this still live within svc-casino.
+** Needs to be extracted+removed from svc-casino.
+* option to choose which reward to take, currently all configured rewards will be awarded.
+* state management, e.g. bonus with multiple reward components, what happens when one reward component fails
+* Needs to be expanded to bring in provider concept :
+** These providers will communicate external to award free-spins on a specific provider.
+** Something like:
++
+[plantuml, format="png", id="rewards1"]
+----
+class b as "svc-reward"
+class prcrx as "svc-reward-pr-casino-roxor"
+class prcif as "svc-reward-pr-casino-iforium"
+class prsbsbt as "svc-reward-pr-sportbook-sbt"
+
+b <|--|> prcrx
+b <|--|> prcif
+b <|--|> prsbsbt
+----
+
+** When svc-promo sends a msg to award a certain reward(bonus), that reward would have been set up with specificc types of rewards. E.g. if it was to reward a freespin/instant reward on a roxor game, the flow would be:
++
+[plantuml, format="png", id="flows1"]
+----
+class p as "svc-promo"
+class r as "svc-reward"
+class prcrx as "svc-reward-pr-casino-roxor"
+class rgp as "Roxor RGP"
+
+note as N
+  Player has fulfilled the
+  requirements of the promo.
+  e.g. Bet $5 and get 5 freespins
+end note
+
+p .. N
+p -|> r
+r -|> prcrx
+prcrx -|> rgp
+----
+
+
+//include::../../service-bonus/service-bonus/docs/plantuml/activate-bonus-flow-proposed.puml[Proposed Implementation]
+
+== svc-promotions (future name svc-promo)
+* rename to svc-promo (To be completed in Squads TA)
+* already receiving events for most actions in system, will be expanded upon, and broken up to be more modular, and bring in the provider concept:
++
+[plantuml, format="png", id="promo1"]
+----
+class p as "svc-promo"
+class prc as "svc-promo-pr-casino"
+class c as "svc-casino/accounting"
+class prsb as "svc-promo-pr-sportsbook"
+class sb as "svc-sportsbook/accounting"
+class prcash as "svc-promo-pr-cashier"
+class ca as "svc-cashier/accounting"
+class pru as "svc-promo-pr-user"
+class u as "svc-user"
+class prxp as "svc-promo-pr-xp"
+class xp as "svc-xp"
+
+note as N
+  sportsbook currently part of svc-casino
+end note
+
+sb .. N
+
+p <|--|> prc
+prc <|--|> c
+p <|--|> prsb
+prsb <|--|> sb
+p <|--|> prcash
+prcash <|--|> ca
+p <|--|> pru
+pru <|--|> u
+p <|--|> prxp
+prxp <|--|> xp
+----
+
+** Providers will listen for specific events in lithium, and only process and send to svc-promo the relevant processed events. e.g.:
+*** `svc-promo-pr-casino` will process Completed Transaction events for CASINO_BET/CASINO_WIN and use this to send to svc-promo to process stats. If svc-promo-pr-casino is not started, no casino events will be processed. If it's never been started, the actions/types for this will not be available in the frontend to configure promotions.
+*** `svc-promo-pr-sportsbook` will currently process Completed Transaction events for SPORTS_BET/SPORTS_WIN, but after the import of sports data project, will process a newly created event that will contain only sports data, with more details about the bet. (More details link:sportsbook-data-retrieval.adoc[here])
+** Providers will register with svc-promo, which would enable certain categories/activities to be available to configure a promotion.
+*** Registration to include:
+**** Category: "sport" / "casino" / "virtual" / "user" / "xp" (Currently named `type`)
+**** Activity: "bet" / "wager" / "win" / "register" / "login" / "level" / "points" (Currently named `action`)
+
+**** Extra fields that can be configured for the category. E.g. for casino, this would be a games, for sports this would be league+sport+event+market+odds for most providers registering though, this would be empty.
+**** Registration Object:
++
+[source,java,linenums,indent=0]
+----
+@Data
+@Builder
+@ToString
+@EqualsAndHashCode
+@NoArgsConstructor
+@AllArgsConstructor
+public class PromoProviderRegistration implements Serializable {
+  private String url;
+  private String category;
+  @Singular
+  private String[] activities;
+  @Singular
+  private Map<String, String> extraFields;
+}
+----
+*** Example provider startups:
++
+[source,java,linenums,indent=0]
+----
+@Service
+@EnablePromoRegistrationStream
+public class ServicePromoProviderSportsbook extends LithiumServiceApplication {
+    @Value("${spring.application.name}")
+    private String applicationName;
+
+    @EventListener
+    public void startup(ApplicationStartedEvent e) throws Exception {
+      log.info("svc-promo-pr-sportsbook context started. Registering provider activities.");
+      super.startup(e);
+
+      serviceToStreamToSvcPromo.stream(
+        PromoProviderRegistration.builder()
+        .url(applicationName)
+        .category("sport")
+        .activity("bet")
+        .activity("win")
+        .extraField("league")
+        .extraField("sport")
+        .extraField("event")
+        .extraField("market")
+        .extraField("odds")
+        .build()
+      );
+
+    }
+}
+----
++
+[source,java,linenums,indent=0]
+----
+@Service
+@EnablePromoRegistrationStream
+public class ServicePromoProviderCasino extends LithiumServiceApplication {
+    @Value("${spring.application.name}")
+    private String applicationName;
+
+    @EventListener
+    public void startup(ApplicationStartedEvent e) throws Exception {
+      log.info("svc-promo-pr-casino context started. Registering provider activities.");
+      super.startup(e);
+
+      serviceToStreamToSvcPromo.stream(
+        PromoProviderRegistration.builder()
+        .url(applicationName)
+        .category("casino")
+        .activity("wager")
+        .activity("win")
+        .extraField("game")
+        .build()
+      );
+
+    }
+}
+----
+
+*** Providers should always implement `PromoProviderInterface`:
++
+[source,java,linenums,indent=0]
+----
+@RequestMapping("/system/promo/provider")
+public interface PromoProviderInterface {
+  @GetMapping("/details/{field}")
+  Optional<List<?>> fieldDetails(@PathVariable String field);
+}
+----
+
+** Operations will be predefined in svc-promo, and not needed on provider registration.
++
+Current available operations: "counter"/"accumulator"/"last value" i.e. if a sport/bet is received, should the operation be to keep a counter (5 bets) or accumulate (value from bet counted onto last stored value, $50 in total from 5x $10 bets) or last value (value of current bet is stored, overwriting last stored value.)
+
+== svc-leaderboard
+* needs to be able to use the new bonus/promo type.
+
+== svc-cashier
+* needs to use multi-adjust to take advantage of completed transaction events.
+
+== svc-casino-provider-sportsbook
+* Needs to receive details about sport
+** saved where/how?
+
+== Example Flows
+
+include::plantuml/example-flows.puml[example flows (redemption)]

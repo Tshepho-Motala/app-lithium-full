@@ -1,0 +1,119 @@
+<div class="container-fluid">
+	<lit-header
+		title="{{ 'UI_NETWORK_ADMIN.SIGNUPEVENTS.VIEW.TITLE' | translate }}"
+		description="{{ 'UI_NETWORK_ADMIN.SIGNUPEVENTS.VIEW.DESCRIPTION' | translate }}">
+	</lit-header>
+	
+	<button-bar>
+		<button-back ui-sref="dashboard.signupevents"></button-back>
+	</button-bar>
+	
+	<div class="row v-reset-row ">
+		<div class="col-xs-12">
+			<div class="well" style="padding: 40px;">
+				<div class="row v-reset-row ">
+					<div class="row v-reset-row ">
+						<div class="col-md-12">
+							<div class="col-md-7">
+								<div class="box box-default box-solid">
+									<div class="box-header with-border">
+										{{ 'UI_NETWORK_ADMIN.SIGNUPEVENTS.VIEW.BASIC.TITLE' | translate }}
+									</div>
+									<div class="box-body table-responsive">
+										<table class="table table-bordered">
+											<tr>
+												<th>{{ 'UI_NETWORK_ADMIN.SIGNUPEVENTS.DATE' | translate }}</th>
+												<td>{{ controller.model.date | datetimedefault }}</td>
+											</tr>
+											<tr>
+												<th>{{ 'UI_NETWORK_ADMIN.SIGNUPEVENTS.SUCCESSFUL' | translate }}</th>
+												<td>{{ controller.model.successful }}</td>
+											</tr>
+											<tr>
+												<th>{{ 'UI_NETWORK_ADMIN.SIGNUPEVENTS.COMMENT' | translate }}</th>
+												<td>{{ controller.model.comment }}</td>
+											</tr>
+										</table>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-5">
+								<div class="box box-info box-solid">
+									<div class="box-header with-border">
+										{{ 'UI_NETWORK_ADMIN.SIGNUPEVENTS.VIEW.GEOGRAPHICAL.TITLE' | translate }}
+									</div>
+									<div class="box-body table-responsive">
+										<table class="table table-bordered">
+											<tr>
+												<th>{{ 'UI_NETWORK_ADMIN.SIGNUPEVENTS.VIEW.GEOGRAPHICAL.COUNTRY' | translate }}</th>
+												<td>{{ controller.model.country }}</td>
+											</tr>
+											<tr>
+												<th>{{ 'UI_NETWORK_ADMIN.SIGNUPEVENTS.VIEW.GEOGRAPHICAL.STATE' | translate }}</th>
+												<td>{{ controller.model.state }}</td>
+											</tr>
+											<tr>
+												<th>{{ 'UI_NETWORK_ADMIN.SIGNUPEVENTS.VIEW.GEOGRAPHICAL.CITY' | translate }}</th>
+												<td>{{ controller.model.city }}</td>
+											</tr>
+										</table>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-7">
+								<div class="box box-success box-solid">
+									<div class="box-header with-border">
+										{{ 'UI_NETWORK_ADMIN.SIGNUPEVENTS.VIEW.USER.TITLE' | translate }}
+									</div>
+									<div class="box-body table-responsive">
+										<table class="table table-bordered">
+											<tr>
+												<th>{{ 'UI_NETWORK_ADMIN.SIGNUPEVENTS.USER.USERNAME' | translate }}</th>
+												<td>{{ controller.model.user.username }}</td>
+											</tr>
+											<tr>
+												<th>{{ 'UI_NETWORK_ADMIN.SIGNUPEVENTS.USER.FIRSTNAME' | translate }}</th>
+												<td>{{ controller.model.user.firstName }}</td>
+											</tr>
+											<tr>
+												<th>{{ 'UI_NETWORK_ADMIN.SIGNUPEVENTS.USER.LASTNAME' | translate }}</th>
+												<td>{{ (controller.model.user.lastNamePrefix ? controller.model.user.lastNamePrefix + ' ' : '') + controller.model.user.lastName ? controller.model.user.lastName : '' }}</td>
+											</tr>
+											<tr>
+												<th>{{ 'UI_NETWORK_ADMIN.SIGNUPEVENTS.USER.EMAIL' | translate }}</th>
+												<td>{{ controller.model.user.email }}</td>
+											</tr>
+										</table>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-5">
+								<div class="box box-info box-solid">
+									<div class="box-header with-border">
+										{{ 'UI_NETWORK_ADMIN.SIGNUPEVENTS.VIEW.SYSTEM.TITLE' | translate }}
+									</div>
+									<div class="box-body table-responsive">
+										<table class="table table-bordered">
+											<tr>
+												<th>{{ 'UI_NETWORK_ADMIN.SIGNUPEVENTS.IPADDRESS' | translate }}</th>
+												<td>{{ controller.model.ipAddress }}</td>
+											</tr>
+											<tr>
+												<th>{{ 'UI_NETWORK_ADMIN.SIGNUPEVENTS.VIEW.SYSTEM.OS' | translate }}</th>
+												<td>{{ controller.model.os }}</td>
+											</tr>
+											<tr>
+												<th>{{ 'UI_NETWORK_ADMIN.SIGNUPEVENTS.VIEW.SYSTEM.BROWSER' | translate }}</th>
+												<td>{{ controller.model.browser }}</td>
+											</tr>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

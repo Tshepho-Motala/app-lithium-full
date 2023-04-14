@@ -1,0 +1,60 @@
+{
+  "GLOBAL": {
+    "BONUS": {
+      "TYPE": {
+        "3": "Virtual Coin"
+      }
+    }
+  },
+  "UI_NETWORK_ADMIN": {
+    "BONUS": {
+      "CUSTOM_BONUS_TOKEN": {
+        "AMOUNT": "Custom bonus token amount"
+      },
+      "BONUSTOKEN": {
+        "ADD": {
+          "TITLE": "Add Bonus Token"
+        },
+        "CURRENCY": {
+          "NAME": "Currency",
+          "DESCRIPTION": "The currency of the bonus token to award the player"
+        },
+        "AMOUNT": {
+          "NAME": "Amount",
+          "DESCRIPTION": "The amount of the bonus token to award the player"
+        },
+        "MINIMUMODDS": {
+          "NAME": "Minimum Odds",
+          "DESCRIPTION": "The minimum odds the bonus token is valid for"
+        },
+        "TBL": {
+          "EMPTY": "No bonus tokens configured."
+        },
+        "BOX": {
+          "TITLE": "Bonus Tokens"
+        }
+      }
+    },
+    "PLAYER": {
+      "TAB" : {
+        "BONUSTOKEN": "Virtual Coin List"
+      },
+      "BONUS": {
+        "REGISTER":{
+          "SUCCESS": "Successfully registered for bonus"
+        },
+        "TYPE" : {
+          "BONUSTOKEN" : "Virtual Coin"
+        }
+      },
+      "BONUSTOKEN": {
+        "ID": "Id",
+        "AMOUNT": "Amount",
+        "CUSTOM_AMOUNT": "Custom Amount",
+        "MINIMUM_ODDS": "Minimum Odds",
+        "CREATION_DATE": "Creation Date",
+        "EXPIRATION_DATE": "Expiration Date"
+      }
+    }
+  }
+}

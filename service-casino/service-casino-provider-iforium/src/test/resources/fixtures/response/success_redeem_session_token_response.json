@@ -1,0 +1,9 @@
+{
+  "ErrorCode": 0,
+  "Result": {
+    "OperatorAccountID": "domain/accountId",
+    "CurrencyCode": "GBP",
+    "CountryCode": "GB",
+    "GatewaySessionToken": "72542ee1-eca8-4df9-93cb-76a5555e3da2"
+  }
+}

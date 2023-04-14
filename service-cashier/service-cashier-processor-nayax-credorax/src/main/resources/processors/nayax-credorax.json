@@ -1,0 +1,31 @@
+{
+  "name": "Nayax Credorax",
+  "code": "nayax-credorax",
+  "url": "service-cashier-processor-nayax-credorax",
+  "methodNames": ["nayax"],
+  "deposit": true,
+  "withdraw": false,
+  "fees": {
+    "flat": 0,
+    "percentage": 0,
+    "minimum": 0
+  },
+  "limits": {
+    "minAmount": 2500,
+    "maxAmount": 0,
+    "maxAmountDay": 0,
+    "maxAmountWeek": 0,
+    "maxAmountMonth": 0,
+    "maxTransactionsDay": 0,
+    "maxTransactionsWeek": 0,
+    "maxTransactionsMonth": 0
+  },
+  "properties": [
+    { 
+      "name": "hashPassword",
+      "defaultValue": "",
+      "type": "string",
+      "description": ""
+    }
+ ]
+}

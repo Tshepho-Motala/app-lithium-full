@@ -1,0 +1,1 @@
+ALTER TABLE `value` ADD COLUMN `date_added` DATETIME DEFAULT NULL;

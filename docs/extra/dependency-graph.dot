@@ -1,0 +1,129 @@
+digraph "app-lithium" {
+  node [shape="box",style="rounded",fontname="Helvetica",fontsize="10"]
+  edge [fontsize="9",fontname="Helvetica"]
+
+  // Node Definitions:
+  "org.springframework.boot:spring-boot-starter-parent:pom::compile"[label=<<font point-size="7">org.springframework.boot</font><br/>spring-boot-starter-parent>]
+  "lithium:common-parent:pom::compile"[label=<<font point-size="7">lithium</font><br/>common-parent>]
+  "org.springframework.boot:spring-boot-dependencies:pom::compile"[label=<<font point-size="7">org.springframework.boot</font><br/>spring-boot-dependencies>]
+  "lithium:common-parent-devops:pom::compile"[label=<<font point-size="7">lithium</font><br/>common-parent-devops>]
+  "lithium:common-parent-server:pom::compile"[label=<<font point-size="7">lithium</font><br/>common-parent-server>]
+  "lithium:common-parent-service:pom::compile"[label=<<font point-size="7">lithium</font><br/>common-parent-service>]
+  "lithium:common-parent-library:pom::compile"[label=<<font point-size="7">lithium</font><br/>common-parent-library>]
+  "lithium:common-parent-client-service:pom::compile"[label=<<font point-size="7">lithium</font><br/>common-parent-client-service>]
+  "lithium:common-parent-ui:pom::compile"[label=<<font point-size="7">lithium</font><br/>common-parent-ui>]
+  "lithium:client-service:jar::compile"[label=<<font point-size="7">lithium</font><br/>client-service>]
+  "lithium:devops-hystrixdashboard:jar::compile"[label=<<font point-size="7">lithium</font><br/>devops-hystrixdashboard>]
+  "lithium:devops-zipkin:jar::compile"[label=<<font point-size="7">lithium</font><br/>devops-zipkin>]
+  "lithium:gateway:jar::compile"[label=<<font point-size="7">lithium</font><br/>gateway>]
+  "lithium:library-client-service:jar::compile"[label=<<font point-size="7">lithium</font><br/>library-client-service>]
+  "lithium:library-common:jar::compile"[label=<<font point-size="7">lithium</font><br/>library-common>]
+  "lithium:library-service:jar::compile"[label=<<font point-size="7">lithium</font><br/>library-service>]
+  "lithium:server-config:jar::compile"[label=<<font point-size="7">lithium</font><br/>server-config>]
+  "lithium:server-eureka:jar::compile"[label=<<font point-size="7">lithium</font><br/>server-eureka>]
+  "lithium:server-oauth2:jar::compile"[label=<<font point-size="7">lithium</font><br/>server-oauth2>]
+  "lithium:client-service-accounting:jar::compile"[label=<<font point-size="7">lithium</font><br/>client-service-accounting>]
+  "lithium:service-accounting:jar::compile"[label=<<font point-size="7">lithium</font><br/>service-accounting>]
+  "lithium:service-accounting-provider-fake:jar::compile"[label=<<font point-size="7">lithium</font><br/>service-accounting-provider-fake>]
+  "lithium:service-accounting-provider-internal:jar::compile"[label=<<font point-size="7">lithium</font><br/>service-accounting-provider-internal>]
+  "lithium:client-service-casino:jar::compile"[label=<<font point-size="7">lithium</font><br/>client-service-casino>]
+  "lithium:service-casino:jar::compile"[label=<<font point-size="7">lithium</font><br/>service-casino>]
+  "lithium:service-casino-provider-betsoft:jar::compile"[label=<<font point-size="7">lithium</font><br/>service-casino-provider-betsoft>]
+  "lithium:service-casino-provider-bog:jar::compile"[label=<<font point-size="7">lithium</font><br/>service-casino-provider-bog>]
+  "lithium:service-casino-provider-fake:jar::compile"[label=<<font point-size="7">lithium</font><br/>service-casino-provider-fake>]
+  "lithium:client-service-domain:jar::compile"[label=<<font point-size="7">lithium</font><br/>client-service-domain>]
+  "lithium:service-domain:jar::compile"[label=<<font point-size="7">lithium</font><br/>service-domain>]
+  "lithium:client-service-mail:jar::compile"[label=<<font point-size="7">lithium</font><br/>client-service-mail>]
+  "lithium:service-mail:jar::compile"[label=<<font point-size="7">lithium</font><br/>service-mail>]
+  "lithium:service-translate:jar::compile"[label=<<font point-size="7">lithium</font><br/>service-translate>]
+  "lithium:client-service-translate:jar::compile"[label=<<font point-size="7">lithium</font><br/>client-service-translate>]
+  "lithium:client-service-user:jar::compile"[label=<<font point-size="7">lithium</font><br/>client-service-user>]
+  "lithium:service-user:jar::compile"[label=<<font point-size="7">lithium</font><br/>service-user>]
+  "lithium:service-user-provider-fake:jar::compile"[label=<<font point-size="7">lithium</font><br/>service-user-provider-fake>]
+  "lithium:service-user-provider-internal:jar::compile"[label=<<font point-size="7">lithium</font><br/>service-user-provider-internal>]
+  "lithium:service-user-provider-ldap:jar::compile"[label=<<font point-size="7">lithium</font><br/>service-user-provider-ldap>]
+  "lithium:service-user-provider-method1:jar::compile"[label=<<font point-size="7">lithium</font><br/>service-user-provider-method1>]
+  "lithium:service-user-provider-google:jar::compile"[label=<<font point-size="7">lithium</font><br/>service-user-provider-google>]
+  "lithium:ui-network-admin:jar::compile"[label=<<font point-size="7">lithium</font><br/>ui-network-admin>]
+  "lithium:ui-site-admin:jar::compile"[label=<<font point-size="7">lithium</font><br/>ui-site-admin>]
+
+  // Edge Definitions:
+  "org.springframework.boot:spring-boot-starter-parent:pom::compile" -> "lithium:common-parent:pom::compile"[style="dotted"]
+  "org.springframework.boot:spring-boot-dependencies:pom::compile" -> "org.springframework.boot:spring-boot-starter-parent:pom::compile"[style="dotted"]
+  "lithium:common-parent:pom::compile" -> "lithium:common-parent-devops:pom::compile"[style="dotted"]
+  "lithium:common-parent:pom::compile" -> "lithium:common-parent-server:pom::compile"[style="dotted"]
+  "lithium:common-parent:pom::compile" -> "lithium:common-parent-service:pom::compile"[style="dotted"]
+  "lithium:common-parent-library:pom::compile" -> "lithium:common-parent-client-service:pom::compile"[style="dotted"]
+  "lithium:common-parent:pom::compile" -> "lithium:common-parent-ui:pom::compile"[style="dotted"]
+  "lithium:common-parent-client-service:pom::compile" -> "lithium:client-service:jar::compile"[style="dotted"]
+  "lithium:common-parent-devops:pom::compile" -> "lithium:devops-hystrixdashboard:jar::compile"[style="dotted"]
+  "lithium:common-parent-devops:pom::compile" -> "lithium:devops-zipkin:jar::compile"[style="dotted"]
+  "org.springframework.boot:spring-boot-starter-parent:pom::compile" -> "lithium:gateway:jar::compile"[style="dotted"]
+  "lithium:common-parent-library:pom::compile" -> "lithium:library-client-service:jar::compile"[style="dotted"]
+  "lithium:common-parent-library:pom::compile" -> "lithium:library-common:jar::compile"[style="dotted"]
+  "lithium:common-parent-library:pom::compile" -> "lithium:library-service:jar::compile"[style="dotted"]
+  "lithium:common-parent-server:pom::compile" -> "lithium:server-config:jar::compile"[style="dotted"]
+  "lithium:common-parent-server:pom::compile" -> "lithium:server-eureka:jar::compile"[style="dotted"]
+  "lithium:common-parent-server:pom::compile" -> "lithium:server-oauth2:jar::compile"[style="dotted"]
+  "lithium:common-parent-client-service:pom::compile" -> "lithium:client-service-accounting:jar::compile"[style="dotted"]
+  "lithium:common-parent-service:pom::compile" -> "lithium:service-accounting:jar::compile"[style="dotted"]
+  "lithium:common-parent-service:pom::compile" -> "lithium:service-accounting-provider-fake:jar::compile"[style="dotted"]
+  "lithium:common-parent-service:pom::compile" -> "lithium:service-accounting-provider-internal:jar::compile"[style="dotted"]
+  "lithium:common-parent-client-service:pom::compile" -> "lithium:client-service-casino:jar::compile"[style="dotted"]
+  "lithium:common-parent-service:pom::compile" -> "lithium:service-casino:jar::compile"[style="dotted"]
+  "lithium:common-parent-service:pom::compile" -> "lithium:service-casino-provider-betsoft:jar::compile"[style="dotted"]
+  "lithium:common-parent-service:pom::compile" -> "lithium:service-casino-provider-bog:jar::compile"[style="dotted"]
+  "lithium:common-parent-service:pom::compile" -> "lithium:service-casino-provider-fake:jar::compile"[style="dotted"]
+  "lithium:common-parent-client-service:pom::compile" -> "lithium:client-service-domain:jar::compile"[style="dotted"]
+  "lithium:common-parent-service:pom::compile" -> "lithium:service-domain:jar::compile"[style="dotted"]
+  "lithium:common-parent-client-service:pom::compile" -> "lithium:client-service-mail:jar::compile"[style="dotted"]
+  "lithium:common-parent-service:pom::compile" -> "lithium:service-mail:jar::compile"[style="dotted"]
+  "lithium:common-parent-service:pom::compile" -> "lithium:service-translate:jar::compile"[style="dotted"]
+  "lithium:common-parent-client-service:pom::compile" -> "lithium:client-service-translate:jar::compile"[style="dotted"]
+  "lithium:common-parent-client-service:pom::compile" -> "lithium:client-service-user:jar::compile"[style="dotted"]
+  "lithium:common-parent-service:pom::compile" -> "lithium:service-user:jar::compile"[style="dotted"]
+  "lithium:common-parent-service:pom::compile" -> "lithium:service-user-provider-fake:jar::compile"[style="dotted"]
+  "lithium:common-parent-service:pom::compile" -> "lithium:service-user-provider-internal:jar::compile"[style="dotted"]
+  "lithium:common-parent-service:pom::compile" -> "lithium:service-user-provider-ldap:jar::compile"[style="dotted"]
+  "lithium:common-parent-service:pom::compile" -> "lithium:service-user-provider-method1:jar::compile"[style="dotted"]
+  "lithium:common-parent-service:pom::compile" -> "lithium:service-user-provider-google:jar::compile"[style="dotted"]
+  "lithium:common-parent-ui:pom::compile" -> "lithium:ui-network-admin:jar::compile"[style="dotted"]
+  "lithium:common-parent-ui:pom::compile" -> "lithium:ui-site-admin:jar::compile"[style="dotted"]
+  "lithium:common-parent-service:pom::compile" -> "lithium:library-service:jar::compile"
+  "lithium:library-service:jar::compile" -> "lithium:library-common:jar::compile"
+  "lithium:common-parent-client-service:pom::compile" -> "lithium:library-client-service:jar::compile"
+  "lithium:library-client-service:jar::compile" -> "lithium:library-common:jar::compile"
+  "lithium:client-service:jar::compile" -> "lithium:library-client-service:jar::compile"
+  "lithium:server-oauth2:jar::compile" -> "lithium:client-service-user:jar::compile"
+  "lithium:client-service-user:jar::compile" -> "lithium:library-client-service:jar::compile"
+  "lithium:client-service-accounting:jar::compile" -> "lithium:library-client-service:jar::compile"
+  "lithium:service-accounting:jar::compile" -> "lithium:library-service:jar::compile"
+  "lithium:service-accounting-provider-fake:jar::compile" -> "lithium:library-service:jar::compile"
+  "lithium:service-accounting-provider-internal:jar::compile" -> "lithium:library-service:jar::compile"
+  "lithium:client-service-casino:jar::compile" -> "lithium:library-client-service:jar::compile"
+  "lithium:service-casino:jar::compile" -> "lithium:library-service:jar::compile"
+  "lithium:service-casino-provider-betsoft:jar::compile" -> "lithium:library-service:jar::compile"
+  "lithium:service-casino-provider-bog:jar::compile" -> "lithium:library-service:jar::compile"
+  "lithium:service-casino-provider-fake:jar::compile" -> "lithium:library-service:jar::compile"
+  "lithium:client-service-domain:jar::compile" -> "lithium:library-client-service:jar::compile"
+  "lithium:service-domain:jar::compile" -> "lithium:library-service:jar::compile"
+  "lithium:client-service-mail:jar::compile" -> "lithium:library-client-service:jar::compile"
+  "lithium:service-mail:jar::compile" -> "lithium:library-service:jar::compile"
+  "lithium:service-translate:jar::compile" -> "lithium:library-service:jar::compile"
+  "lithium:client-service-translate:jar::compile" -> "lithium:library-client-service:jar::compile"
+  "lithium:service-user:jar::compile" -> "lithium:client-service-domain:jar::compile"
+  "lithium:service-user:jar::compile" -> "lithium:client-service-user:jar::compile"
+  "lithium:service-user:jar::compile" -> "lithium:library-service:jar::compile"
+  "lithium:service-user-provider-fake:jar::compile" -> "lithium:client-service-user:jar::compile"
+  "lithium:service-user-provider-fake:jar::compile" -> "lithium:library-service:jar::compile"
+  "lithium:service-user-provider-internal:jar::compile" -> "lithium:library-service:jar::compile"
+  "lithium:service-user-provider-ldap:jar::compile" -> "lithium:client-service-domain:jar::compile"
+  "lithium:service-user-provider-ldap:jar::compile" -> "lithium:client-service-user:jar::compile"
+  "lithium:service-user-provider-ldap:jar::compile" -> "lithium:library-service:jar::compile"
+  "lithium:service-user-provider-method1:jar::compile" -> "lithium:client-service-domain:jar::compile"
+  "lithium:service-user-provider-method1:jar::compile" -> "lithium:client-service-user:jar::compile"
+  "lithium:service-user-provider-method1:jar::compile" -> "lithium:library-service:jar::compile"
+  "lithium:service-user-provider-google:jar::compile" -> "lithium:client-service-domain:jar::compile"
+  "lithium:service-user-provider-google:jar::compile" -> "lithium:client-service-user:jar::compile"
+  "lithium:service-user-provider-google:jar::compile" -> "lithium:library-service:jar::compile"
+}

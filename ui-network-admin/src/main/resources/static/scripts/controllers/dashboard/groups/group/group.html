@@ -1,0 +1,23 @@
+<div class="row v-reset-row ">
+	<div class="col-md-10 col-lg-8 col-xl-6" style="margin-bottom: 10px">
+		<button-back ui-sref="^.list"></button-back>
+		<button-disable lit-if-permission="GROUP_ENABLE" lit-permission-domain="{{domainName}}" ng-if="((group.id != 1) && (group.enabled === true))" ng-click="controller.changeEnabled(group.id, false)"></button-disable>
+		<button-enable lit-if-permission="GROUP_ENABLE" lit-permission-domain="{{domainName}}" ng-if="((group.id != 1) && (group.enabled === false))" ng-click="controller.changeEnabled(group.id, true)"></button-enable>
+	</div>
+</div>
+
+<div class="row v-reset-row ">
+	<!-- <div class="col-md-10 col-lg-8 col-xl-6"> -->
+	<div class="col-xs-12">
+		<div class="nav-tabs-custom">
+			<ul class="nav nav-tabs">
+				<li role="presentation" ng-class="{ active: controller.tab == tab }" ng-repeat="tab in controller.tabs" lit-if-permission="{{tab.roles}}" lit-permission-domain="{{domainName}}">
+					<a ng-click="controller.setTab(tab)">{{ tab.title | translate }}</a>
+				</li>
+			</ul>
+			<div class="tab-content">
+				<div ui-view></div>
+			</div>
+		</div>
+	</div>
+</div>

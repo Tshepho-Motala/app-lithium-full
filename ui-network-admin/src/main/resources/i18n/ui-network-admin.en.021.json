@@ -1,0 +1,141 @@
+{
+	"UI_NETWORK_ADMIN": {
+		"ACCESSRULES": {
+			"DESCRIPTION": "Use the control's below to setup the {{accessRuleType}}. Make use of the test interface provided below to test your configuration for each scenario.",
+			"LIST": {
+				"LABEL": "Access Control List (ACL)",
+				"PLACEHOLDER": "Select ACL",
+				"DESCRIPTION": "The ACL to add to this rule"
+			},
+			"VIEW": {
+				"DISABLED": "(disabled)",
+				"BASICINFORMATION": "Basic Information",
+				"ACTION": {
+					"LABEL": "Default Action",
+					"ACCEPT": "Accept",
+					"REJECT": "Reject",
+					"DEFAULT": "Default"
+				},
+				"NOACLLISTSFOUND": "No access control lists found.",
+				"TYPE": {
+					"LABEL": "Type"
+				},
+				"ENABLED": {
+					"LABEL": "Enabled"
+				},
+				"ACCESSCONTROLLISTS": {
+					"TITLE": "Access Control Lists",
+					"BASIC": {
+						"NAME": "Name",
+						"ENABLED": "Enabled",
+						"ACTION": "Action",
+						"PRIORITY": "Priority"
+					}
+				},
+				"TESTCONFIGURATIONINTERFACE": {
+					"TITLE": "Test Configuration Interface",
+					"NOACLSADDED": "No access control lists configured yet.",
+					"DEFAULTACTIONSETTO": "Default action is set to {{defaultAction}}",
+					"RESULT": {
+						"TITLE": "Test Configuration Result",
+						"SUCCESSFUL": "Successful",
+						"MESSAGE": "Message"
+					},
+					"RAWRESULTS": {
+						"TITLE": "Raw Results",
+						"PRIORITY": "Priority",
+						"LISTNAME": "List Name",
+						"ACTION": "Action",
+						"FOUND": "Found",
+						"PASSED": "Passed",
+						"MESSAGE": "Message"
+					}
+				}
+			},
+			"ADD": {
+				"TYPE": {
+					"LABEL": "Type",
+					"DESCRIPTION": "The type of access rule you want to add to this domain",
+					"PLACEHOLDER": "Select Access Rule Type"
+				}
+			}
+		},
+		"ACCESSCONTROL": {
+			"ADD": {
+				"TITLE": "Create New Access Control List (ACL)"
+			},
+			"VIEW": {
+				"TITLE": "Access Control",
+				"DESCRIPTION": "Review the access list information, and if you have the access to do so, add or remove an entry to the list.",
+				"BASICINFORMATION": "Basic Information",
+				"TYPEINFORMATION": "Type Information",
+				"LISTVALUES": "List Values",
+				"NOVALUESFOUND": "No values found."
+			},
+			"LIST": {
+				"TITLE": "Access Control",
+				"DESCRIPTION": "List of Access Control List's"
+			},
+			"BASIC": {
+				"DOMAIN": {
+					"LABEL": "Domain",
+					"PLACEHOLDER": "Select ACL Domain",
+					"DESCRIPTION": "The domain for which this ACL will be created"
+				},
+				"NAME": {
+					"LABEL": "Name",
+					"PLACEHOLDER": "Eg. Login Countries",
+					"DESCRIPTION": "The name of this ACL"
+				},
+				"DESCRIPTION": {
+					"LABEL": "Description",
+					"PLACEHOLDER": "Description of ACL",
+					"DESCRIPTION": "A brief description of this ACL"
+				},
+				"TYPE": {
+					"LABEL": "Type",
+					"PLACEHOLDER": "Select ACL Type",
+					"DESCRIPTION": "The type of this ACL"
+				},
+				"ENABLED": {
+					"LABEL": "Enabled",
+					"DESCRIPTION": "Check this box to enable this ACL"
+				}
+			}
+		},
+		"SIGNUPEVENTS": {
+			"DATE": "Date",
+			"IPADDRESS": "IP Address",
+			"SUCCESSFUL": "Successful",
+			"COMMENT": "Comment",
+			"USER": {
+				"USERNAME": "Username",
+				"FIRSTNAME": "First Name",
+				"LASTNAME": "Last Name"
+			},
+			"VIEW": {
+				"BASIC": {
+					"TITLE": "Basic Information"
+				},
+				"GEOGRAPHICAL": {
+					"TITLE": "Geographical Information",
+					"COUNTRY": "Country",
+					"STATE": "State",
+					"CITY": "City"
+				},
+				"USER": {
+					"TITLE": "User Information"
+				},
+				"SYSTEM": {
+					"TITLE": "System Information",
+					"OS": "Operating System",
+					"BROWSER": "Browser"
+				}
+			},
+			"LIST": {
+				"TITLE": "Signup Events",
+				"DESCRIPTION": "A list of signup events for the network or domain"
+			}
+		}
+	}
+}

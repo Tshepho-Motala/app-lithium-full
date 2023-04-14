@@ -1,0 +1,13 @@
+{
+	"UI_NETWORK_ADMIN": {
+		"PLAYERS": {
+			"EMAILTEMPLATE": {
+				"PLACEHOLDER": {
+					"PLAYER": {
+						"OPTOUTEMAILURL": "Opt-Out Email URL"
+					}
+				}
+			}
+		}
+	}
+}

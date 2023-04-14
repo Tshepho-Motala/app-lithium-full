@@ -1,0 +1,10 @@
+{
+	"UI_NETWORK_ADMIN": {
+		"SIGNUPEVENTS": {
+			"VIEW": {
+				"TITLE": "Signup Events",
+				"DESCRIPTION": "A list of signup events for the network or domain"
+			}
+		}
+	}
+}

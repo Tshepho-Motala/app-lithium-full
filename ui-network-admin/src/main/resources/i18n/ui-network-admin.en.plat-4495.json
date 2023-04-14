@@ -1,0 +1,222 @@
+{
+    "UI_NETWORK_ADMIN": {
+      "PLAYER": {
+        "TAB": {
+          "MISSIONS": "Promotions"
+        }
+      },
+      "MISSIONS": {
+        "BOXES": {
+          "MISSIONDETAILS": "Promotion Details",
+          "MISSIONREWARD": "Promotion Reward",
+          "MISSIONCHALLENGES": "Promotion Challenges",
+          "CATEGORIES": "User Categories",
+          "CATEGORY_EXPLANATION": "When user categories are present, only players with the same categories in the WHITELIST type will be eligible to participate in the promotion where as players with the same tags in a BLACKLIST type will be not be able to take on the promotion. if no user categories are present then any player can take up the promotion"
+        },
+        "LIST": {
+          "TITLE": "Promotion",
+          "DESCRIPTION": "A searchable list of promotions"
+        },
+        "ADD": {
+          "TITLE": "Add a Promotion",
+          "DESCRIPTION": "Use the controls below to configure a promotion",
+          "SUCCESS": "The promotion was created successfully",
+          "ERROR": "The promotion could not be created"
+        },
+        "EDIT": {
+          "SUCCESS": "The promotion was updated successfully",
+          "ERROR": "The promotion could not be updated"
+        },
+        "MODIFIED": {
+          "EXPLAIN": "Promotion edit started by {{guid}}. Click modify to continue editing the promotion."
+        },
+        "ADD_CATEGORY": {
+          "TITLE": "Add Categories",
+          "DESCRIPTION": "Add the categories that you want to blacklist/whitelist",
+          "ERROR_MESSAGE": "Failed while fetching categories"
+        },
+        "REMOVE_CATEGORY": {
+          "TITLE": "Category Delete Confirmation",
+          "MESSAGE": "Are you sure about removing the category? this action cannot be reversed"
+        },
+        "FIELDS": {
+          "NOT_SET": "Not Set",
+          "CATEGORY": {
+            "CATEGORIES": {
+              "NAME": "Categories",
+              "PLACEHOLDER": "Choose",
+              "DESCRIPTION": "Player with these categories will be whitelisted/blacklist"
+            },
+            "TYPE": {
+              "NAME": "Type",
+              "PLACEHOLDER": "Choose an action",
+              "DESCRIPTION": "The action to be performed on the selected categories"
+            }
+          },
+          "CHALLENGE": {
+            "CHALLENGERULES": {
+              "RULE": {
+                "EXPLAIN": {
+                  "CASINO": {
+                    "SPIN": {
+                      "GAME": "Spin {{val}} times on {{gameName}}",
+                      "ANY": "Spin {{val}} times on any game",
+                      "COMPLETE_GAME": "Accumulated a total of {{spins}} spin(s) on {{gameName}}, challenge requirements fulfilled.",
+                      "COMPLETE_ANY": "Accumulated a total of {{spins}} spin(s), challenge requirements fulfilled.",
+                      "INCOMPLETE_GAME": "Accumulated a total of {{spins}} spin(s) on {{gameName}}, {{short_spins}} spin(s) from reaching the target",
+                      "INCOMPLETE_ANY": "Accumulated a total of {{amount}} spin(s), {{short_amount}} spin(s) from reaching the target"
+                    },
+                    "WIN": {
+                      "ANY": "Win {{val}} cents on any game",
+                      "GAME": "Win {{val}} cents on {{gameName}}",
+                      "COMPLETE_GAME": "Won a total of {{amount}} cents on {{gameName}}, challenge requirements fulfilled.",
+                      "COMPLETE_ANY": "Won a total of {{amount}} cents, challenge requirements fulfilled.",
+                      "INCOMPLETE_GAME": "Won a total of {{amount}} cents on {{gameName}}, {{short_amount}} cents from reaching the target",
+                      "INCOMPLETE_ANY": "Won a total of {{amount}} cents, {{short_amount}} cents from reaching the target"
+                    },
+                    "WAGER_ONCE_OFF": {
+                      "ANY": "Wager {{val}} cents on any game. This is the total size of a single wager",
+                      "GAME": "Wager {{val}} cents on {{gameName}}. This is the total size of a single wager",
+                      "COMPLETE_GAME": "A once-off wager amount of {{amount}} cents was received while playing {{gameName}}, challenge requirements fulfilled.",
+                      "COMPLETE_ANY": "A once-off wager amount of {{amount}} cents was received, challenge requirements fulfilled.",
+                      "INCOMPLETE_GAME": "A wager of {{amount}} cents was received on {{gameName}} while a once off amount of {{required_amount}} cents is required to fulfill the challenge requirements",
+                      "INCOMPLETE_ANY": "A wager of {{amount}} cents was received while a once off amount of {{required_amount}} cents is required to fulfill the challenge requirements"
+
+
+                    },
+                    "WAGER": {
+                      "ANY": "Wager {{val}} cents on any game",
+                      "GAME": "Wager {{val}} cents on {{gameName}}",
+                      "COMPLETE_GAME": "Accumulated {{amount}} cents across wagers while playing {{gameName}}, challenge requirements fulfilled.",
+                      "COMPLETE_ANY": "Accumulated {{amount}} cents across wagers, challenge requirements fulfilled.",
+                      "INCOMPLETE_GAME": "Accumulated {{amount}} cents across wagers while playing {{gameName}}, {{short_amount}} cents short from the target",
+                      "INCOMPLETE_ANY": "Accumulated {{amount}} cents across wagers, {{short_amount}} cents short from the target"
+                    }
+                  },
+                  "SPORTS": {
+                    "WIN": "Win {{val}} cents in sports",
+                    "WIN_COMPLETE": "Won a total of {{amount}} cents in sports, challenge requirements fulfilled.",
+                    "WIN_INCOMPLETE": "Won a total of {{amount}} cents in sports, {{short_amount}} cents from reaching the target",
+                    "BET_TOTAL": "Bet {{val}} cent(s). This is total bet size and must be made in one single bet",
+                    "BET_TOTAL_COMPLETE": "A once-off bet amount of {{amount}} was received, challenge requirements fulfilled.",
+                    "BET_TOTAL_INCOMPLETE": "A bet of {{amount}} cents was received while a once off amount of {{required_amount}} cents is required to fulfill the challenge requirements",
+                    "BET_ACCUMULATOR": "Bet {{val}} cent(s). This amount can be accumulated across bets",
+                    "BET_ACCUMULATOR_COMPLETE": "Accumulated {{amount}} cents across bets, challenge requirements fulfilled.",
+                    "BET_ACCUMULATOR_INCOMPLETE": "Accumulated {{amount}} cents across bets, {{short_amount}} cents short from the target"
+                  }
+                }
+              }
+            }
+          },
+          "DURATION": {
+            "DESCRIPTION": "Specify how long the promotion should be valid for after activation.",
+            "DETAIL": "If the value is 3 for a granularity of daily then the promotion can be completed over a period of 3 days after activation.",
+            "EXPLAIN": {
+              "1": "The promotion can be completed over a period of {{val}} year(s)",
+              "2": "The promotion can be completed over a period of {{val}} month(s)",
+              "3": "The promotion can be completed over a period of {{val}} day(s)",
+              "4": "The promotion can be completed over a period of {{val}} week(s)",
+              "5": "The promotion can be completed at anytime before the expiry date"
+            }
+          },
+          "GRANULARITY_OFFSET": {
+            "DESCRIPTION": "Specify when you want the promotion period to start.",
+            "EXPLAIN": "If the value is 1 and  granularity is weekly then the first day of the week is Monday, if the value is 15 and granularity is monthly then the first day of the month is the 15th."
+          },
+          "GRANULARITY_BREAK": {
+            "EXPLAIN": {
+              "FALSE": "The promotion can be taken immediately after the previous sequenced promotion has completed",
+              "TRUE": "The promotion can be taken after the break period has lapsed"
+            }
+          },
+          "SEQUENCENUMBER": {
+            "NAME": "Sequence Number",
+            "DESCRIPTION": "The promotion sequence number"
+          },
+          "STARTDATE": {
+            "NAME": "Start Date",
+            "DESCRIPTION": "Choose the promotion start date"
+          },
+          "ENDDATE": {
+            "NAME": "End Date",
+            "DESCRIPTION": "Choose the promotion end date"
+          },
+          "MISSIONREWARD": {
+            "NAME": "Promotion Reward",
+            "DESCRIPTION": "The overall mystery reward for accomplishing all challenges within this Promotion"
+          },
+          "NAME": {
+            "NAME": "Name",
+            "DESCRIPTION": "The name of the promotion"
+          },
+          "DESCRIPTION": {
+            "NAME": "Description",
+            "DESCRIPTION": "Provide a short description for the promotion"
+          },
+          "XPLEVEL": {
+            "NAME": "XP Level",
+            "DESCRIPTION": "The XP Level required to activate this promotion"
+          },
+          "DOMAIN": {
+            "NAME": "Domain",
+            "DESCRIPTION": "The domain that you are creating the promotion for",
+            "CHANGED": "Domain change detected. If set, promotion and challenge rewards, as well as challenge rules will be removed as they were set for the previous domain"
+          }
+        }
+      },
+      "PROMOTIONS": {
+        "FIELDS": {
+          "GRANULARITY_BREAK": {
+            "DESCRIPTION": "Indicate whether the should be a break between sequenced promotions"
+          }
+        }
+      },
+      "USERMISSIONS": {
+        "LIST": {
+          "TITLE": "User Promotions",
+          "DESCRIPTION": "A searchable list of active user promotions",
+          "LABELS": {
+            "CURRENT": "Current"
+          }
+        },
+        "FILTER": {
+          "FIELDS": {
+            "CURRENT": {
+              "NAME": "Current",
+              "DESCRIPTION": "Display only for current promotions"
+            },
+            "ACTIVE": {
+              "NAME": "Active",
+              "DESCRIPTION": "display only active"
+            }
+          }
+        },
+
+        "VIEW": {
+          "TITLE": "View User Promotion",
+          "DESCRIPTION": "Viewing user promotion"
+        },
+        "FIELDS": {
+          "MISSION": {
+            "NAME": "Promotion"
+          }
+        },
+        "BOXES": {
+          "USER": "User",
+          "MISSION": "Promotion",
+          "CHALLENGES": "Challenges"
+        }
+      },
+      "BONUS": {
+        "ACTIVATION_HISTORY": {
+          "COMPLETED": "Completed"
+        }
+      },
+      "PAGE": {
+        "TITLE": {
+          "MISSIONS": "Promotions",
+          "USER_MISSIONS": "User Promotions"
+        }
+      }
+    }
+}

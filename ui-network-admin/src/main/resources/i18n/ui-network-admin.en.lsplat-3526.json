@@ -1,0 +1,10 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "USER": {
+      "PROMOOPTOUT": {
+        "OPTIN_MESSAGE": "Opted In",
+        "OPTOUT_MESSAGE": "Opted Out"
+      }
+    }
+  }
+}

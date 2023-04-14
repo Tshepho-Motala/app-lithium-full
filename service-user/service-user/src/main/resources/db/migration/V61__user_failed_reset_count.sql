@@ -1,0 +1,1 @@
+ALTER TABLE `user` ADD COLUMN `failed_reset_count` INT(11);

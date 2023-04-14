@@ -1,0 +1,6 @@
+server:
+  port: 9597
+  
+logging:
+  level:
+    lithium.service.exchange: INFO

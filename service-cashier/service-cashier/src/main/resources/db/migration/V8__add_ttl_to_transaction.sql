@@ -1,0 +1,2 @@
+ALTER TABLE `transaction` 
+ADD COLUMN `ttl` BIGINT(20) DEFAULT -1;

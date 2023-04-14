@@ -1,0 +1,1 @@
+ALTER TABLE `incomplete_user` ADD COLUMN `created_date`  datetime;

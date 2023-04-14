@@ -1,0 +1,3 @@
+-- Sync restrictions data from service-limit to service-user-search
+--request GET .../service-limit/data-migration-job/limit/user-restrictions?dryRun=false&pageSize=100&delay=1000
+--header 'Authorization: Bearer <usertoken>

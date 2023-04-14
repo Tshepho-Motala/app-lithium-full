@@ -1,0 +1,216 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "REPORTS": {
+      "IA": {
+        "LIST": {
+          "TITLE": "Income Access Reports",
+          "DESCRIPTION": "Below is a list of all scheduled or ad-hoc reports on income access activity."
+        },
+        "REPORT": {
+          "TITLE": "Income Access Report",
+          "DESCRIPTION": "A income access report that contains the summary financial details for a player per the configured parameters below.",
+          "FIELDS": {
+            "NAME": {
+              "NAME": "Report Name",
+              "DESCRIPTION": "The name of this report."
+            },
+            "DOMAIN": {
+              "NAME": "Domain Name",
+              "DESCRIPTION": "The domain to which this report applies."
+            },
+            "DESCRIPTION": {
+              "NAME": "Report Description",
+              "DESCRIPTION": "A descriptive note that describes this report."
+            },
+            "CREATEDON": {
+              "NAME": "Created On",
+              "DESCRIPTION": "The date and time that this report was created."
+            },
+            "CREATEDBY": {
+              "NAME": "Created By",
+              "DESCRIPTION": "The user that created this report."
+            }
+          }
+        },
+        "REPORTRUN": {
+          "TITLE": "Report Run",
+          "DESCRIPTION": "Below are the results of a single run of the report. Select 'Download Excel' to retrieve a copy of the report in Excel format."
+        },
+        "GENERAL": {
+          "REPORTDETAILS": "Report Details",
+          "REPORTRUNAT": "The report will run @ {{prettyCron}}"
+        },
+        "FILTERS": {
+          "TITLE": "Report Filters",
+          "ADD": "Add Report Filter",
+          "TABLE": {
+            "FIELD": "Field",
+            "OPERATOR": "Operator",
+            "VALUE": "Value",
+            "NOFILTERSADDED": "No filters added yet."
+          }
+        },
+        "ACTIONS": {
+          "TITLE": "Report Actions",
+          "ADD": "Add Report Action",
+          "TABLE": {
+            "ACTIONTYPE": "Action Type",
+            "EMAILTEMPLATE": "Email Template",
+            "MODIFYRECIPIENTS": "Modify Recipients",
+            "MODIFYEMAILTEMPLATE": "Modify Email Template",
+            "NOACTIONSADDED": "No actions added yet."
+          }
+        },
+        "EMAILTEMPLATE": {
+          "PLACEHOLDER": {
+            "HEADER": {
+              "FIELD": "Field",
+              "PLACEHOLDER": "Placeholder"
+            },
+            "REPORT": {
+              "TITLE": "Email Template Placeholders - (Send Full Report Via Email, Send Report Stats Via Email)",
+              "NAME": "Report Name",
+              "STARTEDON": "Started On",
+              "COMPLETEDON": "Completed On",
+              "STARTEDBY": "Started By",
+              "TOTALRECORDS": "Total Records",
+              "PROCESSEDRECORDS": "Processed Records",
+              "DOMAINNAME": "Domain Name",
+              "DOMAINURL": "Domain URL",
+              "DOMAINSUPPORTEMAIL": "Domain Support Email"
+            }
+          }
+        },
+        "CREATE": {
+          "TITLE": "Income Access Report - Add",
+          "DESCRIPTION": "Use the form below to create a income access report",
+          "FILTER": {
+            "TITLE": "Add a Report Filter"
+          },
+          "ACTION": {
+            "TITLE": "Add a Report Action"
+          }
+        },
+        "EDIT": {
+          "TITLE": "Income Access Report - Edit"
+        },
+        "FIELDS": {
+          "DOMAIN": {
+            "NAME": "Domain",
+            "DESCRIPTION": "The domain for this income access report",
+            "PLACEHOLDER": "Select the domain for this income access report"
+          },
+          "NAME": {
+            "NAME": "Name",
+            "DESCRIPTION": "The name of this income access report",
+            "PLACEHOLDER": "Enter the name"
+          },
+          "DESCRIPTION": {
+            "NAME": "Description",
+            "DESCRIPTION": "A description of this income access report",
+            "PLACEHOLDER": "Enter a description"
+          },
+          "ALLFILTERSAPPLICABLE": {
+            "NAME": "All Filters Applicable",
+            "DESCRIPTION": "If checked, all filters must apply, otherwise one or more"
+          },
+          "IADATAPERIOD": {
+            "NAME": "Income Access Data Period",
+            "DESCRIPTION": "The period of income access data to accumulate for this report",
+            "PLACEHOLDER": "Select the Income Access Data Period"
+          },
+          "IADATAPERIODOFFSET": {
+            "NAME": "Income Access Data Period Offset",
+            "DESCRIPTION": "The Offset Based on the Income Access Data Period. For example, if Income Access Data Period is set to Day, set Income Access Data Period Offset to 1 for yesterday's data, 2 for data from two days ago, and so on. Similarly, if Income Access Data Period is set to Month, set Income Access Data Period Offset to 1 for last months data, 2 for data from two months ago, and so on.",
+            "PLACEHOLDER": "Enter the offset amount",
+            "PATTERN": "Only numbers allowed"
+          },
+          "GGRDEDUCTIONPERCENTAGE": {
+            "NAME": "Income Access Gross Gaming Revenue Deduction",
+            "DESCRIPTION": "The percentage to be deducted from the gross gaming revenue for fees, kyc and licensing during the net gaming revenue calculation.",
+            "PLACEHOLDER": "Enter GGR deduction percentage",
+            "PATTERN": "Format needs to be a percentage number with decimals. 99.99"
+          },
+          "COMPAREXPERIODS": {
+            "NAME": "Compare x Periods",
+            "DESCRIPTION": "The number of periods to generate comparative sheets for, based on Income Access Data Period (GDP) and Income Access Data Period Offset (GDPO). For example, if GDP is set to Year, and GDPO is set to 1, - set Compare x Periods to 2 to generate comparative sheets for 3 years ago and 2 years ago, as well as the regular sheet for last year.",
+            "PLACEHOLDER": "Enter the number of periods",
+            "PATTERN": "Only numbers allowed"
+          },
+          "ENABLED": {
+            "NAME": "Enabled",
+            "DESCRIPTION": "The status of the report, enabled or disabled"
+          },
+          "PERIOD": {
+            "NAME": "Period",
+            "DESCRIPTION": "The period for the schedule",
+            "PLACEHOLDER": "Select the Period"
+          },
+          "DAYOFWEEK": {
+            "NAME": "Day of Week",
+            "DESCRIPTION": "The day of week for the schedule",
+            "PLACEHOLDER": "Select the day of the week"
+          },
+          "DAYOFMONTH": {
+            "NAME": "Day of Month",
+            "DESCRIPTION": "The day of the month for the schedule",
+            "PLACEHOLDER": "Select the day of the month"
+          },
+          "HOUR": {
+            "NAME": "Hour",
+            "DESCRIPTION": "The hour of day for the schedule",
+            "PLACEHOLDER": "Select the hour"
+          },
+          "MINUTE": {
+            "NAME": "Minute",
+            "DESCRIPTION": "The minute of the hour for the schedule",
+            "PLACEHOLDER": "Select the minute"
+          },
+          "FILTER": {
+            "FIELD": {
+              "NAME": "Field",
+              "DESCRIPTION": "The field to filter by",
+              "PLACEHOLDER": "Select the filter field"
+            },
+            "OPERATOR": {
+              "NAME": "Operator",
+              "DESCRIPTION": "The operator to use for filtration",
+              "PLACEHOLDER": "Select the operator"
+            },
+            "VALUE": {
+              "NAME": "Value",
+              "DESCRIPTION": "The value to filter by",
+              "PLACEHOLDER": "Enter the value",
+              "PATTERN": {
+                "NUMBERS": "Only numbers allowed"
+              }
+            },
+            "XDAYSAGO": {
+              "NAME": "X Days Ago",
+              "DESCRIPTION": "The number of days ago. For example, 0 is today, 1 is yesterday, 2 is two days ago, and so on",
+              "PLACEHOLDER": "Enter the number of days ago"
+            }
+          },
+          "ACTION": {
+            "TYPE": {
+              "NAME": "Type",
+              "DESCRIPTION": "The type of action to perform",
+              "PLACEHOLDER": "Select the action"
+            },
+            "RECIPIENT": {
+              "NAME": "Recipient",
+              "DESCRIPTION": "The recipient to add",
+              "PLACEHOLDER": "Enter recipient e-mail address",
+              "PATTERN": "Valid email addresses only"
+            },
+            "EMAILTEMPLATE": {
+              "NAME": "Email Template Name",
+              "DESCRIPTION": "The email template to use for the action",
+              "PLACEHOLDER": "Enter the email template name"
+            }
+          }
+        }
+      }
+    }
+  }
+}

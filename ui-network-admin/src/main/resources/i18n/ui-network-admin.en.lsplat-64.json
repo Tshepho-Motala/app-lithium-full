@@ -1,0 +1,18 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "CHANGELOGS": {
+      "PLAYER": {
+        "TABLE": {
+          "LABEL": {
+            "ENTRIES": "Viewing changelog entries"
+          }
+        }
+      }
+    }
+  },
+  "GLOBAL": {
+    "ACTION": {
+      "SELECTED": "Selected"
+    }
+  }
+}

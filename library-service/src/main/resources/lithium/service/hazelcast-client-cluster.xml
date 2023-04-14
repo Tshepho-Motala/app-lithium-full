@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- https://docs.hazelcast.com/imdg/4.1.1/clients/java.html -->
+
+<hazelcast-client
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.hazelcast.com/schema/client-config
+                               http://www.hazelcast.com/schema/client-config/hazelcast-client-config-4.2.xsd"
+	xmlns="http://www.hazelcast.com/schema/client-config">
+
+	<cluster-name>cluster</cluster-name>
+	<network>
+		<auto-detection enabled="false" />
+		<cluster-members>
+			<address>hazelcast-cluster</address>
+		</cluster-members>
+	</network>
+
+	<connection-strategy async-start="true"
+		reconnect-mode="ASYNC">
+		<connection-retry>
+			<initial-backoff-millis>1000</initial-backoff-millis>
+			<max-backoff-millis>30000</max-backoff-millis>
+			<multiplier>2</multiplier>
+			<cluster-connect-timeout-millis>100000000000000000</cluster-connect-timeout-millis>
+			<jitter>0.5</jitter>
+		</connection-retry>
+	</connection-strategy>
+
+</hazelcast-client>

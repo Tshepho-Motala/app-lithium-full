@@ -1,0 +1,315 @@
+{
+	"GLOBAL": {
+		"NORESULTS": "No Results Found.",
+		"ACTION": {
+			"CONTINUE": "Continue",
+			"COPY": "Copy",
+			"SAVEEXIT": "Save and continue later",
+			"NEW": "New"
+		},
+		"FIELDS": {
+			"ALL": "All",
+			"TO": "to"
+		},
+		"GRANULARITY": {
+			"PERYEAR": "per year",
+			"PERMONTH": "per month",
+			"PERDAY": "per day",
+			"PERWEEK": "per week",
+			"INTOTAL": "in total"
+		},
+		"DAYS": {
+			"SHORT": {
+				"1": "Mon",
+				"2": "Tue",
+				"3": "Wed",
+				"4": "Thu",
+				"5": "Fri",
+				"6": "Sat",
+				"7": "Sun"
+			}
+		},
+		"VALIDATION": {
+			"MIN": "The value for this field is less than the minimum.",
+			"MAX": "The value for this field is less than the maximum."
+		}
+	},
+	"UI_NETWORK_ADMIN": {
+		"CHANGELOG": {
+			"HEADER": {
+				"COPYBONUSBY": "Copied by",
+				"MARKBONUSCURRENTBY": "Marked Current by",
+				"MARKBONUSEDITBY": "Marked Edit by",
+				"CHANGEBONUSSTATUS": "Status changed by"
+			},
+			"BODY": {
+				"COPYBONUS": "Bonus copied on {{ date }} by {{ author }}",
+				"MARKBONUSCURRENT": "Bonus marked as current on {{ date }} by {{ author }}",
+				"MARKBONUSEDIT": "Bonus marked as edit on {{ date }} by {{ author }}",
+				"CHANGEBONUSSTATUS": "Bonus status changed on {{ date }} by {{ author }}"
+			},
+			"BONUS": {
+				"COPYBONUS": "Revision {{fromValue}} was copied to {{toValue}}",
+				"MARKBONUSCURRENT": "Revision {{toValue}} has been marked as current version. (Previous current revision {{fromValue}})",
+				"MARKBONUSEDIT": "Revision {{toValue}} has been marked as edit version. (Previous edit revision {{fromValue}})",
+				"CHANGEBONUSSTATUS": "Bonus enabled status changed from {{fromValue}} to {{toValue}}"
+			}
+		},
+		"BONUS": {
+			"ACTIVATION": {
+				"STATUS": {
+					"COMPLETED": "Completed",
+					"CANCELLED": "Cancelled",
+					"EXPIRED": "Expired",
+					"ACTIVE": "Active"
+				},
+				"TITLE": {
+					"STATUS": "Status",
+					"PLAYTHROUGH": "Play Through",
+					"PLAYTHROUGHREQUIRED": "Play Through Required",
+					"STARTED": "Start Date",
+					"PLAYER": "Player"
+				},
+				"VIEWPLAYER": "view player",
+				"REGISTER_PLAYER": "Register Player",
+				"PREREQUISITES": "Skip all checks for pre-requisites ?",
+				"PLAYER": {
+					"LABEL": "Select player to register",
+					"PLACEHOLDER": "Enter player name to start search..."
+				},
+				"BONUSTYPE": "Bonus Type",
+				"AMOUNT": "Amount"
+			},
+			"LABEL": {
+				"CURRENT": "Current",
+				"EDIT": "Edit"
+			},
+			"LIST": {
+				"TITLE": {
+					"ID": "Id",
+					"STATUS": "Status",
+					"CODE": "Code",
+					"CURRENT": "Current",
+					"REVISIONS": "Revisions",
+					"NAME": "Name",
+					"TYPE": "Type",
+					"DOMAIN": "Domain"
+				}
+			},
+			"TAB": {
+				"REVISIONS": {
+					"TAB": "History",
+					"LIST": "List",
+					"EDIT": "Edit"
+				},
+				"CURRENT": {
+					"TAB": "View",
+					"SUMMARY": "Summary",
+					"GAME_PERCENTAGES": "Game Percentages",
+					"GAME_CAT_PERCENTAGES": "Game Category Percentages"
+				},
+				"DASHBOARD": "Dashboard",
+				"ACTIVATION": "Activation History"
+			},
+			"VIEW": {
+				"VIEWCURRENT": "You are viewing the current version of this bonus.",
+				"VIEWOLDREVISION": "You are viewing revision {{bonusRevisionId}}, which is an older version of this bonus.",
+				"GAME_CATEGORIES": {
+					"EXPLAIN": "List below displays percentages for groups of games. All game winnings will contribute 100% towards playthrough requirement, unless specified below with a different percentage. E.g. If the Live Dealer games below has a percentage of 10%, and a player wins $100, only $10 will be counted towards their playthrough.",
+					"PROGRESSBAR": "{{percentage}}% of all {{category}} winnings will be counted towards play through requirements."
+				}
+			},
+			"EDIT": {
+				"TABS": {
+					"FREESPINS": "Freespins",
+					"PERCENTAGES": "Game Percentages",
+					"GAME_CATEGORIES": "Game Category Percentages"
+				},
+				"GAME_CATEGORIES": {
+					"EXPLAIN": "Use the list below to specify percentages for groups of games. All game winnings will contribute 100% towards playthrough requirement, unless specified below with a different percentage. E.g. If the Live Dealer games below has a percentage of 10%, and a player wins $100, only $10 will be counted towards their playthrough.",
+					"PROGRESSBAR": "{{percentage}}% of all {{category}} winnings will be counted towards play through requirements."
+				},
+				"GAME_PERCENTAGES": {
+					"EXPLAIN": "All game winnings will contribute 100% towards playthrough requirement, unless specified below with a different percentage. E.g. If the game '12 Animals' is listed below with a percentage of 10%, and a player wins $100, only $10 will be counted towards their playthrough.",
+					"EXISTS": "Game already added to game percentage list."
+				},
+				"NOCURRENT": "No current version of this bonus exists. This bonus has not been taken live yet. Finish editing this bonus, and mark this bonus as current to take it live.",
+				"NOTEDIT": "This bonus is currently being edited by {{editUser}} on revision {{bonusRevisionId}}. If you continue the edit, you run the risk of overwriting each others changes",
+				"BUTTON": {
+					"REVISION": "Edit Revision {{bonusRevisionId}}",
+					"MARKCURRENT": "Mark Current",
+					"SUMMARY": "Summary",
+					"FREESPINS": "Freespins",
+					"GAME_PERCENTAGES": "Game Percentages",
+					"GAME_CATEGORIES": "Game Category Percentages"
+				},
+				"SAVE": {
+					"SUCCESS": "Successfully saved changes to this revision.",
+					"ERROR": "Could not save changes to this revision."
+				},
+				"MARK": {
+					"SUCCESSEDIT": "Revision {{bonusRevisionId}} successfully marked as edit.",
+					"ERROREDIT": "Revision {{bonusRevisionId}} could not be marked as edit, please try again later.",
+					"SUCCESSCURRENT": "Revision {{bonusRevisionId}} successfully marked as current.",
+					"ERRORCURRENT": "Revision {{bonusRevisionId}} could not be marked as current, please try again later.",
+					"SUCCESSENABLE": "Bonus successfully enabled.",
+					"ERRORENABLE": "Bonus could not be enabled.",
+					"SUCCESSDISABLE": "Bonus successfully disabled.",
+					"ERRORDISABLE": "Bonus could not be disabled."
+				},
+				"BASIC": {
+					"CODE": {
+						"LABEL": "Code",
+						"PLACEHOLDER": "E.g. WELCOME1",
+						"DESCRIPTION": "The bonus code to be entered by player to claim bonus. If left empty, this will be the default bonus if a player does not enter anything."
+					},
+					"NAME": {
+						"LABEL": "Name",
+						"PLACEHOLDER": "E.g. First Welcome Bonus",
+						"DESCRIPTION": "User friendly name to display for bonus."
+					},
+					"TYPE": {
+						"LABEL": "Type",
+						"PLACEHOLDER": "Select Bonus Type",
+						"DESCRIPTION": "If this is a signup/deposit bonus."
+					},
+					"STATUS": {
+						"LABEL": "Status",
+						"DESCRIPTION": "Should the bonus be enabled"
+					},
+					"DOMAIN": {
+						"LABEL": "Domain",
+						"PLACEHOLDER": "Select Bonus Domain",
+						"DESCRIPTION": "The domain for which this bonus will be applicable."
+					},
+					"FORDEPOSITNUMBER": {
+						"LABEL": "For Deposit #",
+						"PLACEHOLDER": "E.g. 2",
+						"DESCRIPTION": "If a number of 2 is entered, this bonus may only be redeemed on the second deposit made by the player."
+					},
+					"MAXPAYOUT": {
+						"LABEL": "Max Payout",
+						"PLACEHOLDER": "E.g. $500",
+						"DESCRIPTION": "The maximum amount that this bonus will payout when a player completes the bonus requirements.'"
+					}
+				},
+				"DEPENDENCY": {
+					"LABEL": "Depends On",
+					"PLACEHOLDER": "E.g. Welcome Bonus 1",
+					"DESCRIPTION": "Search for a bonus that should be a prerequisite for this bonus. This prerequisite would need to be completed before the player would be allowed to take up this bonus code."
+				},
+				"RESTRICTION": {
+					"STARTINGDATE": {
+						"LABEL": "Start Date",
+						"DESCRIPTION": "Date when this bonus should become active."
+					},
+					"EXPIRATIONDATE": {
+						"LABEL": "End Date",
+						"DESCRIPTION": "Date when this bonus should expire."
+					},
+					"TIMEZONE": {
+						"LABEL": "Timezone",
+						"DESCRIPTION": "Timezone to be used for dates specified above."
+					},
+					"VALIDFOR": {
+						"LABEL": "Valid For (Days)",
+						"DESCRIPTION": "The amount of days this bonus will remain active once activated by the player."
+					},
+					"MAXREDEEMABLE": {
+						"LABEL": "Redeemable",
+						"DESCRIPTION": "The amount of times this bonus may be redeemed by the player."
+					},
+					"MAXREDEEMABLEGRANULARITY": {
+						"LABEL": "",
+						"DESCRIPTION": ""
+					},
+					"ACTIVEDAYS": {
+						"LABEL": "Active Days",
+						"DESCRIPTION": "This can be used to restrict a bonus to only be available on specific days. If nothing selected, bonus will be active on all days."
+					},
+					"ACTIVETIMES": {
+						"LABEL": "Active Times",
+						"DESCRIPTION": "This can be used to restrict a bonus to only be available on within specific timeslots. If nothing specified, bonus will be active throughout the day."
+					},
+					"EXAMPLE": {
+						"TITLE": "Explanation",
+						"TIMEZONE": "(Using timezone : {{timezone}}).",
+						"START": "Bonus starts running on {{startDate | date:'medium'}}. ",
+						"END": "Expires on {{endDate | date:'medium'}}. ",
+						"VALIDDAYS": "Will be valid for {{validdays}} day(s) once redeemed by the player.",
+						"REDEEMABLE": "May be redeemed {{redeemable}}x ",
+						"ACTIVEDAYS": "Will only be active on the following days : {{days}}",
+						"ACTIVETIMES": "Will only be active between {{start}} - {{end}} on the times/days specified above."
+					}
+				},
+				"DEPOSIT": {
+					"MIN": {
+						"LABEL": "Minimum Deposit",
+						"PLACEHOLDER": "E.g. $25.00",
+						"DESCRIPTION": "Minimum deposit amount to qualify for this bonus."
+					},
+					"MAX": {
+						"LABEL": "Maximum Deposit",
+						"PLACEHOLDER": "E.g. $250.00",
+						"DESCRIPTION": "Maximum deposit amount to qualify for this bonus."
+					},
+					"PERCENTAGE": {
+						"LABEL": "Percentage",
+						"PLACEHOLDER": "E.g. 50%",
+						"DESCRIPTION": "Bonus percentage for deposit amount."
+					},
+					"WAGER": {
+						"LABEL": "Wager Requirement",
+						"PLACEHOLDER": "E.g. 35x",
+						"DESCRIPTION": "Multiplier to be used to determine wager requirements for this bonus."
+					},
+					"EXAMPLE": "Example:",
+					"EXPLAIN1": "Minimum deposit of {{minDeposit | currency}} required. No bonus percentage specified. The player will still be required to wager {{wagerTotal | currency}} ({{minDeposit | currency}} x {{wager}}) before being permitted to make a withdrawal.",
+					"EXPLAIN2": "Deposit {{minDeposit | currency}} and receive {{bonusAmount | currency}} as bonus. {{bonusTotal | currency}} in total. The player will still be required to wager {{wagerTotal | currency}} (({{minDeposit | currency}} + {{bonusAmount | currency}}) x {{wager}}) before being permitted to make a withdrawal."
+				},
+				"FREESPINS": {
+					"FREESPINS": "Freespins",
+					"WAGER": "Wager Requirements",
+					"EXAMPLE": "Example",
+					"EXPLAIN": "All winnings from freespins will be counted towards the playthrough requirements. For example using the wagering requirements specified above, if a player finishes the {{freespins}} freespins, and won {{50 | currency}}, {{(50*wager) | currency}} wll be added to his play through requirement.",
+					"EXISTS": "Game already added to freespins list.",
+					"NOGAMES": "Please add games to assign the freespins to."
+				}
+			},
+			"ADD": {
+				"TITLE": "Create New Bonus",
+				"DESCRIPTION": "Fill in the details of the new bonus you want to add.",
+				"EXISTING": {
+					"TITLE": "Existing Bonus",
+					"EXPLAIN": "An exiting bonus for the specified code and domain and type already exists. You can choose to either create a new bonus with the specified criteria (which will disable this existing bonus automatically), or you can choose to continue editing this existing bonus."
+				},
+				"BASIC": {
+					"CODE": {
+						"LABEL": "Code",
+						"PLACEHOLDER": "E.g. WELCOME1",
+						"DESCRIPTION": "The bonus code to be entered by player to claim bonus. If left empty, this will be the default bonus if a player does not enter anything."
+					},
+					"NAME": {
+						"LABEL": "Name",
+						"PLACEHOLDER": "E.g. First Welcome Bonus",
+						"DESCRIPTION": "User friendly name to display for bonus."
+					},
+					"TYPE": {
+						"LABEL": "Type",
+						"PLACEHOLDER": "Select Bonus Type",
+						"DESCRIPTION": "If this is a signup/deposit bonus."
+					},
+					"STATUS": {
+						"LABEL": "Status",
+						"DESCRIPTION": "Should the bonus be enabled"
+					},
+					"DOMAIN": {
+						"LABEL": "Domain",
+						"PLACEHOLDER": "Select Bonus Domain",
+						"DESCRIPTION": "The domain for which this bonus will be created."
+					}
+				}
+			}
+		}
+	}
+}

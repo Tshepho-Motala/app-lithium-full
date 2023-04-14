@@ -1,0 +1,136 @@
+{
+	"name": "Trustly",
+	"code": "trustly",
+	"url": "service-cashier-processor-trustly",
+	"methodNames": [
+		"trustly",
+		"ideal"
+	],
+	"deposit": true,
+	"fees": {
+		"flat": 0,
+		"percentage": 0,
+		"minimum": 0
+	},
+	"withdraw": true,
+	"limits": {
+		"minAmount": 2500,
+		"maxAmount": 0,
+		"maxAmountDay": 0,
+		"maxAmountWeek": 0,
+		"maxAmountMonth": 0,
+		"maxTransactionsDay": 0,
+		"maxTransactionsWeek": 0,
+		"maxTransactionsMonth": 0
+	},
+	"properties": [
+		{
+			"name": "payments_api_url",
+			"defaultValue": "https://trustly.com/api/1",
+			"type": "url",
+			"description": "The base URL for the payment api"
+		},
+		{
+			"name": "username",
+			"defaultValue": "",
+			"type": "string",
+			"description": "Trustly merchant user name"
+		},
+		{
+			"name": "api_password",
+			"defaultValue": "",
+			"type": "url",
+			"description": "Trustly merchant api password"
+		},
+		{
+			"name": "rsa_public_key",
+			"defaultValue": "",
+			"type": "string",
+			"description": "Trustly RSA publicKey. Please paste your public key here."
+		},
+		{
+			"name": "rsa_private_key",
+			"defaultValue": "",
+			"type": "string",
+			"description": "Trustly RSA secretKey. Please paste your secret key here."
+		},
+		{
+			"name": "rsa_private_key_password",
+			"defaultValue": "",
+			"type": "string",
+			"description": "Trustly RSA secretKey. Please paste your secret key here."
+		},
+		{
+			"name": "reversal_notification_template",
+			"defaultValue": "trustly.reversal",
+			"type": "string",
+			"description": "Trustly reversal notification template name."
+		},
+		{
+			"name": "open_loop_withdrawal",
+			"defaultValue": "true",
+			"type": "frontend",
+			"description": "Allowed customers to select their bank account without first making a deposit it with"
+		},
+		{
+			"name": "trustly_email",
+			"defaultValue": "TrustlyNotifications@gamesys.zendesk.com",
+			"type": "string",
+			"description": "Trustly notification email address."
+		},
+		{
+			"name": "verify_iban",
+			"defaultValue": "false",
+			"type": "boolean",
+			"description": "Verify Trustly account iban."
+		},
+		{
+			"name": "skip_amount_check",
+			"defaultValue": "false",
+			"type": "boolean",
+			"description": "Skip amount check"
+		},
+		{
+			"name": "pending_on_redirect",
+			"defaultValue": "false",
+			"type": "boolean",
+			"description": "Enables feature to return status pending on redirect in case transaction is not in final state."
+		},
+		{
+			"name": "success_url",
+			"defaultValue": "",
+			"type": "string",
+			"description": "The return_url will be ignored and specified success_url we be sent to Trustly, without redirect handling."
+		},
+		{
+			"name": "fail_url",
+			"defaultValue": "",
+			"type": "string",
+			"description": "The return_url will be ignored and specified fail_url we be sent to Trustly, without redirect handling."
+		},
+		{
+			"name": "success_url_account",
+			"defaultValue": "",
+			"type": "string",
+			"description": "The return_url will be ignored and specified success_url we be sent to Trustly on account creation, without redirect handling."
+		},
+		{
+			"name": "fail_url_account",
+			"defaultValue": "",
+			"type": "string",
+			"description": "The return_url will be ignored and specified fail_url we be sent to Trustly on account creation, without redirect handling."
+		},
+		{
+			"name": "url_scheme",
+			"defaultValue": "",
+			"type": "string",
+			"description": "If specified, will override url_scheme received from client on deposit."
+		},
+		{
+			"name": "url_scheme_account",
+			"defaultValue": "",
+			"type": "string",
+			"description": "If specified, will override url_scheme received from client on account creation."
+		}
+	]
+}

@@ -1,0 +1,5 @@
+ALTER TABLE `lithium_user`.`user`
+ADD COLUMN `bonus_code` VARCHAR(20) NULL,
+ADD COLUMN `dob_year` INTEGER NULL,
+ADD COLUMN `dob_month` INTEGER NULL,
+ADD COLUMN `dob_day` INTEGER NULL;

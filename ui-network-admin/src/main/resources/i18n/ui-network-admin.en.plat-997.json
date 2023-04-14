@@ -1,0 +1,13 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "GAME": {
+      "FIELDS" : {
+        "MODULE_SUPPLIER_ID": {
+          "NAME": "Module Supplier ID",
+          "DESCRIPTION": "The module supplier id",
+          "PLACEHOLDER": "E.g 42525XSY"
+        }
+      }
+    }
+  }
+}

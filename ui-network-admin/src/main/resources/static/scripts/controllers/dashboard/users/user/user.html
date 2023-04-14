@@ -1,0 +1,16 @@
+<div class="container-fluid">
+	<div class="row v-reset-row ">
+		<div class="col-xs-12">
+			<div class="nav-tabs-custom">
+				<ul class="nav nav-tabs">
+					<li role="presentation" ng-class="{ active: controller.tab == tab }" ng-repeat="tab in controller.tabs" lit-if-permission="{{tab.roles}}" class="{{tab.tclass}}">
+						<a ng-click="controller.setTab(tab)">{{ tab.title | translate }}</a>
+					</li>
+				</ul>
+				<div class="tab-content" style="padding: 5px;">
+					<div ui-view></div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

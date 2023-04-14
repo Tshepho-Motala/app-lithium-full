@@ -1,0 +1,55 @@
+
+<md-card *ngIf="campaign" color="primary" class="mat-elevation-z12 margin nopadding" style="position: relative">
+
+  <loading-overlay [isLoading]="loading"></loading-overlay>
+
+  <md-toolbar style="flex-wrap: wrap">
+    
+    <span>Campaign {{ campaign.name }}</span>
+    <span style="flex: 1"></span>
+    <button md-icon-button [mdMenuTriggerFor]="menu">
+      <md-icon>more_vert</md-icon>
+    </button>
+
+  </md-toolbar>
+
+  <md-menu #menu="mdMenu">
+    <button md-menu-item>
+      <md-icon>publish</md-icon>
+      <span>Publish</span>
+    </button>
+    <button md-menu-item (click)="archive()">
+      <md-icon>archive</md-icon>
+      <span>Archive</span>
+    </button>
+    <button md-menu-item (click)="selectAd()">
+      <md-icon>link</md-icon>
+      <span>Link Ad</span>
+    </button>
+  </md-menu>
+
+  <md-card-content class="padding">
+
+    <p>Created date: {{ campaign.createdDate | date:'medium' }}</p>
+    <p>Archived: {{ campaign.archived }}</p>
+
+    <div fxLayout="row" fxLayoutAlign="center center">
+      <h4 fxFlex>Linked Ads({{ ads?.recordsTotal }})</h4>
+      <button md-raised-button (click)="selectAd()">Link an Ad</button>
+    </div>
+
+
+    <md-card class="hover ad margin" *ngFor="let ca of ads?.data">
+      <md-card-title>{{ca.id}} - {{ca.ad.name}}</md-card-title>
+      <md-card-content>{{ ca.guid }}</md-card-content>
+      <md-card-actions align="end">
+        <button color="primary" md-raised-button (click)="embedAd(ca)">Embed</button>
+      </md-card-actions>    
+    </md-card>
+
+    <mdex-pager (currentPageChanged)="load()" [state]="pagerState"></mdex-pager>
+
+  </md-card-content>
+
+</md-card>
+

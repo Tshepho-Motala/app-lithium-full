@@ -1,0 +1,15 @@
+{
+  "UI_NETWORK_ADMIN": {
+      "PLAYER": {
+        "BONUS": {
+          "REVISION_CODE": "Revision id"
+        },
+        "BONUSHISTORY": {
+          "TABLE": {
+            "BONUSREVISIONCODE" : "Revision id",
+            "BONUSCUSTOMFREEAMOUNT" : "Custom free money"
+          }
+        }
+      }
+  }
+}

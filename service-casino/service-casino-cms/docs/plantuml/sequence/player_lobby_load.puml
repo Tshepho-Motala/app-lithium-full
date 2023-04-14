@@ -1,0 +1,45 @@
+.Player Lobby Load
+[plantuml]
+----
+@startuml
+autonumber
+'https://plantuml.com/sequence-diagram
+
+actor FE as fe
+participant "svc-casino-cms" as svc_cms
+participant "svc-user" as svc_user
+database "lithium-casino-cms" as cms_db
+
+fe -> svc_cms: Load Lobby
+    activate svc_cms
+
+        svc_cms -> cms_db: Get lobby for domain
+        cms_db --> svc_cms: return lobby config
+        svc_cms -> svc_cms: find page config by navigation
+        alt config is null
+            svc_cms -> fe: status 404 Status404LobbyConfigNotFoundException
+        end
+        alt authToken exists
+            svc_cms -> cms_db: Find list of active banners for logged in players \n by lobby_id, primary_nav_code, sub_nav_code and channel
+            cms_db --> svc_cms: return banner list
+            svc_cms -> svc_user: find user tags
+            loop for each banner in banners
+                svc_cms -> svc_cms: filter banners by banner has no tags OR at least 1 tag matches at 1 tags from user tags
+            end
+        else No authToken
+             svc_cms -> cms_db: Find list of active banners for logged out players \n by lobby_id, primary_nav_code, sub_nav_code and channel
+             cms_db --> svc_cms: return banner list
+        end
+        note right
+             logged_in = true -  Means banner is shown to logged_in players
+             logged_in = false - Means Banner is shown to logged out players
+             logged_in = null - Means is shown to both logged in and logged out players
+        end note
+        svc_cms -> svc_cms: order banners by position
+        svc_cms -> svc_cms: create banner widget from the returned result
+        svc_cms -> svc_cms: add banner widget to lobby page
+    deactivate svc_cms
+svc_cms --> fe: Status 200 with Lobby Configuration
+
+@enduml
+----

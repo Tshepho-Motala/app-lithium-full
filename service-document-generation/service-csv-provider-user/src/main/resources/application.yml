@@ -1,0 +1,24 @@
+server:
+  port: 9927
+
+spring:
+  cloud:
+    stream:
+      bindings:
+        service-csv-provider-user-input:
+          binder: rabbit
+          group: service-csv-provider-user-group
+          destination: csv-user-queue
+          consumer:
+            concurrency: 2
+lithium:
+  service-csv-generation-user:
+    processing-job-page-size: 500
+
+eureka:
+  instance:
+    appname: service-csv-provider-user
+
+logging:
+  level:
+    lithium.service.csv.provider.user: INFO

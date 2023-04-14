@@ -1,0 +1,52 @@
+= iForium integration
+:toc:
+
+== Overview
+
+* For details of the API implementation, please see the link:docs[docs] folder.
+* For High-Level Specifications, please see link:docs/spec/high-level-specs.adoc[high-level-specs]
+* For Acceptance Test plans and results, please see link:https://gitlab.com/playsafe/lithium/service-casino-provider-iforium-test[service-casino-provider-iforium-test]
+* For Performance Test plans and results, please see link:https://gitlab.com/playsafe/lithium/lithium-load-test-iforium-k6[lithium-load-test-iforium-k6]
+* Code quality report is available on the Anzo Group link:https://sonarqube-roxor.anzogroup.com/dashboard?id=service.casino.providers%3Aservice-casino-provider-iforium[Sonarqube] instance
+* AppSec report is available on the Anzo Group link:https://nexusiq.anzogroup.com/assets/index.html#/applicationReport/service-casino-provider-iforium/41d63c91e6ec4baeb782d0b3d60a5f74/policy[NexusIQ] instance. A link:docs/Iforium_Casino_Provider-Build-20211110-154516.pdf[snapshot report] is also included in this repository, for those who cannot access NexusIQ.
+
+:leveloffset: +1
+
+include::docs/development-build-and-deploy.adoc[]
+
+include::docs/operations-logging-and-monitoring.adoc[]
+
+include::docs/gameflex-test-page.adoc[]
+
+:leveloffset: -1
+
+== Generating PDF Documentation
+
+The generation of the PDF handover documentation has not been incorporated into the Gitlab CI pipelines (however, this would be fairly trivial to do).
+
+The source structure is held in link:docs/publish.adoc[] and can be rendered manually using the shell script link:docs/publish.sh[]:
+
+[source,shell script]
+----
+include::docs/publish.sh[]
+----
+
+This needs to be run in the same directory as the script (link:docs/[/app-lithium-full/service-casino/service-casino-provider-iforium/docs]) and can be invoked as `./publish.sh publish.adoc`.
+
+== LBO Domain Configuration
+
+Add Iforium Casino Provider using details in the Onboarding Technical Configuration Document provided for specific domains:
+
+* United Kindom: link:docs/gameflex/Iforium_Op_GGO_Onboarding_Technical-LiveScore_v1.6.docx[]
+* Netherlands: link:docs/gameflex/Iforium_Op_GGO_Onboarding_Technical-LiveScore_NED_Updated_v3.docx[]
+
+TIP: Contact mailto:Andy.Pease@digitalgamingcorp.com[Andy Pease] | mailto:Pete.Strickland@digitalgamingcorp.com[Pete Strickland] for Iforium documentation.
+
+== Whitelisting IPs
+
+For Iforium to be able to gain access to the LBO gateway a list of IP addresses have to be whitelisted.
+
+WARNING: `Troubleshooting:` Check https://kibana.lithium-staging.ls-g.net/app/apm/services/svc-casino-pr-iforium/overview?rangeFrom=now-15m&rangeTo=now&latencyAggregationType=avg&transactionType=request&comparisonEnabled=true&comparisonType=day[Kibana APM (Netherlands)] for any events from Iforium after playing a game from the https://ppc2.lsb-nl.ls-g.net/en-nl/casino[casino lobby (Netherlands)], should logs be missing chances are IP addresses are not Whitelisted.
+
+TIP: Contact mailto:Andy.Pease@digitalgamingcorp.com[Andy Pease] | mailto:Pete.Strickland@digitalgamingcorp.com[Pete Strickland] to verify if the IPs have been whitelisted in Iforium.
+

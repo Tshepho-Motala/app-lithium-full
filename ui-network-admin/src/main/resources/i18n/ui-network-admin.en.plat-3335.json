@@ -1,0 +1,13 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "CASHIER": {
+      "TRANS": {
+        "VIEW": {
+          "INFO": {
+            "IS_TEST_ACCOUNT": "Is Test Account"
+          }
+        }
+      }
+    }
+  }
+}

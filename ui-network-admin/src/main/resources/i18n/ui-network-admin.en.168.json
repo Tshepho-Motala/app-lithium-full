@@ -1,0 +1,50 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "USER": {
+      "AGE_VERIFIED": {
+        "VALIDATION": {
+          "SUCCESS": "User age verified successfully"
+        },
+        "INVALIDATION": {
+          "SUCCESS": "User age unverified successfully"
+        }
+      },
+      "ADDRESS_VERIFIED": {
+        "VALIDATION": {
+          "SUCCESS": "User address verified successfully"
+        },
+        "INVALIDATION": {
+          "SUCCESS": "User address unverified successfully"
+        }
+      },
+      "FIELDS": {
+        "AGE_VERIFIED": {
+          "VERIFIED": "Age verified",
+          "UNVERIFIED": "Age is not verified"
+        },
+        "ADDRESS_VERIFIED": {
+          "VERIFIED": "Address verified",
+          "UNVERIFIED": "Address is not verified"
+        }
+      },
+      "ERRORS": {
+        "AGE_VERIFIED": "Can not change toggle",
+        "ADDRESS_VERIFIED": "Can not change toggle"
+      }
+    },
+    "PLAYER": {
+      "QUICK_ACTIONS": {
+        "CHANGE": {
+          "AGE_VERIFIED": {
+            "VERIFIED": "Verify user age",
+            "UNVERIFIED": "Unverify user age"
+          },
+          "ADDRESS_VERIFIED": {
+            "VERIFIED": "Verify user address",
+            "UNVERIFIED": "Unverify  user address"
+          }
+        }
+      }
+    }
+  }
+}

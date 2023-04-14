@@ -1,0 +1,5 @@
+{"properties": [{
+  "name": "lithium.services.db.load-test-data",
+  "type": "java.lang.Boolean",
+  "description": "A property to be implemented for loading test data conditionally on lithium services 'lithium.services.db.load-test-data'"
+}]}

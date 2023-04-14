@@ -1,0 +1,15 @@
+<div class="row v-reset-row " lit-if-permission="USER_ADD" lit-permission-domain="{{controller.domain.name}}">
+	<div class="col-xs-12" style="margin-bottom: 10px">
+		<button-add ng-click="controller.addModal()"></button-add>
+	</div>
+</div>
+
+<div class="row v-reset-row ">
+	<div class="col-xs-12">
+		<div class="box">
+			<div class="box-body no-padding table-responsive">
+				<dt table="controller.usersTable"/>
+			</div>
+		</div>
+	</div>
+</div>

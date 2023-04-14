@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+	<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	
+	</head>
+	<body>
+			
+			<div><p th:text="${url}"></p></div>
+			<div>
+				<div>
+				
+				<div th:unless="${url=='Already played'}">
+				<form action="#"  th:action="@{/mock/fakewin(playerGuid=${playerGuid},campaignid=${campaignid},playid=${playid})}" method="post">
+				
+					<p><input type="submit" value="Click to play"/></p>
+				</form>
+				</div>
+			</div>
+			
+		</div>
+	</body>
+</html>

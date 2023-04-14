@@ -1,0 +1,37 @@
+<div class="modal-content">
+	<div class="modal-header primary-blue darken-4 white-text">
+		<h3 class="modal-title" id="modal-title">
+			<i class="fa fa-pencil"></i>
+			{{ 'UI_NETWORK_ADMIN.PLAYERS.TAGS.CHANGE.TITLE' | translate }}
+			<button-close-window ng-click="vm.cancel()"></button-close-window>
+		</h3>
+	</div>
+
+	<form ng-submit="vm.submit()" name="vm.form" autocomplete="off" novalidate>
+		<div class="modal-body" id="modal-body">
+			<div class="row v-reset-row ">
+				<div class="col-xs-12">
+					<div class="box box-default" style="margin-bottom:10px;" ng-repeat="uc in vm.model.userCategories">
+						<div class="box-header bg-gray-lighter" style="padding:5px;">
+							<i class="fa fa-tag"></i>
+							<h5 class="box-title">
+								{{uc.name}}
+								<p class="description">{{uc.description}}</p>
+							</h5>
+							<div class="box-tools pull-right">
+								<button-custom text="remove" lit-if-permission="PLAYER_TAG_EDIT, DOMAIN_ADD, DOMAIN_EDIT, PLAYER_, USER_" lit-permission-domain="{{uc.domain.name}}" icon="remove" bclass="danger btn-xs" ng-click="vm.remove(uc)"></button-custom>
+							</div>
+						</div>
+					</div>
+					<br/>
+					<formly-form model="vm.model" fields="vm.fields" form="vm.form" options="vm.options">
+					</formly-form>
+				</div>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<button-add ng-click="vm.submit()"></button-add>
+			<button-cancel ng-click="vm.cancel()"></button-cancel>
+		</div>
+	</form>
+</div>

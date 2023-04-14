@@ -1,0 +1,99 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "PAGE": {
+      "TITLE": {
+        "GRANT_MASS_BONUSES": "Grant Mass Bonuses"
+      }
+    },
+    "BONUSES": {
+      "GRANT_MASS": {
+        "LIST": {
+          "TITLE": "Grant Mass Bonuses",
+          "DESCRIPTION": "A mass bonus allocation tool",
+          "DOMAIN_SELECT": "Select a domain to get started."
+        },
+        "CASH_BONUSES": {
+          "FIELDS": {
+            "BONUS_CODES": {
+              "LABEL": "Bonus Code",
+              "DESC": "Select a bonus code"
+            },
+            "AMOUNT": {
+              "LABEL": "Bonus Amount",
+              "DESC": "Enter the bonus amount",
+              "PATTERN": "The max amount you may enter is 9999.99"
+            },
+            "DESC": {
+              "LABEL": "Description",
+              "DESC": "Enter a description"
+            },
+            "UPLOAD_TYPE": {
+              "LABEL": "Upload Type",
+              "CSV_FILE": "CSV File",
+              "SEGMENT": "Segment"
+            },
+            "CHOOSE_FILE": {
+              "LABEL": "Choose File"
+            },
+            "MULTIPLE_BONUSES": {
+              "LABEL": "Enable Granting Multiple Bonuses Per Player"
+            }
+          },
+          "BUTTONS": {
+            "PROCESS:": "Process"
+          },
+          "TABLE": {
+            "ROW_NUMBER": {
+              "LABEL": "Row No"
+            },
+            "PLAYER_ID": {
+              "LABEL": "Player-ID"
+            },
+            "AMOUNT": {
+              "LABEL": "Amount"
+            },
+            "ACCOUNT_STATUS": {
+              "LABEL": "Account Status"
+            }
+          },
+          "ERRORS": {
+            "NO_VALID_PLAYERS": "There are no valid players to process",
+            "NO_BONUS_CODE_SELECTED": "No bonus code was selected",
+            "INVALID_AMOUNT": "The max amount you may enter is 9999.99",
+            "TRIGGER_PROCESSING": "Failed to trigger file for processing",
+            "BONUS_FILE_UPLOAD_FAILED": "Bonus file upload failed, check your file for errors or kindly contact your administrator"
+            },
+          "PROGRESS_BAR": {
+            "UPLOADING_LABEL": "Upload in progress, please wait for process to start...",
+            "PROCESSING_LABEL": "Waiting for process to start, please wait..."
+          },
+          "SUMMARY": {
+            "EXISTING_PLAYERS": "existing players found",
+            "UNDEFINED_PLAYERS": "undefined players found",
+            "DUPLICATED_PLAYERS": "players duplicated"
+          },
+          "TOOLTIP": "CSV file should contain \"Player-ID, Amount\" per row with the first row as header. If amount is not present - the default will be taken instead."
+        }
+      }
+    },
+    "PLAYER": {
+      "BONUS": {
+        "GRANT_BONUS": {
+          "FIELDS": {
+            "BONUS_CODE": {
+              "LABEL": "Bonus Name %26 Code"
+            },
+            "DESC": {
+              "DESC": "Additional information/description about the bonus (optional, for internal use only)"
+            }
+          }
+        }
+      },
+      "TAB": {
+        "CASHBONUS": {
+          "BONUSNAME": "Bonus Name"
+        }
+      }
+    }
+  }
+}

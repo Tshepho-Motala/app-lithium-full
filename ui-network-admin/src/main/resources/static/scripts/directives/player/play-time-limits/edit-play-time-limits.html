@@ -1,0 +1,25 @@
+<div class="modal-content" bs-loading-overlay bs-loading-overlay-reference-id="{{controller.referenceId}}">
+	<div class="modal-header primary-blue darken-4 white-text">
+		<h3 class="modal-title" id="modal-title">
+			<i class="fa fa-pencil"></i>
+			{{ 'UI_NETWORK_ADMIN.PLAY_TIME_LIMITS.POP_UP_DIALOG.EDIT_PLAY_TIME_LIMIT' | translate }}
+			<button-close-window ng-click="controller.cancel()"></button-close-window>
+		</h3>
+	</div>
+
+	<form ng-submit="controller.confirm()" name="controller.form" autocomplete="off" novalidate>
+	<div class="modal-body" id="modal-body">
+		<div class="row v-reset-row ">
+			<div class="col-xs-12">
+				<formly-form model="controller.model" fields="controller.fields" form="controller.form" options="controller.options">
+				</formly-form>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal-footer">
+		<button-submit lit-permission-domain="{{controller.user.domain.name}}" ng-disabled="true"></button-submit>
+		<button-cancel ng-click="controller.cancel()"></button-cancel>
+	</div>
+	</form>
+</div>

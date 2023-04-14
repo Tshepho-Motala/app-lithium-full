@@ -1,0 +1,217 @@
+<div class="container-fluid">
+	<div class="box box-primary box-widget">
+		<div class="box-body box-profile">
+			<div class="user-block">
+				<h4 style="font-weight: bold;">
+					Results Batch ({{controller.resultBatch.id}})
+				</h4>
+				<small>Total Play ({{controller.resultBatch.totalPlay|currency}})</small>
+			</div>
+		</div>
+	</div>
+	
+	<buttonbar>
+		<button-back ui-sref="dashboard.gogamegames.resultbatches"></button-back>
+		<button-refresh ng-click="controller.refresh()"></button-refresh>
+		<button-download-excel ng-if="controller.resultBatch.completed" ng-click="controller.downloadxls()"></button-download-excel>
+		<button-custom lit-if-permission="GOGAMEGAMES_RESULT_BATCHES_EDIT" ng-if="((controller.resultBatch.completed) && (controller.resultBatch.assignedToLedger === undefined || controller.resultBatch.assignedToLedger === null))" btype="button" ng-click="controller.assignToLedger()" bclass="default" icon="file-text-o" text="Assign to ledger"></button-custom>
+	</buttonbar>
+	
+	<br/><br/>
+	
+	<div ng-if="controller.resultBatch.processing" class="panel box box-warning">
+		<div class="box-header with-border">
+			<h4 class="box-title">Result batch is currently processing. Check back in a few minutes.</h4>
+		</div>
+	</div>
+	
+	<div ng-if="controller.resultBatch.processing === false && controller.resultBatch.numCompleted === 0" class="panel box box-info">
+		<div class="box-header with-border">
+			<h4 class="box-title">Result batch processing will begin shortly.</h4>
+		</div>
+	</div>
+	
+	<div ng-if="controller.resultBatch.numCompleted > 0">
+		<div class="row v-reset-row ">
+			<div class="col-xs-6">
+				<div class="info-box bg-aqua">
+					<span class="info-box-icon"><i class="fa fa-spinner"></i></span>
+					
+					<div class="info-box-content">
+						<span class="info-box-text">RESULT BATCH PROCESSING</span>
+						<span class="info-box-number">{{controller.resultBatch.numCompleted/controller.resultBatch.quantity*100|number:2}}%</span>
+						<div class="progress">
+	 						<div class="progress-bar" style="width: {{controller.resultBatch.numCompleted/controller.resultBatch.quantity*100}}%"></div>
+						</div>
+						<span class="progress-description">
+							{{controller.resultBatch.numCompleted}} of {{controller.resultBatch.quantity}}
+						</span>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-6">
+				<div class="info-box bg-green">
+					<span class="info-box-icon"><i class="fa fa-file-text-o"></i></span>
+					<div class="info-box-content">
+						<span class="info-box-text">ASSIGNED LEDGER</span>
+						<span ng-if="!controller.resultBatch.assignedToLedger" class="info-box-number">NONE</span>
+						<span ng-if="controller.resultBatch.assignedToLedger" class="info-box-number">{{controller.resultBatch.assignedToLedger.name}}</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="row v-reset-row ">
+			<div class="col-md-3 col-sm-6 col-xs-12">
+				<div class="info-box">
+					<span class="info-box-icon bg-red" style="width: 112px; height: 112px; line-height: 112px;"><i class="fa fa-dollar"></i></span>
+					<div class="info-box-content" style="margin-left: 112px;">
+						<span class="info-box-text">Play</span> 
+						<span class="info-box-number">{{controller.resultBatchAnalysis.totalPlayCents|cents}}</span>
+					</div>
+					<div class="info-box-content" style="margin-left: 112px;">
+						<span class="info-box-text">Win</span> 
+						<span class="info-box-number">{{controller.resultBatchAnalysis.winCents|cents}}</span>
+					</div>
+				</div>
+			</div>
+	
+			<div class="col-md-3 col-sm-6 col-xs-12">
+				<div class="info-box">
+					<span class="info-box-icon bg-green" style="width: 112px; height: 112px; line-height: 112px;"><i class="fa fa-gamepad"></i></span>
+					<div class="info-box-content" style="margin-left: 112px;">
+						<span class="info-box-text">Spins</span>
+						<span class="info-box-number">{{controller.resultBatch.quantity}}</span>
+					</div>
+					<div class="info-box-content" style="margin-left: 112px;">
+						<span class="info-box-text">Wins</span>
+						<span class="info-box-number">{{controller.resultBatchAnalysis.wins}}</span>
+					</div>
+				</div>
+			</div>
+			
+			<div class="col-md-3 col-sm-6 col-xs-12">
+				<div class="info-box">
+					<span class="info-box-icon bg-yellow" style="width: 112px; height: 112px; line-height: 112px;"><i class="fa fa-repeat"></i></span>
+					
+					<div class="info-box-content" style="margin-left: 112px;">
+						<span class="info-box-text">Respins</span>
+						<span class="info-box-number">{{controller.resultBatchAnalysis.respins}}</span>
+					</div>
+					<div class="info-box-content" style="margin-left: 112px;">
+						<span class="info-box-text">Wins</span>
+						<span class="info-box-number">{{controller.resultBatchAnalysis.respinWins}}</span>
+					</div>
+				</div>
+			</div>
+			
+			<div class="col-md-3 col-sm-6 col-xs-12">
+				<div class="info-box">
+					<span class="info-box-icon bg-aqua" style="width: 112px; height: 112px; line-height: 112px;">
+						<i class="fa fa-play"></i>
+					</span>
+					<div class="info-box-content" style="margin-left: 112px;">
+						<span class="info-box-text">Freespins</span>
+						<span class="info-box-number">{{controller.resultBatchAnalysis.freespins}}</span>
+					</div>
+					<div class="info-box-content" style="margin-left: 112px;">
+						<span class="info-box-text">Wins</span>
+						<span class="info-box-number">{{controller.resultBatchAnalysis.fsWins}}</span>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-md-3 col-sm-6 col-xs-12">
+				<div class="info-box">
+					<span class="info-box-icon bg-purple" style="width: 112px; height: 112px; line-height: 112px;">
+						<i class="fa fa-gift"></i>
+					</span>
+					<div class="info-box-content" style="margin-left: 112px;">
+						<span class="info-box-text">Bonuses</span>
+						<span class="info-box-number">{{controller.resultBatchAnalysis.bonuses}}</span>
+					</div>
+					<div class="info-box-content" style="margin-left: 112px;">
+						<span class="info-box-text">Win</span>
+						<span class="info-box-number">{{controller.resultBatchAnalysis.bonusWinCents|cents}}</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="row v-reset-row ">
+			<div class="col-xs-12">
+				<div class="info-box" ng-class="{'bg-red': controller.resultBatchAnalysis.rtpPercentage > 100, 'bg-green': controller.resultBatchAnalysis.rtpPercentage < 100}">
+					<span class="info-box-icon"><i class="fa fa-info-circle"></i></span>
+					
+					<div class="info-box-content">
+						<span class="info-box-text">RTP</span>
+						<span class="info-box-number">{{controller.resultBatchAnalysis.rtpPercentage}}%</span>
+						<div class="progress">
+	 						<div class="progress-bar" style="width: {{controller.resultBatchAnalysis.rtpPercentage}}%"></div>
+						</div>
+						<span class="progress-description">
+							{{controller.resultBatchAnalysis.winCents|cents}} of {{controller.resultBatchAnalysis.totalPlayCents|cents}}
+						</span>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="row v-reset-row " ng-if="controller.resultBatchAnalysis.freespins > 0 || controller.resultBatchAnalysis.bonuses > 0">
+			<div class="col-xs-12">
+				<div class="info-box" ng-class="{'bg-red': controller.resultBatchAnalysis.baseRtpPercentage > 100, 'bg-green': controller.resultBatchAnalysis.baseRtpPercentage < 100}">
+					<span class="info-box-icon"><i class="fa fa-info-circle"></i></span>
+					
+					<div class="info-box-content">
+						<span class="info-box-text">BASE RTP</span>
+						<span class="info-box-number">{{controller.resultBatchAnalysis.baseRtpPercentage}}%</span>
+						<div class="progress">
+	 						<div class="progress-bar" style="width: {{controller.resultBatchAnalysis.baseRtpPercentage}}%"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div ng-if="controller.resultBatchAnalysis.freespins > 0" class="col-xs-12">
+				<div class="info-box" ng-class="{'bg-red': controller.resultBatchAnalysis.freespinRtpPercentage > 100, 'bg-green': controller.resultBatchAnalysis.freespinRtpPercentage < 100}">
+					<span class="info-box-icon"><i class="fa fa-info-circle"></i></span>
+					
+					<div class="info-box-content">
+						<span class="info-box-text">FREESPIN RTP</span>
+						<span class="info-box-number">{{controller.resultBatchAnalysis.freespinRtpPercentage}}%</span>
+						<div class="progress">
+	 						<div class="progress-bar" style="width: {{controller.resultBatchAnalysis.freespinRtpPercentage}}%"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div ng-if="controller.resultBatchAnalysis.bonuses > 0" class="col-xs-12">
+				<div class="info-box" ng-class="{'bg-red': controller.resultBatchAnalysis.bonusRtpPercentage > 100, 'bg-green': controller.resultBatchAnalysis.bonusRtpPercentage < 100}">
+					<span class="info-box-icon"><i class="fa fa-info-circle"></i></span>
+
+					<div class="info-box-content">
+						<span class="info-box-text">BONUS RTP</span>
+						<span class="info-box-number">{{controller.resultBatchAnalysis.bonusRtpPercentage}}%</span>
+						<div class="progress">
+							<div class="progress-bar" style="width: {{controller.resultBatchAnalysis.bonusRtpPercentage}}%"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	<!-- 	<pre>{{controller.resultBatch|json}}</pre> -->
+	</div>
+	
+	<div class="row v-reset-row ">
+		<div class="col-xs-12">
+			<div class="box box-default">
+				<div class="box-header with-border">
+					<h3 class="box-title">Batch Results</h3>
+				</div>
+				<div class="box-body no-padding table-responsive">
+					<dt table="controller.resultsTable"/>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

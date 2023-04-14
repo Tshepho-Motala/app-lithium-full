@@ -1,0 +1,51 @@
+= Running Acceptance Tests [[_run_acceptance_tests]]
+
+TIP: Acceptance Test plans and results are located in link:https://gitlab.com/playsafe/lithium/service-casino-provider-iforium-test[service-casino-provider-iforium-test].
+
+== Running locally
+
+Before running any tests, the local LBO needs to be appropriately configured and populated with Players, Balances and Games.
+
+The acceptance tests require that, when running locally, the local Domain be configured with the same values as those configured in the link:https://lbo.lithium-develop.ls-g.net/#/dashboard/domains/domain/livescore_ua/view[`Livescore_UA`] Domain in the Development environment.
+
+NOTE: Configuring the Domain only needs to be done once. Subsequent test executions will use the locally-configured values.
+
+WARNING: Only `Livescore_UA` should be used for testing, as `Livescore_UK` is constantly used for testing by other teams, which may cause our tests to fail.
+
+=== Configure the LBO
+
+Configuration scripts can be found in link:https://gitlab.com/playsafe/lithium/app-lithium-full/-/tree/develop/service-casino/service-casino-provider-iforium/docs/test[/service-casino-provider-iforium/docs/test].
+
+Each folder contains an _ordered_ collection of `.http` and `.sql` command files. These can be executed as batches from within the IDE (Intellij IDEA). Run the commands in the folders in the following order:
+
+. link:https://gitlab.com/playsafe/lithium/app-lithium-full/-/tree/develop/service-casino/service-casino-provider-iforium/docs/test/setup-domain-flow[setup-domain-flow]
+
+. link:https://gitlab.com/playsafe/lithium/app-lithium-full/-/tree/develop/service-casino/service-casino-provider-iforium/docs/test/adjust-balance-flow[adjust-balance-flow]
+. https://gitlab.com/playsafe/lithium/app-lithium-full/-/tree/develop/service-casino/service-casino-provider-iforium/docs/test/setup-game[setup-game]
+
+:leveloffset: +2
+include::development-local-lbo.adoc[]
+
+include::development-run-supporting-services.adoc[]
+
+:leveloffset: -2
+
+== Running on the Development Environment
+
+When running tests against the Development environment, you will need to update your local copy of https://gitlab.com/playsafe/lithium/service-casino-provider-iforium-test/-/blob/main/src/test/resources/application-develop.properties[application-develop.properties] to add values for the following credentials:
+
+* lithium.gateway.system-user-basic-auth-api-token
+* lithium.gateway.acme-user-basic-auth-api-token
+* lithium.admin.password
+* iforium.password
+
+You will also need to add an `X-Forwarded-For` request header to https://gitlab.com/playsafe/lithium/service-casino-provider-iforium-test/-/blob/main/src/test/java/service/casino/provider/iforium/service/IForiumService.java[iForiumService.java], to mimic the Roxor VPN. Add the following to the link:https://gitlab.com/playsafe/lithium/service-casino-provider-iforium-test/-/blob/main/src/test/java/service/casino/provider/iforium/service/IForiumService.java#L94[balance] and https://gitlab.com/playsafe/lithium/service-casino-provider-iforium-test/-/blob/main/src/test/java/service/casino/provider/iforium/service/IForiumService.java#L119[redeemToken] requests:
+
+[code,java]
+----
+.header("X-Forwarded-For", "34.89.5.142")
+----
+
+== Run the Tests
+
+Once all settings and services are in place, you can run the tests using link:https://gitlab.com/playsafe/lithium/service-casino-provider-iforium-test/-/blob/main/src/test/java/service/casino/provider/iforium/CucumberIntegrationTest.java[`service.casino.provider.iforium.CucumberIntegrationTest`].

@@ -1,0 +1,151 @@
+.lithium_user ERD (!full schema)
+[plantuml]
+----
+@startuml
+'https://plantuml.com/class-diagram
+
+skinparam linetype ortho
+!define T(name,desc) class name as "desc" << (T,#FFAAAA) >>
+
+!define pk(x) <b>x</b>
+!define fk(x) <color:purple><i>x</i></color>
+!define unique(x) <color:green>x</color>
+!define nn(x) <u>x</u>
+
+T(user, "user\n Contains some users") {
+  pk(id) bigint <<generated>>
+  --
+  fk(current_id): bigint
+  fk(current_collection_data_rev_id): bigint
+  fk(domain_id): bigint
+  fk(user_favourites_id): bigint
+  fk(postal_address_id): bigint
+  fk(residential_address_id):  bigint
+  fk(status_id): bigint
+  fk(status_reason_id): bigint
+  fk(last_login_id): bigint
+  fk(user_api_token_id): bigint
+'  TODO: Check if verifiation status has a table associated to it
+  fk(verification_status): bigint
+  --
+  nn(unique(guid)): varchar(100)
+  nn(created_date): datetime
+  nn(updated_date): datetime
+  nn(username): varchar(35)
+  nn(test_account): bit default b'0'
+  nn(deleted): bit
+  external_username: varchar(35)
+  email: varchar(255)
+  deleted_email: varchar(255)
+  cellphone_number: varchar(255)
+  deleted_cellphone_number: varchar(255)
+  telephone_number: varchar(255)
+  deleted_telephone_number: varchar(255)
+  first_name: varchar(35)
+  last_name_prefix: varchar(255)
+  last_name: varchar(35)
+  gender: varchar(10)
+  dob_year: int
+  dob_month: int
+  dob_day: int
+  country_code: varchar(255)
+  place_of_birth: varchar(255)
+  social_security_number: varchar(15)
+  timezone: varchar(255)
+  comments: longtext
+  password_plaintext: varchar(255)
+  password_hash: varchar(255)
+  password_updated: datetime
+  password_updated_by: varchar(255)
+  referrer_guid: varchar(255)
+  age_verified: bit default b'0'
+  address_verified: bit default b'0'
+  email_validated: bit default b'0'
+  cellphone_validated: bit default b'0'
+  email_opt_out: bit default b'0'
+  sms_opt_out: bit default b'0'
+  call_opt_out: bit default b'0'
+  post_opt_out: bit default b'0'
+  promotions_opt_out: bit default b'0'
+  push_opt_out: bit default b'0'
+  leaderboard_opt_out: bit default b'0'
+  comms_opt_in_complete: bit default b'0'
+  excessive_failed_login_block: bit
+  auto_withdrawal_allowed: bit
+  failed_reset_count: int
+  welcome_email_sent: bit default b'0'
+  welcome_sms_sent: bit default b'0'
+  has_self_excluded: bit
+  bonus_code: varchar(20)
+  protection_of_customer_funds_version: varchar(35)
+  terms_and_conditions_version: varchar(35)
+  version: int
+}
+
+T(domain, "domain\n Domains registered in the system") {
+  pk(id) bigint <<generated>>
+  --
+  nn(unique(name)): varchar(255)
+  version: int
+}
+
+T(address , "address\n Used to store both postal and addresses for a user") {
+  pk(id): bigint <<generated>>
+  --
+  fk(user_id): bigint
+  --
+  nn(address_line1): varchar(255)
+  address_line2: varchar(255)
+  address_line3: varchar(255)
+  admin_level1: varchar(255)
+  admin_level1code: varchar(10)
+  nn(city): varchar(255)
+  city_code: varchar(10)
+  nn(country): varchar(255)
+  country_code: varchar(10)
+  postal_code: varchar(255)
+  manual_address: bit
+  version: int
+}
+
+T(user_favourites, "user_favourites\n User favourites") {
+  pk(id): bigint <<generated>>
+  --
+  events: longtext
+  competitions: longtext
+  last_updated: datetime
+}
+
+T(collection_data_revision_entry, "collection_data_revision_entry\n Contains collection data revision history") {
+  pk(id): bigint
+  --
+  fk(collection_revision_id): bigint
+  fk(collection_data_id): bigint
+  fk(last_updated_revision_id): bigint
+  --
+  version: int
+  --
+  constraint(collection_revision_id, collection_data_id)
+}
+
+T(collection_data, "collection_data/") {
+  pk(id): bigint
+  --
+  nn(collection_name): varchar(255)
+  nn(data_key): varchar(255)
+  nn(data_value): varchar(512)
+  version: int
+  --
+  constraint(collection_name, data_key, data_value)
+}
+
+user }o--|| domain
+user ||--o| address
+user }|--o| user_favourites
+user ||--o{ collection_data_revision
+user ||--o| collection_data_revision
+collection_data_revision ||--o{ collection_data_revision_entry
+collection_data_revision_entry }|--|| collection_data
+
+@enduml
+----

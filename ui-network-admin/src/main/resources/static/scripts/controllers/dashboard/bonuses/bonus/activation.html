@@ -1,0 +1,34 @@
+<div class="row v-reset-row ">
+	<div class="col-md-12">
+		<div class="nav-tabs-custom" style="margin-bottom: 0px;">
+			<div class="tab-content" style="padding: 5px;">
+				<div class="well" style="margin-bottom: 1px;">
+					<div class="btn-group pull-right" uib-dropdown>
+						<button id="dropdown-type" type="button" class="btn btn-default" uib-dropdown-toggle>
+							{{ controller.selectedStatusesDisplay }} <span class="caret"></span>
+						</button>
+						<ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="dropdown-type">
+							<li role="menuitem"><a ng-click="controller.statusSelectAll();controller.bonusTableLoad();">All Statuses</a></li>
+							<li class="divider"></li>
+							<li class="domain-select" role="menuitem" ng-repeat="status in controller.statuses | unique : 'name'">
+								<input ng-model="status.selected" type="checkbox" title="STATUS" ng-change="controller.statusSelect();controller.bonusTableLoad();"/>
+									{{status.name}}
+							</li>
+						</ul>
+					</div>
+					<button registerbonususersearch bonusrevision="controller.bonusRevision" type="button" class="btn btn-default" lit-if-permission="MANUAL_BONUS_ALLOCATION" ng-click="controller.openRegisterBonus()">
+						<i class="fa fa-plus"></i>
+						{{ 'UI_NETWORK_ADMIN.BONUS.ACTIVATION.REGISTER_PLAYER' | translate }}
+					</button>
+					<button-refresh ng-click="controller.refresh()"></button-refresh>
+					<br/><br/>
+					<div class="box">
+						<div class="box-body no-padding table-responsive">
+							<dt table="controller.bonusActivationTable" />
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

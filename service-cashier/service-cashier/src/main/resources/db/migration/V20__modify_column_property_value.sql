@@ -1,0 +1,1 @@
+ALTER TABLE `domain_method_processor_property` MODIFY COLUMN `value` varchar(10000) DEFAULT NULL;

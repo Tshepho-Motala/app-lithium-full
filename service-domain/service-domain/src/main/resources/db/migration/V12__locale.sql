@@ -1,0 +1,1 @@
+ALTER TABLE `domain`ADD COLUMN `default_locale` VARCHAR(20) NOT NULL DEFAULT 'en_US';

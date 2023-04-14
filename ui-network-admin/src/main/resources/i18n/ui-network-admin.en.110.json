@@ -1,0 +1,71 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "GOGAME": {
+      "DEBUG_RESULTS": {
+        "ADD":{
+          "FIELDS": {
+            "ID": {
+              "TITLE": "Debug Result Id",
+              "DESC": "The id for the debug result."
+            },
+            "ENGINE": {
+              "TITLE": "Engine Id",
+              "PLACEHOLDER": "Select Engine",
+              "DESC": "The Engine for the debug result."
+            },
+            "MATH_MODEL": {
+              "TITLE": "Math Model Id",
+              "PLACEHOLDER": "Select Math Model",
+              "DESC": "Choose the math model. The purpose of this is to populate the debug result with appropriate reels setup and other configuration properties"
+            },
+            "TOTAL_PLAY": {
+              "TITLE": "Total Play",
+              "DESC": "The Total Play for the debug result."
+            },
+            "WIN_CENTS": {
+              "TITLE": "Win Cents",
+              "DESC": "Win Cents for the debug result."
+            },
+            "RESULT": {
+              "TITLE": "Result",
+              "DESC": "The JSON response that needs to be passed to the game."
+            }
+          }
+        },
+        "EDIT":{
+          "FIELDS": {
+            "ID": {
+              "TITLE": "Debug Result Id",
+              "DESC": "The id for the debug result."
+            },
+            "ENGINE": {
+              "TITLE": "Engine Id",
+              "PLACEHOLDER": "Select Engine",
+              "DESC": "Choose the engine for debug result"
+            },
+            "MATH_MODEL": {
+              "TITLE": "Math Model Id",
+              "PLACEHOLDER": "Select Math Model",
+              "DESC": "Choose the math model. The purpose of this is to populate the tutorial with appropriate reels setup and other configuration properties"
+            },
+            "TOTAL_PLAY": {
+              "TITLE": "Total Play",
+              "DESC": "The Total Play for the debug result."
+            },
+            "WIN_CENTS": {
+              "TITLE": "Win Cents",
+              "DESC": "Win Cents for the debug result."
+            },
+            "RESULT": {
+              "TITLE": "Result",
+              "DESC": "The JSON response that needs to be passed to the game."
+            }
+          }
+        },
+        "DELETE": {
+          "ENGINE": "Delete By Engine"
+        }
+      }
+    }
+  }
+}

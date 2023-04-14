@@ -1,0 +1,117 @@
+= LSPLAT-5389 PLAT-6096 ⁃ NL email validation
+Steven Makunzva <steven.makunzva@wonderlabz.com>
+1.0, 13 April 2022:: TA - LSPLAT-5389 PLAT-6096 ⁃ NL email validation
+:toc: left
+:toclevels: 4
+:toc-title:
+:icons: font
+:url-quickref: https://docs.asciidoctor.org/asciidoc/latest/syntax-quick-reference/
+
+== Information
+=== Tickets
+* https://playsafe.atlassian.net/browse/LSPLAT-5389
+* https://jira.livescore.com/browse/PLAT-6096
+
+== Dependancies
+* N/A
+
+== MR
+* https://gitlab.com/playsafe/lithium/app-lithium-full/-/merge_requests/4650
+* MR contains the branch that should be used to complete the task
+
+== Description (From Ticket)
+* User can re-trigger their email from FE
+* CS agent can change the user's email but the new email will have to be validated
+* New email added start in pending unvalidated state and old email remains validated until new email becomes validated by the user when they click on the link
+
+== Overview
+
+This functionality will apply to domains that require email validation when there is an email update.
+
+If a domain has a config setting [pending_email_validation_activate], the old email will remain active/validated, the new email will be unvalidated and will be checked against the ecosystem for uniqueness. The new email will become active when a user clicks on the validation link.
+
+For domains without the email validation config setup, the new email will automatically be set to active and validated when performing an email update.
+
+include::../plantuml/overview.service-user-email-validation.puml[]
+
+== Technical implementation
+We have the classes and APIs below that need to be modified and please also check if there are more APIs I might have missed
+
+* `ValidateController.java`
+** `# service-user/frontend/{domain}/validate/mail/2`
+*** This API will be called by the FE to validate the authentication token. Currently it does modify the player's email address and sets it to validated.
+ This should be changed as the email update process should now only be performed by a customer service agent.
+* `PlayerController.java`
+** `# service-user/{domain}/players/{id}`
+This API will:
+*** Check for the domain setting `pending_email_validation_activate` if it exists and is true. If it is true
+*** Perform ecosystem check for email uniqueness
+*** Save email as a label value with label pendingEmail
+*** Generate validation token and send it to the player for validation
+
+** These APIs will be called via LBO and needs to be updated. The APIs need to do the following when a request is sent through
+*** `# service-user/{domain}/players/{id}/v2/redoemailvalidation`
+*** `# service-user/{domain}/players/{id}/redoemailvalidation`
+**** Check if player token was validated
+**** Get the pending email and update the player email
+**** Set the email to validated
+**** Ensure that the redoemailvalidation endpoints are restricted to *PLAYER_EDIT* role
+
+* `EmailValidationController.java`
+*** `#{domainName}/{email or username}/emailvalidation/v2/step1`
+This API will be called by the FE to re-trigger the process in case player missed the previous token. This will send a validation
+token
+
+* `UserService.java`
+*** `UserService#isUniqueEmailEcosystemAware`
+This method will be edited to incorporate the pending email check
+
+* Other technical operations that needs to be performed
+** Upon successful update of email
+*** Move old email to `lithium_user.user.deleted_email`
+*** Delete the value_label of the pending email record from `lithium_user.label_value`
+
+=== Ecosystem Uniqueness checks
+
+* We need to include the `pendingEmail` values as part of the email uniqueness checks whenever the domain setting `pending_email_validation_activate` = true
+** Inside Ecosystem
+*** Registration: When user is being registered on a domain as part of an ecosystem, then we need to check whether the email (`user.email` & `user_revision_label_values` `pendingEmail`) being registered with exists on any of the domains belonging to the same ecoystem
+*** User Profile updates: As with registration, whenever an email is being changed, we first need to check whether the email already exists on a user belonging to any of the domains within an ecosystem, before making the change
+** Outside Ecosystem:
+*** Registration: Ony difference is that the email uniqueness check will now only be performed on the domain the user is trying to registerer with
+*** User Profile updates: Same as with Register outside an ecosystem, we will only validate whether the email already exist on the domain the user is trying to register with.
+
+See `UserService#isUniqueEmail`
+
+WARNING: Take note that we will only include the pending_email uniqueness checks whenever `pending_email_validation_activate` = true; else we will follow normal uniqueness checks as it is currently functioning in prod (excluding `pendingEmail` label values)
+
+==== Example query to see whether a player has a pendingEmail
+[source,sql]
+SELECT *
+FROM user_revision_label_value urlv
+INNER JOIN user as u on u.current_id = urlv.user_revision_id
+INNER JOIN domain as d on u.domain_id = d.id
+INNER JOIN label_value lv on urlv.label_value_id = lv.id
+INNER JOIN label l on lv.label_id = l.id
+WHERE d.name in ('livescore_uk', 'livescore_media')
+AND l.name = 'pendingEmail'
+AND lv.value = 'blakaas@gmail.com' # This will be the email that the user tries to register with or tries to update their account with
+
+=== When backoffice user changes email
+
+* Whenever the domain setting `pending_email_validation_activate` = true
+** Do uniqueness checks on email
+** If email is found to be unique, add the new email as `pendingEmail` (the existing email will remain validated until the new email is validated)
+** Send email validation token to new email
+* When `pending_email_validation_activate` = false
+** Do uniqueness checks on email
+** If email is found to be unique, update `user.email` with the new email and move the old email to `user.deleted_email` and set `email_validated` = false
+** Send email validation token to new email
+
+=== On successful email validation
+
+* Whenever the domain setting `pending_email_validation_activate` = true
+** Update `user.email` with the `pendingEmail` value and move the old email to `user.deleted_email` and set `pendingEmail` = true
+** Set email_validated = true
+* When `pending_email_validation_activate` = false
+** Set `email_validated` = true

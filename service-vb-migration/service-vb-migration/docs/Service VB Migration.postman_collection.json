@@ -1,0 +1,34 @@
+{
+	"info": {
+		"_postman_id": "7007ddf2-fb73-48f2-b1fe-d93bf412f80e",
+		"name": "Service VB Migration",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13768123"
+	},
+	"item": [
+		{
+			"name": "Initiate Migration",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{gateway}}/service-vb-migration/backoffice/migration/initiate-migration/{{domainName}}",
+					"host": [
+						"{{gateway}}"
+					],
+					"path": [
+						"service-vb-migration",
+						"backoffice",
+						"migration",
+						"initiate-migration",
+						"{{domainName}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

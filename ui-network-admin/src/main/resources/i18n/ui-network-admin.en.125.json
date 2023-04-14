@@ -1,0 +1,17 @@
+{
+  "UI_NETWORK_ADMIN": {
+      "PLAYER": {
+        "BONUSHISTORY": {
+          "TABLE": {
+            "COMPLETEDATE": "Completion date",
+            "SOMEERRORS": "Some error occurred"
+          }
+        }
+      }
+  },
+  "GLOBAL": {
+    "ACTION" : {
+      "DOWNLOADCSV": "Download csv"
+    }
+  }
+}

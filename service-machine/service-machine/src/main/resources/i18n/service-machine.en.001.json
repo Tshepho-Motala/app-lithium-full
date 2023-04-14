@@ -1,0 +1,182 @@
+{
+	"GLOBAL": {
+		"GRANULARITY": {
+			"DAILY": "Daily",
+			"WEEKLY": "Weekly",
+			"MONTHLY": "Monthly",
+			"YEARLY": "Yearly"
+		},
+		"ACTION": {
+			"CLOSE": "Close",
+			"REMOVE": "Remove"
+		}
+	},
+	"UI_NETWORK_ADMIN": {
+		"SERVICE_MACHINE": {
+			"DASHBOARD": {
+				"TITLE": "Machines Dashboard",
+				"DESCRIPTION": "Statistics and information related to machines",
+				"MACHINESONLINE": "Machines Online",
+				"MACHINESACTIVE": "Machines Active"
+			},
+			"MACHINES": {
+				"ADD": {
+					"TITLE": "Add a machine",
+					"DESCRIPTION": "Please enter the machine configuration below. Once you are done, click on submit.",
+					"SUCCESS": "Machine added",
+					"DETAILS": "Details",
+					"LOCATION": "Location",
+					"NOLOCATIONADDED": "No location added yet.",
+					"RELATIONSHIPS": "Relationships",
+					"NORELATIONSHIPSADDED": "No relationships added yet."
+				},
+				"LIST": {
+					"TITLE": "Machines List",
+					"DESCRIPTION": "A searchable list of all machines",
+					"ID": "ID",
+					"GUID": "GUID",
+					"STATUS": "Status",
+					"NAME": "Name"
+				},
+				"VIEW": {
+					"TITLE": "View ({{machineName}})",
+					"HISTORY": "History",
+					"DETAILS": "Details",
+					"CHANGESTATUS": {
+						"SUCCESS": "Status changed"
+					},
+					"CHANGEDETAILS": {
+						"TITLE": "Change Machine Details",
+						"SUCCESS": "Machine details changed"
+					},
+					"LOCATIONS": {
+						"LOCATION": "Location",
+						"CHANGELOCATIONDISTRIBUTION": "Change Location Distribution",
+						"SETDISTRIBUTIONPERCENTAGE": "Set distribution percentage",
+						"CHOOSEENTITY": "Choose an entity",
+						"LOCATIONHISTORY": "Location History",
+						"NOLOCATIONADDED": "No location added yet.",
+						"DELETE": {
+							"SUCCESS": "Location cleared"
+						},
+						"DELETEHISTORY": {
+							"SUCCESS": "Location history deleted"
+						},
+						"CHANGELOCATIONHISTORY": {
+							"SUCCESS": "Location history changed"
+						},
+						"CHANGELOCATION": {
+							"SUCCESS": "Location saved"
+						},
+						"ADDLOCATION": {
+							"TITLE": "Add Location",
+							"SUCCESS": "Location added"
+						}
+					},
+					"RELATIONSHIPS": {
+						"RELATIONSHIPS": "Relationships",
+						"RELATIONSHIPHISTORY": "Relationship History",
+						"CHANGERELATIONSHIPDISTRIBUTION": "Change Relationship Distribution",
+						"SETDISTRIBUTIONPERCENTAGE": "Set distribution percentage",
+						"CHOOSEENTITY": "Choose an entity",
+						"NORELATIONSHIPSADDED": "No relationships added yet.",
+						"DELETE": {
+							"SUCCESS": "Relationship cleared"
+						},
+						"DELETEHISTORY": {
+							"SUCCESS": "Relationship history deleted"
+						},
+						"CHANGERELATIONSHIPHISTORY": {
+							"SUCCESS": "Relationship history changed"
+						},
+						"CHANGERELATIONSHIP": {
+							"SUCCESS": "Relationship saved"
+						},
+						"ADDRELATIONSHIP": {
+							"TITLE": "Add Relationship",
+							"SUCCESS": "Relationship added"
+						}
+					},
+					"DISTRIBUTIONTEST": {
+						"TITLE": "Distribution Test",
+						"ACTION": {
+							"TEST": "Test"
+						},
+						"NODISTRIBUTIONAPPLICABLE": "No distribution applicable.",
+						"LOCATIONS": "Location's"
+					}
+				},
+				"FIELDS": {
+					"STATUS": {
+						"NOTSETUP": "Not Setup"
+					},
+					"GUID": {
+						"NAME": "GUID",
+						"DESCRIPTION": "Enter the machine's GUID"
+					},
+					"NAME": {
+						"NAME": "Name",
+						"DESCRIPTION": "Enter a unique name for the machine"
+					},
+					"DESCRIPTION": {
+						"NAME": "Description",
+						"DESCRIPTION": "Enter a description for the machine"
+					},
+					"LOCATIONS": {
+						"ENTITY": {
+							"NAME": "Entity"
+						},
+						"DISTRIBUTIONPERCENTAGE": {
+							"NAME": "Distribution Percentage"
+						},
+						"START": {
+							"NAME": "Start"
+						},
+						"END": {
+							"NAME": "End"
+						},
+						"PERCENTAGE": {
+							"NAME": "Percentage",
+							"DESCRIPTION": "Enter the distribution percentage for this location"
+						}
+					},
+					"RELATIONSHIPS": {
+						"ENTITY": {
+							"NAME": "Entity"
+						},
+						"DISTRIBUTIONPERCENTAGE": {
+							"NAME": "Distribution Percentage"
+						},
+						"START": {
+							"NAME": "Start"
+						},
+						"END": {
+							"NAME": "End"
+						},
+						"PERCENTAGE": {
+							"NAME": "Percentage",
+							"DESCRIPTION": "Enter the distribution percentage for this relationship"
+						}
+					},
+					"DISTRIBUTIONTEST": {
+						"DATE": {
+							"NAME": "Date"
+						},
+						"ENTITY": {
+							"NAME": "Entity"
+						},
+						"STARTDATE": {
+							"NAME": "Start Date"
+						},
+						"ENDDATE": {
+							"NAME": "End Date"
+						},
+						"DISTRIBUTIONPERCENTAGE": {
+							"NAME": "Distribution Percentage"
+						}
+					}
+				}
+			}
+		}
+	}
+}

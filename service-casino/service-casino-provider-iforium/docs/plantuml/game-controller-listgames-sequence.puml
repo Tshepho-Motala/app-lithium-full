@@ -1,0 +1,91 @@
+.List Games Sequence
+[plantuml]
+----
+@startuml
+
+    box "LiveScore" #pink
+        actor "Account Manager" as manager
+    end box
+
+    box "Lithium" #LightBlue
+        participant "Games Service" as games
+        participant "iForium Casino Provider" as provider
+        participant "Config Service" as config
+    end box
+
+    box "iForium" #LightGreen
+       participant "Back Office Portal" as portal
+    end box
+
+    database "Asset Storage" as storage
+    collections "Games List CSV" as csv
+
+    skinparam handwritten false
+    skinparam backgroundColor transparent
+    skinparam roundcorner 10
+
+    skinparam  DatabaseBorderColor ffffff
+    skinparam  DatabaseBackgroundColor 3292b4
+    skinparam  DatabaseFontName Arial
+    skinparam  DatabaseFontSize 17
+    skinparam  DatabaseFontColor white
+
+    skinparam  CollectionsBorderColor ffffff
+    skinparam  CollectionsBackgroundColor 3292b4
+    skinparam  CollectionsFontName Arial
+    skinparam  CollectionsFontSize 17
+    skinparam  CollectionsFontColor white
+
+    skinparam BoxPadding 20
+
+    skinparam sequence {
+
+        ArrowColor 3292b4
+        ArrowThickness 2
+
+        LifeLineBorderColor 3292b4
+        LifeLineBackgroundColor #3292b4
+
+        ParticipantBorderColor 3292b4
+        ParticipantBackgroundColor 3292b4
+        ParticipantFontName Arial
+        ParticipantFontSize 17
+        ParticipantFontColor white
+
+        ActorBorderColor 3292b4
+        ActorBackgroundColor aqua
+        ActorFontColor 3292b4
+        ActorFontSize 17
+        ActorFontName Arial
+    }
+
+    group Publish Games List
+        note over storage
+            Actual storage to be defined.
+            Can be anything accessible to
+            the Casino Provider
+        end note
+        manager ->> portal ++: Export Games List
+        portal -->> manager --: CSV
+        manager ->> storage ++: Upload Asset CSV
+        storage ->> csv **: Store
+        deactivate storage
+    end group
+
+    group List Games
+    games ->> provider ++: /games/{domainName}/listGames
+
+    provider ->> config ++: getConfig(Domain)
+    config -->> provider --: gamesListCSVUrl
+
+    provider ->> csv ++: Fetch CSV (gamesListCSVUrl)
+    csv -->> provider --:
+
+    provider ->> provider : parseCSV
+
+    provider -->> games --: List<Game>
+
+    end group
+
+@enduml
+----

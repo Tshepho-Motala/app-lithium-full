@@ -1,0 +1,9 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "USER": {
+      "PROMOOPTOUT": {
+        "POST": "Post Opt-Out"
+      }
+    }
+  }
+}

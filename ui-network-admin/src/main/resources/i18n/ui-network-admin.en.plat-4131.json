@@ -1,0 +1,11 @@
+{
+  "UI_NETWORK_ADMIN": {
+    "LIMITSAGE": {
+        "DOMAIN" : {
+          "ADD": {
+            "EMPTY_INPUT": "Would you please add at least one daily, weekly or monthly loss limit?"
+          }
+        }
+    }
+  }
+}

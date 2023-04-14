@@ -1,0 +1,8 @@
+{
+  "ERROR_DICTIONARY": {
+    "REGISTRATION": {
+      "PASSWORD_RESET_ERROR": "Token cool off period not yet reached.",
+      "TIME_REMAINING": " seconds remaining"
+    }
+  }
+}

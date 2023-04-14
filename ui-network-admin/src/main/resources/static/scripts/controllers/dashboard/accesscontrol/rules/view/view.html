@@ -1,0 +1,277 @@
+<div class="container-fluid">
+	<div class="card card-block" style="margin-bottom: 10px;">
+		<div class="p-2 text-center">
+			<span class="title">{{ 'UI_NETWORK_ADMIN.ACCESSCONTROL.RULESETS.VIEW.TITLE' | translate }}</span>
+		</div>
+	</div>
+	
+	<button-bar>
+		<button-back ui-sref="dashboard.accesscontrol.rules.list"></button-back>
+	</button-bar>
+	
+	<div class="well" style="padding: 20px;" ng-class="{ 'card-danger-shadow': (!controller.model.enabled) }">
+		<div class="row v-reset-row ">
+			<div class="col-md-5">
+				<form ng-submit="controller.saveRuleset()" name="controller.form" novalidate>
+				<div class="box box-solid box-default">
+					<div class="box-header with-border">
+						{{ 'UI_NETWORK_ADMIN.ACCESSCONTROL.RULESETS.VIEW.INFO_TITLE' | translate }}
+						<div lit-if-permission="ACCESSRULES_EDIT" lit-permission-domain="{{controller.model.domain.name}}" class="box-tools pull-right">
+							<button ng-show="controller.options.formState.readOnly" type="button" class="btn btn-box-tool" ng-click="controller.onEdit()">
+								<span><i class="fa fa-edit"></i> {{ "GLOBAL.ACTION.EDIT" | translate }} </span>
+							</button>
+							<button ng-show="!controller.options.formState.readOnly" class="btn btn-box-tool">
+								<span class="success"><i class="fa fa-floppy-o"></i> {{ "GLOBAL.ACTION.SAVE" | translate }} </span>
+							</button>
+							<button ng-show="!controller.options.formState.readOnly" class="btn btn-box-tool" ng-click="controller.onCancel()">
+								<span><i class="fa fa-ban"></i> {{ "GLOBAL.ACTION.CANCEL" | translate }} </span>
+							</button>
+						</div>
+					</div>
+					<div class="box-body">
+						<formly-form model="controller.model" fields="controller.fields" form="controller.form" options="controller.options">
+						</formly-form>
+						<div class="col-xs-12" lit-if-permission="ACCESSRULES_EDIT" lit-permission-domain="{{controller.model.domain.name}}">
+							<buttonbar>
+								<button-save ng-show="!controller.options.formState.readOnly" class="pull-left"></button-save>
+								<button-cancel ng-show="!controller.options.formState.readOnly" ng-click="controller.onCancel()"></button-cancel>
+							</buttonbar>
+						</div>
+					</div>
+				</div>
+				</form>
+			</div>
+			<div class="col-md-7">
+				<div class="box box-solid box-info">
+					<div class="box-header ui-sortable-handle" style="cursor: move;">
+						{{ 'UI_NETWORK_ADMIN.ACCESSCONTROL.RULESETS.VIEW.DESC_TITLE' | translate }}
+						<div class="pull-right box-tools">
+							<button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+							</button>
+							<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i>
+							</button>
+						</div>
+					</div>
+					<div class="box-body table-responsive">
+						<div class="table-responsive mailbox-messages">
+							<table class="table table-bordered table-striped">
+								<tbody>
+								<tr>
+									<th width="30%">{{ 'UI_NETWORK_ADMIN.ACCESSCONTROL.RULESETS.VIEW.ACTIONS.REJECT' | translate }}</th>
+									<td>{{ 'UI_NETWORK_ADMIN.ACCESSCONTROL.RULESETS.VIEW.ACTIONS.REJECT_DESC' | translate }}</td>
+								</tr><tr>
+									<th>{{ 'UI_NETWORK_ADMIN.ACCESSCONTROL.RULESETS.VIEW.ACTIONS.ACCEPT' | translate }}</th>
+									<td>{{ 'UI_NETWORK_ADMIN.ACCESSCONTROL.RULESETS.VIEW.ACTIONS.ACCEPT_DESC' | translate }}</td>
+								</tr><tr>
+									<th>{{ 'UI_NETWORK_ADMIN.ACCESSCONTROL.RULESETS.VIEW.ACTIONS.CONTINUE' | translate }}</th>
+									<td>{{ 'UI_NETWORK_ADMIN.ACCESSCONTROL.RULESETS.VIEW.ACTIONS.CONTINUE_DESC' | translate }}</td>
+								</tr><tr>
+									<th>{{ 'UI_NETWORK_ADMIN.ACCESSCONTROL.RULESETS.VIEW.ACTIONS.ACCEPT_VERIFY' | translate }}</th>
+									<td>{{ 'UI_NETWORK_ADMIN.ACCESSCONTROL.RULESETS.VIEW.ACTIONS.ACCEPT_VERIFY_DESC' | translate }}</td>
+								</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+				<div class="box box-solid box-warning">
+					<div class="box-header with-border">
+						{{ 'UI_NETWORK_ADMIN.ACCESSRULES.VIEW.TESTCONFIGURATIONINTERFACE.TITLE' | translate }}
+						<div class="box-tools pull-right">
+							<button type="button" class="btn btn-box-tool" ng-click="controller.testConfig()">
+								<span><i class="fa fa-list-ol"></i> {{ "GLOBAL.ACTION.TEST" | translate }} </span>
+							</button>
+						</div>
+					</div>
+					<div class="box-body">
+						<form name="controller.configtestform" novalidate>
+							<div class="row v-reset-row ">
+								<div class="col-xs-12">
+									<div class="form-group" ng-class="{'has-error': showError}">
+										<label>User</label>
+										<div class="input-group">
+											<input type="text"
+												   ng-model="controller.selectedUser"
+												   placeholder="search player"
+												   uib-typeahead="user.username for user in controller.searchUsers($viewValue)"
+												   typeahead-loading="loadingLocations"
+												   typeahead-no-results="noResults"
+												   typeahead-min-length="1"
+												   typeahead-show-hint="true"
+												   typeahead-wait-ms="500"
+												   typeahead-editable="false"
+												   typeahead-on-select="controller.selectedUser = $item;"
+												   class="form-control"/>
+											<div class="input-group-btn">
+												<button type="button" class="btn btn-default" ng-click="controller.resetUserSearch()"><i class="fa fa-remove"></i></button>
+											</div>
+										</div>
+										<div ng-show="loadingLocations" class="overlay">
+											<i class="fa fa-refresh fa-spin"></i>
+										</div>
+										<div ng-show="noResults" class="form-group has-error">
+											<span class="help-block"><i class="fa fa-remove"></i>&nbsp;No Results Found</span>
+										</div>
+										<div class="form-group">
+											<span class="description">If no player is specified, the logged in user account will be used.</span>
+										</div>
+									</div>
+									<formly-form model="controller.configtestmodel" fields="controller.configtestfields" options="controller.configtestoptions" form="controller.configtestform">
+									</formly-form>
+								</div>
+							</div>
+						</form>
+					</div>
+					<div ng-if="controller.configTestResult" class="box-body table-responsive">
+						<table class="table table-bordered table-striped">
+							<thead class="alert" ng-class="{ 'alert-success': controller.configTestResult.successful === true, 'alert-danger': controller.configTestResult.successful === false }">
+							<tr>
+								<th colspan="2">{{ 'UI_NETWORK_ADMIN.ACCESSRULES.VIEW.TESTCONFIGURATIONINTERFACE.RESULT.TITLE' | translate }}</th>
+							</tr>
+							</thead>
+							<tbody>
+							<tr>
+								<th>{{ 'UI_NETWORK_ADMIN.ACCESSRULES.VIEW.TESTCONFIGURATIONINTERFACE.RESULT.SUCCESSFUL' | translate }}</th>
+								<td>{{ controller.configTestResult.successful }}</td>
+							</tr><tr>
+								<th>{{ 'UI_NETWORK_ADMIN.ACCESSCONTROL.RULESETS.TEST.EXPLAIN' | translate }}</th>
+								<td>{{ controller.configTestResult.message }}</td>
+							</tr><tr>
+								<th>{{ 'UI_NETWORK_ADMIN.ACCESSCONTROL.RULESETS.TEST.ERROR_MESSAGE' | translate }}</th>
+								<td>{{ controller.configTestResult.errorMessage }}</td>
+							</tr>
+							</tbody>
+						</table>
+					</div>
+					<div ng-if="controller.configTestResult.rawResults.length > 0" class="box-body table-responsive">
+						<div class="row v-reset-row ">
+							<div class="col-xs-12">
+								<table class="table table-bordered table-striped">
+									<tbody>
+									<tr class="alert alert-info">
+										<th colspan="6">{{ 'UI_NETWORK_ADMIN.ACCESSRULES.VIEW.TESTCONFIGURATIONINTERFACE.RAWRESULTS.TITLE' | translate }}</th>
+									</tr>
+									<tr>
+										<th>{{ 'UI_NETWORK_ADMIN.ACCESSRULES.VIEW.TESTCONFIGURATIONINTERFACE.RAWRESULTS.LISTNAME' | translate }}</th>
+										<th>{{ 'UI_NETWORK_ADMIN.ACCESSRULES.VIEW.TESTCONFIGURATIONINTERFACE.RAWRESULTS.FOUND' | translate }}</th>
+										<th>{{ 'UI_NETWORK_ADMIN.ACCESSRULES.VIEW.TESTCONFIGURATIONINTERFACE.RAWRESULTS.PASSED' | translate }}</th>
+										<th>{{ 'UI_NETWORK_ADMIN.ACCESSRULES.VIEW.TESTCONFIGURATIONINTERFACE.RAWRESULTS.MESSAGE' | translate }}</th>
+									</tr>
+									<tr ng-repeat="rawResult in controller.configTestResult.rawResults | orderBy:'priority'">
+										<td>{{ rawResult.listName }}</td>
+										<td>{{ rawResult.found }}</td>
+										<td>{{ rawResult.passed }}</td>
+										<td>{{ rawResult.message }}</td>
+									</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row v-reset-row ">
+			<div class="col-md-12">
+				<div class="box box-solid box-default">
+					<div class="box-header with-border">
+						{{ 'UI_NETWORK_ADMIN.ACCESSCONTROL.RULESETS.VIEW.RULES_TITLE' | translate }}
+						<div lit-if-permission="ACCESSRULES_EDIT" lit-permission-domain="{{controller.model.domain.name}}" class="box-tools pull-right">
+							<button type="button" class="btn btn-box-tool" ng-click="controller.addRule()">
+								<span><i class="fa fa-plus"></i> {{ "GLOBAL.ACTION.ADD" | translate }} </span>
+							</button>
+						</div>
+					</div>
+					<div class="box-body table-responsive">
+						<div class="table-responsive mailbox-messages">
+							<table class="table table-bordered table-striped">
+								<tbody>
+									<tr>
+										<th>{{ 'UI_NETWORK_ADMIN.ACCESSCONTROL.RULESETS.VIEW.TABLE.NAME' | translate }}</th>
+										<th>{{ 'UI_NETWORK_ADMIN.ACCESSCONTROL.RULESETS.VIEW.TABLE.TYPE' | translate }}</th>
+										<th>{{ 'UI_NETWORK_ADMIN.ACCESSCONTROL.RULESETS.VIEW.TABLE.ACTION_SUCCESS' | translate }}</th>
+										<th>{{ 'UI_NETWORK_ADMIN.ACCESSCONTROL.RULESETS.VIEW.TABLE.ACTION_FAIL' | translate }}</th>
+										<th>{{ 'UI_NETWORK_ADMIN.ACCESSCONTROL.RULESETS.VIEW.TABLE.ORDER' | translate }}</th>
+										<th>{{ 'UI_NETWORK_ADMIN.ACCESSCONTROL.RULESETS.VIEW.TABLE.REJECT_MSG' | translate }}</th>
+										<th>{{ 'UI_NETWORK_ADMIN.ACCESSCONTROL.RULESETS.VIEW.TABLE.TIMEOUT_MSG' | translate }}</th>
+										<th>{{ 'UI_NETWORK_ADMIN.ACCESSCONTROL.RULESETS.VIEW.TABLE.REVIEW_MSG' | translate }}</th>
+										<th>&nbsp;</th>
+									</tr>
+									<tr ng-repeat="r in controller.model.rules | orderBy:'priority'" ng-class="{ 'danger': r.enabled === false}">
+										<td>
+											<span ng-style="{ 'color:red;text-decoration:line-through': r.enabled === false}">{{r.description}}</span>
+										</td>
+										<td ng-if="r.type === 'provider'">
+											{{'UI_NETWORK_ADMIN.ACCESSCONTROL.RULESETS.RULES.PROVIDER'| translate}} ({{r.subType}})
+										</td>
+										<td ng-if="r.type === 'list'">
+											{{'UI_NETWORK_ADMIN.ACCESSCONTROL.RULESETS.RULES.LIST'| translate}} ({{r.subType}})
+										</td>
+										<td>{{r.actionSuccess}}</td>
+										<td>{{r.actionFailed}}</td>
+										<td>
+<!--											{{r.priority}}-->
+											<a lit-if-permission="ACCESSRULES_EDIT" lit-permission-domain="{{controller.model.domain.name}}" ng-if="r.priority > 0" ng-click="controller.changeRuleOrderUp(controller.model.id, r.type, r.id)" class="">
+												<span><i class="fa fa-arrow-up"></i></span>
+											</a>
+											<a lit-if-permission="ACCESSRULES_EDIT" lit-permission-domain="{{controller.model.domain.name}}" ng-if="r.priority < controller.maxPriority" ng-click="controller.changeRuleOrderDown(controller.model.id, r.type, r.id)" class="">
+												<span><i class="fa fa-arrow-down"></i></span>
+											</a>
+										</td>
+										<td>
+											{{ r.message === null? ('UI_NETWORK_ADMIN.ACCESSCONTROL.SAVEMESSAGE.MESSAGE.DEFAULT'| translate):r.message }}
+										</td>
+										<td>
+											{{ r.timeoutMessage === null? ('UI_NETWORK_ADMIN.ACCESSCONTROL.SAVEMESSAGE.MESSAGE.DEFAULT'| translate):r.timeoutMessage }}
+										</td>
+										<td>
+											{{ r.reviewMessage === null? ('UI_NETWORK_ADMIN.ACCESSCONTROL.SAVEMESSAGE.MESSAGE.DEFAULT'| translate):r.reviewMessage }}
+										</td>
+										<td>
+											<a lit-if-permission="ACCESSRULES_EDIT" lit-permission-domain="{{controller.model.domain.name}}" ng-click="controller.editRule(r)" class="description">
+												<span> {{ 'GLOBAL.ACTION.EDIT' | translate | lowercase }} </span>
+											</a>
+											<span ng-if="!r.hasTranData">
+												&nbsp;
+												<a lit-if-permission="ACCESSRULES_EDIT" lit-permission-domain="{{controller.model.domain.name}}" ng-click="controller.deleteRule(r)" class="description">
+													<span> {{ 'GLOBAL.ACTION.DELETE' | translate | lowercase }} </span>
+												</a>
+											</span>
+											<span ng-if="r.actionSuccess === 'REJECT' || r.actionFailed === 'REJECT'">
+												&nbsp;
+												<a lit-if-permission="ACCESSRULES_EDIT" lit-permission-domain="{{controller.model.domain.name}}" ng-click="controller.changeMessageModal(r)" class="description">
+													<span> {{ 'GLOBAL.ACTION.MESSAGE' | translate | lowercase }} </span>
+												</a>
+											</span>
+										</td>
+									</tr><tr bgcolor="#dcdcdc">
+										<td>&nbsp;</td>
+										<td>{{'UI_NETWORK_ADMIN.ACCESSCONTROL.RULESETS.DEFAULT.TITLE'| translate}}</td>
+										<td>{{ controller.model.defaultAction }}</td>
+										<td>&nbsp;</td>
+										<td>&nbsp;</td>
+										<td>{{ controller.model.defaultMessage }}</td>
+										<td></td>
+										<td></td>
+										<td>
+											<a lit-if-permission="ACCESSRULES_EDIT" lit-permission-domain="{{controller.model.domain.name}}" ng-click="controller.editRule()" class="description">
+												<span> {{ 'GLOBAL.ACTION.EDIT' | translate | lowercase }} </span>
+											</a>
+											&nbsp;
+											<a lit-if-permission="ACCESSRULES_EDIT" lit-permission-domain="{{controller.model.domain.name}}" ng-click="controller.changeMessageModal()" class="description">
+												<span> {{ 'GLOBAL.ACTION.MESSAGE' | translate | lowercase }} </span>
+											</a>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="row v-reset-row ">
+			<changelog options="controller.changelogs" model="controller.model"></changelog>
+		</div>
+	</div>
+</div>

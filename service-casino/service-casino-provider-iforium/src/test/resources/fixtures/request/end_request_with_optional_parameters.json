@@ -1,0 +1,14 @@
+{
+  "PlatformKey": "L100",
+  "Sequence": "dec51196-3a6b-4795-8653-1a4c2a6be08e",
+  "Timestamp": "2020-09-14T14:30:06.2794721Z",
+  "GatewaySessionToken": "72542ee1-eca8-4df9-93cb-76a5555e3da2",
+  "OperatorAccountID": "domain/accountId",
+  "GameRoundID": "13245Z",
+  "GameID": "11588",
+  "ContentGameProviderID": "12",
+  "CurrencyCode": "GBP",
+  "JackpotContribution": 0,
+  "JackpotWinnings": 0,
+  "FreeGameOfferCode": "OfferCode"
+}

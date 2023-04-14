@@ -1,0 +1,23 @@
+{
+	"GLOBAL": {
+		"ACTION": {
+			"ON_HOLD": "On-Hold"
+		}
+	},
+	"UI_NETWORK_ADMIN": {
+		"CASHIER": {
+			"TRANSACTION": {
+				"ON_HOLD": {
+					"EXPLANATION": "The transaction can be put on hold due to manual review. See remarks section for more details.",
+					"TITLE": "On-HOLD TRANSACTION",
+					"REASON": {
+						"LABEL": "Reason for the hold"
+					},
+					"SUCCESS": "Transaction is successfully moved to On-Hold.",
+					"ERROR": "Failed to move transaction to On-Hold.",
+					"REMARK": "Moved to on-hold. Reason:"
+				}
+			}
+		}
+	}
+}

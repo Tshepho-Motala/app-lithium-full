@@ -1,0 +1,5 @@
+= Session Endpoints
+
+include::endpoint-mappings-session-createtoken.adoc[leveloffset=+1]
+
+include::endpoint-mappings-session-redeemtoken.adoc[leveloffset=+1]

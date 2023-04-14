@@ -1,0 +1,16 @@
+{
+	"UI_NETWORK_ADMIN": {
+		"REPORTS": {
+			"PLAYER": {
+				"TRAN": {
+					"STARTDATE": {
+						"NAME": "Transaction Query Start date"
+					},
+					"ENDDATE": {
+						"NAME": "Transaction Query End date"
+					}
+				}
+			}
+		}
+	}
+}

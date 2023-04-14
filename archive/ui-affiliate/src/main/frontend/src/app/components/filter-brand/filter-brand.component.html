@@ -1,0 +1,11 @@
+<div class="filter-brand">
+  <md-menu #appMenu="mdMenu">
+    <button md-menu-item (click)="clear()"> All Brands </button>
+    <button md-menu-item *ngFor="let b of brands" (click)="select(b)">{{ b.displayName }}</button>
+  </md-menu>
+  <button md-raised-button color="primary" [mdMenuTriggerFor]="appMenu">
+     <span *ngIf="brand == null">All Brands</span>
+     <span *ngIf="brand != null">{{ brand.displayName }}</span>
+     <md-icon>arrow_drop_down</md-icon>
+  </button>
+</div>

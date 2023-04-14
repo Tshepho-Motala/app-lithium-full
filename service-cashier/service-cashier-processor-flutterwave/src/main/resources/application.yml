@@ -1,0 +1,26 @@
+server.port: 9618
+
+ribbon:
+  ReadTimeout: 30000
+  ConnectTimeout: 30000
+  
+spring:
+  application:
+    name: service-cashier-processor-flutterwave
+  cloud:
+    stream:
+      bindings:
+        processorsregisteroutput:
+          group: processorsregistergroup
+          binder: rabbit
+          destination: processorsregisterqueue
+          producer:
+            required-groups: processorsregistergroup
+  thymeleaf:
+    cache: false
+
+logging:
+  level:
+    lithium.service.cashier: INFO
+    lithium.service.cashier.processor.http: INFO
+    lithium.service.cashier.processor.flutterway: INFO
